@@ -1,0 +1,126 @@
+<header class="hero">
+  <canvas id="guilloche" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div class="eyebrow">Researched __DATE__ · __NSRC__ sources</div>
+    <h1>Claude Income Playbook</h1>
+    <p class="lede">__LEDE__</p>
+    <div class="meta">__META__</div>
+  </div>
+</header>
+
+<nav class="index" aria-label="Sections">
+  <div class="wrap">
+    <ol>
+      <li><a href="#start">Start here</a></li>
+      <li><a href="#reality">Reality check</a></li>
+      <li><a href="#explore">All opportunities</a></li>
+      <li><a href="#where">Where to sell</a></li>
+      <li><a href="#rules">Rules</a></li>
+      <li><a href="#plan">30-day plan</a></li>
+      <li><a href="#templates">Templates</a></li>
+      <li><a href="#workspace">Using this workspace</a></li>
+      <li><a href="#sources">Sources</a></li>
+    </ol>
+  </div>
+</nav>
+
+<main class="wrap">
+  <section id="start">
+    <h2>Start here: the best bets right now</h2>
+    <p class="sub">__PICKS_SUB__</p>
+    <ol class="picks" id="picks"></ol>
+  </section>
+
+  <section id="reality">
+    <h2>Reality check</h2>
+    <p class="sub">__REALITY_SUB__</p>
+    <div class="reality" id="stages">__STAGES__</div>
+    <ul class="principles">__PRINCIPLES__</ul>
+  </section>
+
+  <section id="explore">
+    <h2>All opportunities</h2>
+    <p class="sub">__EXPLORE_SUB__</p>
+    <div class="controls">
+      <div class="chips" id="cat-chips" role="group" aria-label="Filter by field"></div>
+      <label class="field" for="opp-sort">Sort
+        <select id="opp-sort">
+          <option value="rank">Recommended</option>
+          <option value="speed">Fastest first dollar</option>
+          <option value="price">Highest price</option>
+          <option value="fit">Best Claude fit</option>
+          <option value="zero">No reviews needed first</option>
+        </select>
+      </label>
+      <label class="field toggle" for="opp-newbie"><input type="checkbox" id="opp-newbie"> Hide paths that need a track record</label>
+      <input type="search" id="opp-q" placeholder="Search, e.g. Excel, Shopify, resume" aria-label="Search opportunities">
+      <span class="count" id="opp-count"></span>
+    </div>
+    <div class="ledger">
+      <div class="ledger-head" aria-hidden="true"><span>Opportunity</span><span>Typical price</span><span>First $ in</span><span>No reviews needed?</span><span>Claude fit</span><span></span></div>
+      <div id="ledger-rows"></div>
+    </div>
+  </section>
+
+  <section id="where">
+    <h2>Where to sell</h2>
+    <p class="sub">__WHERE_SUB__</p>
+    <div id="platforms"></div>
+    <div class="calc" aria-labelledby="calc-h">
+      <div>
+        <h3 id="calc-h">What you actually keep</h3>
+        <div class="row"><label for="c-plat">Where you sell</label><select id="c-plat"></select></div>
+        <div class="row"><label for="c-price">Price per job (USD)</label><input id="c-price" type="number" min="0" step="5" value="150"></div>
+        <div class="row"><label for="c-hours">Your hours per job</label><input id="c-hours" type="number" min="0" step="0.5" value="3"></div>
+        <div class="row"><label for="c-jobs">Jobs per month</label><input id="c-jobs" type="number" min="0" step="1" value="6"></div>
+        <div class="row"><label for="c-plan">Claude plan cost per month</label>
+          <select id="c-plan"><option value="100">Max 5x, $100</option><option value="200">Max 20x, $200</option><option value="20">Pro, $20</option><option value="0">Ignore</option></select>
+        </div>
+      </div>
+      <div>
+        <label>You keep per job</label>
+        <output class="netbig" id="c-net">$0</output>
+        <div class="breakdown" id="c-break"></div>
+        <p class="note" id="c-note"></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <h2>Rules that keep you paid and unbanned</h2>
+    <p class="sub">__RULES_SUB__</p>
+    <div class="rules">
+      <div class="rulecol do"><h3>Do</h3><ul id="rules-do"></ul></div>
+      <div class="rulecol dont"><h3>Don't</h3><ul id="rules-dont"></ul></div>
+    </div>
+    __RULES_CALLOUT__
+  </section>
+
+  <section id="plan">
+    <h2>30-day plan</h2>
+    <p class="sub">__PLAN_SUB__</p>
+    <div class="progress"><div class="bar"><span id="plan-bar"></span></div><span id="plan-count"></span><button class="btn" type="button" id="plan-reset">Clear checklist</button></div>
+    <div class="weeks" id="weeks"></div>
+  </section>
+
+  <section id="templates">
+    <h2>Copy-ready templates</h2>
+    <p class="sub">__TPL_SUB__</p>
+    <div class="tpls" id="tpls"></div>
+  </section>
+
+  <section id="workspace">
+    <h2>Using this workspace to deliver</h2>
+    <p class="sub">__WS_SUB__</p>
+    <div class="ws" id="ws"></div>
+  </section>
+
+  <section id="sources">
+    <h2>Sources</h2>
+    <p class="sub">__SRC_SUB__</p>
+    <div class="sources" id="sources-list"></div>
+  </section>
+</main>
+
+<footer><div class="wrap">__FOOTER__</div></footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
