@@ -6,8 +6,8 @@ var OPPS_RESULTS = [
  need:"AI companies sponsor hackathons to get developers building on their tools. Judges score the demo, not who you are.",
  how:"Claude Code builds fast. Ship a live demo page and a 2–3 minute video, and keep a starter kit you reuse between events.",
  where:"devpost.com (filter for online events), lablab.ai sponsor tracks (Sept–Oct 2026 pools of $6,000–12,000), Claude-linked events (often selective, often paid in credits).",
- signal:"Devpost AI hackathons ran $80k–$2M prize pools in 2025–2026. Side-track prizes (\"best use of X\") are where small teams win.",
- risk:"Hundreds to thousands of entries, so roughly a 1–5% chance of placing per entry (estimate). lablab.ai payouts can take up to 90 days. Check country eligibility before building.",
+ signal:"Big events are crowded (one Kaggle-hosted hackathon drew about 1,600 submissions for roughly 14 prizes), but smaller ones aren't: DeveloperWeek NY 2026 had 612 participants for $9,250 in cash. Only 5–33% of people who register on Devpost ever submit, so finishing alone puts you ahead.",
+ risk:"Pick online events with under about 500 participants and a sponsor side-track. Many prizes are paid in API credits, and lablab.ai payouts can take up to 90 days. Check the rules on AI disclosure, building during the event, and country eligibility.",
  skill:"Low to medium. The pitch video matters a lot.",
  gig:"Target: a sponsor side-track at an online lablab.ai or Devpost event"},
 {id:"expensify", cat:"results", rank:32, zero:2, speed:2, fit:2, value:250,
@@ -29,9 +29,20 @@ var OPPS_RESULTS = [
  how:"Claude Code reproduces the bug, writes the fix and the tests.",
  where:"algora.io/bounties and opire.dev. Niche languages (Rust, Elixir, Scala, C++ or GPU code) are far less crowded than TypeScript and React.",
  signal:"On 30 Sept 2026 there were 155 open bounties worth $68.8k, and 124 of them paid under $150.",
- risk:"Flooded by AI agents: one $170 bounty drew 158 attempts, and generic bounties work out to about $1–5 an hour. Many repos ban or auto-close AI pull requests. Payouts need Stripe Connect in your country. Skip any bounty with 3+ claimants or a linked PR.",
+ risk:"Flooded by AI agents: one $170 bounty drew 158 attempts, and generic bounties work out to about $1–5 an hour. Many repos ban or auto-close AI pull requests. Payouts go through Stripe, and in some countries (for example the UAE and India) only registered businesses can receive them.",
  skill:"Medium.",
  gig:"Rule: skip any bounty with 3+ claimants or a linked pull request"},
+{id:"contests", cat:"results", rank:36, zero:2, speed:1, fit:2, value:40,
+ name:"Small contests on Freelancer.com",
+ short:"Naming, writing and Excel or data-entry contests",
+ price:"$20–$190 prizes",
+ need:"Buyers post a contest and pay the best entry. A win also gives you a first review on the platform.",
+ how:"Claude helps you produce strong entries quickly. Read each contest brief closely and tailor your entry to it.",
+ where:"freelancer.com/contest. Filter for guaranteed contests with 50 or fewer entries.",
+ signal:"Sampled naming contests paid $20–50 and drew 45–277 entries. A data-entry contest drew 129.",
+ risk:"Low odds per entry, so treat it as practice and a source of a first review. Atom (formerly Squadhelp) bans name generators, AI included. The winner pays Freelancer.com 10% or $5.",
+ skill:"Low.",
+ gig:"Target: 3–5 strong entries a week for a month, then check your win rate"},
 {id:"kaggle", cat:"results", rank:34, zero:2, speed:3, fit:2, value:0,
  name:"Kaggle and data competitions",
  short:"Good for your profile, rarely for cash",
@@ -59,8 +70,8 @@ var OPPS_RESULTS = [
 var PICKS = [
  {name:"Spreadsheet and PDF-to-Excel fixes",
   what:"Fix formulas, clean data, turn PDFs into spreadsheets, build simple dashboards.",
-  why:"Small, cheap jobs are the ones buyers will risk on a newcomer. Claude does them in minutes, and you can check every number before delivering.",
-  price:"$20–$250 per job", first:"Days", where:"Fiverr, Upwork, r/forhire, people you know"},
+  why:"Small, cheap jobs are the ones buyers will risk on a newcomer, and Fiverr searches for Excel data cleaning rose 210% in six months. Claude does the work in minutes, and you can check every number before delivering.",
+  price:"$20–$250 per job", first:"Days", where:"People you know, r/forhire, Upwork, Fiverr"},
  {name:"Show-first websites for local businesses",
   what:"Find businesses with no website, build theirs first, then offer to put it live with a monthly care plan.",
   why:"Reviews don't matter when the owner can see the finished site before paying anything. The care plan turns one sale into monthly income.",
@@ -115,8 +126,8 @@ var FEES = [
 
 var PLATFORM_GROUPS = [
  {label:"Freelance marketplaces: clients come looking", rows:[
-  {name:"Fiverr", url:"https://www.fiverr.com", fee:"20% per order", best:"Fixed-price packages. Buyers search for you, and applying costs nothing.", ai:"AI allowed. Disclose it if a buyer asks, honor \"no AI\" requests, and refine the output."},
-  {name:"Upwork", url:"https://www.upwork.com", fee:"0–15% + Connects", best:"The biggest pool of jobs, including hourly and long-term work.", ai:"AI allowed and best disclosed. Bots or extensions that send proposals get accounts suspended."},
+  {name:"Fiverr", url:"https://www.fiverr.com", fee:"20% per order", best:"Fixed-price packages. Buyers search for you, and applying costs nothing. Its AI matcher (Mira) favors sellers who already have orders.", ai:"AI allowed. Disclose it if a buyer asks, honor \"no AI\" requests, and refine the output. Friends ordering to create reviews means a permanent ban."},
+  {name:"Upwork", url:"https://www.upwork.com", fee:"0–15% + Connects", best:"The biggest pool of jobs. One profile per person since May 2026, and its AI (Uma) shortlists freelancers for clients.", ai:"AI allowed and best disclosed. Bots or extensions that send proposals get accounts suspended."},
   {name:"Contra", url:"https://contra.com", fee:"0% to you", best:"Portfolio-led work, and a way to bill clients you find elsewhere.", ai:"No specific rule found."},
   {name:"Freelancer.com", url:"https://www.freelancer.com", fee:"10% (min $5)", best:"Contests and small cheap jobs; free bids are limited.", ai:"No specific rule found."},
   {name:"PeoplePerHour", url:"https://www.peopleperhour.com", fee:"20% → 7.5% → 3.5%", best:"UK and European small businesses.", ai:"No specific rule found."},
@@ -144,10 +155,10 @@ var PLATFORM_GROUPS = [
   {name:"Kaggle", url:"https://www.kaggle.com", fee:"Free", best:"Medals for your profile.", ai:"Code competitions run offline."}
  ]},
  {label:"Getting paid (availability depends on your country)", rows:[
-  {name:"Payoneer", url:"https://www.payoneer.com", fee:"Varies", best:"Receiving marketplace payouts in many countries.", ai:"Check that it supports your country and bank."},
+  {name:"Payoneer", url:"https://www.payoneer.com", fee:"Varies", best:"Marketplace payouts; Etsy pays sellers in some countries through it.", ai:"Check that it supports your country and bank."},
   {name:"Wise", url:"https://wise.com", fee:"Low conversion fees", best:"Holding and converting foreign currency.", ai:"Check that it supports your country and bank."},
-  {name:"PayPal", url:"https://www.paypal.com/webapps/mpp/country-worldwide", fee:"About 3–5% + fixed fee", best:"Direct clients, Apify payouts from $20.", ai:"Some countries can send but not receive."},
-  {name:"Stripe", url:"https://stripe.com/global", fee:"About 2.9% + $0.30 (US)", best:"Card payments; Algora and Opire bounty payouts.", ai:"Only in Stripe-supported countries."}
+  {name:"PayPal", url:"https://www.paypal.com/webapps/mpp/country-worldwide", fee:"About 3–5% + fixed fee", best:"Direct clients; Apify payouts from $20; UserTesting and Gumroad payouts.", ai:"Some countries can send but not receive."},
+  {name:"Stripe", url:"https://stripe.com/global", fee:"About 2.9% + $0.30 (US)", best:"Card payments; Algora, Opire and Notion Marketplace payouts.", ai:"In some countries (for example the UAE and India) individuals need a business licence, which blocks these payouts."}
  ]}
 ];
 
@@ -158,6 +169,7 @@ var RULES_DO = [
  "<b>Tell clients you use AI tools</b> and honor any \"no AI\" request. Fiverr requires disclosure when asked.",
  "<b>Protect your payment.</b> Take 30–50% upfront or use platform escrow. Hand over rights only after full payment, and cap your liability at the fee.",
  "<b>Keep the client's things in the client's name:</b> domains, hosting, API keys, accounts.",
+ "<b>Label samples as samples,</b> and say how you know anyone who gives you a testimonial.",
  "<b>Plan around usage limits.</b> Max resets every 5 hours and also has a weekly cap shared by Claude and Claude Code. If ANTHROPIC_API_KEY is set, Claude Code bills that key instead.",
  "<b>Check your local rules</b> for freelance permits and tax registration before you send invoices."
 ];
@@ -167,6 +179,7 @@ var RULES_DONT = [
  "<b>Don't write students' graded work,</b> fake reviews, spam or mass-produced SEO pages. All of these break Anthropic's usage policy, and some are crimes.",
  "<b>Don't use Claude on AI-training platforms</b> such as Outlier, DataAnnotation and Mercor. They ban it and keep your pay.",
  "<b>Don't move Upwork or Fiverr clients off-platform.</b> Both ban it.",
+ "<b>Don't let friends or family order your gigs to create reviews,</b> and don't trade discounts for positive reviews. Fiverr bans it permanently, and US law fines fake reviews up to $51,744 each.",
  "<b>Don't use bots to send proposals</b> or to create accounts.",
  "<b>Don't pay to get a job,</b> cash an \"overpayment\" check, or move to Telegram or WhatsApp because a stranger insists.",
  "<b>Don't run a stranger's \"test project\" repo without reading it first.</b> Fake coding tests have carried malware.",

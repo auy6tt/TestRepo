@@ -2,13 +2,14 @@
 
 Research and a starter kit for earning money with a Claude Max plan when you're starting from zero: no reviews, no portfolio, no network.
 
-- **[PLAYBOOK.md](PLAYBOOK.md)**: the full research. Best bets, 35+ ways to earn with prices and demand evidence, platforms and fees, rules, a 30-day plan and sources.
+- **[Interactive playbook](https://claude.ai/artifact/6XujurYFWKFDJQDofE8n9M)**: the published page with filters, a fee calculator and a 30-day checklist. It's private to your Claude account unless you share it.
+- **[PLAYBOOK.md](PLAYBOOK.md)**: the full research. Best bets, where to find first clients with zero reviews, 36 ways to earn with prices and demand evidence, platforms and fees, rules, a 30-day plan and sources.
 - **[templates/](templates/)**: copy-ready messages, proposals, a gig description, an intake form and a one-page agreement.
-- **[playbook/index.html](playbook/index.html)**: the interactive version (filters, fee calculator, 30-day checklist). Open it in a browser.
+- **[playbook/index.html](playbook/index.html)**: the same page as a file you can open in any browser.
 
 ## Start here
 
-1. Read **Start here** and **Rules** in [PLAYBOOK.md](PLAYBOOK.md). That takes about 10 minutes.
+1. Read **Start here**, **First clients** and **Rules**. That takes about 15 minutes.
 2. Turn off model training in Claude's privacy settings before you handle anyone else's files.
 3. Work through the **30-day plan** one week at a time.
 
@@ -31,4 +32,4 @@ The page and the markdown are generated from the data files in `playbook/src/`. 
 node playbook/src/build.mjs
 ```
 
-This rewrites `PLAYBOOK.md`, `templates/` and `playbook/index.html`.
+This rewrites `PLAYBOOK.md`, `templates/` and `playbook/index.html`. Add `--url <link>` to keep the published page's link in `PLAYBOOK.md`.

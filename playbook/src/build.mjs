@@ -13,7 +13,7 @@ const read = f => fs.readFileSync(path.join(SRC, f), "utf8");
 
 const ctx = {};
 vm.createContext(ctx);
-for (const f of ["opportunities-services.js", "opportunities-ai-products.js", "results-picks-platforms-rules.js", "plan-and-templates.js", "sources.js"]) {
+for (const f of ["opportunities-services.js", "opportunities-ai-products.js", "results-picks-platforms-rules.js", "plan-and-templates.js", "first-clients.js", "sources.js"]) {
   vm.runInContext(read(f) + "\n;globalThis.__x = 1;", ctx, {filename: f});
 }
 const get = name => vm.runInContext(name, ctx);
@@ -34,7 +34,8 @@ if (new Set(ranks).size !== ranks.length) throw new Error("duplicate ranks");
 const DATA = {
   cats: CATS, opps, picks: get("PICKS"), fees: get("FEES"), platformGroups: get("PLATFORM_GROUPS"),
   rulesDo: get("RULES_DO"), rulesDont: get("RULES_DONT"), plan: get("PLAN"), templates: get("TEMPLATES"),
-  workspace: get("WORKSPACE"), sources: get("SOURCES")
+  workspace: get("WORKSPACE"), sources: get("SOURCES"),
+  channels: get("CHANNELS"), upworkSteps: get("UPWORK_STEPS"), fiverrSteps: get("FIVERR_STEPS"), proofSteps: get("PROOF_STEPS")
 };
 const STAGES = get("STAGES"), PRINCIPLES = get("PRINCIPLES");
 const nSources = DATA.sources.reduce((n, g) => n + g.items.length, 0);
@@ -47,14 +48,15 @@ const copy = {
   __NSRC__: String(nSources),
   __LEDE__: "What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. <strong>Ranked for someone starting from zero:</strong> no reviews, no portfolio, no network.",
   __META__: `<span><b>${opps.length}</b> ways to earn</span><span><b>${nPlatforms}</b> platforms compared</span><span><b>10</b> research passes</span><span>Prices in USD</span>`,
-  __PICKS_SUB__: "Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Do the first one this week; add others as you get reviews.",
+  __PICKS_SUB__: "Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Start the first one this week and add others as reviews come in. The next section covers where to find the buyers.",
+  __FC_SUB__: "Marketplaces now rank sellers by their history, and AI matchers on both Upwork and Fiverr decide who gets seen. So a newcomer wins fastest through people they know and through outreach that shows finished work first. Run Upwork and Fiverr alongside as slower channels. Ranked by how fast each works for someone with zero reviews.",
   __REALITY_SUB__: "Claude makes the work fast. It doesn't bring clients and it doesn't make strangers trust you. The data is sobering. One dataset of Claude Code businesses that owners listed on a revenue tracker found fewer than half earned anything, and the typical one made about $145–227 a month. The ranges below are targets for someone who works the plan every week, not promises.",
   __STAGES__: STAGES.map(s => `<div class="stage"><div class="when">${esc(s.when)}</div><div class="amt">${esc(s.amt)}</div><p>${esc(s.text)}</p></div>`).join(""),
   __PRINCIPLES__: PRINCIPLES.map(p => `<li><b>${esc(p[0])}</b>${esc(p[1])}</li>`).join(""),
   __EXPLORE_SUB__: "Every option the research turned up, with prices, where buyers are, and how Claude does the work in this workspace. Open a row for details. \"No reviews needed\" means buyers judge the work or product itself; \"With samples\" means a newcomer can win with a portfolio and a low first price.",
   __WHERE_SUB__: "What each platform costs you and its rules on AI. Fees change, so check the platform before you rely on a number. The calculator shows what you keep after fees and your Claude plan.",
   __RULES_SUB__: "Anthropic's consumer terms allow you to sell work made with Claude. Most of the ways people get banned or burned come from the rules below, checked against Anthropic's own pages and each platform's policies.",
-  __RULES_CALLOUT__: `<p class="callout"><b>Scam rule:</b> if someone wants money from you before you've earned anything, or wants to move you to Telegram or WhatsApp right away, walk away. The FTC reports record losses to \"pay to get paid\" job scams.</p><p class="callout"><b>Side income that needs no reviews, but no Claude either:</b> AI-training platforms such as DataAnnotation, Outlier and Mercor pay roughly $15–$60+ an hour if you pass their tests. They ban AI tools, and using Claude there also breaks Anthropic's usage policy, so this work has to be done by you personally.</p>`,
+  __RULES_CALLOUT__: `<p class="callout"><b>Scam rule:</b> if someone wants money from you before you've earned anything, or wants to move you to Telegram or WhatsApp right away, walk away. The FTC reports record losses to \"pay to get paid\" job scams.</p><p class="callout"><b>Side income that needs no reviews, but no Claude either:</b> AI-training platforms (Outlier, Mercor, Alignerr) pay roughly $15–$60+ an hour if you pass their tests, and research sites pay for your opinions (Prolific pays at least $8 an hour; UserTesting pays $10 per short test). All of them ban AI tools or detect them, and using Claude there also breaks Anthropic's usage policy, so this work must be done by you personally. Several are limited to certain countries: DataAnnotation, for example, only accepts six English-speaking countries.</p>`,
   __PLAN_SUB__: "Built for zero reviews. Your progress is saved in this browser only.",
   __TPL_SUB__: "Fill in the brackets, then make each one sound like you. They are also saved as files in the repo's templates folder.",
   __WS_SUB__: "How to run client work in Claude Code without losing files, leaking data or burning through your limits.",
@@ -112,10 +114,18 @@ L.push("# Claude Income Playbook", "");
 L.push("What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. Ranked for someone starting from zero: no reviews, no portfolio, no network.", "");
 if (PAGE_URL) L.push(`**Interactive version (filters, fee calculator, checklist):** ${PAGE_URL}`, "");
 L.push(`Researched October 2026 · ${opps.length} ways to earn · ${nPlatforms} platforms · ${nSources} sources. Not legal, tax or financial advice.`, "");
-L.push("## Contents", "", "1. [Start here](#start-here)", "2. [Reality check](#reality-check)", "3. [All opportunities](#all-opportunities)", "4. [Where to sell](#where-to-sell)", "5. [Rules](#rules)", "6. [30-day plan](#30-day-plan)", "7. [Templates](#templates)", "8. [Using this workspace](#using-this-workspace)", "9. [Sources](#sources)", "");
+L.push("## Contents", "", "1. [Start here](#start-here)", "2. [First clients when nobody knows you](#first-clients-when-nobody-knows-you)", "3. [Reality check](#reality-check)", "4. [All opportunities](#all-opportunities)", "5. [Where to sell](#where-to-sell)", "6. [Rules](#rules)", "7. [30-day plan](#30-day-plan)", "8. [Templates](#templates)", "9. [Using this workspace](#using-this-workspace)", "10. [Sources](#sources)", "");
 L.push("## Start here", "", md(copy.__PICKS_SUB__), "");
 L.push("| # | Pick | Charge | First $ | Sell on |", "|---|---|---|---|---|");
 DATA.picks.forEach((p, i) => L.push(`| ${i + 1} | **${cell(p.name)}**: ${cell(p.what)} ${cell(p.why)} | ${cell(p.price)} | ${cell(p.first)} | ${cell(p.where)} |`));
+L.push("", "## First clients when nobody knows you", "", md(copy.__FC_SUB__), "");
+DATA.channels.forEach((c, i) => L.push(`${i + 1}. **${c.name}** (cost: ${c.cost}; first $: ${c.first}). ${c.what} ${c.why}`));
+L.push("", "### Upwork, step by step", "");
+DATA.upworkSteps.forEach((t, i) => L.push(`${i + 1}. ${t}`));
+L.push("", "### Fiverr, step by step", "");
+DATA.fiverrSteps.forEach((t, i) => L.push(`${i + 1}. ${t}`));
+L.push("", "### Show-first outreach, step by step", "");
+DATA.proofSteps.forEach((t, i) => L.push(`${i + 1}. ${t}`));
 L.push("", "## Reality check", "", md(copy.__REALITY_SUB__), "");
 STAGES.forEach(s => L.push(`- **${s.when}: ${s.amt}.** ${s.text}`));
 L.push("");

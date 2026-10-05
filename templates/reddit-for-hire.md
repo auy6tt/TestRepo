@@ -1,6 +1,6 @@
 # Reddit [For Hire] post
 
-*For r/forhire. Read the subreddit's posting rules first.*
+*For r/forhire (one post a week, $15/hour minimum) and r/freelance_forhire. Read each community's rules first.*
 
 ```text
 [For Hire] Spreadsheet fixes, PDF to Excel, simple business websites. Fixed prices, samples inside
@@ -16,5 +16,5 @@ Prices: spreadsheet fixes from $30, PDF conversion from $20, one-page websites f
 
 For jobs under $50 you can pay after you've seen the result. Bigger jobs are 50% upfront.
 
-DM me what you need and I'll reply with a fixed quote.
+Send me a message with what you need and I'll reply with a fixed quote.
 ```

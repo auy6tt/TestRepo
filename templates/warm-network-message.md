@@ -1,13 +1,13 @@
 # Message to people you know
 
-*Send to 20 friends, relatives, classmates or coworkers in week 2.*
+*Send to 20–40 former classmates, coworkers and shop owners in week 2. Asking for introductions matters as much as asking for work.*
 
 ```text
-Hi [name], quick one. I've started doing [spreadsheet fixes / simple websites / resume rewrites] for small businesses and job seekers.
+Hey [name], hope [their new job / course / shop] is going well!
 
-I'm taking 3 pilot jobs at half price this month in exchange for honest feedback.
+I've started doing [spreadsheet clean-ups and small automations / simple websites] for small businesses. I'm doing my first 3 projects at a reduced price while I build my portfolio.
 
-Do you, or anyone you know, have [a messy spreadsheet / a business without a website / a resume that needs work]?
+Do you know anyone who's drowning in [messy Excel files / running a business without a decent website]? An introduction would mean a lot.
 
 Here's an example of what I do: [link]
 

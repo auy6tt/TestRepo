@@ -60,6 +60,22 @@ function copyText(text, fallbackNode){
   });
 })();
 
+/* ---------- First clients ---------- */
+(function(){
+  var ol = $("#channels");
+  D.channels.forEach(function(c, i){
+    ol.appendChild(h("li", {class:"pick"},
+      h("div", {class:"rank", text:String(i+1)}),
+      h("div", null, h("h3", {text:c.name}), h("p", {text:c.what}), h("p", {class:"why", text:c.why})),
+      h("dl", null, h("dt", {text:"Cost"}), h("dd", {text:c.cost}), h("dt", {text:"First $"}), h("dd", {text:c.first}))
+    ));
+  });
+  [["#upwork-steps", D.upworkSteps], ["#fiverr-steps", D.fiverrSteps], ["#proof-steps", D.proofSteps]].forEach(function(p){
+    var list = $(p[0]);
+    p[1].forEach(function(t){ list.appendChild(h("li", {text:t})); });
+  });
+})();
+
 /* ---------- Opportunity explorer ---------- */
 (function(){
   var SPEED = {1:["fast","Days"], 2:["mid","1–4 weeks"], 3:["slow","Months"]};

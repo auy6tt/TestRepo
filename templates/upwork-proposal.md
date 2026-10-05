@@ -1,15 +1,15 @@
 # Upwork proposal
 
-*Under 150 words. Use the client's own words in the first line and answer what they asked.*
+*Under 150 words. Restate the deliverable in their words, then show a small proof made for this post.*
 
 ```text
 Hi [client name],
 
-You need [their problem in one line, in their words].
+You need [the deliverable, in their words].
 
-I did something similar here: [link to sample] ([one-line result]).
+I made a quick example for your post: [link to a 60–90 second screen recording or a sample file]. Similar finished work: [portfolio link].
 
-How I'd handle yours:
+How I'd do yours:
 1. [first step]
 2. [second step]
 3. [how you'll deliver it and check that it works]

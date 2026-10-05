@@ -2,32 +2,79 @@
 
 What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. Ranked for someone starting from zero: no reviews, no portfolio, no network.
 
-Researched October 2026 · 35 ways to earn · 27 platforms · 160 sources. Not legal, tax or financial advice.
+**Interactive version (filters, fee calculator, checklist):** https://claude.ai/artifact/6XujurYFWKFDJQDofE8n9M
+
+Researched October 2026 · 36 ways to earn · 27 platforms · 210 sources. Not legal, tax or financial advice.
 
 ## Contents
 
 1. [Start here](#start-here)
-2. [Reality check](#reality-check)
-3. [All opportunities](#all-opportunities)
-4. [Where to sell](#where-to-sell)
-5. [Rules](#rules)
-6. [30-day plan](#30-day-plan)
-7. [Templates](#templates)
-8. [Using this workspace](#using-this-workspace)
-9. [Sources](#sources)
+2. [First clients when nobody knows you](#first-clients-when-nobody-knows-you)
+3. [Reality check](#reality-check)
+4. [All opportunities](#all-opportunities)
+5. [Where to sell](#where-to-sell)
+6. [Rules](#rules)
+7. [30-day plan](#30-day-plan)
+8. [Templates](#templates)
+9. [Using this workspace](#using-this-workspace)
+10. [Sources](#sources)
 
 ## Start here
 
-Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Do the first one this week; add others as you get reviews.
+Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Start the first one this week and add others as reviews come in. The next section covers where to find the buyers.
 
 | # | Pick | Charge | First $ | Sell on |
 |---|---|---|---|---|
-| 1 | **Spreadsheet and PDF-to-Excel fixes**: Fix formulas, clean data, turn PDFs into spreadsheets, build simple dashboards. Small, cheap jobs are the ones buyers will risk on a newcomer. Claude does them in minutes, and you can check every number before delivering. | $20–$250 per job | Days | Fiverr, Upwork, r/forhire, people you know |
+| 1 | **Spreadsheet and PDF-to-Excel fixes**: Fix formulas, clean data, turn PDFs into spreadsheets, build simple dashboards. Small, cheap jobs are the ones buyers will risk on a newcomer, and Fiverr searches for Excel data cleaning rose 210% in six months. Claude does the work in minutes, and you can check every number before delivering. | $20–$250 per job | Days | People you know, r/forhire, Upwork, Fiverr |
 | 2 | **Show-first websites for local businesses**: Find businesses with no website, build theirs first, then offer to put it live with a monthly care plan. Reviews don't matter when the owner can see the finished site before paying anything. The care plan turns one sale into monthly income. | $300–$800 + $50–150/mo | 1–3 weeks | Google Maps prospecting, walking in, local groups |
 | 3 | **Fixing apps people built with AI tools**: Diagnose and fix stuck Lovable, Bolt, Replit and Base44 projects, then help them launch. Demand is new and growing fast, so established sellers haven't taken it over, and Claude Code is very strong at it. Sell a fixed-price diagnosis first. | $50–$500 per fix | 1–2 weeks | Fiverr Vibe Coding category, Upwork, tool communities |
 | 4 | **Small automations for businesses**: n8n, Make, Zapier and Apps Script flows that move data, answer leads and build reports. Start by fixing someone's existing workflow for a small fixed fee. Every build can carry a monthly care plan. | $150–$500, then $1,500+ | 2–4 weeks | Upwork, Fiverr n8n category, LinkedIn |
 | 5 | **Resumes and LinkedIn for one profession**: ATS-friendly resume and LinkedIn rewrite matched to real job ads. Everyone knows someone job hunting, so this is the quickest route to a first paid job and a first testimonial through people who already trust you. | $50–$150 to start | Days | People you know first, then Fiverr |
 | 6 | **Hackathons and one Apify tool on the side**: Enter online AI hackathons, and publish one niche data tool on the Apify Store. Judges and marketplace buyers look at the work, not your reviews, and both leave you with public portfolio pieces. Treat the money as a bonus. | Prizes $500–$5,000; Apify $0–300/mo | Weeks to months | devpost.com, lablab.ai, apify.com |
+
+## First clients when nobody knows you
+
+Marketplaces now rank sellers by their history, and AI matchers on both Upwork and Fiverr decide who gets seen. So a newcomer wins fastest through people they know and through outreach that shows finished work first. Run Upwork and Fiverr alongside as slower channels. Ranked by how fast each works for someone with zero reviews.
+
+1. **People you know, and the people they know** (cost: $0; first $: 1–3 weeks). Message 20–40 former classmates, former coworkers and owners of shops you use. Ask for introductions as well as work. Trust passes through someone they already know. A LinkedIn study of about 20 million people found that ties with roughly 10 mutual connections led to more new jobs than close friends did.
+2. **Show-first outreach to small businesses** (cost: $0; first $: 2–6 weeks). Make a quick sample for one specific business (a demo site, a one-page audit, a cleaned spreadsheet) and send it with a personal first line. The finished sample stands in for reviews: the owner sees their own result before paying. Small batches work better: lists under 50 get about 3× the replies of lists over 500.
+3. **Reddit hiring communities** (cost: $0 (some need account age or karma); first $: Days to 2 weeks). r/forhire, r/freelance_forhire, r/slavelabour and r/DoneDirtCheap. Sort by New every day and reply within the first hours with one matching sample. Posters pick whoever replies fast with relevant proof. r/forhire gets about 33 posts a day and bans pay under $15/h; a 6-hour-old post already has 20–30 replies.
+4. **Upwork, with a tight saved search** (cost: $25–40 per 50 proposals; first $: 2–8 weeks). Apply only to fresh jobs with few proposals from clients with a verified payment method. See the Upwork steps below. Escrow protects both sides, and first-time clients take more chances on newcomers. Expect about 1 reply per 10–20 proposals; only about 1 posting in 12 is marked entry level.
+5. **Communities around one tool** (cost: $0; first $: 2–6 weeks). The n8n forum's Jobs category, Webflow's hiring board, and Facebook or Slack groups for agency owners. Help people for 30 minutes a day before you pitch. Helpful public answers are proof anyone can check, and the people there already pay for the tool.
+6. **Fiverr** (cost: $0 (20% per order); first $: 2–6 weeks). Publish 2–4 related gigs and send your own prospects to them. See the Fiverr steps below. Buyers come to you, so a low entry price and strong samples can win first orders. Fiverr's AI matcher (Mira) mostly picks sellers who already have orders, so don't wait for it.
+7. **White-label work for agencies** (cost: $0; first $: 3–8 weeks). Pitch 20–40 web, marketing or automation agencies with 2–3 matching samples and offer a small paid test. The agency's brand carries the trust; they need someone who delivers without creating more management work. Agency work tends to repeat.
+8. **Smaller marketplaces** (cost: $0 to start; first $: 2–4+ weeks). PeoplePerHour (15 free proposals a month), Freelancer.com (6 free bids a month), Workana, Legiit. Use Contra to bill clients you find yourself, since it charges you 0%. Same review problem as Upwork, but less competition in some niches.
+
+### Upwork, step by step
+
+1. Pick one narrow lane in the words buyers search for, such as "Excel and Google Sheets automation" or "Python web scraping to CSV". Upwork rejects generic data-entry, writing and assistant profiles as oversupplied.
+2. Write the profile for Upwork's AI matcher (Uma), which compares it with each job. Repeat clients' own words in your title, fill the skills list, put results in the first two lines, and add 3–5 samples labeled as samples. Since May 2026 each person has a single profile.
+3. If the profile is rejected, add samples, switch to a less crowded category and resubmit.
+4. Budget Connects: $0.15 each, 10 free a month, usually 4–6 per proposal, so 50 proposals cost about $25–40. Don't pay to boost proposals.
+5. Save a search: payment verified, fewer than 5 proposals, client has no hires, posted in the last hour. Leave out jobs that ask for a "free test". Turn on notifications; postings peak Monday to Thursday.
+6. Open each proposal by restating the deliverable, then link a small proof made for their post. A 60–90 second screen recording works well. Add a 3-step plan, a fixed price, a delivery date and one sharp question.
+7. Add 1–2 fixed-price offers to the Project Catalog, for example "Clean and dedupe your spreadsheet (up to 10,000 rows), $40".
+8. Deliver the first job early and ask for feedback. The Rising Talent badge needs a 4.8+ rating and $250 earned, and it lifts you in search.
+
+### Fiverr, step by step
+
+1. Measure competition: search the exact phrase a buyer would type and check how many services come up. Under about 500 is low competition. Make sure the top gigs have recent reviews, which proves demand.
+2. Create 2–4 closely related gigs rather than 7 unrelated ones.
+3. Price slightly below the market average, as Fiverr itself advises, with 3 packages that have clear limits (rows, pages, revisions).
+4. Use before-and-after images, a 20–60 second video, every tag and an FAQ.
+5. Launch when you can reply within hours. Use Out of Office instead of leaving messages unanswered.
+6. Send real prospects to your gig link. Fiverr's AI matcher (Mira) mostly picks sellers who already have orders.
+7. Never have friends or family order to create reviews. Fiverr permanently bans "feedback boosting", and US law fines fake reviews up to $51,744 each.
+8. Level 1 needs at least 5 orders from 3 different clients, $400 earned and a 4.4+ rating. Money clears 14 days after each order.
+
+### Show-first outreach, step by step
+
+1. Pick a type of business and a proof Claude can make in under 45 minutes: a one-page demo site, a one-page audit PDF with a short screen recording, or a messy spreadsheet turned into a clean dashboard.
+2. Find leads on Google Maps: businesses with 20+ reviews and no website or a broken one. Many have no email, so plan on WhatsApp, Instagram, a phone call or a visit.
+3. Label every demo "Concept prepared for [business] by [you]. Not the official site." Share it privately as screenshots or an unlisted link, and put it live on their own domain only after they say yes.
+4. Send in batches of 10–50, each with a personal first line, such as their rating and number of reviews. Expect 3–8% replies, so about 50 contacts gives 2–4 conversations.
+5. Make the first step small: the demo is free, a pilot costs $50–300, and bigger jobs take a 25–50% deposit.
+6. Follow up twice within about 10 days, then stop.
 
 ## Reality check
 
@@ -87,6 +134,7 @@ Every option the research turned up, with prices, where buyers are, and how Clau
 | [Open-source bounties](#oss-bounties) | Paid on results | $50–$500, most under $150 | 1–4 weeks | Yes | ●●○ |
 | [Kaggle and data competitions](#kaggle) | Paid on results | Usually $0 cash | Months | Yes | ●●○ |
 | [Security bug bounties](#bug-bounties) | Paid on results | Most beginners earn $0 | Months | Yes | ●○○ |
+| [Small contests on Freelancer.com](#contests) | Paid on results | $20–$190 prizes | Days | Yes | ●●○ |
 
 ### Websites and apps
 
@@ -98,8 +146,8 @@ Every option the research turned up, with prices, where buyers are, and how Clau
 - **What buyers need:** Shops, salons, clinics, cafés and trades with no website, or a dead one. Google shut down its free Business Profile sites in March 2024, which removed about 20 million small sites. Owners want a fast phone-friendly page with hours, services, photos, a map and a call or WhatsApp button.
 - **How Claude does it here:** Claude builds a static site from the business's public info in an hour or two. Headless Chromium takes phone and desktop screenshots for your pitch. Host paying clients free on Cloudflare Pages, which allows commercial use. Register the domain in the client's name.
 - **Where to find buyers:** Google Maps: search a category in your area and note businesses with no website link. Visit in person or message them with the screenshots. Then friends' and family's businesses and local community groups. Fiverr gigs are a second channel.
-- **Demand signal:** 2025 surveys put small businesses with no website at 17–27%. Freelance brochure sites sell for $1,000–2,500 in the US. Care plans of $75–200/mo are typical.
-- **Watch out:** Expect many no's: a third of owners without a site say they don't need one. Keep demos unlisted, label them as a concept, and delete them if the owner says no. Never put a real business's name on a public page it didn't approve. Vercel Hobby and GitHub Pages don't allow commercial use.
+- **Demand signal:** About 1 in 6 US small businesses had no website in 2025 (Clutch), and other 2025 surveys put the gap at up to 27%. Freelance brochure sites sell for $1,000–2,500 in the US, and care plans of $75–200/mo are typical. Evidence that show-first demos convert is anecdotal: a typical cold email gets about 3–4% replies, and one vendor claims 25% when the message contains a live demo.
+- **Watch out:** Expect many no's. Of owners without a site, 34% say they don't need one and 21% rely on social media, so offer those a booking or FAQ automation instead. Keep demos unlisted, label them as a concept, and delete them if the owner says no. Never put a real business's name on a public page it didn't approve. Vercel Hobby and GitHub Pages don't allow commercial use.
 - **Skill needed from you:** Talking to owners and following up. Claude does the building.
 - **Example:** "I'll build your business a fast mobile website in 72 hours, and you see it before you pay"
 
@@ -178,7 +226,7 @@ Every option the research turned up, with prices, where buyers are, and how Clau
 - **What buyers need:** Office workers and small businesses have broken formulas, messy data and reports they rebuild by hand every week.
 - **How Claude does it here:** The client sends the file. Claude fixes and documents the formulas with the xlsx skill and checks the results with Python. Apps Script and VBA can't run here, so the client tests them and you iterate.
 - **Where to find buyers:** Fiverr Excel and Sheets gigs, Upwork, r/forhire. Also everyone you know who works in an office.
-- **Demand signal:** Steady demand for years. Fiverr Excel automation projects average about $90–157. VBA to Apps Script conversions sell for $35–750.
+- **Demand signal:** Fiverr searches for Excel data cleaning rose 210% (Nov 2025–Apr 2026). Fiverr Excel automation projects average about $90–157, and VBA to Apps Script conversions sell for $35–750.
 - **Watch out:** A wrong formula in a money file hurts the client, so add check totals. Treat files as confidential (see Rules).
 - **Skill needed from you:** Low. The output is easy to check, which makes it the safest place to start.
 - **Example:** "I'll fix your Excel or Google Sheets formulas and automate your weekly report"
@@ -498,8 +546,8 @@ Every option the research turned up, with prices, where buyers are, and how Clau
 - **What buyers need:** AI companies sponsor hackathons to get developers building on their tools. Judges score the demo, not who you are.
 - **How Claude does it here:** Claude Code builds fast. Ship a live demo page and a 2–3 minute video, and keep a starter kit you reuse between events.
 - **Where to find buyers:** devpost.com (filter for online events), lablab.ai sponsor tracks (Sept–Oct 2026 pools of $6,000–12,000), Claude-linked events (often selective, often paid in credits).
-- **Demand signal:** Devpost AI hackathons ran $80k–$2M prize pools in 2025–2026. Side-track prizes ("best use of X") are where small teams win.
-- **Watch out:** Hundreds to thousands of entries, so roughly a 1–5% chance of placing per entry (estimate). lablab.ai payouts can take up to 90 days. Check country eligibility before building.
+- **Demand signal:** Big events are crowded (one Kaggle-hosted hackathon drew about 1,600 submissions for roughly 14 prizes), but smaller ones aren't: DeveloperWeek NY 2026 had 612 participants for $9,250 in cash. Only 5–33% of people who register on Devpost ever submit, so finishing alone puts you ahead.
+- **Watch out:** Pick online events with under about 500 participants and a sponsor side-track. Many prizes are paid in API credits, and lablab.ai payouts can take up to 90 days. Check the rules on AI disclosure, building during the event, and country eligibility.
 - **Skill needed from you:** Low to medium. The pitch video matters a lot.
 - **Example:** "Target: a sponsor side-track at an online lablab.ai or Devpost event"
 
@@ -525,7 +573,7 @@ Every option the research turned up, with prices, where buyers are, and how Clau
 - **How Claude does it here:** Claude Code reproduces the bug, writes the fix and the tests.
 - **Where to find buyers:** algora.io/bounties and opire.dev. Niche languages (Rust, Elixir, Scala, C++ or GPU code) are far less crowded than TypeScript and React.
 - **Demand signal:** On 30 Sept 2026 there were 155 open bounties worth $68.8k, and 124 of them paid under $150.
-- **Watch out:** Flooded by AI agents: one $170 bounty drew 158 attempts, and generic bounties work out to about $1–5 an hour. Many repos ban or auto-close AI pull requests. Payouts need Stripe Connect in your country. Skip any bounty with 3+ claimants or a linked PR.
+- **Watch out:** Flooded by AI agents: one $170 bounty drew 158 attempts, and generic bounties work out to about $1–5 an hour. Many repos ban or auto-close AI pull requests. Payouts go through Stripe, and in some countries (for example the UAE and India) only registered businesses can receive them.
 - **Skill needed from you:** Medium.
 - **Example:** "Rule: skip any bounty with 3+ claimants or a linked pull request"
 
@@ -555,6 +603,19 @@ Every option the research turned up, with prices, where buyers are, and how Clau
 - **Skill needed from you:** High. Only worth it if you want to learn security seriously.
 - **Example:** "Only if you want to learn security seriously"
 
+<a id="contests"></a>
+#### Small contests on Freelancer.com
+
+*Naming, writing and Excel or data-entry contests.* **$20–$190 prizes** · first $ in days · no reviews needed: yes
+
+- **What buyers need:** Buyers post a contest and pay the best entry. A win also gives you a first review on the platform.
+- **How Claude does it here:** Claude helps you produce strong entries quickly. Read each contest brief closely and tailor your entry to it.
+- **Where to find buyers:** freelancer.com/contest. Filter for guaranteed contests with 50 or fewer entries.
+- **Demand signal:** Sampled naming contests paid $20–50 and drew 45–277 entries. A data-entry contest drew 129.
+- **Watch out:** Low odds per entry, so treat it as practice and a source of a first review. Atom (formerly Squadhelp) bans name generators, AI included. The winner pays Freelancer.com 10% or $5.
+- **Skill needed from you:** Low.
+- **Example:** "Target: 3–5 strong entries a week for a month, then check your win rate"
+
 ## Where to sell
 
 What each platform costs you and its rules on AI. Fees change, so check the platform before you rely on a number. The calculator shows what you keep after fees and your Claude plan.
@@ -563,8 +624,8 @@ What each platform costs you and its rules on AI. Fees change, so check the plat
 
 | Platform | What it costs you | Best for | AI rules and notes |
 |---|---|---|---|
-| [Fiverr](https://www.fiverr.com) | 20% per order | Fixed-price packages. Buyers search for you, and applying costs nothing. | AI allowed. Disclose it if a buyer asks, honor "no AI" requests, and refine the output. |
-| [Upwork](https://www.upwork.com) | 0–15% + Connects | The biggest pool of jobs, including hourly and long-term work. | AI allowed and best disclosed. Bots or extensions that send proposals get accounts suspended. |
+| [Fiverr](https://www.fiverr.com) | 20% per order | Fixed-price packages. Buyers search for you, and applying costs nothing. Its AI matcher (Mira) favors sellers who already have orders. | AI allowed. Disclose it if a buyer asks, honor "no AI" requests, and refine the output. Friends ordering to create reviews means a permanent ban. |
+| [Upwork](https://www.upwork.com) | 0–15% + Connects | The biggest pool of jobs. One profile per person since May 2026, and its AI (Uma) shortlists freelancers for clients. | AI allowed and best disclosed. Bots or extensions that send proposals get accounts suspended. |
 | [Contra](https://contra.com) | 0% to you | Portfolio-led work, and a way to bill clients you find elsewhere. | No specific rule found. |
 | [Freelancer.com](https://www.freelancer.com) | 10% (min $5) | Contests and small cheap jobs; free bids are limited. | No specific rule found. |
 | [PeoplePerHour](https://www.peopleperhour.com) | 20% → 7.5% → 3.5% | UK and European small businesses. | No specific rule found. |
@@ -601,10 +662,10 @@ What each platform costs you and its rules on AI. Fees change, so check the plat
 
 | Platform | What it costs you | Best for | AI rules and notes |
 |---|---|---|---|
-| [Payoneer](https://www.payoneer.com) | Varies | Receiving marketplace payouts in many countries. | Check that it supports your country and bank. |
+| [Payoneer](https://www.payoneer.com) | Varies | Marketplace payouts; Etsy pays sellers in some countries through it. | Check that it supports your country and bank. |
 | [Wise](https://wise.com) | Low conversion fees | Holding and converting foreign currency. | Check that it supports your country and bank. |
-| [PayPal](https://www.paypal.com/webapps/mpp/country-worldwide) | About 3–5% + fixed fee | Direct clients, Apify payouts from $20. | Some countries can send but not receive. |
-| [Stripe](https://stripe.com/global) | About 2.9% + $0.30 (US) | Card payments; Algora and Opire bounty payouts. | Only in Stripe-supported countries. |
+| [PayPal](https://www.paypal.com/webapps/mpp/country-worldwide) | About 3–5% + fixed fee | Direct clients; Apify payouts from $20; UserTesting and Gumroad payouts. | Some countries can send but not receive. |
+| [Stripe](https://stripe.com/global) | About 2.9% + $0.30 (US) | Card payments; Algora, Opire and Notion Marketplace payouts. | In some countries (for example the UAE and India) individuals need a business licence, which blocks these payouts. |
 
 ### Fee presets used by the page's calculator
 
@@ -631,6 +692,7 @@ Anthropic's consumer terms allow you to sell work made with Claude. Most of the 
 - **Tell clients you use AI tools** and honor any "no AI" request. Fiverr requires disclosure when asked.
 - **Protect your payment.** Take 30–50% upfront or use platform escrow. Hand over rights only after full payment, and cap your liability at the fee.
 - **Keep the client's things in the client's name:** domains, hosting, API keys, accounts.
+- **Label samples as samples,** and say how you know anyone who gives you a testimonial.
 - **Plan around usage limits.** Max resets every 5 hours and also has a weekly cap shared by Claude and Claude Code. If ANTHROPIC_API_KEY is set, Claude Code bills that key instead.
 - **Check your local rules** for freelance permits and tax registration before you send invoices.
 
@@ -641,6 +703,7 @@ Anthropic's consumer terms allow you to sell work made with Claude. Most of the 
 - **Don't write students' graded work,** fake reviews, spam or mass-produced SEO pages. All of these break Anthropic's usage policy, and some are crimes.
 - **Don't use Claude on AI-training platforms** such as Outlier, DataAnnotation and Mercor. They ban it and keep your pay.
 - **Don't move Upwork or Fiverr clients off-platform.** Both ban it.
+- **Don't let friends or family order your gigs to create reviews,** and don't trade discounts for positive reviews. Fiverr bans it permanently, and US law fines fake reviews up to $51,744 each.
 - **Don't use bots to send proposals** or to create accounts.
 - **Don't pay to get a job,** cash an "overpayment" check, or move to Telegram or WhatsApp because a stranger insists.
 - **Don't run a stranger's "test project" repo without reading it first.** Fake coding tests have carried malware.
@@ -649,50 +712,53 @@ Anthropic's consumer terms allow you to sell work made with Claude. Most of the 
 
 > **Scam rule:** if someone wants money from you before you've earned anything, or wants to move you to Telegram or WhatsApp right away, walk away. The FTC reports record losses to "pay to get paid" job scams.
 
-> **Side income that needs no reviews, but no Claude either:** AI-training platforms such as DataAnnotation, Outlier and Mercor pay roughly $15–$60+ an hour if you pass their tests. They ban AI tools, and using Claude there also breaks Anthropic's usage policy, so this work has to be done by you personally.
+> **Side income that needs no reviews, but no Claude either:** AI-training platforms (Outlier, Mercor, Alignerr) pay roughly $15–$60+ an hour if you pass their tests, and research sites pay for your opinions (Prolific pays at least $8 an hour; UserTesting pays $10 per short test). All of them ban AI tools or detect them, and using Claude there also breaks Anthropic's usage policy, so this work must be done by you personally. Several are limited to certain countries: DataAnnotation, for example, only accepts six English-speaking countries.
 
 ## 30-day plan
 
 Built for zero reviews. Tick items off as you go.
 
-### Week 1: set up and make proof (Days 1–7)
+### Week 1: build proof from nothing (Days 1–7)
 
-*Goal: By day 7 you have one clear offer, three samples and working accounts.*
+*Goal: By day 7 you have one clear offer, 3–5 samples written up as case studies, and accounts ready.*
 
-- [ ] Pick one main offer from "Start here" and one paid-on-results path to run alongside it.
+- [ ] Day 1: pick one main offer from "Start here" and write it as one sentence, such as "I turn messy sales spreadsheets into clean, auto-updating dashboards in 48 hours."
 - [ ] Turn off model training in Claude's privacy settings before you touch anyone else's files.
+- [ ] Days 2–4: ask Claude to build 3–5 samples in this repo from made-up or public data, each labeled as a self-initiated sample.
+- [ ] Day 5: write each sample up as a case study (problem, process, solution, result) with real numbers, and publish them together on one page.
 - [ ] Finish two free Claude Academy courses (academy.claude.com) and add the certificates to your profiles.
-- [ ] Ask Claude to build three samples in this repo using made-up businesses or public data: a demo site for a fictional café, a messy spreadsheet fixed with a dashboard, and a PDF turned into a clean Excel file.
-- [ ] Put the samples online (Cloudflare Pages or GitHub) and write a short case study for each: the problem, what you did, the result.
-- [ ] Open accounts: Fiverr, Upwork, Contra, GitHub, and a payout method that works in your country (Payoneer, Wise or PayPal).
+- [ ] Open accounts: Upwork (profile in clients' own words), Fiverr, Contra, GitHub, and a payout method that works in your country (PayPal, Payoneer or Wise).
+- [ ] Start earning Reddit karma by answering questions in a help community such as r/excel. Hiring subreddits often require karma before you can post.
 
 ### Week 2: first conversations (Days 8–14)
 
-*Goal: At least 40 people or businesses have seen your offer.*
+*Goal: At least 50 people or businesses have seen a sample of your work.*
 
-- [ ] Message 20 people you know: one sentence on what you do, plus 3 discounted pilot jobs in exchange for an honest testimonial.
-- [ ] Publish 2 Fiverr gigs in narrow niches, with your samples as the gig images.
-- [ ] Finish your Upwork profile with a niche headline. Send 10 tailored proposals, only to jobs under 1 hour old with fewer than 5 proposals.
-- [ ] List 15 local businesses with no website from Google Maps. Build demos for the best 3 and show them in person or by message.
-- [ ] Post one [For Hire] message on r/forhire with your samples and fixed starting prices.
+- [ ] Message 20–40 people you know, including former classmates, former coworkers and shop owners. Say what you do, and ask for introductions as well as work.
+- [ ] Find 30 local businesses on Google Maps with 20+ reviews and no website. Build demos for the best 5 and send them in a batch, each with a personal first line.
+- [ ] On Upwork, set up the saved search from "First clients" and send 10 proposals, each linking a small proof made for that post.
+- [ ] Publish 2–4 related Fiverr gigs priced slightly below the average, with your samples as the gig images.
+- [ ] Post a [For Hire] ad on r/forhire and r/freelance_forhire, then check new posts there every day.
 
 ### Week 3: deliver and collect proof (Days 15–21)
 
 *Goal: First paid job delivered and a first review or testimonial in hand.*
 
-- [ ] Deliver every pilot job early, with a short screen recording that explains what you did.
-- [ ] Ask each happy client for a review or written testimonial on the day you deliver.
-- [ ] Turn each job into a before-and-after case study (with the client's permission).
+- [ ] Deliver every job early, with a 60–90 second screen recording that explains what you did.
+- [ ] Ask happy clients for a review or a written testimonial on delivery day.
+- [ ] Follow up once with everyone who hasn't replied from week 2.
+- [ ] Pitch 10 small agencies for white-label overflow work, offering a small paid test.
 - [ ] Keep the rhythm: 10 proposals and 10 outreach messages this week.
-- [ ] Try one paid-on-results path: enter an online hackathon, or claim an Expensify issue you can actually finish.
+- [ ] Enter one small online hackathon, or post a proposal on an Expensify "Help Wanted" issue you can actually finish.
 
-### Week 4: repeat what worked and raise prices (Days 22–30)
+### Week 4: keep what worked and raise prices (Days 22–30)
 
 *Goal: One repeatable offer, a higher price and a monthly add-on.*
 
 - [ ] Count the month: messages sent, replies, calls, wins. Keep the channel with the best reply rate and drop the worst.
-- [ ] Raise prices about 20–30% after your first 3–5 reviews.
-- [ ] Add a monthly care plan or retainer to every delivered project.
+- [ ] Raise prices about 20–30% once you have 3–5 reviews.
+- [ ] Offer a monthly care plan or retainer with every delivered project.
+- [ ] Turn each finished job into a before-and-after case study, with the client's permission.
 - [ ] Save your best proposal, intake form and delivery checklist as templates in this repo.
 - [ ] Set next month's targets: messages per week, and one new sample in your niche.
 
@@ -700,13 +766,14 @@ Built for zero reviews. Tick items off as you go.
 
 Each template is also a separate file in [`templates/`](templates/).
 
-- [Message to people you know](templates/warm-network-message.md): Send to 20 friends, relatives, classmates or coworkers in week 2.
-- [Show-first message to a local business](templates/show-first-local-business.md): Send with screenshots or an unlisted demo link after you've built their draft site.
-- [Upwork proposal](templates/upwork-proposal.md): Under 150 words. Use the client's own words in the first line and answer what they asked.
+- [Message to people you know](templates/warm-network-message.md): Send to 20–40 former classmates, coworkers and shop owners in week 2. Asking for introductions matters as much as asking for work.
+- [Show-first message to a local business](templates/show-first-local-business.md): Send by WhatsApp, Instagram or email with screenshots or an unlisted demo link, after you've built their concept site. Or say it in person.
+- [Upwork proposal](templates/upwork-proposal.md): Under 150 words. Restate the deliverable in their words, then show a small proof made for this post.
 - [Fiverr gig: spreadsheet fixes](templates/fiverr-gig-spreadsheets.md): Gig title, description and three packages. Use screenshots of your samples as gig images.
-- [Reddit [For Hire] post](templates/reddit-for-hire.md): For r/forhire. Read the subreddit's posting rules first.
+- [Reddit [For Hire] post](templates/reddit-for-hire.md): For r/forhire (one post a week, $15/hour minimum) and r/freelance_forhire. Read each community's rules first.
+- [White-label pitch to an agency](templates/agency-white-label-pitch.md): Email or LinkedIn message to small web, marketing or automation agencies. On LinkedIn, connect first and pitch after they accept.
 - [Offer to fix a stuck AI-built app](templates/app-rescue-offer.md): Reply to someone who posted that their Lovable, Bolt or Replit app is broken.
-- [Asking for a review or testimonial](templates/testimonial-request.md): Send on delivery day, while the client is happiest.
+- [Asking for a review or testimonial](templates/testimonial-request.md): Send on delivery day. Never offer anything in return for a positive review.
 - [One-page agreement](templates/simple-agreement.md): Fill in and get a written "yes" before starting any job off-platform. Not legal advice; adapt it to your country.
 - [Website intake questions](templates/website-intake.md): Send after a yes, before building the live version.
 
@@ -721,7 +788,7 @@ Each template is also a separate file in [`templates/`](templates/).
 
 ## Sources
 
-160 sources across 10 research passes, October 2026. This environment's network policy blocked most sites, so the research agents read most pages through search-result summaries; Anthropic's terms and policies were read directly. Prices and fees change, so check before you rely on them.
+210 sources across 10 research passes, October 2026. This environment's network policy blocked most sites, so the research agents read most pages through search-result summaries; Anthropic's terms and policies were read directly. Prices and fees change, so check before you rely on them.
 
 ### Demand and market data
 
@@ -904,6 +971,62 @@ Each template is also a separate file in [`templates/`](templates/).
 - <https://www.ic3.gov/PSA/2025/PSA250123>
 - <https://unit42.paloaltonetworks.com/two-campaigns-by-north-korea-bad-actors-target-job-hunters/>
 - <https://www.irs.gov/forms-pubs/about-form-w-8-ben>
+
+### Getting first clients as a newcomer
+
+- <https://www.upwork.com/press/releases/upwork-updates-spring-2026-ai-powered-innovations-to-help-small-businesses-get-ambitious-work-done>
+- <https://uphunt.io/blog/upwork-uma-recruiter-ai-shortlist-freelancer-guide-2026>
+- <https://www.upwork.com/resources/how-to-get-free-connects>
+- <https://investors.upwork.com/news-releases/news-release-details/upwork-reports-fourth-quarter-and-full-year-2025-financial>
+- <https://tryvibeworker.com/blog/upwork-job-market-report-june-2026>
+- <https://gigradar.io/blog/upwork-proposal-response-rate>
+- <https://support.upwork.com/hc/en-us/articles/211063228-How-to-become-a-Rising-Talent-on-Upwork>
+- <https://www.getsmartbid.com/blog/upwork-project-catalog-the-freelancer-s-guide-to-inbound-clients>
+- <https://www.upwork.com/resources/portfolio-guide>
+- <https://help.fiverr.com/hc/en-us/articles/48756531483537-Finding-talent-with-Mira>
+- <https://community.fiverr.com/public/blogs/tips-to-help-you-get-your-first-fiverr-order-2025-06-23>
+- <https://help.fiverr.com/hc/en-us/articles/360010452317-Gigs-best-practices>
+- <https://help.fiverr.com/hc/en-us/articles/25077475528081-Fiverr-reviews-Content-guidelines-and-removal-policy>
+- <https://www.fiverr.com/resources/guides/reports/business-trends-index-june-2026>
+- <https://dev.to/hcxshh/i-checked-all-12-reddit-subreddits-for-freelance-gigs-only-3-are-usable-4p5d>
+- <https://www.sidequestboard.app/blog/how-to-get-freelance-clients-on-reddit>
+- <https://community.n8n.io/c/jobs/13>
+- <https://www.micalaquinn.com/get-clients-from-facebook-groups/>
+- <https://creativepool.com/magazine/workshop/why-you-should-be-pitching-agencies-for-overflow-work-and-how-to-do-it.35028>
+- <https://instantly.ai/cold-email-benchmark-report-2026>
+- <https://woodpecker.co/blog/cold-email-statistics/>
+- <https://www.loom.com/customers/intercom>
+- <https://expandi.io/blog/linkedin-outreach-benchmarks-2026/>
+- <https://ciela.ai/blogs/how-to-get-ai-agency-clients-with-a-free-audit>
+- <https://themightymarketer.com/freelance-marketing-survey-2025/>
+- <https://www.9am.works/freelancer-academy/blog/referrals-weak-ties-how-freelancers-find-work-research>
+- <https://www.wsgr.com/en/insights/ftc-issues-final-rule-banning-fake-and-misleading-consumer-reviews-and-testimonials.html>
+- <https://github.com/ryanwangtech/pitchpage>
+- <https://www.bloombytehub.com/2025/06/freelance-portfolio-without-clients.html>
+
+### Paths that need no reputation
+
+- <https://www.freelancer.com/contest/>
+- <https://www.atom.com/help/article/rules-and-guidelines-for-submitting-entries>
+- <https://info.devpost.com/product/public-hackathons>
+- <https://dwny-2026-hackathon.devpost.com>
+- <https://www.kaggle.com/competitions/gemma-4-good-hackathon>
+- <https://lablab.ai/ai-hackathons/amd-developer-hackathon-act-iii>
+- <https://docs.apify.com/legal/store-publishing-terms-and-conditions>
+- <https://help.apify.com/en/articles/8684010-make-money-publishing-your-actors-on-apify-store>
+- <https://www.notion.com/help/selling-on-marketplace>
+- <https://help.gumroad.com/article/79-gumroad-discover>
+- <https://app.outlier.ai/legal/screen-monitoring>
+- <https://talent.docs.mercor.com/policies/llm-usage>
+- <https://participant-help.prolific.com/en/articles/445007-who-can-participate-in-studies-on-prolific>
+- <https://www.prolific.com/resources/how-much-should-you-pay-research-participants>
+- <https://testersupport.usertesting.com/hc/en-us/articles/115003700571>
+- <https://algora.io/docs/payments>
+- <https://support.stripe.com/questions/uae-account-activation-requirements>
+- <https://www.axios.com/2026/03/10/ai-agents-spam-the-volunteers-securing-open-source-software>
+- <https://www.indiehackers.com/post/i-built-a-tool-that-generates-a-live-website-for-a-local-business-before-you-contact-them-qoZTIOY6f8DC83FRfxmP>
+- <https://news.ycombinator.com/item?id=35333088>
+- <https://www.networksolutions.com/blog/small-business-website-statistics/>
 
 ### Case studies and earnings evidence
 
