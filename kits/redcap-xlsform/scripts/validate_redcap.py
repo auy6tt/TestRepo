@@ -868,6 +868,7 @@ def main(argv=None) -> int:
     report, code = build_report(path.as_posix(), dd, issues, event_map, repeating, args.strict, when)
     print(report, end="")
     if args.report:
+        Path(args.report).parent.mkdir(parents=True, exist_ok=True)
         Path(args.report).write_text(report, encoding="utf-8")
         print(f"Report saved to {args.report}")
     return code

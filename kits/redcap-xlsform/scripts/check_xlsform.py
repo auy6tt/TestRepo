@@ -435,6 +435,7 @@ def main(argv=None) -> int:
     result, convert_issues, odk_ran = run_pyxform(path, not args.no_odk_validate)
     issues += convert_issues
     if result is not None and args.xml:
+        Path(args.xml).parent.mkdir(parents=True, exist_ok=True)
         Path(args.xml).write_text(result.xform, encoding="utf-8")
         if result.itemsets:
             (Path(args.xml).parent / "itemsets.csv").write_text(result.itemsets, encoding="utf-8")
@@ -479,6 +480,7 @@ def main(argv=None) -> int:
     report = "\n".join(lines) + "\n"
     print(report, end="")
     if args.report:
+        Path(args.report).parent.mkdir(parents=True, exist_ok=True)
         Path(args.report).write_text(report, encoding="utf-8")
         print(f"Report saved to {args.report}")
     return 1 if failed else 0

@@ -658,6 +658,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Work only on the form's structure, never on participant data. Don't change ethics-approved wording, and licensed scales need the client's license.
 - **Test it in one day:** Build two demos from your own made-up questionnaires (a screening form and a three-visit follow-up), publish them, and send 20 personalized offers of one free conversion.
 - **Related:** [Data-sharing packages for research datasets](#data-sharing)
+- **Starter kit:** [`kits/redcap-xlsform/`](kits/redcap-xlsform/). In Claude Code, type `/redcap-xlsform` in this repo.
 
 <a id="replication-packages"></a>
 #### Journal replication packages for researchers

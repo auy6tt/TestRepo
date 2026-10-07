@@ -110,7 +110,7 @@ Take 30-50% upfront or use platform escrow. Include two rounds of changes within
 
 1. **Structure only, never participant data.** Do not ask for, accept or open real exports, screenshots with data, or logins to live projects. If a client sends data by mistake, do not open it, delete it and tell them. Test only with fake data from `make_fake_export.py`.
 2. **Do not change ethics-approved wording.** Build from the approved version only. Adaptations for the screen (for example "mark the line" becoming a slider) are listed in the delivery note for the client to approve; their ethics committee may need to see them. `check_wording.py` proves the rest is word for word.
-3. **Licensed scales need the client's licence.** Many published questionnaires (for example PHQ-9, EQ-5D, SF-36, MMAS-8) have licences that control electronic use. Ask for the licence or written confirmation before building them, and never put licensed items in your samples.
+3. **Check each published scale's terms.** Some published questionnaires are free to use (the PHQ-9 and GAD-7, for example), but others (for example the EQ-5D, SF-36v2 and MMAS-8) need a licence that covers electronic use. Ask for the licence or written confirmation before building a licensed scale, copy every scale exactly, and never put licensed items in your samples.
 4. **The client tests in their own REDCap or Kobo project.** You deliver files; they import them into a test project, test with made-up records, and move to production after sign-off. Regulated trials need the client's own validation process; your test checklist supports it but does not replace it.
 5. **Protect client files.** Turn off model training in your AI tool's privacy settings before client work, keep each client's files in a private folder, and delete them when the job is done if the client asks.
 
@@ -125,7 +125,7 @@ cd kits/redcap-xlsform
 /tmp/redcap-venv/bin/python scripts/selftest.py      # runs every script on the samples: 15 checks
 ```
 
-In the commands below, `python` means `/tmp/redcap-venv/bin/python`, run from `kits/redcap-xlsform/`. Every script has `--help`.
+In the commands below, `python` means `/tmp/redcap-venv/bin/python`, run from `kits/redcap-xlsform/`. Every script has `--help`. The examples write their results to an `out/` folder (ignored by git); the fake-data example rebuilds the sample files themselves.
 
 | Script | What it does |
 |---|---|
@@ -146,7 +146,7 @@ In the commands below, `python` means `/tmp/redcap-venv/bin/python`, run from `k
 ```bash
 python scripts/validate_redcap.py samples/02_redcap/lakeside_data_dictionary.csv \
   --events samples/02_redcap/instrument_event_mapping.csv \
-  --repeating samples/02_redcap/repeating_instruments.csv --report validation_report.txt
+  --repeating samples/02_redcap/repeating_instruments.csv --report out/validation_report.txt
 ```
 
 Add `--strict` to fail on warnings too. See what errors look like: `samples/07_checker_demo/broken_dictionary_report.txt`.
@@ -154,18 +154,18 @@ Add `--strict` to fail on warnings too. See what errors look like: `samples/07_c
 ### Build and check an XLSForm
 
 ```bash
-python scripts/build_xlsform.py samples/03_xlsform/source -o my_form.xlsx
-python scripts/check_xlsform.py my_form.xlsx --xml my_form.xml --report xlsform_check.txt
+python scripts/build_xlsform.py samples/03_xlsform/source -o out/my_form.xlsx
+python scripts/check_xlsform.py out/my_form.xlsx --xml out/my_form.xml --report out/xlsform_check.txt
 ```
 
-To fix a client's existing form, split it into CSVs first: `python scripts/build_xlsform.py --split their_form.xlsx -o their_form_source`.
+To fix a client's existing form, split it into CSVs first: `python scripts/build_xlsform.py --split their_form.xlsx -o out/their_form_source`.
 
 ### Check the wording against the approved questionnaire
 
 ```bash
 python scripts/check_wording.py --source samples/01_client_input/lakeside_questionnaire_v1.2.docx \
   --dictionary samples/02_redcap/lakeside_data_dictionary.csv \
-  --xlsform samples/03_xlsform/lakeside_health_check.xlsx --report wording_check.txt
+  --xlsform samples/03_xlsform/lakeside_health_check.xlsx --report out/wording_check.txt
 ```
 
 ### Make a codebook
@@ -174,8 +174,8 @@ python scripts/check_wording.py --source samples/01_client_input/lakeside_questi
 python scripts/make_codebook.py --dictionary samples/02_redcap/lakeside_data_dictionary.csv \
   --events samples/02_redcap/instrument_event_mapping.csv \
   --repeating samples/02_redcap/repeating_instruments.csv \
-  --title "Lakeside Community Health Check" --out codebook/lakeside_codebook --logic-table skip_logic_tests.md
-python scripts/make_codebook.py --xlsform samples/03_xlsform/lakeside_health_check.xlsx --out codebook/lakeside_kobo_codebook
+  --title "Lakeside Community Health Check" --out out/lakeside_codebook --logic-table out/skip_logic_tests.md
+python scripts/make_codebook.py --xlsform samples/03_xlsform/lakeside_health_check.xlsx --out out/lakeside_kobo_codebook
 ```
 
 Options: `--page letter` for US paper, `--formats html` for the web page only.

@@ -223,6 +223,7 @@ def main(argv=None) -> int:
     text, code = report(check(items, source_lines), source.name, ", ".join(checked), args.strict)
     print(text, end="")
     if args.report:
+        Path(args.report).parent.mkdir(parents=True, exist_ok=True)
         Path(args.report).write_text(text, encoding="utf-8")
         print(f"Report saved to {args.report}")
     return code

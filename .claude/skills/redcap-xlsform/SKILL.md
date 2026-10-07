@@ -21,10 +21,11 @@ Its README explains the service; `reference.md` next to this file has the syntax
    word for word from the approved version. Do not correct, shorten or "improve" it. If the
    screen needs an adaptation (e.g. "mark the line" becomes a slider note), make it in a field
    note or hint and list it for the client's approval.
-3. **Licensed scales.** If the questionnaire contains a published scale (for example PHQ-9,
-   GAD-7, EQ-5D, SF-36/SF-12, MMAS-8, AUDIT, PROMIS), stop and confirm the client holds a
-   licence that covers electronic use. Record the answer in the delivery note. Never put
-   licensed items in samples or portfolio material.
+3. **Published scales.** If the questionnaire contains a published scale, check its terms.
+   Some are free to use (e.g. PHQ-9, GAD-7); others (e.g. EQ-5D, SF-36v2/SF-12v2, MMAS-8)
+   need a licence that covers electronic use, so stop and confirm the client holds it. Record
+   the answer in the delivery note, copy every scale exactly, and never put licensed items in
+   samples or portfolio material.
 4. **Never invent study rules.** Cut-offs, eligibility, visit windows and scoring come from the
    questionnaire or the client. If unclear, write it down as a question for the client.
 5. The client imports and tests in their own test project. Do not ask for logins.

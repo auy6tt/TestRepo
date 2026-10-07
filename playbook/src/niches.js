@@ -461,7 +461,7 @@ NICHES.push(
 
 // --- Research and nonprofits
 NICHES.push(
-{id:"redcap-forms", group:"research", rank:701, s:[4,3,4,4], related:["data-sharing"],
+{id:"redcap-forms", group:"research", rank:701, kit:"redcap-xlsform", s:[4,3,4,4], related:["data-sharing"],
  name:"REDCap and XLSForm survey building for research teams",
  short:"Turn paper questionnaires into validated study forms",
  who:"Clinical and public-health study teams at hospitals, smaller universities and nonprofits without an in-house REDCap build team, and NGOs collecting data with KoboToolbox or ODK.",
