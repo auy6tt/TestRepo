@@ -39,9 +39,14 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 |---|---|---|---|---|---|---|
 | [Microsoft Access database rescue](#access-rescue) | Specialist software | $150–600 per fix, $1,500–8,000 per migration | 4 | 4 | 4 | 3 |
 | [Getting organisations off Drupal 7](#drupal7) | Specialist software | $800–3,000 per fixed package (est.) | 4 | 3 | 5 | 3 |
+| [Packaging-law updates for small consumer brands](#epr-digest) | Data subscriptions | $39–99 a month per brand, or $300–800 a month white-label (est.) | 4 | 3 | 5 | 3 |
+| [Public-bid digest for one trade, with past winning prices](#bid-digest) | Data subscriptions | $49–149 a month per contractor (est.) | 4 | 3 | 4 | 4 |
+| [Local-government meeting watch for one industry](#council-watch) | Data subscriptions | $150–500 a month per client (est.) | 4 | 3 | 5 | 3 |
+| [International aid tenders for one specialty and language](#aid-tenders) | Data subscriptions | $15–40 a month for individuals, $100–300 for firms (est.) | 3 | 3 | 5 | 4 |
 | [AutoCAD automation routines (AutoLISP)](#autolisp) | Specialist software | $50–300 per routine, $500–1,500 per project | 3 | 4 | 4 | 3 |
 | [ColdFusion maintenance and moves to Lucee](#coldfusion) | Specialist software | $60–125 an hour (est.) | 3 | 5 | 4 | 2 |
 | [Spreadsheet-to-catalogue automation](#catalogue) | Specialist software | $300–2,500 per setup, plus a fee per new edition (est.) | 3 | 3 | 4 | 4 |
+| [New commercial premises list for local service firms](#premises-digest) | Data subscriptions | $79–199 a month per metro (est.) | 3 | 3 | 4 | 4 |
 | [Revit automation scripts](#revit) | Specialist software | $30–95 an hour | 4 | 4 | 3 | 2 |
 | [EDI files for small brands selling to big retailers](#edi) | Specialist software | $500–3,000 per retailer connection (est.) | 4 | 3 | 4 | 2 |
 
@@ -144,6 +149,78 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Where buyers are:** Brands announcing new big-retail deals, operations managers on LinkedIn, logistics communities. Search: "Walmart 856 ASN", "EDI mapping help".
 - **Watch out:** Penalties fall on the client, so cap your liability and never guarantee compliance. Keep their pricing data confidential.
 - **Test it in one day:** Build a spreadsheet-to-shipping-notice (856) generator checked against a public retailer spec, and offer a free error check to 10 newly listed brands.
+
+### Data subscriptions
+
+<a id="epr-digest"></a>
+#### Packaging-law updates for small consumer brands
+
+*A monthly brief on US packaging fee laws and deadlines.* **$39–99 a month per brand, or $300–800 a month white-label (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 5/5 · beginner 3/5
+
+- **Who pays:** Food, drink, cosmetics, pet and home-goods brands with roughly $1M–50M in revenue, plus packaging distributors who could resell it to their clients.
+- **What they need:** A monthly brief on what changed in state packaging "producer responsibility" (EPR) laws, which states apply to them and what is due when, with official links and a deadline calendar.
+- **Proof of demand:** Seven US states now have packaging EPR laws. Oregon has invoiced since July 2025, Colorado's fees began in January 2026, and California's rules took effect in May 2026. Typical fees run $5,000–25,000 a year, and brands already pay compliance firms for help.
+- **Why few people offer it:** Today's supply is free law-firm alerts written for big clients and enterprise compliance services. No low-cost recurring brief aimed at small brands turned up in the research (unverified).
+- **How Claude does it here:** A weekly job checks about 30 official pages (state agency pages, the producer organisation's notices, bill trackers) for changes. Claude drafts the change notes and updates the deadline table; you check every line against its source. A scheduled Routine can run the weekly check.
+- **Where buyers are:** Operations and packaging people at consumer brands on LinkedIn, Shopify and DTC founder communities, packaging distributors. Search: "EPR compliance small business", "SB 54 producer".
+- **Watch out:** This must not become legal advice: describe the rules, never tell a client whether they owe fees. Summarise law-firm alerts in your own words rather than copying them.
+- **Test it in one day:** Write "Packaging EPR status, October 2026" for one product type (for example coffee roasters), send it to 30 founders and 5 packaging distributors with a $39 founding offer, and count the replies.
+
+<a id="bid-digest"></a>
+#### Public-bid digest for one trade, with past winning prices
+
+*Every local government bid in one trade, plus who won before and at what price.* **$49–149 a month per contractor (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 4/5
+
+- **Who pays:** Small contractors in one trade (cleaning, mowing, paving, roofing, pest control) who bid on city, county and school work in one metro area or state.
+- **What they need:** Every open bid in their trade, including small agencies, with scope, site-visit dates and insurance rules, plus the past results ("bid tabulations") showing who won and at what price.
+- **Proof of demand:** Contractors already pay for bid alerts: BidNet Direct costs $599 a year for one state and BidPrime starts at $99 a month. Spending-data tools like GovSpend run $8,500–24,750 a year.
+- **Why few people offer it:** Generic bid alerts are crowded, including new AI tools, so don't compete there. What nobody seems to package is a trade-specific digest with past winning prices from the agencies' own PDFs (weak evidence).
+- **How Claude does it here:** Keep a list of 50–150 agency bid pages plus the federal SAM.gov API. Each week Claude pulls the scope and dates out of the bid PDFs and turns past results into a price table; you check every deadline. Deliver a Monday email plus a spreadsheet.
+- **Where buyers are:** Firms named on past bid results (public business information), state trade associations, the cleaning industry's ISSA, builders' exchanges. Search: "janitorial bids [state]".
+- **Watch out:** A wrong deadline is costly, so double-check them. Portals that need a login usually forbid redistribution, so link to notices instead of reposting them.
+- **Test it in one day:** Pick one trade and one metro, collect the open bids and 12 months of past results from 8 agencies, and email 30 firms named in those results offering 4 free weeks.
+
+<a id="council-watch"></a>
+#### Local-government meeting watch for one industry
+
+*Weekly brief on rezonings, moratoria and votes that affect a client's projects.* **$150–500 a month per client (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 5/5 · beginner 3/5
+
+- **Who pays:** Small developers and land brokers (self-storage, car washes, solar and battery storage, data centres), commercial real-estate brokers, and contractors who want early warning.
+- **What they need:** A weekly brief on relevant agenda items, rezonings, moratoria, votes and hearing dates across 10–40 councils and planning boards, with page references.
+- **Proof of demand:** Startups raised money to do this (Hamlet raised $10M), and local rules are moving fast: one tracker counts 321 data-centre moratoriums or restrictions across 32 states as of September 2026.
+- **Why few people offer it:** The existing players are venture-funded, sell through sales calls, hide their prices and cover the whole country. An affordable, human-checked brief for one industry wasn't found (unverified).
+- **How Claude does it here:** Pull agendas from public agenda systems (many councils use Legistar, which has a public API). Claude reads the meeting packets, flags relevant items and summarises them with page numbers; you check each one. Deliver a Monday email plus a status tracker.
+- **Where buyers are:** Development managers, land-acquisition and site-selection roles on LinkedIn, state solar and storage associations, CCIM and NAIOP chapters.
+- **Watch out:** A misreported vote destroys trust, so cite page numbers. Use official minutes, and remove residents' names from public comments.
+- **Test it in one day:** Pick one industry and one state (for example battery storage in Ohio), build a 30-day digest covering 10–20 counties, and send it to 25 development managers with a $150 pilot offer.
+
+<a id="aid-tenders"></a>
+#### International aid tenders for one specialty and language
+
+*Filtered World Bank, UN and EU calls for small consultancies.* **$15–40 a month for individuals, $100–300 for firms (est.)** · demand 3/5 · few rivals 3/5 · Claude fit 5/5 · beginner 4/5
+
+- **Who pays:** Small consultancies and freelancers in one specialty (evaluation, GIS, training, translation), especially French, Portuguese or Arabic-speaking ones.
+- **What they need:** A weekly filtered list of tenders and calls from development banks, UN agencies and the EU, with plain summaries of each terms of reference.
+- **Proof of demand:** People already pay for broad versions: Devex Pro costs $33–59 a month, and the UN Global Marketplace sells a tender alert service.
+- **Why few people offer it:** The aggregators are broad and mostly in English, so users filter everything themselves. Curation by specialty and language is the gap (unverified). The market shrank after USAID's 2025 shutdown.
+- **How Claude does it here:** Collect official procurement notices (World Bank, EU Funding & Tenders, development-bank and UNDP pages), and check each source's reuse terms. Claude sorts notices by specialty and summarises or translates the documents; you check them.
+- **Where buyers are:** Evaluation groups on LinkedIn, national and regional evaluation societies, the Devex community. Search: "M&E consultancy tender", "appel d'offres évaluation".
+- **Watch out:** Don't resell paid alert services' listings, and link to tender documents instead of redistributing them. Aid budgets are shrinking.
+- **Test it in one day:** Compile two weeks of evaluation tenders for one region and language, post it on LinkedIn and two professional mailing lists, and offer a €10-a-month founding price.
+
+<a id="premises-digest"></a>
+#### New commercial premises list for local service firms
+
+*Weekly list of new commercial buildings and fit-outs in one metro.* **$79–199 a month per metro (est.)** · demand 3/5 · few rivals 3/5 · Claude fit 4/5 · beginner 4/5
+
+- **Who pays:** Commercial cleaners, sign makers, alarm and security firms, IT cabling and fire-protection firms, commercial insurance brokers.
+- **What they need:** A weekly list of new commercial buildings and tenant fit-outs (business, address, project value, contractor, stage) so they can pitch before the business opens.
+- **Proof of demand:** National permit-data tools charge $599–999 a month for self-serve access, and lead publishers sell weekly permit editions.
+- **Why few people offer it:** National data is priced for analysts, and raw scrapers need technical skill. Done-for-you local lists for service businesses look rare (unverified).
+- **How Claude does it here:** Many US cities publish permits as open data. Filter for commercial and fit-out permits above a set value; Claude classifies each project and finds the business's website; you check the list. Deliver an email plus a spreadsheet.
+- **Where buyers are:** Business networking (BNI) chapters, chambers of commerce, ISSA, LinkedIn. Search: "commercial construction leads [city]".
+- **Watch out:** Leave out residential permits, because homeowners are private individuals. Check each portal's licence before reusing its data.
+- **Test it in one day:** Pull four weeks of commercial permits from one city's open-data portal, build a sample list and call 20 local cleaning and sign firms.
 
 
 ## First clients when nobody knows you
