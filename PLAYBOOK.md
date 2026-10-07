@@ -37,18 +37,26 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 | Niche | Type | Typical price | Demand | Few rivals | Claude fit | Beginner |
 |---|---|---|---|---|---|---|
+| [Rescuing AI features before their model is retired](#model-retirement) | New AI needs | $300–800 per feature; $1,500–4,000 for a whole app with a reusable test set (est.) | 4 | 4 | 5 | 3 |
+| [Fixing help-centre content so AI support bots stop failing](#support-content) | New AI needs | $1,000–3,500 for an audit plus 40–120 articles; $400–1,000 a month for upkeep (est.) | 4 | 3 | 5 | 4 |
 | [Microsoft Access database rescue](#access-rescue) | Specialist software | $150–600 per fix, $1,500–8,000 per migration | 4 | 4 | 4 | 3 |
 | [Getting organisations off Drupal 7](#drupal7) | Specialist software | $800–3,000 per fixed package (est.) | 4 | 3 | 5 | 3 |
 | [Packaging-law updates for small consumer brands](#epr-digest) | Data subscriptions | $39–99 a month per brand, or $300–800 a month white-label (est.) | 4 | 3 | 5 | 3 |
 | [Public-bid digest for one trade, with past winning prices](#bid-digest) | Data subscriptions | $49–149 a month per contractor (est.) | 4 | 3 | 4 | 4 |
 | [Local-government meeting watch for one industry](#council-watch) | Data subscriptions | $150–500 a month per client (est.) | 4 | 3 | 5 | 3 |
 | [International aid tenders for one specialty and language](#aid-tenders) | Data subscriptions | $15–40 a month for individuals, $100–300 for firms (est.) | 3 | 3 | 5 | 4 |
+| [Test suites for small teams' AI features](#ai-evals) | New AI needs | $750–3,000 setup, plus $200–800 a month for regular runs (est.) | 4 | 3 | 5 | 3 |
+| [Custom Claude skill packs for small teams](#claude-skill-packs) | New AI needs | $250–600 per skill; $1,500–4,000 per team pack (est.) | 3 | 3 | 5 | 4 |
 | [AutoCAD automation routines (AutoLISP)](#autolisp) | Specialist software | $50–300 per routine, $500–1,500 per project | 3 | 4 | 4 | 3 |
 | [ColdFusion maintenance and moves to Lucee](#coldfusion) | Specialist software | $60–125 an hour (est.) | 3 | 5 | 4 | 2 |
 | [Spreadsheet-to-catalogue automation](#catalogue) | Specialist software | $300–2,500 per setup, plus a fee per new edition (est.) | 3 | 3 | 4 | 4 |
 | [New commercial premises list for local service firms](#premises-digest) | Data subscriptions | $79–199 a month per metro (est.) | 3 | 3 | 4 | 4 |
+| [Cleaning up company documents before an AI rollout](#ai-ready-docs) | New AI needs | $1,500–5,000 per department (est.) | 4 | 3 | 4 | 3 |
 | [Revit automation scripts](#revit) | Specialist software | $30–95 an hour | 4 | 4 | 3 | 2 |
 | [EDI files for small brands selling to big retailers](#edi) | Specialist software | $500–3,000 per retailer connection (est.) | 4 | 3 | 4 | 2 |
+| [AI transparency and staff AI-use packs](#ai-policy-pack) | New AI needs | €500–2,000 per pack; €150–400 per training session (est.) | 3 | 3 | 4 | 3 |
+| [AI API bill audits for startups](#ai-cost-audit) | New AI needs | $1,000–3,000, or 20–30% of verified savings over 3 months (est.) | 4 | 3 | 4 | 2 |
+| [ChatGPT Ads setup for small US businesses](#chatgpt-ads) | New AI needs | $300–700 setup plus $300–1,000 a month (est.) | 4 | 3 | 3 | 2 |
 
 ### Specialist software
 
@@ -221,6 +229,120 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Where buyers are:** Business networking (BNI) chapters, chambers of commerce, ISSA, LinkedIn. Search: "commercial construction leads [city]".
 - **Watch out:** Leave out residential permits, because homeowners are private individuals. Check each portal's licence before reusing its data.
 - **Test it in one day:** Pull four weeks of commercial permits from one city's open-data portal, build a sample list and call 20 local cleaning and sign firms.
+
+### New AI needs
+
+<a id="model-retirement"></a>
+#### Rescuing AI features before their model is retired
+
+*Move a company's AI feature to a current model and prove it still works.* **$300–800 per feature; $1,500–4,000 for a whole app with a reusable test set (est.)** · demand 4/5 · few rivals 4/5 · Claude fit 5/5 · beginner 3/5
+
+- **Who pays:** Small software companies, agencies and non-technical owners whose AI feature was built in 2023–25, often by a contractor who has left, and is tied to an old model version.
+- **What they need:** Find every place the old model is used, switch to its successor, re-tune the prompts, and show with a before-and-after report that quality and cost are still fine.
+- **Proof of demand:** Providers retire models on fixed dates and calls to a retired model simply fail. OpenAI is reported to shut down several older GPT-4-era models on 23 October 2026 (check OpenAI's deprecations page), and Anthropic's own retirement page lists an older Claude model ending on 30 November 2026, after nine retirements between October 2025 and August 2026. Newer models can also reject old settings and count tokens differently, so a simple name swap can break things or raise costs.
+- **Why few people offer it:** Searches found no freelancers offering this as a service, only official guides written for developers. Companies without engineers have no obvious person to call (unverified).
+- **How Claude does it here:** Claude Code finds and patches the model calls, builds a set of test cases from real (redacted) inputs, and runs old and new models side by side while the old one still works, producing a spreadsheet comparison. The client tests in staging with their own API key.
+- **Where buyers are:** Deprecation threads in the providers' developer forums (answer questions, don't spam), Bubble, FlutterFlow and WordPress-plugin communities, and agencies that sold AI bots in 2023–24. Search: "model deprecated", "model shutdown".
+- **Watch out:** You touch production code, so use branches and staging. Never use Claude to generate training data for other models. After a shutdown date the work becomes urgent, and you can get blamed for breakage.
+- **Test it in one day:** Publish a one-page "model shutdown checklist + fixed-price fix", list it as a gig, and message 15 agencies and no-code builders. A good sign is 2 replies or 1 job within 72 hours.
+
+<a id="support-content"></a>
+#### Fixing help-centre content so AI support bots stop failing
+
+*Rewrite the articles that make AI support agents give wrong answers.* **$1,000–3,500 for an audit plus 40–120 articles; $400–1,000 a month for upkeep (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 5/5 · beginner 4/5
+
+- **Who pays:** Support leads at companies with 5–50 support agents who pay per ticket their AI bot resolves (Intercom Fin, Zendesk AI, Gorgias) and see too many escalations.
+- **What they need:** Analysis of the conversations the bot failed, then fixes for missing, contradictory, stale and duplicate help articles, plus a monthly gap report.
+- **Proof of demand:** Intercom reports Fin resolves 56% of conversations on average in its first 30 days, with some customers near 90%, and blames wrong answers on outdated or conflicting articles. Intercom even built a dashboard that flags content gaps, which shows content is the bottleneck.
+- **Why few people offer it:** Freelancers in AI support sell bot setup, not knowledge-base work. The vendors' auto-drafted articles still need a person to check the facts.
+- **How Claude does it here:** Claude groups an export of unresolved conversations by theme, finds contradictions and rewrites articles in the brand's voice, with a spreadsheet change log. The support lead checks policy facts and tests in the bot's preview mode.
+- **Where buyers are:** Intercom and Zendesk communities, Support Driven Slack, "Head of Support" and "CX Ops" roles on LinkedIn. Search: "Fin resolution rate", "knowledge base audit".
+- **Watch out:** Wrong policy text creates liability, so the client signs off every article. Ask for exports with personal data removed.
+- **Test it in one day:** Do a free "contradictions and gaps" teardown of one public help centre that has an AI chat widget, and send it to 5 support leads with a fixed price. A good sign is 1 call booked.
+
+<a id="ai-evals"></a>
+#### Test suites for small teams' AI features
+
+*Automatic checks that an AI feature still answers correctly after every change.* **$750–3,000 setup, plus $200–800 a month for regular runs (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 5/5 · beginner 3/5
+
+- **Who pays:** Early-stage startups and agencies shipping AI features with no quality testing.
+- **What they need:** 50–300 test cases with scoring rules, automated runs on every prompt or model change, a safe pack of misuse tests (prompt injection, data leaks, promises the bot shouldn't make), and a scorecard.
+- **Proof of demand:** In LangChain's survey of 1,300+ practitioners, 57% have AI agents in production and 32% call quality the top barrier, but only 52% run evaluations. Contract AI testers earn $40–90 an hour.
+- **Why few people offer it:** Supply is mostly self-serve tools and lab data-labelling gigs. Only about 9 evaluation gigs turned up on Fiverr, while chatbot-building gigs are saturated.
+- **How Claude does it here:** Claude drafts test cases from the client's docs and transcripts, writes the scoring rules, and builds and runs the test harness (open-source tools like promptfoo) against the client's system using their key. You check the automated grader against about 30 answers graded by hand.
+- **Where buyers are:** LangChain and LlamaIndex communities, Indie Hackers, AI launches on Product Hunt, Upwork "LLM testing" jobs.
+- **Watch out:** Run misuse tests only with the owner's written permission. Sign an NDA for transcripts, and never use the test data to train models.
+- **Test it in one day:** Ask 3 public website bots 20 ordinary customer questions (no attacks), and send each owner an accuracy report with an offer. A good sign is 1 request.
+
+<a id="claude-skill-packs"></a>
+#### Custom Claude skill packs for small teams
+
+*Skills built on a firm's own templates, delivered as a private plugin.* **$250–600 per skill; $1,500–4,000 per team pack (est.)** · demand 3/5 · few rivals 3/5 · Claude fit 5/5 · beginner 4/5
+
+- **Who pays:** Agencies, accounting firms and consultancies of 5–150 people on Claude's Team plan who get generic output.
+- **What they need:** 3–8 tested skills built on the firm's own templates and rules (proposals with their pricing, monthly client reports from their exports), packaged as a private plugin with a short training session.
+- **Proof of demand:** Skills launched in October 2025, organisation-wide management followed in December, and private plugin marketplaces arrived in February 2026. Direct job posts from small firms weren't found yet (unverified).
+- **Why few people offer it:** Anthropic's named plugin partners serve large enterprises, and only about 4 Fiverr sellers offer this. Anthropic's free templates cover generic needs, so sell skills built on the client's own material.
+- **How Claude does it here:** Claude's skill-creator drafts the skill files, scripts and document templates and tests them against the client's real samples. The client's admin installs the pack.
+- **Where buyers are:** LinkedIn demo posts, agency-owner groups, businesses posting about adopting Claude. Search: "Claude Team plan", "Cowork plugin".
+- **Watch out:** Deliver files, never share accounts. Skills that touch HR, legal or finance decisions need a qualified person's review.
+- **Test it in one day:** Build one demo skill for one industry, post a 2-minute before-and-after video, and message 10 owners who post about Claude. A good sign is 2 demo requests.
+
+<a id="ai-ready-docs"></a>
+#### Cleaning up company documents before an AI rollout
+
+*Find duplicates, stale versions and over-shared files so the AI gives right answers.* **$1,500–5,000 per department (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Small and mid-size firms rolling out Copilot, Claude, ChatGPT or Notion AI over messy shared drives.
+- **What they need:** An inventory of documents with duplicates and stale versions flagged, one current page per topic with an owner, and a list of over-shared sensitive files for their admin.
+- **Proof of demand:** Gartner found 63% of organisations lack, or aren't sure they have, data practices suited to AI, and predicts many AI projects will be abandoned for lack of AI-ready data. IT firms sell Copilot oversharing fixes starting around $4,950.
+- **Why few people offer it:** IT service firms sell permission fixes; the content clean-up itself is rarely sold on its own (unverified).
+- **How Claude does it here:** Claude reads exported Word, PDF and Excel files, groups duplicates, finds contradictions and drafts the current pages, producing a keep/merge/archive spreadsheet and a list of permission risks. The client's admin makes the changes.
+- **Where buyers are:** Managed IT providers (as white-label work, which suits zero reviews), Microsoft 365 and Notion consultant communities. Search: "Copilot readiness", "SharePoint cleanup".
+- **Watch out:** The documents are confidential: sign an NDA and keep model training off. Never change permissions yourself.
+- **Test it in one day:** Email 5 local IT providers offering a content clean-up add-on, with a sample built from a public company's published policies. A good sign is 1 pilot.
+
+<a id="ai-policy-pack"></a>
+#### AI transparency and staff AI-use packs
+
+*Tool inventory, staff policy, disclosure wording and training for small firms.* **€500–2,000 per pack; €150–400 per training session (est.)** · demand 3/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** EU-facing agencies, publishers and shops that use chatbots or publish AI content, and small businesses with no AI policy.
+- **What they need:** An inventory of AI tools, a staff AI-use policy, disclosure wording for chatbots and AI-generated content, and short staff training with an attendance log.
+- **Proof of demand:** The EU AI Act's transparency rules (Article 50) have applied since 2 August 2026, with large fines possible. In one survey of 4,400 small and mid-size firms, 81% use AI but only 69% have a policy.
+- **Why few people offer it:** Law firms are expensive and templates are free, but hands-on help for 10–50 person firms looks thin (unverified).
+- **How Claude does it here:** Claude drafts the policy, disclosure wording, a slide deck and a quiz with an attendance log. A partner lawyer reviews it, because legal interpretation needs a qualified person.
+- **Where buyers are:** Chambers of commerce, agency networks, LinkedIn. Search: "AI Act Article 50", "AI policy template".
+- **Watch out:** This is not legal advice and the rules keep moving. Don't sell with exaggerated fine threats.
+- **Test it in one day:** Find a lawyer willing to review, publish a free Article 50 checklist, and offer 3 discounted pilots. A good sign is 1 pilot.
+
+<a id="ai-cost-audit"></a>
+#### AI API bill audits for startups
+
+*Cut a startup's AI model bill without hurting quality.* **$1,000–3,000, or 20–30% of verified savings over 3 months (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 2/5
+
+- **Who pays:** Startups spending roughly $2,000–50,000 a month on AI model APIs.
+- **What they need:** Spend broken down by feature and model, savings from prompt caching, batching, smaller models and output limits, and proof that quality held.
+- **Proof of demand:** Industry write-ups put AI running costs at about 23% of revenue for growing AI firms, with gross margins of 50–60% against 80–90% for normal software. Anthropic charges a tenth of the input price for cached reads and half price for batch requests, and the discounts stack.
+- **Why few people offer it:** Cost consultancies focus on cloud bills and AI gateway tools are self-serve. Few freelancers sell a fixed-price audit (unverified).
+- **How Claude does it here:** Claude analyses the usage export by key and model and patches the code for caching and batching, then proves quality with a test set (see the AI test suites niche). The client deploys.
+- **Where buyers are:** Indie Hackers, founders complaining about API bills on X, startup Slack and Discord groups.
+- **Watch out:** Cheaper setups can lower quality, so measure savings rather than promising them. Technical buyers expect credibility.
+- **Test it in one day:** Publish a savings-calculator page and offer 3 free audits in exchange for testimonials. A good sign is 3 sign-ups.
+
+<a id="chatgpt-ads"></a>
+#### ChatGPT Ads setup for small US businesses
+
+*Launch and manage campaigns on a five-month-old ad channel.* **$300–700 setup plus $300–1,000 a month (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 3/5 · beginner 2/5
+
+- **Who pays:** US small businesses and online brands testing ChatGPT's new ad platform.
+- **What they need:** Conversion tracking, campaign structure, ad copy variants, matching landing pages and weekly reports.
+- **Proof of demand:** OpenAI opened self-serve Ads Manager to all US businesses in 2026 with cost-per-click bidding and no minimum spend; trade press reports clicks around $3–5. The named agency partners are giant holding companies that skip small budgets.
+- **Why few people offer it:** The channel is new, but about 8 Fiverr gigs already exist, some from ad specialists with 1,000+ orders, so the window is closing.
+- **How Claude does it here:** Claude writes ad copy variants, maps buyer questions to ads, edits landing pages and analyses report exports. You run Ads Manager and control budgets by hand.
+- **Where buyers are:** Shopify merchant communities, local business groups. Search: "ChatGPT ads", "OpenAI Ads Manager".
+- **Watch out:** You handle client money and results are hard to attribute. US-only for now, and you compete with experienced ad specialists.
+- **Test it in one day:** Run a $50–100 campaign for your own page, publish a 7-day write-up of the results, and pitch 10 businesses. A good sign is 1 quote request.
 
 
 ## First clients when nobody knows you
