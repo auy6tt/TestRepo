@@ -347,6 +347,9 @@ class Item:
     short_written: str = ""
     source: str = ""
     writes: dict[int, str] = field(default_factory=dict)  # column -> text
+    forced: str = ""          # library ID chosen by the reviewer (--use-review)
+    carry_resolved: str = ""  # carried over from the previous review sheet
+    carry_notes: str = ""
 
     @property
     def sheet(self) -> str:
@@ -354,6 +357,12 @@ class Item:
 
     def ref(self, col: int) -> str:
         return f"{col_letter(col)}{self.row}"
+
+    @property
+    def review_cell(self) -> str:
+        """The cell the review sheet links to: the answer cell, else the Yes/No cell."""
+        cols = self.layout.cols
+        return self.ref(self.layout.long_col or cols.get("short") or cols["question"])
 
 
 def collect_items(layout: Layout, args) -> list[Item]:
@@ -468,7 +477,12 @@ def decide(item: Item, ranked: list[Match], args, today: dt.date) -> None:
     best = ranked[0] if ranked else None
     item.match = best
     item.runner = ranked[1] if len(ranked) > 1 else None
-    if best is None or best.score < args.min_score:
+    forced = bool(item.forced)
+    if forced and item.forced.upper() in NO_MATCH_WORDS:
+        item.status = NEEDS
+        item.reasons.append("The reviewer chose no library answer for this question. Get the answer from the client.")
+        return
+    if not forced and (best is None or best.score < args.min_score):
         hint = f" (closest: {best.entry['id']}, score {best.score:.2f})" if best else ""
         item.status = NEEDS
         item.reasons.append(f"No library question is similar enough{hint}. Get the answer from the client, "
@@ -490,12 +504,12 @@ def decide(item: Item, ranked: list[Match], args, today: dt.date) -> None:
 
     item.answer, item.short, item.source = e["answer"], e.get("short", ""), sqkit.source_text(e)
     checks = []
-    if best.score < args.ok_score:
-        checks.append(f"Score {best.score:.2f} is below {args.ok_score:.2f}: confirm {e['id']} really answers this question.")
     r2 = item.runner
-    if r2 and r2.score >= best.score - args.margin and r2.entry.get("answer") != e.get("answer"):
+    if not forced and best.score < args.ok_score:
+        checks.append(f"Score {best.score:.2f} is below {args.ok_score:.2f}: confirm {e['id']} really answers this question.")
+    if not forced and r2 and r2.score >= best.score - args.margin and r2.entry.get("answer") != e.get("answer"):
         checks.append(f"Close second match {r2.entry['id']} ({r2.score:.2f}): make sure the right answer was picked.")
-    if sqkit.has_negation(item.question) != sqkit.has_negation(best.phrasing):
+    if not forced and sqkit.has_negation(item.question) != sqkit.has_negation(best.phrasing):
         checks.append("The question may be worded the opposite way to the library question: check Yes/No.")
     if status == sqkit.STATUS_DRAFT:
         checks.append(f"{e['id']} is a Draft (not yet approved by the client).")
@@ -519,12 +533,15 @@ def decide(item: Item, ranked: list[Match], args, today: dt.date) -> None:
                 item.short_written = mapped
         elif YES_NO_START.match(item.question):
             checks.append(f"{e['id']} has no Short Answer, so the Yes/No cell was left blank.")
+    if forced:
+        item.reasons.append(f"Library entry {e['id']} was chosen by the reviewer.")
     if checks:
         item.status = CHECK
         item.reasons += checks
     else:
         item.status = OK
-        item.reasons.append("Strong match. Still read the answer before sending.")
+        if not forced:
+            item.reasons.append("Strong match. Still read the answer before sending.")
 
 
 def plan_writes(item: Item, args) -> None:
@@ -567,8 +584,10 @@ def already_answered(item: Item) -> bool:
 
 REVIEW_HEADERS = ["Status", "What to do", "Sheet", "Cell", "Ref", "Buyer question", "Proposed Yes/No",
                   "Proposed answer", "Library ID", "Library question matched", "Score", "Shared keywords",
-                  "Runner-up", "Source", "Library confidence", "Last reviewed", "Resolved (Y/N)", "Reviewer notes"]
-REVIEW_WIDTHS = [17, 44, 14, 9, 8, 46, 10, 60, 10, 40, 7, 24, 16, 36, 11, 12, 10, 30]
+                  "Runner-up", "Source", "Library confidence", "Last reviewed", "Use library ID",
+                  "Resolved (Y/N)", "Reviewer notes"]
+REVIEW_WIDTHS = [17, 44, 14, 9, 8, 46, 10, 60, 10, 40, 7, 24, 16, 36, 11, 12, 11, 10, 30]
+NO_MATCH_WORDS = ("NONE", "-", "NO", "NO MATCH")
 STATUS_FILL = {NEEDS: "F8CBAD", CHECK: "FFE699", OK: "C6EFCE", SKIPPED: "D9D9D9"}
 
 
@@ -576,10 +595,8 @@ def review_table(items: list[Item]) -> list[list]:
     rows = []
     for it in items:
         m, e = it.match, (it.match.entry if it.match else {})
-        long_col = it.layout.long_col
-        target = long_col or it.layout.cols.get("short") or it.layout.cols["question"]
         rows.append({
-            "status": it.status, "reasons": " ".join(it.reasons), "sheet": it.sheet, "cell": it.ref(target),
+            "status": it.status, "reasons": " ".join(it.reasons), "sheet": it.sheet, "cell": it.review_cell,
             "ref": it.qid, "question": it.question, "short": it.short_written or (it.short if it.status != NEEDS else ""),
             "answer": it.answer if it.status in (OK, CHECK) else "", "lib_id": e.get("id", "") if m else "",
             "lib_q": m.phrasing if m else "", "score": round(m.score, 2) if m else "",
@@ -587,6 +604,7 @@ def review_table(items: list[Item]) -> list[list]:
             "runner": f"{it.runner.entry['id']} ({it.runner.score:.2f})" if it.runner else "",
             "source": it.source, "confidence": e.get("confidence", "") if m else "",
             "reviewed": e["reviewed"].isoformat() if m and e.get("reviewed") else "",
+            "use_id": it.forced, "resolved": it.carry_resolved, "notes": it.carry_notes,
         })
     return rows
 
@@ -608,8 +626,9 @@ def build_review_sheet(pkg: XlsxPackage, items: list[Item], meta: dict) -> None:
          f"({100 - meta['fuzzy_pct']}% TF-IDF keyword match + {meta['fuzzy_pct']}% fuzzy text match). "
          "Shared keywords show why it matched; Runner-up is the next best library entry."],
         ["How to finish: fix every NEEDS CLIENT INPUT and CHECK row in the questionnaire, then type Y in Resolved. "
-         "Click a Cell link to jump to the answer. The client's technical owner must read and approve every answer. "
-         "Then delete this sheet, or run fill_questionnaire.py --finalize, before sending."],
+         "Wrong match? Type the right library ID (or NONE) in 'Use library ID' and rerun with --use-review. "
+         "The client's technical owner must read and approve every answer. Then delete this sheet, or run "
+         "fill_questionnaire.py --finalize, before sending."],
         [],
         [(h, header) for h in REVIEW_HEADERS],
     ]
@@ -621,7 +640,7 @@ def build_review_sheet(pkg: XlsxPackage, items: list[Item], meta: dict) -> None:
             (r["status"], {"bold": True, "fill": STATUS_FILL[r["status"]], "wrap": True}), (r["reasons"], wrap),
             (r["sheet"], wrap), (r["cell"], link), r["ref"], (r["question"], wrap), r["short"], (r["answer"], wrap),
             r["lib_id"], (r["lib_q"], wrap), r["score"], (r["shared"], wrap), r["runner"], (r["source"], wrap),
-            r["confidence"], r["reviewed"], "", (None, wrap),
+            r["confidence"], r["reviewed"], r["use_id"], r["resolved"], (r["notes"] or None, wrap),
         ])
         links.append((f"D{n}", f"{quote_sheet(r['sheet'])}!{r['cell']}", f"{r['sheet']}!{r['cell']}"))
     last = max(len(rows), first_data)
@@ -629,18 +648,18 @@ def build_review_sheet(pkg: XlsxPackage, items: list[Item], meta: dict) -> None:
     end_col = col_letter(len(REVIEW_HEADERS))
     pkg.add_sheet(REVIEW_SHEET, rows, widths=REVIEW_WIDTHS, freeze_rows=header_row,
                   autofilter=f"A{header_row}:{end_col}{last}", links=links,
-                  lists=[(f"Q{first_data}:Q{max(last, first_data)}", ["Y", "N"])], tab_color="C00000")
+                  lists=[(f"R{first_data}:R{max(last, first_data)}", ["Y", "N"])], tab_color="C00000")
 
 
 def write_review_csv(path: Path, items: list[Item]) -> None:
     ordered = sorted(items, key=lambda it: (PRIORITY[it.status], it.row))
     keys = ["status", "reasons", "sheet", "cell", "ref", "question", "short", "answer", "lib_id", "lib_q", "score",
-            "shared", "runner", "source", "confidence", "reviewed"]
+            "shared", "runner", "source", "confidence", "reviewed", "use_id", "resolved", "notes"]
     with open(path, "w", newline="", encoding="utf-8-sig") as fh:
         w = csv.writer(fh)
         w.writerow(REVIEW_HEADERS)
         for r in review_table(ordered):
-            w.writerow([r[k] for k in keys] + ["", ""])
+            w.writerow([r[k] for k in keys])
 
 
 # --------------------------------------------------------------------------

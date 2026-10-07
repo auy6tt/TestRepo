@@ -51,10 +51,12 @@ KoboToolbox only: the screening section appears only when the visit is "Screenin
 
 ## D. Checks on answers
 
-- [ ] Dates before 2026 or in the future are refused (date of birth: before 1900 or in the future)
-- [ ] Household 0 or 21, active days 8, height 99.9 or 230.1, weight 29.9 or 250.1, blood pressure outside 70-250 / 40-150: each shows a warning
-- [ ] Height and weight need one decimal place (165.0)
-- [ ] Text typed into a number box is refused
+REDCap warns about values outside the limits but lets staff keep them after confirming; KoboToolbox refuses them.
+
+- [ ] Dates before 2026 or in the future give a warning (date of birth: before 1900 or in the future)
+- [ ] Household 0 or 21, active days 8, height 99.9 or 230.1, weight 29.9 or 250.1, blood pressure outside 70-250 / 40-150: each gives a warning
+- [ ] REDCap: height and weight need one decimal place (165.0)
+- [ ] Text typed into a number box shows an error
 - [ ] Leaving a required question blank shows a warning when you save
 - [ ] Question 5: "None of these" cannot be ticked with a condition
 - [ ] KoboToolbox: participant ID must look like LH-0042; diastolic must be lower than systolic

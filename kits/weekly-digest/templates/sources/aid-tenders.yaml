@@ -9,6 +9,8 @@
 #   1. Copy it to digests/<your-digest>/sources.yaml
 #   2. Replace every https://example.org/... address with the real official page.
 #      The watcher skips placeholder addresses, so nothing is fetched until you do.
+#      For json sources, open the real address once (or ask Claude Code to fetch it)
+#      to see the field names, then adjust items_path, id_field, fields and link_field.
 #   3. For each real source, read its terms of use and robots.txt, then put the
 #      date you checked in terms_checked. Several of these portals have their own
 #      reuse terms: summarise in your own words and link to the notice.
@@ -23,8 +25,11 @@
 #     UN agencies. UNGM sells its own alert service, so never resell or repost
 #     its listings: link to each notice. UNDP, UNICEF and others also publish
 #     notices on their own procurement pages.
-#   - European Union: TED (Tenders Electronic Daily) has an official API and
-#     search feeds; EU grant calls are on the EU Funding & Tenders portal.
+#   - European Union: TED (Tenders Electronic Daily) publishes EU tenders and has
+#     an official API; EU grant calls are on the EU Funding & Tenders portal.
+#   - The watcher reads web pages, PDFs, RSS feeds and GET APIs. If a source only
+#     has a search form, a POST-only API or a page that needs JavaScript, it
+#     cannot be watched: check it by hand each week and list it in your checklist.
 #   - Regional development banks (Asian, African, Inter-American and others)
 #     each publish procurement and consulting notices on their sites.
 #   - Pick sources in your subscribers' language. Add keywords in that language
@@ -79,8 +84,8 @@ sources:
     tags: [un, undp]
     terms_checked:
 
-  # --- EU: TED search feed (RSS) for evaluation services in your region.
-  - name: "EU TED: evaluation services notices (RSS)"
+  # --- EU: an RSS feed for a saved search, if the portal you use offers one.
+  - name: "EU tenders: evaluation services notices (RSS)"
     url: https://example.org/ted/search/rss?query=evaluation-services-africa
     type: rss
     tags: [eu, ted]

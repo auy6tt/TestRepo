@@ -10,6 +10,8 @@
 #   1. Copy it to digests/<your-digest>/sources.yaml
 #   2. Replace every https://example.gov/... address with the real dataset address.
 #      The watcher skips placeholder addresses, so nothing is fetched until you do.
+#      For json sources, open the real address once (or ask Claude Code to fetch it)
+#      to see the field names, then adjust items_path, id_field, fields and link_field.
 #   3. Read each portal's terms and data licence (some ask for a credit line:
 #      put it in issue.attribution in your items file) and its robots.txt, then
 #      put the date you checked in terms_checked.

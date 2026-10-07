@@ -33,7 +33,7 @@ The codebook lists every rule in plain English under "Shown when". Test each rul
 ## D. Checks on answers
 
 - [ ] A number below the minimum, or above the maximum, shows a warning
-- [ ] Text typed into a number box is refused
+- [ ] Text typed into a number box shows an error
 - [ ] Impossible dates (for example 31/02) and dates outside the allowed range show a warning
 - [ ] Leaving a required question blank shows a warning when you save (REDCap still lets you save; that is normal)
 - [ ] "None of these" cannot be ticked together with another answer, where the questionnaire says so
