@@ -13,7 +13,7 @@ const read = f => fs.readFileSync(path.join(SRC, f), "utf8");
 
 const ctx = {};
 vm.createContext(ctx);
-for (const f of ["opportunities-services.js", "opportunities-ai-products.js", "results-picks-platforms-rules.js", "plan-and-templates.js", "first-clients.js", "sources.js"]) {
+for (const f of ["opportunities-services.js", "opportunities-ai-products.js", "results-picks-platforms-rules.js", "plan-and-templates.js", "first-clients.js", "niches.js", "sources.js"]) {
   vm.runInContext(read(f) + "\n;globalThis.__x = 1;", ctx, {filename: f});
 }
 const get = name => vm.runInContext(name, ctx);
@@ -28,6 +28,11 @@ for (const o of opps) {
   for (const k of ["cat","rank","zero","speed","fit","value","name","short","price","need","how","where","signal","risk","skill","gig"]) if (o[k] === undefined) throw new Error(o.id + " missing " + k);
   if (!CATS[o.cat]) throw new Error("bad cat " + o.cat);
 }
+for (const n of get("NICHES")) {
+  for (const k of ["id","group","rank","name","short","who","need","demand","why","price","how","where","first","risk","s"]) if (n[k] === undefined) throw new Error("niche " + n.id + " missing " + k);
+  if (!get("NICHE_GROUPS")[n.group]) throw new Error("bad niche group " + n.group);
+  if (n.s.length !== 4 || n.s.some(v => v < 1 || v > 5)) throw new Error("bad scores " + n.id);
+}
 const ranks = opps.map(o => o.rank);
 if (new Set(ranks).size !== ranks.length) throw new Error("duplicate ranks");
 
@@ -35,6 +40,7 @@ const DATA = {
   cats: CATS, opps, picks: get("PICKS"), fees: get("FEES"), platformGroups: get("PLATFORM_GROUPS"),
   rulesDo: get("RULES_DO"), rulesDont: get("RULES_DONT"), plan: get("PLAN"), templates: get("TEMPLATES"),
   workspace: get("WORKSPACE"), sources: get("SOURCES"),
+  niches: get("NICHES"), nicheGroups: get("NICHE_GROUPS"),
   channels: get("CHANNELS"), upworkSteps: get("UPWORK_STEPS"), fiverrSteps: get("FIVERR_STEPS"), proofSteps: get("PROOF_STEPS")
 };
 const STAGES = get("STAGES"), PRINCIPLES = get("PRINCIPLES");
@@ -49,6 +55,7 @@ const copy = {
   __LEDE__: "What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. <strong>Ranked for someone starting from zero:</strong> no reviews, no portfolio, no network.",
   __META__: `<span><b>${opps.length}</b> ways to earn</span><span><b>${nPlatforms}</b> platforms compared</span><span><b>10</b> research passes</span><span>Prices in USD</span>`,
   __PICKS_SUB__: "Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Start the first one this week and add others as reviews come in. The next section covers where to find the buyers.",
+  __NICHES_SUB__: "Each one passed three tests: proof that people pay for it, evidence that few people offer it, and work Claude can do most of. Many exist because a new rule, a platform change or a dull task created demand faster than sellers appeared. Scores are out of 5. Before you build anything, run the one-day test in each entry.",
   __FC_SUB__: "Marketplaces now rank sellers by their history, and AI matchers on both Upwork and Fiverr decide who gets seen. So a newcomer wins fastest through people they know and through outreach that shows finished work first. Run Upwork and Fiverr alongside as slower channels. Ranked by how fast each works for someone with zero reviews.",
   __REALITY_SUB__: "Claude makes the work fast. It doesn't bring clients and it doesn't make strangers trust you. The data is sobering. One dataset of Claude Code businesses that owners listed on a revenue tracker found fewer than half earned anything, and the typical one made about $145–227 a month. The ranges below are targets for someone who works the plan every week, not promises.",
   __STAGES__: STAGES.map(s => `<div class="stage"><div class="when">${esc(s.when)}</div><div class="amt">${esc(s.amt)}</div><p>${esc(s.text)}</p></div>`).join(""),
@@ -114,10 +121,25 @@ L.push("# Claude Income Playbook", "");
 L.push("What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. Ranked for someone starting from zero: no reviews, no portfolio, no network.", "");
 if (PAGE_URL) L.push(`**Interactive version (filters, fee calculator, checklist):** ${PAGE_URL}`, "");
 L.push(`Researched October 2026 · ${opps.length} ways to earn · ${nPlatforms} platforms · ${nSources} sources. Not legal, tax or financial advice.`, "");
-L.push("## Contents", "", "1. [Start here](#start-here)", "2. [First clients when nobody knows you](#first-clients-when-nobody-knows-you)", "3. [Reality check](#reality-check)", "4. [All opportunities](#all-opportunities)", "5. [Where to sell](#where-to-sell)", "6. [Rules](#rules)", "7. [30-day plan](#30-day-plan)", "8. [Templates](#templates)", "9. [Using this workspace](#using-this-workspace)", "10. [Sources](#sources)", "");
+L.push("## Contents", "", "1. [Start here](#start-here)", "2. [Hidden niches: real demand, few competitors](#hidden-niches-real-demand-few-competitors)", "3. [First clients when nobody knows you](#first-clients-when-nobody-knows-you)", "4. [Reality check](#reality-check)", "5. [All opportunities](#all-opportunities)", "6. [Where to sell](#where-to-sell)", "7. [Rules](#rules)", "8. [30-day plan](#30-day-plan)", "9. [Templates](#templates)", "10. [Using this workspace](#using-this-workspace)", "11. [Sources](#sources)", "");
 L.push("## Start here", "", md(copy.__PICKS_SUB__), "");
 L.push("| # | Pick | Charge | First $ | Sell on |", "|---|---|---|---|---|");
 DATA.picks.forEach((p, i) => L.push(`| ${i + 1} | **${cell(p.name)}**: ${cell(p.what)} ${cell(p.why)} | ${cell(p.price)} | ${cell(p.first)} | ${cell(p.where)} |`));
+const NG = get("NICHE_GROUPS"), NN = get("NICHES").slice().sort((a, b) => a.rank - b.rank);
+const ntotal = n => n.s.reduce((x, y) => x + y, 0);
+L.push("", "## Hidden niches: real demand, few competitors", "", md(copy.__NICHES_SUB__), "");
+L.push("| Niche | Type | Typical price | Demand | Few rivals | Claude fit | Beginner |", "|---|---|---|---|---|---|---|");
+NN.slice().sort((a, b) => ntotal(b) - ntotal(a) || a.rank - b.rank).forEach(n => L.push(`| [${cell(n.name)}](#${n.id}) | ${NG[n.group]} | ${cell(n.price)} | ${n.s[0]} | ${n.s[1]} | ${n.s[2]} | ${n.s[3]} |`));
+L.push("");
+for (const g of Object.keys(NG)) {
+  const list = NN.filter(n => n.group === g);
+  if (!list.length) continue;
+  L.push(`### ${NG[g]}`, "");
+  list.forEach(n => {
+    L.push(`<a id="${n.id}"></a>`, `#### ${n.name}`, "", `*${n.short}.* **${n.price}** · demand ${n.s[0]}/5 · few rivals ${n.s[1]}/5 · Claude fit ${n.s[2]}/5 · beginner ${n.s[3]}/5`, "");
+    L.push(`- **Who pays:** ${md(n.who)}`, `- **What they need:** ${md(n.need)}`, `- **Proof of demand:** ${md(n.demand)}`, `- **Why few people offer it:** ${md(n.why)}`, `- **How Claude does it here:** ${md(n.how)}`, `- **Where buyers are:** ${md(n.where)}`, `- **Watch out:** ${md(n.risk)}`, `- **Test it in one day:** ${md(n.first)}`, "");
+  });
+}
 L.push("", "## First clients when nobody knows you", "", md(copy.__FC_SUB__), "");
 DATA.channels.forEach((c, i) => L.push(`${i + 1}. **${c.name}** (cost: ${c.cost}; first $: ${c.first}). ${c.what} ${c.why}`));
 L.push("", "### Upwork, step by step", "");

@@ -9,15 +9,16 @@ Researched October 2026 · 36 ways to earn · 27 platforms · 210 sources. Not l
 ## Contents
 
 1. [Start here](#start-here)
-2. [First clients when nobody knows you](#first-clients-when-nobody-knows-you)
-3. [Reality check](#reality-check)
-4. [All opportunities](#all-opportunities)
-5. [Where to sell](#where-to-sell)
-6. [Rules](#rules)
-7. [30-day plan](#30-day-plan)
-8. [Templates](#templates)
-9. [Using this workspace](#using-this-workspace)
-10. [Sources](#sources)
+2. [Hidden niches: real demand, few competitors](#hidden-niches-real-demand-few-competitors)
+3. [First clients when nobody knows you](#first-clients-when-nobody-knows-you)
+4. [Reality check](#reality-check)
+5. [All opportunities](#all-opportunities)
+6. [Where to sell](#where-to-sell)
+7. [Rules](#rules)
+8. [30-day plan](#30-day-plan)
+9. [Templates](#templates)
+10. [Using this workspace](#using-this-workspace)
+11. [Sources](#sources)
 
 ## Start here
 
@@ -31,6 +32,14 @@ Each pick either lets the buyer see the work before paying, or is small enough t
 | 4 | **Small automations for businesses**: n8n, Make, Zapier and Apps Script flows that move data, answer leads and build reports. Start by fixing someone's existing workflow for a small fixed fee. Every build can carry a monthly care plan. | $150–$500, then $1,500+ | 2–4 weeks | Upwork, Fiverr n8n category, LinkedIn |
 | 5 | **Resumes and LinkedIn for one profession**: ATS-friendly resume and LinkedIn rewrite matched to real job ads. Everyone knows someone job hunting, so this is the quickest route to a first paid job and a first testimonial through people who already trust you. | $50–$150 to start | Days | People you know first, then Fiverr |
 | 6 | **Hackathons and one Apify tool on the side**: Enter online AI hackathons, and publish one niche data tool on the Apify Store. Judges and marketplace buyers look at the work, not your reviews, and both leave you with public portfolio pieces. Treat the money as a bonus. | Prizes $500–$5,000; Apify $0–300/mo | Weeks to months | devpost.com, lablab.ai, apify.com |
+
+## Hidden niches: real demand, few competitors
+
+Each one passed three tests: proof that people pay for it, evidence that few people offer it, and work Claude can do most of. Many exist because a new rule, a platform change or a dull task created demand faster than sellers appeared. Scores are out of 5. Before you build anything, run the one-day test in each entry.
+
+| Niche | Type | Typical price | Demand | Few rivals | Claude fit | Beginner |
+|---|---|---|---|---|---|---|
+
 
 ## First clients when nobody knows you
 

@@ -12,6 +12,7 @@
   <div class="wrap">
     <ol>
       <li><a href="#start">Start here</a></li>
+      <li><a href="#niches">Hidden niches</a></li>
       <li><a href="#first-clients">First clients</a></li>
       <li><a href="#reality">Reality check</a></li>
       <li><a href="#explore">Opportunities</a></li>
@@ -30,6 +31,29 @@
     <h2>Start here: the best bets right now</h2>
     <p class="sub">__PICKS_SUB__</p>
     <ol class="picks" id="picks"></ol>
+  </section>
+
+  <section id="niches">
+    <h2>Hidden niches: real demand, few competitors</h2>
+    <p class="sub">__NICHES_SUB__</p>
+    <h3 class="minor">Best five to try first</h3>
+    <ol class="picks" id="niche-top"></ol>
+    <div class="controls niche-controls">
+      <div class="chips" id="niche-chips" role="group" aria-label="Filter niches by type"></div>
+      <label class="field" for="niche-sort">Sort
+        <select id="niche-sort">
+          <option value="overall">Best overall</option>
+          <option value="scarcity">Fewest competitors</option>
+          <option value="demand">Strongest demand</option>
+          <option value="beginner">Easiest to start</option>
+        </select>
+      </label>
+      <span class="count" id="niche-count"></span>
+    </div>
+    <div class="ledger">
+      <div class="niche-head" aria-hidden="true"><span>Niche</span><span>Typical price</span><span>Scores (out of 5)</span><span></span></div>
+      <div id="niche-rows"></div>
+    </div>
   </section>
 
   <section id="first-clients">

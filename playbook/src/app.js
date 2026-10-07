@@ -60,6 +60,80 @@ function copyText(text, fallbackNode){
   });
 })();
 
+/* ---------- Hidden niches ---------- */
+(function(){
+  var N = D.niches || [], G = D.nicheGroups || {};
+  if (!N.length) return;
+  var total = function(n){ return n.s[0] + n.s[1] + n.s[2] + n.s[3]; };
+  function meter(v){
+    var m = h("span", {class:"meter", "aria-hidden":"true"});
+    for (var i = 1; i <= 5; i++) m.appendChild(h("i", {class: i <= v ? "on" : ""}));
+    return m;
+  }
+  function scores(n){
+    var labels = ["Demand", "Few rivals", "Claude fit", "Beginner"];
+    var box = h("div", {class:"scores", "aria-label": labels.map(function(l, i){ return l + " " + n.s[i] + " of 5"; }).join(", ")});
+    labels.forEach(function(l, i){ box.appendChild(h("span", null, l, meter(n.s[i]))); });
+    return box;
+  }
+  // Best five: highest total, ties broken by beginner-friendliness
+  var top = N.slice().sort(function(a, b){ return (total(b) + b.s[3] * 0.5) - (total(a) + a.s[3] * 0.5) || a.rank - b.rank; }).slice(0, 5);
+  var ol = $("#niche-top");
+  top.forEach(function(n, i){
+    ol.appendChild(h("li", {class:"pick"},
+      h("div", {class:"rank", text:String(i + 1)}),
+      h("div", null, h("span", {class:"group-tag", text:G[n.group]}), h("h3", {text:n.name}), h("p", {text:n.need}), h("p", {class:"why", text:"Why it's open: " + n.why})),
+      h("dl", null, h("dt", {text:"Charge"}), h("dd", null, h("span", {class:"money", text:n.price})), h("dt", {text:"Test it"}), h("dd", {text:n.first}))
+    ));
+  });
+  var state = store("cip-niches") || {group:"all", sort:"overall"};
+  var chips = $("#niche-chips"), rows = $("#niche-rows"), sortEl = $("#niche-sort"), countEl = $("#niche-count");
+  [["all", "All"]].concat(Object.keys(G).map(function(k){ return [k, G[k]]; })).forEach(function(g){
+    var c = g[0] === "all" ? N.length : N.filter(function(n){ return n.group === g[0]; }).length;
+    if (!c) return;
+    var b = h("button", {class:"chip", type:"button", "data-g":g[0], "aria-pressed":String(state.group === g[0])}, g[1], h("span", {class:"n", text:String(c)}));
+    b.addEventListener("click", function(){ state.group = g[0]; sync(); });
+    chips.appendChild(b);
+  });
+  sortEl.value = state.sort;
+  sortEl.addEventListener("change", function(){ state.sort = sortEl.value; sync(); });
+  function row(n){
+    return h("details", {class:"niche", id:"niche-" + n.id},
+      h("summary", null,
+        h("div", {class:"nm"}, h("span", {class:"group-tag", text:G[n.group]}), h("div", {text:n.name}), h("small", {text:n.short})),
+        h("div", {class:"pr"}, h("span", {class:"money", text:n.price})),
+        scores(n),
+        h("span", {class:"caret", "aria-hidden":"true"})
+      ),
+      h("div", {class:"body"},
+        h("div", null, h("h4", {text:"Who pays"}), h("p", {text:n.who})),
+        h("div", null, h("h4", {text:"What they need"}), h("p", {text:n.need})),
+        h("div", null, h("h4", {text:"Proof of demand"}), h("p", {text:n.demand})),
+        h("div", null, h("h4", {text:"Why few people offer it"}), h("p", {text:n.why})),
+        h("div", null, h("h4", {text:"How Claude does it here"}), h("p", {text:n.how})),
+        h("div", null, h("h4", {text:"Where buyers are"}), h("p", {text:n.where})),
+        h("div", null, h("h4", {text:"Watch out"}), h("p", {text:n.risk})),
+        h("div", null, h("h4", {text:"Typical price"}), h("p", {text:n.priceNote || n.price})),
+        h("div", {class:"wide"}, h("h4", {text:"Test it in one day"}), h("p", {class:"firststep", text:n.first}))
+      )
+    );
+  }
+  function sync(){
+    store("cip-niches", state);
+    Array.prototype.forEach.call(chips.children, function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-g") === state.group)); });
+    var items = N.filter(function(n){ return state.group === "all" || n.group === state.group; });
+    var key = {scarcity:1, demand:0, beginner:3}[state.sort];
+    items.sort(function(a, b){
+      if (key !== undefined) return b.s[key] - a.s[key] || total(b) - total(a) || a.rank - b.rank;
+      return total(b) - total(a) || b.s[3] - a.s[3] || a.rank - b.rank;
+    });
+    rows.textContent = "";
+    items.forEach(function(n){ rows.appendChild(row(n)); });
+    countEl.textContent = items.length + " of " + N.length + " shown";
+  }
+  sync();
+})();
+
 /* ---------- First clients ---------- */
 (function(){
   var ol = $("#channels");
