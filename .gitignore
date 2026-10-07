@@ -4,3 +4,13 @@ node_modules/
 .venv/
 venv/
 .DS_Store
+
+# Client work never goes into git (this repository is public).
+# The kits put client files in these folders, at the repo root or inside a kit.
+/clients/
+/work/
+/jobs/
+/reports/
+kits/*/clients/
+kits/*/jobs/
+kits/*/out/
