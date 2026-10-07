@@ -1253,7 +1253,7 @@ def load_config(path: Path) -> tuple[dict | None, list[str], list[str]]:
         sources.append(source)
 
     agent = str(settings["user_agent"])
-    if "example.com" in agent or "@" not in agent:
+    if "@" not in agent or any(x in agent.lower() for x in ("example.com", "yourdomain", "you@")):
         warnings.append("settings.user_agent has no real contact email. Sites should be able to "
                         "reach you: use something like 'YourDigest/1.0 (+mailto:you@yourdomain.com)'.")
     no_terms = [s["name"] for s in sources if s["enabled"] and not s["terms_checked"]

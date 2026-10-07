@@ -14,6 +14,7 @@ for products that are not on the list.
 
 Output: inventory.xlsx with these sheets
   Inventory    one row per product / sheet, with status and review notes
+  Chemical List a plain printable list for the employer to confirm
   Binder Index ready for build_binder.py (--sheet "Binder Index")
   Summary      counts by status
   Settings     age limit and cutoff date used by the status formulas
@@ -1098,6 +1099,7 @@ def write_inventory(workbook, f, rows, args, today, client: str):
     ws.set_row(0, 42)
     c = {name: col_letter(i) for name, i in COL.items()}
     counts: dict[str, int] = {}
+    listing = []
     for n, entry in enumerate(rows, start=1):
         r, site = entry["result"], entry["site"]
         row = n
@@ -1123,6 +1125,11 @@ def write_inventory(workbook, f, rows, args, today, client: str):
         date = r.date.value if r else None
         status = status_of(issue, needs_review, date, args, today)
         counts[status] = counts.get(status, 0) + 1
+        if issue != "NOT ON SITE LIST":
+            listing.append({"row": excel_row,
+                            "product": (r.product.value if r and r.product.value else (site or {}).get("product", "")),
+                            "supplier": (r.supplier.value or "") if r else (site or {}).get("manufacturer", ""),
+                            "location": (site or {}).get("location", ""), "date": date, "file": bool(r)})
 
         def put(name, value, fmt=None, uncertain=False, missing=False, comment=None):
             col = COL[name]
@@ -1184,10 +1191,10 @@ def write_inventory(workbook, f, rows, args, today, client: str):
             put("SDS file", r.rel, f["text"])
             put("Pages", r.pages, f["int"])
         else:
-            for name in ("Product name (from SDS)", "Manufacturer / supplier", "Date type", "Signal word",
-                         "Hazard statement codes", "Codes source", "Pictograms (from text)", "SDS version",
-                         "SDS file", "Pages"):
+            for name in ("Product name (from SDS)", "Date type", "Signal word", "Hazard statement codes",
+                         "Codes source", "Pictograms (from text)", "SDS version", "SDS file", "Pages"):
                 put(name, "")
+            put("Manufacturer / supplier", (site or {}).get("manufacturer", ""), f["muted"])
             put("SDS date", "")
         if site is not None:
             put("Site list product", site["product"])
@@ -1229,7 +1236,47 @@ def write_inventory(workbook, f, rows, args, today, client: str):
     ws.set_landscape()
     ws.fit_to_pages(1, 0)
     ws.repeat_rows(0)
-    return counts
+    return counts, listing
+
+
+def write_chemical_list(workbook, f, listing, client):
+    """A plain, printable list for the employer's written programme. Each cell
+    reads from the Inventory sheet, so corrections there flow through."""
+    sheet = workbook.get_worksheet_by_name("Chemical List")
+    sheet.hide_gridlines(2)
+    widths = [5, 42, 32, 24, 12, 11]
+    for col, width in enumerate(widths):
+        sheet.set_column(col, col, width)
+    sheet.write(0, 0, "Hazardous chemical list", f["title"])
+    sheet.write(1, 0, client or "", f["subtitle"])
+    sheet.write(2, 0, "Confirmed by the employer: ______________________________     Date: ______________", f["label"])
+    headers = ["No.", "Product name", "Manufacturer / supplier", "Location / area", "SDS date", "SDS on file"]
+    for col, name in enumerate(headers):
+        sheet.write(4, col, name, f["header"])
+    inv = {name: col_letter(i) for name, i in COL.items()}
+    for n, item in enumerate(listing, start=1):
+        row, src = 4 + n, item["row"]
+        sheet.write_number(row, 0, n, f["int"])
+        sheet.write_formula(row, 1, f'=IF(Inventory!{inv["Product name (from SDS)"]}{src}<>"",'
+                                    f'Inventory!{inv["Product name (from SDS)"]}{src},'
+                                    f'Inventory!{inv["Site list product"]}{src}&"")', f["text"], item["product"] or "")
+        sheet.write_formula(row, 2, f'=Inventory!{inv["Manufacturer / supplier"]}{src}&""', f["text"], item["supplier"])
+        sheet.write_formula(row, 3, f'=Inventory!{inv["Location / area"]}{src}&""', f["text"], item["location"])
+        cached = (item["date"] - dt.date(1899, 12, 30)).days if item["date"] else ""
+        sheet.write_formula(row, 4, f'=IF(ISNUMBER(Inventory!{inv["SDS date"]}{src}),Inventory!{inv["SDS date"]}{src},"")',
+                            f["date"], cached)
+        sheet.write_formula(row, 5, f'=IF(Inventory!{inv["SDS file"]}{src}="","MISSING","Yes")', f["center"],
+                            "Yes" if item["file"] else "MISSING")
+    last = 4 + len(listing)
+    sheet.conditional_format(5, 5, max(last, 5), 5, {"type": "cell", "criteria": "==", "value": '"MISSING"',
+                                                     "format": f["st_bad"]})
+    sheet.write(last + 2, 0, "Product names and dates are as printed on each safety data sheet. Sheets are kept in "
+                             "the SDS binder.", f["subtitle"])
+    sheet.freeze_panes(5, 0)
+    sheet.repeat_rows(4)
+    sheet.fit_to_pages(1, 0)
+    sheet.set_paper(1)
+    sheet.print_area(0, 0, last + 2, len(headers) - 1)
 
 
 def write_binder_index(workbook, f, rows, group_by: str):
@@ -1357,7 +1404,8 @@ READ_ME = [
     "4. MISSING SDS rows: get the current SDS from the manufacturer, supplier or distributor.",
     "5. REPLACE: OLD FORMAT rows: the file is an old-style MSDS. Get the current 16-section SDS.",
     "6. NOT ON SITE LIST rows: ask the client whether the product is still used on site.",
-    "7. Send the finished list to the client to confirm. The client confirms the on-site list; you don't.",
+    "7. Send the finished list to the client to confirm. The client confirms the on-site list; you don't. The "
+    "'Chemical List' sheet is a plain printable version (it reads from the Inventory sheet).",
     "8. Check the 'Binder Index' sheet (titles, sections, include = yes/no), then build the binder with "
     "build_binder.py --sheet \"Binder Index\".",
     "## Columns",
@@ -1446,9 +1494,10 @@ def main(argv=None) -> int:
     try:
         workbook = xlsxwriter.Workbook(str(out), kitlib.XLSX_OPTIONS)
         f = kitlib.xlsx_formats(workbook)
-        for name in ("Inventory", "Binder Index", "Summary", "Settings"):
+        for name in ("Inventory", "Chemical List", "Binder Index", "Summary", "Settings"):
             workbook.add_worksheet(name)
-        counts = write_inventory(workbook, f, rows, args, today, args.client)
+        counts, listing = write_inventory(workbook, f, rows, args, today, args.client)
+        write_chemical_list(workbook, f, listing, args.client)
         index_rows = write_binder_index(workbook, f, rows, args.group_by)
         write_summary(workbook, f, counts, len(rows), args.client, args, today)
         kitlib.write_readme_sheet(workbook, f, "How to check this inventory", READ_ME)

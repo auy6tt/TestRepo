@@ -303,7 +303,7 @@ NICHES.push(
  where:"Subcontractor project managers on LinkedIn, trade associations (NSCA in the US, FIS in the UK), project coordinators. Search: \"submittal coordinator\", \"closeout documents\", \"O&M manuals\".",
  first:"Build a sample handover binder for one trade from public manufacturer datasheets, then message 25 subcontractor project managers offering a first binder at a flat price with three-day turnaround.",
  risk:"You don't certify compliance, and you never alter manufacturer documents. Keep drawings confidential."},
-{id:"doc-accessibility", group:"rules", rank:405, s:[5,2,4,3], related:["vpat-acr", "opp:audits"],
+{id:"doc-accessibility", group:"rules", rank:405, kit:"doc-accessibility", s:[5,2,4,3], related:["vpat-acr", "opp:audits"],
  name:"Making public bodies' documents accessible",
  short:"Inventory and fix PDFs and Office files for the US ADA rules and the EU Accessibility Act",
  who:"US towns, counties, school and special districts, community colleges, clinics and nonprofits funded by the US health department, EU public bodies (under the Web Accessibility Directive), and accessibility vendors who need overflow help.",

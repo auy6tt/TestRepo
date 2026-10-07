@@ -449,6 +449,13 @@ class Matcher:
             m.shared = sorted(shared, key=lambda t: -self.index.idf.get(t, 0))[:6]
         return ranked
 
+    def score_for(self, question: str, entry_id: str) -> Match | None:
+        """The match for one particular library entry (used when the reviewer picks it)."""
+        for m in self.rank(question, top=len(self.entries)):
+            if m.entry["id"].upper() == entry_id.upper():
+                return m
+        return None
+
 
 def classify_choice(value: str):
     n = re.sub(r"[^a-z]", "", value.lower())
@@ -666,6 +673,41 @@ def write_review_csv(path: Path, items: list[Item]) -> None:
 # Commands
 # --------------------------------------------------------------------------
 
+def read_review_choices(path: Path) -> dict[tuple[str, str], dict]:
+    """(sheet, cell) -> reviewer's 'Use library ID', 'Resolved' and notes from an earlier review."""
+    import openpyxl
+
+    rows: list[dict] = []
+    if path.suffix.lower() == ".csv":
+        with open(path, newline="", encoding="utf-8-sig") as fh:
+            rows = list(csv.DictReader(fh))
+    else:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            wb = openpyxl.load_workbook(path, data_only=True)
+        if REVIEW_SHEET not in wb.sheetnames:
+            raise SystemExit(f"{path} has no '{REVIEW_SHEET}' sheet.")
+        ws = wb[REVIEW_SHEET]
+        names = None
+        for row in ws.iter_rows(min_row=1, max_row=15):
+            texts = [sqkit.clean(c.value) for c in row]
+            if "Cell" in texts and "Status" in texts:
+                names, start = texts, row[0].row + 1
+                break
+        if names is None:
+            raise SystemExit(f"Could not find the review table in {path}.")
+        for values in ws.iter_rows(min_row=start, values_only=True):
+            rows.append(dict(zip(names, values)))
+    choices = {}
+    for r in rows:
+        key = (sqkit.clean(r.get("Sheet")), sqkit.clean(r.get("Cell")).upper())
+        if key[1]:
+            choices[key] = {"use_id": sqkit.clean(r.get("Use library ID")),
+                            "resolved": sqkit.clean(r.get("Resolved (Y/N)")),
+                            "notes": sqkit.clean(r.get("Reviewer notes"))}
+    return choices
+
+
 def find_soffice():
     for name in ("soffice", "libreoffice"):
         if shutil.which(name):
@@ -786,13 +828,33 @@ def cmd_fill(args) -> int:
 
     matcher = Matcher(entries, args.fuzzy_weight, extra_texts=[it.question for it in items],
                       extra_stopwords=set(w.lower() for w in (args.ignore_words or [])))
+    if args.use_review:
+        choices = read_review_choices(Path(args.use_review))
+        known = {e["id"].upper() for e in matcher.entries}
+        applied = 0
+        for it in items:
+            c = choices.get((it.sheet, it.review_cell))
+            if not c:
+                continue
+            it.carry_resolved, it.carry_notes = c["resolved"], c["notes"]
+            uid = c["use_id"].strip().upper()
+            if uid and (uid in NO_MATCH_WORDS or uid in known):
+                it.forced = uid
+                applied += 1
+            elif uid:
+                print(f"  Warning: 'Use library ID' {c['use_id']!r} for {it.sheet}!{it.review_cell} is not in the library; ignored.")
+        print(f"Reviewer choices from {args.use_review}: {applied} library ID(s) applied; notes and Resolved carried over.")
     today = dt.date.today()
     for it in items:
         if already_answered(it) and not args.overwrite:
             it.status = SKIPPED
             it.reasons.append("Already has an answer in the buyer's file; left unchanged (use --overwrite to replace).")
             continue
-        decide(it, matcher.rank(it.question), args, today)
+        ranked = matcher.rank(it.question)
+        if it.forced and it.forced not in NO_MATCH_WORDS:
+            chosen = matcher.score_for(it.question, it.forced)
+            ranked = [chosen] + [m for m in ranked if m.entry["id"] != chosen.entry["id"]][:1]
+        decide(it, ranked, args, today)
         plan_writes(it, args)
 
     counts = {s: sum(1 for it in items if it.status == s) for s in PRIORITY}
@@ -994,6 +1056,9 @@ def build_parser() -> argparse.ArgumentParser:
     m.add_argument("--include-drafts", action="store_true", default=None,
                    help="also use Draft library answers (always flagged CHECK)")
     m.add_argument("--stale-days", type=int, help=f"flag answers reviewed longer ago than this (default {DEFAULTS['stale_days']})")
+    m.add_argument("--use-review", metavar="DRAFT.xlsx|REVIEW.csv",
+                   help="reuse the reviewer's choices from an earlier draft's review sheet: 'Use library ID' forces that "
+                        "library entry (NONE = no match); 'Resolved' and notes are carried over. Run on the original file.")
 
     w = p.add_argument_group("writing")
     w.add_argument("--source-mode", choices=["auto", "column", "append", "review-only"],

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>St Aidan&#x27;s Church, Wrenford: Publisher archive (fictional sample) - contact sheet</title>
+<style>
+:root{--ink:#1d2433;--muted:#566070;--line:#d8dde6;--bg:#f4f5f7;--card:#fff;
+--accent:#1f3a5f;--ok:#1e6b35;--ok-bg:#e3f4e8;--check:#7a5200;--check-bg:#fff2cc;
+--failed:#9c1c1c;--failed-bg:#fde2e1;--skipped:#444;--skipped-bg:#ececec;color-scheme:light}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+header{background:var(--card);border-bottom:1px solid var(--line);padding:28px 0 18px}
+h1{font-size:1.65rem;line-height:1.2;margin:0 0 6px}
+.sub{color:var(--muted);margin:0}
+.stats{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0 12px;padding:0;list-style:none}
+.stats li{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 12px}
+.stats b{font-size:1.1rem}
+.howto{margin:0;max-width:75ch;color:var(--muted)}
+.toolbar{position:sticky;top:0;z-index:5;background:rgba(255,255,255,.97);border-bottom:1px solid var(--line);padding:10px 0}
+.toolbar .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.toolbar input[type=search],.toolbar select{font:inherit;padding:7px 10px;border:1px solid #b9c0cc;border-radius:8px;background:#fff;color:var(--ink);min-width:0}
+.toolbar input[type=search]{flex:1 1 220px}
+.toolbar button{font:inherit;font-weight:600;padding:7px 14px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+.toolbar button:focus-visible,.toolbar input:focus-visible,.toolbar select:focus-visible,a:focus-visible,.pick input:focus-visible{outline:3px solid #f2b632;outline-offset:2px}
+#shown,#pickcount{color:var(--muted);font-size:.9rem}
+#copyout{width:100%;min-height:90px;margin-top:8px;font:13px/1.4 ui-monospace,Menlo,Consolas,monospace}
+.folder h2{font-size:1rem;font-weight:600;margin:28px 0 10px;color:var(--muted);word-break:break-word}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;margin:0}
+.thumb{display:flex;align-items:center;justify-content:center;aspect-ratio:4/5;background:#e9ecf1;padding:10px;text-decoration:none}
+.thumb img{max-width:100%;max-height:100%;object-fit:contain;background:#fff;box-shadow:0 1px 5px rgba(0,0,0,.2)}
+.thumb.none{color:var(--muted);font-size:.9rem;text-align:center}
+figcaption{padding:10px 12px 12px;display:flex;flex-direction:column;gap:4px;flex:1}
+.name{font-weight:600;word-break:break-word;line-height:1.3}
+.meta{color:var(--muted);font-size:.84rem}
+.badge{align-self:flex-start;font-size:.76rem;font-weight:700;padding:2px 9px;border-radius:999px}
+.b-ok{background:var(--ok-bg);color:var(--ok)}.b-check{background:var(--check-bg);color:var(--check)}
+.b-failed{background:var(--failed-bg);color:var(--failed)}.b-skipped{background:var(--skipped-bg);color:var(--skipped)}
+.note{font-size:.8rem;color:var(--muted);margin:0}
+.pick{font-size:.86rem;display:flex;gap:6px;align-items:center;margin-top:auto;padding-top:6px;cursor:pointer}
+.pick input{width:18px;height:18px;margin:0}
+.empty{padding:40px 0;color:var(--muted)}
+footer{color:var(--muted);font-size:.85rem;padding:28px 0 40px}
+@media (max-width:480px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}h1{font-size:1.35rem}}
+@media print{.toolbar,.pick{display:none!important}body{background:#fff}header{border:0}
+.grid{grid-template-columns:repeat(4,1fr)}.card{break-inside:avoid}.folder h2{break-after:avoid}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>St Aidan&#x27;s Church, Wrenford: Publisher archive (fictional sample)</h1>
+<p class="sub">Contact sheet of the PDF archive, made 07 October 2026, 10:36</p>
+<ul class="stats">
+<li><b>10</b> files</li>
+<li><b>9</b> converted</li>
+<li><b>9</b> pages</li>
+<li><b>1</b> need attention</li>
+</ul>
+<p class="howto">Click a picture to open that PDF. Tick <b>Rebuild as template</b> on the
+layouts you reuse most (your newsletter, weekly sheet, certificates), then press
+<b>Copy my ticks</b> and paste the list into an email.</p>
+</div></header>
+<div class="toolbar"><div class="wrap">
+<input id="q" type="search" placeholder="Search names, folders and opening words" aria-label="Search">
+<select id="status" aria-label="Show">
+<option value="all">All files</option>
+<option value="ok">Converted</option>
+<option value="attention">Need attention</option>
+</select>
+<button id="copy" type="button">Copy my ticks</button>
+<span id="pickcount" aria-live="polite"></span>
+<span id="shown" aria-live="polite"></span>
+<textarea id="copyout" hidden aria-label="Your ticked layouts"></textarea>
+</div></div>
+<main class="wrap"><section class="folder"><h2>Certificates</h2><div class="grid"><figure class="card" data-status="ok" data-search="certificates/wrens club reading certificate 2021.odp well done! wrens club summer reading challenge 2021 this is to certify that .................................................... read ......... books this ... converted"><a class="thumb" href="pdf/Certificates/Wrens%20Club%20reading%20certificate%202021.pdf" target="_blank" rel="noopener" title="Open the PDF"><img src="previews/Certificates/Wrens%20Club%20reading%20certificate%202021.png" alt="First page of Wrens Club reading certificate 2021.odp"></a><figcaption><span class="name">Wrens Club reading certificate 2021.odp</span><span class="meta">08 Sep 2021 · 1 page · ODP</span><span class="badge b-ok">Converted</span><label class="pick"><input type="checkbox" data-file="Certificates/Wrens Club reading certificate 2021.odp"> Rebuild as template</label></figcaption></figure></div></section><section class="folder"><h2>Newsletters/2019</h2><div class="grid"><figure class="card" data-status="ok" data-search="newsletters/2019/parish news harvest 2019.docx parish news st aidan&#x27;s church, wrenford * harvest 2019 - issue 86 harvest festival, 29 september our harvest service is at 10 am on sunday 29 september, ... converted"><a class="thumb" href="pdf/Newsletters/2019/Parish%20News%20Harvest%202019.pdf" target="_blank" rel="noopener" title="Open the PDF"><img src="previews/Newsletters/2019/Parish%20News%20Harvest%202019.png" alt="First page of Parish News Harvest 2019.docx"></a><figcaption><span class="name">Parish News Harvest 2019.docx</span><span class="meta">24 Sep 2019 · 1 page · DOCX</span><span class="badge b-ok">Converted</span><label class="pick"><input type="checkbox" data-file="Newsletters/2019/Parish News Harvest 2019.docx"> Rebuild as template</label></figcaption></figure><figure class="card" data-status="ok" data-search="newsletters/2019/parish news spring 2019.docx parish news st aidan&#x27;s church, wrenford * spring 2019 - issue 84 lent and easter at st aidan&#x27;s lent begins on ash wednesday, 6 march, with a said service at ... converted"><a class="thumb" href="pdf/Newsletters/2019/Parish%20News%20Spring%202019.pdf" target="_blank" rel="noopener" title="Open the PDF"><img src="previews/Newsletters/2019/Parish%20News%20Spring%202019.png" alt="First page of Parish News Spring 2019.docx"></a><figcaption><span class="name">Parish News Spring 2019.docx</span><span class="meta">14 Mar 2019 · 1 page · DOCX</span><span class="badge b-ok">Converted</span><label class="pick"><input type="checkbox" data-file="Newsletters/2019/Parish News Spring 2019.docx"> Rebuild as template</label></figcaption></figure></div></section><section class="folder"><h2>Newsletters/2022</h2><div class="grid"><figure class="card" data-status="ok" data-search="newsletters/2022/parish news advent 2022.docx parish news st aidan&#x27;s church, wrenford * advent 2022 - issue 99 christmas at st aidan&#x27;s advent begins on sunday 27 november. our christmas services are listed ... converted"><a class="thumb" href="pdf/Newsletters/2022/Parish%20News%20Advent%202022.pdf" target="_blank" rel="noopener" title="Open the PDF"><img src="previews/Newsletters/2022/Parish%20News%20Advent%202022.png" alt="First page of Parish News Advent 2022.docx"></a><figcaption><span class="name">Parish News Advent 2022.docx</span><span class="meta">20 Nov 2022 · 1 page · DOCX</span><span class="badge b-ok">Converted</span><label class="pick"><input type="checkbox" data-file="Newsletters/2022/Parish News Advent 2022.docx"> Rebuild as template</label></figcaption></figure></div></section><section class="folder"><h2>Old PC backup</h2><div class="grid"><figure class="card" data-status="failed" data-search="old pc backup/parish magazine march 2007.pub  failed"><div class="thumb none">No preview</div><figcaption><span class="name">Parish magazine March 2007.pub</span><span class="meta">01 Mar 2007 · PUB</span><span class="badge b-failed">Failed</span><p class="note" title="LibreOffice could not open this file. It may be damaged, from an unsupported version, or not the file type its name suggests.">LibreOffice could not open it</p></figcaption></figure></div></section><section class="folder"><h2>Posters</h2><div class="grid"><figure class="card" data-status="ok" data-search="posters/carol service 2024.odg st aidan&#x27;s church, wrenford carols by candlelight sunday 22 december 2024 at 6.30 pm mince pies and mulled wine afterwards everyone welcome converted"><a class="thumb" href="pdf/Posters/Carol%20Service%202024.pdf" target="_blank" rel="noopener" title="Open the PDF"><img src="previews/Posters/Carol%20Service%202024.png" alt="First page of Carol Service 2024.odg"></a><figcaption><span class="name">Carol Service 2024.odg</span><span class="meta">02 Dec 2024 · 1 page · ODG</span><span class="badge b-ok">Converted</span><label class="pick"><input type="checkbox" data-file="Posters/Carol Service 2024.odg"> Rebuild as template</label></figcaption></figure><figure class="card" data-status="ok" data-search="posters/coffee morning poster.odg coffee morning every tuesday, 10 am to 12 noon st aidan&#x27;s church hall, church lane homemade cakes - fair-trade coffee - good company all for 2 pounds! converted"><a class="thumb" href="pdf/Posters/Coffee%20morning%20poster.pdf" target="_blank" rel="noopener" title="Open the PDF"><img src="previews/Posters/Coffee%20morning%20poster.png" alt="First page of Coffee morning poster.odg"></a><figcaption><span class="name">Coffee morning poster.odg</span><span class="meta">11 Feb 2018 · 1 page · ODG</span><span class="badge b-ok">Converted</span><label class="pick"><input type="checkbox" data-file="Posters/Coffee morning poster.odg"> Rebuild as template</label></figcaption></figure><figure class="card" data-status="ok" data-search="posters/summer fair 2023.odg st aidan&#x27;s church, wrenford summer fair saturday 8 july 2023 12 noon to 4 pm, vicarage garden cake stall * tombola * plants * dog show * teas free entry. all ... converted"><a class="thumb" href="pdf/Posters/Summer%20Fair%202023.pdf" target="_blank" rel="noopener" title="Open the PDF"><img src="previews/Posters/Summer%20Fair%202023.png" alt="First page of Summer Fair 2023.odg"></a><figcaption><span class="name">Summer Fair 2023.odg</span><span class="meta">02 Jun 2023 · 1 page · ODG</span><span class="badge b-ok">Converted</span><label class="pick"><input type="checkbox" data-file="Posters/Summer Fair 2023.odg"> Rebuild as template</label></figcaption></figure></div></section><section class="folder"><h2>Service sheets</h2><div class="grid"><figure class="card" data-status="ok" data-search="service sheets/2024-03-10 mothering sunday.docx st aidan&#x27;s church, wrenford mothering sunday sunday 10 march 2024, 10.00 am welcome! please take this sheet home with you. hymn 192 first reading 1 samuel ... converted"><a class="thumb" href="pdf/Service%20sheets/2024-03-10%20Mothering%20Sunday.pdf" target="_blank" rel="noopener" title="Open the PDF"><img src="previews/Service%20sheets/2024-03-10%20Mothering%20Sunday.png" alt="First page of 2024-03-10 Mothering Sunday.docx"></a><figcaption><span class="name">2024-03-10 Mothering Sunday.docx</span><span class="meta">08 Mar 2024 · 1 page · DOCX</span><span class="badge b-ok">Converted</span><label class="pick"><input type="checkbox" data-file="Service sheets/2024-03-10 Mothering Sunday.docx"> Rebuild as template</label></figcaption></figure><figure class="card" data-status="ok" data-search="service sheets/2024-12-24 crib service.odt st aidan&#x27;s church, wrenford crib service christmas eve, tuesday 24 december 2024, 4.00 pm welcome! please take this sheet home with you. carol once in royal ... converted"><a class="thumb" href="pdf/Service%20sheets/2024-12-24%20Crib%20service.pdf" target="_blank" rel="noopener" title="Open the PDF"><img src="previews/Service%20sheets/2024-12-24%20Crib%20service.png" alt="First page of 2024-12-24 Crib service.odt"></a><figcaption><span class="name">2024-12-24 Crib service.odt</span><span class="meta">20 Dec 2024 · 1 page · ODT</span><span class="badge b-ok">Converted</span><label class="pick"><input type="checkbox" data-file="Service sheets/2024-12-24 Crib service.odt"> Rebuild as template</label></figcaption></figure></div></section></main>
+<footer class="wrap">Keep this page in the same folder as the <code>pdf</code> and
+<code>previews</code> folders so the links keep working. The full list with details is in
+<code>index.xlsx</code>.</footer>
+<script>
+(function(){
+  var q=document.getElementById('q'),st=document.getElementById('status');
+  var cards=[].slice.call(document.querySelectorAll('.card'));
+  var folders=[].slice.call(document.querySelectorAll('.folder'));
+  var shown=document.getElementById('shown');
+  function apply(){
+    var term=q.value.trim().toLowerCase(),want=st.value,n=0;
+    cards.forEach(function(c){
+      var s=c.getAttribute('data-status');
+      var ok=(!term||c.getAttribute('data-search').indexOf(term)>-1)&&
+        (want==='all'||s===want||(want==='attention'&&(s==='check'||s==='failed'||s==='skipped')));
+      c.hidden=!ok; if(ok){n++;}
+    });
+    folders.forEach(function(f){f.hidden=!f.querySelector('.card:not([hidden])');});
+    shown.textContent=n+' of '+cards.length+' shown';
+  }
+  q.addEventListener('input',apply);st.addEventListener('change',apply);
+  var key='publisher-rescue-ticks:'+document.title,saved={};
+  try{saved=JSON.parse(localStorage.getItem(key)||'{}');}catch(e){saved={};}
+  var boxes=[].slice.call(document.querySelectorAll('.pick input'));
+  var count=document.getElementById('pickcount');
+  function ticked(){return boxes.filter(function(b){return b.checked;}).map(function(b){return b.getAttribute('data-file');});}
+  function update(){count.textContent=ticked().length+' ticked';}
+  boxes.forEach(function(b){
+    if(saved[b.getAttribute('data-file')]){b.checked=true;}
+    b.addEventListener('change',function(){
+      saved[b.getAttribute('data-file')]=b.checked;
+      try{localStorage.setItem(key,JSON.stringify(saved));}catch(e){}
+      update();
+    });
+  });
+  document.getElementById('copy').addEventListener('click',function(){
+    var list=ticked(),out=document.getElementById('copyout');
+    var text=list.length?'Layouts we reuse. Please rebuild these as templates:\n'+
+      list.map(function(f){return '- '+f;}).join('\n'):'No layouts ticked yet.';
+    function show(){out.hidden=false;out.value=text;out.focus();out.select();}
+    if(navigator.clipboard&&window.isSecureContext){
+      navigator.clipboard.writeText(text).then(function(){
+        count.textContent=list.length+' ticked - list copied, paste it into an email';
+      },show);
+    }else{show();}
+  });
+  apply();update();
+})();
+</script>
+</body>
+</html>

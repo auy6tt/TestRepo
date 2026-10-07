@@ -116,6 +116,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Never promise "ADA compliant" or certification; deliver test results and a log of what was checked. Exemptions are for the client's ADA coordinator or lawyer to decide. The deadlines have already moved once.
 - **Test it in one day:** Crawl the websites of 10 towns or school districts under 50,000 people and email each ADA coordinator a one-page snapshot (for example "312 PDFs, 240 not accessible") with one fixed file free.
 - **Related:** [Accessibility reports for software sold to governments and universities](#vpat-acr), [Speed and accessibility check reports](#audits)
+- **Starter kit:** [`kits/doc-accessibility/`](kits/doc-accessibility/). In Claude Code, type `/doc-accessibility` in this repo.
 
 <a id="m365-email-shutdown"></a>
 #### Fixing tools hit by Microsoft 365's old sign-in shutdown

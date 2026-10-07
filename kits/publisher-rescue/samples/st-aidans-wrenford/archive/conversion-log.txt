@@ -1,0 +1,15 @@
+St Aidan's Church, Wrenford: Publisher archive (fictional sample)
+Converted 07 October 2026, 10:36 with LibreOffice 24.2.7.2 420(Build:2)
+
+Converted                  Certificates/Wrens Club reading certificate 2021.odp
+Converted                  Newsletters/2019/Parish News Harvest 2019.docx
+Converted                  Newsletters/2019/Parish News Spring 2019.docx
+Converted                  Newsletters/2022/Parish News Advent 2022.docx
+Failed                     Old PC backup/Parish magazine March 2007.pub
+    LibreOffice could not open this file. It may be damaged, from an unsupported version, or not the file type its name suggests.
+    LibreOffice said: Error: source file could not be loaded
+Converted                  Posters/Carol Service 2024.odg
+Converted                  Posters/Coffee morning poster.odg
+Converted                  Posters/Summer Fair 2023.odg
+Converted                  Service sheets/2024-03-10 Mothering Sunday.docx
+Converted                  Service sheets/2024-12-24 Crib service.odt

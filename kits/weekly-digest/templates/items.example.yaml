@@ -1,0 +1,101 @@
+# Items file for one issue: a commented example.
+#
+# One file per issue, usually digests/<your-digest>/issues/<year>-W<week>/items.yaml.
+# Claude Code drafts it from changes.json with every item set to needs_review.
+# You check each item against its source, then set it to approved or rejected.
+# build_digest.py checks this file against items.schema.json and only publishes
+# approved items. Dates are YYYY-MM-DD; times are YYYY-MM-DDTHH:MM in the
+# issue's time zone.
+#
+# Try it:  python scripts/build_digest.py templates/items.example.yaml --preview --out /tmp/example-issue
+# (--preview is needed because one item below is still needs_review.)
+
+issue:
+  brand: Your Brand Briefs                  # your business or newsletter name
+  title: Roofing Bid Digest                 # the name of the digest
+  region: Example Metro                     # optional: area covered
+  edition: Week 41                          # optional: label for this issue
+  number: 3                                 # optional: issue number
+  date: 2026-10-12                          # the day you send it
+  coverage: Bid pages checked October 11, 2026   # optional: what was checked
+  timezone: America/Chicago                 # time zone for the times below
+  timezone_label: CT                        # optional: shown after times
+  intro: |                                  # optional: 2-3 sentences; a blank line starts a new paragraph
+    The city opened bids for a re-roof of the main library this week, and the county's
+    fleet garage re-roof goes to a vote. The library's site visit is mandatory.
+  contact_email: you@yourdomain.com
+  website: https://yourdomain.com           # optional
+  mailing_address: Your postal address      # US law (CAN-SPAM) requires one in commercial email
+  manage_url: https://yourdomain.com/account   # optional: where subscribers manage or cancel
+  sources_checked: 14                       # optional: or pass --changes changes.json to count them
+  sources_note: city, county, school district and transit purchasing pages   # optional
+  attribution: Contains data from the City of Example Open Data Portal.        # optional: licence credit
+  # accent_color: "#16365c"                 # optional: your main color
+  # sample_notice: "Sample issue..."        # optional: banner for samples and free trials
+  # disclaimer: "..."                       # optional: replaces the standard 'not legal advice' text
+  # file_name: roofing-bids-2026-10-12      # optional: base name for the output files
+
+sections:                                   # optional: order of the categories
+  - Open bids
+  - Results and awards
+
+items:
+  - id: W41-01                              # short and unique within the issue
+    status: approved                        # draft | needs_review | approved | rejected
+    priority: high                          # optional: shows the item as a top item
+    category: Open bids                     # section heading
+    jurisdiction: City of Example           # who issued it
+    title: Main library roof replacement, about 42,000 sq ft (Bid 26-114)
+    short_title: Library roof replacement (Bid 26-114)   # optional: used in "Coming up" and the calendar
+    summary: |                              # what the document says, in your own words
+      The city seeks bids to remove and replace about 42,000 square feet of built-up roofing
+      on the main library with a TPO membrane system, including new insulation and flashing.
+    why_it_matters: >-                      # optional: facts that explain the effect, never advice
+      The pre-bid site visit is mandatory and is the only one scheduled. The notice asks for a
+      5% bid bond and proof of a manufacturer's 20-year warranty.
+    source_name: City of Example purchasing, Invitation to Bid 26-114 (PDF)
+    source_url: https://example.gov/city/purchasing/itb-26-114.pdf   # the official document itself
+    source_ref: pages 1-3                   # optional: page, item or section
+    date: 2026-10-08                        # date of the document (posted, filed or published)
+    deadline: 2026-10-29T14:00              # optional: the next date that matters
+    deadline_label: Bids due
+    deadline_location: City Hall, Purchasing Office   # optional
+    more_dates:                             # optional: other dates for the calendar
+      - date: 2026-10-20T10:00
+        label: Mandatory site visit
+        location: Main library, front entrance
+    details:                                # optional: small table of key facts
+      Bid number: 26-114
+      Estimate in the notice: Not stated
+      Last similar award: "$612,400 (2024 re-roof of the City Annex, Bid 24-071)"
+    tags: [roofing, tpo, city]
+    checked_by: AB                          # required once approved: your initials
+    checked_on: 2026-10-11                  # required once approved: the day you checked the source
+
+  - id: W41-02
+    status: needs_review                    # Claude Code's drafts start here; you change it
+    category: Results and awards
+    jurisdiction: Example County
+    title: County garage re-roof awarded at $214,900, lowest of four bids
+    summary: >-
+      The county's bid tabulation for Bid 2026-31 lists four bids for the fleet garage
+      re-roof, from $214,900 to $268,350. The commissioners' agenda for October 14 asks
+      them to award the contract to the lowest bidder.
+    source_name: Example County purchasing, bid tabulation for Bid 2026-31 (PDF)
+    source_url: https://example.gov/county/purchasing/bid-2026-31-tabulation.pdf
+    source_ref: page 1
+    date: 2026-10-07
+    deadline: 2026-10-14T09:30
+    deadline_label: Commissioners vote on the award
+    details:
+      Bids received: "4"
+      Lowest bid: "$214,900"
+      Highest bid: "$268,350"
+    tags: [roofing, results, county]
+    review_notes: >-                         # notes for the reviewer; never shown to subscribers
+      CHECK: the title says "awarded", but the vote is not until October 14. Change it to
+      "recommended for award" before approving. Confirm the four bid amounts on page 1.
+
+skipped_changes:                            # optional: changes looked at and left out, with the reason
+  - source: Example School District bids page
+    reason: New bid is for HVAC work, outside the trade.

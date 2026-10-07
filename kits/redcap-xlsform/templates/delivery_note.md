@@ -70,7 +70,7 @@ Questions for you:
 
 ## 7. Running the cleaning script (optional)
 
-You need Python 3.9 or newer; no extra packages. Export your data from REDCap as "CSV / Microsoft Excel (raw data)", then run:
+You need Python 3.9 or newer; no extra packages. Keep clean_export.py, redcap_dictionary.py and redcap_logic.py in one folder. Export your data from REDCap as "CSV / Microsoft Excel (raw data)", then run:
 
 ```text
 python clean_export.py --dictionary [name]_data_dictionary.csv --export your_export.csv --events instrument_event_mapping.csv --rules cleaning_rules.csv

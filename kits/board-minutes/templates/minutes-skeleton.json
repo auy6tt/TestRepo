@@ -1,0 +1,73 @@
+{
+  "schema_version": "1.0",
+  "_note": "Copy this file for a new meeting. Replace every TODO, YYYY-MM-DD and HH:MM, and delete what you don't need. The build refuses to run until every date and time is real. Field notes: SCHEMA.md. Full example: samples/wrenfield-commons-2026-09-16-minutes.json.",
+  "document": {
+    "status": "draft",
+    "locale": "en-US",
+    "prepared_by": "TODO your name or business name",
+    "prepared_on": "YYYY-MM-DD"
+  },
+  "organization": {
+    "name": "TODO full name of the association",
+    "short_name": "TODO short name for the page header"
+  },
+  "meeting": {
+    "title": "Regular Meeting of the Board of Directors",
+    "date": "YYYY-MM-DD",
+    "scheduled_time": "HH:MM",
+    "called_to_order": "HH:MM",
+    "adjourned": "HH:MM",
+    "location": "TODO",
+    "presiding": {"name": "TODO", "role": "President"},
+    "recording_secretary": {"name": "TODO", "role": "Secretary"}
+  },
+  "attendance": {
+    "directors_present": [
+      {"name": "TODO", "role": "TODO"}
+    ],
+    "directors_absent": [],
+    "others_present": [],
+    "members_present": "TODO number of members or homeowners, or delete this line",
+    "quorum": {
+      "met": true,
+      "_note": "Add present_count, board_size and required as numbers if you know them."
+    }
+  },
+  "items": [
+    {"number": "1", "title": "Call to Order", "kind": "call_to_order"},
+    {"number": "2", "title": "Roll Call and Quorum", "kind": "roll_call"},
+    {
+      "number": "3",
+      "title": "Approval of Minutes",
+      "kind": "approval_of_minutes",
+      "motions": [
+        {
+          "text": "To approve the minutes of the TODO meeting as presented.",
+          "moved_by": "TODO",
+          "seconded_by": "TODO",
+          "vote": {"method": "voice"},
+          "result": "carried",
+          "source": "00:00:00"
+        }
+      ]
+    },
+    {
+      "number": "4",
+      "title": "TODO",
+      "kind": "business",
+      "summary": ["TODO one to three sentences on what was discussed and decided."]
+    },
+    {"number": "5", "title": "Next Meeting", "kind": "next_meeting"},
+    {"number": "6", "title": "Adjournment", "kind": "adjournment"}
+  ],
+  "action_items": [
+    {"task": "TODO", "owner": "TODO", "due": "YYYY-MM-DD", "item": "4", "source": "00:00:00"}
+  ],
+  "next_meeting": {
+    "description": "regular meeting",
+    "date": "YYYY-MM-DD",
+    "time": "HH:MM",
+    "location": "TODO"
+  },
+  "questions": []
+}

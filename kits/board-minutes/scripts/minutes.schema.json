@@ -232,8 +232,7 @@
         "owner": {"$ref": "#/$defs/text"},
         "due": {"$ref": "#/$defs/text"},
         "item": {"$ref": "#/$defs/text"},
-        "source": {"$ref": "#/$defs/source"},
-        "notes": {"$ref": "#/$defs/text"}
+        "source": {"$ref": "#/$defs/source"}
       }
     },
 

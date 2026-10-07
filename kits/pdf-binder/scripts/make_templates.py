@@ -170,6 +170,7 @@ def write_submittal_log(path, project: dict | None = None, rows: list[dict] | No
                                         f'${L["Days in review"]}{first + 1}>=14,${L["Date returned"]}{first + 1}="")'})
     log.freeze_panes(first, 1)
     log.autofilter(LOG_HEADER_ROW, 0, last, len(LOG_COLUMNS) - 1)
+    log.print_area(0, 0, first + max(len(data) + 10, 40) - 1, len(LOG_COLUMNS) - 1)
     log.set_landscape()
     log.set_paper(1)
     log.fit_to_pages(1, 0)
