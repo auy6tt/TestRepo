@@ -37,8 +37,10 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 | Niche | Type | Typical price | Demand | Few rivals | Claude fit | Beginner |
 |---|---|---|---|---|---|---|
+| [Meeting minutes for HOA, nonprofit and church boards](#board-minutes) | Back office | $75–200 per meeting, or $100–300 a month per association (est.); one firm pays its writers $56 per one-hour meeting | 4 | 3 | 5 | 5 |
 | [Rescuing AI features before their model is retired](#model-retirement) | New AI needs | $300–800 per feature; $1,500–4,000 for a whole app with a reusable test set (est.) | 4 | 4 | 5 | 3 |
 | [Fixing help-centre content so AI support bots stop failing](#support-content) | New AI needs | $1,000–3,500 for an audit plus 40–120 articles; $400–1,000 a month for upkeep (est.) | 4 | 3 | 5 | 4 |
+| [Security questionnaires for small software companies](#security-questionnaires) | Back office | $250–1,500 per questionnaire depending on size (est.) | 5 | 3 | 5 | 3 |
 | [Microsoft Access database rescue](#access-rescue) | Specialist software | $150–600 per fix, $1,500–8,000 per migration | 4 | 4 | 4 | 3 |
 | [Getting organisations off Drupal 7](#drupal7) | Specialist software | $800–3,000 per fixed package (est.) | 4 | 3 | 5 | 3 |
 | [Packaging-law updates for small consumer brands](#epr-digest) | Data subscriptions | $39–99 a month per brand, or $300–800 a month white-label (est.) | 4 | 3 | 5 | 3 |
@@ -47,16 +49,52 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 | [International aid tenders for one specialty and language](#aid-tenders) | Data subscriptions | $15–40 a month for individuals, $100–300 for firms (est.) | 3 | 3 | 5 | 4 |
 | [Test suites for small teams' AI features](#ai-evals) | New AI needs | $750–3,000 setup, plus $200–800 a month for regular runs (est.) | 4 | 3 | 5 | 3 |
 | [Custom Claude skill packs for small teams](#claude-skill-packs) | New AI needs | $250–600 per skill; $1,500–4,000 per team pack (est.) | 3 | 3 | 5 | 4 |
+| [Chemical safety-data binders for OSHA's 2026 update](#sds-binders) | Rules and deadlines | $300–1,500 per site (est.) | 4 | 3 | 4 | 4 |
+| [Construction submittal and handover packages](#closeout-docs) | Back office | $300–1,500 per submittal package, $500–3,000 per handover binder (est.) | 4 | 4 | 4 | 3 |
+| [Preparing UK Gift Aid claims for churches and small charities](#gift-aid) | Back office | £75–300 per claim (est.) | 4 | 3 | 4 | 4 |
 | [AutoCAD automation routines (AutoLISP)](#autolisp) | Specialist software | $50–300 per routine, $500–1,500 per project | 3 | 4 | 4 | 3 |
 | [ColdFusion maintenance and moves to Lucee](#coldfusion) | Specialist software | $60–125 an hour (est.) | 3 | 5 | 4 | 2 |
 | [Spreadsheet-to-catalogue automation](#catalogue) | Specialist software | $300–2,500 per setup, plus a fee per new edition (est.) | 3 | 3 | 4 | 4 |
 | [New commercial premises list for local service firms](#premises-digest) | Data subscriptions | $79–199 a month per metro (est.) | 3 | 3 | 4 | 4 |
 | [Cleaning up company documents before an AI rollout](#ai-ready-docs) | New AI needs | $1,500–5,000 per department (est.) | 4 | 3 | 4 | 3 |
+| [Making public bodies' documents accessible](#doc-accessibility) | Rules and deadlines | $2–15 per page; most vendors charge $4–8 | 5 | 3 | 3 | 3 |
 | [Revit automation scripts](#revit) | Specialist software | $30–95 an hour | 4 | 4 | 3 | 2 |
 | [EDI files for small brands selling to big retailers](#edi) | Specialist software | $500–3,000 per retailer connection (est.) | 4 | 3 | 4 | 2 |
 | [AI transparency and staff AI-use packs](#ai-policy-pack) | New AI needs | €500–2,000 per pack; €150–400 per training session (est.) | 3 | 3 | 4 | 3 |
 | [AI API bill audits for startups](#ai-cost-audit) | New AI needs | $1,000–3,000, or 20–30% of verified savings over 3 months (est.) | 4 | 3 | 4 | 2 |
+| [Allergen charts for UK food businesses](#allergen-charts) | Back office | £100–400 per menu, plus £20–50 per update (est.) | 3 | 3 | 4 | 3 |
 | [ChatGPT Ads setup for small US businesses](#chatgpt-ads) | New AI needs | $300–700 setup plus $300–1,000 a month (est.) | 4 | 3 | 3 | 2 |
+| [Supplier sustainability questionnaires (EcoVadis)](#ecovadis) | Back office | $500–2,500 per assessment (est.) | 4 | 3 | 3 | 2 |
+
+### Rules and deadlines
+
+<a id="sds-binders"></a>
+#### Chemical safety-data binders for OSHA's 2026 update
+
+*Refresh small employers' chemical inventories and safety data sheets.* **$300–1,500 per site (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 4/5
+
+- **Who pays:** Small US employers that use chemicals: auto repair and body shops, cleaning companies, salons, small manufacturers, school facilities teams.
+- **What they need:** A current chemical inventory, up-to-date safety data sheets replacing old versions, an indexed binder on paper and online, and an updated written hazard-communication programme.
+- **Proof of demand:** OSHA's January 2026 final rule set the compliance dates for its updated hazard-communication standard: employers using single-substance chemicals must comply by 20 November 2026, with later dates for mixtures. Businesses already pay $29–49 a month for safety-data software and $500–4,000 for setup.
+- **Why few people offer it:** The market is software subscriptions and safety consultancies. Freelancers compiling binders barely show up, and the software still needs someone to list the chemicals and load them in (unverified).
+- **How Claude does it here:** Claude lists products from photos of shelves or purchase records, a script pulls manufacturer, revision date and hazard statements out of the safety-data PDFs into a spreadsheet, flags old or missing sheets, and builds a bookmarked binder PDF with an index. Claude adapts OSHA's sample written programme.
+- **Where buyers are:** Local auto, cleaning and salon businesses (Google Maps, chambers of commerce). Search: "SDS binder", "OSHA HazCom update".
+- **Watch out:** Never write or change a safety data sheet, classify chemicals or give safety advice; a qualified person delivers staff training. Describe the deadline accurately and avoid scare tactics.
+- **Test it in one day:** Call or email 30 local shops offering a 48-hour binder refresh from photos of their shelves before the November deadline, and track the replies.
+
+<a id="doc-accessibility"></a>
+#### Making public bodies' documents accessible
+
+*Fix PDFs and Word files for the US ADA Title II rule and the EU Accessibility Act.* **$2–15 per page; most vendors charge $4–8** · demand 5/5 · few rivals 3/5 · Claude fit 3/5 · beginner 3/5
+
+- **Who pays:** US cities, counties, school districts and colleges, health providers funded by the US health department, EU companies under the European Accessibility Act, and accessibility vendors needing overflow help.
+- **What they need:** PDFs and Office files made to meet WCAG 2.1 AA and PDF/UA (tags, reading order, alt text, table headers), or converted into accessible web pages.
+- **Proof of demand:** The US Justice Department's ADA Title II rule requires WCAG 2.1 AA; an April 2026 interim rule moved the deadlines to 26 April 2027 for bodies serving 50,000+ people and 26 April 2028 for smaller ones. Large institutions have backlogs of thousands of documents.
+- **Why few people offer it:** Many vendors exist, so competition is moderate, but skilled manual checking is the bottleneck: automated checkers catch only 20–30% of issues.
+- **How Claude does it here:** A script extracts each document's structure; Claude rebuilds it with proper headings, table headers and draft alt text, exports a tagged PDF and checks it with the open-source veraPDF validator. Final checks need Acrobat Pro or the free PAC checker (Windows) and a screen reader.
+- **Where buyers are:** Small municipalities and special districts, state procurement portals, accessibility vendors needing white-label help, accessibility coordinators on LinkedIn. Search: "PDF remediation", "Title II documents".
+- **Watch out:** Never promise "ADA compliant" certification, and have a person check every file. The client approves alt text for complex charts. The deadlines have moved once already.
+- **Test it in one day:** Fix one public council-agenda PDF, show the checker results before and after, and email 20 small public bodies and 10 accessibility vendors offering per-page capacity.
 
 ### Specialist software
 
@@ -157,6 +195,92 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Where buyers are:** Brands announcing new big-retail deals, operations managers on LinkedIn, logistics communities. Search: "Walmart 856 ASN", "EDI mapping help".
 - **Watch out:** Penalties fall on the client, so cap your liability and never guarantee compliance. Keep their pricing data confidential.
 - **Test it in one day:** Build a spreadsheet-to-shipping-notice (856) generator checked against a public retailer spec, and offer a free error check to 10 newly listed brands.
+
+### Back office
+
+<a id="board-minutes"></a>
+#### Meeting minutes for HOA, nonprofit and church boards
+
+*Formal minutes in the client's template within 24–72 hours.* **$75–200 per meeting, or $100–300 a month per association (est.); one firm pays its writers $56 per one-hour meeting** · demand 4/5 · few rivals 3/5 · Claude fit 5/5 · beginner 5/5
+
+- **Who pays:** HOA and condo management companies, association boards, and nonprofit, church and membership boards.
+- **What they need:** Formal minutes (motions, who moved and seconded, votes, action items) in their own template, from a recording or notes, within a day or three.
+- **Proof of demand:** One specialist firm says it has written minutes for 40,000+ meetings for 3,000+ organisations and employs 140+ minute-takers; others in the US and UK sell the same service.
+- **Why few people offer it:** Only a handful of firms specialise in it; everything else is generic transcription. A "your template, next day" offer aimed at management companies looks thin (unverified).
+- **How Claude does it here:** Start from the client's Zoom, Teams or Otter transcript. Claude drafts the minutes in their template as a .docx, plus a motions-and-votes table, an action list and questions on anything unclear. You check names, motions and votes; the board approves the minutes.
+- **Where buyers are:** Community Associations Institute (CAI) chapters and directory, local HOA management companies, nonprofit and church networks, Upwork and Fiverr searches for "meeting minutes".
+- **Watch out:** Follow consent rules for recordings, leave out closed-session detail unless the bylaws allow it, keep everything confidential, and never invent content.
+- **Test it in one day:** Turn a public HOA or council meeting recording into sample minutes, then email 25 management companies offering one free set with 24-hour turnaround, and count the replies.
+
+<a id="security-questionnaires"></a>
+#### Security questionnaires for small software companies
+
+*Answer buyers' vendor-security forms from the client's own policies.* **$250–1,500 per questionnaire depending on size (est.)** · demand 5/5 · few rivals 3/5 · Claude fit 5/5 · beginner 3/5
+
+- **Who pays:** Early-stage software companies with no security lead that sell to mid-sized or enterprise buyers.
+- **What they need:** Questionnaires such as SIG Lite, CAIQ and custom vendor forms answered accurately from their existing policies, plus a reusable library of answers.
+- **Proof of demand:** Vendors report growing software firms get 5–15 questionnaires a quarter, each taking 12–18 hours and adding weeks to a deal. Founders publicly complain it's "still a 15-hour job" in 2026, and new tools and done-for-you services are appearing.
+- **Why few people offer it:** The competition is software rather than freelancers, and the tools still need someone to own and check the answers, which small startups lack (unverified).
+- **How Claude does it here:** Claude reads the client's policies, SOC 2 report and past answers, builds a sourced answer library in Excel, and fills in the buyer's spreadsheet, tagging every answer with its source or "needs client input". The client's technical owner checks and signs off.
+- **Where buyers are:** Indie Hackers, r/SaaS, founders on LinkedIn posting about SOC 2 or security reviews, SOC 2 consultants who could refer clients. Search: "SIG Lite", "CAIQ", "vendor security assessment".
+- **Watch out:** These are statements the client makes to its customers, so never invent security controls. The client signs; don't pose as an auditor or certify compliance.
+- **Test it in one day:** Fill in a public questionnaire for a made-up startup as a sample, then message 30 B2B software founders offering a fixed-price first questionnaire in 72 hours.
+
+<a id="closeout-docs"></a>
+#### Construction submittal and handover packages
+
+*Product approval packages and operation & maintenance binders for subcontractors.* **$300–1,500 per submittal package, $500–3,000 per handover binder (est.)** · demand 4/5 · few rivals 4/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Specialist subcontractors (electrical, mechanical, fire, audio-visual, finishes) and small general contractors.
+- **What they need:** Submittal packages for each section of the project specification (cover sheet, marked-up datasheets, compliance checklist, log) and, at the end of the job, handover binders with operation and maintenance manuals, warranties and spare-parts lists in the required format.
+- **Proof of demand:** Public agencies tender exactly this work, UK trade press calls the handover process "broken", and outside firms charge about £50,000 to produce the manuals for a £100m project.
+- **Why few people offer it:** The US audio-visual contractors' association says experts aren't aware of many members successfully outsourcing this work, because explaining each project is costly. So the gap is real; a tight intake process is the fix.
+- **How Claude does it here:** Claude turns the specification PDF into a checklist of requirements, compares it with product datasheets and flags mismatches. A script merges, bookmarks, numbers and indexes the PDFs, and the submittal log lives in a spreadsheet. The project manager confirms compliance.
+- **Where buyers are:** Subcontractor project managers on LinkedIn, trade associations (NSCA in the US, FIS in the UK), project coordinators. Search: "submittal coordinator", "closeout documents", "O&M manuals".
+- **Watch out:** You don't certify compliance, and you never alter manufacturer documents. Keep drawings confidential.
+- **Test it in one day:** Build a sample handover binder for one trade from public manufacturer datasheets, then message 25 subcontractor project managers offering a first binder at a flat price with three-day turnaround.
+
+<a id="gift-aid"></a>
+#### Preparing UK Gift Aid claims for churches and small charities
+
+*Match offline donations to declarations and build the HMRC claim files.* **£75–300 per claim (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 4/5
+
+- **Who pays:** UK churches and small charities whose donations come in envelopes, standing orders and cash.
+- **What they need:** Donations matched to valid donor declarations, cleaned names and postcodes, claim spreadsheets for HMRC's Charities Online service, Small Donations Scheme figures, and claims for past years.
+- **Proof of demand:** About £560m of Gift Aid, roughly a third of the total, reportedly goes unclaimed every year, and church bodies publish step-by-step claiming guides for volunteer treasurers.
+- **Why few people offer it:** Commission-based services mainly cover online gifts (JustGiving and Swiftaid take 5%). Offline and past-year claims fall to volunteers or accountants, and no freelancers turned up offering this (unverified).
+- **How Claude does it here:** Claude cleans the bank and envelope records, matches donors to their declarations even when names are spelled differently, flags missing or invalid declarations, and produces the claim files and a summary. The charity's authorised official reviews and submits the claim.
+- **Where buyers are:** Church treasurers (contacts are on parish websites), diocesan finance teams, local councils for voluntary service.
+- **Watch out:** HMRC claws back invalid claims and can add penalties, so only claim where valid declarations exist. Sign a data-processing agreement, and avoid percentage fees that reward over-claiming.
+- **Test it in one day:** Email 30 church treasurers offering a free "Gift Aid health check" on last year's records.
+
+<a id="ecovadis"></a>
+#### Supplier sustainability questionnaires (EcoVadis)
+
+*Gap analysis, policies and evidence for small suppliers' ratings.* **$500–2,500 per assessment (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 3/5 · beginner 2/5
+
+- **Who pays:** Small suppliers whose big customers require an EcoVadis or similar sustainability rating: manufacturing, packaging, logistics, promotional products.
+- **What they need:** Evidence gathered and indexed, missing policies drafted for management to adopt, and answers across environment, labour and human rights, ethics and sustainable purchasing.
+- **Proof of demand:** Small firms pay roughly €500–1,500 a year just to be assessed, often to keep a big customer's contract, and trade associations list firms that help.
+- **Why few people offer it:** Accredited consultants exist, so supply isn't empty, but affordable help for small firms already paying the subscription looks thin (unverified).
+- **How Claude does it here:** Claude inventories the client's documents, produces a gap analysis spreadsheet, drafts policies for management approval, indexes the evidence and drafts answers. The client must actually adopt the policies; EcoVadis does the scoring.
+- **Where buyers are:** Suppliers on LinkedIn posting about EcoVadis, procurement-heavy industries, trade associations, Upwork searches for "EcoVadis".
+- **Watch out:** Greenwashing: never fabricate evidence or claim actions that weren't taken, and don't claim EcoVadis accreditation.
+- **Test it in one day:** Find 20 small firms posting about an EcoVadis assessment and offer a fixed-price gap analysis with a one-page sample.
+
+<a id="allergen-charts"></a>
+#### Allergen charts for UK food businesses
+
+*Map every dish to the 14 legal allergens from recipes and supplier specs.* **£100–400 per menu, plus £20–50 per update (est.)** · demand 3/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Independent UK restaurants, cafés, caterers, bakeries, food trucks and small food producers.
+- **What they need:** A chart of which of the 14 listed allergens each dish contains, built from recipes and supplier specifications, plus printable allergen menus and updates when menus or suppliers change.
+- **Proof of demand:** The Food Standards Agency's March 2025 guidance says written allergen information should always be available for food that isn't prepacked, and the Owen's Law campaign is pushing to make it mandatory.
+- **Why few people offer it:** Paid help is mostly software or food-safety consultancies. The agency gives away a free template, so filling it in is what sells (unverified).
+- **How Claude does it here:** Claude reads recipe sheets and supplier specification PDFs, maps each ingredient to the 14 allergens including "may contain" warnings, and produces the chart, an allergen menu and a change log. The head chef signs off every line.
+- **Where buyers are:** Local cafés and restaurants, caterer groups, food business groups and council food-safety newsletters.
+- **Watch out:** A mistake can kill someone. State plainly that the chart is compiled from the specifications the client supplied and that they verify it, consider professional indemnity insurance, and give no advice on cross-contamination.
+- **Test it in one day:** Build a sample chart from a public menu, then visit or email 20 local cafés offering a free chart for five dishes.
 
 ### Data subscriptions
 
