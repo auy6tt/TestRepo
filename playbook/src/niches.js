@@ -255,7 +255,7 @@ NICHES.push(
 
 // --- Back office (and two deadline-driven ones)
 NICHES.push(
-{id:"board-minutes", group:"backoffice", rank:401, s:[4,2,5,5],
+{id:"board-minutes", group:"backoffice", rank:401, kit:"board-minutes", s:[4,2,5,5],
  name:"Meeting minutes for HOA, nonprofit and church boards",
  short:"Formal minutes in the client's template within 24–72 hours",
  who:"HOA and condo management companies, association boards, and nonprofit, church and membership boards.",

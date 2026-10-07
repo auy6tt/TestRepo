@@ -336,6 +336,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Where buyers are:** Community Associations Institute (CAI) chapters and directory, local HOA management companies, nonprofit and church networks, Upwork and Fiverr searches for "meeting minutes".
 - **Watch out:** Follow consent rules for recordings, leave out closed-session detail unless the bylaws allow it, keep everything confidential, and never invent content. Use anonymized or metadata-only exports, or the client's own Claude workspace, for personal data.
 - **Test it in one day:** Turn a public HOA or council meeting recording into sample minutes, then email 25 management companies offering one free set with 24-hour turnaround, and count the replies.
+- **Starter kit:** [`kits/board-minutes/`](kits/board-minutes/). In Claude Code, type `/board-minutes` in this repo.
 
 <a id="security-questionnaires"></a>
 #### Security questionnaires for small software companies

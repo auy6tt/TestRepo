@@ -73,7 +73,7 @@ def test_document_properties(tmp_path, sample, write_json):
     sample["document"]["prepared_by"] = "Sam Writer Minutes Service"
     path = write_json(sample)
     assert build_minutes.main([str(path), "--out-dir", str(tmp_path), "--no-xlsx"]) == 0
-    props = Document(str(tmp_path / "minutes-minutes.docx")).core_properties
+    props = Document(str(tmp_path / "wrenfield-commons-hoa-2026-09-16-minutes.docx")).core_properties
     assert props.author == "Sam Writer Minutes Service"
     assert props.title == "Minutes – Wrenfield Commons HOA – 2026-09-16"
     assert "python-docx" not in (props.author + props.last_modified_by + props.comments)
@@ -85,6 +85,8 @@ def test_output_names(tmp_path, write_json, sample):
     assert (tmp_path / "out" / "acme-minutes.docx").exists()
     assert (tmp_path / "out" / "acme-motions.xlsx").exists()
     assert build_minutes.output_base(path, None) == "acme-2026-10-01"
+    assert build_minutes.output_base(path.with_name("minutes.json"), None, sample) == "wrenfield-commons-hoa-2026-09-16"
+    assert build_minutes.output_base(path.with_name("acme-minutes.json"), None, sample) == "acme"
 
 
 def test_committed_sample_docx_matches_a_fresh_build(tmp_path):
@@ -123,7 +125,7 @@ def test_schema_errors_stop_the_build(tmp_path, sample, write_json, capsys):
     assert "'date' is a required property" in err
     assert "$.items[4].motions[0]: unknown field(s) 'seconder'" in err
     assert "$.meeting.called_to_order" in err and "24-hour HH:MM" in err
-    assert not (tmp_path / "minutes-minutes.docx").exists()
+    assert not list(tmp_path.glob("*.docx"))
 
 
 def test_bad_json_file(tmp_path, capsys):
@@ -232,7 +234,7 @@ def test_uk_locale(tmp_path, sample, write_json):
     sample["document"]["locale"] = "en-GB"
     path = write_json(sample)
     assert build_minutes.main([str(path), "--out-dir", str(tmp_path)]) == 0
-    out = tmp_path / "minutes-minutes.docx"
+    out = tmp_path / "wrenfield-commons-hoa-2026-09-16-minutes.docx"
     doc = Document(str(out))
     assert round(doc.sections[0].page_height.inches, 2) == 11.69  # A4
     text = all_text(out)
@@ -246,7 +248,7 @@ def test_approved_minutes_have_no_draft_notice(tmp_path, sample, write_json):
     sample["document"].pop("notice")
     path = write_json(sample)
     assert build_minutes.main([str(path), "--out-dir", str(tmp_path), "--no-appendix"]) == 0
-    text = all_text(tmp_path / "minutes-minutes.docx")
+    text = all_text(tmp_path / "wrenfield-commons-hoa-2026-09-16-minutes.docx")
     assert "not yet been approved" not in text
     assert "Approved by the Board of Directors on October 21, 2026." in text
     assert "Confidential" not in text
@@ -265,7 +267,7 @@ def test_minimal_minutes(tmp_path, write_json):
     }
     path = write_json(minimal)
     assert build_minutes.main([str(path), "--out-dir", str(tmp_path)]) == 0
-    text = all_text(tmp_path / "minutes-minutes.docx")
+    text = all_text(tmp_path / "st-brigid-parish-council-2026-05-04-minutes.docx")
     assert "Council members present" in text
     assert "The meeting was adjourned at [UNCLEAR]." in text
     assert "No motions were made." in text and "No action items were recorded." in text
@@ -296,3 +298,12 @@ def test_pdf_option(tmp_path):
     pdf = tmp_path / "wrenfield-commons-2026-09-16-minutes.pdf"
     assert pdf.exists() and pdf.stat().st_size > 20_000
     assert pdf.read_bytes()[:5] == b"%PDF-"
+
+
+def test_skeleton_is_valid_json_but_must_be_filled_in(capsys):
+    skeleton = TEMPLATES_DIR / "minutes-skeleton.json"
+    data = build_minutes.load_minutes(skeleton)
+    errors = build_minutes.schema_errors(data)
+    assert errors and all("YYYY-MM-DD" in e or "HH:MM" in e for e in errors)
+    assert build_minutes.main([str(skeleton), "--out-dir", "/nonexistent-folder"]) == 1
+    assert "does not match the minutes format" in capsys.readouterr().err

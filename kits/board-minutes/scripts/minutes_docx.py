@@ -40,7 +40,6 @@ from docx.text.run import Run
 from minutes_common import (
     UNCLEAR_RE,
     board_name,
-    find_unclear,
     format_date,
     format_time,
     group_label,
@@ -701,7 +700,7 @@ def short_date(value, locale: str) -> str:
     d = parse_date(value)
     if d is None:
         return "" if value is None else str(value)
-    month = d.strftime("%b")
+    month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][d.month - 1]
     return f"{d.day} {month} {d.year}" if locale == "en-GB" else f"{month} {d.day}, {d.year}"
 
 
@@ -1199,7 +1198,3 @@ def render_docx(m: dict, out_path: str | Path, template_path: str | Path | None 
     out_path.parent.mkdir(parents=True, exist_ok=True)
     doc.save(str(out_path))
     return out_path
-
-
-def unclear_count(m: dict) -> int:
-    return len(find_unclear(m))

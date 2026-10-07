@@ -9,7 +9,9 @@ Outputs, written to --out-dir (default: the folder of the JSON file):
   <name>-minutes.docx   the minutes, for the secretary to review
   <name>-motions.xlsx   motions and votes, action items, questions, meeting facts
   <name>-minutes.pdf    only with --pdf (needs LibreOffice)
-<name> is the JSON file name without "-minutes" (or the value of --name).
+<name> is --name if given, else the JSON file name without "-minutes"; a plain
+"minutes.json" gives <association>-<meeting date>, for example
+wrenfield-commons-hoa-2026-09-16-minutes.docx.
 
 Examples:
   python build_minutes.py ../samples/wrenfield-commons-2026-09-16-minutes.json
@@ -20,6 +22,7 @@ Examples:
 from __future__ import annotations
 
 import argparse
+import re
 import shutil
 import subprocess
 import sys
@@ -31,14 +34,26 @@ from minutes_docx import TemplateError, render_docx
 from minutes_xlsx import render_xlsx
 
 
-def output_base(json_path: Path, name: str | None) -> str:
+def slugify(text: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+
+
+def output_base(json_path: Path, name: str | None, minutes: dict | None = None) -> str:
+    """Base name for the output files: --name, else the JSON name without "-minutes".
+    A generic name such as minutes.json becomes <association>-<meeting date>."""
     if name:
         return name
     stem = json_path.stem
     for suffix in ("-minutes", "_minutes", " minutes"):
         if stem.lower().endswith(suffix):
-            return stem[: -len(suffix)] or stem
-    return stem
+            stem = stem[: -len(suffix)]
+            break
+    if (not stem or stem.lower() in ("minutes", "draft", "minutes-draft", "data")) and minutes:
+        organization = minutes.get("organization") or {}
+        org = slugify(organization.get("short_name") or organization.get("name") or "")
+        date = (minutes.get("meeting") or {}).get("date", "")
+        stem = "-".join(part for part in (org, date) if part)
+    return stem or "minutes"
 
 
 def convert_to_pdf(docx_path: Path, out_dir: Path) -> Path | None:
@@ -93,7 +108,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1
 
     out_dir = Path(args.out_dir) if args.out_dir else json_path.resolve().parent
-    base = output_base(json_path, args.name)
+    base = output_base(json_path, args.name, minutes)
     docx_path = out_dir / f"{base}-minutes.docx"
     xlsx_path = out_dir / f"{base}-motions.xlsx"
     try:
