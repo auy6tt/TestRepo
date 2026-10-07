@@ -14,7 +14,7 @@ Samples:
 
 Prices: spreadsheet fixes from $30, PDF conversion from $20, one-page websites from $300.
 
-For jobs under $50 you can pay after you've seen the result. Bigger jobs are 50% upfront.
+For jobs under $50 I'll send a preview first; you pay, then I send the full file. Bigger jobs are 50% upfront.
 
 Send me a message with what you need and I'll reply with a fixed quote.
 ```

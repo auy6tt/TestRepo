@@ -71,7 +71,7 @@ function copyText(text, fallbackNode){
     return m;
   }
   function scores(n){
-    var labels = ["Demand", "Few rivals", "Claude fit", "Beginner"];
+    var labels = ["Demand", "Few competitors", "Claude fit", "Beginner"];
     var box = h("div", {class:"scores", "aria-label": labels.map(function(l, i){ return l + " " + n.s[i] + " of 5"; }).join(", ")});
     labels.forEach(function(l, i){ box.appendChild(h("span", null, l, meter(n.s[i]))); });
     return box;
@@ -115,10 +115,23 @@ function copyText(text, fallbackNode){
         h("div", null, h("h4", {text:"Watch out"}), h("p", {text:n.risk})),
         h("div", null, h("h4", {text:"Typical price"}), h("p", {text:n.priceNote || n.price})),
         h("div", {class:"wide"}, h("h4", {text:"Test it in one day"}), h("p", {class:"firststep", text:n.first})),
+        n.related ? h("div", {class:"wide"}, h("h4", {text:"Related"}), h("p", {class:"related"}, n.related.map(function(r){
+          var isOpp = r.indexOf("opp:") === 0, id = isOpp ? r.slice(4) : r;
+          var target = isOpp ? (D.opps.filter(function(o){ return o.id === id; })[0]) : (N.filter(function(x){ return x.id === id; })[0]);
+          if (!target) return null;
+          var a = h("a", {href:"#" + (isOpp ? "opp-" : "niche-") + id, text:target.name + (isOpp ? " (core offer)" : "")});
+          a.addEventListener("click", function(e){ e.preventDefault(); (isOpp ? window.__pbOpenOpp : window.__pbOpenNiche)(id); });
+          return a;
+        }))) : null,
         n.kit ? h("div", {class:"wide"}, h("h4", {text:"Starter kit in your repo"}), h("p", null, "Scripts, templates and a sample deliverable in ", h("code", {text:"kits/" + n.kit + "/"}), ". Open Claude Code in this repo and type ", h("code", {text:"/" + n.kit}), " to run the whole process.")) : null
       )
     );
   }
+  window.__pbOpenNiche = function(id){
+    state.group = "all"; sync();
+    var d = document.getElementById("niche-" + id);
+    if (d){ d.open = true; d.scrollIntoView({block:"start"}); }
+  };
   function sync(){
     store("cip-niches", state);
     Array.prototype.forEach.call(chips.children, function(b){ b.setAttribute("aria-pressed", String(b.getAttribute("data-g") === state.group)); });
@@ -153,7 +166,7 @@ function copyText(text, fallbackNode){
 
 /* ---------- Opportunity explorer ---------- */
 (function(){
-  var SPEED = {1:["fast","Days"], 2:["mid","1–4 weeks"], 3:["slow","Months"]};
+  var SPEED = {1:["fast","Days"], 2:["mid","Weeks"], 3:["slow","Months"]};
   var ZERO = {2:["fast","Yes"], 1:["mid","With samples"], 0:["slow","Track record"]};
   var state = store("cip-explorer") || {cat:"all", sort:"rank", q:"", newbie:false};
   var newbieEl = $("#opp-newbie");
@@ -165,6 +178,11 @@ function copyText(text, fallbackNode){
     b.addEventListener("click", function(){ state.cat = c[0]; sync(); });
     chipsBox.appendChild(b);
   });
+  window.__pbOpenOpp = function(id){
+    state.cat = "all"; state.q = ""; state.newbie = false; qEl.value = ""; newbieEl.checked = false; sync();
+    var d = document.getElementById("opp-" + id);
+    if (d){ d.open = true; d.scrollIntoView({block:"start"}); }
+  };
   sortEl.value = state.sort; qEl.value = state.q || ""; newbieEl.checked = !!state.newbie;
   newbieEl.addEventListener("change", function(){ state.newbie = newbieEl.checked; sync(); });
   sortEl.addEventListener("change", function(){ state.sort = sortEl.value; sync(); });
@@ -281,6 +299,18 @@ function copyText(text, fallbackNode){
   var doL = $("#rules-do"), dontL = $("#rules-dont");
   D.rulesDo.forEach(function(t){ doL.appendChild(h("li", {html:t})); });
   D.rulesDont.forEach(function(t){ dontL.appendChild(h("li", {html:t})); });
+})();
+
+/* ---------- When a job goes wrong ---------- */
+(function(){
+  var ul = $("#when-wrong"); if (!ul) return;
+  (D.whenWrong || []).forEach(function(t){ ul.appendChild(h("li", {html:t})); });
+})();
+
+/* ---------- Glossary ---------- */
+(function(){
+  var dl = $("#glossary-list"); if (!dl) return;
+  (D.glossary || []).forEach(function(g){ dl.appendChild(h("div", null, h("dt", {text:g[0]}), h("dd", {text:g[1]}))); });
 })();
 
 /* ---------- 30-day plan ---------- */

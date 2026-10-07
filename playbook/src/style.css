@@ -70,7 +70,7 @@ p{max-width:70ch}
 /* Hidden niches */
 h3.minor{font-family:var(--f-mono);font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:6px 0 4px}
 .niche-controls{margin-top:30px}
-.niche-head,.niche>summary{display:grid;grid-template-columns:minmax(0,1fr) 150px 250px 22px;gap:14px;align-items:center}
+.niche-head,.niche>summary{display:grid;grid-template-columns:minmax(0,1fr) 140px 310px 22px;gap:14px;align-items:center}
 .niche-head{padding:8px 4px;font-family:var(--f-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);border-bottom:1px solid var(--rule)}
 .niche{border-bottom:1px solid var(--rule)}
 .niche>summary{list-style:none;cursor:pointer;padding:13px 4px}
@@ -94,6 +94,7 @@ code{font-family:var(--f-mono);font-size:.92em;background:var(--note-soft);paddi
 .niche .body h4{font-family:var(--f-mono);font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 4px;font-weight:500}
 .niche .body p{margin:0;font-size:14.5px}
 .niche .body .wide{grid-column:1/-1}
+.related{display:flex;flex-wrap:wrap;gap:6px 16px}
 .firststep{background:var(--gold-soft);padding:10px 12px;border-radius:var(--r)}
 @media (max-width:760px){
   .niche-head{display:none}
@@ -245,6 +246,17 @@ td .money{white-space:nowrap}
 .ws p{margin:4px 0 0;font-size:14px;color:var(--muted)}
 @media (max-width:860px){.ws{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:520px){.ws{grid-template-columns:minmax(0,1fr)}}
+
+/* Glossary and when-wrong */
+.glossary{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin:0}
+.glossary div{min-width:0;border-top:1px solid var(--rule);padding-top:8px}
+.glossary dt{font-weight:650}
+.glossary dd{margin:2px 0 0;color:var(--muted);font-size:14.5px}
+@media (max-width:700px){.glossary{grid-template-columns:minmax(0,1fr)}}
+.wrong-h{margin-top:26px}
+.wrong{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:10px;max-width:80ch}
+.wrong li{font-size:14.5px;padding-left:16px;position:relative}
+.wrong li::before{content:"";position:absolute;left:0;top:.6em;width:7px;height:7px;border-radius:50%;background:var(--gold)}
 
 /* Sources */
 .sources{columns:2 360px;column-gap:32px;font-size:13.5px}

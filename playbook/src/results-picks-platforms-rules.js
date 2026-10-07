@@ -1,5 +1,5 @@
 var OPPS_RESULTS = [
-{id:"hackathons", cat:"results", rank:29, zero:2, speed:2, fit:3, value:500,
+{id:"hackathons", cat:"results", rank:29, zero:2, speed:3, fit:3, value:500,
  name:"Online AI hackathons",
  short:"Judged on a working demo, not on your reviews",
  price:"$500–$5,000 prizes (credits are more common)",
@@ -7,10 +7,10 @@ var OPPS_RESULTS = [
  how:"Claude Code builds fast. Ship a live demo page and a 2–3 minute video, and keep a starter kit you reuse between events.",
  where:"devpost.com (filter for online events), lablab.ai sponsor tracks (Sept–Oct 2026 pools of $6,000–12,000), Claude-linked events (often selective, often paid in credits).",
  signal:"Big events are crowded (one Kaggle-hosted hackathon drew about 1,600 submissions for roughly 14 prizes), but smaller ones aren't: DeveloperWeek NY 2026 had 612 participants for $9,250 in cash. Only 5–33% of people who register on Devpost ever submit, so finishing alone puts you ahead.",
- risk:"Pick online events with under about 500 participants and a sponsor side-track. Many prizes are paid in API credits, and lablab.ai payouts can take up to 90 days. Check the rules on AI disclosure, building during the event, and country eligibility.",
+ risk:"Pick smaller online events (a few hundred participants) with a sponsor side-track. Many prizes are paid in API credits, and lablab.ai payouts can take up to 90 days. Check the rules on AI disclosure, building during the event, and country eligibility.",
  skill:"Low to medium. The pitch video matters a lot.",
  gig:"Target: a sponsor side-track at an online lablab.ai or Devpost event"},
-{id:"expensify", cat:"results", rank:32, zero:2, speed:2, fit:2, value:250,
+{id:"expensify", cat:"results", rank:32, zero:2, speed:3, fit:2, value:250,
  name:"Expensify's paid GitHub issues",
  short:"A company that pays outsiders a fixed fee per accepted fix",
  price:"$250 per fix",
@@ -40,7 +40,7 @@ var OPPS_RESULTS = [
  how:"Claude helps you produce strong entries quickly. Read each contest brief closely and tailor your entry to it.",
  where:"freelancer.com/contest. Filter for guaranteed contests with 50 or fewer entries.",
  signal:"Sampled naming contests paid $20–50 and drew 45–277 entries. A data-entry contest drew 129.",
- risk:"Low odds per entry, so treat it as practice and a source of a first review. Atom (formerly Squadhelp) bans name generators, AI included. The winner pays Freelancer.com 10% or $5.",
+ risk:"Low odds per entry, so treat it as practice and a source of a first review. Freelancer.com takes 10% of the prize or $5, whichever is more. Atom (formerly Squadhelp), a separate naming-contest site, bans name generators, AI included.",
  skill:"Low.",
  gig:"Target: 3–5 strong entries a week for a month, then check your win rate"},
 {id:"kaggle", cat:"results", rank:34, zero:2, speed:3, fit:2, value:0,
@@ -50,7 +50,7 @@ var OPPS_RESULTS = [
  need:"Companies post prediction problems, and the top few teams win prizes.",
  how:"Claude helps you build strong starting models in notebooks quickly.",
  where:"kaggle.com, zindi.africa, drivendata.org.",
- signal:"The best AI agents now win a medal in 61–64% of past Kaggle competitions (MLE-bench, 2026). Medals are easy; prize places are not.",
+ signal:"The best AI agents now win a medal in 61–64% of past Kaggle competitions (MLE-bench, 2026). With AI help, medals are achievable; prize money rarely is.",
  risk:"Prizes go to the top 3–5 of thousands of teams. Code competitions run offline, so you can't call Claude at submission time.",
  skill:"Medium to high.",
  gig:"Use for a portfolio line such as a Kaggle medal, not for income"},
@@ -75,11 +75,11 @@ var PICKS = [
  {name:"Show-first websites for local businesses",
   what:"Find businesses with no website, build theirs first, then offer to put it live with a monthly care plan.",
   why:"Reviews don't matter when the owner can see the finished site before paying anything. The care plan turns one sale into monthly income.",
-  price:"$300–$800 + $50–150/mo", first:"1–3 weeks", where:"Google Maps prospecting, walking in, local groups"},
+  price:"$300–$800 + $50–150/mo", first:"2–6 weeks", where:"Google Maps prospecting, walking in, local groups"},
  {name:"Fixing apps people built with AI tools",
   what:"Diagnose and fix stuck Lovable, Bolt, Replit and Base44 projects, then help them launch.",
   why:"Demand is new and growing fast, so established sellers haven't taken it over, and Claude Code is very strong at it. Sell a fixed-price diagnosis first.",
-  price:"$50–$500 per fix", first:"1–2 weeks", where:"Fiverr Vibe Coding category, Upwork, tool communities"},
+  price:"$50–$500 per fix", first:"1–3 weeks", where:"Fiverr Vibe Coding category, Upwork, tool communities"},
  {name:"Small automations for businesses",
   what:"n8n, Make, Zapier and Apps Script flows that move data, answer leads and build reports.",
   why:"Start by fixing someone's existing workflow for a small fixed fee. Every build can carry a monthly care plan.",
@@ -97,14 +97,14 @@ var PICKS = [
 var STAGES = [
  {when:"First 30 days", amt:"$0–$200", text:"Most of the month goes into samples, profiles and outreach. One or two small paid jobs and a first review count as a good result."},
  {when:"Months 2–3", amt:"$200–$1,000/mo", text:"Reviews and referrals start to stack up if you keep sending 10–20 messages or proposals every week."},
- {when:"Months 4–6", amt:"$1,000–$3,000/mo", text:"Reached by people who pick one niche, raise prices after each batch of reviews and sell monthly care plans. Many never get here."}
+ {when:"Months 4–6", amt:"$1,000–$3,000/mo", text:"A stretch target (our estimate) for people who pick one niche, raise prices after each batch of reviews and sell monthly care plans. Many never get here."}
 ];
 
 var PRINCIPLES = [
  ["Sell finished results, not AI output.", "Buyers can run Claude themselves. Upwork's 2026 data: complex AI work earns 45% more per contract, while generic generated content earns 13% less."],
  ["Show the work before asking for trust.", "Samples, demos and before-and-after examples replace the reviews you don't have yet."],
  ["Say your niche out loud.", "\"Spreadsheets for property managers\" gets replies. \"AI services\" doesn't."],
- ["Spend most of your time finding clients.", "Building is nearly free now. The famous AI-built successes all started with an audience or a network."],
+ ["Spend most of your time finding clients.", "Building is nearly free now. Most of the famous AI-built successes started with an audience or a network."],
  ["Fixed scope, fixed price.", "Diagnose first, then quote. It protects you from endless revisions."],
  ["Turn every job into monthly income.", "Offer a care plan or retainer with every delivered project."],
  ["Check everything before it ships.", "Anthropic gives no accuracy guarantee on outputs, and your name is on the work."],
@@ -129,7 +129,7 @@ var PLATFORM_GROUPS = [
   {name:"Fiverr", url:"https://www.fiverr.com", fee:"20% per order", best:"Fixed-price packages. Buyers search for you, and applying costs nothing. Its AI matcher (Mira) favors sellers who already have orders.", ai:"AI allowed. Disclose it if a buyer asks, honor \"no AI\" requests, and refine the output. Friends ordering to create reviews means a permanent ban."},
   {name:"Upwork", url:"https://www.upwork.com", fee:"0–15% + Connects", best:"The biggest pool of jobs. One profile per person since May 2026, and its AI (Uma) shortlists freelancers for clients.", ai:"AI allowed and best disclosed. Bots or extensions that send proposals get accounts suspended."},
   {name:"Contra", url:"https://contra.com", fee:"0% to you", best:"Portfolio-led work, and a way to bill clients you find elsewhere.", ai:"No specific rule found."},
-  {name:"Freelancer.com", url:"https://www.freelancer.com", fee:"10% (min $5)", best:"Contests and small cheap jobs; free bids are limited.", ai:"No specific rule found."},
+  {name:"Freelancer.com", url:"https://www.freelancer.com", fee:"10% or $5, whichever is more", best:"Contests and small cheap jobs; free bids are limited.", ai:"No specific rule found."},
   {name:"PeoplePerHour", url:"https://www.peopleperhour.com", fee:"20% → 7.5% → 3.5%", best:"UK and European small businesses.", ai:"No specific rule found."},
   {name:"Legiit", url:"https://legiit.com", fee:"15%", best:"SEO and digital marketing gigs.", ai:"No specific rule found."},
   {name:"Malt", url:"https://www.malt.com", fee:"10%, later 5% (0% UK/NL)", best:"European corporate clients.", ai:"No specific rule found."},
@@ -145,7 +145,7 @@ var PLATFORM_GROUPS = [
   {name:"Shopify App Store", url:"https://shopify.dev/docs/apps/launch/distribution/revenue-share", fee:"0% on first $1M, then 15%", best:"Monthly-subscription merchant tools.", ai:"App review applies."},
   {name:"Notion Marketplace", url:"https://www.notion.com/templates", fee:"10% + $0.40", best:"Niche business templates.", ai:"No specific rule found."},
   {name:"Agensi / MCPize", url:"https://www.agensi.io", fee:"You keep 70–85%", best:"Claude skills and MCP servers; small sums.", ai:"Security scan on listings."},
-  {name:"Envato, Teachers Pay Teachers, Udemy, KDP", url:"https://www.teacherspayteachers.com", fee:"Up to 50–85% taken", best:"Mostly avoid: Envato takes 50% from Jul 2026; TpT pays 55% on its basic plan; Udemy's subscription share fell to 15%.", ai:"KDP and others require AI disclosure."}
+  {name:"Envato, Teachers Pay Teachers, Udemy, KDP", url:"https://www.teacherspayteachers.com", fee:"Large cuts", best:"Mostly avoid: Envato takes 50% from July 2026, Teachers Pay Teachers keeps 45% on its basic plan, and Udemy pays instructors 15% of subscription revenue.", ai:"KDP and others require AI disclosure."}
  ]},
  {label:"Paid on results", rows:[
   {name:"Devpost", url:"https://devpost.com", fee:"Free to enter", best:"Online hackathons with cash and credit prizes.", ai:"Usually must use the sponsor's tools; check each ruleset."},
@@ -164,40 +164,90 @@ var PLATFORM_GROUPS = [
 
 var RULES_DO = [
  "<b>Sell work made with Claude.</b> Anthropic's consumer terms assign outputs to you (\"if any\") and don't forbid commercial use. They also give no accuracy guarantee, so check everything.",
- "<b>Turn off model training before client work</b> at claude.ai/settings/data-privacy-controls. With it on, chats are kept 5 years; off, 30 days. Don't rate client chats with thumbs, which saves them, and delete finished client sessions.",
- "<b>Run anything a client uses on an API key.</b> That means chatbots, agents and automations, on the client's own key or yours billed to them. List API usage as a separate cost line.",
- "<b>Tell clients you use AI tools</b> and honor any \"no AI\" request. Fiverr requires disclosure when asked.",
- "<b>Protect your payment.</b> Take 30–50% upfront or use platform escrow. Hand over rights only after full payment, and cap your liability at the fee.",
- "<b>Keep the client's things in the client's name:</b> domains, hosting, API keys, accounts.",
+ "<b>Turn off model training before client work</b> at claude.ai/settings/data-privacy-controls. With it off, Anthropic's retention period is 30 days; with it on, data from new chats can be kept up to 5 years. Chats you don't delete stay in your history, and deleted ones are erased from Anthropic's systems within 30 days. Don't rate client chats with thumbs, which saves them.",
+ "<b>Run anything a client uses on an API key.</b> That means chatbots, agents and automations, on the client's own key or yours billed to them. List API usage as a separate cost line and set a spending limit.",
+ "<b>Tell clients you use AI tools</b> and honor any \"no AI\" request. Fiverr requires disclosure when asked, and any chatbot you build for a client must tell its users they're talking to an AI (Anthropic's usage policy).",
+ "<b>Protect your payment.</b> Take 50% upfront (never less than 30%) or use platform escrow. Hand over rights only after full payment, and cap your liability at the fee.",
+ "<b>Keep the client's things in the client's name:</b> domains, hosting accounts, API keys and other accounts.",
  "<b>Label samples as samples,</b> and say how you know anyone who gives you a testimonial.",
- "<b>Plan around usage limits.</b> Max resets every 5 hours and also has a weekly cap shared by Claude and Claude Code. If ANTHROPIC_API_KEY is set, Claude Code bills that key instead.",
- "<b>Check your local rules</b> for freelance permits and tax registration before you send invoices."
+ "<b>Follow marketing rules when you contact strangers.</b> Send messages by hand, include an easy opt-out (\"Reply 'no' and I won't contact you again\"), put your postal address in US marketing emails (CAN-SPAM), get consent before emailing sole traders in the UK (PECR), and stop at the first no. Messaging apps ban numbers that get reported for spam.",
+ "<b>Plan around usage limits.</b> Max resets every 5 hours and also has a weekly cap shared by Claude and Claude Code; you can buy extra usage if you hit it before a deadline. If ANTHROPIC_API_KEY is set, Claude Code bills that key instead.",
+ "<b>Sort out tax and payout paperwork.</b> Check your local rules for freelance permits and tax registration before you invoice. Non-US sellers usually fill in form W-8BEN when a US platform asks. Keep a record of every payment. If you sell digital products directly, a merchant-of-record checkout (Gumroad, Lemon Squeezy, Paddle) handles sales tax and VAT for you."
 ];
 var RULES_DONT = [
- "<b>Don't share or rent your Claude account,</b> or let a client use your login. Offers to \"be the face\" of an account are linked to fraud rings.",
+ "<b>Don't share or rent your Claude account,</b> or let a client use your login. Separately, offers to rent your freelancer account or identity, or to \"be the face\" of someone else's account, are linked to fraud rings.",
  "<b>Don't run client bots or apps on your Max login</b> or resell \"Claude access\". Anthropic forbids routing other people's usage through Pro or Max plans.",
  "<b>Don't write students' graded work,</b> fake reviews, spam or mass-produced SEO pages. All of these break Anthropic's usage policy, and some are crimes.",
  "<b>Don't use Claude on AI-training platforms</b> such as Outlier, DataAnnotation and Mercor. They ban it and keep your pay.",
  "<b>Don't move Upwork or Fiverr clients off-platform.</b> Both ban it.",
- "<b>Don't let friends or family order your gigs to create reviews,</b> and don't trade discounts for positive reviews. Fiverr bans it permanently, and US law fines fake reviews up to $51,744 each.",
+ "<b>Never offer anything in return for a review,</b> positive or not, and never have friends or family order your gigs to create reviews. Fiverr bans this permanently, and the US FTC can seek up to $53,088 per fake review (2025 figure). Bill people you know directly and ask them for a testimonial instead.",
  "<b>Don't use bots to send proposals</b> or to create accounts.",
  "<b>Don't pay to get a job,</b> cash an \"overpayment\" check, or move to Telegram or WhatsApp because a stranger insists.",
- "<b>Don't run a stranger's \"test project\" repo without reading it first.</b> Fake coding tests have carried malware.",
+ "<b>Never run a stranger's \"test project\" on your own computer.</b> Fake coding tests hide malware in dependencies and install scripts that reading the code won't reveal. If you must run one, use a throwaway cloud environment with no saved logins, keys or wallets.",
  "<b>Don't promise \"compliant\", \"secure\" or \"guaranteed rankings\".</b> Describe what you checked, and when.",
- "<b>Don't paste client passwords or personal data</b> into chats unless your agreement allows AI tools."
+ "<b>Never paste client passwords into chats,</b> and share client personal data with AI tools only if your agreement allows it."
+];
+
+var WHEN_WRONG = [
+ "<b>The client wants more than you agreed.</b> Say yes with a price: \"Happy to add that; it's an extra $X and one more day.\" Write it down before you start.",
+ "<b>The client pays late.</b> Send a polite reminder on the due date and a firmer one 7 days later, and pause further work until it's paid. On off-platform jobs, don't hand over final files before payment.",
+ "<b>The client is unhappy.</b> Ask exactly what's wrong, fix anything within the agreed scope quickly, and offer a partial refund before it turns into a dispute.",
+ "<b>A platform dispute starts.</b> Keep every message and delivery on the platform and use its resolution center. Cancellations hurt your Fiverr stats, so agree changes before an order starts.",
+ "<b>You made a mistake.</b> Own it, fix it quickly at no charge, and tell the client what you changed so it doesn't happen again."
 ];
 
 var WORKSPACE = [
  {t:"One folder or repo per client", d:"Ask Claude to set up a folder or repo for each client and to commit and push as it goes. This cloud container is temporary and is deleted after a period of inactivity."},
  {t:"A CLAUDE.md for each client", d:"Put the client's rules, style, file locations and quirks in a CLAUDE.md inside their project. Claude reads it at the start of every session, so you never re-explain."},
- {t:"Turn repeat work into a skill", d:"When you deliver the same thing twice, ask Claude to save the steps as a custom skill (.claude/skills/<name>/SKILL.md). The third delivery takes one command and comes out consistent."},
+ {t:"Turn repeat work into a skill", d:"When you deliver the same thing twice, ask Claude to save the steps as a custom skill (a SKILL.md file in .claude/skills/your-skill-name/). The third delivery takes one command and comes out consistent."},
+ {t:"Starter kits", d:"The kits folder in this repo has scripts, templates and a sample deliverable for several niches. Each comes with a skill: type its name after a slash in this repo (for example /board-minutes)."},
  {t:"Weekly deliverables on a schedule", d:"Routines (claude.ai/code/routines) run a saved task in the cloud on a schedule, even with your laptop closed: a weekly digest, a monthly report. You review the output and send it to your client yourself."},
  {t:"Real office files", d:"Ask for .xlsx, .docx, .pptx or .pdf. Claude has skills for each, so spreadsheets keep working formulas and documents keep real formatting."},
  {t:"A browser for checking", d:"Headless Chromium and Playwright are installed. Use them for phone and desktop screenshots, form testing, and speed or accessibility audits."},
- {t:"Private pages like this one", d:"Claude can publish private pages for your portfolio, price sheet or reports. Client-branded sites go on hosting in the client's name, not here."},
- {t:"Steer from your phone", d:"Cloud sessions keep running in the background, and Remote Control lets you follow and steer a session from your phone or another computer."},
- {t:"Stretch your usage limits", d:"Long chats and big files use up limits fastest. Start a fresh session per task, use /compact in long ones, pick a lighter model for routine work, and keep CLAUDE.md short."},
+ {t:"Private pages like this one", d:"Claude can publish private pages for your portfolio, price sheet or reports, and you can share one from the page's Share menu. For a public portfolio site, GitHub Pages or Cloudflare Pages work. Client-branded sites go on hosting in the client's name, not here."},
+ {t:"Quote a fixed price", d:"Estimate your hours, multiply by your target hourly rate, add 30% for surprises, and quote that as a fixed price with a clear scope. Track your real hours on the first few jobs so later quotes get more accurate."},
+ {t:"Stretch your usage limits", d:"Long chats and big files use up limits fastest. Start a fresh session per task, use /compact in long ones, pick a lighter model for routine work, keep CLAUDE.md short, and keep some weekly usage in reserve for deadlines. You can buy extra usage if you run out."},
  {t:"Network access", d:"This environment's network policy blocked many sites during research (Upwork, Etsy, Wikipedia, the FTC). For scraping or auditing client sites, change Network access in the environment settings."},
- {t:"Secrets stay secret", d:"Don't paste client passwords into chat. Use the environment's secrets settings and temporary accounts, and never commit keys to Git."},
- {t:"Clean up after each client", d:"With training turned off, chats are kept 30 days. Delete finished client sessions from claude.ai/code to remove them sooner, and don't use thumbs ratings on client work."}
+ {t:"Safe client access", d:"Ask for the least access that works: collaborator or staff accounts (Shopify, WordPress), invitations to private GitHub repos, read-only exports. Never log in to a client's personal accounts (for LinkedIn work, send them the text to post), and ask them to remove your access when the job ends."},
+ {t:"Secrets stay secret", d:"Never paste client passwords into chat. Use the environment's secrets settings and temporary accounts, and never commit keys to Git."},
+ {t:"Clean up after each client", d:"Chats you don't delete stay in your history. Delete finished client sessions from claude.ai/code; Anthropic erases deleted chats from its systems within 30 days. Don't use thumbs ratings on client work."},
+ {t:"Steer from your phone", d:"Cloud sessions keep running in the background, and Remote Control lets you follow and steer a session from your phone or another computer."}
+];
+
+var GLOSSARY = [
+ ["API key", "A secret code that lets software use a service such as Claude and bills that usage to the key's owner."],
+ ["ATS", "Applicant tracking system: software employers use to filter resumes by keywords."],
+ ["Care plan or retainer", "A monthly fee for ongoing updates, monitoring and small fixes after a project."],
+ ["Connects", "Upwork's credits for sending proposals, $0.15 each."],
+ ["EDI", "Electronic data interchange: the file formats big retailers use for orders, shipping notices and invoices."],
+ ["Escrow", "The platform holds the client's payment and releases it to you when the work is approved."],
+ ["GeoJSON", "A standard file format for map shapes, such as farm plot outlines."],
+ ["KYC", "\"Know your customer\": the identity checks platforms run before paying you."],
+ ["MCP", "Model Context Protocol: the standard way to connect tools and data to AI assistants like Claude."],
+ ["Merchant of record", "A checkout service that sells on your behalf and handles sales tax and VAT (Gumroad, Lemon Squeezy, Paddle)."],
+ ["OCR", "Optical character recognition: turning scanned images into real, selectable text."],
+ ["Pay-per-event", "Apify's pricing, where users pay each time your tool performs a counted action."],
+ ["PLR", "\"Private label rights\" content bought for resale. Etsy bans reselling it."],
+ ["Regression", "A bug where something that used to work breaks after a change."],
+ ["Rotate keys", "Replace passwords or API keys with new ones so any old copies stop working."],
+ ["Routine", "A Claude Code task that runs on a schedule in the cloud."],
+ ["SBOM", "Software bill of materials: a list of every component inside a piece of software."],
+ ["Skill", "A saved set of instructions and files that teaches Claude a repeatable task. Run it by typing its name after a slash."],
+ ["Staging", "A private copy of a website or app where changes are tested before going live."],
+ ["VPAT and ACR", "A VPAT is the standard form used to write an Accessibility Conformance Report (ACR) about a product."],
+ ["W-8BEN", "A US tax form non-US people give to US platforms so US tax isn't withheld unnecessarily."],
+ ["WCAG", "Web Content Accessibility Guidelines: the standard used to judge whether websites and documents are accessible."],
+ ["White-label", "Work you do that another business sells under its own name."],
+ ["CAN-SPAM, PECR, GDPR", "US, UK and EU rules on marketing messages and personal data."],
+ ["ASN (856)", "Advance ship notice: the EDI message a supplier sends a retailer before a shipment arrives."],
+ ["Backdrop", "A free content-management system forked from Drupal 7, so old Drupal 7 sites can upgrade to it easily."],
+ ["Fork", "A separate project started from a copy of another project's code."],
+ ["Microsoft Graph", "Microsoft's current interface for programs that read or send Microsoft 365 email and files."],
+ ["NVDA and PAC", "A free screen reader (NVDA) and a free PDF accessibility checker (PAC), both for Windows."],
+ ["PCI DSS and SAQ", "The card industry's security standard (PCI DSS) and the yearly self-assessment questionnaire (SAQ) small merchants fill in."],
+ ["PCIP", "Publisher's cataloging-in-publication: library cataloging data printed on a self-published book's copyright page."],
+ ["pyRevit and Dynamo", "Tools for writing automation scripts inside Autodesk Revit."],
+ ["security.txt", "A small text file on a website that tells people where to report security problems."],
+ ["SIG Lite and CAIQ", "Two common standard security questionnaires that big customers send to software vendors."],
+ ["SOC 2", "An independent audit report on a company's security controls, often requested by business customers."]
 ];

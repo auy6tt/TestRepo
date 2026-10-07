@@ -1,6 +1,6 @@
 # Asking for a review or testimonial
 
-*Send on delivery day. Never offer anything in return for a positive review.*
+*Send on delivery day. Never offer anything in return for a review, positive or not.*
 
 ```text
 Thanks again for working with me on [project].
