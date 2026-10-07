@@ -17,9 +17,9 @@ mistake. Add --preview to build a clearly marked draft for your own review.
 
 Run it from the kits/weekly-digest folder:
 
-  python scripts/build_digest.py digests/ohio-bess/issues/2026-W41/items.yaml
-  python scripts/build_digest.py path/to/items.yaml --preview
-  python scripts/build_digest.py path/to/items.yaml --formats html,pdf
+  .venv/bin/python scripts/build_digest.py digests/ohio-bess/issues/2026-W41/items.yaml
+  .venv/bin/python scripts/build_digest.py path/to/items.yaml --preview
+  .venv/bin/python scripts/build_digest.py path/to/items.yaml --formats html,pdf
 
 The items format is explained in templates/items.example.yaml and checked
 against templates/items.schema.json.
@@ -51,8 +51,9 @@ try:
 except ImportError as exc:  # pragma: no cover - message for the user
     sys.exit(
         f"Missing Python package: {exc.name}\n"
-        "Install the kit's requirements first, for example:\n"
-        "  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt"
+        "Run the kit's scripts with its own Python, .venv/bin/python. To set it up, run\n"
+        "  bash kits/setup.sh weekly-digest      (from the repository root), or\n"
+        "  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   (from kits/weekly-digest)"
     )
 
 KIT = Path(__file__).resolve().parent.parent
@@ -652,7 +653,7 @@ def html_to_pdf(html_text: str, out_path: Path, paper: str) -> str:
     else:
         problems.append("no Chromium or Chrome browser was found")
     raise BuildError("Could not make the PDF: " + "; ".join(problems) +
-                     ". Install a browser with: python -m playwright install chromium")
+                     ". Install a browser with: .venv/bin/python -m playwright install chromium")
 
 
 def add_pdf_metadata(path: Path, view: dict) -> None:

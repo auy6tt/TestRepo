@@ -7,7 +7,7 @@ Every week a watcher checks a list of **official sources** for changes. Claude C
 **Start here**
 
 1. Install the kit and run the self-test ([Set up](#set-up)). It takes two minutes and works offline.
-2. Open the sample issue in [`samples/battery-storage-ohio-week41/output/`](samples/battery-storage-ohio-week41/output/). The `.pdf` is your portfolio piece: send it to prospects.
+2. Open the sample issue in [`samples/battery-storage-ohio-week41/output/`](samples/battery-storage-ohio-week41/output/). The `.pdf` is your portfolio piece: put your own name on it ([how](#the-sample-issue)) and send it to prospects.
 3. Pick an offer below, copy its sources template and follow [Start a digest](#start-a-digest).
 
 ## What is in the kit
@@ -106,7 +106,13 @@ This kit is not legal, tax or business advice. Check the rules where you live be
 
 ## Set up
 
-Run these from the `kits/weekly-digest` folder:
+In a Claude Code cloud session, run `bash kits/setup.sh weekly-digest` from the repository root. It makes the kit's Python environment in `kits/weekly-digest/.venv`. Then run the self-test from the `kits/weekly-digest` folder:
+
+```bash
+.venv/bin/python tests/selftest.py
+```
+
+On your own computer you can make the environment yourself, from the `kits/weekly-digest` folder:
 
 ```bash
 python3 -m venv .venv
@@ -114,7 +120,7 @@ python3 -m venv .venv
 .venv/bin/python tests/selftest.py
 ```
 
-The self-test serves the fictional sample sites on your computer and checks the whole kit (about 60 checks, under a minute, no internet needed). On Windows, use `.venv\Scripts\python` instead of `.venv/bin/python`.
+Always run the kit's scripts with `.venv/bin/python` (the weekly-digest line of `bash kits/setup.sh --list`). Plain `python` does not have the kit's packages. The self-test serves the fictional sample sites on your computer and checks the whole kit (about 70 checks, under a minute, no internet needed). On Windows, use `.venv\Scripts\python` instead of `.venv/bin/python`.
 
 On your own computer, the PDF step needs a browser for Playwright. Run `.venv/bin/python -m playwright install chromium` once. Claude Code cloud sessions already have one.
 
@@ -129,11 +135,13 @@ It serves the week 40 copy of the fictional sites, runs the watcher, swaps in th
 ## Start a digest
 
 1. Create `digests/<name>/` and copy the closest template from `templates/sources/` to `digests/<name>/sources.yaml`. Or ask Claude Code: *"Use the weekly-digest skill to set up a new digest called roofing-dallas from the public-bids template."*
-2. Replace every `example.gov` address with the real official page. The comments in each template say where to look. The watcher skips placeholder addresses, so nothing is fetched until you do this.
+2. Replace every `example.gov` or `example.org` placeholder address with the real official page. The comments in each template say where to look. The watcher skips placeholder addresses (any `example.gov`, `example.org`, `example.com` or `example.net` address), so nothing is fetched until you do this.
 3. For each source, open `https://<site>/robots.txt` and the site's terms of use, then write the date in `terms_checked`.
 4. Allow every domain in the environment's network settings (next section).
 5. Run the watcher. The first run only saves snapshots; changes show up from the second run, a week later. Use `--dry-run` while you tune selectors and keywords.
-6. Commit and push `digests/<name>/`, including `data/`.
+6. Commit and push `digests/<name>/`, including `data/`, to a private repository (see below).
+
+**Keep your digests in a private repository.** The weekly run commits your issues and snapshots, and anyone can read a public repository, including the issues your subscribers pay for. This repository is public: make it private in its GitHub settings, or copy the kit and its skill into a new private repository, before you push a digest.
 
 ## Network access
 
@@ -141,10 +149,10 @@ Claude Code cloud sessions can only reach package registries and a few developer
 
 To allow your sources:
 
-1. At claude.ai/code, click the cloud icon above the message box, hover over your environment and click the settings icon.
-2. Set **Network access** to **Custom** (called **Limited** in newer versions of the app).
+1. At claude.ai/code, click the cloud icon showing your environment's name (above the message box), hover over the environment and click the settings icon. In some versions of the app this environment menu is in the session's title bar instead: open it and click **Edit**.
+2. Set **Network access** to **Custom** (newer versions of the app may call it **Limited**). If your app shows other labels, pick the level that lets you list your own domains.
 3. Under **Allowed domains**, list each domain your sources use, one per line. `*.example.gov` covers every subdomain.
-4. Keep the package managers box ticked (**Also include default list of common package managers**, or **Allow package managers** in newer versions), so Python packages still install.
+4. Keep the package managers box ticked (**Also include default list of common package managers**; newer versions: **Allow package managers**), so Python packages still install.
 5. Save. Existing sessions pick up the change within about a minute.
 
 A Routine uses the environment you choose when you create it, so allow the domains in that environment. The steps are also in the Claude Code documentation: https://code.claude.com/docs/en/cloud-environments#network-access. On your own computer there is no such limit.
@@ -236,6 +244,15 @@ Claude Code never approves an item unless you say you checked it, and never send
 ## The sample issue
 
 [`samples/battery-storage-ohio-week41/`](samples/battery-storage-ohio-week41/) is a complete issue of "Battery Storage Zoning Watch — Ohio, Week 41". Everything in it is fictional: the counties, townships, city, planning commission, companies and documents are invented, and the links use the reserved `.example` domain, so they do not open. It shows the whole process: two weeks of simulated official pages, the watcher's change report, the drafted and checked items (including one rejected draft and the skipped changes), and the finished files. The grey "Sample issue" banner comes from `issue.sample_notice` in its items file; leave that field out of your real issues.
+
+**Put your own name on the sample.** In the `issue:` block at the top of `samples/battery-storage-ohio-week41/items.reviewed.yaml`, change `brand` (your business or newsletter name), `contact_email` and `website`. Keep the sample postal address in `mailing_address` (this repository is public), and keep `sample_notice`, so the sample always says it is fictional. Then rebuild the files from the `kits/weekly-digest` folder:
+
+```bash
+.venv/bin/python scripts/build_digest.py samples/battery-storage-ohio-week41/items.reviewed.yaml \
+  --out samples/battery-storage-ohio-week41/output --changes samples/battery-storage-ohio-week41/changes.json
+```
+
+The new `.pdf` in `output/` is your portfolio piece.
 
 ## Troubleshooting
 

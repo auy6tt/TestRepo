@@ -6,7 +6,7 @@ Two paid services that share one set of scripts:
 |---|---|---|
 | **Who buys** | Small US employers that use chemicals: auto repair and body shops, cleaning companies, salons, small manufacturers, school facilities teams | Specialist subcontractors (mechanical, electrical, fire, audio-visual, finishes) and small general contractors |
 | **What they get** | A current chemical inventory, the latest SDS for every product, old and missing sheets flagged, and an indexed, bookmarked binder PDF | Product datasheets, manuals and warranties merged into an indexed, bookmarked binder in the general contractor's order, with a cover sheet and a submittal log |
-| **Price guide** | $300–1,500 per site | $300–1,500 per submittal package; $500–3,000 per handover binder |
+| **Price guide (estimates)** | $300–1,500 per site | $300–1,500 per submittal package; $500–3,000 per handover binder |
 | **You never** | Write, change or "correct" a safety data sheet, classify chemicals or give safety advice | Alter a manufacturer's document or certify compliance |
 
 The scripts do the slow, fiddly part (merging, page numbers, contents, bookmarks, reading dates and codes out of PDFs). You do the part clients pay for: collecting the right documents, checking what the scripts flag, and delivering a clean, correct binder on time.
@@ -21,7 +21,7 @@ kits/pdf-binder/
 │   ├── build_binder.py        merge PDFs into one binder: cover, contents, dividers, bookmarks, index.xlsx
 │   ├── extract_sds.py         read SDS PDFs into inventory.xlsx; flag old, missing and unclear sheets
 │   ├── verify_binder.py       check a finished binder: pages, bookmarks, contents numbers, links
-│   ├── make_templates.py      recreate the spreadsheet templates
+│   ├── make_templates.py      recreate the spreadsheet and CSV templates
 │   ├── make_samples.py        recreate the portfolio samples (with your business name)
 │   └── kitlib.py              shared helpers (not run directly)
 ├── templates/
@@ -34,19 +34,21 @@ kits/pdf-binder/
 │   ├── binder-cover-sds.toml / -submittal.toml / -handover.toml
 │   └── submittal-log.xlsx
 ├── samples/                   fake, clearly watermarked portfolio samples (see below)
+├── jobs/                      your client jobs (make it yourself; ignored by git, never committed)
 └── tests/test_kit.py          quick self-test
 ```
 
 ## Set up (once per session)
 
-You need Python 3.11 or newer. In the Claude Code cloud sandbox:
+You need Python 3.11 or newer. In the Claude Code cloud sandbox, from the repository root:
 
 ```bash
+bash kits/setup.sh pdf-binder               # makes the kit's Python in kits/pdf-binder/.venv
 cd kits/pdf-binder
-python3 -m venv .venv
-.venv/bin/pip install -r requirements.txt
 .venv/bin/python tests/test_kit.py          # should end with "All tests passed."
 ```
+
+`bash kits/setup.sh --list` shows where each kit's Python is. The setup also installs system tools for the other kits, which takes about 2 minutes the first time. To set up only this kit, run `python3 -m venv .venv && .venv/bin/pip install -r requirements.txt` inside `kits/pdf-binder` instead.
 
 Every command below runs from `kits/pdf-binder` with `.venv/bin/python`. (On Windows the path is `.venv\Scripts\python`.) Or just ask Claude: *"Use the pdf-binder skill to set up the kit."*
 
@@ -89,7 +91,7 @@ A first message that works: offer a 48-hour binder refresh from photos of their 
 
 Starting points. Adjust to your market and the state of their records.
 
-| Job | Suggested price |
+| Job | Suggested price (estimate) |
 |---|---|
 | One site, up to about 25 products, records in decent shape | $300–450 |
 | 25–75 products | $500–900 |
@@ -98,6 +100,8 @@ Starting points. Adjust to your market and the state of their records.
 | Rush (48 hours) | Add 25% |
 | Draft written programme (from the outline in templates/) | Add $100–250 |
 | Yearly refresh | Offer at a lower price than the first job |
+
+Estimates from the October 2026 research; check your market.
 
 ### What you deliver
 
@@ -109,9 +113,9 @@ Starting points. Adjust to your market and the state of their records.
 ### Step by step
 
 1. **Intake.** Go through `templates/intake-checklist-sds-binder.md` with the client. Get shelf photos, purchase records and their old binder.
-2. **Make a job folder.** Keep each client separate, ideally in a private repo, because this container is temporary:
+2. **Make a job folder** inside the kit's `jobs/` folder, one per client. Git ignores `jobs/`, so client files are never committed (this repository is public). This container is temporary, so download what you deliver, or keep it in the client's private storage:
    ```text
-   ~/jobs/riverside-auto/
+   jobs/riverside-auto/
    ├── site-list.xlsx     (copy of templates/sds-site-list-template.xlsx)
    ├── sds/               (one PDF per product)
    ├── cover.toml         (copy of templates/binder-cover-sds.toml)
@@ -122,7 +126,7 @@ Starting points. Adjust to your market and the state of their records.
 4. **Get the current sheets.** Download each SDS from the manufacturer's or supplier's website on your own computer (most websites are blocked in the cloud sandbox), save as PDF and upload them to `sds/`. Never type up or edit a sheet.
 5. **Read the sheets:**
    ```bash
-   JOB=~/jobs/riverside-auto
+   JOB=jobs/riverside-auto
    .venv/bin/python scripts/extract_sds.py --sds-folder $JOB/sds --site-list $JOB/site-list.xlsx \
        --out $JOB/output/inventory.xlsx --group-by location --client "Riverside Auto Care"
    ```
@@ -174,7 +178,7 @@ A first message that works: show the sample O&M binder and offer a first binder 
 
 ### Price guide
 
-| Job | Suggested price |
+| Job | Suggested price (estimate) |
 |---|---|
 | Submittal package: a few products, under about 50 pages | $300–500 |
 | Submittal package: several sections, with a spec checklist for the PM | $600–1,500 |
@@ -182,6 +186,8 @@ A first message that works: show the sample O&M binder and offer a first binder 
 | Handover binder: several sections, 200–800 pages | $1,000–2,000 |
 | Large multi-volume closeout | $2,000–3,000 |
 | Resubmittal after comments | Quote separately or include one round |
+
+Estimates from the October 2026 research; check your market.
 
 ### What you deliver
 
@@ -192,11 +198,11 @@ A first message that works: show the sample O&M binder and offer a first binder 
 ### Step by step
 
 1. **Intake.** Use `templates/intake-checklist-submittal-handover.md`. Get the project's submittal and closeout rules, the required order, the cover or transmittal form, and every document.
-2. **Job folder:** `docs/` (all PDFs), `index.xlsx` (copy of `templates/binder-index-template.xlsx`), `cover.toml` (copy of `binder-cover-submittal.toml` or `binder-cover-handover.toml`), `output/`.
+2. **Job folder** in the kit's `jobs/` folder (ignored by git), for example `jobs/harborview-hvac/`: `docs/` (all PDFs), `index.xlsx` (copy of `templates/binder-index-template.xlsx`), `cover.toml` (copy of `binder-cover-submittal.toml` or `binder-cover-handover.toml`), `output/`.
 3. **Fill in the index** in the required order. Use the `pages` column to include only some pages of a long catalogue, and leave `file` blank for anything still to come.
 4. **Build and check:**
    ```bash
-   JOB=~/jobs/harborview-hvac
+   JOB=jobs/harborview-hvac
    .venv/bin/python scripts/build_binder.py --pdf-folder $JOB/docs --index $JOB/index.xlsx \
        --cover $JOB/cover.toml --out $JOB/output/Harborview_Div23_OM.pdf --page-numbers
    .venv/bin/python scripts/verify_binder.py $JOB/output/Harborview_Div23_OM.pdf
@@ -293,7 +299,7 @@ Checks the page count, that sections and documents follow on with no gaps, that 
 
 ### make_templates.py and make_samples.py
 
-`make_templates.py` restores clean copies of the spreadsheet templates. `make_samples.py` rebuilds the samples (`--business` puts your name on the covers, `--only sds|om|submittal` does one set).
+`make_templates.py` restores clean copies of the spreadsheet and CSV templates (submittal log, binder index, site list and manual entries). `make_samples.py` rebuilds the samples (`--business` puts your name on the covers, `--only sds|om|submittal` does one set).
 
 ---
 
@@ -322,4 +328,4 @@ Checks the page count, that sections and documents follow on with no gaps, that 
 
 ## Privacy
 
-Client files are confidential. Keep each client in its own private folder or repo, use their documents only for their job, and never put real client documents in `samples/`. Before handling anyone else's files, check your Claude privacy settings (the playbook recommends turning off model training).
+Client files are confidential. Keep each client in its own folder under `jobs/` (git ignores it) or in the client's private storage, use their documents only for their job, and never put real client documents in `samples/`. Before handling anyone else's files, check your Claude privacy settings (the playbook recommends turning off model training).

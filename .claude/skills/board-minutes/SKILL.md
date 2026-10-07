@@ -22,14 +22,15 @@ Turn a meeting transcript into draft minutes with the kit in `${CLAUDE_PROJECT_D
 ## Step 0: Setup (once per session)
 
 ```bash
-bash ${CLAUDE_PROJECT_DIR}/kits/board-minutes/scripts/setup.sh
+bash ${CLAUDE_PROJECT_DIR}/kits/setup.sh board-minutes
 ```
 
-Run the kit's scripts with `~/.venvs/board-minutes/bin/python`, as below.
+`bash kits/setup.sh board-minutes` is the usual setup route: it installs LibreOffice Writer (needed for `--pdf`) and the kit's Python. The kit's Python is `~/.venvs/board-minutes/bin/python` (the board-minutes line of `bash kits/setup.sh --list`). If `kits/setup.sh` is missing or fails, run `bash ${CLAUDE_PROJECT_DIR}/kits/board-minutes/scripts/setup.sh` (Python packages only). Run the kit's scripts with `~/.venvs/board-minutes/bin/python`, as below, never with a bare `python` or `python3`.
 
 ## Step 1: Job folder and inputs
 
 - Use the job folder in the user's request, with the client's files in `<job>/input/` and everything you make in `<job>/output/`. If the user gave loose files, create `${CLAUDE_PROJECT_DIR}/kits/board-minutes/work/<client-name>/<YYYY-MM-DD>/input/` and copy them there.
+- The job folder must be one git ignores, because this repository is public: `kits/board-minutes/work/...`, or `work/`, `clients/` or `jobs/` at the repository root. If the user's folder is anywhere else in the repository, copy the files into `kits/board-minutes/work/<client-name>/<YYYY-MM-DD>/input/` and work there. `git check-ignore -q <job> && echo ignored` checks a folder.
 - You need: the transcript file, the agenda, and the board list with titles (often on the agenda). Useful: the quorum rule, the client's .docx template, past minutes for style, the secretary's notes, and whether to name residents.
 - If the agenda or board list is missing, ask the user before writing the JSON (you can clean the transcript first).
 - If there is only audio or video, ask for the transcript file the meeting software produced. This kit does not transcribe audio.

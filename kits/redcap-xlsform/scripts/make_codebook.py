@@ -10,7 +10,7 @@ Usage (from the kit folder):
     python scripts/make_codebook.py --dictionary samples/02_redcap/lakeside_data_dictionary.csv \
         --events samples/02_redcap/instrument_event_mapping.csv \
         --repeating samples/02_redcap/repeating_instruments.csv \
-        --title "Lakeside Community Health Check" --out samples/04_codebook/lakeside_codebook
+        --title "Lakeside Community Health Check (fictional sample)" --out samples/04_codebook/lakeside_codebook
 
     python scripts/make_codebook.py --xlsform samples/03_xlsform/lakeside_health_check.xlsx \
         --out samples/04_codebook/lakeside_kobo_codebook

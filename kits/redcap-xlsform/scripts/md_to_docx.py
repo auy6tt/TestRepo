@@ -7,7 +7,7 @@ Supports: # headings, paragraphs, - bullets, 1. numbered lists, - [ ] tick boxes
 | tables |, **bold**, *italic*, `code`, > notes and --- lines.
 
 Usage (from the kit folder):
-    python scripts/md_to_docx.py templates/client_test_checklist.md -o client_test_checklist.docx
+    python scripts/md_to_docx.py templates/client_test_checklist.md -o out/client_test_checklist.docx
     python scripts/md_to_docx.py templates/*.md --outdir out/
 
 Needs python-docx (pip install python-docx).

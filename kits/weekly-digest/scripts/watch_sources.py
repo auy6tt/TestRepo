@@ -21,9 +21,9 @@ copy of the repository.
 
 Examples (run from the kits/weekly-digest folder):
 
-  python scripts/watch_sources.py digests/ohio-bess/sources.yaml
-  python scripts/watch_sources.py digests/ohio-bess --only "Tarrow County"
-  python scripts/watch_sources.py digests/ohio-bess --dry-run
+  .venv/bin/python scripts/watch_sources.py digests/ohio-bess/sources.yaml
+  .venv/bin/python scripts/watch_sources.py digests/ohio-bess --only "Tarrow County"
+  .venv/bin/python scripts/watch_sources.py digests/ohio-bess --dry-run
 
 The sources.yaml format is explained in README.md and in the examples in
 templates/sources/.
@@ -58,8 +58,9 @@ try:
 except ImportError as exc:  # pragma: no cover - message for the user
     sys.exit(
         f"Missing Python package: {exc.name}\n"
-        "Install the kit's requirements first, for example:\n"
-        "  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt"
+        "Run the kit's scripts with its own Python, .venv/bin/python. To set it up, run\n"
+        "  bash kits/setup.sh weekly-digest      (from the repository root), or\n"
+        "  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt   (from kits/weekly-digest)"
     )
 
 VERSION = "1.0"

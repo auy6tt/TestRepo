@@ -4,6 +4,7 @@ Run every script in the kit on the samples and check the results. Takes about a 
 
 Run it after installing the requirements, and again after you change any script:
     python scripts/selftest.py
+    python scripts/selftest.py --help     (shows this help and runs nothing)
 
 It writes only to a temporary folder (the samples are not changed) and prints PASS or
 FAIL for each check. Exit code 0 means everything passed.
@@ -11,6 +12,7 @@ FAIL for each check. Exit code 0 means everything passed.
 
 from __future__ import annotations
 
+import argparse
 import csv
 import shutil
 import subprocess
@@ -75,13 +77,34 @@ def logic_tests():
     return True, ""
 
 
-def main() -> int:
+def help_tests(folder: Path):
+    """Every script must print help for --help, exit 0 and write no files."""
+    folder.mkdir()
+    for script in sorted(SCRIPTS.glob("*.py")):
+        r = subprocess.run([sys.executable, "-B", str(script), "--help"], capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", cwd=folder, timeout=120)
+        if r.returncode != 0 or not r.stdout.strip():
+            return False, f"{script.name} --help: exit {r.returncode}, output {r.stdout[:80]!r}"
+        if any(folder.iterdir()):
+            return False, f"{script.name} --help wrote files"
+    return True, ""
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Run every script in the kit on the samples and report PASS or FAIL for each check. "
+                    "It writes only to a temporary folder; the samples are not changed. "
+                    "Exit code 0 means everything passed.")
+    parser.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(errors="replace")
     tmp = Path(tempfile.mkdtemp(prefix="redcap_kit_selftest_"))
     try:
         ok, detail = logic_tests()
         check("logic parser and evaluator", ok, detail)
+
+        ok, detail = help_tests(tmp / "help")
+        check("every script prints help for --help and changes nothing", ok, detail)
 
         r = run(SCRIPTS / "validate_redcap.py", DICT, "--events", EVENTS, "--repeating", REPEATING, "--strict")
         check("sample dictionary passes validate_redcap.py (strict)", r.returncode == 0, r.stdout[-400:])

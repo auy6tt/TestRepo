@@ -14,9 +14,9 @@ It creates, under samples/:
   submittal-package/ a small product-data submittal with a review cover
 
 Usage:
-  python scripts/make_samples.py
-  python scripts/make_samples.py --business "Jane Doe Document Services"
-  python scripts/make_samples.py --inputs-only      # don't run the kit
+  .venv/bin/python scripts/make_samples.py
+  .venv/bin/python scripts/make_samples.py --business "Jane Doe Document Services"
+  .venv/bin/python scripts/make_samples.py --inputs-only      # don't run the kit
 
 Put your own business name in with --business before showing the samples.
 """

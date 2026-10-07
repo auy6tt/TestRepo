@@ -15,7 +15,7 @@
 #      date you checked in terms_checked. Several of these portals have their own
 #      reuse terms: summarise in your own words and link to the notice.
 #   4. Add each domain under Allowed domains in the environment's Network access settings.
-#   5. Run: python scripts/watch_sources.py digests/<your-digest>
+#   5. Run: .venv/bin/python scripts/watch_sources.py digests/<your-digest>
 #
 # Where to find the real sources:
 #   - World Bank: procurement notices for its projects are public, and the

@@ -108,6 +108,29 @@ def test_build_and_verify():
         assert result.returncode == 0, result.stdout + result.stderr
 
 
+def test_make_templates_writes_every_template():
+    with tempfile.TemporaryDirectory() as tmp:
+        run = [sys.executable, str(KIT / "scripts" / "make_templates.py"), "--out-dir", tmp]
+        result = subprocess.run(run, capture_output=True, text=True)
+        assert result.returncode == 0, result.stdout + result.stderr
+        for name in ("submittal-log.xlsx", "binder-index-template.xlsx", "binder-index-template.csv",
+                     "sds-site-list-template.xlsx", "sds-manual-entries-template.csv"):
+            assert (Path(tmp) / name).is_file(), f"make_templates.py did not write {name}"
+        for name in ("binder-index-template.csv", "sds-manual-entries-template.csv"):
+            assert (Path(tmp) / name).read_bytes() == (KIT / "templates" / name).read_bytes(), \
+                f"templates/{name} is not what make_templates.py writes"
+
+
+def test_help_has_no_side_effects():
+    with tempfile.TemporaryDirectory() as tmp:
+        for script in sorted((KIT / "scripts").glob("*.py")):
+            result = subprocess.run([sys.executable, str(script), "--help"], capture_output=True, text=True,
+                                    cwd=tmp)
+            assert result.returncode == 0, f"{script.name} --help: {result.stderr}"
+            assert result.stdout.strip(), f"{script.name} --help printed nothing"
+        assert not any(Path(tmp).iterdir()), "--help wrote files"
+
+
 if __name__ == "__main__":
     failures = 0
     for name, func in list(globals().items()):

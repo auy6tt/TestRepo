@@ -61,7 +61,7 @@ COLUMNS = [
      "Yes, No, Partial or N/A. Used for Yes/No columns in questionnaires. Leave blank for open questions."),
     ("source_doc", "Source Document", 28,
      "The client document the answer comes from (title and version), or "
-     "'Written confirmation from <name>, <date>'."),
+     "'Written answers from <name>, <date>'."),
     ("source_section", "Source Section", 24,
      "Section number and heading, or page, in the source document."),
     ("excerpt", "Source Excerpt", 50,
@@ -355,8 +355,8 @@ def write_library(path, entries: list[dict], *, client: str = "", evidence: list
         ("What this is", "The client's approved answers to common security questions, each tied to the document it comes from. "
                          "Use it to fill questionnaires faster and keep answers consistent."),
         ("The rules", "1. Answers are statements the client makes to its customers. Write only what the client's documents "
-                      "or written confirmations say. Never invent a control, a date, a number or a certification."),
-        ("", "2. Every answer cites its source (document and section, or a dated written confirmation). "
+                      "or written answers say. Never invent a control, a date, a number or a certification."),
+        ("", "2. Every answer cites its source (document and section, or the client's dated written answers). "
              "If the documents are silent, leave the answer blank and set Status to NEEDS CLIENT INPUT."),
         ("", "3. The client's technical owner reviews and approves every answer. Only Approved answers are used to fill questionnaires."),
         ("", "4. This library is not an audit, certification or attestation."),

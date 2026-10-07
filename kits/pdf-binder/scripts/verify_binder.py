@@ -12,8 +12,9 @@ It reopens the binder PDF and its index spreadsheet and checks:
      and the source file hasn't changed since the binder was built
 
 Example:
-  python scripts/verify_binder.py work/output/Binder.pdf
-  python scripts/verify_binder.py Binder.pdf --index Binder-index.xlsx --pdf-folder work/docs
+  .venv/bin/python scripts/verify_binder.py jobs/acme/output/Binder.pdf
+  .venv/bin/python scripts/verify_binder.py jobs/acme/output/Binder.pdf \\
+      --index jobs/acme/output/Binder-index.xlsx --pdf-folder jobs/acme/docs
 
 Exit code 0 means every check passed.
 """

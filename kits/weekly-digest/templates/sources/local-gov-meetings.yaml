@@ -15,7 +15,7 @@
 #   3. For each real source, read the site's terms of use and its robots.txt,
 #      then put the date you checked in terms_checked.
 #   4. Add each domain under Allowed domains in the environment's Network access settings.
-#   5. Run: python scripts/watch_sources.py digests/<your-digest>
+#   5. Run: .venv/bin/python scripts/watch_sources.py digests/<your-digest>
 #
 # Where to find the real sources:
 #   - Start with the county, township and city websites in your area. Look for

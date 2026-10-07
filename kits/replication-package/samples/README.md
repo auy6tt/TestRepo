@@ -50,7 +50,8 @@ John Roe), the paper, the school district and the data. Show it to prospects as 
 
 ## Re-run it yourself
 
-From the `kits/replication-package` folder, with the kit's requirements installed:
+From the `kits/replication-package` folder, with the kit's Python active (run
+`source ../../.venv/bin/activate` first; see Setup in the kit's README):
 
 ```sh
 python scripts/check_package.py samples/1-original-package --out samples/2-check-report
@@ -62,15 +63,17 @@ python scripts/run_and_compare.py samples/3-fixed-package --master main.py \
 python scripts/check_package.py samples/3-fixed-package --out samples/5-final-check
 ```
 
-To see a failed run, try the original package. It stops at the first hard-coded folder:
+To see a failed run, try the original package. It stops at the first hard-coded folder. The
+report goes to the kit's `out/` folder, which git ignores:
 
 ```sh
 python scripts/run_and_compare.py samples/1-original-package --master code/clean_data.py \
-    --report-dir ../original-run-report
+    --report-dir out/original-run-report
 ```
 
 ## Before you show it to prospects
 
 - Replace `[Your name]` in `3-fixed-package/README.md` (Acknowledgements) and in `delivery-note.md`.
+  They are plain Markdown files, so nothing needs rebuilding.
 - Say in your message that it is a fictional demonstration.
 - Share the whole `samples` folder as a zip file, or as a public repository of its own.

@@ -1,7 +1,7 @@
 {
   "title": "St Aidan's Church, Wrenford: Publisher archive (fictional sample)",
   "source_name": "originals",
-  "generated": "07 October 2026, 10:37",
+  "generated": "07 October 2026, 15:19",
   "counts": {
     "files": 10,
     "converted": 9,
@@ -21,5 +21,13 @@
       "problem": "LibreOffice could not open this file. It may be damaged, from an unsupported version, or not the file type its name suggests."
     }
   ],
-  "check_files": []
+  "check_files": [],
+  "stand_in_fonts": [
+    {
+      "file": "Certificates/Wrens Club reading certificate 2021.odp",
+      "fonts": [
+        "Z003-MediumItalic"
+      ]
+    }
+  ]
 }

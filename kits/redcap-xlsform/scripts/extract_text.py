@@ -9,7 +9,7 @@ reads paragraphs and tables in document order. PDFs need pdftotext (poppler-util
 
 Usage (from the kit folder):
     python scripts/extract_text.py samples/01_client_input/lakeside_questionnaire_v1.2.docx
-    python scripts/extract_text.py questionnaire.pdf -o questionnaire.txt
+    python scripts/extract_text.py ../../work/<client>/input/questionnaire.pdf -o ../../work/<client>/input/questionnaire.txt
 
 Always compare the text with the original layout: tick boxes, grids and arrows
 ("go to question 7") carry meaning too.

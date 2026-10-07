@@ -1,7 +1,8 @@
 St Aidan's Church, Wrenford: Publisher archive (fictional sample)
-Converted 07 October 2026, 10:37 with LibreOffice 24.2.7.2 420(Build:2)
+Converted 07 October 2026, 15:19 with LibreOffice 24.2.7.2 420(Build:2)
 
 Converted                  Certificates/Wrens Club reading certificate 2021.odp
+    Some text is shown in a stand-in font (Z003-MediumItalic) because the font the file asked for was not available, so it can look different from the original.
 Converted                  Newsletters/2019/Parish News Harvest 2019.docx
 Converted                  Newsletters/2019/Parish News Spring 2019.docx
 Converted                  Newsletters/2022/Parish News Advent 2022.docx

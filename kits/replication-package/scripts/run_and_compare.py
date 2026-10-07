@@ -370,9 +370,12 @@ def program_version(exe: str) -> str:
 
 
 def build_command(master: Path, args):
+    # The command runs inside the clean copy, so a relative path such as .venv/bin/python
+    # must become absolute here. abspath, not resolve(): resolve() would follow a virtual
+    # environment's python symlink out of the environment.
     ext = master.suffix.lower()
     if ext == ".py":
-        python = shutil.which(args.python) or args.python
+        python = os.path.abspath(shutil.which(args.python) or args.python)
         if not Path(python).exists():
             raise FileNotFoundError(f"Python not found: {args.python}")
         return [python, master.name], program_version(python)
@@ -382,6 +385,7 @@ def build_command(master: Path, args):
             raise FileNotFoundError(
                 f"'{args.rscript}' was not found. Install R (on Ubuntu: sudo apt-get install r-base) or pass "
                 "--rscript /path/to/Rscript.")
+        rscript = os.path.abspath(rscript)
         return [rscript, master.name], program_version(rscript)
     raise ValueError(f"{master.name}: only Python (.py) and R (.R) master scripts can be run. For Stata, MATLAB or "
                      "SAS, have the author run the package and use --compare-only.")

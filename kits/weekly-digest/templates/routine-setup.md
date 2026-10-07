@@ -6,14 +6,14 @@ You still check every item, and you send the issue yourself. The Routine never s
 
 ## Before you start (once)
 
-1. **Keep the kit in a GitHub repository you own.** A Routine clones the repository at the start of every run. This repository works: the kit is in `kits/weekly-digest/` and the skill is in `.claude/skills/weekly-digest/`.
+1. **Keep the kit in a private GitHub repository you own.** A Routine clones the repository at the start of every run and pushes your issues and snapshots to it. The kit is in `kits/weekly-digest/` and the skill is in `.claude/skills/weekly-digest/`. This playbook repository is public, and anyone can read a public repository, including the issues your subscribers pay for. Make it private in its GitHub settings, or copy the kit and its skill into a new private repository.
 2. **Create your digest folder.** In a Claude Code session, ask: *"Use the weekly-digest skill to set up a new digest called ohio-bess from the local-gov-meetings template."* That creates `kits/weekly-digest/digests/ohio-bess/sources.yaml`. Replace the placeholder addresses with real official pages and fill in `terms_checked` for each one.
 3. **Allow your sources in the network settings.** Cloud sessions can only reach package registries and a few developer sites by default, so government websites are blocked until you allow them.
-   - At claude.ai/code, click the cloud icon above the message box, hover over your environment and click the settings icon.
-   - Set **Network access** to **Custom** (called **Limited** in newer versions of the app).
+   - At claude.ai/code, click the cloud icon showing your environment's name (above the message box), hover over the environment and click the settings icon. In some versions of the app this environment menu is in the session's title bar instead: open it and click **Edit**.
+   - Set **Network access** to **Custom** (newer versions of the app may call it **Limited**). If your app shows other labels, pick the level that lets you list your own domains.
    - Under **Allowed domains**, list every domain your sources use, one per line. `*.example.gov` covers all its subdomains.
-   - Keep the package managers box ticked (**Also include default list of common package managers**, or **Allow package managers** in newer versions), so the kit's Python packages can still install.
-   - Save. A Routine uses the environment you pick for it, so make sure it is this one.
+   - Keep the package managers box ticked (**Also include default list of common package managers**; newer versions: **Allow package managers**), so the kit's Python packages can still install.
+   - Save. A Routine uses the environment you pick for it, so make sure it is this one. The steps are also in the Claude Code documentation: https://code.claude.com/docs/en/cloud-environments#network-access.
 4. **Test by hand.** In a session, run the watcher twice (the first run only saves snapshots). Any source that is still blocked shows "Blocked by the network policy (host)" in `changes.md`.
 5. **Commit and push** the digest folder, including `data/`. The snapshots in `data/` are how next week's run knows what changed. Every cloud session starts from a fresh copy of your repository, so anything you do not push is lost.
 

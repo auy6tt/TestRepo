@@ -21,8 +21,8 @@ Output: inventory.xlsx with these sheets
   Read me      how to read and check the inventory
 
 Example:
-  python scripts/extract_sds.py --sds-folder work/sds --site-list work/site-list.xlsx \\
-      --out work/inventory.xlsx --group-by location
+  .venv/bin/python scripts/extract_sds.py --sds-folder jobs/acme/sds --site-list jobs/acme/site-list.xlsx \\
+      --out jobs/acme/output/inventory.xlsx --group-by location
 
 The spreadsheet records what the sheets SAY. It is not a hazard assessment.
 A person checks every flagged row against the PDF, and the client confirms
@@ -1527,8 +1527,9 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         description="Read SDS PDFs and build inventory.xlsx (plus a Binder Index for build_binder.py).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="Example:\n  python scripts/extract_sds.py --sds-folder sds --site-list site-list.xlsx "
-               "--out inventory.xlsx --group-by location")
+        epilog="Example (client files go in the kit's jobs/ folder, which git ignores):\n"
+               "  .venv/bin/python scripts/extract_sds.py --sds-folder jobs/acme/sds "
+               "--site-list jobs/acme/site-list.xlsx --out jobs/acme/output/inventory.xlsx --group-by location")
     parser.add_argument("--sds-folder", required=True, help="folder with the SDS PDF files")
     parser.add_argument("--out", required=True, help="inventory spreadsheet to create (.xlsx)")
     parser.add_argument("--site-list", help="client's on-site chemical list (.xlsx or .csv)")

@@ -7,7 +7,7 @@
 # approved items. Dates are YYYY-MM-DD; times are YYYY-MM-DDTHH:MM in the
 # issue's time zone.
 #
-# Try it:  python scripts/build_digest.py templates/items.example.yaml --preview --out /tmp/example-issue
+# Try it:  .venv/bin/python scripts/build_digest.py templates/items.example.yaml --preview --out out/example-issue
 # (--preview is needed because one item below is still needs_review.)
 
 issue:

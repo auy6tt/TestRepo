@@ -17,8 +17,8 @@ What it does:
 
 Nothing goes over the internet. Run it from the kits/weekly-digest folder:
 
-  python scripts/run_demo.py            # rebuild everything in the sample folder
-  python scripts/run_demo.py --serve    # only serve the week 41 sites so you can browse them
+  .venv/bin/python scripts/run_demo.py            # rebuild everything in the sample folder
+  .venv/bin/python scripts/run_demo.py --serve    # only serve the week 41 sites so you can browse them
 """
 
 from __future__ import annotations

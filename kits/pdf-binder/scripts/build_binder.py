@@ -25,8 +25,8 @@ Index columns (header names are not case sensitive):
   include  - optional; "no" leaves the row out
 
 Example:
-  python scripts/build_binder.py --pdf-folder work/docs --index work/index.csv \\
-      --cover work/cover.toml --out work/output/Binder.pdf
+  .venv/bin/python scripts/build_binder.py --pdf-folder jobs/acme/docs --index jobs/acme/index.csv \\
+      --cover jobs/acme/cover.toml --out jobs/acme/output/Binder.pdf
 
 Manufacturer documents are copied in as they are. The script never edits
 their content. --page-numbers adds a small page number in the bottom margin
@@ -1345,8 +1345,9 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         description="Merge a folder of PDFs into one indexed, bookmarked binder.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="Example:\n  python scripts/build_binder.py --pdf-folder docs --index index.csv "
-               "--cover cover.toml --out output/Binder.pdf")
+        epilog="Example (client files go in the kit's jobs/ folder, which git ignores):\n"
+               "  .venv/bin/python scripts/build_binder.py --pdf-folder jobs/acme/docs --index jobs/acme/index.csv "
+               "--cover jobs/acme/cover.toml --out jobs/acme/output/Binder.pdf")
     parser.add_argument("--pdf-folder", required=True, help="folder that holds the PDF files")
     parser.add_argument("--index", required=True, help="index file (.csv or .xlsx)")
     parser.add_argument("--sheet", help="sheet to read in an .xlsx index (default: 'Binder Index', "

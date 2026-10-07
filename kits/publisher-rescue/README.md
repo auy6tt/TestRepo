@@ -161,7 +161,7 @@ source ~/.venvs/publisher-rescue/bin/activate
 cd kits/publisher-rescue
 ```
 
-`bash kits/setup.sh publisher-rescue` installs the system tools for all the kits, and this kit's Python in `~/.venvs/publisher-rescue` (`bash kits/setup.sh --list` shows it). The `source` line makes `python` mean that Python in your terminal. If you do not use it, run the scripts with `~/.venvs/publisher-rescue/bin/python` instead of `python`. Without it, the scripts stop with "No module named ...".
+`bash kits/setup.sh publisher-rescue` installs the system tools for all the kits, and this kit's Python in `~/.venvs/publisher-rescue` (`bash kits/setup.sh --list` shows it). The `source` line makes `python` mean that Python in your terminal. If you skip it, write `~/.venvs/publisher-rescue/bin/python` instead of `python` in the commands below. The computer's own `python` does not have the kit's packages, so the scripts stop with "No module named ...".
 
 To set up only this kit, run `bash kits/publisher-rescue/scripts/setup.sh`. It installs:
 

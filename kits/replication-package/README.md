@@ -52,11 +52,13 @@ science. Policies change, so read each journal's current data and code policy be
 
 ## Prices
 
-| Service | Price guide | Includes |
+| Service | Price (estimate) | Includes |
 |---|---|---|
 | README and structure check | $300–600 | Check report, README in the standard format, table and figure map, list of fixes for the author |
 | Full clean-up | $800–2,500 | All of the above, plus master script, path fixes, pinned versions, logs, reproduction run and comparison report, delivery note, one round of changes after the data editor's report |
 | Migration of old code | Quote separately | For example an old Stata version to a current one, or SAS to R or Python, with a comparison report showing the outputs match |
+
+These prices are estimates. Check what others charge in your market and adjust.
 
 Quote a fixed price after a free first look: run `check_package.py` on their package (with their
 permission) and price by the number of programs, languages, run time and High findings. Charge
@@ -68,11 +70,13 @@ the deadline is short. Ask for 50% upfront; the repo's
 
 1. **Intake.** Send [templates/client-intake-checklist.md](templates/client-intake-checklist.md).
    Get the code, the public data, the original outputs and any data editor report. Restricted
-   data stay with the author.
+   data stay with the author. Put the files in `clients/<client>/as-received/` at the top of
+   this repository. Git ignores the `clients/` and `reports/` folders there, so client files are
+   never committed (this repository is public).
 2. **First look and quote.** Run `check_package.py`. Send the author the top findings and a fixed
    price. Agree in writing that the author decides about any difference in results.
-3. **Baseline.** Keep an untouched copy of the package as received. Put your working copy in its
-   own private Git repository and commit after each kind of change.
+3. **Baseline.** Keep the package as received untouched. Copy it to `clients/<client>/work/`,
+   make that copy its own private Git repository and commit after each kind of change.
 4. **Clean up.**
    - Add a master script from [templates/](templates/) (`main.py`, `main.R` or `main.do`).
    - Replace hard-coded paths with paths relative to the package. Remove `setwd()` and `cd`.
@@ -130,7 +134,9 @@ the deadline is short. Ask for 50% upfront; the repo's
 
 ### Setup
 
-Python 3.10 or newer (tested with 3.11). From the repository's top folder:
+Python 3.11 or newer (tested with 3.11). The versions pinned in `requirements.txt` (numpy 2.4,
+pandas 3.0, scipy 1.17, matplotlib 3.11) need Python 3.11 or newer. From the repository's top
+folder:
 
 ```sh
 python3 -m venv .venv
@@ -138,16 +144,24 @@ source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r kits/replication-package/requirements.txt
 ```
 
-The scripts also run with only the standard library: without `openpyxl` there is no Excel
-report, and without `pillow` images are compared by bytes only.
+In the Claude Code cloud container, `bash kits/setup.sh replication-package` makes the same
+`.venv` for you (`bash kits/setup.sh --list` shows where each kit's Python is). It also installs
+system tools for the other kits, which takes about 2 minutes the first time. Then run
+`source .venv/bin/activate`. If you skip the `source` line, write `.venv/bin/python` instead of
+`python` in the commands below.
+
+The two scripts also run with only the standard library, on Python 3.10 too: without `openpyxl`
+there is no Excel report, and without `pillow` images are compared by bytes only.
 
 ### check_package.py: find the problems
 
 ```sh
-python kits/replication-package/scripts/check_package.py path/to/package --out reports/smith-2026
+python kits/replication-package/scripts/check_package.py clients/smith-2026/as-received \
+    --out reports/smith-2026/before
 ```
 
-Reads the package (it never changes it) and writes `check_report.md` and `check_report.xlsx`.
+Reads the package (it never changes it) and writes `check_report.md` and `check_report.xlsx`
+to the `--out` folder. Keep reports in `reports/<client>/` (git ignores it).
 Each finding has a severity (High, Medium, Low, Info), a location and a suggested fix. The Excel
 file has a Status column so you can track fixes. It checks:
 
@@ -166,15 +180,24 @@ file has a Status column so you can track fixes. It checks:
 
 ### run_and_compare.py: prove it reproduces
 
+First install the package's own dependencies in a fresh virtual environment, outside the
+package folder:
+
 ```sh
-python kits/replication-package/scripts/run_and_compare.py path/to/package --master main.py \
-    --outputs output --clean data/derived --originals path/to/original/output \
-    --report-dir reports/smith-2026/run1
+python3 -m venv clients/smith-2026/venv
+clients/smith-2026/venv/bin/pip install -r clients/smith-2026/work/requirements.txt
 ```
 
-First install the package's own dependencies, ideally in a fresh virtual environment, and pass
-that interpreter with `--python` (for example `--python .venv/bin/python`). An error like
-"No module named pandas" means a missing dependency, not a failed reproduction.
+Then pass that Python with `--python`:
+
+```sh
+python kits/replication-package/scripts/run_and_compare.py clients/smith-2026/work --master main.py \
+    --outputs output --clean data/derived --originals clients/smith-2026/as-received/output \
+    --report-dir reports/smith-2026/run1 --python clients/smith-2026/venv/bin/python
+```
+
+Without `--python`, the script uses the Python that runs it. An error like "No module named
+pandas" means a missing dependency, not a failed reproduction.
 
 Copies the package to a temporary folder, empties the output folders there, runs the master
 script with a time limit, saves everything it prints to `run_log.txt`, and compares every
@@ -187,6 +210,8 @@ regenerated output with the original. It writes `comparison_report.md`, and
 | `--outputs` | Output folders to empty before the run and compare after it (default `output`) |
 | `--clean` | Other folders to empty first, such as `data/derived` |
 | `--originals` | Folder with the original outputs (default: the package's own output folders) |
+| `--report-dir` | Folder for the reports, outside the package, for example `reports/<client>/run1` |
+| `--python`, `--rscript` | Python or Rscript to run the master script with (a relative path is fine) |
 | `--timeout` | Time limit in seconds (default 3600) |
 | `--rtol`, `--atol` | Tolerance for numbers (defaults 1e-6 and 1e-9) |
 | `--compare-only` | Compare `--originals` with `--regenerated` without running anything |
@@ -201,7 +226,14 @@ code still writes to absolute paths. Exit codes: 0 all outputs match, 1 differen
 outputs, 2 the run failed or timed out.
 
 R scripts need R (`sudo apt-get install r-base` in this cloud container). Stata, MATLAB and SAS
-need licences, so the author runs the master script and you compare with `--compare-only`.
+need licences, so the author runs the master script and sends you the new output folder. Put it
+in `clients/<client>/author-run/` and compare with `--compare-only`:
+
+```sh
+python kits/replication-package/scripts/run_and_compare.py --compare-only \
+    --originals clients/smith-2026/as-received/output \
+    --regenerated clients/smith-2026/author-run/output --report-dir reports/smith-2026/compare1
+```
 
 ### With Claude Code
 
@@ -231,6 +263,12 @@ kits/replication-package/
 │   └── delivery-note.md         what you send with the finished package
 └── samples/                     fictional before-and-after portfolio sample (see samples/README.md)
 ```
+
+**Put your own name on the sample.** Open `samples/3-fixed-package/README.md` (the
+Acknowledgements section) and `samples/delivery-note.md`, and replace `[Your name]` with your
+name or business name. They are plain Markdown files, so nothing needs rebuilding. If you also
+want today's date in the sample reports, rebuild them with the three commands under "Re-run it
+yourself" in [samples/README.md](samples/README.md).
 
 ## Limits
 

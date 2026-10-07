@@ -35,7 +35,7 @@ Everything in this folder is **made up**. Quarterhour, Inc. is a fictional 12-pe
 
 ## Rebuild the sample outputs
 
-From `kits/security-questionnaire/`:
+From `kits/security-questionnaire/`, with the environment activated (see Setup in the [kit README](../README.md#setup)):
 
 ```sh
 python scripts/build_library.py --docs samples/policies --out samples/library/answer_library_DRAFT.xlsx --client "Quarterhour, Inc. (FICTIONAL SAMPLE)" --owner "Dana Whitfield, CTO"
@@ -46,3 +46,5 @@ soffice --headless --convert-to pdf --outdir samples/output samples/output/cobal
 ```
 
 The completed library (step 4) was written by hand from the draft and the sources, as you would for a client; the scripts never write answers.
+
+To put your name on the sample, add `--prepared-by "Your Name, Your Business"` to the fourth command, then run the `soffice` line again. The review sheet then says "Prepared by Your Name, Your Business" near the top. The two preview pictures are not rebuilt by these commands.

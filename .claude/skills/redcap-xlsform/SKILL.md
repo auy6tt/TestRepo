@@ -34,20 +34,27 @@ Its README explains the service; `reference.md` next to this file has the syntax
 ## Setup (once per session)
 
 ```bash
-python3 -m venv /tmp/redcap-venv && /tmp/redcap-venv/bin/pip install -q -r kits/redcap-xlsform/requirements.txt
+test -x /tmp/redcap-venv/bin/python || bash kits/setup.sh redcap-xlsform
 ```
 
-Use `/tmp/redcap-venv/bin/python` for every command below (written as `python`). Run them
-from the repository root. Make a work folder for the job, outside the kit, e.g.
-`work/<project>/` with `input/ redcap/ xlsform/ codebook/ test_data/ delivery/`.
-Client questionnaires are confidential: do not commit them to a public repository.
+`bash kits/setup.sh redcap-xlsform` is the setup route (needs Python 3.10 or newer), and
+`bash kits/setup.sh --list` shows this kit's Python: `/tmp/redcap-venv/bin/python`. Run every
+command below with it, never with a bare `python` or `python3`. If `kits/setup.sh` is missing
+or fails, run `python3 -m venv /tmp/redcap-venv && /tmp/redcap-venv/bin/pip install -q -r kits/redcap-xlsform/requirements.txt`.
+To confirm the kit works: `/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/selftest.py`
+(every check must PASS).
+
+Run the commands from the repository root. Make a work folder for the job there, outside the
+kit, e.g. `work/<project>/` with `input/ redcap/ xlsform/ codebook/ test_data/ delivery/`
+(git ignores `work/`). Client questionnaires are confidential: keep them there and never
+commit them.
 
 ## Workflow
 
 ### 1. Read the questionnaire
 
 ```bash
-python kits/redcap-xlsform/scripts/extract_text.py work/<project>/input/<file> -o work/<project>/input/questionnaire.txt
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/extract_text.py work/<project>/input/<file> -o work/<project>/input/questionnaire.txt
 ```
 
 Also look at the layout (convert to PDF and view pages: `soffice --headless --convert-to pdf`,
@@ -79,7 +86,7 @@ action tags. Write `instrument_event_mapping.csv` (arm_num, unique_event_name, f
 ### 4. Check it and fix until it passes
 
 ```bash
-python kits/redcap-xlsform/scripts/validate_redcap.py work/<project>/redcap/<name>_data_dictionary.csv \
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/validate_redcap.py work/<project>/redcap/<name>_data_dictionary.csv \
   --events work/<project>/redcap/instrument_event_mapping.csv \
   --repeating work/<project>/redcap/repeating_instruments.csv \
   --report work/<project>/redcap/validation_report.txt
@@ -95,19 +102,20 @@ Write `survey.csv`, `choices.csv` and `settings.csv` in `work/<project>/xlsform/
 `version` in settings), then:
 
 ```bash
-python kits/redcap-xlsform/scripts/build_xlsform.py work/<project>/xlsform/source -o work/<project>/xlsform/<name>.xlsx
-python kits/redcap-xlsform/scripts/check_xlsform.py work/<project>/xlsform/<name>.xlsx \
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/build_xlsform.py work/<project>/xlsform/source -o work/<project>/xlsform/<name>.xlsx
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/check_xlsform.py work/<project>/xlsform/<name>.xlsx \
   --xml work/<project>/xlsform/<name>.xml --report work/<project>/xlsform/xlsform_check_report.txt
 ```
 
-To edit a client's existing XLSForm, split it first: `build_xlsform.py --split form.xlsx -o source/`.
+To edit a client's existing XLSForm, split it first:
+`/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/build_xlsform.py --split work/<project>/input/<form>.xlsx -o work/<project>/xlsform/source`.
 REDCap-to-XLSForm equivalents are in `reference.md`. ODK forms cannot see earlier submissions,
 so cross-visit calculations move to analysis (say so in the delivery note).
 
 ### 6. Check the wording against the approved document
 
 ```bash
-python kits/redcap-xlsform/scripts/check_wording.py --source work/<project>/input/<file>.docx \
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/check_wording.py --source work/<project>/input/<file>.docx \
   --dictionary <dictionary.csv> --xlsform <form.xlsx> --report work/<project>/delivery/wording_check.txt
 ```
 
@@ -116,18 +124,18 @@ Every "differs" or "not found" item must be either fixed or listed in the delive
 ### 7. Make the codebook
 
 ```bash
-python kits/redcap-xlsform/scripts/make_codebook.py --dictionary <dictionary.csv> --events <mapping.csv> \
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/make_codebook.py --dictionary <dictionary.csv> --events <mapping.csv> \
   --repeating <repeating.csv> --title "<study title>" --out work/<project>/codebook/<name>_codebook \
   --logic-table work/<project>/delivery/skip_logic_tests.md
-python kits/redcap-xlsform/scripts/make_codebook.py --xlsform <form.xlsx> --out work/<project>/codebook/<name>_kobo_codebook
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/make_codebook.py --xlsform <form.xlsx> --out work/<project>/codebook/<name>_kobo_codebook
 ```
 
 ### 8. Test the cleaning script on fake data
 
 ```bash
-python kits/redcap-xlsform/scripts/make_fake_export.py --dictionary <dictionary.csv> --events <mapping.csv> \
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/make_fake_export.py --dictionary <dictionary.csv> --events <mapping.csv> \
   --repeating <repeating.csv> --records 25 --errors 8 --seed 1 --out work/<project>/test_data/fake_export.csv
-python kits/redcap-xlsform/scripts/clean_export.py --dictionary <dictionary.csv> --export work/<project>/test_data/fake_export.csv \
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/clean_export.py --dictionary <dictionary.csv> --export work/<project>/test_data/fake_export.csv \
   --events <mapping.csv> --rules work/<project>/test_data/cleaning_rules.csv \
   --answer-key work/<project>/test_data/fake_export_answer_key.csv --outdir work/<project>/test_data/cleaning_output
 ```
@@ -145,10 +153,13 @@ Copy `kits/redcap-xlsform/templates/client_test_checklist.md` and `delivery_note
 list wording differences, decisions and open questions), then:
 
 ```bash
-python kits/redcap-xlsform/scripts/md_to_docx.py work/<project>/delivery/*.md --outdir work/<project>/delivery
+/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/md_to_docx.py work/<project>/delivery/*.md --outdir work/<project>/delivery
 ```
 
-Look at `kits/redcap-xlsform/samples/08_delivery/` for a finished example.
+Look at `kits/redcap-xlsform/samples/08_delivery/` for a finished example. To put the user's
+name on that portfolio sample, replace `[your name]` in the "Prepared by" row of
+`kits/redcap-xlsform/samples/08_delivery/delivery_note.md`, then run
+`/tmp/redcap-venv/bin/python kits/redcap-xlsform/scripts/md_to_docx.py kits/redcap-xlsform/samples/08_delivery/delivery_note.md`.
 
 ### 10. Final check before telling the user it is ready
 

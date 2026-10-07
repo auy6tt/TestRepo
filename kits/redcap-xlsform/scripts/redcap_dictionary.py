@@ -570,3 +570,7 @@ def strip_html(text: str) -> str:
     text = (text.replace("&nbsp;", " ").replace("&amp;", "&").replace("&lt;", "<")
             .replace("&gt;", ">").replace("&quot;", '"').replace("&#39;", "'"))
     return re.sub(r"\s+", " ", text).strip()
+
+
+if __name__ == "__main__":  # a helper module: running it (for example with --help) only shows this help
+    print(__doc__.strip())

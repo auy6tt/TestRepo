@@ -160,3 +160,7 @@ REF = re.compile(r"\$\{([^}]*)\}")
 
 def references(expression: str) -> list[str]:
     return [name.strip() for name in REF.findall(expression or "")]
+
+
+if __name__ == "__main__":  # a helper module: running it (for example with --help) only shows this help
+    print(__doc__.strip())

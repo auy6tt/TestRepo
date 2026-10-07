@@ -6,7 +6,7 @@
 #
 # How to use this file:
 #   1. Copy it to digests/<your-digest>/sources.yaml
-#   2. Replace every https://example.gov/... address with the real official page.
+#   2. Replace every https://example.gov/... and https://example.org/... address with the real official page.
 #      The watcher skips placeholder addresses, so nothing is fetched until you do.
 #      For json sources, open the real address once (or ask Claude Code to fetch it)
 #      to see the field names, then adjust items_path, id_field, fields and link_field.
@@ -14,7 +14,7 @@
 #      (https://<site>/robots.txt), then put the date you checked in terms_checked.
 #   4. Add each domain under Allowed domains in the environment's Network access
 #      settings (see README.md).
-#   5. Run: python scripts/watch_sources.py digests/<your-digest>
+#   5. Run: .venv/bin/python scripts/watch_sources.py digests/<your-digest>
 #      The first run only saves snapshots. Changes show up from the second run.
 #
 # Where to find the real sources:

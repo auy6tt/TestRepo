@@ -14,12 +14,15 @@ What it never does
   It never writes an answer. A person (with Claude's help) reads each
   candidate source and writes the answer using only what the source says.
 
-Usage
-  python build_library.py --docs CLIENT_DOCS_FOLDER --out answer_library_DRAFT.xlsx
+Usage (from kits/security-questionnaire/; client files go in clients/<client>/,
+which git ignores)
+  python scripts/build_library.py --docs clients/<client>/docs --out clients/<client>/answer_library.xlsx
          [--questions templates/question_bank.csv] [--client "Client name"]
-         [--owner "Name, Title"] [--top 3] [--min-score 0.12] [--gaps gaps.md]
-  python build_library.py --blank templates/answer_library.xlsx
-  python build_library.py --check answer_library.xlsx [--gaps questions_for_client.md]
+         [--owner "Name, Title"] [--top 3] [--min-score 0.12]
+         [--gaps clients/<client>/questions_for_client.md]
+  python scripts/build_library.py --blank templates/answer_library.xlsx
+  python scripts/build_library.py --check clients/<client>/answer_library.xlsx
+         [--gaps clients/<client>/questions_for_client.md]
 
 Run with --help for all options.
 """
@@ -587,10 +590,14 @@ def main(argv=None) -> int:
     parser = argparse.ArgumentParser(
         description="Seed a draft answer library from client documents, write a blank template, or check a library.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="Examples:\n"
-               "  python build_library.py --docs ../samples/policies --out draft.xlsx --client \"Quarterhour\"\n"
-               "  python build_library.py --blank ../templates/answer_library.xlsx\n"
-               "  python build_library.py --check ../samples/library/answer_library.xlsx")
+        epilog="Examples (run from kits/security-questionnaire/; client files go in clients/<client>/, which git ignores):\n"
+               "  python scripts/build_library.py --docs clients/acme/docs --out clients/acme/answer_library.xlsx "
+               "--client \"Acme\" --gaps clients/acme/questions_for_client.md\n"
+               "  python scripts/build_library.py --check clients/acme/answer_library.xlsx "
+               "--gaps clients/acme/questions_for_client.md\n"
+               "  python scripts/build_library.py --docs samples/policies --out /tmp/draft.xlsx --client \"Quarterhour\"\n"
+               "  python scripts/build_library.py --check samples/library/answer_library.xlsx\n"
+               "  python scripts/build_library.py --blank templates/answer_library.xlsx")
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--docs", help="folder of client documents (.md .txt .docx .pdf), searched recursively")
     mode.add_argument("--blank", metavar="OUT.xlsx", help="write an empty library template and stop")

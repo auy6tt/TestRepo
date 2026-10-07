@@ -815,3 +815,7 @@ def format_number(value) -> str:
 truthy = _truthy
 is_number = _is_number
 to_number = _num
+
+
+if __name__ == "__main__":  # a helper module: running it (for example with --help) only shows this help
+    print(__doc__.strip())

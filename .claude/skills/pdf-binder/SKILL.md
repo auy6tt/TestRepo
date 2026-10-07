@@ -15,23 +15,23 @@ KIT = `${CLAUDE_PROJECT_DIR}/kits/pdf-binder`. The full guide (offers, buyers, p
 - The client (employer) confirms the on-site chemical list. Never present an unconfirmed list as final.
 - Never certify that a submittal complies. A spec checklist only shows where each requirement appears; the subcontractor's project manager confirms, signs and stamps. Never add mark-ups to a datasheet unless the PM gave exact instructions.
 - OSHA dates: tell the user to check osha.gov. The employer compliance date for single-substance chemicals is reported as 20 November 2026, with later dates for mixtures. Never use it to scare anyone.
-- Client files are confidential. Keep each client in its own folder (ideally a private repo; this container is temporary). Never copy client documents into `KIT/samples/`.
+- Client files are confidential. Keep each client in its own folder under `KIT/jobs/` (git ignores it; this repository is public). This container is temporary, so remind the user to download what they deliver. Never copy client documents into `KIT/samples/`.
 
 ## Setup (once per session)
 
 ```bash
-cd "${CLAUDE_PROJECT_DIR}/kits/pdf-binder"
-test -x .venv/bin/python || python3 -m venv .venv
-.venv/bin/pip install -q -r requirements.txt
+cd "${CLAUDE_PROJECT_DIR}"
+test -x kits/pdf-binder/.venv/bin/python || bash kits/setup.sh pdf-binder
+cd kits/pdf-binder
 .venv/bin/python tests/test_kit.py        # must end with "All tests passed."
 ```
 
-Run every script from KIT as `.venv/bin/python scripts/<name>.py`. Each script has `--help`.
+The kit's Python is `KIT/.venv/bin/python` (the pdf-binder line of `bash kits/setup.sh --list`). `bash kits/setup.sh pdf-binder` is the usual setup route. If it is missing or fails, run `python3 -m venv .venv && .venv/bin/pip install -q -r requirements.txt` inside KIT. Run every script from KIT as `.venv/bin/python scripts/<name>.py`, never with a bare `python` or `python3` (they don't have the kit's packages). Each script has `--help`.
 
 ## Workflow A: SDS binder
 
 1. Intake: go through `templates/intake-checklist-sds-binder.md` with the user. Collect shelf photos, purchase records and the old binder.
-2. Make a job folder, e.g. `JOB=~/jobs/<client>` with `sds/`, `output/`, a copy of `templates/sds-site-list-template.xlsx` as `site-list.xlsx`, and a copy of `templates/binder-cover-sds.toml` as `cover.toml`.
+2. Make a job folder in KIT's `jobs/` folder (ignored by git), e.g. `JOB=jobs/<client>` with `sds/`, `output/`, a copy of `templates/sds-site-list-template.xlsx` as `site-list.xlsx`, and a copy of `templates/binder-cover-sds.toml` as `cover.toml`.
 3. Draft the on-site list from the photos and records (one row per product, name as on the label, manufacturer, location). Mark it as a draft for the client to confirm.
 4. The user downloads the current SDS PDFs (most websites are blocked in the sandbox) into `$JOB/sds/`. Never generate or retype a sheet.
 5. Read the sheets:
@@ -55,7 +55,7 @@ Run every script from KIT as `.venv/bin/python scripts/<name>.py`. Each script h
 ## Workflow B: submittal package or O&M / handover binder
 
 1. Intake: `templates/intake-checklist-submittal-handover.md`. Get the project's submittal and closeout rules, the required order and tab names, the GC's cover or transmittal form, and every document.
-2. Job folder: `docs/` (all PDFs), `index.xlsx` (copy of `templates/binder-index-template.xlsx`), `cover.toml` (copy of `templates/binder-cover-submittal.toml` or `binder-cover-handover.toml`), `output/`.
+2. Job folder in KIT's `jobs/` folder (ignored by git), e.g. `JOB=jobs/<client>`: `docs/` (all PDFs), `index.xlsx` (copy of `templates/binder-index-template.xlsx`), `cover.toml` (copy of `templates/binder-cover-submittal.toml` or `binder-cover-handover.toml`), `output/`.
 3. Fill the index in the required order: section, title, file, order, notes; `pages` (e.g. `3-5`) to take only some pages of a catalogue; blank `file` = PENDING placeholder page; rows starting with EXAMPLE are ignored.
 4. Build:
    ```bash
@@ -76,7 +76,7 @@ It must end with `RESULT: all N checks passed.` Then look at the result yourself
 
 ## Samples
 
-`.venv/bin/python scripts/make_samples.py --business "<user's business name>"` rebuilds all three portfolio samples (fake, watermarked inputs) and verifies them. `scripts/make_templates.py` restores clean spreadsheet templates.
+`.venv/bin/python scripts/make_samples.py --business "<user's business name>"` rebuilds all three portfolio samples (fake, watermarked inputs) and verifies them. `.venv/bin/python scripts/make_templates.py` restores clean spreadsheet and CSV templates.
 
 ## Quick fixes
 

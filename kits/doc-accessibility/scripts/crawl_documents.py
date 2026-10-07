@@ -29,7 +29,8 @@ named in --also-download-from) so triage_pdfs.py can check them.
 Only crawl a client's site after they agree. Before that, keep any check of a
 prospect's site light (a few pages, slow rate).
 
-Examples:
+Examples (the paths are inside the client's folder, for example
+clients/town-of-example/ at the repository root, which git ignores):
   python crawl_documents.py https://www.example-town.gov/ --out crawl --download downloads
   python crawl_documents.py https://www.example-town.gov/ --depth 2 --max-pages 200 --sitemap \\
       --user-agent "DocInventory/1.0 (+mailto:you@example.com)" --out crawl

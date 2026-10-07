@@ -10,8 +10,8 @@ Usage (from the kit folder):
     # CSV folder -> .xlsx
     python scripts/build_xlsform.py samples/03_xlsform/source -o samples/03_xlsform/lakeside_health_check.xlsx
 
-    # .xlsx -> CSV folder (to edit a client's existing form)
-    python scripts/build_xlsform.py --split client_form.xlsx -o client_form_source
+    # .xlsx -> CSV folder (to edit a client's existing form; keep client files in work/, which git ignores)
+    python scripts/build_xlsform.py --split ../../work/<client>/input/client_form.xlsx -o ../../work/<client>/xlsform/source
 
 Needs openpyxl (pip install openpyxl).
 """

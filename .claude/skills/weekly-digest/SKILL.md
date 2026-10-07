@@ -32,20 +32,22 @@ If no step is named, find the newest issue folder for the digest and carry on fr
 
 ## Setup (once per session)
 
+From the repository root:
+
 ```bash
+bash kits/setup.sh weekly-digest
 cd kits/weekly-digest
-test -x .venv/bin/python || { python3 -m venv .venv && .venv/bin/pip install -q -r requirements.txt; }
 ```
 
-Use `.venv/bin/python` for every script. To confirm the kit works (offline, about 20 seconds): `.venv/bin/python tests/selftest.py`.
+`bash kits/setup.sh weekly-digest` makes the kit's Python environment in `kits/weekly-digest/.venv` (it is the weekly-digest line of `bash kits/setup.sh --list`). This kit needs none of the system tools that `setup.sh` also installs, so in a Routine you can save about two minutes with `python3 -m venv .venv && .venv/bin/pip install -q -r requirements.txt` from `kits/weekly-digest` instead: it makes the same environment. Use `.venv/bin/python` for every script, never plain `python` or `python3`: they do not have the kit's packages. To confirm the kit works (offline, about 20 seconds): `.venv/bin/python tests/selftest.py`.
 
 ## New digest
 
 1. Copy the closest template from `templates/sources/` (`epr-packaging-us`, `public-bids-one-trade`, `local-gov-meetings`, `aid-tenders`, `new-commercial-premises`) to `digests/<name>/sources.yaml`.
 2. Fill in `digest.name`, `scope` and `audience`, a real contact email in `settings.user_agent`, and the keywords.
-3. Help the user replace the `example.gov` placeholders with real official pages, following the comments in the template. For each source they read the site's terms and set `terms_checked`.
+3. Help the user replace every `example.gov` or `example.org` placeholder address with real official pages, following the comments in the template. For each source they read the site's terms and set `terms_checked`.
 4. Remind them to add every domain under Allowed domains in the environment's Network access settings (README, "Network access").
-5. Run Watch once to save the first snapshots, then commit and push `digests/<name>/`.
+5. Run Watch once to save the first snapshots, then commit and push `digests/<name>/` (only to a private repository, see Save).
 
 ## Watch
 
@@ -91,7 +93,9 @@ Exit code 3 means an item is still unchecked: go back to the review handoff. Loo
 
 Commit `digests/<name>/data/` and the week's issue folder, then push (to `main` unless the user or the Routine prompt says otherwise). Every cloud run starts from a fresh clone, so without the pushed snapshots the next run cannot tell what changed.
 
+Push digests only to a private repository: the issues are what subscribers pay for. Check with `gh api 'repos/{owner}/{repo}' -q .visibility` when `gh` works. If it says `public`, do not push: tell the user to make the repository private or to move the kit and skill into a private one (README, "Start a digest"). If you cannot check, push, and remind the user in your report that the repository must be private.
+
 ## Sample and tests
 
-- `samples/battery-storage-ohio-week41/` is a complete fictional issue, from sources to finished files. `scripts/run_demo.py` rebuilds it offline.
-- `tests/selftest.py` checks the watcher and the builder offline.
+- `samples/battery-storage-ohio-week41/` is a complete fictional issue, from sources to finished files. `.venv/bin/python scripts/run_demo.py` rebuilds it offline. To put the user's own name on it, change `brand`, `contact_email` and `website` in the `issue:` block of its `items.reviewed.yaml` (keep the sample `mailing_address` and `sample_notice`), then rebuild only the files: `.venv/bin/python scripts/build_digest.py samples/battery-storage-ohio-week41/items.reviewed.yaml --out samples/battery-storage-ohio-week41/output --changes samples/battery-storage-ohio-week41/changes.json`.
+- `.venv/bin/python tests/selftest.py` checks the watcher and the builder offline.

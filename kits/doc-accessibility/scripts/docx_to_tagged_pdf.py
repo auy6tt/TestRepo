@@ -14,7 +14,8 @@ After converting, it runs the same checks as triage_pdfs.py on the new PDF.
 LibreOffice export settings used: tagged PDF on, PDF/UA on (turn it off with
 --no-pdfua), bookmarks from headings on.
 
-Examples:
+Examples (the paths are inside the client's folder, for example
+clients/town-of-example/ at the repository root, which git ignores):
   python docx_to_tagged_pdf.py agenda.docx --out fixed/
   python docx_to_tagged_pdf.py agenda.docx --out fixed/ --compare downloads/agenda.pdf --validate
   python docx_to_tagged_pdf.py sources/*.docx --out fixed/

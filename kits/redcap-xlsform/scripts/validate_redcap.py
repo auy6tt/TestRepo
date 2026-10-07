@@ -11,8 +11,8 @@ but are not flagged.
 
 Usage (from the kit folder):
     python scripts/validate_redcap.py samples/02_redcap/lakeside_data_dictionary.csv
-    python scripts/validate_redcap.py my_dictionary.csv --events instrument_event_mapping.csv \
-        --repeating repeating_instruments.csv --report validation_report.txt
+    python scripts/validate_redcap.py out/my_dictionary.csv --events out/instrument_event_mapping.csv \
+        --repeating out/repeating_instruments.csv --report out/validation_report.txt
 
 Exit code: 0 = no errors, 1 = errors (or warnings when --strict is used),
 2 = the file could not be read.

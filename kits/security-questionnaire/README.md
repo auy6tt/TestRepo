@@ -2,7 +2,7 @@
 
 Answer security questionnaires for small B2B software companies that have no security lead, using **only their own policies and documents**, and leave them with a reusable answer library. The scripts do the slow parts (finding the source text, matching questions, filling the buyer's spreadsheet without breaking it). You and the client's technical owner make every judgement.
 
-- **Portfolio sample:** [`samples/output/`](samples/output/). Open [`cobalt-ridge-supplier-security-questionnaire_DRAFT2.pdf`](samples/output/cobalt-ridge-supplier-security-questionnaire_DRAFT2.pdf) to see a filled questionnaire and its review sheet. Everything in `samples/` is fictional.
+- **Portfolio sample:** [`samples/output/`](samples/output/). Open [`cobalt-ridge-supplier-security-questionnaire_DRAFT2.pdf`](samples/output/cobalt-ridge-supplier-security-questionnaire_DRAFT2.pdf) to see a filled questionnaire and its review sheet. Everything in `samples/` is fictional. To put your name on it, see [Put your name on the sample](#put-your-name-on-the-sample).
 - **Claude Code skill:** [`.claude/skills/security-questionnaire/SKILL.md`](../../.claude/skills/security-questionnaire/SKILL.md). Ask Claude to "answer this security questionnaire" and it follows the process below.
 
 ## The offer
@@ -40,6 +40,8 @@ Hi [name], saw you're closing [customer]. If their security questionnaire lands 
 | Monthly retainer | $300 to $600 a month | Up to 2 questionnaires, library kept current, faster turnaround |
 | Rush (under 48 hours) | +30% | Only if the client can answer gap questions quickly |
 
+Estimates from the October 2026 research; check your market.
+
 Start at the low end for your first three clients in exchange for a testimonial. The library makes repeat work faster, which is where the retainer pays.
 
 ## The rules (not negotiable)
@@ -65,10 +67,10 @@ Commands run from `kits/security-questionnaire/` with the environment activated 
 6. **Client approves the library.** Go through it with the technical owner. Set Status to Approved with Owner and Last Reviewed. Run `--check` again: it must show no errors.
 7. **Fill the questionnaire.** Try `--dry-run` first to see the columns it found, then:
    `python scripts/fill_questionnaire.py clients/acme/buyer.xlsx --library clients/acme/answer_library.xlsx`
-   This writes `buyer_DRAFT.xlsx` next to the original (never changing the original) with a review sheet.
+   This writes `clients/acme/buyer_DRAFT.xlsx` next to the original (never changing the original) with a review sheet.
 8. **Your review pass.** Work through the review sheet: NEEDS CLIENT INPUT first, then CHECK, then read every OK answer. Fix a wrong match by typing the right library ID in "Use library ID", then run the fill again on the **original** file: `python scripts/fill_questionnaire.py clients/acme/buyer.xlsx --library clients/acme/answer_library.xlsx --use-review clients/acme/buyer_DRAFT.xlsx --out clients/acme/buyer_DRAFT2.xlsx`. Add the buyer's wording to that entry's Alternate Phrasings so it matches next time. Edit two-part questions by hand.
 9. **Client review and sign-off.** Send the draft with part A of `templates/cover_note.md`. Put their answers into the library first, then refill the same way (`--use-review` keeps your choices, notes and Resolved marks). Get the sign-off.
-10. **Finalise and deliver.** `python scripts/fill_questionnaire.py --finalize buyer_DRAFT2.xlsx --out buyer_FINAL.xlsx` refuses while any NEEDS CLIENT INPUT text remains or any CHECK/NEEDS row isn't marked Resolved = Y, then removes the review sheet. Send it with part B of the cover note and the updated library.
+10. **Finalise and deliver.** `python scripts/fill_questionnaire.py --finalize clients/acme/buyer_DRAFT2.xlsx --out clients/acme/buyer_FINAL.xlsx` refuses while any NEEDS CLIENT INPUT text remains or any CHECK/NEEDS row isn't marked Resolved = Y, then removes the review sheet. Send it with part B of the cover note and the updated library.
 11. **Close out.** Log changes on the library's Change Log sheet. Delete the client's files when the engagement ends (or keep them in their folder while on retainer).
 
 ## Quality checklist (before anything leaves your hands)
@@ -99,17 +101,17 @@ python3 -m venv ~/.venvs/security-questionnaire
 ~/.venvs/security-questionnaire/bin/pip install -r kits/security-questionnaire/requirements.txt
 ```
 
-Run the scripts with `~/.venvs/security-questionnaire/bin/python` (or activate the environment and use `python`, as in the examples below). LibreOffice is optional: it's only used to open `.xls` and `.ods` questionnaires.
+Run the scripts with `~/.venvs/security-questionnaire/bin/python` (`bash kits/setup.sh --list` shows it), or activate the environment and use `python`, as in the examples below. LibreOffice is optional: it's only used to open `.xls` and `.ods` questionnaires.
 
 ## The scripts
 
-All commands below are run from `kits/security-questionnaire/`, with the environment activated (`source ~/.venvs/security-questionnaire/bin/activate`).
+All commands below are run from `kits/security-questionnaire/`, with the environment activated (`source ~/.venvs/security-questionnaire/bin/activate`). Client files always go in `clients/<client>/`, which git ignores. Replace `<client>` with the client's folder name, for example `acme`.
 
 ### `scripts/build_library.py`: draft the answer library from client documents
 
 ```sh
-python scripts/build_library.py --docs DOCS_FOLDER --out answer_library.xlsx [--client NAME] [--owner "Name, Title"] [--gaps questions.md]
-python scripts/build_library.py --check answer_library.xlsx [--gaps questions_for_client.md]
+python scripts/build_library.py --docs clients/<client>/docs --out clients/<client>/answer_library.xlsx [--client NAME] [--owner "Name, Title"] [--gaps clients/<client>/questions_for_client.md]
+python scripts/build_library.py --check clients/<client>/answer_library.xlsx [--gaps clients/<client>/questions_for_client.md]
 python scripts/build_library.py --blank templates/answer_library.xlsx
 ```
 
@@ -123,9 +125,9 @@ python scripts/build_library.py --blank templates/answer_library.xlsx
 ### `scripts/fill_questionnaire.py`: fill the buyer's questionnaire
 
 ```sh
-python scripts/fill_questionnaire.py BUYER.xlsx --library answer_library.xlsx [--out BUYER_DRAFT.xlsx] [--dry-run]
-python scripts/fill_questionnaire.py BUYER.xlsx --library answer_library.xlsx --use-review BUYER_DRAFT.xlsx --out BUYER_DRAFT2.xlsx
-python scripts/fill_questionnaire.py --finalize BUYER_DRAFT2.xlsx --out BUYER_FINAL.xlsx [--force]
+python scripts/fill_questionnaire.py clients/<client>/BUYER.xlsx --library clients/<client>/answer_library.xlsx [--out clients/<client>/BUYER_DRAFT.xlsx] [--dry-run]
+python scripts/fill_questionnaire.py clients/<client>/BUYER.xlsx --library clients/<client>/answer_library.xlsx --use-review clients/<client>/BUYER_DRAFT.xlsx --out clients/<client>/BUYER_DRAFT2.xlsx
+python scripts/fill_questionnaire.py --finalize clients/<client>/BUYER_DRAFT2.xlsx --out clients/<client>/BUYER_FINAL.xlsx [--force]
 ```
 
 - **Formats:** `.xlsx`, `.xlsm` and `.csv` (any delimiter and encoding). `.xls` and `.ods` are converted with LibreOffice first and come back as `.xlsx`.
@@ -133,8 +135,9 @@ python scripts/fill_questionnaire.py --finalize BUYER_DRAFT2.xlsx --out BUYER_FI
 - **What it writes:** the approved answer in the answer column (or the comments column), Yes/No/Partial/N/A in the Yes/No column (matched to the buyer's drop-down values), and "Source: document, section" in the evidence column. With no evidence column, the source goes in the comments column, or on a line under the answer. Change this with `--source-mode auto|column|append|review-only`. Unanswered questions get `NEEDS CLIENT INPUT` (`--placeholder ""` leaves them blank). Cells that already have answers are left alone unless you add `--overwrite`; cells with formulas are never touched.
 - **The copy is safe:** the buyer's file is never changed. The copy differs only in the filled cells, the added review sheet and the workbook entries that register it (the sheet list and a few styles). Each filled cell keeps its formatting, and everything else (other sheets, drop-downs, conditional formatting, comments, macros) is kept exactly as it was. In testing, filled and finalised files passed the Open XML SDK validator whenever the buyer's original did.
 - **Review sheet** ("Review - remove before sending"): every question, NEEDS CLIENT INPUT first, then CHECK, then OK, with the proposed answer, source, what to do, library ID, score, shared keywords, runner-up and a link to the cell. Type Y in **Resolved** as you clear each item; type a library ID (or NONE) in **Use library ID** to correct a match and rerun with `--use-review`.
+- **Your name:** `--prepared-by "Your Name, Your Business"` adds "Prepared by ..." at the top of the review sheet. `--finalize` removes the review sheet, so the buyer never sees it.
 - **Only Approved library answers are used.** `--include-drafts` also uses Draft answers, always flagged CHECK.
-- **Config file:** save the settings for one buyer's file in JSON and pass `--config settings.json`; see `templates/fill_config.example.json`. Command-line options win over the file.
+- **Config file:** save the settings for one buyer's file in JSON in the client's folder and pass `--config clients/<client>/settings.json`; see `templates/fill_config.example.json`. Command-line options win over the file.
 - `--finalize` refuses (exit code 1) while placeholders remain or CHECK/NEEDS rows aren't Resolved = Y. `--force` overrides when the client accepts the open items.
 
 ### How matching works, and what the score means
@@ -166,6 +169,17 @@ python scripts/fill_questionnaire.py --finalize /tmp/cobalt_DRAFT2.xlsx --out /t
 ```
 
 Expected: 40 questions found; 15 OK, 18 CHECK, 7 NEEDS CLIENT INPUT on the first pass; 17 OK, 17 CHECK, 6 NEEDS CLIENT INPUT after the review choices. `samples/README.md` explains each sample file.
+
+### Put your name on the sample
+
+Your name goes on the sample with the `--prepared-by` option of `fill_questionnaire.py`. Rebuild the portfolio sample with your name (from `kits/security-questionnaire/`, with the environment activated):
+
+```sh
+python scripts/fill_questionnaire.py samples/questionnaire/cobalt-ridge-supplier-security-questionnaire.xlsx --library samples/library/answer_library.xlsx --use-review samples/output/cobalt-ridge-supplier-security-questionnaire_DRAFT2.xlsx --out samples/output/cobalt-ridge-supplier-security-questionnaire_DRAFT2.xlsx --prepared-by "Your Name, Your Business"
+soffice --headless --convert-to pdf --outdir samples/output samples/output/cobalt-ridge-supplier-security-questionnaire_DRAFT2.xlsx
+```
+
+The review sheet in the `.xlsx` and in the `.pdf` then says "Prepared by Your Name, Your Business" near the top. The company and the buyer stay fictional: always say so when you show the sample.
 
 ## Using it with Claude Code
 

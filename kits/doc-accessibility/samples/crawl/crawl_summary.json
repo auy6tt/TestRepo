@@ -5,6 +5,7 @@
   "finished": "2026-10-07T10:35:13",
   "depth": 3,
   "delay_seconds": 0.2,
+  "effective_delay_seconds": 0.2,
   "max_pages": 500,
   "user_agent": "DocInventory/1.0 (+mailto:you@example.com)",
   "used_sitemap": true,

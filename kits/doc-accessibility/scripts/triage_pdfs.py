@@ -20,7 +20,8 @@ Outputs in --out: inventory.xlsx, inventory.csv and summary.md.
 These are automated checks only. They cannot show that a file is
 accessible, and they are not a legal opinion.
 
-Examples:
+Examples (the paths are inside the client's folder, for example
+clients/town-of-example/ at the repository root, which git ignores):
   python triage_pdfs.py downloads/ --out inventory/
   python triage_pdfs.py downloads/ --crawl crawl/documents.csv \\
       --out inventory/ --client "Town of Example"

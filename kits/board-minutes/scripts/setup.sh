@@ -6,6 +6,10 @@
 # Run it again in each new cloud session (the container is temporary).
 set -euo pipefail
 
+case "${1:-}" in
+  -h|--help) sed -n '2,6p' "$0" | sed 's/^# \{0,1\}//'; exit 0 ;;
+esac
+
 KIT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VENV="${BOARD_MINUTES_VENV:-$HOME/.venvs/board-minutes}"
 

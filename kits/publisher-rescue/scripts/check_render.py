@@ -104,9 +104,9 @@ def main(argv=None) -> int:
             print(f"        fonts: {', '.join(notes) or 'none'}")
             if warnings:
                 problems += 1
-                print("        CHECK: some text used a stand-in font, so line breaks may "
-                      "differ on the client's computer. (If only tick boxes or symbols "
-                      "use it, you can ignore this.)")
+                print("        CHECK: some text used a stand-in font, so line breaks and "
+                      "letter shapes may differ on the client's computer. (If only tick "
+                      "boxes or symbols use it, you can ignore this.)")
             if args.expect_pages and info.pages != args.expect_pages:
                 problems += 1
                 print(f"        CHECK: expected {args.expect_pages} pages, found {info.pages}.")

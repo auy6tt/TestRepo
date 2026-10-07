@@ -6,8 +6,9 @@
 # status to approved (with checked_by and checked_on) or rejected.
 #
 # Build the issue with:
-#   python scripts/build_digest.py samples/battery-storage-ohio-week41/items.reviewed.yaml \
-#     --out samples/battery-storage-ohio-week41/output
+#   .venv/bin/python scripts/build_digest.py samples/battery-storage-ohio-week41/items.reviewed.yaml \
+#     --out samples/battery-storage-ohio-week41/output \
+#     --changes samples/battery-storage-ohio-week41/changes.json
 
 issue:
   brand: Fieldline Briefs

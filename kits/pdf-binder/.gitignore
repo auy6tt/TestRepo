@@ -2,3 +2,6 @@
 __pycache__/
 *.pyc
 *.partial
+# Client jobs: keep confidential files out of git (this repository is public).
+jobs/
+out/

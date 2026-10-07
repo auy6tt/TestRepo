@@ -13,7 +13,7 @@ other tools load.
 
 Usage (from the kit folder):
     python scripts/check_xlsform.py samples/03_xlsform/lakeside_health_check.xlsx
-    python scripts/check_xlsform.py my_form.xlsx --xml my_form.xml --report my_form_check.txt
+    python scripts/check_xlsform.py out/my_form.xlsx --xml out/my_form.xml --report out/my_form_check.txt
 
 Exit code: 0 = no errors, 1 = errors (or warnings with --strict), 2 = file could not be read.
 Needs: pip install pyxform openpyxl

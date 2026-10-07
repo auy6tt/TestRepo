@@ -45,13 +45,15 @@ The playbook's one-day test: send this to 25 management companies, offer one fre
 
 ## Price guide
 
-| Package | Price (USD) | Notes |
+| Package | Price (USD, estimate) | Notes |
 |---|---|---|
 | One meeting up to 1 hour, 72-hour turnaround | $75–100 | Your layout or theirs, one round of corrections |
 | One meeting of 1–2 hours, or 48-hour turnaround | $100–150 | |
 | 24-hour rush, meetings over 2 hours, or complex meetings | $150–200 | Elections, annual meetings, many motions |
 | Monthly, one association | $100–300 a month | One regular meeting a month plus corrections; extra meetings priced separately |
 | Management company with several associations | Monthly price per association, small discount from the third one | Ask for one contact and one template per association |
+
+Estimates from the October 2026 research; check your market.
 
 Plan on one to two hours of your own time per one-hour meeting at first: reading, checking and emailing. It gets faster once you know a board. For new clients, take payment for the first meeting upfront or use platform escrow.
 
@@ -87,17 +89,17 @@ The skill that runs the process lives at [`.claude/skills/board-minutes/SKILL.md
 Once per session (the cloud container is temporary, so do it again in a new session):
 
 ```sh
-bash kits/board-minutes/scripts/setup.sh
+bash kits/setup.sh board-minutes
 ```
 
-It creates a Python virtual environment in `~/.venvs/board-minutes` and installs python-docx, openpyxl, jsonschema and pytest. Then run the scripts with that Python:
+It installs LibreOffice Writer (for PDF output) and the other system tools, then runs this kit's `scripts/setup.sh`. That creates a Python virtual environment in `~/.venvs/board-minutes` and installs python-docx, openpyxl, jsonschema and pytest. `bash kits/setup.sh --list` shows where each kit's Python is. Then run the scripts with that Python:
 
 ```sh
 PY=~/.venvs/board-minutes/bin/python
 $PY kits/board-minutes/scripts/check_minutes.py --help
 ```
 
-PDF output needs LibreOffice Writer. A fresh cloud session has only part of LibreOffice, so install Writer once per session with `sudo apt-get install -y --no-install-recommends libreoffice-writer`, or run `bash kits/setup.sh board-minutes`, which does both steps. Without Writer you still get the .docx and .xlsx.
+To set up only the Python part, run `bash kits/board-minutes/scripts/setup.sh`. PDF output then still needs LibreOffice Writer: a fresh cloud session has only part of LibreOffice, so install Writer with `sudo apt-get install -y --no-install-recommends libreoffice-writer`. Without Writer you still get the .docx and .xlsx.
 
 ## Step-by-step delivery process
 
@@ -207,7 +209,7 @@ $PY kits/board-minutes/scripts/check_minutes.py \
 Rewrites `templates/minutes-template.docx`. Use `--locale en-GB` for A4 paper and `--no-appendix` to leave out the appendices:
 
 ```sh
-$PY kits/board-minutes/scripts/make_template.py -o my-template-a4.docx --locale en-GB
+$PY kits/board-minutes/scripts/make_template.py -o kits/board-minutes/work/my-template-a4.docx --locale en-GB
 ```
 
 ## Using a client's own template
@@ -215,7 +217,8 @@ $PY kits/board-minutes/scripts/make_template.py -o my-template-a4.docx --locale 
 Give `build_minutes.py` any `.docx` that contains placeholders:
 
 ```sh
-$PY kits/board-minutes/scripts/build_minutes.py minutes.json --template work/acme-hoa/input/acme-template.docx
+$PY kits/board-minutes/scripts/build_minutes.py kits/board-minutes/work/acme-hoa/2026-10-14/output/minutes.json \
+    --template kits/board-minutes/work/acme-hoa/2026-10-14/input/acme-template.docx
 ```
 
 Open the client's template in Word, type placeholders where their blanks are, and save it as `.docx`. The template's fonts, logo, header and footer stay as they are. Two kinds of placeholder:
@@ -280,7 +283,13 @@ Claude Code loads project skills from `.claude/skills/` automatically, including
 
 It also shows the hard parts done right: two directors seconding at once, two different figures quoted for one bid, a task given to no one by name, and a recording that ran into executive session. The first three are marked [UNCLEAR] and asked about; the closed-session talk is left out and the client is told.
 
-**Showing it to prospects:** send the PDF (it's labelled as a fictional sample) and point to the yellow [UNCLEAR] highlights. They show you check and ask rather than guess, which is what boards worry about. Put your name in `document.prepared_by` and rebuild if you want it in the file properties. Never show a real client's minutes without written permission.
+**Showing it to prospects:** send the PDF (it's labelled as a fictional sample) and point to the yellow [UNCLEAR] highlights. They show you check and ask rather than guess, which is what boards worry about. Never show a real client's minutes without written permission.
+
+**Putting your own name on it:** open `samples/wrenfield-commons-2026-09-16-minutes.json`. In the `document` section, add `"prepared_by": "Your Name"` (it becomes the author in the file properties). To show your name on the page too, add it to the `notice` line, for example `"Portfolio sample prepared by Jane Doe Minutes: Wrenfield Commons, its people and this meeting are fictional."` Keep the word "fictional". Then rebuild the Word, Excel and PDF files from the repo root:
+
+```sh
+$PY kits/board-minutes/scripts/build_minutes.py kits/board-minutes/samples/wrenfield-commons-2026-09-16-minutes.json --pdf
+```
 
 ## Running the tests
 

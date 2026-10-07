@@ -1,4 +1,5 @@
 # Python packages for this kit, pinned to the versions it was tested with (Python 3.11).
+# numpy, pandas, scipy and matplotlib at these versions need Python 3.11 or newer.
 # Install inside a virtual environment:  pip install -r requirements.txt
 
 # Used by the scripts in scripts/

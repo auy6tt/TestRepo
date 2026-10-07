@@ -2,12 +2,14 @@
 """
 Self-test for the weekly-digest kit. Runs offline in about a minute.
 
-  python tests/selftest.py
+  .venv/bin/python tests/selftest.py
 
 It copies the fictional sample sites to a temporary folder, serves them on
 this computer and checks that:
 
   - robots.txt rules are read correctly (wildcards, longest match, groups)
+  - every script's --help works and changes nothing, and the docs run the
+    scripts with the kit's own Python (.venv/bin/python)
   - the first run saves snapshots, and the "week 41" run finds the changes:
     a new agenda PDF, a replaced PDF, a new RSS notice, a new open-data
     record, a changed legislation page, a page that disappeared (404) and a
@@ -25,6 +27,7 @@ Nothing in the kit folder is changed. Exit code 0 means every check passed.
 
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import re
@@ -85,6 +88,33 @@ def unit_tests() -> None:
     check("keywords: whole words, plurals, wildcards",
           find_keywords(["Battery storage", "Bessemer Road"], ["battery", "BESS"]) == ["battery"]
           and find_keywords(["new batteries"], ["batter*"]) == ["batter*"])
+
+
+def kit_state() -> dict:
+    """Every file in the kit (except the local Python) with its size and change time."""
+    return {str(p.relative_to(KIT)): (p.stat().st_size, p.stat().st_mtime_ns) for p in KIT.rglob("*")
+            if p.is_file() and not {".venv", "__pycache__"} & set(p.relative_to(KIT).parts)}
+
+
+def help_and_docs_tests() -> None:
+    print("Help and docs")
+    before = kit_state()
+    for script in ("scripts/watch_sources.py", "scripts/build_digest.py", "scripts/run_demo.py"):
+        proc = run([str(KIT / script), "--help"])
+        check(f"{script} --help prints help and exits 0",
+              proc.returncode == 0 and proc.stdout.startswith("usage:"), (proc.stderr or proc.stdout)[-300:])
+    check("--help changes nothing in the kit folder", kit_state() == before)
+
+    # Commands in the docs must use the kit's own Python: a bare "python scripts/..."
+    # fails in a cloud session, where the system Python has none of the kit's packages.
+    bare = re.compile(r"(?<![\w/.\\])python3? (?:scripts|tests)/")
+    skill = KIT.parent.parent / ".claude" / "skills" / "weekly-digest"
+    docs = [KIT / "README.md", *(KIT / "templates").rglob("*.yaml"), *(KIT / "templates").glob("*.md"),
+            *(KIT / "samples").glob("*/items.reviewed.yaml"), *(KIT / "scripts").glob("*.py"),
+            *(skill.glob("*.md") if skill.is_dir() else [])]
+    found = [f"{d.name}:{n}" for d in docs
+             for n, line in enumerate(d.read_text(encoding="utf-8").splitlines(), 1) if bare.search(line)]
+    check("docs and templates run scripts with .venv/bin/python, not bare python", not found, ", ".join(found))
 
 
 def watcher_tests(tmp: Path) -> None:
@@ -295,10 +325,14 @@ def build_tests(tmp: Path) -> None:
           and "PREVIEW, NOT CHECKED" in preview.read_text())
 
 
-def main() -> int:
+def main(argv=None) -> int:
+    argparse.ArgumentParser(
+        description="Offline self-test of the weekly-digest kit. It changes nothing in the kit folder.",
+        epilog="Run it from the kits/weekly-digest folder: .venv/bin/python tests/selftest.py").parse_args(argv)
     tmp = Path(tempfile.mkdtemp(prefix="weekly-digest-selftest-"))
     try:
         unit_tests()
+        help_and_docs_tests()
         watcher_tests(tmp)
         feature_tests(tmp)
         build_tests(tmp)

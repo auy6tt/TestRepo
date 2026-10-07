@@ -12,7 +12,8 @@ Install veraPDF once with:  bash scripts/setup.sh --verapdf
 
 Outputs in --out: validation.csv and validation.md.
 
-Examples:
+Examples (the paths are inside the client's folder, for example
+clients/town-of-example/ at the repository root, which git ignores):
   python validate_pdfs.py fixed/ --out fixed/
   python validate_pdfs.py before.pdf after.pdf
 """

@@ -349,3 +349,7 @@ def write_readme_sheet(workbook, formats, title: str, paragraphs: list[str], nam
             sheet.set_row(row, 14 * lines)
         row += 1
     return sheet
+
+
+if __name__ == "__main__":  # run by mistake (for example with --help): explain and stop
+    print(__doc__.strip())

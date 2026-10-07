@@ -13,7 +13,7 @@ in the client's document (.docx or .txt). It lists:
 Usage (from the kit folder):
     python scripts/check_wording.py --source samples/01_client_input/lakeside_questionnaire_v1.2.docx \
         --dictionary samples/02_redcap/lakeside_data_dictionary.csv \
-        --xlsform samples/03_xlsform/lakeside_health_check.xlsx --report wording_check.txt
+        --xlsform samples/03_xlsform/lakeside_health_check.xlsx --report out/wording_check.txt
 
 Exit code: 0 (use --strict to get 1 when any text is not an exact match).
 Needs python-docx for .docx sources and openpyxl for XLSForms.

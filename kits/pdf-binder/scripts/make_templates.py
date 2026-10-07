@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Create the spreadsheet templates in templates/.
+"""Create the spreadsheet and CSV templates in templates/.
 
-  submittal-log.xlsx           track every submittal: dates, status, days in review
-  binder-index-template.xlsx   the index that build_binder.py reads (also .csv)
-  sds-site-list-template.xlsx  the on-site chemical list the client confirms
+  submittal-log.xlsx               track every submittal: dates, status, days in review
+  binder-index-template.xlsx       the index that build_binder.py reads (also .csv)
+  sds-site-list-template.xlsx      the on-site chemical list the client confirms
+  sds-manual-entries-template.csv  details you read off a sheet yourself (extract_sds.py --manual)
 
 Run it again any time to restore clean copies:
-  python scripts/make_templates.py
-  python scripts/make_templates.py --out-dir somewhere/else
+  .venv/bin/python scripts/make_templates.py
+  .venv/bin/python scripts/make_templates.py --out-dir somewhere/else
 
 make_samples.py uses the same functions to fill in the sample files.
 """
@@ -345,8 +346,33 @@ def write_site_list(path, info: dict | None = None, rows: list[dict] | None = No
     workbook.close()
 
 
+MANUAL_HEADERS = ["sds file", "field", "value", "note"]
+MANUAL_EXAMPLES = [
+    ["EXAMPLE scanned-sheet.pdf", "product", "Product name as printed on the sheet",
+     "read from the scan by JD 2026-10-07"],
+    ["EXAMPLE scanned-sheet.pdf", "manufacturer", "Manufacturer name as printed", ""],
+    ["EXAMPLE scanned-sheet.pdf", "date", "2024-09-03", "revision date on page 1"],
+    ["EXAMPLE scanned-sheet.pdf", "signal word", "Warning", ""],
+    ["EXAMPLE scanned-sheet.pdf", "codes", "H319, H336", "Section 2"],
+    ["EXAMPLE scanned-sheet.pdf", "pictograms", "GHS07", ""],
+    ["EXAMPLE other-sheet.pdf", "reviewed", "yes", "checked against the PDF by JD"],
+]
+
+
+def write_manual_entries_template(csv_path):
+    """Details read off a sheet by a person, for extract_sds.py --manual. EXAMPLE rows are ignored."""
+    with open(csv_path, "w", newline="", encoding="utf-8") as handle:
+        writer = csv.writer(handle, lineterminator="\n")
+        writer.writerow(MANUAL_HEADERS)
+        writer.writerows(MANUAL_EXAMPLES)
+
+
+TEMPLATE_FILES = ("submittal-log.xlsx", "binder-index-template.xlsx", "binder-index-template.csv",
+                  "sds-site-list-template.xlsx", "sds-manual-entries-template.csv")
+
+
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="Create the spreadsheet templates.")
+    parser = argparse.ArgumentParser(description="Create the spreadsheet and CSV templates in templates/.")
     parser.add_argument("--out-dir", default=str(kitlib.KIT_DIR / "templates"), help="where to write them")
     args = parser.parse_args(argv)
     out = Path(args.out_dir)
@@ -354,8 +380,8 @@ def main(argv=None) -> int:
     write_submittal_log(out / "submittal-log.xlsx")
     write_index_template(out / "binder-index-template.xlsx", out / "binder-index-template.csv")
     write_site_list(out / "sds-site-list-template.xlsx")
-    for name in ("submittal-log.xlsx", "binder-index-template.xlsx", "binder-index-template.csv",
-                 "sds-site-list-template.xlsx"):
+    write_manual_entries_template(out / "sds-manual-entries-template.csv")
+    for name in TEMPLATE_FILES:
         print(f"Wrote {out / name}")
     return 0
 

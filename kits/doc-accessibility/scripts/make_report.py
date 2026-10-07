@@ -8,7 +8,8 @@ it) and, with --pdf, exports a tagged PDF with LibreOffice.
 
 Read the result before sending it. Change anything that does not fit the client.
 
-Example:
+Example (the paths are inside the client's folder, for example
+clients/town-of-example/ at the repository root, which git ignores):
   python make_report.py --inventory inventory/inventory.xlsx --crawl-summary crawl/crawl_summary.json \\
       --client "Town of Example" --prepared-by "Your Name" --contact "you@example.com" \\
       --sector us-public --out report/snapshot.docx --pdf

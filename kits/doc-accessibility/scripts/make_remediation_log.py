@@ -9,7 +9,8 @@ It fills only the automated columns. The human-check columns (PAC, reading
 order, alt text, tables, links, forms, colour) say "To do" until a person has
 done them. Never mark a check as passed that nobody did.
 
-Examples:
+Examples (the paths are inside the client's folder, for example
+clients/town-of-example/ at the repository root, which git ignores):
   python make_remediation_log.py --before downloads --after fixed --out log.xlsx \\
       --work "Rebuilt in Word with headings and lists; exported tagged PDF" --validate
   python make_remediation_log.py --before downloads --after basic-fixes \\

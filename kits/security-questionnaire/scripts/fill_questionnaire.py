@@ -19,10 +19,12 @@ What it does
 Only library answers with Status "Approved" are used. Weak or missing
 matches are never guessed: they are marked NEEDS CLIENT INPUT.
 
-Usage
-  python fill_questionnaire.py BUYER.xlsx --library answer_library.xlsx [--out BUYER_DRAFT.xlsx]
-  python fill_questionnaire.py BUYER.xlsx --library answer_library.xlsx --dry-run
-  python fill_questionnaire.py --finalize BUYER_DRAFT.xlsx --out BUYER_FINAL.xlsx
+Usage (from kits/security-questionnaire/; client files go in clients/<client>/,
+which git ignores)
+  python scripts/fill_questionnaire.py clients/<client>/BUYER.xlsx --library clients/<client>/answer_library.xlsx
+         [--out clients/<client>/BUYER_DRAFT.xlsx]
+  python scripts/fill_questionnaire.py clients/<client>/BUYER.xlsx --library clients/<client>/answer_library.xlsx --dry-run
+  python scripts/fill_questionnaire.py --finalize clients/<client>/BUYER_DRAFT.xlsx --out clients/<client>/BUYER_FINAL.xlsx
 
 Run with --help for every option (columns, thresholds, sources, config file).
 """
@@ -447,7 +449,8 @@ class Matcher:
         ranked = sorted(matches, key=lambda m: -m.score)[:top]
         for m in ranked:
             shared = set(q_toks) & set(m.tokens)
-            m.shared = sorted(shared, key=lambda t: -self.index.idf.get(t, 0))[:6]
+            # Rarest words first; ties in alphabetical order, so every run gives the same list.
+            m.shared = sorted(shared, key=lambda t: (-self.index.idf.get(t, 0), t))[:6]
         return ranked
 
     def score_for(self, question: str, entry_id: str) -> Match | None:
@@ -648,7 +651,8 @@ def build_review_sheet(pkg: XlsxPackage, items: list[Item], meta: dict) -> None:
         (f"Review: {meta['questionnaire']} (remove this sheet before sending to the buyer)", {"bold": True, "size": 14}),
         (f"{len(items)} questions: {counts[OK]} OK, {counts[CHECK]} CHECK, {counts[NEEDS]} NEEDS CLIENT INPUT"
          + (f", {counts[SKIPPED]} skipped (already answered)" if counts[SKIPPED] else "")
-         + f". Library: {meta['library']} ({meta['approved']} approved answers). Generated {meta['date']}.",
+         + f". Library: {meta['library']} ({meta['approved']} approved answers). Generated {meta['date']}."
+         + (f" Prepared by {meta['prepared_by']}." if meta.get("prepared_by") else ""),
          {"bold": True, "wrap": True}),
         ("How to finish: fix every NEEDS CLIENT INPUT and CHECK row in the questionnaire (click the Cell link to jump "
          "there), then type Y in Resolved. Wrong match? Type the right library ID (or NONE) in 'Use library ID' and "
@@ -898,7 +902,7 @@ def cmd_fill(args) -> int:
 
     meta = {"questionnaire": src.name, "library": library_path.name, "approved": len(approved),
             "date": today.isoformat(), "ok_score": args.ok_score, "min_score": args.min_score,
-            "fuzzy_pct": round(args.fuzzy_weight * 100)}
+            "fuzzy_pct": round(args.fuzzy_weight * 100), "prepared_by": (args.prepared_by or "").strip()}
     out.parent.mkdir(parents=True, exist_ok=True)
     if is_csv:
         for it in items:
@@ -1043,12 +1047,15 @@ def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(
         description="Fill a buyer's security questionnaire from an answer library (writes a copy plus a review sheet).",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="Examples:\n"
-               "  python fill_questionnaire.py ../samples/questionnaire/buyer.xlsx --library ../samples/library/answer_library.xlsx\n"
-               "  python fill_questionnaire.py buyer.xlsx --library lib.xlsx --sheet \"Security\" --question-col C --answer-col E\n"
-               "  python fill_questionnaire.py buyer.csv --library lib.xlsx --ok-score 0.6 --min-score 0.4\n"
-               "  python fill_questionnaire.py --finalize buyer_DRAFT.xlsx --out buyer_FINAL.xlsx\n\n"
-               "Config file: --config settings.json with any option names as keys, e.g.\n"
+        epilog="Examples (run from kits/security-questionnaire/; client files go in clients/<client>/, which git ignores):\n"
+               "  python scripts/fill_questionnaire.py samples/questionnaire/cobalt-ridge-supplier-security-questionnaire.xlsx "
+               "--library samples/library/answer_library.xlsx --dry-run\n"
+               "  python scripts/fill_questionnaire.py clients/acme/buyer.xlsx --library clients/acme/answer_library.xlsx "
+               "--sheet \"Security\" --question-col C --answer-col E\n"
+               "  python scripts/fill_questionnaire.py clients/acme/buyer.csv --library clients/acme/answer_library.xlsx "
+               "--ok-score 0.6 --min-score 0.4\n"
+               "  python scripts/fill_questionnaire.py --finalize clients/acme/buyer_DRAFT2.xlsx --out clients/acme/buyer_FINAL.xlsx\n\n"
+               "Config file: --config clients/acme/settings.json with any option names as keys, e.g.\n"
                '  {"sheet": ["Security"], "header_row": 4, "question_col": "C", "short_col": "D", "ok_score": 0.6}')
     p.add_argument("questionnaire", nargs="?", help="the buyer's questionnaire (.xlsx .xlsm .csv; .xls .ods via LibreOffice)")
     p.add_argument("--library", help="the client's answer library (.xlsx)")
@@ -1097,6 +1104,9 @@ def build_parser() -> argparse.ArgumentParser:
                         "on the review sheet (default auto)")
     w.add_argument("--placeholder", help=f"text for unanswered questions (default '{DEFAULTS['placeholder']}'; '' leaves them blank)")
     w.add_argument("--overwrite", action="store_true", default=None, help="replace answers already in the buyer's file")
+    w.add_argument("--prepared-by", metavar="NAME",
+                   help="your name or business, shown at the top of the review sheet as 'Prepared by NAME' "
+                        "(--finalize removes the review sheet, so the buyer never sees it)")
     return p
 
 

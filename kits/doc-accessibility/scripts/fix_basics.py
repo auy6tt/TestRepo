@@ -25,7 +25,8 @@ Where titles come from (the first that exists):
      "Council agenda, March 10, 2026")
 Titles from 4 and 5 are marked "check" in the log.
 
-Examples:
+Examples (the paths are inside the client's folder, for example
+clients/town-of-example/ at the repository root, which git ignores):
   python fix_basics.py downloads/ --crawl crawl/documents.csv --suggest-titles titles.csv
   python fix_basics.py downloads/ --out fixed-basics/ --titles titles.csv --lang en-US --ocr
   python fix_basics.py agenda.pdf --out fixed/ --title "Town Council Agenda, March 10, 2026"

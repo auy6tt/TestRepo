@@ -1,4 +1,5 @@
 # Install inside a virtual environment:  pip install -r requirements.txt
+# pyxform 4.x needs Python 3.10 or newer.
 # validate_redcap.py, clean_export.py and make_fake_export.py need none of these:
 # they run on plain Python 3.9 or newer.
 pyxform~=4.5        # official XLSForm converter used by KoboToolbox and ODK (check_xlsform.py)

@@ -16,7 +16,7 @@
 #      put it in issue.attribution in your items file) and its robots.txt, then
 #      put the date you checked in terms_checked.
 #   4. Add each domain under Allowed domains in the environment's Network access settings.
-#   5. Run: python scripts/watch_sources.py digests/<your-digest>
+#   5. Run: .venv/bin/python scripts/watch_sources.py digests/<your-digest>
 #
 # Where to find the real sources:
 #   - Search the city's or county's open-data portal for "building permits",

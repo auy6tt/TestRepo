@@ -42,7 +42,7 @@ For towns, counties, school districts, special districts and public colleges. Ve
 >
 > [Your name]
 
-If they reply "list", run the crawler with `--depth 1` and a slow `--delay`, then send the short list. That is your foot in the door.
+If they reply "list", run the crawler with `--depth 1`, a slow `--delay` and `--out clients/<town>/crawl` (the `clients/` folder at the repository root, which git ignores), then send the short list. That is your foot in the door.
 
 ## Version for health providers (Section 504 coordinator)
 

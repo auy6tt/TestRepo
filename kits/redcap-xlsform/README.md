@@ -83,7 +83,7 @@ Take 30-50% upfront or use platform escrow. Include two rounds of changes within
 
 1. **Intake.** Send `templates/intake_form.docx`. Ask for the approved questionnaire (version and date), the platform, visits, repeating items, identifiers and any licensed scales. Never ask for data.
 2. **Quote.** Fixed price, deliverables, two rounds of changes, timeline, deposit. Tell the client you use AI-assisted tools (with no participant data involved) and honour a "no AI" request.
-3. **Set up a work folder** for the client, for example `work/<client>/input/`, and put the questionnaire there. Keep client files out of public repositories.
+3. **Set up a work folder** for the client, for example `work/<client>/input/` at the top of the repository (git ignores the `work/` folder), and put the questionnaire there. Keep client files out of public repositories.
 4. **Build with the skill.** In your coding-assistant session, type `/redcap-xlsform work/<client>/input/questionnaire.docx both`, or just ask: "Build a REDCap data dictionary and an XLSForm from work/acme/input/questionnaire.docx". The skill (`.claude/skills/redcap-xlsform/`) plans the build, writes the files and runs every check below.
 5. **Check and fix** until the validators pass: `validate_redcap.py`, `check_xlsform.py`, then `check_wording.py` against the approved document.
 6. **Codebook, fake data and cleaning script:** `make_codebook.py`, `make_fake_export.py`, `clean_export.py --answer-key` (every deliberate mistake must be found).
@@ -116,16 +116,18 @@ Take 30-50% upfront or use platform escrow. Include two rounds of changes within
 
 ## Set up and run the scripts
 
-You need Python 3.9 or newer. `validate_redcap.py`, `clean_export.py` and `make_fake_export.py` use only the standard library. The others need three packages; ODK Validate also needs Java (already in the cloud sandbox).
+You need Python 3.10 or newer (`validate_redcap.py`, `clean_export.py` and `make_fake_export.py` also run on Python 3.9, since they use only the standard library). The other scripts need three packages; ODK Validate also needs Java (already in the cloud sandbox).
+
+The easy way, from the repository root: `bash kits/setup.sh redcap-xlsform`. It makes the Python environment below (`bash kits/setup.sh --list` shows where). Or make it by hand:
 
 ```bash
 python3 -m venv /tmp/redcap-venv
 /tmp/redcap-venv/bin/pip install -r kits/redcap-xlsform/requirements.txt
 cd kits/redcap-xlsform
-/tmp/redcap-venv/bin/python scripts/selftest.py      # runs every script on the samples: 15 checks
+/tmp/redcap-venv/bin/python scripts/selftest.py      # runs every script on the samples: 16 checks
 ```
 
-In the commands below, `python` means `/tmp/redcap-venv/bin/python`, run from `kits/redcap-xlsform/`. Every script has `--help`. The examples write their results to an `out/` folder (ignored by git); the fake-data example rebuilds the sample files themselves.
+In the commands below, `python` means `/tmp/redcap-venv/bin/python`, run from `kits/redcap-xlsform/`. Every script has `--help`, which shows the options and changes nothing. The examples write their results to an `out/` folder (ignored by git); the fake-data example rebuilds the sample files themselves.
 
 | Script | What it does |
 |---|---|
@@ -139,7 +141,7 @@ In the commands below, `python` means `/tmp/redcap-venv/bin/python`, run from `k
 | `extract_text.py` | Gets the text out of a questionnaire (.docx, .doc, .odt, .rtf, .pdf) |
 | `md_to_docx.py` | Turns the Markdown templates into Word documents |
 | `selftest.py` | Runs everything on the samples and reports PASS/FAIL |
-| `redcap_dictionary.py`, `redcap_logic.py`, `xlsform_reader.py` | Helper modules used by the scripts above |
+| `redcap_dictionary.py`, `redcap_logic.py`, `xlsform_reader.py` | Helper modules used by the scripts above (you do not run them; `--help` only says what they do) |
 
 ### Check a REDCap data dictionary
 
@@ -158,7 +160,7 @@ python scripts/build_xlsform.py samples/03_xlsform/source -o out/my_form.xlsx
 python scripts/check_xlsform.py out/my_form.xlsx --xml out/my_form.xml --report out/xlsform_check.txt
 ```
 
-To fix a client's existing form, split it into CSVs first: `python scripts/build_xlsform.py --split their_form.xlsx -o out/their_form_source`.
+To fix a client's existing form, split it into CSVs first. Keep the client's files in `work/<client>/` at the top of the repository (git ignores that folder), not in the kit folder: `python scripts/build_xlsform.py --split ../../work/<client>/input/their_form.xlsx -o ../../work/<client>/xlsform/source`.
 
 ### Check the wording against the approved questionnaire
 
@@ -174,7 +176,7 @@ python scripts/check_wording.py --source samples/01_client_input/lakeside_questi
 python scripts/make_codebook.py --dictionary samples/02_redcap/lakeside_data_dictionary.csv \
   --events samples/02_redcap/instrument_event_mapping.csv \
   --repeating samples/02_redcap/repeating_instruments.csv \
-  --title "Lakeside Community Health Check" --out out/lakeside_codebook --logic-table out/skip_logic_tests.md
+  --title "Lakeside Community Health Check (fictional sample)" --out out/lakeside_codebook --logic-table out/skip_logic_tests.md
 python scripts/make_codebook.py --xlsform samples/03_xlsform/lakeside_health_check.xlsx --out out/lakeside_kobo_codebook
 ```
 
@@ -202,8 +204,10 @@ The last line of the output must read "Answer key: 9 of 9 deliberate mistakes fo
 ### Turn templates into Word documents
 
 ```bash
-python scripts/md_to_docx.py templates/intake_form.md templates/client_test_checklist.md templates/delivery_note.md
+python scripts/md_to_docx.py templates/intake_form.md templates/client_test_checklist.md templates/delivery_note.md --outdir out
 ```
+
+Without `--outdir`, each Word file is written next to its Markdown file, so the command above would overwrite the Word templates in `templates/`. For a client, fill in copies in `work/<client>/delivery/` and use `--outdir ../../work/<client>/delivery`.
 
 ## The sample (your portfolio piece)
 
@@ -221,6 +225,14 @@ A fictional "Lakeside Community Health Check": a 15-question screening questionn
 | `samples/08_delivery/` | The filled-in delivery note and test checklist (.md and .docx) and the wording check |
 
 How to use it with prospects: share the delivery note and the HTML codebook first (they show the finished package), and the broken-file reports to show your checks. Always say the study is fictional. You can rebuild any sample output with the commands above; the self-test confirms the samples are still consistent.
+
+**Put your own name on the sample.** Open `samples/08_delivery/delivery_note.md` and replace `[your name]` in the "Prepared by" row with your name or business name. Then rebuild its Word file (from `kits/redcap-xlsform/`):
+
+```bash
+python scripts/md_to_docx.py samples/08_delivery/delivery_note.md
+```
+
+This writes `samples/08_delivery/delivery_note.docx` next to the Markdown file. Keep the "fictional sample" line at the top.
 
 ## What the kit cannot do
 

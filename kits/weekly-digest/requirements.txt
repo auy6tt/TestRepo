@@ -14,7 +14,7 @@ openpyxl>=3.1,<4           # .xlsx tracker
 
 # Prints the PDF with headless Chromium. 1.56 matches the browser already installed
 # in Claude Code cloud sessions. On your own computer, run once:
-#   python -m playwright install chromium
+#   .venv/bin/python -m playwright install chromium
 playwright==1.56.0
 
 # Time zone data (Windows needs it; Linux and macOS already have it).
