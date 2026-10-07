@@ -28,6 +28,7 @@ from __future__ import annotations
 import argparse
 import csv
 import re
+import signal
 import sys
 import warnings
 from dataclasses import dataclass, field
@@ -581,6 +582,8 @@ def cmd_build(args) -> int:
 
 
 def main(argv=None) -> int:
+    if hasattr(signal, "SIGPIPE"):  # exit quietly when output is piped to head/less
+        signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     parser = argparse.ArgumentParser(
         description="Seed a draft answer library from client documents, write a blank template, or check a library.",
         formatter_class=argparse.RawDescriptionHelpFormatter,

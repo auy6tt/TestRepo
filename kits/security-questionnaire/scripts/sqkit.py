@@ -265,6 +265,8 @@ def write_library(path, entries: list[dict], *, client: str = "", evidence: list
     from openpyxl.worksheet.datavalidation import DataValidation
 
     wb = openpyxl.Workbook()
+    wb.properties.creator = "Security questionnaire kit"
+    wb.properties.title = "Answer library" + (f": {client}" if client else "")
     readme = wb.active
     readme.title = "Readme"
     lib = wb.create_sheet(LIBRARY_SHEET)
@@ -432,6 +434,16 @@ def write_library(path, entries: list[dict], *, client: str = "", evidence: list
         ws.sheet_view.tabSelected = ws.title == active
     wb.active = wb.sheetnames.index(active)
     wb.save(path)
+    tidy_xlsx(path)
+
+
+def tidy_xlsx(path) -> None:
+    """Fix openpyxl's non-standard font element order so the file passes strict validators."""
+    from xlsx_patch import XlsxPackage
+
+    pkg = XlsxPackage(path)
+    pkg.tidy_font_order()
+    pkg.save(path)
 
 
 def read_question_bank(path) -> list[dict]:

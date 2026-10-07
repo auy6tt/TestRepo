@@ -277,7 +277,7 @@ NICHES.push(
  where:"Community Associations Institute (CAI) chapters and directory, local HOA management companies, nonprofit and church networks, Upwork and Fiverr searches for \"meeting minutes\".",
  first:"Turn a public HOA or council meeting recording into sample minutes, then email 25 management companies offering one free set with 24-hour turnaround, and count the replies.",
  risk:"Follow consent rules for recordings, leave out closed-session detail unless the bylaws allow it, keep everything confidential, and never invent content. Use anonymized or metadata-only exports, or the client's own Claude workspace, for personal data."},
-{id:"security-questionnaires", group:"backoffice", rank:402, s:[5,3,5,2], related:["ecovadis"],
+{id:"security-questionnaires", group:"backoffice", rank:402, kit:"security-questionnaire", s:[5,3,5,2], related:["ecovadis"],
  name:"Security questionnaires for small software companies",
  short:"Answer buyers' vendor-security forms from the client's own policies",
  who:"Early-stage software companies with no security lead that sell to mid-sized or enterprise buyers.",

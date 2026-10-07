@@ -1,0 +1,7 @@
+# Client work never goes into git. Keep each client in clients/<client-name>/.
+clients/
+
+# Office lock files and Python caches
+~$*
+.~lock.*#
+__pycache__/

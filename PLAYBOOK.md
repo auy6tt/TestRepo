@@ -353,6 +353,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** These are statements the client makes to its customers, so never invent security controls. The client signs; don't pose as an auditor or certify compliance.
 - **Test it in one day:** Fill in a public questionnaire for a made-up startup as a sample, then message 30 B2B software founders offering a fixed-price first questionnaire in 72 hours.
 - **Related:** [Supplier sustainability questionnaires (EcoVadis)](#ecovadis)
+- **Starter kit:** [`kits/security-questionnaire/`](kits/security-questionnaire/). Set it up with `bash kits/setup.sh security-questionnaire`, then type `/security-questionnaire` in Claude Code.
 
 <a id="closeout-docs"></a>
 #### Construction submittal and handover packages

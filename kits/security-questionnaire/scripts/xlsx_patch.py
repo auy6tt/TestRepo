@@ -360,8 +360,11 @@ class XlsxPackage:
                 etree.SubElement(font, M + "name", val=name.get("val") if name is not None else "Calibri")
                 for tag in ("family", "charset", "scheme"):
                     el = base.find(M + tag)
-                    if el is not None:
-                        font.append(copy.deepcopy(el))
+                    if el is None:
+                        continue
+                    if tag == "family" and el.get("val", "") not in {str(n) for n in range(1, 15)}:
+                        continue  # some tools write family="0", which is not valid
+                    font.append(copy.deepcopy(el))
                 fonts.set("count", str(len(fonts)))
                 fill_id = 0
                 if spec.get("fill"):
@@ -650,6 +653,23 @@ class XlsxPackage:
                 if view is not None:
                     view.set("tabSelected", "1")
                     self._touch(remaining[active]["part"])
+
+    def tidy_font_order(self) -> None:
+        """Put <font> children in the order the standard requires (openpyxl writes name/color first)."""
+        part = self._styles_part()
+        if not part:
+            return
+        order = ["b", "i", "strike", "condense", "extend", "outline", "shadow", "u", "vertAlign", "sz", "color",
+                 "name", "family", "charset", "scheme"]
+        rank = {M + t: i for i, t in enumerate(order)}
+        for font in self._tree(part).iter(M + "font"):
+            children = list(font)
+            ordered = sorted(children, key=lambda el: rank.get(el.tag, len(order)))
+            if ordered != children:
+                for el in children:
+                    font.remove(el)
+                font.extend(ordered)
+                self._touch(part)
 
     # ---- save
     def save(self, path) -> None:

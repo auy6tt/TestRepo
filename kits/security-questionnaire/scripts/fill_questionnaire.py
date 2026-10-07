@@ -33,6 +33,7 @@ import csv
 import datetime as dt
 import json
 import re
+import signal
 import shutil
 import subprocess
 import sys
@@ -181,7 +182,7 @@ def header_roles(text: str) -> dict[str, int]:
         roles["id"] = 3
     yes_no = re.search(r"yes\s*/\s*no|\by\s*/\s*n\b|yes or no|yes,\s*no|yes\s*-\s*no", t)
     if not idish:
-        if "question" in t:
+        if re.search(r"\bquestions?\b", t):  # not "questionnaire"
             roles["question"] = 4
         elif re.search(r"requirement|control (statement|question|description|text)|criteria|criterion|"
                        r"assessment item|query|^item$|^control$", t):
@@ -601,18 +602,18 @@ def already_answered(item: Item) -> bool:
 # Review sheet
 # --------------------------------------------------------------------------
 
-# Review sheet columns: (header, key, width). The first ten (A to J) are the essentials and
+# Review sheet columns: (header, key, width). The first eleven (A to K) are the essentials and
 # form the print area; then the reviewer's own columns; then matching details.
 REVIEW_COLUMNS = [
     ("Status", "status", 16), ("Ref", "ref", 8), ("Cell", "cell", 10), ("Buyer question", "question", 40),
     ("Proposed Yes/No", "short", 9), ("Proposed answer", "answer", 52), ("Source", "source", 30),
     ("What to do", "reasons", 38), ("Library ID", "lib_id", 9), ("Score", "score", 7),
-    ("Use library ID", "use_id", 11), ("Resolved (Y/N)", "resolved", 10), ("Reviewer notes", "notes", 28),
+    ("Reviewer notes", "notes", 28), ("Use library ID", "use_id", 11), ("Resolved (Y/N)", "resolved", 10),
     ("Library question matched", "lib_q", 36), ("Shared keywords", "shared", 22), ("Runner-up", "runner", 14),
     ("Library confidence", "confidence", 11), ("Last reviewed", "reviewed", 12), ("Sheet", "sheet", 14),
 ]
 REVIEW_HEADERS = [c[0] for c in REVIEW_COLUMNS]
-PRINT_COLS = 10
+PRINT_COLS = 11
 NO_MATCH_WORDS = ("NONE", "-", "NO", "NO MATCH")
 STATUS_FILL = {NEEDS: "F8CBAD", CHECK: "FFE699", OK: "C6EFCE", SKIPPED: "D9D9D9"}
 
@@ -1100,6 +1101,8 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv=None) -> int:
+    if hasattr(signal, "SIGPIPE"):  # exit quietly when output is piped to head/less
+        signal.signal(signal.SIGPIPE, signal.SIG_DFL)
     parser = build_parser()
     args = parser.parse_args(argv)
     if args.config:
