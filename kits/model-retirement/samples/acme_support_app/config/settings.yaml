@@ -1,0 +1,10 @@
+# Feature settings for the Acme Home Goods support helper.
+# FICTIONAL SAMPLE CONFIG for the model-retirement starter kit portfolio.
+summarizer:
+  enabled: true
+  model: old-model-v1
+  temperature: 0.3
+  max_tokens: 300
+reply_drafter:
+  enabled: true
+  max_articles: 3

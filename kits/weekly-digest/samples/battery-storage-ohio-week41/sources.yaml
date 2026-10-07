@@ -1,0 +1,86 @@
+# Sources for the FICTIONAL sample "Battery Storage Zoning Watch — Ohio".
+#
+# Every address below uses the reserved ".example" domain, so none of them is a
+# real website and every place, body, company and document is invented.
+# scripts/run_demo.py serves them from the site/ folder on your own computer
+# and runs the watcher twice: once on the "week 40" copy and once on the
+# "week 41" copy, so you can see what a real weekly change report looks like.
+#
+# For a real digest, start from one of the files in templates/sources/.
+
+digest:
+  name: "Battery Storage Zoning Watch — Ohio"
+  scope: >-
+    Local government actions in Ohio that affect battery energy storage (BESS)
+    projects: moratoria, zoning text amendments, rezonings, conditional use and
+    variance cases, hearings, votes and fire-safety ordinances.
+  audience: "Battery storage developers, land agents and their consultants"
+
+settings:
+  user_agent: "WeeklyDigestWatcher/1.0 (+mailto:briefs@fieldline.example)"
+  delay_seconds: 0.5            # demo only: use 5 or more for real sites
+  keywords: [battery, batteries, energy storage, BESS, moratorium, moratoria]
+
+sources:
+  - name: "Tarrow County Commissioners: agendas"
+    url: https://www.tarrowcounty.example/commissioners/agendas/
+    type: html
+    ignore_patterns: ["^Page last updated"]   # this line changes every time the page is touched
+    follow_new_links: true                    # fetch new agenda PDFs and save their text
+    tags: [tarrow-county, county, agenda]
+    terms_checked: 2026-09-28
+
+  - name: "Tarrow County Board of Zoning Appeals: decisions"
+    url: https://www.tarrowcounty.example/bza/decisions/
+    type: html
+    tags: [tarrow-county, county, zoning-appeals]
+    terms_checked: 2026-09-28
+
+  - name: "Tarrow County site search: battery storage"
+    url: https://www.tarrowcounty.example/search/?q=battery+storage
+    type: html
+    notes: "robots.txt disallows /search/, so the watcher skips this. Kept to show what that looks like."
+    tags: [tarrow-county]
+    terms_checked: 2026-09-28
+
+  - name: "Kestrel Regional Planning Commission: current agenda (PDF)"
+    url: https://www.kestrelrpc.example/agendas/current-agenda.pdf
+    type: pdf
+    tags: [regional, planning-commission, agenda]
+    terms_checked: 2026-09-28
+
+  - name: "Wrenfield Township: public notices (RSS)"
+    url: https://www.wrenfieldtwp.example/notices/feed.xml
+    type: rss
+    follow_new_links: true                    # new notices link to PDFs
+    tags: [wrenfield-township, township, legal-notice]
+    terms_checked: 2026-09-28
+
+  - name: "Halden County open data: zoning applications (JSON)"
+    url: https://data.haldencounty.example/api/zoning-applications.json
+    type: json
+    items_path: records
+    id_field: case_number
+    # Keep only these fields. Anything else (such as contact phone numbers) is never stored.
+    fields: [case_number, filed_date, application_type, township, proposed_use,
+             project_name, applicant_name, applicant_type, site_location, acreage,
+             status, documents_url]
+    link_field: documents_url
+    skip_records_where:
+      applicant_type: [individual]            # never store private individuals' applications
+    tags: [halden-county, county, open-data]
+    terms_checked: 2026-09-28
+
+  - name: "City of Marlowe Falls: pending legislation"
+    url: https://www.marlowefalls.example/council/legislation/
+    type: html
+    selector: "#pending-legislation"          # watch only this part of the page
+    follow_new_links: true
+    tags: [marlowe-falls, city, ordinance]
+    terms_checked: 2026-09-28
+
+  - name: "Halden County Zoning Commission: hearings page"
+    url: https://www.haldencounty.example/planning/zoning-commission/
+    type: html
+    tags: [halden-county, county, hearing]
+    terms_checked: 2026-09-28

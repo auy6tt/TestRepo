@@ -1,0 +1,5 @@
+# Sample robots.txt for the fictional Town of Fernwick site
+User-agent: *
+Disallow: /staff-only/
+
+Sitemap: {{BASE_URL}}sitemap.xml

@@ -1,0 +1,13 @@
+,(1),(2),(3)
+Tutoring offer,0.292***,0.257***,0.259***
+,(0.078),(0.045),(0.045)
+Baseline score (z),,0.871***,0.794***
+,,(0.026),(0.024)
+Female,,0.025,0.030
+,,(0.040),(0.045)
+Low income,,-0.164***,-0.195***
+,,(0.042),(0.044)
+Grade fixed effects,No,Yes,Yes
+School fixed effects,No,No,Yes
+Observations,750,750,750
+R-squared,0.020,0.762,0.792

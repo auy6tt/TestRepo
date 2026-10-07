@@ -1,0 +1,13 @@
+{
+  "id": "halden-county-zoning-commission-hearings-page",
+  "name": "Halden County Zoning Commission: hearings page",
+  "url": "https://www.haldencounty.example/planning/zoning-commission/",
+  "type": "html",
+  "first_checked": "2026-10-07T10:12:15Z",
+  "last_checked": "2026-10-07T10:12:15Z",
+  "last_changed": "2026-10-07T10:12:15Z",
+  "sha256": "37ce7e04df6f79fde84f89e0916c2af9612c76af18888dd5f95c938cceb1ffca",
+  "etag": null,
+  "last_modified": "Wed, 30 Sep 2026 10:00:00 GMT",
+  "config": "eec8d6fde3f2"
+}

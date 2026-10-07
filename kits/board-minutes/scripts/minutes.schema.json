@@ -1,0 +1,276 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "board-minutes/minutes.schema.json",
+  "title": "Board meeting minutes",
+  "description": "The structured content of one set of meeting minutes. Field-by-field notes are in SCHEMA.md. Keys that start with an underscore (for example \"_note\") are allowed anywhere and are ignored by the scripts.",
+  "type": "object",
+  "required": ["schema_version", "organization", "meeting", "attendance", "items"],
+  "additionalProperties": false,
+  "patternProperties": {"^_": {}},
+  "properties": {
+    "schema_version": {"const": "1.0", "description": "Always \"1.0\" for this version of the kit."},
+    "document": {"$ref": "#/$defs/document"},
+    "organization": {"$ref": "#/$defs/organization"},
+    "meeting": {"$ref": "#/$defs/meeting"},
+    "attendance": {"$ref": "#/$defs/attendance"},
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Agenda items in the order they were taken up, from call to order to adjournment.",
+      "items": {"$ref": "#/$defs/item"}
+    },
+    "action_items": {"type": "array", "items": {"$ref": "#/$defs/action_item"}},
+    "next_meeting": {"anyOf": [{"$ref": "#/$defs/next_meeting"}, {"type": "null"}]},
+    "attachments": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+    "questions": {"type": "array", "items": {"$ref": "#/$defs/question"}},
+    "signatures": {"$ref": "#/$defs/signatures"}
+  },
+  "$defs": {
+    "text": {"type": "string", "minLength": 1},
+    "unclear": {
+      "type": "string",
+      "pattern": "^\\[UNCLEAR(?:[:\\s][^\\[\\]]*)?\\]$",
+      "description": "[UNCLEAR] or [UNCLEAR: short note]"
+    },
+    "date": {"type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$", "description": "YYYY-MM-DD"},
+    "date_or_unclear": {"anyOf": [{"$ref": "#/$defs/date"}, {"$ref": "#/$defs/unclear"}]},
+    "time": {"type": "string", "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$", "description": "24-hour HH:MM, for example 19:02"},
+    "time_or_unclear": {"anyOf": [{"$ref": "#/$defs/time"}, {"$ref": "#/$defs/unclear"}]},
+    "source": {
+      "type": "string",
+      "pattern": "^\\d{1,2}:\\d{2}(:\\d{2})?(\\s*[-–]\\s*\\d{1,2}:\\d{2}(:\\d{2})?)?$",
+      "description": "Where this is in the recording, for example 00:12:40 or 00:12:40-00:15:05"
+    },
+    "name_or_null": {"anyOf": [{"$ref": "#/$defs/text"}, {"type": "null"}]},
+    "count": {"anyOf": [{"type": "integer", "minimum": 0}, {"type": "null"}]},
+
+    "document": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "status": {"enum": ["draft", "approved"]},
+        "locale": {"enum": ["en-US", "en-GB"]},
+        "notice": {"$ref": "#/$defs/text"},
+        "prepared_by": {"$ref": "#/$defs/text"},
+        "prepared_on": {"$ref": "#/$defs/date"},
+        "approved_on": {"$ref": "#/$defs/date"},
+        "confidential": {"type": "boolean"}
+      }
+    },
+
+    "organization": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "name": {"$ref": "#/$defs/text"},
+        "short_name": {"$ref": "#/$defs/text"},
+        "board_name": {"$ref": "#/$defs/text"},
+        "board_short": {"$ref": "#/$defs/text"}
+      }
+    },
+
+    "person": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "name": {"$ref": "#/$defs/text"},
+        "role": {"$ref": "#/$defs/text"},
+        "attended": {"enum": ["in_person", "remote", "phone"]},
+        "arrived": {"$ref": "#/$defs/time_or_unclear"},
+        "left": {"$ref": "#/$defs/time_or_unclear"},
+        "note": {"$ref": "#/$defs/text"}
+      }
+    },
+
+    "meeting": {
+      "type": "object",
+      "required": ["title", "date", "called_to_order", "adjourned", "presiding"],
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "title": {"$ref": "#/$defs/text"},
+        "date": {"$ref": "#/$defs/date"},
+        "scheduled_time": {"$ref": "#/$defs/time"},
+        "called_to_order": {"$ref": "#/$defs/time_or_unclear"},
+        "adjourned": {"$ref": "#/$defs/time_or_unclear"},
+        "location": {"$ref": "#/$defs/text"},
+        "format": {"enum": ["in_person", "virtual", "hybrid"]},
+        "presiding": {"$ref": "#/$defs/person"},
+        "recording_secretary": {"$ref": "#/$defs/person"},
+        "voting_body": {"enum": ["board", "members"]}
+      }
+    },
+
+    "attendance": {
+      "type": "object",
+      "required": ["directors_present", "directors_absent", "quorum"],
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "group_label": {"$ref": "#/$defs/text"},
+        "directors_present": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/person"}},
+        "directors_absent": {"type": "array", "items": {"$ref": "#/$defs/person"}},
+        "others_present": {"type": "array", "items": {"$ref": "#/$defs/person"}},
+        "members_present": {"$ref": "#/$defs/text"},
+        "quorum": {
+          "type": "object",
+          "required": ["met"],
+          "additionalProperties": false,
+          "patternProperties": {"^_": {}},
+          "properties": {
+            "met": {"type": ["boolean", "null"]},
+            "present_count": {"type": "integer", "minimum": 0},
+            "required": {"type": "integer", "minimum": 1},
+            "board_size": {"type": "integer", "minimum": 1},
+            "statement": {"$ref": "#/$defs/text"}
+          }
+        }
+      }
+    },
+
+    "vote": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "method": {"enum": ["voice", "show_of_hands", "roll_call", "ballot", "unanimous_consent", "electronic", "[UNCLEAR]"]},
+        "in_favor": {"$ref": "#/$defs/count"},
+        "opposed": {"$ref": "#/$defs/count"},
+        "abstained": {"$ref": "#/$defs/count"},
+        "unanimous": {"type": "boolean"},
+        "roll_call": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "vote"],
+            "additionalProperties": false,
+            "patternProperties": {"^_": {}},
+            "properties": {
+              "name": {"$ref": "#/$defs/text"},
+              "vote": {"enum": ["yes", "no", "abstain", "recused", "absent", "[UNCLEAR]"]}
+            }
+          }
+        },
+        "recused": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "note": {"$ref": "#/$defs/text"}
+      }
+    },
+
+    "result": {"enum": ["carried", "failed", "withdrawn", "tabled", "postponed", "referred", "ruled_out_of_order", "no_vote", "[UNCLEAR]"]},
+
+    "amendment": {
+      "type": "object",
+      "required": ["text", "moved_by", "seconded_by", "result"],
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "text": {"$ref": "#/$defs/text"},
+        "moved_by": {"$ref": "#/$defs/name_or_null"},
+        "seconded_by": {"$ref": "#/$defs/name_or_null"},
+        "second_note": {"$ref": "#/$defs/text"},
+        "vote": {"$ref": "#/$defs/vote"},
+        "result": {"$ref": "#/$defs/result"},
+        "notes": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/source"}
+      }
+    },
+
+    "motion": {
+      "type": "object",
+      "required": ["text", "moved_by", "seconded_by", "result"],
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "label": {"$ref": "#/$defs/text"},
+        "text": {"$ref": "#/$defs/text"},
+        "moved_by": {"$ref": "#/$defs/name_or_null"},
+        "seconded_by": {"$ref": "#/$defs/name_or_null"},
+        "second_note": {"$ref": "#/$defs/text"},
+        "on_behalf_of": {"$ref": "#/$defs/text"},
+        "amendments": {"type": "array", "items": {"$ref": "#/$defs/amendment"}},
+        "vote": {"$ref": "#/$defs/vote"},
+        "threshold": {"enum": ["majority", "two_thirds", "unanimous", "other"]},
+        "result": {"$ref": "#/$defs/result"},
+        "notes": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/source"}
+      }
+    },
+
+    "item": {
+      "type": "object",
+      "required": ["title"],
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "number": {"$ref": "#/$defs/text"},
+        "title": {"$ref": "#/$defs/text"},
+        "kind": {"enum": ["call_to_order", "roll_call", "agenda_approval", "approval_of_minutes", "open_forum", "report", "business", "executive_session", "next_meeting", "adjournment", "heading", "other"]},
+        "level": {"enum": [1, 2]},
+        "presenter": {"$ref": "#/$defs/text"},
+        "summary": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "motions": {"type": "array", "items": {"$ref": "#/$defs/motion"}},
+        "start": {"$ref": "#/$defs/time_or_unclear"},
+        "end": {"$ref": "#/$defs/time_or_unclear"},
+        "topics": {"type": "array", "items": {"$ref": "#/$defs/text"}},
+        "outcome": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/source"}
+      }
+    },
+
+    "action_item": {
+      "type": "object",
+      "required": ["task", "owner", "due"],
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "task": {"$ref": "#/$defs/text"},
+        "owner": {"$ref": "#/$defs/text"},
+        "due": {"$ref": "#/$defs/text"},
+        "item": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/source"},
+        "notes": {"$ref": "#/$defs/text"}
+      }
+    },
+
+    "next_meeting": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "description": {"$ref": "#/$defs/text"},
+        "date": {"$ref": "#/$defs/date_or_unclear"},
+        "time": {"$ref": "#/$defs/time_or_unclear"},
+        "location": {"$ref": "#/$defs/text"},
+        "note": {"$ref": "#/$defs/text"}
+      }
+    },
+
+    "question": {
+      "type": "object",
+      "required": ["question"],
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "question": {"$ref": "#/$defs/text"},
+        "where": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/source"}
+      }
+    },
+
+    "signatures": {
+      "type": "object",
+      "additionalProperties": false,
+      "patternProperties": {"^_": {}},
+      "properties": {
+        "secretary": {"$ref": "#/$defs/person"},
+        "submitted_label": {"$ref": "#/$defs/text"},
+        "show_approval_line": {"type": "boolean"}
+      }
+    }
+  }
+}

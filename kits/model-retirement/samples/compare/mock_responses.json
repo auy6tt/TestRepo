@@ -1,0 +1,42 @@
+{
+  "S01": {
+    "old": "Priya's oak bookshelf (order #10423) has not shipped; tracking has shown 'label created' for 9 days. She is moving on 20 September and needs it before then. She wants to know where it is or to have a new one sent.",
+    "new": "Order #10423 (oak bookshelf) has not shipped: tracking has said 'label created' for 9 days. Priya needs it before she moves on 20 September and wants a status update or a replacement."
+  },
+  "S02": {
+    "old": "Tom's ceramic table lamp from order #10511 arrived with a cracked base, and he has sent photos. He wants a replacement rather than a refund because it matches his other lamp.",
+    "new": "The ceramic table lamp in order #10511 arrived with a cracked base (photos attached). Tom wants a replacement, not a refund, because it matches a lamp he already owns."
+  },
+  "S03": {
+    "old": "The customer was charged twice ($84.50 each) for order #10602 on 14 September. They have attached a bank statement and want the duplicate charge refunded.",
+    "new": "Order #10602 was charged twice on 14 September ($84.50 each time). The customer attached a bank statement and wants the duplicate charge refunded."
+  },
+  "S04": {
+    "old": "The customer wants to change the delivery address for their order to 14 Harbour Road, Unit 3, Millbrook. Their account shows the order has not shipped yet.",
+    "new": "The customer wants the delivery address for order #10655 changed to 14 Harbour Road, Unit 3, Millbrook. Their account shows the order has not shipped yet."
+  },
+  "S05": {
+    "old": "The customer returned the linen curtains from order #10388 three weeks ago (return label RT-55821), and the courier shows we received them on 12 September. The refund has not arrived and they want it checked.",
+    "new": "The customer returned the linen curtains from order #10388 (return label RT-55821) but has not received a refund. They want us to check on it."
+  },
+  "S06": {
+    "old": "The customer cannot finish checking out because the website keeps logging them out, even in two different browsers, so there is no order number yet. They want the 15% welcome discount to still apply once the problem is fixed.",
+    "new": "The customer is logged out every time they try to check out (tried two browsers), so there is no order number yet. They want their 15% welcome discount to still apply after the fix."
+  },
+  "R01": {
+    "old": "Hi Priya,\n\nThank you for getting in touch, and I'm sorry your oak bookshelf (order #10423) hasn't arrived yet. Because the tracking hasn't moved for more than 5 working days, we will send a replacement free of charge. I'll arrange it today so it reaches you before your move on 20 September.\n\nBest wishes,\nAcme Home Goods Support",
+    "new": "Hi Priya,\n\nI'm sorry your oak bookshelf (order #10423) hasn't arrived. As the tracking hasn't moved for over 5 working days, we'll send a replacement free of charge and email you the new tracking number today.\n\nThe Acme Home Goods team"
+  },
+  "R02": {
+    "old": "Hi Tom,\n\nI'm sorry your ceramic lamp (order #10511) arrived with a cracked base, and thank you for the photos. We'll send you a free replacement, and I'll email the tracking details as soon as it ships.\n\nKind regards,\nAcme Home Goods Support",
+    "new": "Hi Tom,\n\nI'm sorry the lamp from order #10511 arrived cracked, and thanks for the photos. We'll send you a free replacement and email you the tracking details when it ships.\n\nThe Acme Home Goods team"
+  },
+  "R03": {
+    "old": "Hi there,\n\nThanks for your patience. We received your linen curtains on 12 September, and refunds are issued within 5 working days of receiving a return. Your bank may then take another 3-5 working days to show the money. I've asked our returns team to check the refund for order #10388.\n\nBest wishes,\nAcme Home Goods Support",
+    "new": "Hi,\n\nThanks for your patience. Refunds are issued within 5 working days of a return arriving, and your bank may take another 3-5 working days to show it. Your curtains arrived on 12 September, so I've asked our returns team to check the refund for order #10388 today.\n\nThe Acme Home Goods team"
+  },
+  "R04": {
+    "old": "Hi,\n\nYes, we accept PayPal as well as Visa, Mastercard and American Express. The PayPal option appears at checkout once you have entered your delivery address.\n\nBest wishes,\nAcme Home Goods Support",
+    "new": "Hi,\n\nYes, you can pay with PayPal. It appears at checkout once you've entered your delivery address. We also accept Visa, Mastercard and American Express.\n\nThe Acme Home Goods team"
+  }
+}

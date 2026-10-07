@@ -1,0 +1,6 @@
+Variable,Control mean,Control SD,Tutoring mean,Tutoring SD,Difference,p-value
+Baseline math score,47.398,10.302,47.821,10.864,0.424,0.584
+Female,0.531,0.5,0.504,0.501,-0.026,0.469
+Low income,0.483,0.5,0.499,0.501,0.016,0.664
+Grade,7.005,0.819,6.949,0.83,-0.056,0.35
+Students,377.0,,373.0,,,

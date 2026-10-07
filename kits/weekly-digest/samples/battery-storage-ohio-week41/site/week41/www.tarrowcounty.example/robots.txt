@@ -1,0 +1,5 @@
+# Tarrow County (fictional sample site)
+User-agent: *
+Disallow: /search/
+Disallow: /*?print=
+Crawl-delay: 1

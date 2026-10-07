@@ -1,0 +1,13 @@
+{
+  "id": "kestrel-regional-planning-commission-current-agenda-pdf",
+  "name": "Kestrel Regional Planning Commission: current agenda (PDF)",
+  "url": "https://www.kestrelrpc.example/agendas/current-agenda.pdf",
+  "type": "pdf",
+  "first_checked": "2026-10-07T10:12:14Z",
+  "last_checked": "2026-10-07T10:12:18Z",
+  "last_changed": "2026-10-07T10:12:18Z",
+  "sha256": "b064edcd1928746d7e47ba24da2f2937e337e457caf39928c8941be38e672660",
+  "etag": null,
+  "last_modified": "Wed, 07 Oct 2026 09:00:00 GMT",
+  "config": "910777ea8409"
+}

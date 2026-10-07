@@ -1,0 +1,474 @@
+{
+  "tool": "weekly-digest watch_sources.py 1.0",
+  "digest": "Battery Storage Zoning Watch — Ohio",
+  "scope": "Local government actions in Ohio that affect battery energy storage (BESS) projects: moratoria, zoning text amendments, rezonings, conditional use and variance cases, hearings, votes and fire-safety ordinances.",
+  "sources_file": "sources.yaml",
+  "paths_relative_to": "the folder that holds the sources file",
+  "week": "2026-W41",
+  "run_started": "2026-10-07T10:12:15Z",
+  "run_finished": "2026-10-07T10:12:20Z",
+  "dry_run": false,
+  "summary": {
+    "sources": 8,
+    "changed": 5,
+    "first_run": 0,
+    "unchanged": 1,
+    "skipped": 1,
+    "errors": 1
+  },
+  "next_step": "Draft items from the changed sources with status needs_review. A person must check every item against its source before anything is sent.",
+  "changed": [
+    {
+      "id": "tarrow-county-commissioners-agendas",
+      "name": "Tarrow County Commissioners: agendas",
+      "url": "https://www.tarrowcounty.example/commissioners/agendas/",
+      "type": "html",
+      "status": "changed",
+      "tags": [
+        "tarrow-county",
+        "county",
+        "agenda"
+      ],
+      "checked_at": "2026-10-07T10:12:15Z",
+      "previous_check": "2026-10-07T10:12:12Z",
+      "added": [
+        "Notice: The Board will consider Resolution 2026-118, a proposed moratorium on battery energy storage facility zoning applications, at its October 13, 2026 regular session.",
+        "October 13, 2026 | Regular session | October 6, 2026 | Agenda (PDF) | –"
+      ],
+      "removed": [],
+      "diff": [
+        "@@ -2,3 +2,5 @@",
+        " Regular sessions are held on Tuesdays at 9:30 a.m. in the Commissioners' Chambers, Tarrow County Administration Building, 41 Court Street, Tarrow City. Agendas are posted at least five days before each session. Public comment is taken at the start of each regular session.",
+        "+Notice: The Board will consider Resolution 2026-118, a proposed moratorium on battery energy storage facility zoning applications, at its October 13, 2026 regular session.",
+        " Meeting | Type | Posted | Agenda | Minutes",
+        "+October 13, 2026 | Regular session | October 6, 2026 | Agenda (PDF) | –",
+        " October 6, 2026 | Regular session | September 30, 2026 | Agenda (PDF) | Pending approval"
+      ],
+      "new_links": [
+        {
+          "text": "Agenda (PDF)",
+          "url": "https://www.tarrowcounty.example/commissioners/agendas/2026-10-13-agenda.pdf",
+          "kind": "pdf"
+        }
+      ],
+      "removed_links": [],
+      "keyword_hits": [
+        "battery",
+        "energy storage",
+        "moratorium"
+      ],
+      "documents": [
+        {
+          "title": "Agenda (PDF)",
+          "url": "https://www.tarrowcounty.example/commissioners/agendas/2026-10-13-agenda.pdf",
+          "type": "pdf",
+          "text_file": "data/documents/f0e6cf00e3473930.txt",
+          "excerpt": [
+            "[Page 1]",
+            "Page 1 of 2",
+            "TARROW COUNTY BOARD OF COMMISSIONERS",
+            "REGULAR SESSION AGENDA",
+            "Tuesday, October 13, 2026, 9:30 a.m.",
+            "Commissioners' Chambers, Tarrow County Administration Building, 41 Court Street, Tarrow City",
+            "Posted October 6, 2026",
+            "1. Call to order and Pledge of Allegiance",
+            "2. Roll call",
+            "3. Public comment (three minutes per speaker; please sign in at the door)",
+            "4. Approval of minutes: regular session of October 6, 2026",
+            "5. Consent agenda",
+            "a. Then-and-now certificates, County Auditor",
+            "b. Road maintenance agreement with Wrenfield Township for the Kessler Road culvert",
+            "6. County Engineer: award of bid for the 2026 crack-seal program",
+            "7. Resolution 2026-118: Moratorium on battery energy storage facility zoning applications (summary",
+            "on page 2)",
+            "8. Resolution 2026-119: Appropriation transfer, Sheriff's Office",
+            "9. Executive session, if needed",
+            "10. Adjourn",
+            "[Page 2]",
+            "Page 2 of 2",
+            "Duration",
+            "Applies to",
+            "Applies in",
+            "Does not apply to",
+            "Effective date",
+            "Study",
+            "Item 7: Resolution 2026-118",
+            "A resolution declaring a moratorium on the acceptance and processing of applications for zoning",
+            "permits, zoning map amendments and conditional use approvals for battery energy storage facilities in",
+            "the unincorporated areas subject to the Tarrow County Zoning Resolution, and directing the Tarrow",
+            "County Zoning Commission to study the matter and recommend amendments.",
+            "Summary prepared by the Clerk of the Board",
+            "Twelve (12) months from the effective date, unless ended earlier by",
+            "resolution of the Board.",
+            "New applications for battery energy storage facilities with a rated capacity",
+            "of one (1) megawatt or more.",
+            "The unincorporated areas subject to the Tarrow County Zoning Resolution",
+            "(currently Ferris, Quill and Brindle townships). Townships that administer"
+          ],
+          "pages": 2
+        }
+      ],
+      "summary": "2 lines added, 1 new link, 1 document fetched",
+      "snapshot": "data/snapshots/tarrow-county-commissioners-agendas/current.txt"
+    },
+    {
+      "id": "kestrel-regional-planning-commission-current-agenda-pdf",
+      "name": "Kestrel Regional Planning Commission: current agenda (PDF)",
+      "url": "https://www.kestrelrpc.example/agendas/current-agenda.pdf",
+      "type": "pdf",
+      "status": "changed",
+      "tags": [
+        "regional",
+        "planning-commission",
+        "agenda"
+      ],
+      "checked_at": "2026-10-07T10:12:18Z",
+      "previous_check": "2026-10-07T10:12:14Z",
+      "added": [
+        "[p. 1] Thursday, October 22, 2026, 6:00 p.m.",
+        "[p. 1] Posted October 5, 2026",
+        "[p. 1] 2. Approval of minutes: September 24, 2026",
+        "[p. 1] a. RZ-26-014, Tarrow County, Wrenfield Township. Request to rezone approximately 48.2 acres",
+        "[p. 1] on the north side of Kessler Road from A-1 Agricultural to I-1 Light Industrial to allow a",
+        "[p. 1] battery energy storage facility. Applicant: Northbank Storage Partners LLC. Case summary on",
+        "[p. 1] page 2. Staff report to be presented at the meeting.",
+        "[p. 1] Continued from September 24, 2026 at the request of the Tarrow County Zoning Commission.",
+        "[p. 1] No action expected.",
+        "[p. 1] a. SUB-26-031, Halden County, Larch Township. Orchard Ridge Phase 1 final plat, 12 lots.",
+        "[p. 1] 5. Staff report: proposed 2027 meeting calendar",
+        "[p. 2] Location",
+        "[p. 2] Area",
+        "[p. 2] Current zoning",
+        "[p. 2] Requested zoning",
+        "[p. 2] Proposed use",
+        "[p. 2] Applicant",
+        "[p. 2] Property owners",
+        "[p. 2] Process",
+        "[p. 2] Related",
+        "[p. 2] Case summary: RZ-26-014",
+        "[p. 2] North side of Kessler Road, Wrenfield Township, Tarrow County (three",
+        "[p. 2] parcels)",
+        "[p. 2] Approximately 48.2 acres",
+        "[p. 2] A-1 Agricultural",
+        "[p. 2] I-1 Light Industrial",
+        "[p. 2] Battery energy storage facility, approximately 80 MW / 320 MWh, as",
+        "[p. 2] stated in the application",
+        "[p. 2] Northbank Storage Partners LLC",
+        "[p. 2] Listed in the application file",
+        "[p. 2] The Commission will hold a public hearing and make a recommendation",
+        "[p. 2] to the Wrenfield Township Zoning Commission. The Township Zoning",
+        "[p. 2] Commission then holds its own public hearing before the Township",
+        "[p. 2] Trustees decide.",
+        "[p. 2] Wrenfield Township has proposed Zoning Text Amendment ZTA-2026-03",
+        "[p. 2] on battery energy storage systems (public hearing October 21, 2026).",
+        "[p. 2] Next regular meeting: Thursday, November 19, 2026, 6:00 p.m. (moved from November 26 because of",
+        "[p. 2] Thanksgiving)"
+      ],
+      "removed": [
+        "Thursday, September 24, 2026, 6:00 p.m.",
+        "Posted September 17, 2026",
+        "2. Approval of minutes: August 27, 2026",
+        "a. Z-26-011, Halden County, Larch Township. Rezoning of 3.1 acres on the east side of Orchard",
+        "Pike Road from R-1 Residential to B-2 General Business for a car wash. Applicant:",
+        "Brightwash Development LLC. Staff recommends approval.",
+        "First presentation; discussion only.",
+        "a. SUB-26-027, Halden County, Larch Township. Orchard Ridge preliminary plat, 24 lots.",
+        "5. Staff report: 2026 development activity",
+        "Next regular meeting: Thursday, October 22, 2026, 6:00 p.m."
+      ],
+      "diff": [
+        "@@ -5,16 +5,18 @@",
+        " REGULAR MEETING AGENDA",
+        "-Thursday, September 24, 2026, 6:00 p.m.",
+        "+Thursday, October 22, 2026, 6:00 p.m.",
+        " RPC Meeting Room, 210 Pike Street, Tarrow City",
+        "-Posted September 17, 2026",
+        "+Posted October 5, 2026",
+        " 1. Call to order",
+        "-2. Approval of minutes: August 27, 2026",
+        "+2. Approval of minutes: September 24, 2026",
+        " 3. Zoning cases (public hearings)",
+        "-a. Z-26-011, Halden County, Larch Township. Rezoning of 3.1 acres on the east side of Orchard",
+        "-Pike Road from R-1 Residential to B-2 General Business for a car wash. Applicant:",
+        "-Brightwash Development LLC. Staff recommends approval.",
+        "+a. RZ-26-014, Tarrow County, Wrenfield Township. Request to rezone approximately 48.2 acres",
+        "+on the north side of Kessler Road from A-1 Agricultural to I-1 Light Industrial to allow a",
+        "+battery energy storage facility. Applicant: Northbank Storage Partners LLC. Case summary on",
+        "+page 2. Staff report to be presented at the meeting.",
+        " b. TA-26-006, Tarrow County. Text amendment creating a Solar and Storage Overlay District.",
+        "-First presentation; discussion only.",
+        "+Continued from September 24, 2026 at the request of the Tarrow County Zoning Commission.",
+        "+No action expected.",
+        " 4. Subdivisions",
+        "-a. SUB-26-027, Halden County, Larch Township. Orchard Ridge preliminary plat, 24 lots.",
+        "-5. Staff report: 2026 development activity",
+        "+a. SUB-26-031, Halden County, Larch Township. Orchard Ridge Phase 1 final plat, 12 lots.",
+        "+5. Staff report: proposed 2027 meeting calendar",
+        " 6. Adjourn",
+        "@@ -22,2 +24,27 @@",
+        " Page 2 of 2",
+        "+Location",
+        "+Area",
+        "+Current zoning",
+        "+Requested zoning",
+        "+Proposed use",
+        "+Applicant",
+        "+Property owners",
+        "+Process",
+        "+Related",
+        "+Case summary: RZ-26-014",
+        "+North side of Kessler Road, Wrenfield Township, Tarrow County (three",
+        "+parcels)",
+        "+Approximately 48.2 acres",
+        "+A-1 Agricultural",
+        "+I-1 Light Industrial",
+        "+Battery energy storage facility, approximately 80 MW / 320 MWh, as",
+        "+stated in the application",
+        "+Northbank Storage Partners LLC",
+        "+Listed in the application file",
+        "+The Commission will hold a public hearing and make a recommendation",
+        "+to the Wrenfield Township Zoning Commission. The Township Zoning",
+        "+Commission then holds its own public hearing before the Township",
+        "+Trustees decide.",
+        "+Wrenfield Township has proposed Zoning Text Amendment ZTA-2026-03",
+        "+on battery energy storage systems (public hearing October 21, 2026).",
+        " Notes for the public",
+        "@@ -26,3 +53,4 @@",
+        " or county that has zoning authority.",
+        "-Next regular meeting: Thursday, October 22, 2026, 6:00 p.m.",
+        "+Next regular meeting: Thursday, November 19, 2026, 6:00 p.m. (moved from November 26 because of",
+        "+Thanksgiving)",
+        " Sample only: this is a fictional page made for the weekly-digest kit. The place and the documents do not exist."
+      ],
+      "new_links": [],
+      "removed_links": [],
+      "keyword_hits": [
+        "battery",
+        "energy storage"
+      ],
+      "summary": "38 lines added, 10 lines removed",
+      "snapshot": "data/snapshots/kestrel-regional-planning-commission-current-agenda-pdf/current.txt"
+    },
+    {
+      "id": "wrenfield-township-public-notices-rss",
+      "name": "Wrenfield Township: public notices (RSS)",
+      "url": "https://www.wrenfieldtwp.example/notices/feed.xml",
+      "type": "rss",
+      "status": "changed",
+      "tags": [
+        "wrenfield-township",
+        "township",
+        "legal-notice"
+      ],
+      "checked_at": "2026-10-07T10:12:18Z",
+      "previous_check": "2026-10-07T10:12:14Z",
+      "new_records": [
+        {
+          "id": "https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf",
+          "text": "2026-10-05 | Notice of public hearing: Zoning Text Amendment ZTA-2026-03 (battery energy storage systems) | The Wrenfield Township Zoning Commission will hold a public hearing on Wednesday, October 21, 2026 at 7:00 p.m. at the Township Hall on proposed zoning amendments for battery energy storage systems. Written comments are accepted until 4:00 p.m. on Friday, October 16, 2026.",
+          "url": "https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf",
+          "keywords": [
+            "battery",
+            "energy storage"
+          ]
+        }
+      ],
+      "changed_records": [],
+      "removed_records": [],
+      "other_records_not_matching_keywords": 1,
+      "keyword_hits": [
+        "battery",
+        "energy storage"
+      ],
+      "documents": [
+        {
+          "title": "https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf",
+          "url": "https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf",
+          "type": "pdf",
+          "text_file": "data/documents/5eef3619fcc0425e.txt",
+          "excerpt": [
+            "[Page 1]",
+            "Page 1 of 1",
+            "WRENFIELD TOWNSHIP",
+            "Tarrow County, Ohio",
+            "NOTICE OF PUBLIC HEARING",
+            "Zoning Text Amendment ZTA-2026-03: Battery Energy Storage Systems",
+            "The Wrenfield Township Zoning Commission will hold a public hearing on Wednesday, October 21,",
+            "2026, at 7:00 p.m. at the Wrenfield Township Hall, 8 Gable Road, on proposed amendments to the",
+            "Wrenfield Township Zoning Resolution.",
+            "The proposed amendments would:",
+            "1. Add definitions of \"battery energy storage system\" and \"battery energy storage facility\".",
+            "2. Allow battery energy storage facilities as a conditional use in the I-1 Light Industrial District only.",
+            "3. Require a setback of at least 300 feet from any existing dwelling and at least 100 feet from any",
+            "property line.",
+            "4. Require a decommissioning plan and a financial guarantee (bond or letter of credit) covering",
+            "removal costs, to be reviewed every five years.",
+            "5. Require a fire-safety plan reviewed by the Fire Chief before a zoning certificate is issued.",
+            "The proposed text may be inspected at the Township Hall during office hours and on the township",
+            "website. Written comments may be submitted to the Zoning Inspector until 4:00 p.m. on Friday,",
+            "October 16, 2026. After the hearing, the Zoning Commission will send its recommendation to the",
+            "Board of Township Trustees.",
+            "By order of the Wrenfield Township Zoning Commission. Posted October 5, 2026.",
+            "Sample only: this is a fictional page made for the weekly-digest kit. The place and the documents do not exist."
+          ],
+          "pages": 1
+        }
+      ],
+      "summary": "1 new record, 1 document fetched, 1 other record change without your keywords",
+      "snapshot": "data/snapshots/wrenfield-township-public-notices-rss/current.txt"
+    },
+    {
+      "id": "halden-county-open-data-zoning-applications-json",
+      "name": "Halden County open data: zoning applications (JSON)",
+      "url": "https://data.haldencounty.example/api/zoning-applications.json",
+      "type": "json",
+      "status": "changed",
+      "tags": [
+        "halden-county",
+        "county",
+        "open-data"
+      ],
+      "checked_at": "2026-10-07T10:12:19Z",
+      "previous_check": "2026-10-07T10:12:14Z",
+      "new_records": [
+        {
+          "id": "CU-2026-031",
+          "text": "filed_date: 2026-10-02 | application_type: Conditional use | township: Larch Township | proposed_use: Battery energy storage facility, 20 MW | project_name: Larch Storage | applicant_name: Greyline Energy Storage LLC | applicant_type: business | site_location: South side of Tolland Road, east of the Larch substation | acreage: 6.5 | status: Received; Board of Zoning Appeals hearing to be scheduled | documents_url: https://www.haldencounty.example/zoning/cases/CU-2026-031/",
+          "url": "https://www.haldencounty.example/zoning/cases/CU-2026-031/",
+          "keywords": [
+            "battery",
+            "energy storage"
+          ]
+        }
+      ],
+      "changed_records": [],
+      "removed_records": [],
+      "other_records_not_matching_keywords": 2,
+      "keyword_hits": [
+        "battery",
+        "energy storage"
+      ],
+      "summary": "1 new record, 2 other record changes without your keywords",
+      "snapshot": "data/snapshots/halden-county-open-data-zoning-applications-json/current.txt"
+    },
+    {
+      "id": "city-of-marlowe-falls-pending-legislation",
+      "name": "City of Marlowe Falls: pending legislation",
+      "url": "https://www.marlowefalls.example/council/legislation/",
+      "type": "html",
+      "status": "changed",
+      "tags": [
+        "marlowe-falls",
+        "city",
+        "ordinance"
+      ],
+      "checked_at": "2026-10-07T10:12:19Z",
+      "previous_check": "2026-10-07T10:12:14Z",
+      "added": [
+        "Ordinance 2026-41 | Establishing fire safety and emergency response requirements for battery energy storage systems | First reading September 21, 2026. Amended in the Safety Committee October 5, 2026. Second reading October 19, 2026. | Ordinance 2026-41 as introduced (PDF)",
+        "Ordinance 2026-41 as amended (PDF)",
+        "Ordinance 2026-43 | Establishing a no-parking zone on the west side of Mill Street | First reading October 5, 2026. Second reading October 19, 2026. | Ordinance 2026-43 (PDF)"
+      ],
+      "removed": [
+        "Ordinance 2026-41 | Establishing fire safety and emergency response requirements for battery energy storage systems | First reading September 21, 2026. Referred to the Safety Committee. | Ordinance 2026-41 as introduced (PDF)",
+        "Ordinance 2026-38 | Amending the 2026 annual appropriations | Second reading October 5, 2026. | Ordinance 2026-38 (PDF)",
+        "Ordinance 2026-43 | Establishing a no-parking zone on the west side of Mill Street | First reading October 5, 2026. | Ordinance 2026-43 (PDF)"
+      ],
+      "diff": [
+        "@@ -2,4 +2,4 @@",
+        " Legislation | Title | Status | Documents",
+        "-Ordinance 2026-41 | Establishing fire safety and emergency response requirements for battery energy storage systems | First reading September 21, 2026. Referred to the Safety Committee. | Ordinance 2026-41 as introduced (PDF)",
+        "-Ordinance 2026-38 | Amending the 2026 annual appropriations | Second reading October 5, 2026. | Ordinance 2026-38 (PDF)",
+        "-Ordinance 2026-43 | Establishing a no-parking zone on the west side of Mill Street | First reading October 5, 2026. | Ordinance 2026-43 (PDF)",
+        "+Ordinance 2026-41 | Establishing fire safety and emergency response requirements for battery energy storage systems | First reading September 21, 2026. Amended in the Safety Committee October 5, 2026. Second reading October 19, 2026. | Ordinance 2026-41 as introduced (PDF)",
+        "+Ordinance 2026-41 as amended (PDF)",
+        "+Ordinance 2026-43 | Establishing a no-parking zone on the west side of Mill Street | First reading October 5, 2026. Second reading October 19, 2026. | Ordinance 2026-43 (PDF)"
+      ],
+      "new_links": [
+        {
+          "text": "Ordinance 2026-41 as amended (PDF)",
+          "url": "https://www.marlowefalls.example/council/legislation/ord-2026-41-amended.pdf",
+          "kind": "pdf"
+        }
+      ],
+      "removed_links": [
+        {
+          "text": "Ordinance 2026-38 (PDF)",
+          "url": "https://www.marlowefalls.example/council/legislation/ord-2026-38.pdf",
+          "kind": "pdf"
+        }
+      ],
+      "keyword_hits": [
+        "battery",
+        "energy storage"
+      ],
+      "documents": [
+        {
+          "title": "Ordinance 2026-41 as amended (PDF)",
+          "url": "https://www.marlowefalls.example/council/legislation/ord-2026-41-amended.pdf",
+          "type": "pdf",
+          "text_file": "data/documents/f3539e45a981c97a.txt",
+          "excerpt": [
+            "[Page 1]",
+            "Page 1 of 2",
+            "CITY OF MARLOWE FALLS, OHIO",
+            "ORDINANCE NO. 2026-41",
+            "As amended in the Safety Committee, October 5, 2026",
+            "AN ORDINANCE ESTABLISHING FIRE SAFETY AND EMERGENCY RESPONSE",
+            "REQUIREMENTS FOR BATTERY ENERGY STORAGE SYSTEMS.",
+            "Section 1. Applicability. This ordinance applies to battery energy storage systems with an aggregate",
+            "energy capacity greater than 600 kWh, other than systems serving a single one- or two-family",
+            "dwelling.",
+            "Section 2. Standards. Systems shall be designed, installed and maintained in accordance with NFPA",
+            "855, Standard for the Installation of Stationary Energy Storage Systems, in the edition in effect when",
+            "the permit application is filed.",
+            "Section 3. Emergency response plan. Before a certificate of occupancy is issued, the owner shall",
+            "submit an emergency response plan approved by the Fire Chief.",
+            "Section 4. Annual walkthrough. The owner shall host a site walkthrough with the Marlowe Falls Fire",
+            "Department once each calendar year.",
+            "Section 5. Signs and contacts. A 24-hour emergency contact number shall be posted at each entrance",
+            "to the site.",
+            "Section 6. Effective date. This ordinance takes effect at the earliest date allowed by law.",
+            "[Page 2]",
+            "Page 2 of 2",
+            "Safety Committee amendments, October 5, 2026",
+            "1. Section 1: threshold raised from 50 kWh to 600 kWh.",
+            "2. Section 4: walkthrough changed from twice each year to once each calendar year.",
+            "First reading: September 21, 2026. Second reading: October 19, 2026.",
+            "Sample only: this is a fictional page made for the weekly-digest kit. The place and the documents do not exist."
+          ],
+          "pages": 2
+        }
+      ],
+      "summary": "3 lines added, 3 lines removed, 1 new link, 1 document fetched",
+      "snapshot": "data/snapshots/city-of-marlowe-falls-pending-legislation/current.txt"
+    }
+  ],
+  "errors": [
+    {
+      "id": "halden-county-zoning-commission-hearings-page",
+      "name": "Halden County Zoning Commission: hearings page",
+      "url": "https://www.haldencounty.example/planning/zoning-commission/",
+      "error": "Page not found (HTTP 404)",
+      "hint": "The site may have moved or removed it. Find the new address on the site, update sources.yaml, and check the page by hand this week."
+    }
+  ],
+  "skipped": [
+    {
+      "id": "tarrow-county-site-search-battery-storage",
+      "name": "Tarrow County site search: battery storage",
+      "url": "https://www.tarrowcounty.example/search/?q=battery+storage",
+      "reason": "robots.txt does not allow automated access to this address. Do not fetch it another way: look for an RSS feed, API or open-data version, or check it by hand."
+    }
+  ],
+  "first_run": [],
+  "unchanged": [
+    {
+      "id": "tarrow-county-board-of-zoning-appeals-decisions",
+      "name": "Tarrow County Board of Zoning Appeals: decisions",
+      "url": "https://www.tarrowcounty.example/bza/decisions/",
+      "last_changed": "2026-10-07T10:12:13Z"
+    }
+  ],
+  "warnings": []
+}

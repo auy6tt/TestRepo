@@ -1,0 +1,32 @@
+Source: https://www.marlowefalls.example/council/legislation/ord-2026-41-amended.pdf
+Link text: Ordinance 2026-41 as amended (PDF)
+Fetched: 2026-10-07T10:12:20Z
+Type: pdf, 2 pages
+
+[Page 1]
+Page 1 of 2
+CITY OF MARLOWE FALLS, OHIO
+ORDINANCE NO. 2026-41
+As amended in the Safety Committee, October 5, 2026
+AN ORDINANCE ESTABLISHING FIRE SAFETY AND EMERGENCY RESPONSE
+REQUIREMENTS FOR BATTERY ENERGY STORAGE SYSTEMS.
+Section 1. Applicability. This ordinance applies to battery energy storage systems with an aggregate
+energy capacity greater than 600 kWh, other than systems serving a single one- or two-family
+dwelling.
+Section 2. Standards. Systems shall be designed, installed and maintained in accordance with NFPA
+855, Standard for the Installation of Stationary Energy Storage Systems, in the edition in effect when
+the permit application is filed.
+Section 3. Emergency response plan. Before a certificate of occupancy is issued, the owner shall
+submit an emergency response plan approved by the Fire Chief.
+Section 4. Annual walkthrough. The owner shall host a site walkthrough with the Marlowe Falls Fire
+Department once each calendar year.
+Section 5. Signs and contacts. A 24-hour emergency contact number shall be posted at each entrance
+to the site.
+Section 6. Effective date. This ordinance takes effect at the earliest date allowed by law.
+[Page 2]
+Page 2 of 2
+Safety Committee amendments, October 5, 2026
+1. Section 1: threshold raised from 50 kWh to 600 kWh.
+2. Section 4: walkthrough changed from twice each year to once each calendar year.
+First reading: September 21, 2026. Second reading: October 19, 2026.
+Sample only: this is a fictional page made for the weekly-digest kit. The place and the documents do not exist.

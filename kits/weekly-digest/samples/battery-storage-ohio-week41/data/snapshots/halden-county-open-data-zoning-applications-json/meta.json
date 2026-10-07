@@ -1,0 +1,13 @@
+{
+  "id": "halden-county-open-data-zoning-applications-json",
+  "name": "Halden County open data: zoning applications (JSON)",
+  "url": "https://data.haldencounty.example/api/zoning-applications.json",
+  "type": "json",
+  "first_checked": "2026-10-07T10:12:14Z",
+  "last_checked": "2026-10-07T10:12:19Z",
+  "last_changed": "2026-10-07T10:12:19Z",
+  "sha256": "318cd86fd9fd71762b15a478a384500d8e0a9ce1b63777d421bae7f103db05cc",
+  "etag": null,
+  "last_modified": "Wed, 07 Oct 2026 09:00:00 GMT",
+  "config": "3ca86321d90e"
+}

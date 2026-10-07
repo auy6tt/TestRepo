@@ -1,0 +1,50 @@
+list_name,name,label::English (en)
+visit,screening,Screening
+visit,visit_1,Follow-up visit 1 (2 weeks)
+visit,visit_2,Follow-up visit 2 (3 months)
+visit,visit_3,Follow-up visit 3 (6 months)
+yesno,1,Yes
+yesno,0,No
+sex,1,Female
+sex,2,Male
+sex,99,Prefer not to say
+education,1,No formal schooling
+education,2,Primary school
+education,3,Secondary school
+education,4,Trade or vocational qualification
+education,5,University degree
+education,99,Prefer not to say
+conditions,1,High blood pressure
+conditions,2,Diabetes
+conditions,3,Heart disease
+conditions,4,Asthma or COPD
+conditions,5,Kidney disease
+conditions,6,None of these
+smoke,1,"Yes, every day"
+smoke,2,"Yes, some days"
+smoke,3,"No, but I used to"
+smoke,4,"No, never"
+often,0,Never
+often,1,Rarely
+often,2,Sometimes
+often,3,Often
+often,4,Every night or almost every night
+freq3,0,Not at all
+freq3,1,Some days
+freq3,2,Most days
+contact_time,1,Morning
+contact_time,2,Afternoon
+contact_time,3,Evening
+contact_time,4,Any time
+missed,1,Could not contact participant
+missed,2,Participant declined
+missed,3,Participant unwell
+missed,4,Participant moved away
+missed,5,Other
+he_type,1,Overnight hospital stay
+he_type,2,Emergency department visit (no overnight stay)
+he_type,3,New health condition diagnosed
+he_type,4,Other
+yes_no_unsure,1,Yes
+yes_no_unsure,0,No
+yes_no_unsure,98,Not sure

@@ -1,0 +1,7 @@
+part,name,version,type,supplier,licence,purl,cpe,website,notes
+sprout-fw,sprout-fw,2.3.0,firmware,Mossbyte Labs BV (fictional),LicenseRef-Proprietary,,,,Sensor firmware for the ESP32-C3 chip. Own code.
+sprout-fw,ESP-IDF,5.1.2,framework,Espressif Systems,Apache-2.0,pkg:github/espressif/esp-idf@v5.1.2,,https://github.com/espressif/esp-idf,SDK and build system. Version taken from the client's build log (fictional sample).
+sprout-fw,FreeRTOS kernel (ESP-IDF port),10.4.3,operating-system,Espressif Systems,MIT,,,https://github.com/espressif/esp-idf/tree/v5.1.2/components/freertos,Comes with ESP-IDF.
+sprout-fw,Mbed TLS,3.4.1,library,Mbed TLS project,Apache-2.0,pkg:github/Mbed-TLS/mbedtls@v3.4.1,,https://github.com/Mbed-TLS/mbedtls,Comes with ESP-IDF. Used for TLS to the cloud and for OTA update checks.
+sprout-fw,lwIP,2.1.3,library,lwIP project,BSD-3-Clause,,,https://savannah.nongnu.org/projects/lwip/,Comes with ESP-IDF (Espressif fork). TCP/IP stack.
+sprout-fw,cJSON,1.7.15,library,cJSON project,MIT,pkg:github/DaveGamble/cJSON@v1.7.15,,https://github.com/DaveGamble/cJSON,Comes with ESP-IDF. Parses configuration messages.

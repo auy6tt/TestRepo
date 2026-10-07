@@ -1,0 +1,29 @@
+{
+  "_note": "FICTIONAL SAMPLE. Mock runner with canned answers; prices are made up. top_p removed for the reply feature because new-model-v2 (fictional) rejects temperature and top_p together.",
+  "name": "new-model-v2 (re-tuned prompts)",
+  "runner": "mock",
+  "model": "new-model-v2",
+  "features": {
+    "summarize": {
+      "system": "You summarize customer support tickets for Acme Home Goods agents.\nRules:\n- Write 2 or 3 plain sentences. No greeting, no bullet points, no headings.\n- Copy the order number exactly as written (for example #10423). If there is no order number, say so.\n- Say what went wrong, what the customer wants, and any date they mention.",
+      "params": {
+        "temperature": 0.3,
+        "max_tokens": 300
+      }
+    },
+    "reply": {
+      "system": "Write a short, friendly reply for an Acme Home Goods support agent to send.\n- Use the help articles when they apply. Do not promise anything they do not say, including delivery dates.\n- Keep it under 120 words. Sign off as \"The Acme Home Goods team\".",
+      "params": {
+        "temperature": 0.7,
+        "max_tokens": 400
+      }
+    }
+  },
+  "price_per_1m_input_tokens": 0.8,
+  "price_per_1m_output_tokens": 2.4,
+  "mock_responses": "mock_responses.json",
+  "mock_key": "new",
+  "mock_chars_per_token": 3.6,
+  "mock_base_latency_s": 0.6,
+  "mock_seconds_per_output_token": 0.012
+}

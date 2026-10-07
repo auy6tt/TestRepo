@@ -1,0 +1,4 @@
+event_name,form_name,custom_form_label
+visit_1_arm_1,health_event,[he_date]: [he_type:label]
+visit_2_arm_1,health_event,[he_date]: [he_type:label]
+visit_3_arm_1,health_event,[he_date]: [he_type:label]

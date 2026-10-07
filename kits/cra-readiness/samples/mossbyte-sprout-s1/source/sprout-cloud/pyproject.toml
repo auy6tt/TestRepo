@@ -1,0 +1,9 @@
+# FICTIONAL sample product used by the CRA readiness kit.
+# Runtime dependencies are pinned in requirements.txt.
+[project]
+name = "sprout-cloud"
+version = "2.3.0"
+description = "Cloud backend for the Sprout S1 plant sensor (fictional sample)"
+license = "LicenseRef-Proprietary"
+requires-python = ">=3.10"
+authors = [{ name = "Mossbyte Labs (fictional)", email = "dev@mossbyte.example" }]

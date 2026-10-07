@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>{{BASE_URL}}index.html</loc></url>
+  <url><loc>{{BASE_URL}}government/council.html</loc></url>
+  <url><loc>{{BASE_URL}}government/budget.html</loc></url>
+  <url><loc>{{BASE_URL}}departments/parks.html</loc></url>
+  <url><loc>{{BASE_URL}}departments/public-works.html</loc></url>
+  <url><loc>{{BASE_URL}}services/forms.html</loc></url>
+  <url><loc>{{BASE_URL}}archive.html</loc></url>
+  <url><loc>{{BASE_URL}}archive/2019.html</loc></url>
+  <url><loc>{{BASE_URL}}notices/public-hearing.html</loc></url>
+</urlset>

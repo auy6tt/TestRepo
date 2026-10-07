@@ -1,0 +1,30 @@
+{
+  "_note": "FICTIONAL SAMPLE. Mock runner with canned answers; prices are made up.",
+  "name": "old-model-v1 (current prompts)",
+  "runner": "mock",
+  "model": "old-model-v1",
+  "features": {
+    "summarize": {
+      "system": "You summarize customer support tickets for Acme Home Goods agents. Write 2-3 sentences. Include the order number, the problem, and what the customer wants.",
+      "params": {
+        "temperature": 0.3,
+        "max_tokens": 300
+      }
+    },
+    "reply": {
+      "system": "Write a short, friendly reply for an Acme Home Goods support agent to send. Use the help articles when they apply. Do not promise anything the articles do not say.",
+      "params": {
+        "temperature": 0.7,
+        "top_p": 0.95,
+        "max_tokens": 400
+      }
+    }
+  },
+  "price_per_1m_input_tokens": 1.0,
+  "price_per_1m_output_tokens": 3.0,
+  "mock_responses": "mock_responses.json",
+  "mock_key": "old",
+  "mock_chars_per_token": 4.0,
+  "mock_base_latency_s": 0.9,
+  "mock_seconds_per_output_token": 0.02
+}

@@ -1,0 +1,13 @@
+{
+  "id": "wrenfield-township-public-notices-rss",
+  "name": "Wrenfield Township: public notices (RSS)",
+  "url": "https://www.wrenfieldtwp.example/notices/feed.xml",
+  "type": "rss",
+  "first_checked": "2026-10-07T10:12:14Z",
+  "last_checked": "2026-10-07T10:12:18Z",
+  "last_changed": "2026-10-07T10:12:18Z",
+  "sha256": "0fee889c928c5b586b1002efd00c8f9b11d326fa22ee0c64192e6df89b330c6a",
+  "etag": null,
+  "last_modified": "Wed, 07 Oct 2026 09:00:00 GMT",
+  "config": "8fefe9ca815e"
+}

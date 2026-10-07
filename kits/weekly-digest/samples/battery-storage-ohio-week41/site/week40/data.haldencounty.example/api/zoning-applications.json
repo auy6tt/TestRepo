@@ -1,0 +1,68 @@
+{
+  "dataset": "Zoning applications",
+  "publisher": "Halden County Department of Planning and Zoning (fictional sample)",
+  "license": "Sample data made for the weekly-digest kit. Not real records.",
+  "updated": "2026-09-29T21:00:00-04:00",
+  "records": [
+    {
+      "case_number": "Z-2026-011",
+      "filed_date": "2026-08-03",
+      "application_type": "Zoning map amendment",
+      "township": "Larch Township",
+      "proposed_use": "Car wash",
+      "project_name": "Brightwash Larch",
+      "applicant_name": "Brightwash Development LLC",
+      "applicant_type": "business",
+      "site_location": "East side of Orchard Pike Road",
+      "acreage": 3.1,
+      "status": "Planning commission hearing September 24, 2026",
+      "documents_url": "https://www.haldencounty.example/zoning/cases/Z-2026-011/",
+      "contact_phone": "555-0100"
+    },
+    {
+      "case_number": "CU-2026-027",
+      "filed_date": "2026-07-14",
+      "application_type": "Conditional use",
+      "township": "Bram Township",
+      "proposed_use": "Telecommunications tower, 180 ft",
+      "project_name": "Bram Road tower",
+      "applicant_name": "Tri-County Tower Co. LLC",
+      "applicant_type": "business",
+      "site_location": "North side of Bram Road",
+      "acreage": 0.9,
+      "status": "Approved by the Board of Zoning Appeals, September 8, 2026",
+      "documents_url": "https://www.haldencounty.example/zoning/cases/CU-2026-027/",
+      "contact_phone": "555-0101"
+    },
+    {
+      "case_number": "V-2026-104",
+      "filed_date": "2026-08-19",
+      "application_type": "Variance",
+      "township": "Larch Township",
+      "proposed_use": "Sign height for an existing business",
+      "project_name": "Larch Hardware sign",
+      "applicant_name": "Larch Hardware Inc.",
+      "applicant_type": "business",
+      "site_location": "Larch village center",
+      "acreage": null,
+      "status": "Approved by the Board of Zoning Appeals, September 8, 2026",
+      "documents_url": "https://www.haldencounty.example/zoning/cases/V-2026-104/",
+      "contact_phone": "555-0102"
+    },
+    {
+      "case_number": "V-2026-109",
+      "filed_date": "2026-09-02",
+      "application_type": "Variance",
+      "township": "Larch Township",
+      "proposed_use": "Detached garage, side-yard setback",
+      "project_name": "",
+      "applicant_name": "Resident (sample)",
+      "applicant_type": "individual",
+      "site_location": "Residential lot (address withheld in this sample)",
+      "acreage": null,
+      "status": "Board of Zoning Appeals hearing October 12, 2026",
+      "documents_url": "https://www.haldencounty.example/zoning/cases/V-2026-109/",
+      "contact_phone": "555-0199"
+    }
+  ]
+}

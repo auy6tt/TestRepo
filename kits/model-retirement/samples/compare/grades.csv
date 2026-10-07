@@ -1,0 +1,11 @@
+id,preferred,new_ok,notes
+S01,new,yes,Both correct. New is tighter.
+S02,same,yes,
+S03,same,yes,
+S04,new,yes,Old left out the order number.
+S05,old,yes,New left out the date the return arrived (12 September). Still usable.
+S06,same,yes,Neither invented an order number.
+R01,new,yes,"Old promised delivery before 20 September, which the delivery policy does not say."
+R02,same,yes,
+R03,same,yes,
+R04,same,yes,

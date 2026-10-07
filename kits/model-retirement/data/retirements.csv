@@ -1,0 +1,2 @@
+provider,model_id,retirement_date,replacement,source_url,notes
+Example Provider (FAKE ROW - delete me),example-model-2023,2099-01-01,example-model-2025,https://example.com/deprecations,"FAKE EXAMPLE ROW. Replace it with real rows copied from each provider's official deprecations page. Dates must be YYYY-MM-DD. Note the day you checked, e.g. 'checked 2026-10-07'."

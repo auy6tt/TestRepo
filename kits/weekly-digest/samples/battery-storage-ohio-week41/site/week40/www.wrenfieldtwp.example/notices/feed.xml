@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+<title>Wrenfield Township: Public Notices</title>
+<link>https://www.wrenfieldtwp.example/notices/</link>
+<description>Legal and public notices from Wrenfield Township, Tarrow County, Ohio. Fictional sample feed for the weekly-digest kit.</description>
+<language>en-us</language>
+<item>
+  <title>Trustees regular meeting, October 1, 2026</title>
+  <link>https://www.wrenfieldtwp.example/notices/2026-10-01-trustees-meeting.html</link>
+  <guid isPermaLink="true">https://www.wrenfieldtwp.example/notices/2026-10-01-trustees-meeting.html</guid>
+  <pubDate>Thu, 24 Sep 2026 14:00:00 -0400</pubDate>
+  <description>The Board of Trustees will hold its regular meeting on Thursday, October 1, 2026 at 7:00 p.m. at the Township Hall.</description>
+</item>
+<item>
+  <title>Fall leaf collection schedule</title>
+  <link>https://www.wrenfieldtwp.example/notices/2026-fall-leaf-collection.html</link>
+  <guid isPermaLink="true">https://www.wrenfieldtwp.example/notices/2026-fall-leaf-collection.html</guid>
+  <pubDate>Fri, 18 Sep 2026 10:00:00 -0400</pubDate>
+  <description>Curbside leaf collection runs from October 19 to November 20, 2026.</description>
+</item>
+<item>
+  <title>Board of Zoning Appeals: October meeting cancelled</title>
+  <link>https://www.wrenfieldtwp.example/notices/2026-10-bza-cancelled.html</link>
+  <guid isPermaLink="true">https://www.wrenfieldtwp.example/notices/2026-10-bza-cancelled.html</guid>
+  <pubDate>Thu, 10 Sep 2026 09:00:00 -0400</pubDate>
+  <description>There are no cases for the October meeting of the Board of Zoning Appeals, so the meeting is cancelled.</description>
+</item>
+</channel>
+</rss>

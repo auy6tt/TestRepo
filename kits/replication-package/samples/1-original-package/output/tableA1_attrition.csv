@@ -1,0 +1,5 @@
+Group,Students assigned,Took endline test,Share missing
+Control,398.0,377.0,0.053
+Tutoring offer,388.0,373.0,0.039
+Difference (tutoring - control),,,-0.014
+p-value (clustered by school),,,0.313

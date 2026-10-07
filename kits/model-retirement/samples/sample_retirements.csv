@@ -1,0 +1,5 @@
+provider,model_id,retirement_date,replacement,source_url,notes
+Provider A (fictional),old-model-v0,2026-03-31,new-model-v2,https://example.com/provider-a/deprecations,FICTIONAL sample row. Already retired. Checked 2026-10-07.
+Provider A (fictional),old-model-v1,2026-12-01,new-model-v2,https://example.com/provider-a/deprecations,FICTIONAL sample row. Checked 2026-10-07.
+Provider A (fictional),old-embed-v1,2027-04-30,new-embed-v2,https://example.com/provider-a/deprecations,FICTIONAL sample row. A new embedding model means re-embedding every stored document. Checked 2026-10-07.
+Provider B (fictional),old-small-v1,2027-01-15,new-small-v2,https://example.com/provider-b/model-deprecations,FICTIONAL sample row. Checked 2026-10-07.

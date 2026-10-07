@@ -1,0 +1,9 @@
+arm_num,unique_event_name,form
+1,screening_arm_1,screening
+1,screening_arm_1,contact_details
+1,visit_1_arm_1,follow_up_visit
+1,visit_1_arm_1,health_event
+1,visit_2_arm_1,follow_up_visit
+1,visit_2_arm_1,health_event
+1,visit_3_arm_1,follow_up_visit
+1,visit_3_arm_1,health_event

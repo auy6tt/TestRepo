@@ -1,0 +1,3 @@
+part,name,version,type,supplier,licence,purl,cpe,website,notes
+my-firmware,my-firmware,1.0.0,firmware,Client company name,LicenseRef-Proprietary,,,,The client's own firmware. One row where name = part describes the part itself.
+my-firmware,Example SDK,5.1.2,framework,SDK vendor,Apache-2.0,pkg:github/vendor/sdk@v5.1.2,,https://example.com/sdk,Replace these example rows. Types: library framework operating-system firmware device-driver application.

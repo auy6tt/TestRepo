@@ -1,0 +1,90 @@
+{
+  "tool": "weekly-digest watch_sources.py 1.0",
+  "digest": "Battery Storage Zoning Watch — Ohio",
+  "scope": "Local government actions in Ohio that affect battery energy storage (BESS) projects: moratoria, zoning text amendments, rezonings, conditional use and variance cases, hearings, votes and fire-safety ordinances.",
+  "sources_file": "sources.yaml",
+  "paths_relative_to": "the folder that holds the sources file",
+  "week": "2026-W41",
+  "run_started": "2026-10-07T10:12:12Z",
+  "run_finished": "2026-10-07T10:12:15Z",
+  "dry_run": false,
+  "summary": {
+    "sources": 8,
+    "changed": 0,
+    "first_run": 7,
+    "unchanged": 0,
+    "skipped": 1,
+    "errors": 0
+  },
+  "next_step": "Draft items from the changed sources with status needs_review. A person must check every item against its source before anything is sent.",
+  "changed": [],
+  "errors": [],
+  "skipped": [
+    {
+      "id": "tarrow-county-site-search-battery-storage",
+      "name": "Tarrow County site search: battery storage",
+      "url": "https://www.tarrowcounty.example/search/?q=battery+storage",
+      "reason": "robots.txt does not allow automated access to this address. Do not fetch it another way: look for an RSS feed, API or open-data version, or check it by hand."
+    }
+  ],
+  "first_run": [
+    {
+      "id": "tarrow-county-commissioners-agendas",
+      "name": "Tarrow County Commissioners: agendas",
+      "url": "https://www.tarrowcounty.example/commissioners/agendas/",
+      "type": "html",
+      "snapshot": "data/snapshots/tarrow-county-commissioners-agendas/current.txt",
+      "note": "First check: snapshot saved. Changes will be reported from the next run."
+    },
+    {
+      "id": "tarrow-county-board-of-zoning-appeals-decisions",
+      "name": "Tarrow County Board of Zoning Appeals: decisions",
+      "url": "https://www.tarrowcounty.example/bza/decisions/",
+      "type": "html",
+      "snapshot": "data/snapshots/tarrow-county-board-of-zoning-appeals-decisions/current.txt",
+      "note": "First check: snapshot saved. Changes will be reported from the next run."
+    },
+    {
+      "id": "kestrel-regional-planning-commission-current-agenda-pdf",
+      "name": "Kestrel Regional Planning Commission: current agenda (PDF)",
+      "url": "https://www.kestrelrpc.example/agendas/current-agenda.pdf",
+      "type": "pdf",
+      "snapshot": "data/snapshots/kestrel-regional-planning-commission-current-agenda-pdf/current.txt",
+      "note": "First check: snapshot saved. Changes will be reported from the next run."
+    },
+    {
+      "id": "wrenfield-township-public-notices-rss",
+      "name": "Wrenfield Township: public notices (RSS)",
+      "url": "https://www.wrenfieldtwp.example/notices/feed.xml",
+      "type": "rss",
+      "snapshot": "data/snapshots/wrenfield-township-public-notices-rss/current.txt",
+      "note": "First check: snapshot saved. Changes will be reported from the next run."
+    },
+    {
+      "id": "halden-county-open-data-zoning-applications-json",
+      "name": "Halden County open data: zoning applications (JSON)",
+      "url": "https://data.haldencounty.example/api/zoning-applications.json",
+      "type": "json",
+      "snapshot": "data/snapshots/halden-county-open-data-zoning-applications-json/current.txt",
+      "note": "First check: snapshot saved. Changes will be reported from the next run."
+    },
+    {
+      "id": "city-of-marlowe-falls-pending-legislation",
+      "name": "City of Marlowe Falls: pending legislation",
+      "url": "https://www.marlowefalls.example/council/legislation/",
+      "type": "html",
+      "snapshot": "data/snapshots/city-of-marlowe-falls-pending-legislation/current.txt",
+      "note": "First check: snapshot saved. Changes will be reported from the next run."
+    },
+    {
+      "id": "halden-county-zoning-commission-hearings-page",
+      "name": "Halden County Zoning Commission: hearings page",
+      "url": "https://www.haldencounty.example/planning/zoning-commission/",
+      "type": "html",
+      "snapshot": "data/snapshots/halden-county-zoning-commission-hearings-page/current.txt",
+      "note": "First check: snapshot saved. Changes will be reported from the next run."
+    }
+  ],
+  "unchanged": [],
+  "warnings": []
+}
