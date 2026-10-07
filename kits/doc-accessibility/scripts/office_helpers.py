@@ -88,6 +88,11 @@ def add_table(document, headers: list[str], rows: list[list[str]], header_row: b
     if header_row:
         mark_header_row(table.rows[0])
     if widths:
+        table.autofit = False
+        grid_cols = table._tbl.tblGrid.findall(qn("w:gridCol"))
+        for col, width in enumerate(widths):
+            if col < len(grid_cols):
+                grid_cols[col].set(qn("w:w"), str(int(width * 1440)))
         for row in table.rows:
             for col, width in enumerate(widths):
                 row.cells[col].width = Inches(width)
@@ -111,7 +116,6 @@ def add_page_number_footer(document, prefix: str = "Page ") -> None:
         paragraph.text = ""
         if prefix:
             paragraph.add_run(prefix)
-        run = paragraph.add_run()
         field = OxmlElement("w:fldSimple")
         field.set(qn("w:instr"), "PAGE")
         inner = OxmlElement("w:r")
@@ -119,11 +123,12 @@ def add_page_number_footer(document, prefix: str = "Page ") -> None:
         text.text = "1"
         inner.append(text)
         field.append(inner)
-        run._r.append(field)
+        paragraph._p.append(field)
 
 
 def patch_app_properties(docx_path: str | Path, application: str, pages: int | None = None) -> None:
-    """Rewrite docProps/app.xml so 'made with' and the page count are honest."""
+    """Rewrite docProps/app.xml (Word, Excel or PowerPoint file) so 'made with'
+    and the page count are honest."""
     path = Path(docx_path)
     with tempfile.TemporaryDirectory() as tmp:
         temp_file = Path(tmp) / path.name
@@ -135,7 +140,6 @@ def patch_app_properties(docx_path: str | Path, application: str, pages: int | N
                     xml = re.sub(r"<Application>.*?</Application>", f"<Application>{application}</Application>", xml)
                     if pages is not None:
                         xml = re.sub(r"<Pages>\d+</Pages>", f"<Pages>{pages}</Pages>", xml)
-                    xml = re.sub(r"<Template>.*?</Template>", "<Template>Normal.dotm</Template>", xml)
                     data = xml.encode("utf-8")
                 target.writestr(item, data)
         shutil.move(str(temp_file), str(path))

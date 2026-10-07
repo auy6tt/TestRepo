@@ -1,0 +1,22 @@
+document_url,file_type,type_group,found_on,found_on_depth,link_text,link_text_note,element
+http://127.0.0.1:8765/documents/summer-recreation-guide-2026.pdf,PDF,PDF,http://127.0.0.1:8765/,0,2026 Summer Recreation Guide (PDF),,a
+http://127.0.0.1:8765/documents/water-quality-report-2025.pdf,PDF,PDF,http://127.0.0.1:8765/,0,2025 Water Quality Report,,a
+http://127.0.0.1:8765/documents/council-agenda-2026-03-10.pdf,PDF,PDF,http://127.0.0.1:8765/government/council.html,1,Agenda (PDF),,a
+http://127.0.0.1:8765/documents/council-agenda-2026-03-10-print.pdf,PDF,PDF,http://127.0.0.1:8765/government/council.html,1,printable agenda,,a
+http://127.0.0.1:8765/documents/council-minutes-2026-02-10.pdf,PDF,PDF,http://127.0.0.1:8765/government/council.html,1,Minutes (PDF),,a
+http://127.0.0.1:8765/documents/council-minutes-2026-02-10.pdf,PDF,PDF,http://127.0.0.1:8765/government/council.html,1,click here,Unclear link text ('click here'),a
+http://127.0.0.1:8765/documents/budget-summary-fy2026.pdf,PDF,PDF,http://127.0.0.1:8765/government/budget.html,1,Fiscal Year 2026 budget summary (PDF),,a
+http://127.0.0.1:8765/documents/budget-presentation-fy2026.pptx,PPTX,PowerPoint,http://127.0.0.1:8765/government/budget.html,1,Budget presentation to the Town Council (PowerPoint),,a
+http://127.0.0.1:8765/DocumentCenter/View/2041/Fee-Schedule-2026,PDF,PDF,http://127.0.0.1:8765/government/budget.html,1,2026 fee schedule,,a
+http://127.0.0.1:8765/documents/summer-recreation-guide-2026.pdf,PDF,PDF,http://127.0.0.1:8765/departments/parks.html,1,Summer Recreation Guide 2026,,a
+http://127.0.0.1:8765/documents/pool-schedule-2026.xlsx,XLSX,Excel,http://127.0.0.1:8765/departments/parks.html,1,Pool schedule (Excel),,a
+http://127.0.0.1:8765/documents/volunteer-signup-form.docx,DOCX,Word,http://127.0.0.1:8765/departments/parks.html,1,Volunteer sign-up form (Word),,a
+http://127.0.0.1:8765/documents/water-quality-report-2025.pdf,PDF,PDF,http://127.0.0.1:8765/departments/public-works.html,1,2025 Water Quality Report,,a
+http://127.0.0.1:8765/documents/resolution-2026-14-signed.pdf,PDF,PDF,http://127.0.0.1:8765/departments/public-works.html,1,"Resolution 2026-14, dump truck purchase (signed copy)",,a
+https://www.example.org/state-private-well-guide.pdf,PDF,PDF,http://127.0.0.1:8765/departments/public-works.html,1,download,Unclear link text ('download'),a
+http://127.0.0.1:8765/documents/building-permit-application.pdf,PDF,PDF,http://127.0.0.1:8765/services/forms.html,1,Building permit application (fillable PDF),,a
+http://127.0.0.1:8765/documents/dog-license-application.pdf,PDF,PDF,http://127.0.0.1:8765/services/forms.html,1,Dog license application,,a
+http://127.0.0.1:8765/documents/volunteer-signup-form.docx,DOCX,Word,http://127.0.0.1:8765/services/forms.html,1,Volunteer sign-up form,,a
+http://127.0.0.1:8765/staff-only/timesheet-instructions.pdf,PDF,PDF,http://127.0.0.1:8765/services/forms.html,1,timesheet instructions,,a
+http://127.0.0.1:8765/documents/planning-board-minutes-2019-06-18.pdf,PDF,PDF,http://127.0.0.1:8765/archive/2019.html,1,"Planning Board minutes, June 18, 2019",,a
+http://127.0.0.1:8765/documents/public-hearing-notice-2026-04.pdf,PDF,PDF,http://127.0.0.1:8765/notices/public-hearing.html,1,Notice of public hearing on Ordinance 2026-03 (PDF),,a

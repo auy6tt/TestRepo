@@ -1,6 +1,6 @@
 Source: https://www.tarrowcounty.example/commissioners/agendas/2026-10-13-agenda.pdf
 Link text: Agenda (PDF)
-Fetched: 2026-10-07T10:12:17Z
+Fetched: 2026-10-07T10:13:36Z
 Type: pdf, 2 pages
 
 [Page 1]
@@ -25,30 +25,22 @@ on page 2)
 10. Adjourn
 [Page 2]
 Page 2 of 2
-Duration
-Applies to
-Applies in
-Does not apply to
-Effective date
-Study
 Item 7: Resolution 2026-118
 A resolution declaring a moratorium on the acceptance and processing of applications for zoning
 permits, zoning map amendments and conditional use approvals for battery energy storage facilities in
 the unincorporated areas subject to the Tarrow County Zoning Resolution, and directing the Tarrow
 County Zoning Commission to study the matter and recommend amendments.
 Summary prepared by the Clerk of the Board
-Twelve (12) months from the effective date, unless ended earlier by
-resolution of the Board.
-New applications for battery energy storage facilities with a rated capacity
-of one (1) megawatt or more.
-The unincorporated areas subject to the Tarrow County Zoning Resolution
-(currently Ferris, Quill and Brindle townships). Townships that administer
-their own zoning are not affected.
-Applications filed and determined to be complete before the effective date;
-battery systems that serve a single home or business on the same property.
-Immediately upon adoption.
-The Zoning Commission is directed to recommend setback, fire-safety and
-decommissioning standards to the Board within nine (9) months.
+Duration: Twelve (12) months from the effective date, unless ended earlier by resolution of the Board.
+Applies to: New applications for battery energy storage facilities with a rated capacity of one (1)
+megawatt or more.
+Applies in: The unincorporated areas subject to the Tarrow County Zoning Resolution (currently
+Ferris, Quill and Brindle townships). Townships that administer their own zoning are not affected.
+Does not apply to: Applications filed and determined to be complete before the effective date; battery
+systems that serve a single home or business on the same property.
+Effective date: Immediately upon adoption.
+Study: The Zoning Commission is directed to recommend setback, fire-safety and decommissioning
+standards to the Board within nine (9) months.
 Presented by the Office of the County Administrator. The full text of the resolution is available from
 the Clerk of the Board.
 Sample only: this is a fictional page made for the weekly-digest kit. The place and the documents do not exist.

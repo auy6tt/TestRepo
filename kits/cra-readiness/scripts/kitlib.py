@@ -441,7 +441,7 @@ def _column_widths(header: list[str], rows: list[list[str]], total_mm: float) ->
     """Share the page width between columns: every column gets room for its longest
     word, and the rest goes to the columns with the most text."""
     def mm(chars: float) -> float:          # 9 pt Arial plus cell padding
-        return 1.85 * chars + 3.2
+        return 1.95 * chars + 3.2
 
     def tokens(text: str) -> list[str]:
         out = []
@@ -455,9 +455,11 @@ def _column_widths(header: list[str], rows: list[list[str]], total_mm: float) ->
                 for r in rows] or [""]
         head = re.sub(r"[*`]", "", header[c])
         longest_word = max((len(w) for t in body + [head] for w in tokens(t)), default=3)
-        lo = min(max(mm(longest_word), 12), 34)
+        lo = min(max(mm(longest_word), 12), 46)
         avg = sum(len(t) for t in body) / len(body)
         want = max(lo, min(mm(0.5 * avg + 0.5 * min(max(len(t) for t in body), 70)), 95))
+        if not any(t.strip() for t in body):
+            want = max(lo, total_mm * 0.4)  # an empty column is for answers: leave room to write
         mins.append(lo)
         wants.append(want)
     if sum(mins) >= total_mm:

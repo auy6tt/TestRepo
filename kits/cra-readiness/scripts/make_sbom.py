@@ -181,6 +181,10 @@ def sbom_python(folder: Path, kind: str, out_file: Path, mode: str, include_dev:
                              "Use the default mode to include indirect dependencies.")
 
     sbom = K.load_json(out_file)
+    meta = sbom.setdefault("metadata", {})
+    if not meta.get("component"):
+        # No pyproject.toml: describe the project by its folder name.
+        meta["component"] = {"type": "application", "name": folder.name, "bom-ref": "root-component"}
     if direct_names is not None:
         set_python_root_dependencies(sbom, direct_names)
     return sbom
@@ -481,6 +485,8 @@ def licence_text(comp: dict) -> str:
         lic = entry.get("license", {})
         value = lic.get("id") or lic.get("name") or ""
         value = value.replace("License :: OSI Approved :: ", "").replace("License :: ", "")
+        if value == "OSI Approved":
+            value = "OSI-approved (name not stated)"
         if value:
             names.append(value)
     spdx_like = [n for n in names if re.match(r"^[A-Za-z0-9.+-]+$", n) and " " not in n]
@@ -525,7 +531,7 @@ def table_rows(bom: dict) -> list[dict]:
     deps = {d["ref"]: set(d.get("dependsOn", [])) for d in bom.get("dependencies", [])}
     root = bom.get("metadata", {}).get("component", {}) or {}
     product_ref = root.get("bom-ref")
-    part_refs = [r for r in deps.get(product_ref, set()) if r in comps]
+    part_refs = [r for r in deps.get(product_ref, set()) if r in comps and get_prop(comps[r], PART_PROP)]
     single_project = not part_refs
     if single_project:  # a single-project SBOM: its root is the metadata component
         part_refs = [product_ref] if product_ref else []
@@ -560,7 +566,7 @@ def part_summary(bom: dict) -> list[dict]:
     out = []
     for ref in deps.get(product_ref, []):
         comp = comps.get(ref)
-        if comp:
+        if comp and get_prop(comp, PART_PROP):
             out.append({"name": comp.get("name"), "version": comp.get("version", ""), "type": comp.get("type", "")})
     return out
 
@@ -802,7 +808,6 @@ def main() -> None:
                     "dependencies": [{"ref": root["bom-ref"], "dependsOn": refs}]}
             parts.append({"name": part_name, "sbom": sbom, "source": csv_file})
             K.info(f"Added {len(components)} hand-listed components for {part_name} from {csv_file}")
-            tools_used.setdefault("hand-listed components", Path(csv_file).name)
 
     product_name = args.product or first_product.get("name")
     single = len(parts) == 1 and not product_name
@@ -824,7 +829,8 @@ def main() -> None:
 
     if single:
         bom = parts[0]["sbom"]
-        base = slugify_part(f"{parts[0]['name']}-{(bom.get('metadata', {}).get('component') or {}).get('version', '')}")
+        root_version = (bom.get("metadata", {}).get("component") or {}).get("version", "")
+        base = slugify_part(f"{parts[0]['name']}-{root_version}" if root_version else parts[0]["name"])
     else:
         bom = merge_parts(parts, product, tools, prepared_by)
         base = slugify_part(f"{product['name']}-{product['version'] or 'unversioned'}")

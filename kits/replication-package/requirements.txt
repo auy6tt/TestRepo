@@ -1,0 +1,14 @@
+# Python packages for this kit, pinned to the versions it was tested with (Python 3.11).
+# Install inside a virtual environment:  pip install -r requirements.txt
+
+# Used by the scripts in scripts/
+openpyxl==3.1.5      # Excel reports, and comparing .xlsx outputs
+pillow==12.3.0       # comparing images pixel by pixel
+pypdf==6.19.0        # reading README files that are PDFs
+
+# Used by the sample package in samples/ (and by run_and_compare.py for Stata .dta files)
+numpy==2.4.6
+pandas==3.0.6
+scipy==1.17.1
+statsmodels==0.15.0
+matplotlib==3.11.2

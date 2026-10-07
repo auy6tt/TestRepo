@@ -1,0 +1,32 @@
+{
+  "start_url": "http://127.0.0.1:8765/",
+  "date": "2026-10-07",
+  "started": "2026-10-07T10:28:24",
+  "finished": "2026-10-07T10:28:30",
+  "depth": 3,
+  "delay_seconds": 0.2,
+  "max_pages": 500,
+  "user_agent": "DocInventory/1.0 (+mailto:you@example.com)",
+  "used_sitemap": true,
+  "pages_crawled": 9,
+  "pages_blocked_by_robots": 1,
+  "links_beyond_depth": 0,
+  "links_excluded": 0,
+  "requests": 27,
+  "stopped_at_page_limit": false,
+  "documents_found": 17,
+  "document_links": 21,
+  "by_type": {
+    "PDF": 14,
+    "PowerPoint": 1,
+    "Excel": 1,
+    "Word": 1
+  },
+  "off_site_documents": 1,
+  "downloaded": 14,
+  "broken_links": 1,
+  "blocked_by_robots": 1,
+  "unclear_link_text": 2,
+  "broken_pages": 0,
+  "notes": []
+}

@@ -190,6 +190,10 @@ def dig(data, path: str | None):
     return data
 
 
+def plural(count: int, word: str, words: str | None = None) -> str:
+    return f"{count} {word if count == 1 else (words or word + 's')}"
+
+
 def short(value, limit: int = 300) -> str:
     if isinstance(value, (dict, list)):
         value = json.dumps(value, ensure_ascii=False, sort_keys=True)
@@ -853,6 +857,8 @@ def compare_records(old: dict, new: dict, keywords: list[str]) -> dict:
             out["other_records_not_matching_keywords"] += 1
             continue
         rec = {"id": rid, "text": new[rid]["text"], "url": new[rid].get("url")}
+        if new[rid].get("title"):
+            rec["title"] = new[rid]["title"]
         if hits:
             rec["keywords"] = hits
         out["new_records"].append(rec)
@@ -993,7 +999,7 @@ def check_source(source: dict, fetcher: Fetcher, store: Store, settings: dict,
         meta = {**prev_meta, "last_checked": now}
         store.save_meta(sid, meta)
         return {**base, "status": "unchanged", "last_changed": prev_meta.get("last_changed"),
-                "note": "not modified (HTTP 304)"}
+                "first_checked": prev_meta.get("first_checked"), "note": "not modified (HTTP 304)"}
     if resp.status_code >= 300:
         message, hint = http_status_problem(resp.status_code)
         return {**base, "status": "error", "error": message, "hint": hint}
@@ -1026,7 +1032,7 @@ def check_source(source: dict, fetcher: Fetcher, store: Store, settings: dict,
         "id": sid, "name": name, "url": url, "type": kind,
         "first_checked": prev_meta.get("first_checked", now),
         "last_checked": now,
-        "last_changed": prev_meta.get("last_changed", now),
+        "last_changed": prev_meta.get("last_changed"),  # None until a change is seen
         "sha256": sha,
         "etag": headers.get("etag"),
         "last_modified": headers.get("last-modified"),
@@ -1046,7 +1052,8 @@ def check_source(source: dict, fetcher: Fetcher, store: Store, settings: dict,
 
     if sha == prev_meta.get("sha256"):
         store.save_meta(sid, meta)
-        entry = {**base, "status": "unchanged", "last_changed": prev_meta.get("last_changed")}
+        entry = {**base, "status": "unchanged", "last_changed": prev_meta.get("last_changed"),
+                 "first_checked": prev_meta.get("first_checked")}
         if warnings:
             entry["warnings"] = warnings
         return entry
@@ -1064,7 +1071,8 @@ def check_source(source: dict, fetcher: Fetcher, store: Store, settings: dict,
     new_urls = {l["url"] for l in ext.links}
     if ext.records is not None and previous.get("records") is not None:
         entry.update(compare_records(previous["records"], ext.records, keywords))
-        candidates = [{"text": r["id"], "url": r["url"]} for r in entry["new_records"] if r.get("url")]
+        candidates = [{"text": r.get("title") or r["id"], "url": r["url"]}
+                      for r in entry["new_records"] if r.get("url")]
         hit_texts = [r["text"] for r in entry["new_records"]] + \
                     [r["after"] for r in entry["changed_records"]]
     else:
@@ -1229,10 +1237,16 @@ def build_report(config: dict, results: list[dict], started: dt.datetime, finish
         "errors": [{k: r.get(k) for k in ("id", "name", "url", "error", "hint")} for r in groups["error"]],
         "skipped": [{k: r.get(k) for k in ("id", "name", "url", "reason")} for r in groups["skipped"]],
         "first_run": [{k: v for k, v in r.items() if k != "status"} for r in groups["first_run"]],
-        "unchanged": [{k: r.get(k) for k in ("id", "name", "url", "last_changed")} for r in groups["unchanged"]],
+        "unchanged": [{k: r.get(k) for k in ("id", "name", "url", "last_changed", "first_checked")}
+                      for r in groups["unchanged"]],
         "warnings": warnings,
     }
     return report
+
+
+def counts_text(s: dict) -> str:
+    return (f"{s['changed']} changed, {s['unchanged']} unchanged, {s['first_run']} first check, "
+            f"{s['skipped']} skipped, {plural(s['errors'], 'error')}")
 
 
 def _md_link(text: str, url: str) -> str:
@@ -1244,9 +1258,7 @@ def report_markdown(report: dict) -> str:
     s = report["summary"]
     out = [f"# Changes found: {report['digest'] or 'weekly digest'}", ""]
     out.append(f"Checked {report['run_started'].replace('T', ' ').replace('Z', ' UTC')} "
-               f"(week {report['week']}). {s['sources']} sources: {s['changed']} changed, "
-               f"{s['unchanged']} unchanged, {s['first_run']} first check, "
-               f"{s['skipped']} skipped, {s['errors']} errors.")
+               f"(week {report['week']}). {plural(s['sources'], 'source')}: {counts_text(s)}.")
     if report.get("dry_run"):
         out.append("")
         out.append("**Dry run:** snapshots were not updated.")
@@ -1259,9 +1271,11 @@ def report_markdown(report: dict) -> str:
         meta = f"<{entry['url']}> · {entry['type']}"
         if entry.get("tags"):
             meta += " · tags: " + ", ".join(entry["tags"])
-        out += [meta, "", f"**Summary:** {entry['summary']}"]
+        out += [meta, "", f"- **What changed:** {entry['summary']}"]
         if entry.get("keyword_hits"):
-            out.append(f"**Keywords found:** {', '.join(entry['keyword_hits'])}")
+            out.append(f"- **Keywords found:** {', '.join(entry['keyword_hits'])}")
+        if entry.get("notes"):
+            out.append(f"- **Your note:** {entry['notes']}")
         out.append("")
         if entry.get("diff"):
             out += ["```diff"] + entry["diff"] + ["```"]
@@ -1274,7 +1288,8 @@ def report_markdown(report: dict) -> str:
                 out += [f"**{title}**", ""]
                 for rec in entry[key]:
                     text = rec.get("text") or f"before: {rec.get('before')}\n  after: {rec.get('after')}"
-                    line = f"- `{rec['id']}`: {text}"
+                    label = "" if rec["id"] == rec.get("url") else f"`{rec['id']}`: "
+                    line = f"- {label}{text}"
                     if rec.get("url"):
                         line += f" ({_md_link('link', rec['url'])})"
                     out.append(line)
@@ -1289,7 +1304,7 @@ def report_markdown(report: dict) -> str:
         if entry.get("documents"):
             out += ["**New documents fetched**", ""]
             for doc in entry["documents"]:
-                pages = f", {doc['pages']} pages" if doc.get("pages") else ""
+                pages = f", {plural(doc['pages'], 'page')}" if doc.get("pages") else ""
                 out.append(f"- {_md_link(doc['title'] or doc['url'], doc['url'])}{pages}. "
                            f"Full text: `{doc['text_file']}`")
                 for line in doc["excerpt"][:12]:
@@ -1315,8 +1330,12 @@ def report_markdown(report: dict) -> str:
         out.append("")
     if report["unchanged"]:
         out += [f"## Unchanged ({len(report['unchanged'])})", ""]
-        out += [f"- {e['name']} (last changed {(e.get('last_changed') or 'unknown')[:10]})"
-                for e in report["unchanged"]]
+        for e in report["unchanged"]:
+            if e.get("last_changed"):
+                when = f"last changed {e['last_changed'][:10]}"
+            else:
+                when = f"no change seen since the first check on {(e.get('first_checked') or '?')[:10]}"
+            out.append(f"- {e['name']} ({when})")
         out.append("")
     if report["warnings"]:
         out += ["## Setup warnings", ""] + [f"- {w}" for w in report["warnings"]] + [""]
@@ -1423,8 +1442,7 @@ def main(argv=None) -> int:
         _write_json(data_dir / "runs" / f"{iso(started).replace(':', '')}-changes.json", report)
 
     s = report["summary"]
-    print(f"\nDone: {s['changed']} changed, {s['unchanged']} unchanged, {s['first_run']} first check, "
-          f"{s['skipped']} skipped, {s['errors']} errors. {fetcher.request_count} requests.")
+    print(f"\nDone: {counts_text(s)}. {plural(fetcher.request_count, 'request')}.")
     print(f"Wrote {out_path} and {md_path.name}")
     if report["errors"]:
         print("Check the sources with errors by hand this week (see the Errors section in "

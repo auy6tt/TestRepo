@@ -477,8 +477,13 @@ class FileScan:
         def indent(s):
             m = re.match(r"^(\s*)(-\s+)?", s)
             return len(m.group(1)) + (len(m.group(2)) if m.group(2) else 0)
-        base, out = indent(self.line_text(line_no)), []
+        def is_item(s):
+            return s.lstrip().startswith("- ")
+        here = self.line_text(line_no)
+        base, out = indent(here), []
         for step in (-1, 1):
+            if step == -1 and is_item(here):
+                continue                      # this line starts its list item: nothing above belongs to it
             i = line_no - 1 + step
             while 0 <= i < len(self.lines):
                 s = self.lines[i]
@@ -486,10 +491,12 @@ class FileScan:
                     i += step
                     continue
                 ind = indent(s)
-                if ind < base:
-                    break
+                if ind < base or (step == 1 and ind == base and is_item(s)):
+                    break                     # parent block, or the next list item
                 if ind == base:
                     self._collect_cfg_param(s, out)
+                    if step == -1 and is_item(s):
+                        break                 # reached the start of this list item
                 i += step
         return ", ".join(out)
 
@@ -845,15 +852,20 @@ def notebook_cells(text: str):
     return out
 
 
+def is_generic(name: str) -> bool:
+    """'model' or 'modelName' could be anything; an all-caps constant such as MODEL is specific."""
+    return name.lower() in GENERIC_NAMES and not name.isupper()
+
+
 def resolve_references(findings: list):
     defs = {}
     for f in findings:
         if f.literal:
-            for name in {f.key.lower(), f.alias.lower()}:
-                if name and name not in GENERIC_NAMES and f not in defs.get(name, []):
-                    defs.setdefault(name, []).append(f)
+            for name in {f.key, f.alias}:
+                if name and not is_generic(name) and f not in defs.get(name.lower(), []):
+                    defs.setdefault(name.lower(), []).append(f)
     for f in findings:
-        if f.literal or not f.ref_name or f.ref_name.lower() in GENERIC_NAMES:
+        if f.literal or not f.ref_name or is_generic(f.ref_name):
             continue
         cands = [d for d in defs.get(f.ref_name.lower(), []) if d is not f]
         dotted = "." in f.model  # settings.CHAT_MODEL may live in another file

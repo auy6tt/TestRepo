@@ -92,6 +92,8 @@ def main(argv=None) -> int:
     parser.add_argument("-o", "--output", required=True, help="the .xlsx to write (or the folder, with --split)")
     parser.add_argument("--split", action="store_true", help="split an .xlsx into one CSV per sheet")
     args = parser.parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="replace")  # never crash on unusual characters
     source, output = Path(args.source), Path(args.output)
     if not source.exists():
         print(f"ERROR: not found: {source}")

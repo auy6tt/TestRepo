@@ -576,8 +576,8 @@ class Checker:
                          "only ever '1' (ticked) or '0' (not ticked).", f"Write {ref.text} = '1'.", column)
             return
         if target.ftype in ("radio", "dropdown", "yesno", "truefalse") and op in ("=", "<>") and literal != "":
-            if literal not in target.choice_map and not (rl._is_number(literal) and any(
-                    rl._is_number(c) and float(c) == float(literal) for c in target.choice_map)):
+            if literal not in target.choice_map and not (rl.is_number(literal) and any(
+                    rl.is_number(c) and float(c) == float(literal) for c in target.choice_map)):
                 self.add("WARNING", f, f"{what}: [{target.name}] is compared with '{literal}', which is not one of "
                          f"its codes ({', '.join(target.choice_map)}).", "Use one of the existing codes.", column)
 
@@ -837,6 +837,8 @@ def main(argv=None) -> int:
     parser.add_argument("--strict", action="store_true", help="fail on warnings as well as errors")
     parser.add_argument("--no-date", action="store_true", help="leave the date out of the report")
     args = parser.parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="replace")  # never crash on unusual characters
 
     path = Path(args.dictionary)
     if not path.exists():

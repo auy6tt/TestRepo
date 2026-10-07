@@ -1,0 +1,149 @@
+{#-
+  Layout for the issue email and its PDF. build_digest.py fills it in.
+  Every style is inline (st.* values come from build_digest.py) because many
+  email programs drop <style> blocks. The print version adds a small <style>
+  block for page size and page numbers only.
+  Change colors with issue.accent_color in the items file, not here.
+-#}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="x-apple-disable-message-reformatting">
+<meta name="color-scheme" content="light">
+<meta name="supported-color-schemes" content="light">
+<title>{{ issue.title }}{% if issue.edition %}: {{ issue.edition }}{% endif %}</title>
+{%- if print_mode %}
+<style>
+@page { size: {{ paper }}; margin: 0.5in 0.5in 0.65in;
+  @bottom-left { content: "{{ print_footer }}"; font-family: {{ fonts.sans }}; font-size: 8pt; color: #66717d; }
+  @bottom-right { content: "Page " counter(page) " of " counter(pages); font-family: {{ fonts.sans }}; font-size: 8pt; color: #66717d; } }
+html, body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+.keep, .item p, .item table, .item .top { break-inside: avoid; page-break-inside: avoid; }
+.head, .head td, .item .top { break-after: avoid; page-break-after: avoid; }
+</style>
+{%- endif %}
+</head>
+<body style="{{ st.body }}">
+{%- if not print_mode %}
+<div style="display:none; font-size:1px; line-height:1px; max-height:0; max-width:0; opacity:0; overflow:hidden; mso-hide:all;">{{ preheader }}</div>
+{%- endif %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="{{ st.outer }}">
+<tr><td align="center" style="{{ st.outer_cell }}">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="{{ st.card }}">
+{%- if preview %}
+<tr><td style="{{ st.preview_bar }}">PREVIEW, NOT CHECKED. Do not send. {{ unchecked_count }} item{{ "s" if unchecked_count != 1 else "" }} still need{{ "" if unchecked_count != 1 else "s" }} checking against the source.</td></tr>
+{%- endif %}
+{%- if issue.sample_notice %}
+<tr><td style="{{ st.sample_bar }}">{{ issue.sample_notice }}</td></tr>
+{%- endif %}
+<tr><td style="{{ st.masthead }}">
+<p style="{{ st.kicker }}">{{ issue.brand }}</p>
+<h1 style="{{ st.h1 }}">{{ issue.title }}</h1>
+<p style="{{ st.subtitle }}">{{ subtitle }}</p>
+</td></tr>
+{%- if issue.intro_paras %}
+<tr><td style="{{ st.block_intro }}">
+<p style="{{ st.label }}">This week</p>
+{%- for para in issue.intro_paras %}
+<p style="{{ st.intro }}">{{ para }}</p>
+{%- endfor %}
+</td></tr>
+{%- endif %}
+{%- if stats %}
+<tr><td style="{{ st.block_stats }}">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+{%- for stat in stats %}
+{%- if not loop.first %}
+<td width="10" style="{{ st.tile_gap }}">&nbsp;</td>
+{%- endif %}
+<td width="{{ (96 // stats|length) }}%" align="center" valign="top" style="{{ st.tile }}">
+<p style="{{ st.stat_value }}">{{ stat.value }}</p>
+<p style="{{ st.stat_label }}">{{ stat.label }}</p>
+</td>
+{%- endfor %}
+</tr></table>
+</td></tr>
+{%- endif %}
+{%- if dates %}
+<tr><td class="keep" style="{{ st.block_dates }}">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="{{ st.dates_box }}">
+<tr><td style="{{ st.dates_title }}">Coming up</td></tr>
+{%- for d in dates %}
+<tr><td style="{{ st.dates_row_last if loop.last else st.dates_row }}">
+<p style="{{ st.date_when }}">{{ d.day }}{% if d.time %} &middot; {{ d.time }}{% endif %}</p>
+<p style="{{ st.date_what }}"><strong>{{ d.label }}:</strong> {{ d.what }}{% if d.where %} <span style="{{ st.date_where }}">({{ d.where }})</span>{% endif %}</p>
+</td></tr>
+{%- endfor %}
+<tr><td style="{{ st.dates_note }}">Every date is also in the calendar file (.ics) sent with this issue.{% if tz_note %} {{ tz_note }}{% endif %}</td></tr>
+</table>
+</td></tr>
+{%- endif %}
+{%- if not sections %}
+<tr><td style="{{ st.quiet }}">Nothing new this week. We checked every source on our list and found no relevant changes. We will keep watching.</td></tr>
+{%- endif %}
+{%- for section in sections %}
+<tr class="head"><td style="{{ st.block_section }}">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"><tr>
+<td style="{{ st.section }}">{{ section.name }} <span style="{{ st.section_count }}">&middot; {{ section.entries|length }}</span></td>
+</tr></table>
+</td></tr>
+{%- for it in section.entries %}
+<tr><td style="{{ st.block_item }}">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="{{ st.item_high if it.high else st.item }}">
+<tr><td class="item" style="{{ st.item_cell }}">
+<div class="top">
+<p style="{{ st.item_meta }}">{% if it.high %}<span style="{{ st.badge }}">Top item</span>&nbsp; {% endif %}{{ it.meta }}</p>
+<h3 style="{{ st.item_title }}"><a href="{{ it.source_url }}" style="{{ st.item_title_link }}">{{ it.title }}</a></h3>
+</div>
+{%- for para in it.summary_paras %}
+<p style="{{ st.item_text }}">{{ para }}</p>
+{%- endfor %}
+{%- if it.why %}
+<p style="{{ st.item_text }}"><strong style="{{ st.why_label }}">Why it matters:</strong> {{ it.why }}</p>
+{%- endif %}
+{%- if it.details %}
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="{{ st.details }}">
+{%- for key, value in it.details %}
+<tr><td width="38%" valign="top" style="{{ st.details_key }}">{{ key }}</td><td valign="top" style="{{ st.details_value }}">{{ value }}</td></tr>
+{%- endfor %}
+</table>
+{%- endif %}
+{%- for d in it.dates %}
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" style="{{ st.pill_table }}"><tr><td style="{{ st.pill_past if d.past else st.pill }}">{{ d.label }}: {{ d.when }}{% if d.past %} (passed){% endif %}{% if d.location %}<br><span style="{{ st.pill_where }}">{{ d.location }}</span>{% endif %}</td></tr></table>
+{%- endfor %}
+<p style="{{ st.source }}">Source: <a href="{{ it.source_url }}" style="{{ st.link }}">{{ it.source_name }}</a>{% if it.source_ref %}, {{ it.source_ref }}{% endif %}</p>
+{%- if it.unchecked %}
+<p style="{{ st.unchecked }}">NOT CHECKED YET ({{ it.status }}). Check it against the source before sending.</p>
+{%- else %}
+<p style="{{ st.checked }}">&#10003; Checked against the source on {{ it.checked_display }}</p>
+{%- endif %}
+</td></tr>
+</table>
+</td></tr>
+{%- endfor %}
+{%- endfor %}
+<tr><td class="keep" style="{{ st.footer }}">
+<p style="{{ st.footer_head }}">How this brief is made</p>
+<p style="{{ st.footer_text }}">{{ method_text }}</p>
+<p style="{{ st.footer_head }}">Not legal advice</p>
+<p style="{{ st.footer_text }}">{{ disclaimer }}</p>
+{%- if issue.attribution %}
+<p style="{{ st.footer_text }}">{{ issue.attribution }}</p>
+{%- endif %}
+<p style="{{ st.footer_last }}">Questions or corrections: reply to this email or write to <a href="mailto:{{ issue.contact_email }}" style="{{ st.link }}">{{ issue.contact_email }}</a>.</p>
+{%- if print_mode %}
+<p style="{{ st.footer_last }}">{{ issue.brand }}{% if issue.mailing_address %} &middot; {{ issue.mailing_address }}{% endif %}{% if issue.website %} &middot; {{ website_host }}{% endif %}</p>
+{%- endif %}
+</td></tr>
+</table>
+{%- if not print_mode %}
+<p style="{{ st.legal }}">You receive {{ issue.title }} because you subscribed{% if issue.website %} at <a href="{{ issue.website }}" style="{{ st.legal_link }}">{{ website_host }}</a>{% endif %}.<br>
+{{ issue.brand }}{% if issue.mailing_address %} &middot; {{ issue.mailing_address }}{% endif %}<br>
+<a href="{{ manage_url }}" style="{{ st.legal_link }}">Manage or cancel your subscription</a></p>
+{%- endif %}
+</td></tr>
+</table>
+</body>
+</html>

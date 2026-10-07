@@ -1,0 +1,6 @@
+rule,logic
+Diastolic is not lower than systolic (screening),[scr_sbp] <> '' and [scr_dbp] <> '' and [scr_dbp] >= [scr_sbp]
+Diastolic is not lower than systolic (follow-up),[fu_sbp] <> '' and [fu_dbp] <> '' and [fu_dbp] >= [fu_sbp]
+Visit 1 outside its window (7 to 21 days after screening),[event-name] = 'visit_1_arm_1' and [fu_days] <> '' and ([fu_days] < 7 or [fu_days] > 21)
+BMI below 15 or above 60 (check height and weight),[bmi] <> '' and ([bmi] < 15 or [bmi] > 60)
+Health event dated after the visit,"[he_date] <> '' and [fu_date] <> '' and datediff([he_date], [fu_date], 'd', true) < 0"

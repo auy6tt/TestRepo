@@ -1,0 +1,11 @@
+# Security contact for Mossbyte Labs BV (fictional).
+# Found a vulnerability in one of our products? Please tell us. Our policy explains how.
+
+Contact: mailto:security@mossbyte.example
+Contact: https://mossbyte.example/security/report
+Expires: 2027-09-02T23:59:59Z
+Encryption: https://mossbyte.example/.well-known/pgp-key.txt
+Acknowledgments: https://mossbyte.example/security/thanks
+Preferred-Languages: en, nl, fr
+Canonical: https://mossbyte.example/.well-known/security.txt
+Policy: https://mossbyte.example/security/policy

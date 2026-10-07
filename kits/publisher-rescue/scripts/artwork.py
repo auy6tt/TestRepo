@@ -60,9 +60,13 @@ class Canvas:
     """A drawing surface in final pixel units, drawn at SCALE x for smoothness."""
 
     def __init__(self, width: int, height: int, background="FFFFFF"):
+        """background=None gives a transparent picture (for logos)."""
         self.w, self.h = width, height
-        bg = rgb(background) if isinstance(background, str) else background
-        self.img = Image.new("RGB", (width * SCALE, height * SCALE), bg)
+        if background is None:
+            self.img = Image.new("RGBA", (width * SCALE, height * SCALE), (255, 255, 255, 0))
+        else:
+            bg = rgb(background) if isinstance(background, str) else background
+            self.img = Image.new("RGB", (width * SCALE, height * SCALE), bg)
         self.d = ImageDraw.Draw(self.img)
 
     def _s(self, values):
@@ -404,8 +408,8 @@ def window_scene(width=700, height=860, colours=None) -> bytes:
 
 
 def emblem(initials: str, primary="1F3A5F", accent="C8912E", size=600) -> bytes:
-    """A round logo: church outline above the initials."""
-    c = Canvas(size, size, "FFFFFF")
+    """A round logo: church outline above the initials, on a clear background."""
+    c = Canvas(size, size, None)
     c.circle(size / 2, size / 2, size * 0.48, fill=primary)
     c.circle(size / 2, size / 2, size * 0.43, outline=accent, width=size * 0.012)
     s = size / 600

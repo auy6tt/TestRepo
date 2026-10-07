@@ -1,0 +1,6 @@
+section,title,file,order,notes,pages,include
+EXAMPLE - General Information,Contractor and supplier contact list,contact-list.pdf,1,Prepared by the subcontractor,,yes
+EXAMPLE - Rooftop Unit RTU-1,Product data,rtu-1-datasheet.pdf,2,Spec section 23 74 00,,yes
+EXAMPLE - Rooftop Unit RTU-1,"Installation, operation and maintenance manual",rtu-1-iom.pdf,3,,,yes
+EXAMPLE - Rooftop Unit RTU-1,Performance data only,rtu-1-iom.pdf,4,Pages 12-14 of the manual,12-14,yes
+EXAMPLE - Testing and Balancing,Final test and balance report,,5,Blank file = placeholder page until it arrives,,yes

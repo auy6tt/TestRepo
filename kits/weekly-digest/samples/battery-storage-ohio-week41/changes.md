@@ -1,6 +1,6 @@
 # Changes found: Battery Storage Zoning Watch — Ohio
 
-Checked 2026-10-07 10:12:15 UTC (week 2026-W41). 8 sources: 5 changed, 1 unchanged, 0 first check, 1 skipped, 1 errors.
+Checked 2026-10-07 10:13:34 UTC (week 2026-W41). 8 sources: 5 changed, 1 unchanged, 0 first check, 1 skipped, 1 error.
 
 > **Next step:** Draft items from the changed sources with status needs_review. A person must check every item against its source before anything is sent.
 
@@ -10,8 +10,8 @@ Checked 2026-10-07 10:12:15 UTC (week 2026-W41). 8 sources: 5 changed, 1 unchang
 
 <https://www.tarrowcounty.example/commissioners/agendas/> · html · tags: tarrow-county, county, agenda
 
-**Summary:** 2 lines added, 1 new link, 1 document fetched
-**Keywords found:** battery, energy storage, moratorium
+- **What changed:** 2 lines added, 1 new link, 1 document fetched
+- **Keywords found:** battery, energy storage, moratorium
 
 ```diff
 @@ -2,3 +2,5 @@
@@ -46,8 +46,8 @@ Checked 2026-10-07 10:12:15 UTC (week 2026-W41). 8 sources: 5 changed, 1 unchang
 
 <https://www.kestrelrpc.example/agendas/current-agenda.pdf> · pdf · tags: regional, planning-commission, agenda
 
-**Summary:** 38 lines added, 10 lines removed
-**Keywords found:** battery, energy storage
+- **What changed:** 27 lines added, 10 lines removed
+- **Keywords found:** battery, energy storage
 
 ```diff
 @@ -5,16 +5,18 @@
@@ -78,35 +78,24 @@ Checked 2026-10-07 10:12:15 UTC (week 2026-W41). 8 sources: 5 changed, 1 unchang
 +a. SUB-26-031, Halden County, Larch Township. Orchard Ridge Phase 1 final plat, 12 lots.
 +5. Staff report: proposed 2027 meeting calendar
  6. Adjourn
-@@ -22,2 +24,27 @@
+@@ -22,2 +24,16 @@
  Page 2 of 2
-+Location
-+Area
-+Current zoning
-+Requested zoning
-+Proposed use
-+Applicant
-+Property owners
-+Process
-+Related
 +Case summary: RZ-26-014
-+North side of Kessler Road, Wrenfield Township, Tarrow County (three
-+parcels)
-+Approximately 48.2 acres
-+A-1 Agricultural
-+I-1 Light Industrial
-+Battery energy storage facility, approximately 80 MW / 320 MWh, as
-+stated in the application
-+Northbank Storage Partners LLC
-+Listed in the application file
-+The Commission will hold a public hearing and make a recommendation
-+to the Wrenfield Township Zoning Commission. The Township Zoning
-+Commission then holds its own public hearing before the Township
-+Trustees decide.
-+Wrenfield Township has proposed Zoning Text Amendment ZTA-2026-03
-+on battery energy storage systems (public hearing October 21, 2026).
++Location: North side of Kessler Road, Wrenfield Township, Tarrow County (three parcels)
++Area: Approximately 48.2 acres
++Current zoning: A-1 Agricultural
++Requested zoning: I-1 Light Industrial
++Proposed use: Battery energy storage facility, approximately 80 MW / 320 MWh, as stated in the
++application
++Applicant: Northbank Storage Partners LLC
++Property owners: Listed in the application file
++Process: The Commission will hold a public hearing and make a recommendation to the Wrenfield
++Township Zoning Commission. The Township Zoning Commission then holds its own public hearing
++before the Township Trustees decide.
++Related: Wrenfield Township has proposed Zoning Text Amendment ZTA-2026-03 on battery energy
++storage systems (public hearing October 21, 2026).
  Notes for the public
-@@ -26,3 +53,4 @@
+@@ -26,3 +42,4 @@
  or county that has zoning authority.
 -Next regular meeting: Thursday, October 22, 2026, 6:00 p.m.
 +Next regular meeting: Thursday, November 19, 2026, 6:00 p.m. (moved from November 26 because of
@@ -118,18 +107,18 @@ Checked 2026-10-07 10:12:15 UTC (week 2026-W41). 8 sources: 5 changed, 1 unchang
 
 <https://www.wrenfieldtwp.example/notices/feed.xml> · rss · tags: wrenfield-township, township, legal-notice
 
-**Summary:** 1 new record, 1 document fetched, 1 other record change without your keywords
-**Keywords found:** battery, energy storage
+- **What changed:** 1 new record, 1 document fetched, 1 other record change without your keywords
+- **Keywords found:** battery, energy storage
 
 **New records**
 
-- `https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf`: 2026-10-05 | Notice of public hearing: Zoning Text Amendment ZTA-2026-03 (battery energy storage systems) | The Wrenfield Township Zoning Commission will hold a public hearing on Wednesday, October 21, 2026 at 7:00 p.m. at the Township Hall on proposed zoning amendments for battery energy storage systems. Written comments are accepted until 4:00 p.m. on Friday, October 16, 2026. ([link](https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf))
+- 2026-10-05 | Notice of public hearing: Zoning Text Amendment ZTA-2026-03 (battery energy storage systems) | The Wrenfield Township Zoning Commission will hold a public hearing on Wednesday, October 21, 2026 at 7:00 p.m. at the Township Hall on proposed zoning amendments for battery energy storage systems. Written comments are accepted until 4:00 p.m. on Friday, October 16, 2026. ([link](https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf))
 
 _1 other record change(s) did not match your keywords and are not listed._
 
 **New documents fetched**
 
-- [https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf](https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf), 1 pages. Full text: `data/documents/5eef3619fcc0425e.txt`
+- [Notice of public hearing: Zoning Text Amendment ZTA-2026-03 (battery energy storage systems)](https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf), 1 page. Full text: `data/documents/5eef3619fcc0425e.txt`
   > [Page 1]
   > Page 1 of 1
   > WRENFIELD TOWNSHIP
@@ -147,8 +136,8 @@ _1 other record change(s) did not match your keywords and are not listed._
 
 <https://data.haldencounty.example/api/zoning-applications.json> · json · tags: halden-county, county, open-data
 
-**Summary:** 1 new record, 2 other record changes without your keywords
-**Keywords found:** battery, energy storage
+- **What changed:** 1 new record, 2 other record changes without your keywords
+- **Keywords found:** battery, energy storage
 
 **New records**
 
@@ -160,17 +149,16 @@ _2 other record change(s) did not match your keywords and are not listed._
 
 <https://www.marlowefalls.example/council/legislation/> · html · tags: marlowe-falls, city, ordinance
 
-**Summary:** 3 lines added, 3 lines removed, 1 new link, 1 document fetched
-**Keywords found:** battery, energy storage
+- **What changed:** 2 lines added, 3 lines removed, 1 new link, 1 document fetched
+- **Keywords found:** battery, energy storage
 
 ```diff
-@@ -2,4 +2,4 @@
+@@ -2,4 +2,3 @@
  Legislation | Title | Status | Documents
 -Ordinance 2026-41 | Establishing fire safety and emergency response requirements for battery energy storage systems | First reading September 21, 2026. Referred to the Safety Committee. | Ordinance 2026-41 as introduced (PDF)
 -Ordinance 2026-38 | Amending the 2026 annual appropriations | Second reading October 5, 2026. | Ordinance 2026-38 (PDF)
 -Ordinance 2026-43 | Establishing a no-parking zone on the west side of Mill Street | First reading October 5, 2026. | Ordinance 2026-43 (PDF)
-+Ordinance 2026-41 | Establishing fire safety and emergency response requirements for battery energy storage systems | First reading September 21, 2026. Amended in the Safety Committee October 5, 2026. Second reading October 19, 2026. | Ordinance 2026-41 as introduced (PDF)
-+Ordinance 2026-41 as amended (PDF)
++Ordinance 2026-41 | Establishing fire safety and emergency response requirements for battery energy storage systems | First reading September 21, 2026. Amended in the Safety Committee October 5, 2026. Second reading October 19, 2026. | Ordinance 2026-41 as introduced (PDF); Ordinance 2026-41 as amended (PDF)
 +Ordinance 2026-43 | Establishing a no-parking zone on the west side of Mill Street | First reading October 5, 2026. Second reading October 19, 2026. | Ordinance 2026-43 (PDF)
 ```
 
@@ -205,4 +193,4 @@ _2 other record change(s) did not match your keywords and are not listed._
 
 ## Unchanged (1)
 
-- Tarrow County Board of Zoning Appeals: decisions (last changed 2026-10-07)
+- Tarrow County Board of Zoning Appeals: decisions (no change seen since the first check on 2026-10-07)

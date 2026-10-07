@@ -1,0 +1,343 @@
+{
+  "schema_version": "1.0",
+  "_note": "Portfolio sample. Everything here is fictional. Keys starting with '_' are notes for you; the scripts ignore them.",
+  "document": {
+    "status": "draft",
+    "locale": "en-US",
+    "notice": "Portfolio sample: Wrenfield Commons, its people and this meeting are fictional.",
+    "prepared_on": "2026-09-17"
+  },
+  "organization": {
+    "name": "Wrenfield Commons Homeowners Association",
+    "short_name": "Wrenfield Commons HOA",
+    "_note": "The transcript says 'Renfield Commons' (a speech-to-text error). The agenda has the correct spelling."
+  },
+  "meeting": {
+    "title": "Regular Meeting of the Board of Directors",
+    "date": "2026-09-16",
+    "scheduled_time": "19:00",
+    "called_to_order": "19:02",
+    "adjourned": "19:36",
+    "location": "By Zoom videoconference",
+    "format": "virtual",
+    "presiding": {"name": "Diane Okafor", "role": "President"},
+    "recording_secretary": {"name": "Marcus Bell", "role": "Secretary"},
+    "_note": "Times are the ones the President announced. Don't work them out from the recording clock: the recording was paused during executive session."
+  },
+  "attendance": {
+    "directors_present": [
+      {"name": "Diane Okafor", "role": "President"},
+      {"name": "Raymond Castillo", "role": "Vice President"},
+      {"name": "Grace Lindqvist", "role": "Treasurer"},
+      {"name": "Marcus Bell", "role": "Secretary"},
+      {"name": "Helen Whitaker", "role": "Director at Large", "arrived": "19:14"}
+    ],
+    "directors_absent": [],
+    "others_present": [
+      {"name": "Priya Raman", "role": "Community Manager, Hartwell & Finch Community Management"}
+    ],
+    "members_present": "Nine homeowners",
+    "quorum": {
+      "met": true,
+      "present_count": 4,
+      "board_size": 5,
+      "required": 3,
+      "statement": "A quorum was present at the call to order: 4 of 5 directors (3 required)."
+    },
+    "_note": "Roles and spellings come from the board list on the agenda ('Lindquist' in the transcript is a speech-to-text error). 'Helen's iPhone' in the raw transcript is Helen Whitaker: she says so when she joins at 00:13:49."
+  },
+  "items": [
+    {
+      "number": "1",
+      "title": "Call to Order",
+      "kind": "call_to_order",
+      "summary": [
+        "President Diane Okafor called the meeting to order at 7:02 p.m. She reminded attendees that the meeting is recorded to help prepare the minutes and that the recording is deleted once the minutes are approved.",
+        "The President announced that the annual meeting and election will be held on December 9 and that the call for candidates will be sent next week."
+      ],
+      "source": "00:02:07"
+    },
+    {
+      "number": "2",
+      "title": "Roll Call and Quorum",
+      "kind": "roll_call",
+      "summary": [
+        "Secretary Marcus Bell called the roll. Four of the five directors were present, and the President confirmed that a quorum was present (three directors are required). Director Helen Whitaker joined the meeting at 7:14 p.m., during Item 7.",
+        "Also present were Community Manager Priya Raman of Hartwell & Finch Community Management and nine homeowners."
+      ],
+      "source": "00:03:11"
+    },
+    {
+      "number": "3",
+      "title": "Approval of Agenda",
+      "kind": "agenda_approval",
+      "summary": ["The agenda was approved as presented, without objection."],
+      "source": "00:03:32"
+    },
+    {
+      "number": "4",
+      "title": "Homeowner Open Forum",
+      "kind": "open_forum",
+      "_note": "Homeowners who spoke are not named. Most associations prefer this; ask the client.",
+      "summary": [
+        "Three homeowners spoke:",
+        "- Speeding on Wrenfield Drive near the north entrance, now that school has started. The homeowner asked for radar speed signs or more signs, and noted that signs there would need to be solar-powered. The President noted that speed bumps had been difficult because of the snow plow contract. The Community Manager will get quotes for two radar speed signs for the October meeting packet.",
+        "- The lack of a pet-waste bag station near the playground; the nearest one is at the mailboxes. The President asked for the option and cost of adding a station near the playground to be looked into for next month.",
+        "- A request to keep the pool open through the end of September next year. The President noted that the pool season is budgeted through Labor Day and that the request will be considered with the 2027 budget. The Treasurer will add it to the list for the budget workshop."
+      ],
+      "source": "00:04:37"
+    },
+    {
+      "number": "5",
+      "title": "Approval of Minutes: August 19, 2026 Regular Meeting",
+      "kind": "approval_of_minutes",
+      "summary": [
+        "One correction was noted: in the Treasurer's Report section on page 2, the July reserve transfer should read $5,400, not $4,500."
+      ],
+      "motions": [
+        {
+          "text": "To approve the minutes of the August 19, 2026 regular meeting as corrected.",
+          "moved_by": "Marcus Bell",
+          "seconded_by": "Raymond Castillo",
+          "vote": {"method": "voice", "in_favor": 4, "opposed": 0},
+          "result": "carried",
+          "source": "00:09:27"
+        }
+      ],
+      "source": "00:08:39"
+    },
+    {
+      "number": "6",
+      "title": "Treasurer's Report: August 2026 Financial Statements",
+      "kind": "report",
+      "presenter": "Grace Lindqvist, Treasurer",
+      "summary": [
+        "The Treasurer presented the financial statements through August 31, 2026:",
+        "- Operating cash was $48,212.67, and the reserve accounts totaled $312,540.18.",
+        "- Operating expenses are about $3,900 under budget year to date, mainly because irrigation water use was low after the July rains.",
+        "- The pool pump motor failed in August. The $1,240 cost came from pool repairs, so that line is now over budget for the year. The motor was about six months past its warranty.",
+        "- Six accounts are more than 60 days past due, totaling $7,850 (down from eight accounts last month); two of the six are on payment plans. A question about referring accounts to the attorney was held for executive session.",
+        "- The July reserve transfer of $5,400 was completed. Collections for the month were about 97 percent of assessments billed.",
+        "- The insurance policy renews in December. The broker expects roughly a 12 percent increase on the property policy and is getting at least two other quotes before the budget workshop."
+      ],
+      "motions": [
+        {
+          "text": "To accept the Treasurer's report as presented.",
+          "moved_by": "Marcus Bell",
+          "seconded_by": "[UNCLEAR: Raymond Castillo or Grace Lindqvist]",
+          "vote": {"method": "voice", "unanimous": true},
+          "result": "carried",
+          "source": "00:12:46",
+          "_note": "Two directors said 'Second' at the same moment (00:12:51) and the chair did not name one, so it goes to the secretary as question 1. The chair said 'carries unanimously' but gave no count, so no count is recorded."
+        }
+      ],
+      "source": "00:09:59"
+    },
+    {
+      "number": "7",
+      "title": "Community Manager's Report",
+      "kind": "report",
+      "presenter": "Priya Raman, Community Manager",
+      "summary": [
+        "- The pool closed for the season on September 8, and winterizing is complete.",
+        "- There were 14 work orders since the last meeting; 11 are closed. Still open: the north entrance gate arm, which is stuck open while a replacement part is on order (expected by the end of next week); an irrigation leak on Thistle Court, which the landscaper is repairing this week; and a streetlight out on Wrenfield Drive, reported to the electric company, which estimated seven to ten business days.",
+        "- Nine courtesy violation notices were sent in the last month (seven for trash cans visible from the street, two for overgrown lawns); two are resolved.",
+        "- The fall walk-through inspection is scheduled for Saturday, October 3, at 9:00 a.m., starting at the clubhouse. Directors are welcome to join.",
+        "- The clubhouse air conditioning was serviced, and new locks are installed on the Larkspur Lane mailbox kiosk. Residents can pick up new keys at the management office.",
+        "Director Castillo raised yard waste being dumped near the dumpsters while the gate is open. The gate cannot be locked closed until the part arrives; the Community Manager will keep the Board updated by email."
+      ],
+      "source": "00:13:13"
+    },
+    {
+      "number": "8",
+      "title": "Old Business",
+      "kind": "heading"
+    },
+    {
+      "number": "8a",
+      "level": 2,
+      "title": "Pool Resurfacing Bids",
+      "kind": "business",
+      "presenter": "Priya Raman, Community Manager",
+      "_note": "The transcript says 'Aqua Shore'; the agenda spells it 'AquaShore Pools'.",
+      "summary": [
+        "Two bids have been received, both including replastering, a new tile line and coping repairs: AquaShore Pools, $38,400, with a five-year plaster warranty, and Blue Mesa Pool Company, $42,950, with a seven-year plaster warranty. Both estimate about three weeks of work starting in March, weather permitting. Ridgeline Pool Services expects to submit a bid by early October.",
+        "The Treasurer noted that the reserve study allocates $40,000 for resurfacing in 2027. Directors Castillo and Whitaker preferred to wait for the third bid, as the work is not planned until spring."
+      ],
+      "motions": [
+        {
+          "text": "To postpone the pool resurfacing decision to the October meeting.",
+          "moved_by": "Raymond Castillo",
+          "seconded_by": "Helen Whitaker",
+          "vote": {"method": "voice", "in_favor": 5, "opposed": 0},
+          "result": "carried",
+          "source": "00:17:38"
+        }
+      ],
+      "source": "00:16:08"
+    },
+    {
+      "number": "9",
+      "title": "New Business",
+      "kind": "heading"
+    },
+    {
+      "number": "9a",
+      "level": 2,
+      "title": "Landscaping Contract Renewal",
+      "kind": "business",
+      "presenter": "Priya Raman, Community Manager",
+      "summary": [
+        "The current contract with Pinecrest Grounds Maintenance ends October 31, 2026. Three bids were received for a two-year contract:",
+        "- Pinecrest Grounds Maintenance (current contractor): $5,150 per month, including spring irrigation startup and winterizing.",
+        "- GreenWay Lawn & Garden: $4,800 per month, not including leaf removal or seasonal flowers; irrigation startup and winterizing are charged separately.",
+        "- Holloway Landscapes: [UNCLEAR: $5,600 or $5,650] per month, including spring irrigation startup and winterizing.",
+        "GreenWay's bid is $350 per month ($8,400 over two years) lower than Pinecrest's. Leaf removal cost about $3,000 last year, which narrows the difference. GreenWay maintains two nearby communities; the Treasurer contacted one reference, who was satisfied. All three contracts include a 30-day termination clause. Directors discussed Pinecrest's service record and the cost difference in light of the expected insurance increase."
+      ],
+      "motions": [
+        {
+          "text": "To renew the contract with Pinecrest Grounds Maintenance for two years at $5,150 per month, starting November 1.",
+          "moved_by": "Raymond Castillo",
+          "seconded_by": "Helen Whitaker",
+          "vote": {
+            "method": "roll_call",
+            "in_favor": 4,
+            "opposed": 1,
+            "roll_call": [
+              {"name": "Diane Okafor", "vote": "yes"},
+              {"name": "Raymond Castillo", "vote": "yes"},
+              {"name": "Grace Lindqvist", "vote": "no"},
+              {"name": "Helen Whitaker", "vote": "yes"},
+              {"name": "Marcus Bell", "vote": "yes"}
+            ]
+          },
+          "result": "carried",
+          "source": "00:21:28"
+        }
+      ],
+      "source": "00:17:59",
+      "_note": "The two figures for Holloway conflict (00:18:24 and 00:18:54), so both are shown as [UNCLEAR] and question 2 asks the secretary."
+    },
+    {
+      "number": "9b",
+      "level": 2,
+      "title": "Reserve Study Update Proposal: Keystone Reserve Advisors",
+      "kind": "business",
+      "presenter": "Grace Lindqvist, Treasurer",
+      "summary": [
+        "The last full reserve study was completed in 2023, and an update is due every three years. Keystone Reserve Advisors, which prepared the previous study, proposed a Level 2 update with a site visit for $3,200, with the report in about eight weeks. The cost is budgeted under professional fees, and the roads are among the components reviewed. Because the report will probably arrive after the 2027 budget is adopted in November, the 2027 reserve contribution will be based on the 2023 study and adjusted next year if needed."
+      ],
+      "motions": [
+        {
+          "text": "To approve the proposal from Keystone Reserve Advisors for a Level 2 reserve study update at a cost of $3,200.",
+          "moved_by": "Grace Lindqvist",
+          "seconded_by": "Marcus Bell",
+          "vote": {"method": "voice", "in_favor": 5, "opposed": 0},
+          "result": "carried",
+          "source": "00:23:25"
+        }
+      ],
+      "source": "00:22:28"
+    },
+    {
+      "number": "9c",
+      "level": 2,
+      "title": "Architectural Request: Rear Yard Fence, 18 Thistle Court",
+      "kind": "business",
+      "presenter": "Helen Whitaker, for the Architectural Review Committee",
+      "summary": [
+        "The owners of 18 Thistle Court requested approval for a six-foot cedar privacy fence around their rear yard. The architectural guidelines limit rear yard fences to five feet. The Architectural Review Committee recommended approval at a maximum height of five feet in the approved cedar style; the owners may still apply for a variance. Both neighbors sent letters with no objection.",
+        "Director Marcus Bell abstained because the applicants are his next-door neighbors."
+      ],
+      "motions": [
+        {
+          "text": "To approve the rear yard fence at 18 Thistle Court at a maximum height of five feet, in the approved cedar style.",
+          "moved_by": "Helen Whitaker",
+          "on_behalf_of": "Architectural Review Committee",
+          "seconded_by": null,
+          "second_note": "No second required (committee recommendation)",
+          "vote": {"method": "voice", "in_favor": 4, "opposed": 0, "abstained": 1},
+          "result": "carried",
+          "source": "00:24:26"
+        }
+      ],
+      "source": "00:24:16"
+    },
+    {
+      "number": "10",
+      "title": "Executive Session",
+      "kind": "executive_session",
+      "start": "19:26",
+      "end": "19:35",
+      "topics": ["a delinquent account", "a vendor contract matter"],
+      "outcome": "The President reported that no action was taken in executive session.",
+      "source": "00:26:10",
+      "_note": "The recording kept running for about 30 seconds into executive session (00:26:43). That discussion is confidential and is left out on purpose. Question 4 tells the secretary."
+    },
+    {
+      "number": "11",
+      "title": "Action on Executive Session Items",
+      "kind": "business",
+      "summary": ["The Board returned to open session at 7:35 p.m."],
+      "motions": [
+        {
+          "text": "To refer account number 1147 to the association's attorney for collection.",
+          "moved_by": "Grace Lindqvist",
+          "seconded_by": "Raymond Castillo",
+          "vote": {"method": "voice", "in_favor": 5, "opposed": 0, "unanimous": true},
+          "result": "carried",
+          "source": "00:27:33"
+        }
+      ],
+      "source": "00:27:00"
+    },
+    {
+      "number": "12",
+      "title": "Next Meeting",
+      "kind": "next_meeting",
+      "source": "00:27:58"
+    },
+    {
+      "number": "13",
+      "title": "Adjournment",
+      "kind": "adjournment",
+      "summary": ["There being no further business, the meeting was adjourned at 7:36 p.m."],
+      "motions": [
+        {
+          "text": "To adjourn the meeting.",
+          "moved_by": "Marcus Bell",
+          "seconded_by": "Helen Whitaker",
+          "vote": {"method": "voice"},
+          "result": "carried",
+          "source": "00:28:30"
+        }
+      ],
+      "source": "00:28:30"
+    }
+  ],
+  "action_items": [
+    {"task": "Get quotes for two solar-powered radar speed signs, one at each end of Wrenfield Drive, for the October meeting packet.", "owner": "Priya Raman", "due": "2026-10-21", "item": "4", "source": "00:06:08"},
+    {"task": "Look into adding a pet-waste bag station near the playground, including the cost.", "owner": "[UNCLEAR]", "due": "2026-10-21", "item": "4", "source": "00:07:14"},
+    {"task": "Add extending the pool season through September to the list for the 2027 budget workshop.", "owner": "Grace Lindqvist", "due": "Budget workshop", "item": "4", "source": "00:08:31"},
+    {"task": "Keep the Board updated by email on the north entrance gate arm repair.", "owner": "Priya Raman", "due": "Until repaired", "item": "7", "source": "00:15:59"},
+    {"task": "Get the Ridgeline Pool Services bid into the October meeting packet.", "owner": "Priya Raman", "due": "2026-10-21", "item": "8a", "source": "00:17:48"},
+    {"task": "Let Pinecrest know about the renewal, send the contract to the President for signature, and tell the other two bidders.", "owner": "Priya Raman", "due": "2026-09-18", "item": "9a", "source": "00:22:20"},
+    {"task": "Sign the Keystone Reserve Advisors engagement letter and return it.", "owner": "Grace Lindqvist", "due": "2026-09-30", "item": "9b", "source": "00:24:07"},
+    {"task": "Send the approval letter to the owners of 18 Thistle Court.", "owner": "Priya Raman", "due": "2026-09-18", "item": "9c", "source": "00:26:04"},
+    {"task": "Send the file for account 1147 to the association's attorney.", "owner": "Priya Raman", "due": "2026-09-17", "item": "11", "source": "00:27:53"}
+  ],
+  "_note_due_dates": "Relative dates were turned into dates only where the meaning is certain: 'by Friday' = 2026-09-18, 'tomorrow' = 2026-09-17, 'end of the month' = 2026-09-30, 'next month' or 'October packet' = the October 21 meeting.",
+  "next_meeting": {
+    "description": "regular meeting",
+    "date": "2026-10-21",
+    "time": "19:00",
+    "location": "by Zoom videoconference",
+    "note": "The Community Manager will send the link with the meeting packet."
+  },
+  "questions": [
+    {"question": "Who seconded the motion to accept the Treasurer's report? Raymond Castillo and Grace Lindqvist both said \"Second\" at the same moment, and the chair did not name the seconder.", "where": "Item 6, Motion 2", "source": "00:12:51"},
+    {"question": "Was Holloway Landscapes' bid $5,600 or $5,650 per month? The Community Manager said $5,600 and the Treasurer's notes said $5,650. Please check the bid summary.", "where": "Item 9a", "source": "00:18:24"},
+    {"question": "Who will look into adding a pet-waste bag station near the playground? The President asked for it for next month, but no one was named.", "where": "Item 4 and action item 2", "source": "00:07:14"},
+    {"question": "The recording kept running for about 30 seconds after the Board went into executive session. I left that part out of the minutes. Do you want the recording and transcript handled differently because of it (for example, deleted now rather than after approval)?", "where": "Item 10", "source": "00:26:43"}
+  ]
+}

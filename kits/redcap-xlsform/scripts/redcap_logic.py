@@ -635,10 +635,7 @@ def evaluate(node, get_value):
     if kind == "bool":
         return node[1]
     if kind == "ref":
-        ref = node[1]
-        if ref.smart:
-            raise Unknown(f"smart variable [{ref.smart}]")
-        value = get_value(ref)
+        value = get_value(node[1])  # get_value raises Unknown for things it cannot look up
         return None if _blank(value) else value
     if kind == "neg":
         value = _num(evaluate(node[1], get_value))
@@ -812,3 +809,9 @@ def format_number(value) -> str:
             return str(int(value))
         return repr(round(value, 10)).rstrip("0").rstrip(".")
     return str(value)
+
+
+# Public names for the helpers other scripts use
+truthy = _truthy
+is_number = _is_number
+to_number = _num

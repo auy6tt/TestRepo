@@ -1,0 +1,30 @@
+{
+  "_help": "Copy this file twice: runner_old.json (current setup) and runner_new.json (new setup). Keys that start with _ are notes and are ignored. Never put an API key in this file.",
+  "name": "old setup (current prompt)",
+  "runner": "client_api",
+  "_runner_help": "mock = fake answers for testing; recorded = replay saved answers (needs recorded_outputs); client_api = the stub in scripts/runners.py, filled in for this client; or your own file: my_runner.py:run",
+  "model": "PUT-THE-MODEL-ID-HERE",
+  "_model_help": "Copy the exact model ID from the client's code or settings (old) or from the provider's deprecations page (new).",
+  "params": {
+    "temperature": 0.3,
+    "max_tokens": 300
+  },
+  "_params_help": "The same settings the client's code sends. Remove settings the new model rejects.",
+  "_system_help": "Optional: add a \"system\" key with the system prompt this setup uses. Without it, the system prompt from each test case is used.",
+  "prompt_template": "{input}",
+  "_prompt_template_help": "{input} is replaced by the test case input. Example: 'Summarize this ticket:\\n\\n{input}'",
+  "features": {
+    "summarize": {
+      "params": {
+        "max_tokens": 300,
+        "top_p": null
+      }
+    }
+  },
+  "_features_help": "Optional. Settings per feature, matched with the \"feature\" field in the test set. Each feature can have its own \"system\", \"prompt_template\", \"model\" and \"params\". null removes a setting.",
+  "price_per_1m_input_tokens": 0.0,
+  "price_per_1m_output_tokens": 0.0,
+  "_price_help": "From the provider's pricing page, in dollars per 1 million tokens. Used for the cost columns.",
+  "api_key_env": "CLIENT_API_KEY",
+  "_api_key_env_help": "The NAME of the environment variable that holds the client's staging key. Not the key itself."
+}

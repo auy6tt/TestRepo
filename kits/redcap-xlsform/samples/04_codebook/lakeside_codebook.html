@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codebook - Lakeside Community Health Check (fictional sample)</title>
+<style>
+:root { --ink:#1d2733; --muted:#5b6672; --line:#d5dbe1; --head:#e8eef4; --accent:#1f3a5f; --sect:#f3f6f9; }
+* { box-sizing: border-box; }
+body { margin:0; background:#ffffff; color:var(--ink); font:15px/1.5 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+main { max-width:1180px; margin:0 auto; padding:32px 16px 64px; }
+h1 { color:var(--accent); font-size:28px; margin:0 0 4px; }
+h2 { color:var(--accent); font-size:20px; margin:40px 0 6px; padding-top:8px; border-top:2px solid var(--accent); }
+.sub { color:var(--muted); margin:0 0 20px; }
+.facts { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 20px; padding:0; list-style:none; }
+.facts li { background:var(--sect); border:1px solid var(--line); border-radius:8px; padding:8px 12px; }
+.facts b { display:block; font-size:18px; }
+.facts span { color:var(--muted); font-size:13px; }
+.box { background:var(--sect); border:1px solid var(--line); border-radius:8px; padding:12px 18px; margin:12px 0; }
+.box ul { margin:6px 0; padding-left:20px; }
+.intro { color:var(--muted); margin:0 0 10px; }
+.wrap { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; font-size:13.5px; }
+th, td { border:1px solid var(--line); padding:6px 8px; vertical-align:top; text-align:left; }
+th { background:var(--head); }
+td.var { font-family:Consolas, Menlo, monospace; font-weight:600; white-space:nowrap; }
+.flag { display:inline-block; font-family:-apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-weight:500;
+        font-size:11.5px; border:1px solid var(--line); border-radius:10px; padding:0 6px; margin:2px 2px 0 0; color:var(--muted); }
+.flag.id { border-color:#b4472b; color:#b4472b; }
+.flag.req { border-color:var(--accent); color:var(--accent); }
+.note { color:var(--muted); font-style:italic; font-size:12.5px; }
+.raw { color:var(--muted); font-family:Consolas, Menlo, monospace; font-size:11.5px; }
+tr.header td { background:var(--sect); font-weight:600; }
+tr.muted td { color:var(--muted); }
+.values div { white-space:normal; }
+footer { color:var(--muted); font-size:12.5px; margin-top:40px; }
+@media print { body { font-size:11px; } main { padding:0; } h2 { break-before:page; } table { font-size:10px; }
+  tr { break-inside:avoid; } .wrap { overflow:visible; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Codebook: Lakeside Community Health Check (fictional sample)</h1>
+<p class="sub">Generated from lakeside_data_dictionary.csv on 2026-10-07.</p>
+<ul class="facts"><li><b>4</b><span>Instruments</span></li><li><b>56</b><span>Variables</span></li><li><b>2</b><span>Identifiers flagged</span></li><li><b>4</b><span>Events</span></li></ul>
+<div class="box"><b>How to read this codebook</b><ul><li>Variable is the column name in a REDCap export. Codes are what is stored; labels are what people see.</li><li>Checkbox questions export one column per option, named variable___code (three underscores): 1 = ticked, 0 = not ticked.</li><li>Shown when: the question only appears when this is true. A blank value can mean &#x27;not shown&#x27; as well as &#x27;not answered&#x27;.</li><li>Dates are stored as YYYY-MM-DD whatever the display format.</li><li>Each instrument has a status column (instrument_complete): 0 = Incomplete, 1 = Unverified, 2 = Complete.</li><li>Identifiers are flagged so they can be removed from de-identified exports.</li><li>Longitudinal project: each row of an export is one record at one event (column redcap_event_name).</li><li>Repeating instruments get extra rows with redcap_repeat_instrument and redcap_repeat_instance filled in.</li></ul></div>
+<div class="box"><b>Identifiers (remove or protect before sharing data)</b><ul><li>dob: What is your date of birth?</li><li>contact_phone: Phone number for follow-up reminders</li></ul></div>
+<h2 id="overview">Overview</h2><div class="wrap"><table><thead><tr><th scope="col">Instrument</th><th scope="col">Variables</th><th scope="col">screening_arm_1</th><th scope="col">visit_1_arm_1</th><th scope="col">visit_2_arm_1</th><th scope="col">visit_3_arm_1</th></tr></thead><tbody>
+<tr><td><a href="#s0">Screening (screening)</a></td><td>29</td><td>Yes</td><td></td><td></td><td></td></tr>
+<tr><td><a href="#s1">Contact details (contact_details)</a></td><td>3</td><td>Yes</td><td></td><td></td><td></td></tr>
+<tr><td><a href="#s2">Follow up visit (follow_up_visit)</a></td><td>18</td><td></td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+<tr><td><a href="#s3">Health event (health_event)</a></td><td>6</td><td></td><td>Repeating</td><td>Repeating</td><td>Repeating</td></tr>
+</tbody></table></div>
+<h2 id="s0">Screening (screening)</h2>
+<p class="intro">Events: screening_arm_1. 29 variables.</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">record_id<div><span class="flag">Record ID</span></div></td><td>Participant ID<div class="note">Assigned by REDCap</div></td><td>Text box</td><td class="values"></td><td>Always</td></tr>
+<tr class="header"><td colspan="5">Staff section: visit details and consent</td></tr>
+<tr><td class="var">scr_date<div><span class="flag req">Required</span></div></td><td>Date of screening</td><td>Text: Date (D-M-Y)</td><td class="values"><div>Range: 2026-01-01 to today</div><div>Stored as YYYY-MM-DD</div></td><td>Always</td></tr>
+<tr><td class="var">consent<div><span class="flag req">Required</span></div></td><td>Has the participant signed the study consent form?</td><td>Yes / No</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>Always</td></tr>
+<tr class="muted"><td class="var">consent_stop<div></div></td><td>STOP. Do not continue: people can only take part after signing the consent form.</td><td>Descriptive text (no data saved)</td><td class="values"></td><td>consent is &quot;No&quot; (0)<div class="raw">[consent] = &#x27;0&#x27;</div></td></tr>
+<tr class="header"><td colspan="5">Section A: About you</td></tr>
+<tr><td class="var">dob<div><span class="flag">Q 1</span><span class="flag req">Required</span><span class="flag id">Identifier</span></div></td><td>What is your date of birth?</td><td>Text: Date (D-M-Y)</td><td class="values"><div>Range: 1900-01-01 to today</div><div>Stored as YYYY-MM-DD</div></td><td>Always</td></tr>
+<tr><td class="var">age<div></div></td><td>Age at screening (years)<div class="note">Calculated from date of birth and date of screening</div></td><td>Calculated field</td><td class="values"><div>Formula: rounddown(datediff([dob], [scr_date], &quot;y&quot;), 0)</div></td><td>Always</td></tr>
+<tr class="muted"><td class="var">age_stop<div></div></td><td>STOP. This person is under 18 and cannot take part. Do not continue.</td><td>Descriptive text (no data saved)</td><td class="values"></td><td>age is not blank AND age &lt; 18<div class="raw">[age] &lt;&gt; &#x27;&#x27; and [age] &lt; 18</div></td></tr>
+<tr><td class="var">sex<div><span class="flag">Q 2</span><span class="flag req">Required</span></div></td><td>What is your sex?</td><td>Radio buttons (one answer)</td><td class="values"><div>1 = Female</div><div>2 = Male</div><div>99 = Prefer not to say</div></td><td>Always</td></tr>
+<tr><td class="var">education<div><span class="flag">Q 3</span><span class="flag req">Required</span></div></td><td>What is the highest level of education you have completed?</td><td>Drop-down list (one answer)</td><td class="values"><div>1 = No formal schooling</div><div>2 = Primary school</div><div>3 = Secondary school</div><div>4 = Trade or vocational qualification</div><div>5 = University degree</div><div>99 = Prefer not to say</div></td><td>Always</td></tr>
+<tr><td class="var">household<div><span class="flag">Q 4</span></div></td><td>How many people live in your household, including you?</td><td>Text: Whole number</td><td class="values"><div>Range: 1 to 20</div></td><td>Always</td></tr>
+<tr class="header"><td colspan="5">Section B: Your health</td></tr>
+<tr><td class="var">conditions<div><span class="flag">Q 5</span><span class="flag req">Required</span></div></td><td>Has a doctor or nurse ever told you that you have any of these conditions? Tick all that apply.<div class="note">Action tags: @NONEOFTHEABOVE</div></td><td>Checkboxes (tick all that apply)</td><td class="values"><div>One column per option (1 = ticked, 0 = not ticked):</div><div>conditions___1 = High blood pressure</div><div>conditions___2 = Diabetes</div><div>conditions___3 = Heart disease</div><div>conditions___4 = Asthma or COPD</div><div>conditions___5 = Kidney disease</div><div>conditions___6 = None of these</div><div>&#x27;None of these&#x27; cannot be ticked with other options</div></td><td>Always</td></tr>
+<tr><td class="var">bp_med<div><span class="flag">Q 6</span><span class="flag req">Required</span></div></td><td>Are you currently taking medicine for high blood pressure?</td><td>Yes / No</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>conditions: &quot;High blood pressure&quot; is ticked<div class="raw">[conditions(1)] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">smoke_status<div><span class="flag">Q 7</span><span class="flag req">Required</span></div></td><td>Do you smoke tobacco (cigarettes, cigars, pipe, water-pipe or similar)?</td><td>Radio buttons (one answer)</td><td class="values"><div>1 = Yes, every day</div><div>2 = Yes, some days</div><div>3 = No, but I used to</div><div>4 = No, never</div></td><td>Always</td></tr>
+<tr><td class="var">cig_per_day<div><span class="flag">Q 8</span><span class="flag req">Required</span></div></td><td>On a day when you smoke, how many cigarettes (or similar) do you usually smoke?</td><td>Text: Whole number</td><td class="values"><div>Range: 1 to 80</div></td><td>smoke_status is &quot;Yes, every day&quot; (1) OR smoke_status is &quot;Yes, some days&quot; (2)<div class="raw">[smoke_status] = &#x27;1&#x27; or [smoke_status] = &#x27;2&#x27;</div></td></tr>
+<tr><td class="var">active_days<div><span class="flag">Q 9</span><span class="flag req">Required</span></div></td><td>In a usual week, on how many days are you active for at least 30 minutes (for example brisk walking, cycling, sport or heavy housework)?<div class="note">0 to 7 days</div></td><td>Text: Whole number</td><td class="values"><div>Range: 0 to 7</div></td><td>Always</td></tr>
+<tr><td class="var">fruit_veg<div><span class="flag">Q 10</span></div></td><td>On a usual day, how many portions of fruit and vegetables do you eat? One portion is about a handful.</td><td>Text: Whole number</td><td class="values"><div>Range: 0 to 20</div></td><td>Always</td></tr>
+<tr><td class="var">energy<div><span class="flag">Q 11</span></div></td><td>Over the past week, how much energy have you had?<div class="note">Move the slider to your answer (0 to 100).</div></td><td>Slider (visual analogue scale)</td><td class="values"><div>0 to 100 (No energy at all ... Full of energy)</div></td><td>Always</td></tr>
+<tr><td class="var">sleep_trouble<div><span class="flag">Q 12</span></div></td><td>Over the past month, how often have you had trouble sleeping?</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Never</div><div>1 = Rarely</div><div>2 = Sometimes</div><div>3 = Often</div><div>4 = Every night or almost every night</div></td><td>Always</td></tr>
+<tr class="header"><td colspan="5">In the past 2 weeks, how often have you had the following?</td></tr>
+<tr><td class="var">sym_headache<div><span class="flag">Q 13a</span><span class="flag">Matrix: scr_symptoms</span></div></td><td>Headaches</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always</td></tr>
+<tr><td class="var">sym_dizzy<div><span class="flag">Q 13b</span><span class="flag">Matrix: scr_symptoms</span></div></td><td>Dizziness or feeling faint</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always</td></tr>
+<tr><td class="var">sym_chest<div><span class="flag">Q 13c</span><span class="flag">Matrix: scr_symptoms</span></div></td><td>Chest pain or tightness</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always</td></tr>
+<tr><td class="var">sym_breath<div><span class="flag">Q 13d</span><span class="flag">Matrix: scr_symptoms</span></div></td><td>Shortness of breath</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always</td></tr>
+<tr><td class="var">sym_ankles<div><span class="flag">Q 13e</span><span class="flag">Matrix: scr_symptoms</span></div></td><td>Swollen ankles or feet</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always</td></tr>
+<tr class="header"><td colspan="5">Section C: Measurements (staff to complete)</td></tr>
+<tr><td class="var">height_cm<div><span class="flag">Q 14a</span><span class="flag req">Required</span></div></td><td>Height (cm)<div class="note">Measure without shoes. Enter one decimal place, e.g. 165.0</div></td><td>Text: Number, 1 decimal place</td><td class="values"><div>Range: 100 to 230</div></td><td>Always</td></tr>
+<tr><td class="var">weight_kg<div><span class="flag">Q 14b</span><span class="flag req">Required</span></div></td><td>Weight (kg)<div class="note">Light clothing, no shoes. Enter one decimal place, e.g. 72.4</div></td><td>Text: Number, 1 decimal place</td><td class="values"><div>Range: 30 to 250</div></td><td>Always</td></tr>
+<tr><td class="var">bmi<div></div></td><td>Body mass index (BMI, kg/m2)<div class="note">Calculated from height and weight</div></td><td>Calculated field</td><td class="values"><div>Formula: round([weight_kg] / (([height_cm] / 100) ^ 2), 1)</div></td><td>Always</td></tr>
+<tr><td class="var">scr_sbp<div><span class="flag">Q 15a</span><span class="flag req">Required</span></div></td><td>Systolic blood pressure (mmHg)<div class="note">Seated, after 5 minutes&#x27; rest</div></td><td>Text: Whole number</td><td class="values"><div>Range: 70 to 250</div></td><td>Always</td></tr>
+<tr><td class="var">scr_dbp<div><span class="flag">Q 15b</span><span class="flag req">Required</span></div></td><td>Diastolic blood pressure (mmHg)</td><td>Text: Whole number</td><td class="values"><div>Range: 40 to 150</div></td><td>Always</td></tr>
+<tr class="header"><td colspan="5">Section D: Result and follow-up (staff to complete)</td></tr>
+<tr><td class="var">bp_high<div></div></td><td>High blood pressure reading (1 = yes, 0 = no)<div class="note">1 if systolic is 140 or more, or diastolic is 90 or more</div></td><td>Calculated field</td><td class="values"><div>Formula: if([scr_sbp] = &#x27;&#x27; or [scr_dbp] = &#x27;&#x27;, &#x27;&#x27;, if([scr_sbp] &gt;= 140 or [scr_dbp] &gt;= 90, 1, 0))</div></td><td>Always</td></tr>
+<tr class="muted"><td class="var">bp_high_msg<div></div></td><td>This reading is 140/90 mmHg or higher. Give the participant the advice leaflet and invite them to the 3 follow-up visits.</td><td>Descriptive text (no data saved)</td><td class="values"></td><td>bp_high is 1<div class="raw">[bp_high] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_agree<div><span class="flag req">Required</span></div></td><td>Has the participant agreed to the 3 follow-up visits?</td><td>Yes / No</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>bp_high is 1<div class="raw">[bp_high] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">scr_notes<div></div></td><td>Staff notes (do not write names, addresses or phone numbers here)<div class="note">Action tags: @CHARLIMIT</div></td><td>Notes box (long text)</td><td class="values"></td><td>Always</td></tr>
+<tr><td class="var">screening_complete<div><span class="flag">Added by REDCap</span></div></td><td>Form status</td><td>Form status</td><td class="values"><div>0 = Incomplete</div><div>1 = Unverified</div><div>2 = Complete</div></td><td>Always</td></tr>
+</tbody></table></div>
+<h2 id="s1">Contact details (contact_details)</h2>
+<p class="intro">Events: screening_arm_1. 3 variables.</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr class="muted"><td class="var">contact_intro<div></div></td><td>Complete this form only if the participant agreed to the follow-up visits. These details identify the participant: record them only here.</td><td>Descriptive text (no data saved)</td><td class="values"></td><td>Always</td></tr>
+<tr><td class="var">contact_phone<div><span class="flag req">Required</span><span class="flag id">Identifier</span></div></td><td>Phone number for follow-up reminders<div class="note">Include the area code</div></td><td>Text box</td><td class="values"></td><td>fu_agree is &quot;Yes&quot; (1)<div class="raw">[fu_agree] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">contact_time<div></div></td><td>Best time to call</td><td>Drop-down list (one answer)</td><td class="values"><div>1 = Morning</div><div>2 = Afternoon</div><div>3 = Evening</div><div>4 = Any time</div></td><td>fu_agree is &quot;Yes&quot; (1)<div class="raw">[fu_agree] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">contact_sms<div><span class="flag req">Required</span></div></td><td>May we send text message reminders before each visit?</td><td>Yes / No</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>fu_agree is &quot;Yes&quot; (1)<div class="raw">[fu_agree] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">contact_details_complete<div><span class="flag">Added by REDCap</span></div></td><td>Form status</td><td>Form status</td><td class="values"><div>0 = Incomplete</div><div>1 = Unverified</div><div>2 = Complete</div></td><td>Always</td></tr>
+</tbody></table></div>
+<h2 id="s2">Follow up visit (follow_up_visit)</h2>
+<p class="intro">Events: visit_1_arm_1, visit_2_arm_1, visit_3_arm_1. 18 variables.</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr class="header"><td colspan="5">Visit details</td></tr>
+<tr><td class="var">fu_date<div><span class="flag">Q F1</span><span class="flag req">Required</span></div></td><td>Date of visit (or date of last contact attempt)</td><td>Text: Date (D-M-Y)</td><td class="values"><div>Range: 2026-01-01 to today</div><div>Stored as YYYY-MM-DD</div></td><td>Always</td></tr>
+<tr><td class="var">fu_attended<div><span class="flag">Q F2</span><span class="flag req">Required</span></div></td><td>Did the visit take place?</td><td>Yes / No</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>Always</td></tr>
+<tr><td class="var">fu_missed_reason<div><span class="flag">Q F3</span><span class="flag req">Required</span></div></td><td>Main reason the visit did not take place</td><td>Drop-down list (one answer)</td><td class="values"><div>1 = Could not contact participant</div><div>2 = Participant declined</div><div>3 = Participant unwell</div><div>4 = Participant moved away</div><div>5 = Other</div></td><td>fu_attended is &quot;No&quot; (0)<div class="raw">[fu_attended] = &#x27;0&#x27;</div></td></tr>
+<tr><td class="var">fu_missed_other<div><span class="flag">Q F3a</span><span class="flag req">Required</span></div></td><td>Other reason, please describe</td><td>Text box</td><td class="values"></td><td>fu_missed_reason is &quot;Other&quot; (5)<div class="raw">[fu_missed_reason] = &#x27;5&#x27;</div></td></tr>
+<tr><td class="var">fu_days<div></div></td><td>Days since screening<div class="note">Calculated from the screening date</div></td><td>Calculated field</td><td class="values"><div>Formula: datediff([screening_arm_1][scr_date], [fu_date], &quot;d&quot;)</div></td><td>Always</td></tr>
+<tr class="header"><td colspan="5">Measurements</td></tr>
+<tr><td class="var">fu_sbp<div><span class="flag">Q F4a</span><span class="flag req">Required</span></div></td><td>Systolic blood pressure (mmHg)<div class="note">Seated, after 5 minutes&#x27; rest</div></td><td>Text: Whole number</td><td class="values"><div>Range: 70 to 250</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_dbp<div><span class="flag">Q F4b</span><span class="flag req">Required</span></div></td><td>Diastolic blood pressure (mmHg)</td><td>Text: Whole number</td><td class="values"><div>Range: 40 to 150</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_bp_change<div></div></td><td>Change in systolic blood pressure since screening (mmHg)<div class="note">A negative number means lower than at screening</div></td><td>Calculated field</td><td class="values"><div>Formula: [fu_sbp] - [screening_arm_1][scr_sbp]</div></td><td>Always</td></tr>
+<tr><td class="var">fu_weight<div><span class="flag">Q F5</span></div></td><td>Weight (kg)<div class="note">Light clothing, no shoes. Enter one decimal place, e.g. 72.4</div></td><td>Text: Number, 1 decimal place</td><td class="values"><div>Range: 30 to 250</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr class="header"><td colspan="5">Medicines and symptoms</td></tr>
+<tr><td class="var">fu_bp_med<div><span class="flag">Q F6</span><span class="flag req">Required</span></div></td><td>Are you currently taking medicine for high blood pressure?</td><td>Yes / No</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_med_days<div><span class="flag">Q F7</span><span class="flag req">Required</span></div></td><td>On how many of the last 7 days did you take your blood pressure medicine?</td><td>Text: Whole number</td><td class="values"><div>Range: 0 to 7</div></td><td>fu_bp_med is &quot;Yes&quot; (1)<div class="raw">[fu_bp_med] = &#x27;1&#x27;</div></td></tr>
+<tr class="header"><td colspan="5">In the past 2 weeks, how often have you had the following?</td></tr>
+<tr><td class="var">fu_headache<div><span class="flag">Q F8a</span><span class="flag">Matrix: fu_symptoms</span></div></td><td>Headaches</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_dizzy<div><span class="flag">Q F8b</span><span class="flag">Matrix: fu_symptoms</span></div></td><td>Dizziness or feeling faint</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_chest<div><span class="flag">Q F8c</span><span class="flag">Matrix: fu_symptoms</span></div></td><td>Chest pain or tightness</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_breath<div><span class="flag">Q F8d</span><span class="flag">Matrix: fu_symptoms</span></div></td><td>Shortness of breath</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_ankles<div><span class="flag">Q F8e</span><span class="flag">Matrix: fu_symptoms</span></div></td><td>Swollen ankles or feet</td><td>Radio buttons (one answer)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_health_event<div><span class="flag">Q F9</span><span class="flag req">Required</span></div></td><td>Since the last visit, have you stayed overnight in hospital, visited an emergency department, or been told you have a new health condition?</td><td>Yes / No</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>fu_attended is &quot;Yes&quot; (1)<div class="raw">[fu_attended] = &#x27;1&#x27;</div></td></tr>
+<tr class="muted"><td class="var">fu_he_msg<div></div></td><td>Complete one Health event form for each event.</td><td>Descriptive text (no data saved)</td><td class="values"></td><td>fu_health_event is &quot;Yes&quot; (1)<div class="raw">[fu_health_event] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">fu_notes<div></div></td><td>Staff notes (do not write names, addresses or phone numbers here)<div class="note">Action tags: @CHARLIMIT</div></td><td>Notes box (long text)</td><td class="values"></td><td>Always</td></tr>
+<tr><td class="var">follow_up_visit_complete<div><span class="flag">Added by REDCap</span></div></td><td>Form status</td><td>Form status</td><td class="values"><div>0 = Incomplete</div><div>1 = Unverified</div><div>2 = Complete</div></td><td>Always</td></tr>
+</tbody></table></div>
+<h2 id="s3">Health event (health_event)</h2>
+<p class="intro">Events: visit_1_arm_1, visit_2_arm_1, visit_3_arm_1. Repeating instrument (several instances per event) in: visit_1_arm_1, visit_2_arm_1, visit_3_arm_1. 6 variables.</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">he_date<div><span class="flag">Q H1</span><span class="flag req">Required</span></div></td><td>Date the event started</td><td>Text: Date (D-M-Y)</td><td class="values"><div>Range: 2026-01-01 to today</div><div>Stored as YYYY-MM-DD</div></td><td>Always</td></tr>
+<tr><td class="var">he_type<div><span class="flag">Q H2</span><span class="flag req">Required</span></div></td><td>Type of event</td><td>Radio buttons (one answer)</td><td class="values"><div>1 = Overnight hospital stay</div><div>2 = Emergency department visit (no overnight stay)</div><div>3 = New health condition diagnosed</div><div>4 = Other</div></td><td>Always</td></tr>
+<tr><td class="var">he_type_other<div><span class="flag">Q H2a</span><span class="flag req">Required</span></div></td><td>Other, please describe</td><td>Text box</td><td class="values"></td><td>he_type is &quot;Other&quot; (4)<div class="raw">[he_type] = &#x27;4&#x27;</div></td></tr>
+<tr><td class="var">he_nights<div><span class="flag">Q H3</span><span class="flag req">Required</span></div></td><td>Number of nights in hospital</td><td>Text: Whole number</td><td class="values"><div>Range: 1 to 365</div></td><td>he_type is &quot;Overnight hospital stay&quot; (1)<div class="raw">[he_type] = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">he_heart<div><span class="flag">Q H4</span><span class="flag req">Required</span></div></td><td>Was the event related to the heart or blood pressure?</td><td>Radio buttons (one answer)</td><td class="values"><div>1 = Yes</div><div>0 = No</div><div>98 = Not sure</div></td><td>Always</td></tr>
+<tr><td class="var">he_desc<div><span class="flag">Q H5</span></div></td><td>Brief description (no names or other identifying details)<div class="note">Action tags: @CHARLIMIT</div></td><td>Notes box (long text)</td><td class="values"></td><td>Always</td></tr>
+<tr><td class="var">health_event_complete<div><span class="flag">Added by REDCap</span></div></td><td>Form status</td><td>Form status</td><td class="values"><div>0 = Incomplete</div><div>1 = Unverified</div><div>2 = Complete</div></td><td>Always</td></tr>
+</tbody></table></div>
+<footer>Made with the redcap-xlsform starter kit. Check every path in a test project before collecting data.</footer>
+</main>
+</body>
+</html>

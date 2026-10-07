@@ -1,0 +1,11 @@
+{
+  "name": "cra-readiness-kit-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Node tools for the CRA readiness kit. scripts/setup.sh installs them into a local folder, never globally.",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@cyclonedx/cyclonedx-npm": "^6.0.1",
+    "@cyclonedx/cdxgen": "^12.8.5"
+  }
+}

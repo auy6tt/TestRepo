@@ -1,0 +1,25 @@
+# security.txt template (RFC 9116). Normally you create this file with:
+#   python scripts/make_security_txt.py --client client.json --out security.txt
+# If you fill it in by hand, replace the <...> parts, delete fields you do not use,
+# then check it with: python scripts/make_security_txt.py --check security.txt
+# Publish it at https://<domain>/.well-known/security.txt (HTTPS, plain text, UTF-8).
+#
+# Required. One or more ways to report a problem: mailto:, https:// or tel:
+Contact: mailto:security@<domain>
+Contact: https://<domain>/security/report
+# Required, exactly once. Date and time in UTC. Keep it less than a year ahead and renew it in time.
+Expires: <YYYY-MM-DD>T23:59:59Z
+# Optional. Where your public PGP key is (a link, never the key itself).
+Encryption: https://<domain>/.well-known/pgp-key.txt
+# Optional. A page thanking people who reported vulnerabilities.
+Acknowledgments: https://<domain>/security/thanks
+# Optional. Languages you can handle reports in, comma-separated.
+Preferred-Languages: en
+# Recommended. The address where this file is published.
+Canonical: https://<domain>/.well-known/security.txt
+# Recommended. Your vulnerability disclosure policy.
+Policy: https://<domain>/security/policy
+# Optional. Security job openings.
+# Hiring: https://<domain>/jobs
+# Optional. Machine-readable security advisories (CSAF provider metadata).
+# CSAF: https://<domain>/.well-known/csaf/provider-metadata.json

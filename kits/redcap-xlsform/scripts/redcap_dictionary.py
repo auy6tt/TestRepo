@@ -513,6 +513,56 @@ def piping_refs(text: str) -> list[tuple[str, str | None, str]]:
     return refs
 
 
+class RecordContext:
+    """Looks up values for one record in REDCap export rows, so logic can be evaluated.
+
+    rows: {(event, repeat_instrument, instance): {column: raw value}} for ONE record.
+    current: the key of the row being checked.
+    """
+
+    def __init__(self, dd: "Dictionary", record_id: str, rows: dict, current: tuple):
+        self.dd = dd
+        self.record_id = record_id
+        self.rows = rows
+        self.current = current
+
+    def get(self, ref) -> str:
+        from redcap_logic import Unknown  # local import keeps the modules independent
+        event, repeat_form, instance = self.current
+        if ref.smart:
+            name = ref.smart.split(":")[0]
+            if name == "event-name" and not ref.field:
+                return event
+            if name == "record-name":
+                return self.record_id
+            if name == "current-instance":
+                return instance or "1"
+            raise Unknown(f"smart variable [{ref.smart}]")
+        field = self.dd.by_name.get(ref.field)
+        if field is None:
+            raise Unknown(f"unknown field [{ref.field}]")
+        if field.ftype == "checkbox":
+            if ref.code is None:
+                raise Unknown(f"checkbox [{ref.field}] without a code")
+            column = checkbox_column(field.name, ref.code)
+        else:
+            column = field.name
+        target_event = event
+        if ref.event and ref.event != "event-name":
+            if "-" in ref.event:
+                raise Unknown(f"event smart variable [{ref.event}]")
+            target_event = ref.event
+        if ref.instance and ref.instance not in ("current-instance",):
+            raise Unknown(f"instance reference {ref.text}")
+        if repeat_form and field.form == repeat_form and target_event == event:
+            row = self.rows.get(self.current, {})
+        else:
+            row = self.rows.get((target_event, "", ""))
+            if row is None:  # e.g. a classic project without event names
+                row = self.rows.get(("", "", ""), {})
+        return row.get(column, "")
+
+
 def strip_html(text: str) -> str:
     """Remove HTML tags and tidy spaces (for codebooks and wording checks)."""
     text = re.sub(r"<br\s*/?>", " ", text or "", flags=re.I)

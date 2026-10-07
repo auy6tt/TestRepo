@@ -1,0 +1,7 @@
+# Exact versions used to produce the results in output/.
+# Install with: pip install -r requirements.txt   (Python 3.11)
+numpy==2.4.6
+pandas==3.0.6
+scipy==1.17.1
+statsmodels==0.15.0
+matplotlib==3.11.2

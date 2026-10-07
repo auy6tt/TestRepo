@@ -871,6 +871,8 @@ def main() -> int:
             patch_app_properties(volunteer, MADE_WITH, page_count(volunteer_pdf))
         pool_schedule_xlsx(DOCS / "pool-schedule-2026.xlsx")
         budget_pptx(DOCS / "budget-presentation-fy2026.pptx", spend_chart)
+        for office_file in (DOCS / "pool-schedule-2026.xlsx", DOCS / "budget-presentation-fy2026.pptx"):
+            patch_app_properties(office_file, MADE_WITH)
 
     print("Making the website...")
     build_site()

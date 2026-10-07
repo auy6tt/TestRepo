@@ -159,16 +159,16 @@ def main(argv: list[str] | None = None) -> int:
     for path in files:
         result = results.get(str(path.resolve()), {"summary": "No result", "rules": [], "compliant": None,
                                                     "failed_rules": None, "failed_checks": None})
-        print(f"{path.name}: {result['summary']}")
-        lines += [f"## {path.name}", "", result["summary"], ""]
+        print(f"{path}: {result['summary']}")
+        lines += [f"## {path.parent.name}/{path.name}", "", result["summary"], ""]
         problems = []
         for rule in result["rules"]:
-            print(f"   - {rule['plain']} (rule {rule['rule']}, {rule['failed_checks']} checks)")
-            lines.append(f"- {rule['plain']} (rule {rule['rule']}, {rule['failed_checks']} checks). "
-                         f"veraPDF says: {rule['description']}")
+            count = f"{rule['failed_checks']} check{'s' if rule['failed_checks'] != 1 else ''}"
+            print(f"   - {rule['plain']} (rule {rule['rule']}, {count})")
+            lines.append(f"- {rule['plain']} (rule {rule['rule']}, {count}). veraPDF says: {rule['description']}")
             problems.append(rule["plain"])
         lines.append("")
-        rows.append([path.name, "Pass" if result["compliant"] else ("Fail" if result["compliant"] is False else "Not checked"),
+        rows.append([f"{path.parent.name}/{path.name}", "Pass" if result["compliant"] else ("Fail" if result["compliant"] is False else "Not checked"),
                      result["failed_rules"], result["failed_checks"], "; ".join(dict.fromkeys(problems))])
     if args.out:
         out = Path(args.out)

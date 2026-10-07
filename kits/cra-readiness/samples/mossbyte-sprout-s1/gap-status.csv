@@ -1,0 +1,55 @@
+id,status,evidence,owner,target_date,notes
+S1,Needs lawyer,,Pieter Claes (CEO) with the lawyer,2026-10-21,Lawyer meeting booked for 21 October. Product list and connection diagram sent.
+S2,Needs lawyer,,Lawyer,2026-10-21,Plant sensor with no security function; the lawyer to confirm the category.
+S3,Needs lawyer,,Lawyer,2026-10-21,Mossbyte designs the product and sells it under its own name from Belgium. Lawyer to confirm the role.
+S4,Needs lawyer,,Lawyer and test lab,2026-11-15,Wi-Fi product: ask the test lab about the radio equipment cybersecurity standards (EN 18031 series).
+S5,Needs lawyer,,Lawyer,2026-10-21,Watering alerts need Sprout Cloud. Is the cloud service part of the product?
+D1,In progress,docs/risk/threat-list-v0.3 (internal),Mara Janssens (CTO),2026-11-30,One-page threat list started. Needs a link to design decisions.
+D2,Not started,,Mara Janssens (CTO),2027-03-31,Create a technical file folder; file this pack in it.
+D3,Not started,,Pieter Claes (CEO),2027-03-31,
+D4,Needs lawyer,,Lawyer,2027-06-30,Route depends on the category (S2).
+D5,Not started,,Pieter Claes (CEO),2027-09-30,"Only after the conformity assessment. Mossbyte signs, not the consultant."
+D6,Done,Device label artwork v4; box artwork v2,Lina Haddad (firmware lead),,Model and serial number on the label; address and email on the box.
+P1,In progress,Threat list (D1),Mara Janssens (CTO),2026-12-31,
+P2,In progress,vulnerability-report.xlsx (2026-10-07),Tom Willems (backend),2026-11-30,6 updates planned for release 2.4. Firmware components still need a manual check.
+P3,Done,"Set-up guide, page 2; factory reset test log",Lina Haddad (firmware lead),,Unique set-up code per device on the label. Factory reset: hold the button for 10 seconds.
+P4,In progress,,Lina Haddad (firmware lead),2027-03-31,OTA updates exist and are signed. Automatic install with postpone option is in release 2.4.
+P5,In progress,,Tom Willems (backend),2026-12-31,Cloud log-in is rate-limited. Failed log-ins are not yet logged.
+P6,Done,TLS settings note (internal),Tom Willems (backend),,TLS 1.2+ for all connections; Wi-Fi credentials stored in encrypted flash.
+P7,In progress,,Lina Haddad (firmware lead),2027-03-31,Firmware images are signed. Secure boot is not enabled yet.
+P8,Done,Data inventory (internal),Mara Janssens (CTO),,"Collects soil moisture, light level and device ID only."
+P9,Done,Offline test notes,Lina Haddad (firmware lead),,Sensor keeps 7 days of readings when the cloud is unreachable.
+P10,Not started,,Lina Haddad (firmware lead),2027-03-31,Check reconnect back-off in the firmware.
+P11,In progress,,Lina Haddad (firmware lead),2026-12-31,Serial console is off in release builds; JTAG is still enabled. Fix in release 2.4.
+P12,Not started,,Lina Haddad (firmware lead),2027-06-30,
+P13,Not started,,Tom Willems (backend),2027-03-31,
+P14,Done,Factory reset test log,Lina Haddad (firmware lead),,"Factory reset wipes keys, Wi-Fi credentials and stored readings."
+V1,In progress,sbom/sprout-s1-2.3.0.cdx.json,Mara Janssens (CTO),2026-10-21,Waiting for Mossbyte to confirm the SBOM matches the shipped release.
+V2,In progress,,Mara Janssens (CTO),2026-12-31,Fix targets agreed in the policy draft.
+V3,In progress,Monthly check (monthly care plan),Tom Willems (backend),2026-11-30,Monthly dependency check starts in November.
+V4,Not started,,Sofie Peeters (customer care),2026-12-15,Create a 'Security advisories' page.
+V5,In progress,vulnerability-handling-policy.docx (draft),Pieter Claes (CEO),2026-11-01,Lawyer to review the safe-harbour wording before publishing.
+V6,In progress,security.txt (ready to publish),Tom Willems (backend),2026-11-01,Publish together with the policy.
+V7,In progress,,Lina Haddad (firmware lead),2027-03-31,Signed OTA over TLS. Signing key is on a laptop: move it to a hardware token.
+V8,Not started,,Sofie Peeters (customer care),2026-12-15,Write a template for security update notes.
+V9,Not started,,Lina Haddad (firmware lead),2026-12-31,Add an 'upstream report' step to the release checklist.
+V10,Not started,,Mara Janssens (CTO),2027-03-31,
+R1,In progress,,Mara Janssens (CTO),2026-10-31,Platform access requested for Mara and Lina.
+R2,In progress,reporting-runbook.docx (draft),Mara Janssens (CTO),2026-11-18,Practice run planned for 18 November.
+R3,In progress,reporting-runbook.docx (draft),Mara Janssens (CTO),2026-11-18,Ask the hosting provider how they report incidents.
+R4,Not started,,Sofie Peeters (customer care),2026-11-30,User notice template is in the runbook; decide the CSAF tooling.
+R5,In progress,Roles table in the runbook,Mara Janssens (CTO),2026-11-18,
+R6,Done,Contact page; support process,Sofie Peeters (customer care),,security@ and support@ are read every working day; phone line on the website.
+U1,In progress,support-period-statement.docx (draft),Pieter Claes (CEO),2026-10-31,Proposed: end of March 2031 (six years from launch). CEO to approve.
+U2,Not started,,Sofie Peeters (customer care),2026-11-30,Add the end date to the web shop page and the next box print run.
+U3,Not started,,Tom Willems (backend),2026-12-31,Set up a long-term update archive.
+U4,In progress,Component list in the support statement,Mara Janssens (CTO),2026-12-31,Check the ESP-IDF 5.1 end-of-support date.
+I1,Done,"Manual, page 12; website footer",Sofie Peeters (customer care),,
+I2,In progress,,Sofie Peeters (customer care),2026-11-01,Add the security contact and policy link to the manual.
+I3,Done,Label; Settings > About in the app,Lina Haddad (firmware lead),,
+I4,Not started,,Mara Janssens (CTO),2027-03-31,
+I5,Not started,,Mara Janssens (CTO),2027-03-31,
+I6,Not started,,Sofie Peeters (customer care),2027-09-30,After the declaration of conformity is signed.
+I7,In progress,support-period-statement.docx (draft),Sofie Peeters (customer care),2026-11-30,
+I8,In progress,Online help pages,Sofie Peeters (customer care),2027-03-31,Set-up and update pages exist; decommissioning page missing.
+I9,Not applicable,,Pieter Claes (CEO),,Mossbyte does not plan to publish the SBOM; it stays in the technical file.

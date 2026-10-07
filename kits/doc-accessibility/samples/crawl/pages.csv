@@ -1,0 +1,11 @@
+url,depth,status,content_type,title,documents_linked,note
+http://127.0.0.1:8765/,0,200,text/html,Welcome to Fernwick | Town of Fernwick,2,
+http://127.0.0.1:8765/government/council.html,1,200,text/html,Council meetings | Town of Fernwick,4,
+http://127.0.0.1:8765/government/budget.html,1,200,text/html,Budget | Town of Fernwick,3,
+http://127.0.0.1:8765/departments/parks.html,1,200,text/html,Parks and recreation | Town of Fernwick,3,
+http://127.0.0.1:8765/departments/public-works.html,1,200,text/html,Public works | Town of Fernwick,3,
+http://127.0.0.1:8765/services/forms.html,1,200,text/html,Forms and permits | Town of Fernwick,4,
+http://127.0.0.1:8765/archive.html,1,200,text/html,Archive | Town of Fernwick,0,
+http://127.0.0.1:8765/archive/2019.html,1,200,text/html,2019 records | Town of Fernwick,1,
+http://127.0.0.1:8765/notices/public-hearing.html,1,200,text/html,Public hearing notice | Town of Fernwick,1,
+http://127.0.0.1:8765/staff-only/index.html,1,,,,0,Blocked by robots.txt (not fetched)

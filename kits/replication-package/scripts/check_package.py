@@ -195,11 +195,14 @@ def split_comments(lines, lang: str):
     """Split each line into its code part and its comment part.
 
     A simple scanner, good enough for finding paths and commands. Text inside
-    quotes stays in the code part, so quoted paths are kept.
+    quotes stays in the code part, so quoted paths are kept. Python docstrings
+    and other triple-quoted text count as comments, since they usually hold
+    explanations and examples rather than paths the code uses.
     """
     out = []
     block = False          # inside /* */ (Stata, SAS) or %{ %} (MATLAB)
     sas_star = False       # inside a SAS "* ... ;" comment
+    triple = None          # inside a Python triple-quoted string: its delimiter
     for label, line in lines:
         stripped = line.strip()
         if lang == "MATLAB":
@@ -227,6 +230,20 @@ def split_comments(lines, lang: str):
         i, n = 0, len(line)
         while i < n:
             ch = line[i]
+            if triple:
+                end = line.find(triple, i)
+                if end == -1:
+                    comment.append(line[i:])
+                    break
+                comment.append(line[i:end + 3])
+                i = end + 3
+                triple = None
+                continue
+            if lang == "Python" and not quote and line.startswith(('"""', "'''"), i):
+                triple = line[i:i + 3]
+                comment.append(triple)
+                i += 3
+                continue
             if block:
                 end = line.find("*/", i)
                 if end == -1:
@@ -894,7 +911,10 @@ def file_references(sources):
             for m in QUOTED_FILE_RE.finditer(code):
                 ref = m.group(2)
                 seen.add(ref)
-                refs.append((s, label, ref, classify(code, m.start(), m.end())))
+                mode = classify(code, m.start(), m.end())
+                if s.lang == "Stata" and mode == "unknown":
+                    mode = stata_mode(code, "using")   # merge/append/joinby ... using "file"
+                refs.append((s, label, ref, mode))
             if s.lang == "Stata":
                 for m in STATA_FILE_RE.finditer(code):
                     ref = m.group(2).strip('"')
@@ -922,6 +942,15 @@ def check_data_references(root, files, sources, report):
         if mode == "write":
             continue
         clean = ref.replace("\\", "/")
+        if re.match(r"^(https?|ftp)://", clean, re.I):
+            key = (clean.lower(), s.info.rel)
+            if key not in reported:
+                reported.add(key)
+                report.add("Medium", "Data files", where(s, label),
+                           f"Downloads data from the internet when it runs: `{short(clean, 70)}`.",
+                           "Web data can change or disappear. If the licence allows, save a copy in the package "
+                           "and read that instead; record the download date and cite the source in the README.")
+            continue
         base = clean.rsplit("/", 1)[-1]
         if not base or re.search(r"[$`'{}%*<>]", base) or base.lower() in written:
             continue

@@ -1,0 +1,398 @@
+# CLEAN TRANSCRIPT
+# Source: wrenfield-commons-2026-09-16-transcript.vtt (WebVTT)
+# Length: 00:28:45 | Speaker turns: 196 | Filler words removed: 4
+# Speakers (words): Diane Okafor (1,066), Priya Raman (680), Grace Lindqvist (539), Raymond Castillo (214), Marcus Bell (192), Helen Whitaker (189), Kevin T (118), J Moreno (66), Annette Wu (59)
+# Times in [brackets] are from the start of the recording.
+# ------------------------------------------------------------------
+
+[00:00:01] Diane Okafor: Okay, I've started the recording. Can everybody hear me all right?
+
+[00:00:07] Raymond Castillo: Yep, you're good, Diane.
+
+[00:00:10] Marcus Bell: Loud and clear.
+
+[00:00:12] Diane Okafor: Great. Grace, I can see you, but I think you're still on mute.
+
+[00:00:23] Grace Lindqvist: Sorry, sorry. Can you hear me now?
+
+[00:00:27] Diane Okafor: Yes, we've got you. Priya, are you with us?
+
+[00:00:33] Priya Raman: I'm here. Just so everyone knows, I sent out an updated financial package about an hour ago. So if you're looking at the packet from last week, the reserve page changed a little bit.
+
+[00:00:48] Diane Okafor: Okay, thanks, Priya. I haven't heard from Helen yet. She texted that she might be a few minutes late, so let's give it another minute or so and then we'll get going.
+
+[00:01:16] Marcus Bell: I think there are a couple more people in the waiting room.
+
+[00:01:22] Priya Raman: Yep, I'm letting them in now.
+
+[00:01:33] Raymond Castillo: Diane, did you get my email about the gate? I sent it this afternoon.
+
+[00:01:40] Diane Okafor: I did. Priya's going to cover it in her report, so let's hold it until then.
+
+[00:02:07] Diane Okafor: All right. It's 7:02, so let's go ahead and get started. Good evening, everyone. I'm going to call this regular meeting of the Renfield Commons Homeowners Association Board of Directors to order. It's 7:02 p.m. Just a reminder that we record these meetings so that Marcus can prepare the minutes, and we delete the recording once the minutes are approved. If you're a homeowner and you'd like to speak during the open forum, please use the raise hand button and Priya will unmute you when it's your turn. Before we start, one announcement. The annual meeting and election is on December 9th, and the call for candidates goes out next week. If you're interested in serving on the board, please watch your email. Marcus, would you call the roll?
+
+[00:03:11] Marcus Bell: Sure. Diane Okafor?
+
+[00:03:13] Diane Okafor: Here.
+
+[00:03:14] Marcus Bell: Raymond Castillo?
+
+[00:03:16] Raymond Castillo: Here.
+
+[00:03:17] Marcus Bell: Grace Lindquist?
+
+[00:03:19] Grace Lindqvist: Present.
+
+[00:03:20] Marcus Bell: Helen Whitaker? Not yet. And Marcus Bell is here. So that's four of our five directors.
+
+[00:03:32] Diane Okafor: Thank you. We need three for a quorum, so we have a quorum. Also with us tonight is Priya Raman from Hartwell and Finch, our community manager. And I count nine homeowners on the call. Welcome, everybody, and thanks for coming. Next is approval of the agenda. Everyone should have it in the packet. Are there any changes or additions to the agenda? Okay. Hearing none, the agenda is approved as presented. That brings us to the homeowner open forum. We set aside ten minutes for this, and we ask that each speaker keep it to about three minutes. The board will listen, and if something needs action, we'll put it on a future agenda. Priya, do we have any hands up?
+
+[00:04:37] Priya Raman: We have three hands up. The first is Kevin T. Kevin, I'm unmuting you now.
+
+[00:04:47] Kevin T: Hi, thanks. Can you hear me okay?
+
+[00:04:51] Diane Okafor: We can hear you fine.
+
+[00:04:54] Kevin T: Great. So, Kevin Tran, I'm on Wrenfield Drive, up near the north entrance. I want to bring up the speeding again. People are cutting through to Route 9 in the morning and they are doing forty, forty-five, easy. School just started and we have a lot of kids on bikes now. I know we talked about speed bumps last year and that kind of went nowhere, but what about one of those radar signs that shows you your speed? Or even just more signs. Anything, honestly. Oh, and if you do get signs, they'd probably need to be solar. There's no power out by the entrance.
+
+[00:05:44] Diane Okafor: Thanks, Kevin. I agree it's a real problem, I see it too. The speed bumps were difficult because of the snow plow contract, but the radar signs are a good idea. Priya, could you get us a couple of quotes on radar speed signs before the next meeting?
+
+[00:06:08] Priya Raman: Sure. And good point on the solar, I'll ask for solar models. I'll get quotes for two signs, one at each end of Wrenfield Drive, and I'll have them in the October packet.
+
+[00:06:23] Kevin T: That'd be great. Thank you.
+
+[00:06:28] Priya Raman: Next we have J Moreno. Go ahead, you're unmuted.
+
+[00:06:35] J Moreno: Hi. Hi, this is Julia Moreno on Thistle Court. Mine's about dog waste around the playground. There's no bag station anywhere near it, and people just aren't picking up after their dogs. My kids have stepped in it twice this month. Could we put a station by the playground?
+
+[00:06:59] Raymond Castillo: That's a fair point. The closest one is down by the mailboxes, right?
+
+[00:07:06] J Moreno: Right, by the mailboxes, which is kind of far if you're over on that side.
+
+[00:07:14] Diane Okafor: Okay. Can somebody look at whether we can add a station by the playground, and what it would cost?
+
+[00:07:23] Raymond Castillo: Yeah, I mean, we could probably,
+
+[00:07:26] Grace Lindqvist: They're not expensive. I think they're a couple hundred dollars.
+
+[00:07:31] Diane Okafor: Okay. Let's, let's get that figured out for next month. Thank you, Julia.
+
+[00:07:38] J Moreno: Thank you.
+
+[00:07:41] Priya Raman: And the last hand is Annette Wu.
+
+[00:07:47] Annette Wu: Hi everyone. This is a quick one. The pool closed on the 8th, right after Labor Day, and it was still like eighty-five degrees the whole next week. Is there any way we could keep it open through the end of September next year? I think a lot of people would use it on the weekends.
+
+[00:08:13] Diane Okafor: That's a good question. The lifeguard contract and the chemicals are budgeted through Labor Day, so it's really a budget question. We'll be working on the 2027 budget in October and November, so let's take it up then.
+
+[00:08:31] Grace Lindqvist: I'll add it to the list for the budget workshop.
+
+[00:08:36] Annette Wu: Okay, great. Thanks.
+
+[00:08:39] Diane Okafor: Thank you all. That closes the open forum. Item five is approval of the minutes from the August 19th meeting. Does anyone have corrections?
+
+[00:08:53] Marcus Bell: Yes, I have one. On page two, under the treasurer's report, it says the reserve transfer for July was $4,500. It should be $5,400. I think I just flipped the numbers when I typed it up.
+
+[00:09:10] Grace Lindqvist: That's right. It was $5,400.
+
+[00:09:14] Diane Okafor: Okay. Any other corrections? Then is there a motion to approve the August 19th minutes as corrected?
+
+[00:09:27] Marcus Bell: I'll move that we approve the August 19th minutes as corrected.
+
+[00:09:32] Raymond Castillo: Second.
+
+[00:09:34] Diane Okafor: Moved by Marcus, seconded by Raymond. Any discussion? All in favor?
+
+[00:09:43] Raymond Castillo: Aye.
+
+[00:09:43] Grace Lindqvist: Aye.
+
+[00:09:43] Marcus Bell: Aye.
+
+[00:09:44] Diane Okafor: Aye. Any opposed? Any abstentions? Okay. The minutes are approved as corrected, four to nothing. Grace, the treasurer's report.
+
+[00:09:59] Grace Lindqvist: Thanks, Diane. Priya, could you put the balance sheet up on the screen?
+
+[00:10:06] Priya Raman: Sure, one second.
+
+[00:10:19] Priya Raman: Okay, can everyone see it?
+
+[00:10:22] Diane Okafor: Yes, we can see it.
+
+[00:10:26] Grace Lindqvist: Great. So these are the August financials, through August 31st. Operating cash is $48,212.67, and the reserve accounts total $312,540.18. Year to date we're about $3,900 under budget on operating expenses, and most of that is water, because we had all that rain in July and the irrigation barely ran. The one surprise was the pool pump motor, which failed in August. That was $1,240, and it came out of pool repairs, so that line is now over budget for the year. But we're fine overall. On delinquencies, we have six accounts more than sixty days past due, totaling $7,850. That's down from eight accounts last month, and two of the six are on payment plans. And the July reserve transfer of $5,400 did go through, like Marcus said. Collections for the month were about 97 percent of the assessments billed, which is normal for us. And one heads-up for the budget: the insurance renewal is in December, and the broker expects roughly a 12 percent increase on the property policy.
+
+[00:11:47] Diane Okafor: Thanks, Grace. Questions for Grace?
+
+[00:11:52] Raymond Castillo: Just one. The pump motor, was that covered by the warranty at all?
+
+[00:11:58] Grace Lindqvist: No, it was about six months past the warranty. Priya checked.
+
+[00:12:04] Priya Raman: Yeah, I called the pool company. No luck, unfortunately.
+
+[00:12:09] Marcus Bell: And on the delinquencies, are any of those headed to the attorney?
+
+[00:12:15] Grace Lindqvist: One of them might be, but let's talk about that in executive session.
+
+[00:12:23] Diane Okafor: And on the insurance, is the broker going to shop it around this year?
+
+[00:12:30] Grace Lindqvist: Yes. She's getting at least two other quotes, and she said she'll have numbers for us before the budget workshop.
+
+[00:12:40] Diane Okafor: Okay. Is there a motion to accept the treasurer's report?
+
+[00:12:46] Marcus Bell: I move we accept the treasurer's report as presented.
+
+[00:12:51] Raymond Castillo: Second.
+
+[00:12:51] Grace Lindqvist: Second.
+
+[00:12:52] Diane Okafor: Okay, we have a motion and a second. Any discussion? All in favor?
+
+[00:13:01] Raymond Castillo: Aye.
+
+[00:13:02] Marcus Bell: Aye.
+
+[00:13:02] Grace Lindqvist: Aye.
+
+[00:13:03] Diane Okafor: Aye. Opposed? Hearing none, that carries unanimously. Priya, the manager's report.
+
+[00:13:13] Priya Raman: Sure. So, a few things. The pool closed for the season on September 8th, and the winterizing is done. We had 14 work orders since the last meeting, and 11 of them are closed. The three open ones are the gate arm at the north entrance, which is waiting on a part, an irrigation leak on Thistle Court, which the landscaper is fixing this week, and a streetlight that's out on Wrenfield Drive, which I reported to the electric company.
+
+[00:13:49] Helen Whitaker: Hi, sorry, everyone. It's Helen. I'm finally here. I'm on my phone, so I might be a little hard to hear.
+
+[00:14:00] Diane Okafor: Welcome, Helen. Let the minutes show Helen joined at 7:14.
+
+[00:14:05] Marcus Bell: Got it.
+
+[00:14:07] Priya Raman: Okay, continuing. Violations. We sent nine courtesy notices in the last month. Seven were for trash cans visible from the street, and two were for overgrown lawns. Two of those are already resolved. And the fall walk-through inspection is scheduled for Saturday, October 3rd. Directors are welcome to join. We'll start at 9 a.m. at the clubhouse. Two smaller things. The clubhouse air conditioning was serviced last week, and the new locks on the mailbox kiosk on Larkspur Lane are installed. Residents who haven't picked up their new keys can get them from the management office.
+
+[00:14:49] Diane Okafor: Thanks, Priya. Any questions on the manager's report?
+
+[00:14:55] Grace Lindqvist: The gate arm. Is it just stuck open until the part comes in?
+
+[00:15:01] Priya Raman: It's stuck open right now, yes. The vendor said the part should be in by the end of next week.
+
+[00:15:11] Raymond Castillo: And the streetlight, did the electric company give you a date?
+
+[00:15:16] Priya Raman: They said seven to ten business days. I'll keep after them.
+
+[00:15:22] Raymond Castillo: And on the gate, that's what my email was about. It's been stuck open for almost two weeks, and we've had people dumping yard waste by the dumpsters again. Is there anything we can do in the meantime?
+
+[00:15:40] Priya Raman: I asked the vendor about locking it closed with the keypad working, but the arm motor is the part that failed, so it really has to wait for the part. It should be in by the end of next week.
+
+[00:15:59] Diane Okafor: Okay. Let's give it until then, and Priya, just keep us posted by email.
+
+[00:16:06] Priya Raman: Will do.
+
+[00:16:08] Diane Okafor: Okay. Thank you. Old business. Item 8a, the pool resurfacing. Priya, where are we on the bids?
+
+[00:16:19] Priya Raman: We have two bids so far. Aqua Shore Pools came in at $38,400, and Blue Mesa Pool Company at $42,950. Both include replastering, a new tile line, and the coping repairs. I also asked Ridgeline Pool Services, and they said they could get us a bid by early October.
+
+[00:16:41] Grace Lindqvist: And just for reference, the reserve study has $40,000 for resurfacing in 2027, so Aqua Shore is under that.
+
+[00:16:50] Marcus Bell: Did either of them say how long the job takes?
+
+[00:16:56] Priya Raman: About three weeks. Both said they'd want to start in March, weather permitting.
+
+[00:17:02] Raymond Castillo: What about warranties? Last time we got burned on the plaster.
+
+[00:17:08] Priya Raman: Aqua Shore gives five years on the plaster and Blue Mesa gives seven. That's part of the price difference.
+
+[00:17:17] Raymond Castillo: Then I'd rather wait for the third bid. We're not doing the work until spring anyway, and these two are pretty far apart.
+
+[00:17:28] Helen Whitaker: I agree with Raymond.
+
+[00:17:31] Diane Okafor: Okay. Then I'd entertain a motion to postpone the pool resurfacing decision to the October meeting.
+
+[00:17:38] Raymond Castillo: So moved.
+
+[00:17:40] Helen Whitaker: Second.
+
+[00:17:41] Diane Okafor: Raymond moved, Helen seconded. All in favor?
+
+[00:17:45] Raymond Castillo: Aye.
+
+[00:17:46] Grace Lindqvist: Aye.
+
+[00:17:46] Helen Whitaker: Aye.
+
+[00:17:47] Marcus Bell: Aye.
+
+[00:17:48] Diane Okafor: Aye. Opposed? Okay, that's five to zero. It's postponed to October. Priya, please get the Ridgeline bid into the October packet.
+
+[00:18:01] Priya Raman: Will do.
+
+[00:18:04] Diane Okafor: New business. Item 9a, the landscaping contract renewal. Pinecrest's contract runs out October 31st. Priya, can you walk us through the bids?
+
+[00:18:15] Priya Raman: Sure. Let me share the bid summary.
+
+[00:18:29] Priya Raman: Okay, you should see it now. So we got three bids for a two-year contract. Pinecrest, our current company, bid $5,150 a month. Green Way Lawn and Garden bid $4,800 a month, but that doesn't include leaf removal or the seasonal flowers, which would be extra. And Holloway Landscapes came in at $5,600 a month.
+
+[00:18:54] Grace Lindqvist: Wait, I had Holloway at $5,650 in my notes from the bid summary.
+
+[00:19:02] Priya Raman: I don't have it in front of me, so I'd have to double check. Either way, they're the highest.
+
+[00:19:12] Helen Whitaker: What about the irrigation? Does Pinecrest's price include the spring startup?
+
+[00:19:18] Priya Raman: Yes. Pinecrest and Holloway both include the spring startup and the winterizing. Green Way charges for those separately.
+
+[00:19:27] Helen Whitaker: Do we know anything about Green Way? I haven't heard of them.
+
+[00:19:34] Priya Raman: They maintain two communities near us, Fernhollow Park and Ashbury Ridge. I sent both references to the board last week.
+
+[00:19:43] Grace Lindqvist: I called the manager at Fernhollow Park, and she said they've been happy with them. But that's one reference.
+
+[00:19:52] Raymond Castillo: Honestly, Pinecrest has been good. They respond quickly, and the entrance has never looked better. I'd like to stay with them.
+
+[00:20:03] Grace Lindqvist: I'm going to push back a little. Green Way is $350 a month less. That's $8,400 over two years, and we just paid for a pump motor we didn't budget for.
+
+[00:20:18] Helen Whitaker: But if you add the leaf removal back in, doesn't Green Way come out about the same?
+
+[00:20:27] Priya Raman: Leaf removal was about $3,000 last year, so it narrows the gap, but Green Way would still be a little lower.
+
+[00:20:37] Marcus Bell: Can I ask about the contract terms? If we sign for two years and they slip, are we stuck?
+
+[00:20:47] Priya Raman: No. All three contracts have a thirty-day termination clause, so the board can end it with thirty days' notice.
+
+[00:20:56] Diane Okafor: For what it's worth, I'd lean toward Pinecrest too. When the irrigation main broke in June, they had a crew out the same day. But I understand Grace's point about the budget.
+
+[00:21:11] Grace Lindqvist: I'm not saying they're bad. I just think we should be careful this year, with the insurance going up.
+
+[00:21:21] Diane Okafor: Okay. I think we've heard the options. Is there a motion?
+
+[00:21:28] Raymond Castillo: I move that we renew the contract with Pinecrest Grounds Maintenance for two years at $5,150 per month, starting November 1st.
+
+[00:21:38] Helen Whitaker: I'll second.
+
+[00:21:40] Diane Okafor: Moved by Raymond, seconded by Helen. Any more discussion? Okay. Since it's a contract, let's do a roll call vote. Marcus?
+
+[00:21:55] Marcus Bell: Okafor?
+
+[00:21:56] Diane Okafor: Yes.
+
+[00:21:58] Marcus Bell: Castillo?
+
+[00:21:59] Raymond Castillo: Yes.
+
+[00:22:00] Marcus Bell: Lindquist?
+
+[00:22:02] Grace Lindqvist: No.
+
+[00:22:03] Marcus Bell: Whitaker?
+
+[00:22:05] Helen Whitaker: Yes.
+
+[00:22:06] Marcus Bell: And Bell, yes. That's four yes and one no.
+
+[00:22:11] Diane Okafor: The motion carries, four to one. Priya, please let Pinecrest know, and send me the contract to sign.
+
+[00:22:20] Priya Raman: I'll send it to you by Friday, and I'll let the other two companies know.
+
+[00:22:28] Diane Okafor: Item 9b, the reserve study update. Grace?
+
+[00:22:32] Grace Lindqvist: Sure. Our last full reserve study was done in 2023, and we're supposed to update it every three years. Keystone Reserve Advisors sent a proposal for a Level 2 update with a site visit, for $3,200. They'd deliver the report in about eight weeks. It's in the budget under professional fees.
+
+[00:22:57] Marcus Bell: Is that the same firm we used last time?
+
+[00:23:02] Grace Lindqvist: Yes, same firm, so they already have our component list.
+
+[00:23:07] Raymond Castillo: Will they look at the roads? The asphalt on Larkspur Lane is getting pretty bad.
+
+[00:23:15] Grace Lindqvist: Yes, the roads are one of the components.
+
+[00:23:19] Diane Okafor: Will we have the report before we adopt the 2027 budget?
+
+[00:23:25] Grace Lindqvist: Probably not. The budget has to be adopted in November, so we'll use the 2023 study for the 2027 reserve contribution and adjust next year if we need to. So I'll move that we approve the proposal from Keystone Reserve Advisors for a Level 2 reserve study update at a cost of $3,200.
+
+[00:23:52] Marcus Bell: Second.
+
+[00:23:53] Diane Okafor: Moved and seconded. All in favor?
+
+[00:23:57] Raymond Castillo: Aye.
+
+[00:23:57] Helen Whitaker: Aye.
+
+[00:23:57] Grace Lindqvist: Aye.
+
+[00:23:58] Marcus Bell: Aye.
+
+[00:23:59] Diane Okafor: Aye. Opposed? Abstaining? Okay, that passes five to zero.
+
+[00:24:07] Grace Lindqvist: I'll sign the engagement letter and get it back to them by the end of the month.
+
+[00:24:16] Diane Okafor: Item 9c, the architectural request for a fence at 18 Thistle Court. Helen, that came through your committee.
+
+[00:24:26] Helen Whitaker: Yes. The owners at 18 Thistle Court asked to put in a six-foot cedar privacy fence around their back yard. Our guidelines cap rear yard fences at five feet. The committee met last week, and we recommend approving it at a maximum height of five feet, in the approved cedar style. So that's the committee's recommendation as a motion.
+
+[00:24:54] Raymond Castillo: Did they say why they want six feet?
+
+[00:24:59] Helen Whitaker: They have a large dog that can jump a five-foot fence. The committee talked about it, but the guidelines are clear, and we didn't want to set a precedent. They can still apply for a variance if they want to go through that process. We also got letters from both neighbors, and neither one objected.
+
+[00:25:25] Diane Okafor: Since that comes from the committee, it doesn't need a second. Any discussion?
+
+[00:25:32] Marcus Bell: Just so everyone knows, they're my next-door neighbors, so I'm going to abstain on this one.
+
+[00:25:40] Diane Okafor: Understood. All in favor of approving the fence at a maximum of five feet, in the approved cedar style?
+
+[00:25:49] Raymond Castillo: Aye.
+
+[00:25:49] Grace Lindqvist: Aye.
+
+[00:25:50] Helen Whitaker: Aye.
+
+[00:25:51] Diane Okafor: Aye. Opposed? And Marcus is abstaining. So that's four in favor, none opposed, and one abstention. The motion carries.
+
+[00:26:04] Priya Raman: I'll get the approval letter out to the owners by Friday.
+
+[00:26:10] Diane Okafor: Okay. That brings us to executive session. The board needs to discuss a delinquent account and a contract matter. Homeowners, Priya will move you to the waiting room, and we'll bring you back when we're done. It should be about ten minutes. The time is 7:26.
+
+[00:26:32] Priya Raman: Okay, moving everyone now.
+
+[00:26:43] Priya Raman: Okay, so the first one is account 1147. They're now at $4,100 and change, and they didn't respond to the second letter or the certified letter.
+
+[00:26:55] Marcus Bell: Wait, sorry, Diane, is the recording still going?
+
+[00:27:00] Diane Okafor: Oh. Good catch. Stopping it now. Okay, the recording is back on. We're back in open session. It's 7:35. Priya, is everyone back in?
+
+[00:27:14] Priya Raman: Yes, everyone's back.
+
+[00:27:17] Diane Okafor: Thank you. In executive session, the board discussed one delinquent account and a vendor contract matter, and no action was taken in executive session. Is there a motion on the delinquent account?
+
+[00:27:33] Grace Lindqvist: I move that we refer account number 1147 to the association's attorney for collection.
+
+[00:27:40] Raymond Castillo: Second.
+
+[00:27:41] Diane Okafor: All in favor?
+
+[00:27:43] Raymond Castillo: Aye.
+
+[00:27:43] Grace Lindqvist: Aye.
+
+[00:27:44] Helen Whitaker: Aye.
+
+[00:27:44] Marcus Bell: Aye.
+
+[00:27:45] Diane Okafor: Aye. Opposed? Okay, that's unanimous, five to zero.
+
+[00:27:53] Priya Raman: I'll send the file over to the attorney tomorrow.
+
+[00:27:58] Diane Okafor: Our next regular meeting is Wednesday, October 21st, at 7 p.m., here on Zoom. Priya will send the link out with the packet. And a reminder that the fall walk-through is Saturday, October 3rd, at 9 a.m., if any directors want to join. Is there anything else for tonight? Then is there a motion to adjourn?
+
+[00:28:30] Marcus Bell: So moved.
+
+[00:28:32] Helen Whitaker: Second.
+
+[00:28:33] Diane Okafor: All in favor?
+
+[00:28:35] Raymond Castillo: Aye.
+
+[00:28:35] Grace Lindqvist: Aye.
+
+[00:28:36] Marcus Bell: Aye.
+
+[00:28:36] Helen Whitaker: Aye.
+
+[00:28:38] Diane Okafor: We are adjourned at 7:36. Thanks, everybody. Good night.
+
+[00:28:43] Raymond Castillo: Night, everyone.
+
+[00:28:44] Grace Lindqvist: Bye, all.

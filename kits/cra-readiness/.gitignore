@@ -1,0 +1,12 @@
+# Tools installed by scripts/setup.sh if you point it at this folder
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+# Keep real client work out of this repository (use a private repo or folder per client)
+clients/
+work/
+# Temporary files from office tools
+~$*
+*.tmp.xlsx

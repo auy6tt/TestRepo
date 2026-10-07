@@ -1,0 +1,4 @@
+# Needed by compare_runs.py (Excel output) and md_to_docx.py (Word output).
+# scan_models.py uses only the Python standard library (Python 3.9 or newer).
+openpyxl>=3.1,<4
+python-docx>=1.1,<2

@@ -1,0 +1,3 @@
+File,PDF/UA-1 machine checks,Rules failed,Checks failed,Problems
+before/council-agenda-2026-03-10.pdf,Fail,7,242,No tag structure; Some content is not tagged; Fonts not embedded; No XMP metadata in the file; Not marked as tagged; Language not set; Title bar does not show the document title
+after/council-agenda-2026-03-10.pdf,Pass,0,0,

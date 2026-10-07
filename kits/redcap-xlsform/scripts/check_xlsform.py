@@ -396,6 +396,13 @@ def summary_lines(form: xr.XLSForm) -> list[str]:
     return lines
 
 
+def sort_key(issue: Issue):
+    order = ["workbook", "survey", "choices", "settings", "setup", "pyxform", "ODK"]
+    rank = next((i for i, word in enumerate(order) if issue.where.startswith(word)), len(order))
+    number = re.search(r"row (\d+)", issue.where)
+    return rank, int(number.group(1)) if number else 0
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Check an XLSForm and explain problems in plain English.")
     parser.add_argument("xlsform", help="the XLSForm .xlsx file")
@@ -405,6 +412,8 @@ def main(argv=None) -> int:
     parser.add_argument("--strict", action="store_true", help="fail on warnings as well as errors")
     parser.add_argument("--no-date", action="store_true", help="leave the date out of the report")
     args = parser.parse_args(argv)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(errors="replace")  # never crash on unusual characters
 
     path = Path(args.xlsform)
     if not path.exists():
@@ -458,7 +467,7 @@ def main(argv=None) -> int:
         if not items:
             lines += ["  None.", ""]
             continue
-        for issue in items:
+        for issue in sorted(items, key=sort_key):
             lines.append(f"* {issue.where}")
             lines.append(f"    {issue.message}")
             if issue.fix:

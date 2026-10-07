@@ -1,0 +1,179 @@
+{
+  "_note": "FICTIONAL sample client. Mossbyte Labs, its people, addresses, phone numbers and the .example web addresses are made up for the portfolio sample.",
+  "company": {
+    "legal_name": "Mossbyte Labs BV (fictional)",
+    "trading_name": "Mossbyte",
+    "address": "Example Street 1, 9000 Ghent, Belgium (fictional address)",
+    "country": "Belgium",
+    "website": "https://mossbyte.example",
+    "domain": "mossbyte.example",
+    "size": "Micro enterprise, 6 staff",
+    "contact_person": "Mara Janssens, CTO"
+  },
+  "contacts": {
+    "security_email": "security@mossbyte.example",
+    "security_form_url": "https://mossbyte.example/security/report",
+    "security_phone": "",
+    "pgp_key_url": "https://mossbyte.example/.well-known/pgp-key.txt",
+    "policy_url": "https://mossbyte.example/security/policy",
+    "advisories_url": "https://mossbyte.example/security/advisories",
+    "acknowledgments_url": "https://mossbyte.example/security/thanks",
+    "security_txt_url": "https://mossbyte.example/.well-known/security.txt",
+    "support_email": "support@mossbyte.example",
+    "support_page_url": "https://mossbyte.example/support/security-updates",
+    "languages": [
+      "en",
+      "nl",
+      "fr"
+    ]
+  },
+  "products": [
+    {
+      "name": "Sprout S1",
+      "model": "SPR-S1",
+      "description": "Wi-Fi soil moisture and light sensor for house plants, with a desktop companion app and a cloud service that sends watering alerts.",
+      "parts": [
+        "sprout-fw firmware 2.3.0 (ESP32-C3)",
+        "Sprout Companion desktop app 2.3.0",
+        "Sprout Cloud service 2.3.0"
+      ],
+      "current_version": "2.3.0",
+      "placed_on_market": "2025-03",
+      "sold_in": "All EU countries (online), plus two plant shops in Belgium",
+      "sales_channels": "Own web shop, a Crowd Supply campaign, two plant shops",
+      "support_end": "2031-03",
+      "expected_use": "5 to 7 years. The battery can be replaced; the soil probe wears out after about 6 years.",
+      "update_method": "over-the-air (OTA) updates for the sensor, sent from Sprout Cloud; the companion app updates through its own installer",
+      "automatic_updates": "Security updates install automatically at night by default. You can postpone an update for up to 7 days, or switch automatic updates off in the companion app (Settings > Updates).",
+      "how_to_check_version": "Settings > About in the companion app shows the sensor firmware version and the app version.",
+      "after_support": "The sensor keeps working on your local network but gets no more security updates. We will tell you 12 months before support ends and explain how to keep using the sensor safely or recycle it.",
+      "support_reasons": [
+        "Customers keep plant sensors for 5 to 7 years; the probe wears out after about 6 years.",
+        "Six years from launch (March 2025 to March 2031) covers the expected use time and is longer than the five-year minimum.",
+        "The ESP32-C3 chip family and our cloud hosting contract are both expected to stay available for longer than that."
+      ],
+      "component_support": [
+        {
+          "component": "ESP-IDF 5.1 (firmware SDK)",
+          "supported_until": "check Espressif's support policy",
+          "note": "Plan the move to a newer ESP-IDF release line in 2027."
+        },
+        {
+          "component": "Python 3.11 (Sprout Cloud)",
+          "supported_until": "2027-10",
+          "note": "Move Sprout Cloud to a newer Python version before October 2027."
+        },
+        {
+          "component": "Node.js 22 (Sprout Companion)",
+          "supported_until": "2027-04",
+          "note": "Move to the next long-term support version of Node.js in early 2027."
+        }
+      ],
+      "support_decided_by": "Pieter Claes, CEO",
+      "support_decision_date": "2026-10-07"
+    }
+  ],
+  "policy": {
+    "version": "1.0",
+    "effective_date": "2026-11-01",
+    "next_review": "2027-11-01",
+    "ack_days": 3,
+    "triage_days": 10,
+    "update_interval_days": 14,
+    "disclosure_days": 90,
+    "fix_targets": {
+      "critical": "within 14 days",
+      "high": "within 30 days",
+      "medium": "within 90 days",
+      "low": "in a planned release"
+    },
+    "safe_harbour": true,
+    "credit": true,
+    "bug_bounty": false,
+    "sbom_check_frequency": "every month"
+  },
+  "roles": [
+    {
+      "role": "Incident lead",
+      "name": "Mara Janssens, CTO",
+      "phone": "+32 000 00 00 01 (fictional)",
+      "email": "mara@mossbyte.example",
+      "backup": "Lina Haddad"
+    },
+    {
+      "role": "Deputy incident lead",
+      "name": "Lina Haddad, firmware lead",
+      "phone": "+32 000 00 00 02 (fictional)",
+      "email": "lina@mossbyte.example",
+      "backup": "Mara Janssens"
+    },
+    {
+      "role": "Technical lead (cloud and app)",
+      "name": "Tom Willems, backend developer",
+      "phone": "+32 000 00 00 03 (fictional)",
+      "email": "tom@mossbyte.example",
+      "backup": "Lina Haddad"
+    },
+    {
+      "role": "Communications lead",
+      "name": "Sofie Peeters, customer care",
+      "phone": "+32 000 00 00 04 (fictional)",
+      "email": "sofie@mossbyte.example",
+      "backup": "Pieter Claes"
+    },
+    {
+      "role": "Management sign-off",
+      "name": "Pieter Claes, CEO",
+      "phone": "+32 000 00 00 05 (fictional)",
+      "email": "pieter@mossbyte.example",
+      "backup": "Mara Janssens"
+    },
+    {
+      "role": "Lawyer",
+      "name": "Example Law Firm (fictional)",
+      "phone": "+32 000 00 00 99 (fictional)",
+      "email": "office@lawfirm.example",
+      "backup": "Firm's on-call number"
+    }
+  ],
+  "reporting": {
+    "main_establishment": "Belgium",
+    "csirt": "The CSIRT that Belgium has designated as coordinator (name to be confirmed with the lawyer)",
+    "platform": "ENISA's single reporting platform (current address to be confirmed before the first practice run)",
+    "platform_accounts": "Mara Janssens and Lina Haddad (access requested)",
+    "member_states": "All EU countries (sold online across the EU)"
+  },
+  "runbook": {
+    "version": "1.0",
+    "last_tested": "not yet",
+    "next_exercise": "2026-11-18"
+  },
+  "external_contacts": [
+    {
+      "who": "Cloud hosting provider (fictional EU host)",
+      "contact": "Support portal, priority ticket; account number in the password manager"
+    },
+    {
+      "who": "Espressif (chip and SDK vendor)",
+      "contact": "Espressif's security advisories page and product security contact"
+    },
+    {
+      "who": "Crowd Supply (sales channel)",
+      "contact": "Creator support contact, for messages to backers"
+    }
+  ],
+  "support": {
+    "version": "1.0"
+  },
+  "security_txt": {
+    "expires_days": 330
+  },
+  "engagement": {
+    "consultant_name": "Alex Example, Example Consulting (fictional)",
+    "consultant_email": "alex@consulting.example",
+    "date": "2026-10-07",
+    "reference": "EC-2026-014",
+    "deliverables_folder": "Shared folder 'Mossbyte CRA pack' (link sent by email)",
+    "monthly_plan": "EUR 150 per month: a new SBOM for each release, a monthly vulnerability check with a 'what changed' note, security.txt renewal, and a quarterly check of the runbook contacts"
+  }
+}

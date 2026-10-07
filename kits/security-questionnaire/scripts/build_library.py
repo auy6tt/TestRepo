@@ -19,7 +19,7 @@ Usage
          [--questions templates/question_bank.csv] [--client "Client name"]
          [--owner "Name, Title"] [--top 3] [--min-score 0.12] [--gaps gaps.md]
   python build_library.py --blank templates/answer_library.xlsx
-  python build_library.py --check answer_library.xlsx
+  python build_library.py --check answer_library.xlsx [--gaps questions_for_client.md]
 
 Run with --help for all options.
 """
@@ -403,18 +403,22 @@ def excerpt(text: str, limit: int = EXCERPT_CHARS) -> str:
 # Matching seed questions to passages
 # --------------------------------------------------------------------------
 
-def find_evidence(questions: list[dict], passages: list[Passage], top: int, min_score: float):
-    passage_feats = [sqkit.features(sqkit.tokens(f"{p.doc.title} {p.section.context} {p.text}")) for p in passages]
+def find_evidence(questions: list[dict], passages: list[Passage], top: int, floor: float):
+    """For each question, the best passage per section, best first, down to `floor`.
+
+    The query is the canonical question plus its alternate phrasings and
+    search terms. Scores are TF-IDF cosine similarity (0 to 1)."""
+    passage_feats = [sqkit.features(sqkit.tokens(f"{p.section.context} {p.text}")) for p in passages]
     index = sqkit.TfidfIndex(passage_feats)
     vectors = [index.vector(f) for f in passage_feats]
     results = []
     for q in questions:
-        query = q["question"] + " " + " ".join(q.get("search_terms", []))
+        query = " ".join([q["question"], *q.get("alternates", []), *q.get("search_terms", [])])
         qv = index.vector(sqkit.features(sqkit.tokens(query)))
         scored = sorted(((index.cosine(qv, v), i) for i, v in enumerate(vectors)), reverse=True)
         picked, seen = [], set()
         for score, i in scored:
-            if score < min_score or len(picked) >= top:
+            if score < floor or len(picked) >= top:
                 break
             p = passages[i]
             key = (p.doc.path, p.section.ref)
@@ -424,6 +428,13 @@ def find_evidence(questions: list[dict], passages: list[Passage], top: int, min_
             picked.append((score, p))
         results.append(picked)
     return results
+
+
+def display_text(p: Passage) -> str:
+    """A short bullet such as 'Critical: 7 days' means little alone: show its whole section."""
+    if len(p.text) < 80 and len(p.section.paragraphs) > 1:
+        return " • ".join(p.section.paragraphs)
+    return p.text
 
 
 # --------------------------------------------------------------------------
@@ -436,8 +447,12 @@ def cmd_blank(out: Path) -> int:
     return 0
 
 
-def cmd_check(path: Path, stale_days: int) -> int:
+def cmd_check(path: Path, stale_days: int, gaps: str | None = None, client: str = "") -> int:
     entries = sqkit.read_library(path)
+    if gaps:
+        write_gaps(Path(gaps), entries, client)
+        n = sum(1 for e in entries if e["status"] == sqkit.NEEDS_INPUT)
+        print(f"Wrote {n} NEEDS CLIENT INPUT question(s) for the client: {gaps}")
     issues = sqkit.check_library(entries, stale_days=stale_days)
     counts = {s: sum(1 for e in entries if e.get("status") == s) for s in sqkit.STATUSES}
     blank = sum(1 for e in entries if not e.get("status"))
@@ -469,7 +484,7 @@ def write_gaps(path: Path, entries: list[dict], client: str) -> None:
     lines = [f"# Questions for {client or 'the client'}", "",
              "Your documents don't cover these topics. A short factual answer for each is enough. "
              "If something is not in place, just say so: an honest \"No\" or \"Not yet\" is fine. "
-             "If a document covers it, send the document instead.", ""]
+             "If a document covers it, send the document instead."]
     current = None
     for e in gaps:
         if e["category"] != current:
@@ -497,15 +512,23 @@ def cmd_build(args) -> int:
     passages = make_passages(docs)
     questions = sqkit.read_question_bank(args.questions)
     sqkit.assign_ids(questions)
-    results = find_evidence(questions, passages, args.top, args.min_score)
+    if args.weak_score > args.min_score:
+        args.weak_score = args.min_score
+    results = find_evidence(questions, passages, args.top, args.weak_score)
 
     entries, evidence = [], []
-    for q, picked in zip(questions, results):
+    for q, all_picked in zip(questions, results):
+        picked = [(s, p) for s, p in all_picked if s >= args.min_score]
+        weak = [(s, p) for s, p in all_picked if s < args.min_score]
         best = picked[0] if picked else None
         if best:
             score, p = best
             note = (f"Possible source found automatically (score {score:.2f}). Read the section; write an answer only "
                     f"if it really supports one. Other candidates: Evidence sheet.")
+        elif weak:
+            score, p = weak[0]
+            note = (f"Documents seem silent. Only a weak match (score {score:.2f}): {p.doc.title}, {p.section.ref}. "
+                    f"Check it on the Evidence sheet, then ask the client.")
         else:
             note = "No matching text found in the documents provided. Ask the client (or for a document that covers it)."
         entries.append({
@@ -513,13 +536,14 @@ def cmd_build(args) -> int:
             "alternates": "\n".join(q["alternates"]), "answer": "", "short": "",
             "source_doc": best[1].doc.title if best else "",
             "source_section": best[1].section.ref if best else "",
-            "excerpt": excerpt(best[1].text) if best else "",
+            "excerpt": excerpt(display_text(best[1])) if best else "",
             "owner": args.owner or "", "reviewed": None, "confidence": "",
             "status": sqkit.STATUS_DRAFT if best else sqkit.NEEDS_INPUT, "notes": note,
         })
-        for rank, (score, p) in enumerate(picked, start=1):
-            evidence.append([q["id"], q["question"], rank, round(score, 2), p.doc.title, p.section.ref,
-                             str(p.doc.path.relative_to(docs_dir)), excerpt(p.text, 700)])
+        for rank, (score, p) in enumerate(all_picked, start=1):
+            label = rank if score >= args.min_score else f"{rank} (weak)"
+            evidence.append([q["id"], q["question"], label, round(score, 2), p.doc.title, p.section.ref,
+                             str(p.doc.path.relative_to(docs_dir)), excerpt(display_text(p), 700)])
 
     documents = [[str(d.path.relative_to(docs_dir)), d.title, d.kind, len(d.sections), d.chars, " ".join(d.notes)]
                  for d in docs]
@@ -576,8 +600,12 @@ def main(argv=None) -> int:
     parser.add_argument("--top", type=int, default=3, help="candidate passages to keep per question (default: 3)")
     parser.add_argument("--min-score", type=float, default=0.12,
                         help="lowest similarity (0-1) that counts as a possible source (default: 0.12)")
+    parser.add_argument("--weak-score", type=float, default=0.07,
+                        help="matches between this and --min-score are listed as 'weak' on the Evidence sheet "
+                             "but the row stays NEEDS CLIENT INPUT (default: 0.07)")
     parser.add_argument("--gaps", metavar="FILE.md|FILE.csv",
-                        help="also write the NEEDS CLIENT INPUT questions as a checklist to send to the client")
+                        help="also write the NEEDS CLIENT INPUT questions as a checklist to send to the client "
+                             "(with --docs: from the new draft; with --check: from the reviewed library)")
     parser.add_argument("--stale-days", type=int, default=365, help="--check: warn when Last Reviewed is older (default: 365)")
     args = parser.parse_args(argv)
 
@@ -586,7 +614,7 @@ def main(argv=None) -> int:
         if args.blank:
             return cmd_blank(Path(args.blank))
         if args.check:
-            return cmd_check(Path(args.check), args.stale_days)
+            return cmd_check(Path(args.check), args.stale_days, args.gaps, args.client)
         if not args.out:
             parser.error("--out is required with --docs")
         return cmd_build(args)

@@ -1,0 +1,185 @@
+# Reviewed items for the FICTIONAL sample issue (week 41).
+#
+# How this file was made: Claude Code drafted each item from changes.json and
+# the document text the watcher saved, with status: needs_review. A person then
+# opened every source link, checked each fact, date and number, and changed the
+# status to approved (with checked_by and checked_on) or rejected.
+#
+# Build the issue with:
+#   python scripts/build_digest.py samples/battery-storage-ohio-week41/items.reviewed.yaml \
+#     --out samples/battery-storage-ohio-week41/output
+
+issue:
+  brand: Fieldline Briefs
+  title: Battery Storage Zoning Watch
+  region: Ohio
+  edition: Week 41
+  number: 12
+  date: 2026-10-08
+  coverage: Official sources checked October 7, 2026 and compared with September 30, 2026
+  timezone: America/New_York
+  timezone_label: ET
+  intro: |
+    Two local governments in our coverage area moved toward new battery storage rules this week, and two projects reached public review.
+
+    The item to watch is Tarrow County's proposed 12-month pause on battery storage zoning applications. Commissioners are scheduled to consider it on Tuesday, October 13, and as drafted it would take effect as soon as it is adopted.
+  contact_email: briefs@fieldline.example
+  website: https://fieldline.example
+  mailing_address: PO Box 0000, Columbus, OH 43216 (sample address)
+  sources_checked: 7
+  sources_note: county commission agendas, planning commission packets, township legal notices, city legislation and county open data
+  sample_notice: "Sample issue: every place, project, company and document in it is fictional. It shows the format of a real issue."
+
+sections:
+  - Moratoria
+  - Zoning rules
+  - Rezonings and applications
+  - Ordinances
+
+items:
+  - id: W41-01
+    status: approved
+    priority: high
+    category: Moratoria
+    jurisdiction: Tarrow County
+    title: Tarrow County to consider a 12-month pause on battery storage zoning applications
+    short_title: Tarrow County vote on a 12-month battery storage pause (Res. 2026-118)
+    summary: |
+      Commissioners will take up Resolution 2026-118 at their October 13 regular session. It would stop the county from accepting or processing zoning permits, rezonings (zoning map amendments) and conditional use requests for battery energy storage facilities of 1 MW or more for 12 months.
+
+      It covers the areas under county zoning, currently Ferris, Quill and Brindle townships; townships that run their own zoning are not affected. Applications filed and found complete before it takes effect, and batteries that serve a single home or business on the same property, are excluded.
+    why_it_matters: As drafted, the pause takes effect on the day it is adopted. The county zoning commission would then have nine months to recommend setback, fire-safety and decommissioning standards.
+    source_name: Tarrow County Board of Commissioners, agenda for October 13, 2026 (PDF)
+    source_url: https://www.tarrowcounty.example/commissioners/agendas/2026-10-13-agenda.pdf
+    source_ref: page 2, item 7
+    date: 2026-10-06
+    deadline: 2026-10-13T09:30
+    deadline_label: Commissioners' session (public comment at the start)
+    deadline_location: Commissioners' Chambers, Tarrow County Administration Building, 41 Court Street, Tarrow City
+    details:
+      Resolution: "2026-118"
+      Covers: Battery storage facilities of 1 MW or more
+      Length: 12 months from adoption, unless ended earlier
+    tags: [moratorium, tarrow-county]
+    checked_by: AB
+    checked_on: 2026-10-08
+
+  - id: W41-02
+    status: approved
+    category: Zoning rules
+    jurisdiction: Wrenfield Township, Tarrow County
+    title: "Wrenfield Township proposes battery storage rules: I-1 district only, 300-foot setbacks, removal bond"
+    short_title: Wrenfield Township battery storage rules (ZTA-2026-03)
+    summary: |
+      Zoning text amendment ZTA-2026-03 would add definitions for battery energy storage systems and allow battery energy storage facilities only as a conditional use in the I-1 Light Industrial district. It would require setbacks of at least 300 feet from existing homes and 100 feet from property lines, a decommissioning plan backed by a bond or letter of credit and reviewed every five years, and a fire-safety plan reviewed by the fire chief before a zoning certificate is issued.
+    why_it_matters: Written comments close on October 16. After the October 21 hearing, the township zoning commission sends its recommendation to the township trustees.
+    source_name: Wrenfield Township, notice of public hearing on ZTA-2026-03 (PDF)
+    source_url: https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf
+    source_ref: proposed amendments 1 to 5
+    date: 2026-10-05
+    deadline: 2026-10-21T19:00
+    deadline_label: Township zoning commission public hearing
+    deadline_location: Wrenfield Township Hall, 8 Gable Road
+    more_dates:
+      - date: 2026-10-16T16:00
+        label: Written comments due to the Zoning Inspector
+    details:
+      Amendment: ZTA-2026-03
+      Setbacks: 300 ft from existing homes, 100 ft from property lines
+      Where allowed: I-1 Light Industrial, as a conditional use
+    tags: [zoning-text-amendment, setbacks, wrenfield-township]
+    checked_by: AB
+    checked_on: 2026-10-08
+
+  - id: W41-03
+    status: approved
+    category: Rezonings and applications
+    jurisdiction: Wrenfield Township, Tarrow County
+    title: 48-acre rezoning sought for an 80 MW battery project on Kessler Road
+    short_title: Kessler Road battery project rezoning, Wrenfield Township (RZ-26-014)
+    summary: |
+      Northbank Storage Partners LLC asks to rezone about 48.2 acres on the north side of Kessler Road from A-1 Agricultural to I-1 Light Industrial for a battery energy storage facility of about 80 MW / 320 MWh, as stated in the application (case RZ-26-014).
+    why_it_matters: The Kestrel Regional Planning Commission holds the first public hearing and makes a recommendation on October 22. The township zoning commission then holds its own hearing before the township trustees decide. The same township is also considering the new battery storage rules above.
+    source_name: Kestrel Regional Planning Commission, agenda for October 22, 2026 (PDF)
+    source_url: https://www.kestrelrpc.example/agendas/current-agenda.pdf
+    source_ref: page 1, item 3a; case summary on page 2
+    date: 2026-10-05
+    deadline: 2026-10-22T18:00
+    deadline_label: Planning commission hearing and recommendation
+    deadline_location: RPC Meeting Room, 210 Pike Street, Tarrow City
+    details:
+      Case: RZ-26-014
+      Applicant: Northbank Storage Partners LLC
+      Size: About 80 MW / 320 MWh (per the application)
+      Zoning: A-1 Agricultural to I-1 Light Industrial
+    tags: [rezoning, wrenfield-township]
+    checked_by: AB
+    checked_on: 2026-10-08
+    review_notes: The link is a "current agenda" file that the commission replaces each month, so the source name says which meeting it is.
+
+  - id: W41-04
+    status: approved
+    category: Rezonings and applications
+    jurisdiction: Larch Township, Halden County
+    title: 20 MW battery storage project files for a conditional use in Larch Township
+    summary: |
+      Greyline Energy Storage LLC filed conditional use application CU-2026-031 on October 2 for "Larch Storage", a 20 MW battery energy storage facility on about 6.5 acres on the south side of Tolland Road, east of the Larch substation.
+    why_it_matters: The county lists the application as received, with a Board of Zoning Appeals hearing still to be scheduled. We will add the hearing date when the county posts it.
+    source_name: Halden County open data, zoning applications (case CU-2026-031)
+    source_url: https://www.haldencounty.example/zoning/cases/CU-2026-031/
+    source_ref: case record
+    date: 2026-10-02
+    details:
+      Case: CU-2026-031
+      Applicant: Greyline Energy Storage LLC
+      Size: 20 MW on about 6.5 acres
+      Status: Received; hearing to be scheduled
+    tags: [conditional-use, larch-township, halden-county]
+    checked_by: AB
+    checked_on: 2026-10-08
+
+  - id: W41-05
+    status: approved
+    category: Ordinances
+    jurisdiction: City of Marlowe Falls, Halden County
+    title: Marlowe Falls battery fire-safety ordinance amended ahead of its second reading
+    short_title: Marlowe Falls battery fire-safety ordinance (No. 2026-41)
+    summary: |
+      The Safety Committee amended Ordinance 2026-41 on October 5. As amended, it applies to battery energy storage systems larger than 600 kWh (up from 50 kWh), other than systems serving a single one- or two-family home. It requires compliance with NFPA 855, an emergency response plan approved by the fire chief before a certificate of occupancy is issued, a site walkthrough with the fire department once a year (down from twice a year) and a 24-hour emergency contact posted at each entrance.
+    why_it_matters: Systems of 600 kWh or less would not be covered. City council holds the second reading on October 19.
+    source_name: City of Marlowe Falls, Ordinance 2026-41 as amended (PDF)
+    source_url: https://www.marlowefalls.example/council/legislation/ord-2026-41-amended.pdf
+    source_ref: sections 1 to 5; committee amendments on page 2
+    date: 2026-10-05
+    deadline: 2026-10-19T19:00
+    deadline_label: City council second reading
+    deadline_location: Council Chambers, Marlowe Falls City Hall, 12 Main Street
+    tags: [ordinance, fire-safety, marlowe-falls]
+    checked_by: AB
+    checked_on: 2026-10-08
+
+  - id: W41-06
+    status: rejected
+    category: Zoning rules
+    jurisdiction: Tarrow County
+    title: Tarrow County solar and storage overlay district back on the planning agenda
+    summary: Text amendment TA-26-006, creating a Solar and Storage Overlay District, is on the Kestrel Regional Planning Commission agenda for October 22.
+    source_name: Kestrel Regional Planning Commission, agenda for October 22, 2026 (PDF)
+    source_url: https://www.kestrelrpc.example/agendas/current-agenda.pdf
+    source_ref: page 1, item 3b
+    date: 2026-10-05
+    review_notes: Rejected. The agenda says the item was continued at the county's request and no action is expected, so nothing has changed since September 24.
+
+skipped_changes:
+  - source: Kestrel Regional Planning Commission agenda
+    reason: The Orchard Ridge Phase 1 plat (SUB-26-031) and the 2027 meeting calendar are outside the scope.
+  - source: Halden County open data
+    reason: Two other record changes did not mention battery storage (a self-storage rezoning and a car wash status update).
+  - source: City of Marlowe Falls pending legislation
+    reason: Ordinance 2026-43 (no-parking zone) and Ordinance 2026-38 (appropriations) are outside the scope.
+  - source: Wrenfield Township notices
+    reason: One new notice did not match the keywords (a road closure on Kessler Road).
+  - source: Halden County Zoning Commission hearings page
+    reason: The page moved (HTTP 404). Checked by hand on the county planning site; no battery storage hearings listed. Update the address in sources.yaml.
+  - source: Tarrow County site search
+    reason: Skipped because robots.txt does not allow it. The commissioners' agenda page covers the same meetings.

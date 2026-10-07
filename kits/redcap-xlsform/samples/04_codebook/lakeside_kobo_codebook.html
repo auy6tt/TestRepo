@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Codebook - Lakeside Community Health Check (fictional sample)</title>
+<style>
+:root { --ink:#1d2733; --muted:#5b6672; --line:#d5dbe1; --head:#e8eef4; --accent:#1f3a5f; --sect:#f3f6f9; }
+* { box-sizing: border-box; }
+body { margin:0; background:#ffffff; color:var(--ink); font:15px/1.5 -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+main { max-width:1180px; margin:0 auto; padding:32px 16px 64px; }
+h1 { color:var(--accent); font-size:28px; margin:0 0 4px; }
+h2 { color:var(--accent); font-size:20px; margin:40px 0 6px; padding-top:8px; border-top:2px solid var(--accent); }
+.sub { color:var(--muted); margin:0 0 20px; }
+.facts { display:flex; flex-wrap:wrap; gap:10px; margin:16px 0 20px; padding:0; list-style:none; }
+.facts li { background:var(--sect); border:1px solid var(--line); border-radius:8px; padding:8px 12px; }
+.facts b { display:block; font-size:18px; }
+.facts span { color:var(--muted); font-size:13px; }
+.box { background:var(--sect); border:1px solid var(--line); border-radius:8px; padding:12px 18px; margin:12px 0; }
+.box ul { margin:6px 0; padding-left:20px; }
+.intro { color:var(--muted); margin:0 0 10px; }
+.wrap { overflow-x:auto; }
+table { border-collapse:collapse; width:100%; font-size:13.5px; }
+th, td { border:1px solid var(--line); padding:6px 8px; vertical-align:top; text-align:left; }
+th { background:var(--head); }
+td.var { font-family:Consolas, Menlo, monospace; font-weight:600; white-space:nowrap; }
+.flag { display:inline-block; font-family:-apple-system, "Segoe UI", Roboto, Arial, sans-serif; font-weight:500;
+        font-size:11.5px; border:1px solid var(--line); border-radius:10px; padding:0 6px; margin:2px 2px 0 0; color:var(--muted); }
+.flag.id { border-color:#b4472b; color:#b4472b; }
+.flag.req { border-color:var(--accent); color:var(--accent); }
+.note { color:var(--muted); font-style:italic; font-size:12.5px; }
+.raw { color:var(--muted); font-family:Consolas, Menlo, monospace; font-size:11.5px; }
+tr.header td { background:var(--sect); font-weight:600; }
+tr.muted td { color:var(--muted); }
+.values div { white-space:normal; }
+footer { color:var(--muted); font-size:12.5px; margin-top:40px; }
+@media print { body { font-size:11px; } main { padding:0; } h2 { break-before:page; } table { font-size:10px; }
+  tr { break-inside:avoid; } .wrap { overflow:visible; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Codebook: Lakeside Community Health Check (fictional sample)</h1>
+<p class="sub">Generated from lakeside_health_check.xlsx on 2026-10-07.</p>
+<ul class="facts"><li><b>lakeside_health_check.xlsx</b><span>Source file</span></li><li><b>lakeside_health_check</b><span>Form id</span></li><li><b>2026100701</b><span>Version</span></li><li><b>58</b><span>Variables</span></li><li><b>English (en)</b><span>Languages</span></li></ul>
+<div class="box"><b>How to read this codebook</b><ul><li>Variable is the question name. Exports may add group names in front (e.g. section_a/dob), depending on the export settings.</li><li>Choose-all-that-apply questions store the chosen codes separated by spaces; KoboToolbox can also export one 0/1 column per option.</li><li>Shown when: the question only appears when this is true (its group&#x27;s condition applies too).</li><li>Dates are stored as YYYY-MM-DD.</li></ul></div>
+<h2 id="overview">Overview</h2><div class="wrap"><table><thead><tr><th scope="col">Section</th><th scope="col">Variables</th></tr></thead><tbody>
+<tr><td><a href="#s0">Form start</a></td><td>5</td></tr>
+<tr><td><a href="#s1">Screening visit</a></td><td>2</td></tr>
+<tr><td><a href="#s2">Screening visit &gt; Section A: About you</a></td><td>5</td></tr>
+<tr><td><a href="#s3">Screening visit &gt; Section B: Your health</a></td><td>8</td></tr>
+<tr><td><a href="#s4">Screening visit &gt; Section B: Your health &gt; 13. In the past 2 weeks, how often have you had the following?</a></td><td>5</td></tr>
+<tr><td><a href="#s5">Screening visit &gt; Section C: Measurements (staff to complete)</a></td><td>5</td></tr>
+<tr><td><a href="#s6">Screening visit &gt; Section D: Result and follow-up (staff to complete)</a></td><td>2</td></tr>
+<tr><td><a href="#s7">Screening visit &gt; Section D: Result and follow-up (staff to complete) &gt; Contact details</a></td><td>3</td></tr>
+<tr><td><a href="#s8">Screening visit &gt; Section D: Result and follow-up (staff to complete) (continued)</a></td><td>1</td></tr>
+<tr><td><a href="#s9">Follow-up visit</a></td><td>4</td></tr>
+<tr><td><a href="#s10">Follow-up visit &gt; Measurements</a></td><td>3</td></tr>
+<tr><td><a href="#s11">Follow-up visit &gt; Medicines and symptoms</a></td><td>2</td></tr>
+<tr><td><a href="#s12">Follow-up visit &gt; Medicines and symptoms &gt; F8. In the past 2 weeks, how often have you had the following?</a></td><td>5</td></tr>
+<tr><td><a href="#s13">Follow-up visit &gt; Medicines and symptoms (continued)</a></td><td>1</td></tr>
+<tr><td><a href="#s14">Follow-up visit &gt; Health event (repeat)</a></td><td>6</td></tr>
+<tr><td><a href="#s15">Follow-up visit (continued)</a></td><td>1</td></tr>
+</tbody></table></div>
+<h2 id="s0">Form start</h2>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">start<div></div></td><td>(no label)</td><td>Start time (automatic)</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr><td class="var">end<div></div></td><td>(no label)</td><td>End time (automatic)</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr><td class="var">today<div></div></td><td>(no label)</td><td>Date (automatic)</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr class="muted"><td class="var">intro<div></div></td><td>Lakeside Community Health Check (fictional sample form). Staff complete this form with the participant. Choose the visit first.</td><td>Note (no data)</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr><td class="var">participant_id<div><span class="flag req">Required</span></div></td><td>Participant ID<div class="note">Format LH-0000, for example LH-0042</div></td><td>Text</td><td class="values"><div>Rule: regex(., &#x27;^LH-[0-9]{4}$&#x27;)</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">visit<div><span class="flag req">Required</span></div></td><td>Which visit is this?</td><td>Choose one (visit)</td><td class="values"><div>screening = Screening</div><div>visit_1 = Follow-up visit 1 (2 weeks)</div><div>visit_2 = Follow-up visit 2 (3 months)</div><div>visit_3 = Follow-up visit 3 (6 months)</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s1">Screening visit</h2>
+<p class="intro">Shown when: visit is &quot;Screening&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">scr_date<div><span class="flag req">Required</span></div></td><td>Date of screening</td><td>Date</td><td class="values"><div>Rule: . &gt;= date(&#x27;2026-01-01&#x27;) AND . &lt;= today()</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">consent<div><span class="flag req">Required</span></div></td><td>Has the participant signed the study consent form?</td><td>Choose one (yesno)</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>Always (within its group)</td></tr>
+<tr class="muted"><td class="var">consent_stop<div></div></td><td>STOP. Do not continue: people can only take part after signing the consent form.</td><td>Note (no data)</td><td class="values"></td><td>consent is &quot;No&quot;<div class="raw">${consent} = &#x27;0&#x27;</div></td></tr>
+</tbody></table></div>
+<h2 id="s2">Screening visit &gt; Section A: About you</h2>
+<p class="intro">Shown when: consent is &quot;Yes&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">dob<div><span class="flag req">Required</span></div></td><td>1. What is your date of birth?</td><td>Date</td><td class="values"><div>Rule: . &gt;= date(&#x27;1900-01-01&#x27;) AND . &lt;= today()</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">age<div></div></td><td>(no label)</td><td>Calculated</td><td class="values"><div>Formula: if(${dob} != &#x27;&#x27; and ${scr_date} != &#x27;&#x27;, int((decimal-date-time(${scr_date}) - decimal-date-time(${dob})) div 365.2425), &#x27;&#x27;)</div></td><td>Always (within its group)</td></tr>
+<tr class="muted"><td class="var">age_stop<div></div></td><td>STOP. This person is under 18 and cannot take part. Do not continue.</td><td>Note (no data)</td><td class="values"></td><td>age is not blank AND age &lt; 18<div class="raw">${age} != &#x27;&#x27; and ${age} &lt; 18</div></td></tr>
+<tr><td class="var">sex<div><span class="flag req">Required</span></div></td><td>2. What is your sex?</td><td>Choose one (sex)</td><td class="values"><div>1 = Female</div><div>2 = Male</div><div>99 = Prefer not to say</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">education<div><span class="flag req">Required</span></div></td><td>3. What is the highest level of education you have completed?<div class="note">Appearance: minimal</div></td><td>Choose one (education)</td><td class="values"><div>1 = No formal schooling</div><div>2 = Primary school</div><div>3 = Secondary school</div><div>4 = Trade or vocational qualification</div><div>5 = University degree</div><div>99 = Prefer not to say</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">household<div></div></td><td>4. How many people live in your household, including you?</td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 1 AND . &lt;= 20</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s3">Screening visit &gt; Section B: Your health</h2>
+<p class="intro">Shown when: consent is &quot;Yes&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">conditions<div><span class="flag req">Required</span></div></td><td>5. Has a doctor or nurse ever told you that you have any of these conditions? Tick all that apply.</td><td>Choose all that apply (conditions)</td><td class="values"><div>Several answers, stored space-separated:</div><div>1 = High blood pressure</div><div>2 = Diabetes</div><div>3 = Heart disease</div><div>4 = Asthma or COPD</div><div>5 = Kidney disease</div><div>6 = None of these</div><div>Rule: not(selected(., &#x27;6&#x27;) AND count-selected(.) &gt; 1)</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">bp_med<div><span class="flag req">Required</span></div></td><td>6. Are you currently taking medicine for high blood pressure?</td><td>Choose one (yesno)</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>conditions includes &quot;High blood pressure&quot;<div class="raw">selected(${conditions}, &#x27;1&#x27;)</div></td></tr>
+<tr><td class="var">smoke_status<div><span class="flag req">Required</span></div></td><td>7. Do you smoke tobacco (cigarettes, cigars, pipe, water-pipe or similar)?</td><td>Choose one (smoke)</td><td class="values"><div>1 = Yes, every day</div><div>2 = Yes, some days</div><div>3 = No, but I used to</div><div>4 = No, never</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">cig_per_day<div><span class="flag req">Required</span></div></td><td>8. On a day when you smoke, how many cigarettes (or similar) do you usually smoke?</td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 1 AND . &lt;= 80</div></td><td>smoke_status is &quot;Yes, every day&quot; OR smoke_status is &quot;Yes, some days&quot;<div class="raw">${smoke_status} = &#x27;1&#x27; or ${smoke_status} = &#x27;2&#x27;</div></td></tr>
+<tr><td class="var">active_days<div><span class="flag req">Required</span></div></td><td>9. In a usual week, on how many days are you active for at least 30 minutes (for example brisk walking, cycling, sport or heavy housework)?<div class="note">0 to 7 days</div></td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 0 AND . &lt;= 7</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fruit_veg<div></div></td><td>10. On a usual day, how many portions of fruit and vegetables do you eat? One portion is about a handful.</td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 0 AND . &lt;= 20</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">energy<div></div></td><td>11. Over the past week, how much energy have you had?<div class="note">0 = No energy at all, 100 = Full of energy</div></td><td>Range / slider</td><td class="values"><div>Parameters: start=0 end=100 step=1</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">sleep_trouble<div></div></td><td>12. Over the past month, how often have you had trouble sleeping?</td><td>Choose one (often)</td><td class="values"><div>0 = Never</div><div>1 = Rarely</div><div>2 = Sometimes</div><div>3 = Often</div><div>4 = Every night or almost every night</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s4">Screening visit &gt; Section B: Your health &gt; 13. In the past 2 weeks, how often have you had the following?</h2>
+<p class="intro">Appearance: table-list</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">sym_headache<div></div></td><td>Headaches</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">sym_dizzy<div></div></td><td>Dizziness or feeling faint</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">sym_chest<div></div></td><td>Chest pain or tightness</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">sym_breath<div></div></td><td>Shortness of breath</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">sym_ankles<div></div></td><td>Swollen ankles or feet</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s5">Screening visit &gt; Section C: Measurements (staff to complete)</h2>
+<p class="intro">Shown when: consent is &quot;Yes&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">height_cm<div><span class="flag req">Required</span></div></td><td>14a. Height (cm)<div class="note">Measure without shoes. Enter one decimal place, e.g. 165.0</div></td><td>Decimal number</td><td class="values"><div>Rule: . &gt;= 100 AND . &lt;= 230</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">weight_kg<div><span class="flag req">Required</span></div></td><td>14b. Weight (kg)<div class="note">Light clothing, no shoes. Enter one decimal place, e.g. 72.4</div></td><td>Decimal number</td><td class="values"><div>Rule: . &gt;= 30 AND . &lt;= 250</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">bmi<div></div></td><td>(no label)</td><td>Calculated</td><td class="values"><div>Formula: if(${height_cm} != &#x27;&#x27; and ${weight_kg} != &#x27;&#x27;, round(${weight_kg} div ((${height_cm} div 100) * (${height_cm} div 100)), 1), &#x27;&#x27;)</div></td><td>Always (within its group)</td></tr>
+<tr class="muted"><td class="var">bmi_show<div></div></td><td>Body mass index (BMI, kg/m2): ${bmi}</td><td>Note (no data)</td><td class="values"></td><td>bmi is not blank<div class="raw">${bmi} != &#x27;&#x27;</div></td></tr>
+<tr><td class="var">scr_sbp<div><span class="flag req">Required</span></div></td><td>15a. Systolic blood pressure (mmHg)<div class="note">Seated, after 5 minutes&#x27; rest</div></td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 70 AND . &lt;= 250</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">scr_dbp<div><span class="flag req">Required</span></div></td><td>15b. Diastolic blood pressure (mmHg)</td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 40 AND . &lt;= 150 AND . &lt; scr_sbp</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s6">Screening visit &gt; Section D: Result and follow-up (staff to complete)</h2>
+<p class="intro">Shown when: consent is &quot;Yes&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">bp_high<div></div></td><td>(no label)</td><td>Calculated</td><td class="values"><div>Formula: if(${scr_sbp} = &#x27;&#x27; or ${scr_dbp} = &#x27;&#x27;, &#x27;&#x27;, if(${scr_sbp} &gt;= 140 or ${scr_dbp} &gt;= 90, 1, 0))</div></td><td>Always (within its group)</td></tr>
+<tr class="muted"><td class="var">bp_high_msg<div></div></td><td>This reading is 140/90 mmHg or higher. Give the participant the advice leaflet and invite them to the 3 follow-up visits.</td><td>Note (no data)</td><td class="values"></td><td>bp_high = 1<div class="raw">${bp_high} = 1</div></td></tr>
+<tr><td class="var">fu_agree<div><span class="flag req">Required</span></div></td><td>Has the participant agreed to the 3 follow-up visits?</td><td>Choose one (yesno)</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>bp_high = 1<div class="raw">${bp_high} = 1</div></td></tr>
+</tbody></table></div>
+<h2 id="s7">Screening visit &gt; Section D: Result and follow-up (staff to complete) &gt; Contact details</h2>
+<p class="intro">Shown when: fu_agree is &quot;Yes&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr class="muted"><td class="var">contact_intro<div></div></td><td>Complete this form only if the participant agreed to the follow-up visits. These details identify the participant: record them only here.</td><td>Note (no data)</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr><td class="var">contact_phone<div><span class="flag req">Required</span></div></td><td>Phone number for follow-up reminders<div class="note">Include the area code | Appearance: numbers</div></td><td>Text</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr><td class="var">contact_time<div></div></td><td>Best time to call</td><td>Choose one (contact_time)</td><td class="values"><div>1 = Morning</div><div>2 = Afternoon</div><div>3 = Evening</div><div>4 = Any time</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">contact_sms<div><span class="flag req">Required</span></div></td><td>May we send text message reminders before each visit?</td><td>Choose one (yesno)</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s8">Screening visit &gt; Section D: Result and follow-up (staff to complete) (continued)</h2>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">scr_notes<div></div></td><td>Staff notes (do not write names, addresses or phone numbers here)<div class="note">Appearance: multiline</div></td><td>Text</td><td class="values"><div>Rule: string-length(.) &lt;= 500</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s9">Follow-up visit</h2>
+<p class="intro">Shown when: visit is not blank AND visit is not &quot;Screening&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">fu_date<div><span class="flag req">Required</span></div></td><td>F1. Date of visit (or date of last contact attempt)</td><td>Date</td><td class="values"><div>Rule: . &gt;= date(&#x27;2026-01-01&#x27;) AND . &lt;= today()</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fu_attended<div><span class="flag req">Required</span></div></td><td>F2. Did the visit take place?</td><td>Choose one (yesno)</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fu_missed_reason<div><span class="flag req">Required</span></div></td><td>F3. Main reason the visit did not take place</td><td>Choose one (missed)</td><td class="values"><div>1 = Could not contact participant</div><div>2 = Participant declined</div><div>3 = Participant unwell</div><div>4 = Participant moved away</div><div>5 = Other</div></td><td>fu_attended is &quot;No&quot;<div class="raw">${fu_attended} = &#x27;0&#x27;</div></td></tr>
+<tr><td class="var">fu_missed_other<div><span class="flag req">Required</span></div></td><td>F3a. Other reason, please describe</td><td>Text</td><td class="values"></td><td>fu_missed_reason is &quot;Other&quot;<div class="raw">${fu_missed_reason} = &#x27;5&#x27;</div></td></tr>
+</tbody></table></div>
+<h2 id="s10">Follow-up visit &gt; Measurements</h2>
+<p class="intro">Shown when: fu_attended is &quot;Yes&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">fu_sbp<div><span class="flag req">Required</span></div></td><td>F4a. Systolic blood pressure (mmHg)<div class="note">Seated, after 5 minutes&#x27; rest</div></td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 70 AND . &lt;= 250</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fu_dbp<div><span class="flag req">Required</span></div></td><td>F4b. Diastolic blood pressure (mmHg)</td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 40 AND . &lt;= 150 AND . &lt; fu_sbp</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fu_weight<div></div></td><td>F5. Weight (kg)<div class="note">Light clothing, no shoes. Enter one decimal place, e.g. 72.4</div></td><td>Decimal number</td><td class="values"><div>Rule: . &gt;= 30 AND . &lt;= 250</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s11">Follow-up visit &gt; Medicines and symptoms</h2>
+<p class="intro">Shown when: fu_attended is &quot;Yes&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">fu_bp_med<div><span class="flag req">Required</span></div></td><td>F6. Are you currently taking medicine for high blood pressure?</td><td>Choose one (yesno)</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fu_med_days<div><span class="flag req">Required</span></div></td><td>F7. On how many of the last 7 days did you take your blood pressure medicine?</td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 0 AND . &lt;= 7</div></td><td>fu_bp_med is &quot;Yes&quot;<div class="raw">${fu_bp_med} = &#x27;1&#x27;</div></td></tr>
+</tbody></table></div>
+<h2 id="s12">Follow-up visit &gt; Medicines and symptoms &gt; F8. In the past 2 weeks, how often have you had the following?</h2>
+<p class="intro">Appearance: table-list</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">fu_headache<div></div></td><td>Headaches</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fu_dizzy<div></div></td><td>Dizziness or feeling faint</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fu_chest<div></div></td><td>Chest pain or tightness</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fu_breath<div></div></td><td>Shortness of breath</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">fu_ankles<div></div></td><td>Swollen ankles or feet</td><td>Choose one (freq3)</td><td class="values"><div>0 = Not at all</div><div>1 = Some days</div><div>2 = Most days</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s13">Follow-up visit &gt; Medicines and symptoms (continued)</h2>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">fu_health_event<div><span class="flag req">Required</span></div></td><td>F9. Since the last visit, have you stayed overnight in hospital, visited an emergency department, or been told you have a new health condition?</td><td>Choose one (yesno)</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s14">Follow-up visit &gt; Health event (repeat)</h2>
+<p class="intro">Repeat group: can be filled in several times. Shown when: fu_health_event is &quot;Yes&quot;</p>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr class="muted"><td class="var">fu_he_msg<div></div></td><td>Complete one Health event form for each event.</td><td>Note (no data)</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr><td class="var">he_date<div><span class="flag req">Required</span></div></td><td>H1. Date the event started</td><td>Date</td><td class="values"><div>Rule: . &gt;= date(&#x27;2026-01-01&#x27;) AND . &lt;= today()</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">he_type<div><span class="flag req">Required</span></div></td><td>H2. Type of event</td><td>Choose one (he_type)</td><td class="values"><div>1 = Overnight hospital stay</div><div>2 = Emergency department visit (no overnight stay)</div><div>3 = New health condition diagnosed</div><div>4 = Other</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">he_type_other<div><span class="flag req">Required</span></div></td><td>H2a. Other, please describe</td><td>Text</td><td class="values"></td><td>he_type is &quot;Other&quot;<div class="raw">${he_type} = &#x27;4&#x27;</div></td></tr>
+<tr><td class="var">he_nights<div><span class="flag req">Required</span></div></td><td>H3. Number of nights in hospital</td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 1 AND . &lt;= 365</div></td><td>he_type is &quot;Overnight hospital stay&quot;<div class="raw">${he_type} = &#x27;1&#x27;</div></td></tr>
+<tr><td class="var">he_heart<div><span class="flag req">Required</span></div></td><td>H4. Was the event related to the heart or blood pressure?</td><td>Choose one (yes_no_unsure)</td><td class="values"><div>1 = Yes</div><div>0 = No</div><div>98 = Not sure</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">he_desc<div></div></td><td>H5. Brief description (no names or other identifying details)<div class="note">Appearance: multiline</div></td><td>Text</td><td class="values"><div>Rule: string-length(.) &lt;= 500</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<h2 id="s15">Follow-up visit (continued)</h2>
+<div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
+<tr><td class="var">fu_notes<div></div></td><td>Staff notes (do not write names, addresses or phone numbers here)<div class="note">Appearance: multiline</div></td><td>Text</td><td class="values"><div>Rule: string-length(.) &lt;= 500</div></td><td>Always (within its group)</td></tr>
+</tbody></table></div>
+<footer>Made with the redcap-xlsform starter kit. Check every path in a test project before collecting data.</footer>
+</main>
+</body>
+</html>

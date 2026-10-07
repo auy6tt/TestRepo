@@ -94,7 +94,9 @@ class Sbom:
         self.components = {c.get("bom-ref") or f"{c.get('name')}@{c.get('version')}": c for c in comps}
         self.deps = {d.get("ref"): list(d.get("dependsOn", []) or []) for d in self.data.get("dependencies", []) or []}
         root_ref = self.root.get("bom-ref")
-        self.part_roots = [r for r in self.deps.get(root_ref, []) if r in self.components]
+        # Parts exist only in product SBOMs merged by make_sbom.py (they carry the part property).
+        self.part_roots = [r for r in self.deps.get(root_ref, [])
+                           if r in self.components and get_prop(self.components[r], PART_PROP)]
         self.single = not self.part_roots
         if self.single:
             self.part_roots = [root_ref] if root_ref else []
@@ -1007,6 +1009,9 @@ def main() -> None:
     findings = merge_duplicates(findings)
     actions = assign_actions(findings, sbom)
     comparison = compare(findings, K.load_json(args.previous)) if args.previous else None
+    if comparison is None:
+        for f in findings:
+            f["status"] = "First check"
 
     checked = len(python_refs) + len(node_refs) + len(other_refs) - sum(
         1 for row in not_checked if not row["reason"].startswith("Listed by hand")

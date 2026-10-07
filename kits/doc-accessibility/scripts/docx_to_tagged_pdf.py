@@ -116,7 +116,8 @@ def comparison_markdown(name: str, before: dict, after: dict, checks: dict | Non
         for label, result in (("before", old), ("after", new)):
             if result and result["rules"]:
                 lines += ["", f"veraPDF rules failed ({label}):", ""]
-                lines += [f"- {rule['plain']} (rule {rule['rule']}, {rule['failed_checks']} checks)" for rule in result["rules"]]
+                lines += [f"- {rule['plain']} (rule {rule['rule']}, {rule['failed_checks']} "
+                          f"check{'s' if rule['failed_checks'] != 1 else ''})" for rule in result["rules"]]
         lines += ["", "veraPDF tests the parts of PDF/UA a machine can test. Passing them does not mean "
                   "the file is accessible: a person still checks it."]
     lines += ["", "## What a person still has to check", "",

@@ -86,6 +86,8 @@ def load_config(path: Path, side: str) -> dict:
         raise SystemExit(f"Runner config not found: {path}")
     except ValueError as exc:
         raise SystemExit(f"{path.name} is not valid JSON: {exc}")
+    if not isinstance(cfg, dict):
+        raise SystemExit(f"{path.name} must contain one JSON object {{...}}.")
     for key in ("runner", "model"):
         if not cfg.get(key):
             raise SystemExit(f'{path.name} needs a "{key}" value.')
@@ -122,6 +124,8 @@ def resolve_runner(cfg: dict):
 
 
 def load_grades(path: Path) -> dict:
+    if not path.exists():
+        raise SystemExit(f"Grades file not found: {path}")
     grades = {}
     with path.open(newline="", encoding="utf-8-sig") as fh:
         for n, raw in enumerate(csv.DictReader(fh), start=2):
@@ -299,7 +303,6 @@ def write_workbook(rows: list, old: dict, new: dict, out: Path, tests_path: Path
     bad_fill, bad_font = PatternFill("solid", fgColor="FFC7CE"), Font(color="9C0006")
     section_fill = PatternFill("solid", fgColor="DDEBF7")
     wrap_top = Alignment(wrap_text=True, vertical="top")
-    top = Alignment(vertical="top")
     money = '"$"#,##0.00000'
     pct = "+0%;-0%;0%"
 
@@ -480,7 +483,7 @@ def write_workbook(rows: list, old: dict, new: dict, out: Path, tests_path: Path
             cell.number_format = "0.00"
             r += 1
 
-    section("Human grading (updates as you fill the Comparison sheet)", ["Count"])
+    section("Human grading (updates as you grade)", ["Count"])
     pref = f"Comparison!${pref_col}$2:${pref_col}${last}"
     okr = f"Comparison!${ok_col}$2:${ok_col}${last}"
     for label, formula, fmt in (
@@ -542,6 +545,10 @@ def write_workbook(rows: list, old: dict, new: dict, out: Path, tests_path: Path
         settings.row_dimensions[i].height = min(300, max(15, 15 * math.ceil(longest / 75)))
     settings.freeze_panes = "B2"
 
+    for ws in (summary, comp, settings):
+        ws.page_setup.orientation = "landscape"
+    summary.sheet_properties.pageSetUpPr.fitToPage = True
+    summary.page_setup.fitToWidth, summary.page_setup.fitToHeight = 1, 0
     wb.calculation.fullCalcOnLoad = True
     wb.properties.creator = "compare_runs.py"
     wb.save(out)
@@ -588,9 +595,7 @@ def main(argv=None) -> int:
         print(f"\nThis run calls a real API ({', '.join(live)}). That uses the client's key and costs money.\n"
               f"Check the plan above, then run again with --yes.")
         return 2
-    try:
-        import openpyxl  # noqa: F401
-    except ImportError:
+    if importlib.util.find_spec("openpyxl") is None:
         print("openpyxl is not installed. Run: pip install -r requirements.txt", file=sys.stderr)
         return 1
     grades = load_grades(Path(args.grades)) if args.grades else {}
@@ -628,7 +633,12 @@ def main(argv=None) -> int:
             return 1
 
     write_raw(rows, raw_path)
-    so, sn = write_workbook(rows, old_cfg, new_cfg, out, tests_path, grades)
+    try:
+        so, sn = write_workbook(rows, old_cfg, new_cfg, out, tests_path, grades)
+    except PermissionError:
+        print(f"Could not write {out}. Close it in Excel and run again. Every answer is saved in {raw_path}; "
+              f'to rebuild without new calls, use "runner": "recorded" with "recorded_side".', file=sys.stderr)
+        return 1
     if grades:
         unknown = sorted(set(grades) - {r["case"]["id"] for r in rows})
         if unknown:

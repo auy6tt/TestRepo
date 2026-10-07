@@ -1,0 +1,5 @@
+# Speaker labels to rename, one per line: OLD = NEW
+# Only rename a label when the transcript or the client makes it clear who it is.
+# Here Helen Whitaker joins by phone at 00:13:48 ("It's Helen ... I'm on my phone")
+# and the President welcomes her by name.
+Helen's iPhone = Helen Whitaker

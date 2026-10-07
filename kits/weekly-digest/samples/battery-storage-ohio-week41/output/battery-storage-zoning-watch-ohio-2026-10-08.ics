@@ -1,0 +1,151 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//weekly-digest kit//build_digest.py//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Battery Storage Zoning Watch: Week 41
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+UID:battery-storage-zoning-watch-w41-01-667926115d@fieldline.example
+DTSTAMP:20261007T102627Z
+DTSTART:20261013T133000Z
+DTEND:20261013T143000Z
+SUMMARY:Commissioners' session (public comment at the start): Tarrow County
+  vote on a 12-month battery storage pause (Res. 2026-118)
+DESCRIPTION:Commissioners will take up Resolution 2026-118 at their October
+  13 regular session. It would stop the county from accepting or processing
+  zoning permits\, rezonings (zoning map amendments) and conditional use re
+ quests for battery energy storage facilities of 1 MW or more for 12 months
+ . It covers the areas under county zoning\, currently Ferris\, Quill and B
+ rindle townships\; townships that run their own zoning are not affected. A
+ pplications filed and found complete before it takes effect\, and batterie
+ s that serve a single home or business on the same property\, are excluded
+ .\n\nSource: Tarrow County Board of Commissioners\, agenda for October 13\
+ , 2026 (PDF)\, page 2\, item 7\nhttps://www.tarrowcounty.example/commissio
+ ners/agendas/2026-10-13-agenda.pdf\n\nFrom Battery Storage Zoning Watch\, 
+ Week 41 (Fieldline Briefs). Check the official source before you rely on t
+ his date. Not legal advice.
+URL:https://www.tarrowcounty.example/commissioners/agendas/2026-10-13-agend
+ a.pdf
+CATEGORIES:Moratoria
+TRANSP:TRANSPARENT
+LOCATION:Commissioners' Chambers\, Tarrow County Administration Building\, 
+ 41 Court Street\, Tarrow City
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Commissioners' session (public comment at the start)
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:battery-storage-zoning-watch-w41-02-3068315ceb@fieldline.example
+DTSTAMP:20261007T102627Z
+DTSTART:20261016T200000Z
+DTEND:20261016T210000Z
+SUMMARY:Written comments due to the Zoning Inspector: Wrenfield Township ba
+ ttery storage rules (ZTA-2026-03)
+DESCRIPTION:Zoning text amendment ZTA-2026-03 would add definitions for bat
+ tery energy storage systems and allow battery energy storage facilities on
+ ly as a conditional use in the I-1 Light Industrial district. It would req
+ uire setbacks of at least 300 feet from existing homes and 100 feet from p
+ roperty lines\, a decommissioning plan backed by a bond or letter of credi
+ t and reviewed every five years\, and a fire-safety plan reviewed by the f
+ ire chief before a zoning certificate is issued.\n\nSource: Wrenfield Town
+ ship\, notice of public hearing on ZTA-2026-03 (PDF)\, proposed amendments
+  1 to 5\nhttps://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-noti
+ ce.pdf\n\nFrom Battery Storage Zoning Watch\, Week 41 (Fieldline Briefs). 
+ Check the official source before you rely on this date. Not legal advice.
+URL:https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf
+CATEGORIES:Zoning rules
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Written comments due to the Zoning Inspector
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:battery-storage-zoning-watch-w41-02-884565474a@fieldline.example
+DTSTAMP:20261007T102627Z
+DTSTART:20261021T230000Z
+DTEND:20261022T000000Z
+SUMMARY:Township zoning commission public hearing: Wrenfield Township batte
+ ry storage rules (ZTA-2026-03)
+DESCRIPTION:Zoning text amendment ZTA-2026-03 would add definitions for bat
+ tery energy storage systems and allow battery energy storage facilities on
+ ly as a conditional use in the I-1 Light Industrial district. It would req
+ uire setbacks of at least 300 feet from existing homes and 100 feet from p
+ roperty lines\, a decommissioning plan backed by a bond or letter of credi
+ t and reviewed every five years\, and a fire-safety plan reviewed by the f
+ ire chief before a zoning certificate is issued.\n\nSource: Wrenfield Town
+ ship\, notice of public hearing on ZTA-2026-03 (PDF)\, proposed amendments
+  1 to 5\nhttps://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-noti
+ ce.pdf\n\nFrom Battery Storage Zoning Watch\, Week 41 (Fieldline Briefs). 
+ Check the official source before you rely on this date. Not legal advice.
+URL:https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf
+CATEGORIES:Zoning rules
+TRANSP:TRANSPARENT
+LOCATION:Wrenfield Township Hall\, 8 Gable Road
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Township zoning commission public hearing
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:battery-storage-zoning-watch-w41-03-b8278799c9@fieldline.example
+DTSTAMP:20261007T102627Z
+DTSTART:20261022T220000Z
+DTEND:20261022T230000Z
+SUMMARY:Planning commission hearing and recommendation: Kessler Road batter
+ y project rezoning\, Wrenfield Township (RZ-26-014)
+DESCRIPTION:Northbank Storage Partners LLC asks to rezone about 48.2 acres 
+ on the north side of Kessler Road from A-1 Agricultural to I-1 Light Indus
+ trial for a battery energy storage facility of about 80 MW / 320 MWh\, as 
+ stated in the application (case RZ-26-014).\n\nSource: Kestrel Regional Pl
+ anning Commission\, agenda for October 22\, 2026 (PDF)\, page 1\, item 3a\
+ ; case summary on page 2\nhttps://www.kestrelrpc.example/agendas/current-a
+ genda.pdf\n\nFrom Battery Storage Zoning Watch\, Week 41 (Fieldline Briefs
+ ). Check the official source before you rely on this date. Not legal advic
+ e.
+URL:https://www.kestrelrpc.example/agendas/current-agenda.pdf
+CATEGORIES:Rezonings and applications
+TRANSP:TRANSPARENT
+LOCATION:RPC Meeting Room\, 210 Pike Street\, Tarrow City
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: Planning commission hearing and recommendation
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:battery-storage-zoning-watch-w41-05-d954f97d99@fieldline.example
+DTSTAMP:20261007T102627Z
+DTSTART:20261019T230000Z
+DTEND:20261020T000000Z
+SUMMARY:City council second reading: Marlowe Falls battery fire-safety ordi
+ nance (No. 2026-41)
+DESCRIPTION:The Safety Committee amended Ordinance 2026-41 on October 5. As
+  amended\, it applies to battery energy storage systems larger than 600 kW
+ h (up from 50 kWh)\, other than systems serving a single one- or two-famil
+ y home. It requires compliance with NFPA 855\, an emergency response plan 
+ approved by the fire chief before a certificate of occupancy is issued\, a
+  site walkthrough with the fire department once a year (down from twice a 
+ year) and a 24-hour emergency contact posted at each entrance.\n\nSource: 
+ City of Marlowe Falls\, Ordinance 2026-41 as amended (PDF)\, sections 1 to
+  5\; committee amendments on page 2\nhttps://www.marlowefalls.example/coun
+ cil/legislation/ord-2026-41-amended.pdf\n\nFrom Battery Storage Zoning Wat
+ ch\, Week 41 (Fieldline Briefs). Check the official source before you rely
+  on this date. Not legal advice.
+URL:https://www.marlowefalls.example/council/legislation/ord-2026-41-amende
+ d.pdf
+CATEGORIES:Ordinances
+TRANSP:TRANSPARENT
+LOCATION:Council Chambers\, Marlowe Falls City Hall\, 12 Main Street
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: City council second reading
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+END:VCALENDAR

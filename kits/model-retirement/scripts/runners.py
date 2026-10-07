@@ -144,8 +144,11 @@ def recorded_run(prompt, system, config, case):
 def client_api_run(prompt, system, config, case):
     """STUB: call the CLIENT's model with the CLIENT's own API key.
 
-    Fill in the block marked below for each project (Claude Code can do it with you),
-    then set "runner": "client_api" in the runner config.
+    For each client, copy this function into a file in the client's work folder
+    (for example client_runner.py, with `import os` and `from runners import RunnerSetupError`
+    at the top), fill in the block marked below, and set
+    "runner": "client_runner.py:client_api_run" in the runner config. That keeps client code
+    out of the kit. (You can also fill it in here and use "runner": "client_api".)
 
     Rules:
       - The key comes from an environment variable named in the runner config
@@ -199,8 +202,8 @@ def client_api_run(prompt, system, config, case):
     #     return {"output": summarize_ticket(case["input"])}
     #     (Their function must use the model you are testing, for example through an env var.)
     raise NotImplementedError(
-        "client_api_run is a stub. Open scripts/runners.py and fill in the block marked "
-        "'PUT THE CLIENT'S API CALL HERE', or point the runner config at your own runner file.")
+        f"client_api_run is a stub, so nothing was sent (model {model!r}, settings {params}). Fill in the "
+        f"block marked 'PUT THE CLIENT'S API CALL HERE' in your copy of it (see the docstring).")
 
 
 BUILT_IN = {"mock": mock_run, "recorded": recorded_run, "client_api": client_api_run}

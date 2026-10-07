@@ -1,0 +1,393 @@
+{
+  "_about": "Content for the FICTIONAL sample organisation St Aidan's Church, Wrenford. Every name, phone number (UK numbers reserved for drama) and address is made up. build_templates.py --content reads this file; copy it to fill templates for a real client. Pictures: 'art:<name>' uses a built-in illustration (church, flowers, harvest, bunting, candles, books, coffee, window, emblem:<initials>); anything else is a file path relative to this file.",
+  "brand": {
+    "org": "St Aidan's Church, Wrenford",
+    "primary": "5B1A2E",
+    "accent": "C99A3A",
+    "tint": "F7F1EA",
+    "ink": "26201E",
+    "muted": "6B605A",
+    "heading_font": "Cambria",
+    "body_font": "Calibri",
+    "language": "en-GB",
+    "logo": "art:emblem:St A"
+  },
+  "newsletter": {
+    "title": "Parish News",
+    "tagline": "St Aidan's Church, Wrenford  ·  News for everyone in the parish",
+    "issue": "Issue 112",
+    "date": "Spring 2026",
+    "issue_right": "Free, please take one",
+    "lead": {
+      "kicker": "From the vicar",
+      "headline": "A busy, hopeful spring",
+      "byline": "Revd Helen Marsh",
+      "paragraphs": [
+        "As the evenings draw out, St Aidan's is full of life again. The Little Wrens toddler group has doubled in size since January, the choir has three new members, and the churchyard is bright with the bulbs our volunteers planted in the autumn.",
+        "Lent begins on Ash Wednesday, 18 February, and our Lent study group meets at the vicarage on Thursday afternoons. Everyone is welcome, whether you come every week or just once."
+      ],
+      "photo": "art:flowers",
+      "caption": "Four hundred bulbs went in along Church Lane last November. Thank you to the Saturday team.",
+      "paragraphs_after": [
+        "Easter Day falls on 5 April this year. Our services are listed in the diary, and the Easter flowers list is at the back of church if you would like to give flowers in memory of someone you love.",
+        "Thank you, as ever, for all you give to this parish in time, prayer and cake."
+      ]
+    },
+    "quote": "“Whether you come every week or just once, you are welcome here.”",
+    "articles": [
+      {
+        "kicker": "Building news",
+        "headline": "Heating appeal passes £18,000",
+        "byline": "",
+        "paragraphs": [
+          "Our appeal to replace the 40-year-old boiler has now raised £18,240 of the £25,000 we need. That includes £4,100 from the Christmas Fair and a grant from the Wrenford Village Trust.",
+          "Work is planned for the summer so the church is warm by the autumn. Gift Aid envelopes are at the back of church, or speak to our treasurer, Tom Okafor."
+        ],
+        "photo": "art:church",
+        "caption": "St Aidan's from the south lawn. The new boiler will sit in the old vestry."
+      },
+      {
+        "kicker": "Children and families",
+        "headline": "Wrens Club reading challenge",
+        "byline": "",
+        "paragraphs": [
+          "Last summer 31 children took part in the Wrens Club reading challenge and read 412 books between them. This year's challenge starts in July with a story trail around the churchyard.",
+          "Certificates from last year are ready to collect from the parish office."
+        ]
+      },
+      {
+        "kicker": "Save the date",
+        "headline": "Summer Fair: Saturday 13 June",
+        "byline": "",
+        "paragraphs": [
+          "This year's fair will be in the vicarage garden from 12 noon to 4 pm, with the tombola, plant stall, dog show and cream teas. Money raised will go to the heating appeal.",
+          "We need helpers to set up on the Friday evening and to run the cake stall. Please add your name to the list in the porch."
+        ],
+        "photo": "art:bunting",
+        "caption": "Last year's fair raised £3,950. Can we beat it?"
+      },
+      {
+        "kicker": "",
+        "headline": "Coffee morning moves to Tuesdays",
+        "byline": "",
+        "paragraphs": [
+          "From March our coffee morning moves to Tuesdays, 10 am to 12 noon in the church hall. Homemade cakes, fair-trade coffee and good company, all for £2."
+        ]
+      },
+      {
+        "kicker": "Little Wrens",
+        "headline": "Story time for the youngest",
+        "byline": "",
+        "paragraphs": [
+          "Little Wrens, our group for babies, toddlers and their grown-ups, now meets every Wednesday at 9.15 am in the church hall. There are stories, songs and toys, and coffee for the grown-ups.",
+          "It costs £1 a family and you do not need to book. New helpers who enjoy reading aloud are very welcome."
+        ],
+        "photo": "art:books",
+        "caption": "The Little Wrens book box now has over 200 picture books, all donated."
+      },
+      {
+        "kicker": "Recipe corner",
+        "headline": "Margaret's simnel cake",
+        "byline": "",
+        "paragraphs": [
+          "Margaret Bell's simnel cake has been a Mothering Sunday favourite for thirty years. She has kindly shared her recipe, with her tips for the eleven marzipan balls, on the parish website.",
+          "Slices will be on sale after the Mothering Sunday service, with all proceeds going to the Wrens Club."
+        ]
+      }
+    ],
+    "diary_title": "Dates for your diary",
+    "diary": [
+      [
+        "Wed 18 Feb",
+        "Ash Wednesday service, 7.30 pm"
+      ],
+      [
+        "Sat 7 Mar",
+        "Churchyard spring clean, 10 am"
+      ],
+      [
+        "Sun 15 Mar",
+        "Mothering Sunday all-age service, 10 am"
+      ],
+      [
+        "Sun 29 Mar",
+        "Palm Sunday procession, 9.45 am"
+      ],
+      [
+        "Fri 3 Apr",
+        "Good Friday walk of witness, 11 am"
+      ],
+      [
+        "Sun 5 Apr",
+        "Easter Day: services at 8 am and 10 am"
+      ],
+      [
+        "Sat 9 May",
+        "Plant sale, church hall, 10 am"
+      ]
+    ],
+    "notices_title": "Notices",
+    "notices": [
+      "Parish office hours: Tuesday and Thursday, 9.30 am to 12.30 pm.",
+      "Easter flowers: add your name to the list at the back of church by 22 March.",
+      "We need two more volunteers for the Sunday coffee rota. Please speak to Priya in the office."
+    ],
+    "contact_title": "Contact us",
+    "contact": [
+      "Vicar: Revd Helen Marsh, 01632 960412",
+      "Parish office: office@example.org",
+      "St Aidan's Church, Church Lane, Wrenford",
+      "www.example.org"
+    ],
+    "footer": "St Aidan's Church, Church Lane, Wrenford  ·  www.example.org"
+  },
+  "bulletin": {
+    "org": "St Aidan's Church",
+    "place": "Wrenford",
+    "title": "Mothering Sunday",
+    "date": "Sunday 15 March 2026",
+    "service": "10.00 am  ·  All-Age Worship",
+    "cover_picture": "art:window",
+    "welcome": "Welcome to St Aidan's! Today we give thanks for mothers and for everyone who cares for others. If you are visiting, please make yourself known after the service. Large-print sheets and a hearing loop are available.",
+    "people": "Leading: Revd Helen Marsh  ·  Music: David Lowe",
+    "order_title": "Order of Service",
+    "order_intro": "Words in bold are said by everyone. Please stand or sit as you are able.",
+    "sections": [
+      {
+        "heading": "We gather",
+        "items": [
+          {
+            "item": "Welcome",
+            "detail": "Revd Helen Marsh"
+          },
+          {
+            "item": "Hymn",
+            "detail": "192",
+            "note": "Praise, my soul, the King of heaven"
+          },
+          {
+            "rubric": "Please stand"
+          },
+          {
+            "leader": "God of love, you have gathered us as one family."
+          },
+          {
+            "all": "Welcome us, hold us, and send us out in your love."
+          },
+          {
+            "rubric": "We say together"
+          },
+          {
+            "all": "Loving God, thank you for all who have cared for us: for mothers and grandmothers, carers and friends. Help us to care for others as you care for us. Amen."
+          },
+          {
+            "item": "Opening prayer",
+            "detail": "Revd Helen Marsh"
+          }
+        ]
+      },
+      {
+        "heading": "We listen",
+        "items": [
+          {
+            "item": "First reading",
+            "detail": "1 Samuel 1.20-28",
+            "note": "Read by Margaret Bell"
+          },
+          {
+            "item": "Psalm",
+            "detail": "34.11-20"
+          },
+          {
+            "item": "Second reading",
+            "detail": "Colossians 3.12-17",
+            "note": "Read by Joshua Mensah"
+          },
+          {
+            "item": "Gospel",
+            "detail": "Luke 2.33-35"
+          },
+          {
+            "rubric": "Children are invited to the Wrens corner during the talk. They return for the prayers."
+          },
+          {
+            "item": "Talk",
+            "detail": "Revd Helen Marsh"
+          }
+        ]
+      },
+      {
+        "heading": "We respond",
+        "new_page": true,
+        "items": [
+          {
+            "item": "Prayers",
+            "detail": "Priya Shah"
+          },
+          {
+            "leader": "For all who have cared for us and taught us to love,"
+          },
+          {
+            "all": "we give you thanks and praise."
+          },
+          {
+            "item": "The Peace",
+            "detail": ""
+          },
+          {
+            "leader": "May the peace of God be with you all."
+          },
+          {
+            "all": "And also with you."
+          },
+          {
+            "rubric": "Please share a sign of peace with those around you."
+          },
+          {
+            "item": "Hymn",
+            "detail": "365",
+            "note": "Now thank we all our God"
+          },
+          {
+            "rubric": "The collection is taken during this hymn."
+          },
+          {
+            "rubric": "The children will give everyone a posy of spring flowers."
+          }
+        ]
+      },
+      {
+        "heading": "We go out",
+        "items": [
+          {
+            "item": "Blessing",
+            "detail": ""
+          },
+          {
+            "item": "Final hymn",
+            "detail": "16",
+            "note": "All things bright and beautiful"
+          },
+          {
+            "leader": "Go out into the world with hope."
+          },
+          {
+            "all": "Thanks be to God."
+          },
+          {
+            "rubric": "Please stay for tea, coffee and simnel cake in the hall."
+          }
+        ]
+      }
+    ],
+    "week_title": "This week at St Aidan's",
+    "diary": [
+      [
+        "Mon",
+        "7.30 pm",
+        "Church council, vestry"
+      ],
+      [
+        "Tue",
+        "10.00 am",
+        "Coffee morning, church hall"
+      ],
+      [
+        "Wed",
+        "9.15 am",
+        "Little Wrens toddler group"
+      ],
+      [
+        "Thu",
+        "2.00 pm",
+        "Lent study group, the vicarage"
+      ],
+      [
+        "Sat",
+        "10.00 am",
+        "Churchyard spring clean"
+      ],
+      [
+        "Sun",
+        "10.00 am",
+        "Fifth Sunday of Lent"
+      ]
+    ],
+    "notices_title": "Notices",
+    "notices": [
+      "The heating appeal has reached £18,240. Thank you!",
+      "Easter flowers: please add names to the list at the back by 22 March.",
+      "The Palm Sunday procession leaves the village green at 9.45 am on 29 March."
+    ],
+    "prayer_title": "Please pray for",
+    "prayer": "Those who are unwell and those who care for them; families who are grieving; the children and staff of Wrenford Primary School.",
+    "contact_title": "Contact",
+    "contacts": [
+      "Vicar: Revd Helen Marsh  ·  01632 960412",
+      "Office: office@example.org  ·  Tue and Thu mornings",
+      "www.example.org"
+    ],
+    "giving": "Give by card at the back of church, or online at example.org/give."
+  },
+  "certificate": {
+    "org": "St Aidan's Church, Wrenford",
+    "title": "Certificate",
+    "subtitle": "of Achievement",
+    "presented": "This certificate is proudly presented to",
+    "recipients": [
+      {
+        "name": "Amelia Hart",
+        "reason": "for reading 24 books in the Wrens Club Summer Reading Challenge"
+      },
+      {
+        "name": "Joshua Mensah",
+        "reason": "for writing the best book review of the summer"
+      },
+      {
+        "name": "Grace Kowalski",
+        "reason": "for reading every single day of the summer holidays"
+      }
+    ],
+    "date": "Awarded on Sunday 13 September 2026",
+    "seal": "2026",
+    "signatures": [
+      {
+        "name": "Revd Helen Marsh",
+        "role": "Vicar"
+      },
+      {
+        "name": "Jenny Clarke",
+        "role": "Wrens Club Leader"
+      }
+    ],
+    "logo": "art:emblem:St A"
+  },
+  "delivery_note": {
+    "client": "St Aidan's Church, Wrenford",
+    "contact": "Priya Shah",
+    "from": "Sam Taylor Document Services",
+    "from_email": "sam@example.com",
+    "date": "6 October 2026",
+    "reference": "SAW-2026-01",
+    "templates": [
+      [
+        "Parish News (two-column newsletter)",
+        "Word, A4",
+        "templates/newsletter-two-column-A4.docx"
+      ],
+      [
+        "Sunday service bulletin (folded booklet)",
+        "Word, four A5 pages",
+        "templates/service-bulletin-A5-booklet.docx"
+      ],
+      [
+        "Certificate of achievement",
+        "PowerPoint, A4",
+        "templates/certificate-of-achievement-A4.pptx"
+      ]
+    ],
+    "fonts": "Your old files used Times New Roman and Arial, which every computer has. The rebuilt templates use Cambria for headings and Calibri for text. Both come with Microsoft Office and are also available in Google Docs, so no paid fonts were needed.",
+    "delete_by": "13 October 2026",
+    "support_days": "14"
+  }
+}

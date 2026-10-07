@@ -1,0 +1,162 @@
+{
+  "_how_to_use": "Copy this file to the client's folder as client.json. Replace every [bracketed] value and every company.example address with the client's answers from the intake questionnaire. Empty strings are optional fields. Lists can hold more items. Then run scripts/fill_templates.py --client client.json --out <folder>.",
+  "company": {
+    "legal_name": "[Company legal name]",
+    "trading_name": "[Brand or trading name]",
+    "address": "[Postal address]",
+    "country": "[Country of main establishment]",
+    "website": "https://company.example",
+    "domain": "company.example",
+    "size": "[Micro or small enterprise, number of staff]",
+    "contact_person": "[Main contact: name, role]"
+  },
+  "contacts": {
+    "security_email": "security@company.example",
+    "security_form_url": "",
+    "security_phone": "",
+    "pgp_key_url": "",
+    "policy_url": "https://company.example/security/policy",
+    "advisories_url": "https://company.example/security/advisories",
+    "acknowledgments_url": "",
+    "security_txt_url": "https://company.example/.well-known/security.txt",
+    "support_email": "support@company.example",
+    "support_page_url": "https://company.example/support/security-updates",
+    "languages": [
+      "en"
+    ]
+  },
+  "products": [
+    {
+      "name": "[Product name]",
+      "model": "[Model or type number]",
+      "description": "[One sentence: what the product does and how it connects]",
+      "parts": [
+        "[Firmware name and version]",
+        "[App name and version]",
+        "[Cloud service name]"
+      ],
+      "current_version": "[1.0.0]",
+      "placed_on_market": "[YYYY-MM]",
+      "sold_in": "[EU countries where it is sold]",
+      "sales_channels": "[Own web shop, Crowd Supply, Tindie, Kickstarter, distributors]",
+      "support_end": "[YYYY-MM]",
+      "expected_use": "[How long customers typically use it, and why you think so]",
+      "update_method": "[How updates reach users, e.g. over-the-air updates from the app]",
+      "automatic_updates": "[Are security updates installed automatically by default? How can users postpone or switch this off?]",
+      "how_to_check_version": "[Where users can see the installed version]",
+      "after_support": "[What happens when support ends]",
+      "support_reasons": [
+        "[Reason 1 for the support period]",
+        "[Reason 2]"
+      ],
+      "component_support": [
+        {
+          "component": "[SDK, operating system or runtime]",
+          "supported_until": "[YYYY-MM or 'check']",
+          "note": "[Plan]"
+        }
+      ],
+      "support_decided_by": "[Name, role]",
+      "support_decision_date": "[YYYY-MM-DD]"
+    }
+  ],
+  "policy": {
+    "version": "1.0",
+    "effective_date": "[YYYY-MM-DD]",
+    "next_review": "[YYYY-MM-DD]",
+    "ack_days": 3,
+    "triage_days": 10,
+    "update_interval_days": 14,
+    "disclosure_days": 90,
+    "fix_targets": {
+      "critical": "within 14 days",
+      "high": "within 30 days",
+      "medium": "within 90 days",
+      "low": "in a planned release"
+    },
+    "safe_harbour": true,
+    "credit": true,
+    "bug_bounty": false,
+    "sbom_check_frequency": "every month"
+  },
+  "roles": [
+    {
+      "role": "Incident lead",
+      "name": "[Name, job title]",
+      "phone": "[Phone]",
+      "email": "[Email]",
+      "backup": "[Deputy]"
+    },
+    {
+      "role": "Deputy incident lead",
+      "name": "[Name, job title]",
+      "phone": "[Phone]",
+      "email": "[Email]",
+      "backup": "[Backup]"
+    },
+    {
+      "role": "Technical lead",
+      "name": "[Name, job title]",
+      "phone": "[Phone]",
+      "email": "[Email]",
+      "backup": "[Backup]"
+    },
+    {
+      "role": "Communications lead",
+      "name": "[Name, job title]",
+      "phone": "[Phone]",
+      "email": "[Email]",
+      "backup": "[Backup]"
+    },
+    {
+      "role": "Management sign-off",
+      "name": "[Name, job title]",
+      "phone": "[Phone]",
+      "email": "[Email]",
+      "backup": "[Backup]"
+    },
+    {
+      "role": "Lawyer",
+      "name": "[Name, law firm]",
+      "phone": "[Phone]",
+      "email": "[Email]",
+      "backup": "[Backup]"
+    }
+  ],
+  "reporting": {
+    "main_establishment": "[EU country of main establishment]",
+    "csirt": "[CSIRT designated as coordinator for you: confirm with your lawyer]",
+    "platform": "[ENISA single reporting platform address: confirm the current link]",
+    "platform_accounts": "[Who has access to the platform]",
+    "member_states": "[EU countries where the product is sold]"
+  },
+  "runbook": {
+    "version": "1.0",
+    "last_tested": "[YYYY-MM-DD or 'not yet']",
+    "next_exercise": "[YYYY-MM-DD]"
+  },
+  "external_contacts": [
+    {
+      "who": "[Hosting or cloud provider]",
+      "contact": "[Support or security contact]"
+    },
+    {
+      "who": "[Main component vendor]",
+      "contact": "[Security advisories page or contact]"
+    }
+  ],
+  "support": {
+    "version": "1.0"
+  },
+  "security_txt": {
+    "expires_days": 330
+  },
+  "engagement": {
+    "consultant_name": "[Your name], [Your business]",
+    "consultant_email": "you@your-business.example",
+    "date": "[YYYY-MM-DD]",
+    "reference": "[Quote or invoice reference]",
+    "deliverables_folder": "[Link to the shared folder]",
+    "monthly_plan": "[e.g. EUR 150 per month: new SBOM for each release, monthly vulnerability check, security.txt renewal]"
+  }
+}

@@ -1,0 +1,4 @@
+{"id": "T01", "feature": "summarize", "input": "Paste one real input here, with names, emails, phone numbers and addresses removed.", "expected": "Optional: what a good answer must contain.", "must_include": ["a phrase the answer must contain"], "tags": ["example"]}
+{"id": "T02", "feature": "summarize", "input": "A harder or unusual case: very long, very short, angry, another language, missing information.", "must_not_include": ["something the answer must never say"]}
+{"id": "T03", "feature": "classify", "input": "If the feature must return JSON, set expect_json to true.", "expect_json": true}
+{"id": "T04", "input": "If answers must fit a box or an SMS, set max_chars.", "max_chars": 300}

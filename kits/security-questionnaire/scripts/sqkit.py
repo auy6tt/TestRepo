@@ -241,16 +241,22 @@ def check_library(entries: list[dict], stale_days: int = 365, today: dt.date | N
         if status == STATUS_APPROVED and reviewed and (today - reviewed).days > stale_days:
             issues.append(("WARNING", eid, f"Last reviewed {reviewed.isoformat()}, over {stale_days} days ago."))
         if answer:
-            low = answer.lower()
-            hits = [w for w in RISKY_WORDS if re.search(r"(?<![a-z])" + re.escape(w) + r"(?![a-z])", low)]
+            low, quoted = answer.lower(), (e.get("excerpt") or "").lower()
+
+            def says(text, word):
+                return re.search(r"(?<![a-z])" + re.escape(word) + r"(?![a-z])", text)
+
+            # A strong word is fine when the quoted source uses it too.
+            hits = [w for w in RISKY_WORDS if says(low, w) and not says(quoted, w)]
             if hits:
                 issues.append(("WARNING", eid, f"Check wording, could overstate: {', '.join(hits)}. "
-                                              "Keep only if the source says exactly this."))
+                                              "Keep only if the source says exactly this (and quote it in Source Excerpt)."))
     return issues
 
 
 def write_library(path, entries: list[dict], *, client: str = "", evidence: list[list] | None = None,
-                  documents: list[list] | None = None, active: str = LIBRARY_SHEET) -> None:
+                  documents: list[list] | None = None, changelog: list[list] | None = None,
+                  active: str = LIBRARY_SHEET) -> None:
     """Write an answer library workbook (also used for the blank template)."""
     import openpyxl
     from openpyxl.formatting.rule import FormulaRule
@@ -405,7 +411,8 @@ def write_library(path, entries: list[dict], *, client: str = "", evidence: list
     if documents is not None:
         table_sheet("Documents", ["File", "Title used for citations", "Type", "Sections", "Characters", "Notes"],
                     documents, [34, 34, 7, 9, 11, 60])
-    table_sheet("Change Log", ["Date", "ID", "What changed", "Changed by", "Approved by"], [], [12, 10, 70, 18, 18])
+    table_sheet("Change Log", ["Date", "ID", "What changed", "Changed by", "Approved by"], changelog or [],
+                [12, 10, 70, 18, 18])
 
     lists = wb.create_sheet("Lists")
     for c, (header, values) in enumerate([
@@ -565,6 +572,10 @@ SYNONYM_GROUPS = {
     "auditlog": ["audit logs", "audit log", "audit trails", "audit trail", "security logs", "event logs",
                  "activity logs", "activity log"],
     "patch": ["patch management", "patching", "patches", "patched", "security updates"],
+    "notify": ["notifications", "notification", "notifies", "notified", "notifying", "notify"],
+    "retain": ["retention period", "retention", "retained", "retaining", "retains", "retain", "kept for", "kept"],
+    "login": ["sign in", "signin", "sign on", "log in", "logon", "log on", "logins", "login"],
+    "idp": ["identity providers", "identity provider", "idp"],
 }
 
 STOPWORDS = set("""
@@ -616,6 +627,7 @@ def normalise(text: str) -> str:
     t = re.sub(r"\b(us|eu|ap|ca|sa|me|af|il|mx)-(east|west|north|south|central|northeast|southeast|northwest|"
                r"southwest)-(\d)\b", r"\1\2\3", t)
     t = re.sub(r"(\w)'s\b", r"\1", t)          # vendor's -> vendor
+    t = re.sub(r"\b(\w{3,})fications?\b", r"\1fy", t)  # classification -> classify (stems then agree)
     t = re.sub(r"(\w)s'(?=\s|$)", r"\1s", t)    # customers' -> customers
     t = re.sub(r"[^a-z0-9@]+", " ", t)
     t = re.sub(r"\s+", " ", t).strip()

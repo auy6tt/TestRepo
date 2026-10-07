@@ -547,6 +547,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** You touch production code, so use branches and staging. Never use Claude to generate training data for other models. After a shutdown date the work becomes urgent, and you can get blamed for breakage.
 - **Test it in one day:** Publish a one-page "model shutdown checklist + fixed-price fix", list it as a gig, and message 15 agencies and no-code builders. A good sign is 2 replies or 1 job within 72 hours.
 - **Related:** [Test suites for small teams' AI features](#ai-evals), [AI API bill audits for startups](#ai-cost-audit), [Fix and launch apps people built with AI tools](#vibe-rescue)
+- **Starter kit:** [`kits/model-retirement/`](kits/model-retirement/). In Claude Code, type `/model-retirement` in this repo.
 
 <a id="support-content"></a>
 #### Fixing help-center content so AI support bots stop failing

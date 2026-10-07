@@ -342,6 +342,7 @@ def parse_text_transcript(text: str, info: TranscriptInfo) -> list[Cue]:
     lines = text.splitlines()
     if lines and lines[0].lstrip("\ufeff").startswith("# CLEAN TRANSCRIPT"):
         lines = [line for line in lines if not line.startswith("#")]
+        info.format = "Clean transcript"
     if sum(1 for line in lines if TIMING_RE.match(line.strip())) >= 2:
         return parse_timed_blocks("\n".join(lines), name_lines=True)
 
@@ -456,7 +457,10 @@ def load_turns(path: str | Path, speaker_map: dict[str, str] | None = None, keep
             key = cue.speaker or "Unknown speaker"
             info.speaker_seconds[key] = info.speaker_seconds.get(key, 0.0) + (cue.end - cue.start)
 
-    turns = merge_cues(cues, merge_gap=merge_gap, split_after=split_after)
+    if info.format == "Clean transcript":  # this script's own output: paragraphs are already turns
+        turns = [Turn(cue.start, cue.end, cue.speaker, cue.text) for cue in cues]
+    else:
+        turns = merge_cues(cues, merge_gap=merge_gap, split_after=split_after)
     if not keep_fillers:
         for turn in turns:
             turn.text, removed = remove_fillers(turn.text)

@@ -1,0 +1,9 @@
+# Client work never goes into git. Keep each job in jobs/<client>/.
+jobs/
+render-check/
+*.zip
+
+# Python and LibreOffice leftovers
+__pycache__/
+*.pyc
+.~lock.*#

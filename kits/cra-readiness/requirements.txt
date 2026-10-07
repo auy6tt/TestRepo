@@ -1,0 +1,8 @@
+# Python tools for the CRA readiness kit.
+# Install them into a virtualenv with scripts/setup.sh (never system-wide).
+cyclonedx-bom>=7.5,<8        # cyclonedx-py: SBOMs from Python projects, plus CycloneDX schema checks
+pip-audit>=2.10,<3           # known-vulnerability check for Python packages
+semantic-version>=2.10,<3    # reads npm version ranges in advisories
+openpyxl>=3.1,<4             # writes the .xlsx files
+python-docx>=1.2,<2          # writes the .docx files
+Jinja2>=3.1,<4               # fills the document templates

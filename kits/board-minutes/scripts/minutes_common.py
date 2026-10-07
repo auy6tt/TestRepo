@@ -354,7 +354,8 @@ def result_label(result: str | None) -> str:
 
 
 def vote_counts_text(vote: dict | None, locale: str = "en-US") -> str:
-    """'4 in favor, 1 opposed, 0 abstained (roll call vote)', 'Unanimous (voice vote)', ..."""
+    """'4 in favor, 1 opposed (roll call vote)', '5 in favor, 0 opposed (unanimous, voice vote)',
+    'Unanimous (voice vote)', 'Voice vote', 'By unanimous consent'."""
     if not vote:
         return ""
     counts = []
@@ -364,16 +365,16 @@ def vote_counts_text(vote: dict | None, locale: str = "en-US") -> str:
         counts.append(f"{vote['opposed']} opposed")
     if vote.get("abstained") is not None:
         counts.append(f"{vote['abstained']} abstained")
-    text = ", ".join(counts)
-    if vote.get("unanimous"):
-        text = f"{text} (unanimous)" if text else "Unanimous"
     method = vote.get("method")
     if method == "unanimous_consent" and not counts:
         return "By unanimous consent"
-    if method:
-        label = METHOD_LABELS.get(method, method)
-        text = f"{text} ({label})" if text else label[0].upper() + label[1:]
-    return text
+    label = METHOD_LABELS.get(method, method) if method else ""
+    if counts:
+        extra = ", ".join(x for x in ("unanimous" if vote.get("unanimous") else "", label) if x)
+        return ", ".join(counts) + (f" ({extra})" if extra else "")
+    if vote.get("unanimous"):
+        return f"Unanimous ({label})" if label else "Unanimous"
+    return label[0].upper() + label[1:] if label else ""
 
 
 _ROLL_WORDS = {"yes": "yes", "no": "no", "abstain": "abstained", "recused": "recused",
@@ -397,6 +398,12 @@ def roll_call_counts(vote: dict) -> dict[str, int]:
 # --------------------------------------------------------------------------
 # Standard sentences
 # --------------------------------------------------------------------------
+
+def sentence(text: str) -> str:
+    """Add a full stop unless the text already ends with one (for example '7:02 p.m.')."""
+    text = text.rstrip()
+    return text if text.endswith((".", "!", "?")) else text + "."
+
 
 def quorum_text(m: dict) -> str:
     """The quorum line for the attendance block."""
@@ -425,11 +432,11 @@ def auto_item_text(m: dict, item: dict) -> list[str]:
     kind = item.get("kind", "business")
     if kind == "call_to_order":
         who = role_and_name(meeting.get("presiding")) or "The presiding officer"
-        return [f"{who} called the meeting to order at {format_time(meeting.get('called_to_order'), locale)}."]
+        return [sentence(f"{who} called the meeting to order at {format_time(meeting.get('called_to_order'), locale)}")]
     if kind == "roll_call":
         return [quorum_text(m)]
     if kind == "adjournment":
-        return [f"The meeting was adjourned at {format_time(meeting.get('adjourned'), locale)}."]
+        return [sentence(f"The meeting was adjourned at {format_time(meeting.get('adjourned'), locale)}")]
     if kind == "next_meeting":
         return [next_meeting_text(m)]
     if kind == "executive_session":
@@ -439,20 +446,20 @@ def auto_item_text(m: dict, item: dict) -> list[str]:
 
 def executive_session_text(m: dict, item: dict) -> str:
     locale = locale_of(m)
-    sentence = f"The {board_short(m)} met in executive session"
+    text = f"The {board_short(m)} met in executive session"
     start, end = item.get("start"), item.get("end")
     if start and end:
-        sentence += f" from {format_time(start, locale)} to {format_time(end, locale)}"
+        text += f" from {format_time(start, locale)} to {format_time(end, locale)}"
     elif start:
-        sentence += f" at {format_time(start, locale)}"
+        text += f" at {format_time(start, locale)}"
     topics = item.get("topics") or []
     if topics:
         if len(topics) == 1:
             joined = topics[0]
         else:
             joined = ", ".join(topics[:-1]) + " and " + topics[-1]
-        sentence += f" to discuss {joined}"
-    return sentence + "."
+        text += f" to discuss {joined}"
+    return sentence(text)
 
 
 def next_meeting_text(m: dict) -> str:
@@ -470,7 +477,7 @@ def next_meeting_text(m: dict) -> str:
         location = nxt["location"]
         joiner = "" if re.match(r"(?i)(by|via|online|at|in|on)\b", location) else "at "
         text += f", {joiner}{location}"
-    text += "."
+    text = sentence(text)
     if nxt.get("note"):
         text += f" {nxt['note']}"
     return text

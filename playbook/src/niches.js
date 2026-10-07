@@ -166,7 +166,7 @@ NICHES.push(
 
 // --- New AI needs
 NICHES.push(
-{id:"model-retirement", group:"aiera", rank:301, s:[4,3,5,3], related:["ai-evals", "ai-cost-audit", "opp:vibe-rescue"],
+{id:"model-retirement", group:"aiera", rank:301, kit:"model-retirement", s:[4,3,5,3], related:["ai-evals", "ai-cost-audit", "opp:vibe-rescue"],
  name:"Rescuing AI features before their model is retired",
  short:"Move a company's AI feature to a current model and prove it still works",
  who:"Small software companies, agencies and non-technical owners whose AI feature was built in 2023–25, often by a contractor who has left, and is tied to an old model version.",

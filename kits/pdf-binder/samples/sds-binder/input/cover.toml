@@ -1,0 +1,17 @@
+# Cover for the sample SDS binder. Copy templates/binder-cover-sds.toml for real jobs.
+type = "sds"
+title = "Safety Data Sheet Binder"
+subtitle = "Chemical inventory and safety data sheets"
+organization = "Sample Document Services"
+footer_text = "Riverside Auto Care (fictional) - Safety Data Sheet Binder"
+accent_color = "#1F3A5F"
+watermark = "SAMPLE"
+
+[details]
+"Prepared for" = "Riverside Auto Care (fictional client)"
+"Site" = "1200 Example Avenue, Sampletown, ST 00000"
+"Binder date" = "today"
+"Revision" = "0 (first issue)"
+"Prepared by" = "Sample Document Services"
+"Chemical list confirmed by" = ""
+"Date confirmed" = ""

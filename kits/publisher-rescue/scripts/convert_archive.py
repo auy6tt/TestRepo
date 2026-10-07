@@ -557,6 +557,9 @@ def write_contact_sheet(records: list[FileRecord], out_root: Path, meta: dict) -
     for r in records:
         groups.setdefault(r.folder, []).append(r)
 
+    # Big archives load pictures as you scroll; small ones load them all at once
+    # so that printing the page always includes every picture.
+    lazy = ' loading="lazy"' if len(records) > 300 else ""
     sections = []
     for folder in sorted(groups, key=lambda f: (f != "", f.lower())):
         cards = []
@@ -565,7 +568,7 @@ def write_contact_sheet(records: list[FileRecord], out_root: Path, meta: dict) -
             if r.preview_rel:
                 thumb = (f'<a class="thumb" href="{_url(r.pdf_rel)}" target="_blank" '
                          f'rel="noopener" title="Open the PDF"><img src="{_url(r.preview_rel)}" '
-                         f'alt="First page of {esc(r.name)}" loading="lazy"></a>')
+                         f'alt="First page of {esc(r.name)}"{lazy}></a>')
             else:
                 thumb = '<div class="thumb none">No preview</div>'
             bits = [r.modified.strftime("%d %b %Y")]
@@ -768,9 +771,9 @@ def main(argv: list[str] | None = None) -> int:
             if r.status == STATUS_FAILED and r.log:
                 log.write("    LibreOffice said: " + r.log.replace("\n", "\n    ") + "\n")
     summary = dict(meta)
-    summary["failed_files"] = [{"file": r.rel_path, "problem": r.problem}
+    summary["failed_files"] = [{"file": r.rel_path, "note": r.note, "problem": r.problem}
                                for r in records if r.status in (STATUS_FAILED, STATUS_SKIPPED)]
-    summary["check_files"] = [{"file": r.rel_path, "problem": r.problem}
+    summary["check_files"] = [{"file": r.rel_path, "note": r.note, "problem": r.problem}
                               for r in records if r.status == STATUS_CHECK]
     (out_root / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 

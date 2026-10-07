@@ -25,7 +25,7 @@ from docx import Document
 from docx.enum.section import WD_ORIENT
 from docx.enum.style import WD_STYLE_TYPE
 from docx.enum.table import WD_TABLE_ALIGNMENT
-from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_COLOR_INDEX, WD_TAB_ALIGNMENT
+from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_COLOR_INDEX, WD_TAB_ALIGNMENT
 from docx.opc.constants import CONTENT_TYPE as CT
 from docx.opc.constants import RELATIONSHIP_TYPE as RT
 from docx.opc.packuri import PackURI
@@ -50,6 +50,7 @@ from minutes_common import (
     locale_of,
     motion_label,
     next_meeting_text,
+    parse_date,
     people_list,
     person_text,
     quorum_text,
@@ -214,6 +215,13 @@ def set_table_width(table: Table, width: int) -> None:
     tblw.set(qn("w:w"), str(width))
     tblw.set(qn("w:type"), "dxa")
     set_child(table_props(table), "tblLayout", TBLPR_ORDER).set(qn("w:type"), "fixed")
+
+
+def set_table_indent(table: Table, twips: int) -> None:
+    """Indent a table so its left border lines up with the text margin (Word 2010 layout rules)."""
+    indent = set_child(table_props(table), "tblInd", TBLPR_ORDER)
+    indent.set(qn("w:w"), str(twips))
+    indent.set(qn("w:type"), "dxa")
 
 
 def set_column_widths(table: Table, widths: list[int]) -> None:
@@ -422,7 +430,7 @@ def define_house_styles(doc, locale: str = "en-US") -> None:
         S_BOX_DETAIL: dict(font=UI_FONT, size=9.5, color=INK, after=1, line=1.05),
         S_LABEL: dict(font=UI_FONT, size=8.5, bold=True, color=MUTED, caps=True, spacing=0.5, after=0, line=1.0),
         S_VALUE: dict(font=BODY_FONT, size=10.5, color=INK, after=0, line=1.05),
-        S_TABLE: dict(font=UI_FONT, size=9.5, color=INK, after=0, line=1.0),
+        S_TABLE: dict(font=UI_FONT, size=9, color=INK, after=0, line=1.0),
         S_TABLE_HEAD: dict(font=UI_FONT, size=9, bold=True, color="FFFFFF", after=0, line=1.0),
         S_SPACER: dict(size=4, before=0, after=0, line_exact=6),
         S_SMALL: dict(font=UI_FONT, size=9, color=MUTED, after=3),
@@ -527,8 +535,8 @@ def build_house_template(locale: str = "en-US", appendices: bool = True):
     for block in ("NOTICE", "MEETING_DETAILS", "ITEMS", "ATTACHMENTS", "SIGNATURES"):
         _plain_paragraph(doc, "{{" + block + "}}", S_BODY)
     if appendices:
-        doc.add_paragraph(style=S_BODY).add_run().add_break(WD_BREAK.PAGE)
-        _plain_paragraph(doc, "Appendix A: Action Items", S_H1)
+        # "Page break before" (not a page-break character) so a full last page never leaves a blank page.
+        _plain_paragraph(doc, "Appendix A: Action Items", S_H1).paragraph_format.page_break_before = True
         _plain_paragraph(doc, "{{ACTION_ITEMS}}", S_BODY)
         _plain_paragraph(doc, "Appendix B: Summary of Motions", S_H1)
         _plain_paragraph(doc, "{{MOTIONS_TABLE}}", S_BODY)
@@ -618,6 +626,7 @@ def box(ctx: Ctx, fill: str, accent: str):
     set_column_widths(table, [ctx.width])
     set_table_borders(table, left=(24, accent))
     set_cell_margins(table, top=90, left=170, bottom=90, right=150)
+    set_table_indent(table, 170)
     shade_cell(table.cell(0, 0), fill)
     row_flags(table.rows[0], cant_split=True)
     return table.cell(0, 0)
@@ -633,7 +642,8 @@ def grid_table(ctx: Ctx, headers: list[str], widths: list[int], rows: list[list]
     set_table_width(table, sum(widths))
     set_column_widths(table, widths)
     set_table_borders(table, top=(4, NAVY), bottom=(4, RULE), insideH=(4, RULE))
-    set_cell_margins(table, top=50, left=80, bottom=50, right=80)
+    set_cell_margins(table, top=36, left=80, bottom=36, right=80)
+    set_table_indent(table, 80)
     head = table.rows[0]
     row_flags(head, cant_split=True, header=True)
     for index, label in enumerate(headers):
@@ -652,6 +662,10 @@ def grid_table(ctx: Ctx, headers: list[str], widths: list[int], rows: list[list]
             paragraph.style = ctx.doc.styles[S_TABLE]
             if isinstance(value, tuple):  # (text, color, bold)
                 add_text(paragraph, value[0], color=value[1], bold=value[2])
+            elif isinstance(value, list):  # one line per entry
+                for position, line in enumerate(value):
+                    target = paragraph if position == 0 else cell.add_paragraph(style=S_TABLE)
+                    add_text(target, line)
             else:
                 add_text(paragraph, str(value) if value is not None else "")
     return table
@@ -681,7 +695,6 @@ def details_table(ctx: Ctx, rows: list[tuple[str, list[str]]]):
 
 
 def short_date(value, locale: str) -> str:
-    from minutes_common import parse_date
     d = parse_date(value)
     if d is None:
         return "" if value is None else str(value)
@@ -757,7 +770,7 @@ def render_attendance(ctx: Ctx, _arg=None) -> None:
     spacer(ctx)
 
 
-def render_motion(ctx: Ctx, motion: dict, container=None) -> None:
+def render_motion(ctx: Ctx, motion: dict) -> None:
     locale = ctx.locale
     number = ctx.motion_numbers.get(id(motion), 0)
     cell = box(ctx, BOX_FILL, NAVY)
@@ -800,7 +813,7 @@ def render_motion(ctx: Ctx, motion: dict, container=None) -> None:
             details.append(amendment["second_note"])
         votes = vote_counts_text(amendment.get("vote"), locale)
         if votes:
-            details.append(votes[0].lower() + votes[1:] if votes[:1].isupper() and not votes[:2].isupper() else votes)
+            details.append(votes[0].lower() + votes[1:])
         details.append(result_label(amendment.get("result")).lower())
         add_text(line, f" ({'; '.join(details)})", color=MUTED)
 
@@ -843,7 +856,9 @@ def render_item_body(ctx: Ctx, item: dict) -> None:
         if entry.startswith("- "):
             bullet(ctx, entry[2:].strip())
         else:
-            para(ctx, entry)
+            paragraph = para(ctx, entry)
+            if entry.rstrip().endswith(":"):  # a lead-in line stays with the list below it
+                paragraph.paragraph_format.keep_with_next = True
     if kind == "executive_session" and item.get("outcome"):
         para(ctx, item["outcome"])
     for motion in item.get("motions") or []:
@@ -890,18 +905,20 @@ def render_motions_table(ctx: Ctx, _arg=None) -> None:
     if not motions:
         para(ctx, "No motions were made.")
         return
+    note = para(ctx, f"Votes show in {word(ctx.locale, 'favor', 'favour')}–opposed–abstained where counts were "
+                     "recorded.", S_SMALL)
+    note.paragraph_format.keep_with_next = True
     rows = []
     for number, item, motion in motions:
-        moved = motion.get("moved_by") or (f"the {motion['on_behalf_of']}" if motion.get("on_behalf_of") else "—")
-        second = motion.get("seconded_by") or motion.get("second_note") or "—"
+        moved = motion.get("moved_by") or motion.get("on_behalf_of") or "—"
+        second = motion.get("seconded_by") or "—"
         result = motion.get("result")
-        rows.append([str(number), item.get("number", ""), motion["text"], f"{moved} / {second}",
+        rows.append([str(number), item.get("number", ""), motion["text"], [moved, second],
                      vote_short(motion.get("vote")),
                      (result_label(result), RESULT_COLORS.get(result, OTHER_RESULT_COLOR), True)])
     grid_table(ctx, ["#", "Item", "Motion", "Moved / seconded", "Vote", "Result"],
-               [430, 700, 3900, 2050, 1100, 1180], rows)
-    para(ctx, f"Vote shows in {word(ctx.locale, 'favor', 'favour')}–opposed–abstained where counts "
-              "were recorded.", S_SMALL).paragraph_format.space_before = Pt(4)
+               [400, 620, 3820, 2120, 1200, 1200], rows)
+    spacer(ctx)
 
 
 def render_attachments(ctx: Ctx, _arg=None) -> None:
@@ -1160,9 +1177,13 @@ def render_docx(m: dict, out_path: str | Path, template_path: str | Path | None 
         template_path = Path(template_path)
         if not template_path.exists():
             raise TemplateError(f"Template not found: {template_path}")
-        if template_path.suffix.lower() not in (".docx", ".dotx"):
-            raise TemplateError("The template must be a .docx file (save .doc files as .docx first).")
-        doc = Document(str(template_path))
+        if template_path.suffix.lower() != ".docx":
+            raise TemplateError("The template must be a .docx file. Open it in Word or LibreOffice and "
+                                "save it as a Word document (.docx) first.")
+        try:
+            doc = Document(str(template_path))
+        except Exception as exc:  # python-docx raises several error types for damaged files
+            raise TemplateError(f"Could not open the template {template_path.name}: {exc}") from None
         house = False
     else:
         doc = build_house_template(locale_of(m), appendices=appendices)

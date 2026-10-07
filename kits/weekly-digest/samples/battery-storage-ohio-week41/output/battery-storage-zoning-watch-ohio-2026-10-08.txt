@@ -1,0 +1,178 @@
+Sample issue: every place, project, company and document in it is
+fictional. It shows the format of a real issue.
+
+BATTERY STORAGE ZONING WATCH
+Ohio · Week 41 · Thursday, October 8, 2026 · Issue 12
+Fieldline Briefs
+========================================================================
+
+THIS WEEK
+
+Two local governments in our coverage area moved toward new battery
+storage rules this week, and two projects reached public review.
+
+The item to watch is Tarrow County's proposed 12-month pause on battery
+storage zoning applications. Commissioners are scheduled to consider it
+on Tuesday, October 13, and as drafted it would take effect as soon as
+it is adopted.
+
+COMING UP
+
+- Tue, Oct 13, 9:30 AM ET: Commissioners' session (public comment at the
+  start): Tarrow County vote on a 12-month battery storage pause (Res.
+  2026-118)
+- Fri, Oct 16, 4:00 PM ET: Written comments due to the Zoning Inspector:
+  Wrenfield Township battery storage rules (ZTA-2026-03)
+- Mon, Oct 19, 7:00 PM ET: City council second reading: Marlowe Falls
+  battery fire-safety ordinance (No. 2026-41)
+- Wed, Oct 21, 7:00 PM ET: Township zoning commission public hearing:
+  Wrenfield Township battery storage rules (ZTA-2026-03)
+- Thu, Oct 22, 6:00 PM ET: Planning commission hearing and
+  recommendation: Kessler Road battery project rezoning, Wrenfield
+  Township (RZ-26-014)
+  (All dates are in the attached calendar file.)
+
+MORATORIA
+---------
+
+[TOP ITEM] Tarrow County to consider a 12-month pause on battery storage
+zoning applications
+  Tarrow County · Oct 6, 2026
+  Commissioners will take up Resolution 2026-118 at their October 13
+  regular session. It would stop the county from accepting or processing
+  zoning permits, rezonings (zoning map amendments) and conditional use
+  requests for battery energy storage facilities of 1 MW or more for 12
+  months.
+  It covers the areas under county zoning, currently Ferris, Quill and
+  Brindle townships; townships that run their own zoning are not
+  affected. Applications filed and found complete before it takes
+  effect, and batteries that serve a single home or business on the same
+  property, are excluded.
+  Why it matters: As drafted, the pause takes effect on the day it is
+  adopted. The county zoning commission would then have nine months to
+  recommend setback, fire-safety and decommissioning standards.
+  Resolution: 2026-118
+  Covers: Battery storage facilities of 1 MW or more
+  Length: 12 months from adoption, unless ended earlier
+  Commissioners' session (public comment at the start): Tue, Oct 13,
+  2026, 9:30 AM ET, Commissioners' Chambers, Tarrow County
+  Administration Building, 41 Court Street, Tarrow City
+  Source: Tarrow County Board of Commissioners, agenda for October 13,
+  2026 (PDF), page 2, item 7
+  https://www.tarrowcounty.example/commissioners/agendas/2026-10-13-agenda.pdf
+  Checked against the source on Oct 8, 2026.
+
+ZONING RULES
+------------
+
+Wrenfield Township proposes battery storage rules: I-1 district only,
+300-foot setbacks, removal bond
+  Wrenfield Township, Tarrow County · Oct 5, 2026
+  Zoning text amendment ZTA-2026-03 would add definitions for battery
+  energy storage systems and allow battery energy storage facilities
+  only as a conditional use in the I-1 Light Industrial district. It
+  would require setbacks of at least 300 feet from existing homes and
+  100 feet from property lines, a decommissioning plan backed by a bond
+  or letter of credit and reviewed every five years, and a fire-safety
+  plan reviewed by the fire chief before a zoning certificate is issued.
+  Why it matters: Written comments close on October 16. After the
+  October 21 hearing, the township zoning commission sends its
+  recommendation to the township trustees.
+  Amendment: ZTA-2026-03
+  Setbacks: 300 ft from existing homes, 100 ft from property lines
+  Where allowed: I-1 Light Industrial, as a conditional use
+  Written comments due to the Zoning Inspector: Fri, Oct 16, 2026, 4:00
+  PM ET
+  Township zoning commission public hearing: Wed, Oct 21, 2026, 7:00 PM
+  ET, Wrenfield Township Hall, 8 Gable Road
+  Source: Wrenfield Township, notice of public hearing on ZTA-2026-03
+  (PDF), proposed amendments 1 to 5
+  https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf
+  Checked against the source on Oct 8, 2026.
+
+REZONINGS AND APPLICATIONS
+--------------------------
+
+48-acre rezoning sought for an 80 MW battery project on Kessler Road
+  Wrenfield Township, Tarrow County · Oct 5, 2026
+  Northbank Storage Partners LLC asks to rezone about 48.2 acres on the
+  north side of Kessler Road from A-1 Agricultural to I-1 Light
+  Industrial for a battery energy storage facility of about 80 MW / 320
+  MWh, as stated in the application (case RZ-26-014).
+  Why it matters: The Kestrel Regional Planning Commission holds the
+  first public hearing and makes a recommendation on October 22. The
+  township zoning commission then holds its own hearing before the
+  township trustees decide. The same township is also considering the
+  new battery storage rules above.
+  Case: RZ-26-014
+  Applicant: Northbank Storage Partners LLC
+  Size: About 80 MW / 320 MWh (per the application)
+  Zoning: A-1 Agricultural to I-1 Light Industrial
+  Planning commission hearing and recommendation: Thu, Oct 22, 2026,
+  6:00 PM ET, RPC Meeting Room, 210 Pike Street, Tarrow City
+  Source: Kestrel Regional Planning Commission, agenda for October 22,
+  2026 (PDF), page 1, item 3a; case summary on page 2
+  https://www.kestrelrpc.example/agendas/current-agenda.pdf
+  Checked against the source on Oct 8, 2026.
+
+20 MW battery storage project files for a conditional use in Larch
+Township
+  Larch Township, Halden County · Oct 2, 2026
+  Greyline Energy Storage LLC filed conditional use application
+  CU-2026-031 on October 2 for "Larch Storage", a 20 MW battery energy
+  storage facility on about 6.5 acres on the south side of Tolland Road,
+  east of the Larch substation.
+  Why it matters: The county lists the application as received, with a
+  Board of Zoning Appeals hearing still to be scheduled. We will add the
+  hearing date when the county posts it.
+  Case: CU-2026-031
+  Applicant: Greyline Energy Storage LLC
+  Size: 20 MW on about 6.5 acres
+  Status: Received; hearing to be scheduled
+  Source: Halden County open data, zoning applications (case
+  CU-2026-031), case record
+  https://www.haldencounty.example/zoning/cases/CU-2026-031/
+  Checked against the source on Oct 8, 2026.
+
+ORDINANCES
+----------
+
+Marlowe Falls battery fire-safety ordinance amended ahead of its second
+reading
+  City of Marlowe Falls, Halden County · Oct 5, 2026
+  The Safety Committee amended Ordinance 2026-41 on October 5. As
+  amended, it applies to battery energy storage systems larger than 600
+  kWh (up from 50 kWh), other than systems serving a single one- or two-
+  family home. It requires compliance with NFPA 855, an emergency
+  response plan approved by the fire chief before a certificate of
+  occupancy is issued, a site walkthrough with the fire department once
+  a year (down from twice a year) and a 24-hour emergency contact posted
+  at each entrance.
+  Why it matters: Systems of 600 kWh or less would not be covered. City
+  council holds the second reading on October 19.
+  City council second reading: Mon, Oct 19, 2026, 7:00 PM ET, Council
+  Chambers, Marlowe Falls City Hall, 12 Main Street
+  Source: City of Marlowe Falls, Ordinance 2026-41 as amended (PDF),
+  sections 1 to 5; committee amendments on page 2
+  https://www.marlowefalls.example/council/legislation/ord-2026-41-amended.pdf
+  Checked against the source on Oct 8, 2026.
+
+========================================================================
+HOW THIS BRIEF IS MADE
+Each week we check 7 official sources (county commission agendas,
+planning commission packets, township legal notices, city legislation
+and county open data) for changes. A person reads every item against its
+source document before the brief is sent. We link to the official
+documents rather than copying them.
+
+NOT LEGAL ADVICE
+This brief summarises public documents for information only. It is not
+legal advice and does not tell you what you must do. Dates and details
+can change after it is sent, so confirm with the official source before
+you act, and ask a qualified professional about your own situation.
+
+Questions or corrections: reply to this email or write to
+briefs@fieldline.example.
+
+Fieldline Briefs, PO Box 0000, Columbus, OH 43216 (sample address)
+Manage or cancel your subscription: mailto:briefs@fieldline.example?subject=Manage%20my%20subscription

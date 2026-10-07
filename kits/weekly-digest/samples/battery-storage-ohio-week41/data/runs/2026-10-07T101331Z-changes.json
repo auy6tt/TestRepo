@@ -5,8 +5,8 @@
   "sources_file": "sources.yaml",
   "paths_relative_to": "the folder that holds the sources file",
   "week": "2026-W41",
-  "run_started": "2026-10-07T10:12:12Z",
-  "run_finished": "2026-10-07T10:12:15Z",
+  "run_started": "2026-10-07T10:13:31Z",
+  "run_finished": "2026-10-07T10:13:34Z",
   "dry_run": false,
   "summary": {
     "sources": 8,

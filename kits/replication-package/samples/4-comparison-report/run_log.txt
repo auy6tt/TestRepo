@@ -1,0 +1,57 @@
+run_and_compare.py 1.0
+Started 2026-10-07 10:27:20
+Package: samples/3-fixed-package
+Clean copy: a temporary folder, deleted after the run
+Command: python main.py  (run in the master script's folder)
+Interpreter: Python 3.11.15
+----------------------------------------------------------------------
+Replication run started 2026-10-07 10:27:20
+Package folder: 3-fixed-package
+Computer: Linux-6.18.44-fc-v77-x86_64-with-glibc2.39, 4 CPU cores
+Python: 3.11.15 (in a virtual environment)
+Packages (installed version, checked against requirements.txt):
+  numpy==2.4.6
+  pandas==3.0.6
+  scipy==1.17.1
+  statsmodels==0.15.0
+  matplotlib==3.11.2
+
+=== code/01_clean_data.py ===
+Saved 750 students
+--- code/01_clean_data.py finished in 0.4 s
+
+=== code/02_analysis.py ===
+              Variable  Control mean  ...  Difference  p-value
+0  Baseline math score        47.398  ...       0.424    0.584
+1               Female         0.531  ...      -0.026    0.469
+2           Low income         0.483  ...       0.016    0.664
+3                Grade         7.005  ...      -0.056    0.350
+4             Students       377.000  ...         NaN      NaN
+
+[5 rows x 7 columns]
+                               (1)        (2)        (3)
+0         Tutoring offer  0.292***   0.257***   0.259***
+1                          (0.078)    (0.045)    (0.045)
+2     Baseline score (z)             0.871***   0.794***
+3                                     (0.026)    (0.024)
+4                 Female                0.025      0.030
+5                                     (0.040)    (0.045)
+6             Low income            -0.164***  -0.195***
+7                                     (0.042)    (0.044)
+8    Grade fixed effects        No        Yes        Yes
+9   School fixed effects        No         No        Yes
+10          Observations       750        750        750
+11             R-squared     0.020      0.762      0.792
+mean gain: -1.125
+--- code/02_analysis.py finished in 1.4 s
+
+=== code/03_figure1.py ===
+--- code/03_figure1.py finished in 1.0 s
+
+=== code/04_tableA1_attrition.py ===
+--- code/04_tableA1_attrition.py finished in 1.3 s
+
+All 4 programs finished in 4.2 s. Log saved to logs/main.log.
+----------------------------------------------------------------------
+Exit code: 0
+Run time: 4.2 s
