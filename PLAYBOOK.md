@@ -2,7 +2,7 @@
 
 What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. Ranked for someone starting from zero: no reviews, no portfolio, no network.
 
-Researched October 2026 · 36 ways to earn · 46 hidden niches · 27 platforms · 272 sources. Not legal, tax or financial advice.
+Researched October 2026 · 36 ways to earn · 46 hidden niches · 27 platforms · 286 sources. Not legal, tax or financial advice.
 
 ## Contents
 
@@ -93,7 +93,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** Small US employers that use chemicals: auto repair and body shops, cleaning companies, salons, small manufacturers, school facilities teams.
 - **What they need:** A current chemical inventory, up-to-date safety data sheets replacing old versions, an indexed binder on paper and online, and an updated written hazard-communication programme.
-- **Proof of demand:** OSHA's January 2026 final rule set the compliance dates for its updated hazard-communication standard: employers using single-substance chemicals must comply by 20 November 2026, with later dates for mixtures. Businesses already pay $29–49 a month for safety-data software and $500–4,000 for setup.
+- **Proof of demand:** OSHA's January 2026 final rule pushed the updated hazard-communication dates back four months: employers using single-substance chemicals must comply by 20 November 2026, and by 19 May 2028 for mixtures. Businesses already pay $29–49 a month for safety-data software and $500–4,000 for setup.
 - **Why few people offer it:** The market is software subscriptions and safety consultancies. Freelancers compiling binders barely show up, and the software still needs someone to list the chemicals and load them in (unverified).
 - **How Claude does it here:** Claude lists products from photos of shelves or purchase records, a script pulls manufacturer, revision date and hazard statements out of the safety-data PDFs into a spreadsheet, flags old or missing sheets, and builds a bookmarked binder PDF with an index. Claude adapts OSHA's sample written programme.
 - **Where buyers are:** Local auto, cleaning and salon businesses (Google Maps, chambers of commerce). Search: "SDS binder", "OSHA HazCom update".
@@ -107,7 +107,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** US towns, counties, school and special districts, community colleges, clinics and nonprofits funded by the US health department, EU businesses under the European Accessibility Act, and accessibility vendors who need overflow help.
 - **What they need:** A list of every PDF, Word and PowerPoint file on their website sorted into delete, archive, convert to a web page, or fix; then the files that stay fixed to WCAG 2.1 AA (headings, reading order, alt text, table headers, usable forms), plus accessible templates for new files.
-- **Proof of demand:** The US Justice Department's ADA Title II rule requires WCAG 2.1 AA; an April 2026 interim rule moved the deadlines to 26 April 2027 for bodies serving 50,000+ people and 26 April 2028 for smaller ones. Health providers funded by the US health department face separate Section 504 deadlines (May 2026 for 15+ staff, May 2027 for smaller ones). The Justice Department itself cited the difficulty of fixing large document sets as a reason for the delay.
+- **Proof of demand:** The US Justice Department's ADA Title II rule requires WCAG 2.1 AA; an April 2026 interim rule moved the deadlines to 26 April 2027 for bodies serving 50,000+ people and 26 April 2028 for smaller ones. Health providers funded by the US health department got their own one-year extension under Section 504: 11 May 2027 for those with 15+ employees and 10 May 2028 for smaller ones. The standard itself did not change, and the Justice Department cited the difficulty of fixing large document sets as a reason for the delay.
 - **Why few people offer it:** Vendors are multiplying and automated tools start around $0.30 a page, so compete on careful human checking for small bodies rather than on price. Automated checkers catch only 20–30% of issues.
 - **How Claude does it here:** A crawler lists every document on the site; a script triages each PDF (tagged or not, scanned or real text, title and language set). Claude fixes the source Word files (headings, draft alt text, table headers) and exports tagged PDFs with LibreOffice; scans get OCR. A person checks reading order and alt text with free Windows tools (PAC, NVDA) or Acrobat.
 - **Where buyers are:** State municipal leagues and school-board associations, bid portals (search "document remediation"), ADA coordinators on LinkedIn, state associations of community health centres, accessibility vendors needing white-label help.
@@ -121,11 +121,11 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** Small firms, schools, nonprofits and small software vendors whose tools connect to Microsoft 365 email the old way: scan-to-email copiers, accounting and ERP systems, CRMs, help desks, WordPress mail plugins, Python or PHP scripts.
 - **What they need:** A list of everything that depends on the old connections, a fix for each (move code to Microsoft Graph, switch sending to modern sign-in or another mail service), and a runbook.
-- **Proof of demand:** Microsoft began disabling Exchange Web Services (EWS) in Exchange Online on 1 October 2026 and turns it off for good on 1 April 2027. Password-only SMTP sending is switched off by default at the end of December 2026. Software partners are already warning their users.
+- **Proof of demand:** Microsoft turned Exchange Web Services (EWS) off by default in Exchange Online on 1 October 2026; admins can temporarily allow specific apps, but EWS shuts down for good on 1 April 2027 with no exceptions. Password-only SMTP sending is switched off by default at the end of December 2026 (admins can turn it back on for now; Microsoft will announce the final removal date in late 2027). Software partners are already warning their users.
 - **Why few people offer it:** The work needs both Microsoft 365 admin knowledge and coding against Microsoft Graph. IT firms look after contract clients, but many 5–50 person organisations have no IT firm (unverified).
 - **How Claude does it here:** Claude writes read-only PowerShell checks for the client's admin to run and turns the output into a fix list. It rewrites old mailbox code to use Graph with tests and minimal permissions, and writes setup steps for each device. Everything is tested in the client's own Microsoft 365 account.
 - **Where buyers are:** r/sysadmin, r/Office365, Microsoft Tech Community, Spiceworks. Search the error messages people post ("EWS stopped working", "535 5.7.139"). A business's DNS mail records show whether it uses Microsoft 365.
-- **Watch out:** Turning old access back on is only a stopgap, so say so in writing. Never ask for full admin passwords.
+- **Watch out:** Turning old access back on is only a stopgap, so say so in writing and pitch this as a growing risk, not a hard cutoff for every tool. Never ask for full admin passwords.
 - **Test it in one day:** Publish a free self-check script with a plain-English guide, then email 20 local Microsoft 365 users offering a fixed-price 48-hour check.
 
 <a id="publisher-rescue"></a>
@@ -139,7 +139,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Why few people offer it:** Two separate searches found no services rebuilding editable templates, only converter tools and how-to articles. Microsoft's own bulk route needs PowerShell scripting, and press coverage says no third-party app is fully compatible.
 - **How Claude does it here:** LibreOffice, which is installed here, can open .pub files (fidelity varies) and batch-converts them to PDFs with preview images and an index. Claude rebuilds the reused layouts as styled Word or PowerPoint templates. You compare previews with the originals and walk the client through the templates.
 - **Where buyers are:** Church-admin and church-communications groups, school offices, diocese and school-district offices (one deal can cover many sites). Search: "can't open .pub file".
-- **Watch out:** Use substitute fonts where licences are an issue, and delete personal data after delivery. Sell "archive plus top templates", not perfect copies of everything.
+- **Watch out:** Use substitute fonts where licences are an issue, and delete personal data after delivery. People who own the one-time-purchase Publisher 2021 can still open their files (though its support ends 13 October 2026), so some prospects won't need you. Sell "archive plus top templates", not perfect copies of everything.
 - **Test it in one day:** Offer "send one .pub file, get a PDF and an editable Word version free" in 3 church-admin groups.
 
 <a id="uk-epr-data"></a>
@@ -191,7 +191,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** UAE businesses, especially those under AED 50M revenue, which must appoint an accredited e-invoicing provider in 2027.
 - **What they need:** A clean-up of invoice and customer data (tax numbers, IDs, item codes), a map from their Tally, Zoho or Excel fields to the required format, and a comparison of providers.
-- **Proof of demand:** Ministerial decisions in 2025 set the rollout: larger businesses face late-2026 and January 2027 deadlines; smaller ones must appoint a provider by 31 March 2027 and go live on 1 July 2027, with penalties for missing them.
+- **Proof of demand:** Ministerial decisions in 2025 set the rollout: businesses with AED 50M+ revenue go live on 1 January 2027; smaller ones must appoint an accredited provider by 31 March 2027 and go live on 1 July 2027, with penalties for missing the deadlines.
 - **Why few people offer it:** The market is led by providers, ERP resellers and large accounting firms; independent help with data readiness is rarely offered (unverified).
 - **How Claude does it here:** Claude extracts fields from sample invoices and accounting exports and builds a mapping and validation workbook, plus provider questions and staff instructions. The client's tax agent signs off and the provider handles the connection.
 - **Where buyers are:** Chamber and free-zone business events, UAE small-business groups, small accounting firms as partners.
@@ -221,7 +221,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** Small manufacturers, clinics, distributors, charities and councils whose Access database was built by someone who has since left.
 - **What they need:** Fixes after Office updates, new reports, 64-bit VBA fixes, or moving the data into a proper database or a web app.
-- **Proof of demand:** Access 2021 support ends on 13 October 2026, a year after Access 2016 and 2019. US Access/VBA work averages about $48 an hour (ZipRecruiter, Aug 2026), and London contracts have a median of £650 a day.
+- **Proof of demand:** Access 2021 support ends on 13 October 2026, a year after Access 2016 and 2019: the databases keep running but get no more security fixes. US Access/VBA work averages about $48 an hour (ZipRecruiter, Aug 2026), and London contracts have a median of £650 a day.
 - **Why few people offer it:** Migration firms report that the original builders have often retired and VBA skills get scarcer every year. Full migrations are a crowded market (migration platforms and firms compete), so lead with fixes and health checks for small databases.
 - **How Claude does it here:** Python tools (mdbtools, access-parser) read the tables here. The client exports forms and VBA as text so Claude can read every module. A web replacement can be built and fully tested in this sandbox; VBA changes have to be tested by the client on Windows.
 - **Where buyers are:** UtterAccess, Access World Forums, r/MSAccess, Microsoft Q&A, Upwork "Microsoft Access" jobs, and local IT-support firms that inherit these databases.
@@ -239,7 +239,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Why few people offer it:** Agencies price these moves at £4,000–35,000. Very little is offered at small-budget prices.
 - **How Claude does it here:** Everything can be tested here: run a copy of the client's site in Docker, run Backdrop's upgrade or Drupal's migration, and compare old and new pages with Playwright screenshots. A static archive is just a crawl of the site.
 - **Where buyers are:** The CiviCRM community, Drupal Slack, university web teams, and sites whose page source still shows the "Generator: Drupal 7" tag.
-- **Watch out:** Many of these sites are already hacked, so scan copies before moving them. Only look at what a normal visit shows, and follow cold-email laws.
+- **Watch out:** Many of these sites are already hacked, so scan copies before moving them. Drupal 7 sites keep running after end of life; sell it as a growing security risk, not a sudden shutdown. Only look at what a normal visit shows, and follow cold-email laws.
 - **Test it in one day:** Move a sample Drupal 7 site to Backdrop and to a static archive here, write a one-page "3 ways off Drupal 7" PDF, and email 20 nonprofits still running it.
 
 <a id="autolisp"></a>
@@ -407,7 +407,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** Food, drink, cosmetics, pet and home-goods brands with roughly $1M–50M in revenue, plus packaging distributors who could resell it to their clients.
 - **What they need:** A monthly brief on what changed in state packaging "producer responsibility" (EPR) laws, which states apply to them and what is due when, with official links and a deadline calendar.
-- **Proof of demand:** Seven US states now have packaging EPR laws. Oregon has invoiced since July 2025, Colorado's fees began in January 2026, and California's rules took effect in May 2026. Typical fees run $5,000–25,000 a year, and brands already pay compliance firms for help.
+- **Proof of demand:** Seven US states now have packaging EPR laws (California, Colorado, Maine, Maryland, Minnesota, Oregon, Washington). Oregon sent its first invoices in June 2025, Colorado's fees began in January 2026, and California's rules took effect in May 2026. Typical fees run $5,000–25,000 a year, and brands already pay compliance firms for help.
 - **Why few people offer it:** Today's supply is free law-firm alerts written for big clients and enterprise compliance services. No low-cost recurring brief aimed at small brands turned up in the research (unverified).
 - **How Claude does it here:** A weekly job checks about 30 official pages (state agency pages, the producer organisation's notices, bill trackers) for changes. Claude drafts the change notes and updates the deadline table; you check every line against its source. A scheduled Routine can run the weekly check.
 - **Where buyers are:** Operations and packaging people at consumer brands on LinkedIn, Shopify and DTC founder communities, packaging distributors. Search: "EPR compliance small business", "SB 54 producer".
@@ -537,7 +537,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** Small software companies, agencies and non-technical owners whose AI feature was built in 2023–25, often by a contractor who has left, and is tied to an old model version.
 - **What they need:** Find every place the old model is used, switch to its successor, re-tune the prompts, and show with a before-and-after report that quality and cost are still fine.
-- **Proof of demand:** Providers retire models on fixed dates and calls to a retired model simply fail. OpenAI is reported to shut down several older GPT-4-era models on 23 October 2026 (check OpenAI's deprecations page), and Anthropic's own retirement page lists an older Claude model ending on 30 November 2026, after nine retirements between October 2025 and August 2026. Newer models can also reject old settings and count tokens differently, so a simple name swap can break things or raise costs.
+- **Proof of demand:** Providers retire models on fixed dates and calls to a retired model simply fail. OpenAI's deprecations page lists several older models, including some fine-tuned ones, shutting down on 23 October 2026. Anthropic's retirement page lists an older Claude model retiring on 30 November 2026, after nine retirements between October 2025 and August 2026 (cloud platforms such as Amazon Bedrock and Google Cloud set their own dates). Newer models can also reject old settings and count tokens differently, so a simple name swap can break things or raise costs.
 - **Why few people offer it:** Searches found no freelancers offering this as a service, only official guides written for developers. Companies without engineers have no obvious person to call (unverified).
 - **How Claude does it here:** Claude Code finds and patches the model calls, builds a set of test cases from real (redacted) inputs, and runs old and new models side by side while the old one still works, producing a spreadsheet comparison. The client tests in staging with their own API key.
 - **Where buyers are:** Deprecation threads in the providers' developer forums (answer questions, don't spam), Bubble, FlutterFlow and WordPress-plugin communities, and agencies that sold AI bots in 2023–24. Search: "model deprecated", "model shutdown".
@@ -679,7 +679,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** Researchers running their own trials at community hospitals, small medical-device and biotech firms, foundations, and universities without a central registry office.
 - **What they need:** The results sections of a ClinicalTrials.gov record (participant flow, baseline data, outcomes and statistics, adverse events) built from the final data, checked for consistency and entered, then replies to reviewer comments.
-- **Proof of demand:** In April 2026 the FDA sent reminder letters to more than 2,200 sponsors and researchers; its analysis found 29.6% of trials that very likely must report had posted no results. Fines can reach $15,107 a day.
+- **Proof of demand:** In spring 2026 the FDA reminded more than 2,200 sponsors and researchers, covering 3,000+ trials, to post overdue results (letters sent 30 March, announced 13 April; these were voluntary reminders, not formal non-compliance notices). Its analysis found 29.6% of trials that very likely must report had posted no results, and fines can reach $15,107 a day.
 - **Why few people offer it:** Large academic medical centres help their own teams for free, which leaves small outside sponsors with no help; commercial vendors mostly serve drug companies (unverified).
 - **How Claude does it here:** Claude builds the results tables from summary-level data, cross-checks counts between sections and drafts outcome descriptions and replies to reviewers. The lead researcher or statistician signs off before release.
 - **Where buyers are:** Public trackers list sponsors with overdue trials (open them in your own browser), regulatory-affairs groups on LinkedIn, clinical research associations.
@@ -723,7 +723,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** Small Amazon and Shopify brands importing consumer products into the US, and non-US makers shipping children's clothing, toys, baby gear or sporting goods duties-paid.
 - **What they need:** For each product: which certificate applies (General Certificate of Conformity or Children's Product Certificate), the certificate drafted from existing lab reports, the data entered in CPSC's Product Registry, and a spreadsheet linking products to tariff codes, rules, certificates and retest dates.
-- **Proof of demand:** Certificate eFiling became mandatory on 8 July 2026 for about 600 tariff codes, with no low-value exemption. Shipments without it risk exams, storage fees and delays, and freight forwarders are warning their customers.
+- **Proof of demand:** Certificate eFiling became mandatory on 8 July 2026 for about 600 tariff codes, with no low-value exemption (goods entering through foreign-trade zones follow on 8 January 2027). Shipments without it risk exams, storage fees and delays, and freight forwarders are warning their customers.
 - **Why few people offer it:** Visible providers are law firms, customs brokers and test labs that draft certificates as an add-on; one Fiverr seller charges $295–585 per certificate. Cheap bulk registry setup wasn't found (unverified).
 - **How Claude does it here:** Claude pulls data out of lab-report PDFs, maps products to the rules, drafts the certificates and builds a registry-ready spreadsheet with a list of products lacking valid tests. The importer issues and signs; the broker files.
 - **Where buyers are:** Amazon Seller Forums, FBA and Shopify seller groups, small freight forwarders, non-US sellers of children's products.
@@ -737,7 +737,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** EU importers of coffee, cocoa, rubber, timber, palm oil, soy and cattle (including small roasters and chocolate makers) and the cooperatives and exporters that supply them.
 - **What they need:** Valid map files (GeoJSON) for each farm plot with outlines for plots over 4 hectares, repaired shapes, duplicates removed, plots linked to shipments, a check against forest-loss maps, and supplier instructions.
-- **Proof of demand:** The EU Deforestation Regulation applies from 30 December 2026 for large and medium firms and 30 June 2027 for micro and small ones. Collecting and checking location data is called the single biggest compliance problem, and cooperatives already pay $1,600–7,500 for field mapping.
+- **Proof of demand:** The EU Deforestation Regulation applies from 30 December 2026 for large and medium firms and 30 June 2027 for micro and small ones (one source limits the later date to non-timber products, so check which applies). The Commission's May 2026 review did not reopen or delay it. Collecting and checking location data is called the single biggest compliance problem, and cooperatives already pay $1,600–7,500 for field mapping.
 - **Why few people offer it:** Supply is traceability software and local field-mapping firms; remote data checking for small importers looks fragmented (unverified).
 - **How Claude does it here:** Python mapping libraries repair shapes, compute areas, flag overlaps and compare plots with the EU's 2020 forest map, producing a spreadsheet and an interactive map. You resolve problems with suppliers; the importer files the due-diligence statement.
 - **Where buyers are:** Specialty coffee roasters, craft chocolate makers, timber trade groups, exporter associations, LinkedIn. Spanish, Portuguese, French, Indonesian or Swahili is a major advantage.
@@ -1507,7 +1507,7 @@ Each template is also a separate file in [`templates/`](templates/).
 
 ## Sources
 
-272 sources across 10 research passes, October 2026. This environment's network policy blocked most sites, so the research agents read most pages through search-result summaries; Anthropic's terms and policies were read directly. Prices and fees change, so check before you rely on them.
+286 sources across 10 research passes, October 2026. This environment's network policy blocked most sites, so the research agents read most pages through search-result summaries; Anthropic's terms and policies were read directly. Prices and fees change, so check before you rely on them.
 
 ### Demand and market data
 
@@ -1709,6 +1709,20 @@ Each template is also a separate file in [`templates/`](templates/).
 - <https://www.cpsc.gov/Newsroom/News-Releases/2026/CPSC-Implements-Mandatory-eFiling-for-Certificates-of-Compliance-Targeting-Dangerous-Foreign-Imports>
 - <https://www.coolset.com/academy/the-eu-deforestation-regulation-eudr-what-businesses-need-to-know-and-do>
 - <https://epoch.blue/article/missing-polygons>
+- <https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web>
+- <https://www.powerslaw.com/hhs-website-accessibility-deadline-extended/>
+- <https://mc.merill.net/message/MC1278920>
+- <https://mc.merill.net/message/MC786329>
+- <https://mc.merill.net/message/MC1469564>
+- <https://www.morganlewis.com/pubs/2026/01/more-time-to-comply-osha-pushes-back-hazard-communication-deadlines-by-four-months>
+- <https://www.gtlaw.com/en/insights/2026/4/fda-sends-notices-to-more-than-2200-sponsors-regarding-unpublished-clinical-trial-results>
+- <https://eur-lex.europa.eu/eli/reg/2024/2847/oj>
+- <https://environment.ec.europa.eu/document/download/a3c5c3a0-232e-43c4-b0b8-1eecb1df45c7_en?filename=Report+from+the+Commission+to+the+Council+and+Parliament+on+the+EUDR.pdf>
+- <https://www.bws.net/insights/blogs/cpsc-efiling-of-certificates-of-compliance-is-becoming-mandatory>
+- <https://kpmg.com/us/en/taxnewsflash/news/2026/07/tnf-uae-phased-implementation-of-e-invoicing-beginning-january-1-2027.html>
+- <https://www.drupal.org/about/announcements/blog/drupal-7-end-of-life-is-coming-jan-5-2025>
+- <https://circularactionalliance.org/producer-resource-center>
+- <https://developers.openai.com/api/docs/deprecations>
 
 ### Hidden niches: specialist software and data subscriptions
 

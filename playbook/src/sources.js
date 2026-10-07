@@ -187,7 +187,21 @@ var SOURCES = [
   "https://www.ehstoday.com/osha-enforcement/news/55343917/osha-extends-compliance-date-for-hazard-communication-standard-rulemaking",
   "https://www.cpsc.gov/Newsroom/News-Releases/2026/CPSC-Implements-Mandatory-eFiling-for-Certificates-of-Compliance-Targeting-Dangerous-Foreign-Imports",
   "https://www.coolset.com/academy/the-eu-deforestation-regulation-eudr-what-businesses-need-to-know-and-do",
-  "https://epoch.blue/article/missing-polygons"
+  "https://epoch.blue/article/missing-polygons",
+  "https://www.federalregister.gov/documents/2026/04/20/2026-07663/extension-of-compliance-dates-for-nondiscrimination-on-the-basis-of-disability-accessibility-of-web",
+  "https://www.powerslaw.com/hhs-website-accessibility-deadline-extended/",
+  "https://mc.merill.net/message/MC1278920",
+  "https://mc.merill.net/message/MC786329",
+  "https://mc.merill.net/message/MC1469564",
+  "https://www.morganlewis.com/pubs/2026/01/more-time-to-comply-osha-pushes-back-hazard-communication-deadlines-by-four-months",
+  "https://www.gtlaw.com/en/insights/2026/4/fda-sends-notices-to-more-than-2200-sponsors-regarding-unpublished-clinical-trial-results",
+  "https://eur-lex.europa.eu/eli/reg/2024/2847/oj",
+  "https://environment.ec.europa.eu/document/download/a3c5c3a0-232e-43c4-b0b8-1eecb1df45c7_en?filename=Report+from+the+Commission+to+the+Council+and+Parliament+on+the+EUDR.pdf",
+  "https://www.bws.net/insights/blogs/cpsc-efiling-of-certificates-of-compliance-is-becoming-mandatory",
+  "https://kpmg.com/us/en/taxnewsflash/news/2026/07/tnf-uae-phased-implementation-of-e-invoicing-beginning-january-1-2027.html",
+  "https://www.drupal.org/about/announcements/blog/drupal-7-end-of-life-is-coming-jan-5-2025",
+  "https://circularactionalliance.org/producer-resource-center",
+  "https://developers.openai.com/api/docs/deprecations"
  ]},
  {label:"Hidden niches: specialist software and data subscriptions", items:[
   "https://help4access.com/microsoft-access-end-of-life/",
