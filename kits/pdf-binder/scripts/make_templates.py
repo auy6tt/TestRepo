@@ -58,7 +58,7 @@ def write_submittal_log(path, project: dict | None = None, rows: list[dict] | No
     """Write a submittal log. rows use the column names in LOG_COLUMNS."""
     today = today or dt.date.today()
     project = project or {}
-    workbook = xlsxwriter.Workbook(str(path))
+    workbook = xlsxwriter.Workbook(str(path), kitlib.XLSX_OPTIONS)
     f = kitlib.xlsx_formats(workbook, accent)
     log = workbook.add_worksheet("Submittal Log")
     summary = workbook.add_worksheet("Summary")
@@ -239,7 +239,7 @@ INDEX_EXAMPLES = [
 
 
 def write_index_template(xlsx_path, csv_path):
-    workbook = xlsxwriter.Workbook(str(xlsx_path))
+    workbook = xlsxwriter.Workbook(str(xlsx_path), kitlib.XLSX_OPTIONS)
     f = kitlib.xlsx_formats(workbook)
     sheet = workbook.add_worksheet("Index")
     for col, (name, width) in enumerate(INDEX_HEADERS):
@@ -284,7 +284,7 @@ SITE_HEADER_ROW = 10
 def write_site_list(path, info: dict | None = None, rows: list[dict] | None = None):
     """The on-site chemical list. The client confirms it; extract_sds.py reads it."""
     info = info or {}
-    workbook = xlsxwriter.Workbook(str(path))
+    workbook = xlsxwriter.Workbook(str(path), kitlib.XLSX_OPTIONS)
     f = kitlib.xlsx_formats(workbook)
     sheet = workbook.add_worksheet("Site Chemical List")
     sheet.hide_gridlines(2)

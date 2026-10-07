@@ -1214,7 +1214,7 @@ def write_markdown(report: Report, files, out: Path, today: str):
     lines.append(f"- **Tables and figures found:** {len(report.outputs)}")
     lines += ["", "## Findings", ""]
     if not report.findings:
-        lines.append("No findings. Still read the README and run the package before you sign off.")
+        lines += ["No findings. Still read the README and run the package before you sign off.", ""]
     for sev in SEVERITIES:
         group = [f for f in report.findings if f.severity == sev]
         if not group:

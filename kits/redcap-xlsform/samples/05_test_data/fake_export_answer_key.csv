@@ -1,0 +1,10 @@
+record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,field,value_written,mistake,description
+1,visit_1_arm_1,,,fu_dbp,172,out_of_range,above the maximum (150)
+7,visit_3_arm_1,health_event,1,he_heart,7,invalid_code,not one of the choice codes
+14,visit_3_arm_1,,,fu_missed_other,,missing_required,required but blank
+19,visit_1_arm_1,health_event,1,he_date,2026-02-30,bad_date,not a real date
+12,visit_1_arm_1,,,fu_dbp,70.5,not_a_number,not a whole number
+6,visit_2_arm_1,health_event,1,he_nights,266,hidden_has_value,has a value although its branching logic hides it
+24,visit_2_arm_1,,,fu_days,93,calc_mismatch,stored value differs from the formula
+3,screening_arm_1,,,conditions,6 and 3 ticked,none_of_the_above_conflict,'none of these' ticked together with another option
+2,screening_arm_1,,,scr_dbp,148,manual,value set with --set

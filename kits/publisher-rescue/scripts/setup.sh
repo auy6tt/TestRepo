@@ -26,10 +26,13 @@ $SUDO apt-get update -qq
 $SUDO apt-get install -y -qq --no-install-recommends \
   libreoffice-draw libreoffice-writer libreoffice-impress libmspub-tools \
   poppler-utils fonts-crosextra-carlito fonts-crosextra-caladea \
-  fonts-liberation fonts-dejavu-core python3-venv >/dev/null
+  fonts-liberation fonts-dejavu-core >/dev/null
 
 echo "== Creating the Python environment in $VENV"
 PYTHON="$(command -v python3.11 || command -v python3)"
+if ! "$PYTHON" -c "import venv, ensurepip" >/dev/null 2>&1; then
+  $SUDO apt-get install -y -qq python3-venv >/dev/null
+fi
 "$PYTHON" -m venv "$VENV"
 "$VENV/bin/pip" install -q --upgrade pip
 "$VENV/bin/pip" install -q -r "$KIT_DIR/requirements.txt"

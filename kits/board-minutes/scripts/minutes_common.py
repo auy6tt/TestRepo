@@ -94,6 +94,11 @@ def schema_errors(data: dict) -> list[str]:
         message = err.message
         if err.validator in ("anyOf", "oneOf"):
             message = f"{err.instance!r} is not an allowed value here."
+        elif err.validator == "additionalProperties" and isinstance(err.instance, dict):
+            known = err.schema.get("properties", {})
+            extra = [k for k in err.instance if k not in known and not str(k).startswith("_")]
+            message = (f"unknown field(s) {', '.join(repr(k) for k in extra)}. Check the spelling against "
+                       f"SCHEMA.md (allowed here: {', '.join(known)}). Notes for yourself must start with '_'.")
         messages.append(f"{format_path(err.absolute_path)}: {message}{_hint(err)}")
     return messages
 

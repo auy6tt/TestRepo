@@ -670,6 +670,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Never change estimates or "fix" results; report every discrepancy to the author. Restricted data stays with the client.
 - **Test it in one day:** Take a public replication package, write a template-compliant README for it, publish the before and after, and email 25 working-paper authors offering a free README check.
 - **Related:** [Data-sharing packages for research datasets](#data-sharing)
+- **Starter kit:** [`kits/replication-package/`](kits/replication-package/). In Claude Code, type `/replication-package` in this repo.
 
 <a id="ctgov-results"></a>
 #### ClinicalTrials.gov results reporting for small sponsors

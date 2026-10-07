@@ -360,6 +360,7 @@ def make_certificate_pptx(path: Path) -> None:
          font="Times New Roman")
     prs.core_properties.author = "Parish Office"
     prs.core_properties.title = "Reading certificate 2021"
+    prs.core_properties.comments = ""
     prs.save(path)
 
 

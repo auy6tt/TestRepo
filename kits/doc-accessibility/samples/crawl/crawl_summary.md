@@ -1,6 +1,6 @@
 # Crawl summary: http://127.0.0.1:8765/
 
-Crawled on 2026-10-07 (2026-10-07T10:28:24 to 2026-10-07T10:28:30), up to 3 clicks from the start page, one request every 0.2 seconds or slower, following robots.txt.
+Crawled on 2026-10-07 (2026-10-07T10:35:08 to 2026-10-07T10:35:13), up to 3 clicks from the start page, one request every 0.2 seconds or slower, following robots.txt.
 
 | Measure | Count |
 |---|---|

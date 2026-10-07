@@ -321,7 +321,10 @@ def codebook_from_xlsform(path, title, when="") -> Codebook:
         if row.get("appearance"):
             notes.append(f"Appearance: {row['appearance']}")
         relevant = row.get("relevant", "")
-        current.rows.append(Row("field", name, flags, label or "(no label)", " | ".join(notes),
+        if not label:
+            label = ("(calculated, not shown on screen)" if kind == "calculate" else
+                     "(recorded automatically)" if kind in xr.METADATA_TYPES else "(no label)")
+        current.rows.append(Row("field", name, flags, label, " | ".join(notes),
                                 XLS_TYPES.get(kind, kind) + (f" ({list_name})" if list_name else ""), values,
                                 describe_xpath(relevant, names, lists, form) if relevant else "Always (within its group)",
                                 relevant, muted=kind == "note"))
@@ -610,6 +613,23 @@ def render_docx(book: Codebook, target: Path, page: str = "a4") -> None:
     doc.save(target)
 
 
+def write_logic_table(books, target: Path) -> None:
+    """Markdown table of every question with a 'shown when' rule, for the test checklist."""
+    lines = []
+    for kind, book in books:
+        lines += [f"Skip-logic tests ({'REDCap' if kind == 'redcap' else 'XLSForm'})", "",
+                  "| Form or section | Question | Shown when | Appears when it should | Stays hidden when it should |",
+                  "|---|---|---|---|---|"]
+        for section in book.sections:
+            for row in section.rows:
+                if row.kind == "field" and row.shown_raw:
+                    shown = row.shown.replace("|", "/")
+                    lines.append(f"| {section.title} | {row.variable} | {shown} | [ ] | [ ] |")
+        lines.append("")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text("\n".join(lines), encoding="utf-8")
+
+
 # ---------------------------------------------------------------------------
 
 def main(argv=None) -> int:
@@ -624,6 +644,8 @@ def main(argv=None) -> int:
     parser.add_argument("--formats", default="docx,html", help="docx,html (default) or just one of them")
     parser.add_argument("--page", choices=["a4", "letter"], default="a4", help="paper size for the .docx")
     parser.add_argument("--date", help="date printed on the codebook (default: today; 'none' to leave it out)")
+    parser.add_argument("--logic-table", help="also write a Markdown table of every skip-logic rule, ready to paste "
+                                              "into the client test checklist")
     args = parser.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(errors="replace")  # never crash on unusual characters
@@ -649,6 +671,9 @@ def main(argv=None) -> int:
     if args.xlsform:
         book = codebook_from_xlsform(args.xlsform, args.title, when)
         books.append(("xlsform", book))
+    if args.logic_table:
+        write_logic_table(books, Path(args.logic_table))
+        print(f"Wrote {args.logic_table}")
     for kind, book in books:
         stem = out if len(books) == 1 else out.with_name(f"{out.name}_{kind}")
         if "html" in formats:

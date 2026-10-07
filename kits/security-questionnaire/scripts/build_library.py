@@ -408,13 +408,14 @@ def find_evidence(questions: list[dict], passages: list[Passage], top: int, floo
 
     The query is the canonical question plus its alternate phrasings and
     search terms. Scores are TF-IDF cosine similarity (0 to 1)."""
-    passage_feats = [sqkit.features(sqkit.tokens(f"{p.section.context} {p.text}")) for p in passages]
+    passage_feats = [sqkit.features(sqkit.tokens(f"{p.section.context} {p.text}", keep_phrase_words=False))
+                     for p in passages]
     index = sqkit.TfidfIndex(passage_feats)
     vectors = [index.vector(f) for f in passage_feats]
     results = []
     for q in questions:
         query = " ".join([q["question"], *q.get("alternates", []), *q.get("search_terms", [])])
-        qv = index.vector(sqkit.features(sqkit.tokens(query)))
+        qv = index.vector(sqkit.features(sqkit.tokens(query, keep_phrase_words=False)))
         scored = sorted(((index.cosine(qv, v), i) for i, v in enumerate(vectors)), reverse=True)
         picked, seen = [], set()
         for score, i in scored:

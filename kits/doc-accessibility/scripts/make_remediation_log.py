@@ -98,7 +98,9 @@ def main(argv: list[str] | None = None) -> int:
             status = "In progress"
         else:
             status = "Ready for human check"
-        notes = fix.get("still_to_do") or ("; ".join(new["issues"]) if new["issues"] else "")
+        remaining = "; ".join(new["issues"]) if new["tagged"] == "Yes" else ""
+        notes = "; ".join(part for part in (f"Automated checks still find: {remaining}" if remaining else "",
+                                            fix.get("still_to_do", "")) if part)
         values = {
             "File ID": next_row - 1, "File name": after.name, "URL": crawl.get(before.name, {}).get("url", ""),
             "Pages": new["pages"], "Before: tagged": old["tagged"], "Before: text": old["text"],

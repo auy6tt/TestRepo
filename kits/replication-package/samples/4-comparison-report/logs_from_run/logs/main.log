@@ -1,4 +1,4 @@
-Replication run started 2026-10-07 10:27:20
+Replication run started 2026-10-07 10:34:23
 Package folder: 3-fixed-package
 Computer: Linux-6.18.44-fc-v77-x86_64-with-glibc2.39, 4 CPU cores
 Python: 3.11.15 (in a virtual environment)
@@ -44,4 +44,4 @@ mean gain: -1.125
 === code/04_tableA1_attrition.py ===
 --- code/04_tableA1_attrition.py finished in 1.3 s
 
-All 4 programs finished in 4.2 s. Log saved to logs/main.log.
+All 4 programs finished in 4.1 s. Log saved to logs/main.log.

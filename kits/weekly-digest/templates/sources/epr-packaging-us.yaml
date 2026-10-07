@@ -1,0 +1,114 @@
+# Offer: US packaging-law (EPR) update brief for small consumer brands
+#
+# What it watches: state "extended producer responsibility" (EPR) programs for
+# packaging: program pages, rulemaking dockets, comment periods, registration
+# and reporting deadlines, fee schedules, and new bills.
+#
+# How to use this file:
+#   1. Copy it to digests/<your-digest>/sources.yaml
+#   2. Replace every https://example.gov/... address with the real official page.
+#      The watcher skips placeholder addresses, so nothing is fetched until you do.
+#   3. For each real source, read the site's terms of use and its robots.txt
+#      (https://<site>/robots.txt), then put the date you checked in terms_checked.
+#   4. Add each domain under Allowed domains in the environment's Network access
+#      settings (see README.md).
+#   5. Run: python scripts/watch_sources.py digests/<your-digest>
+#      The first run only saves snapshots. Changes show up from the second run.
+#
+# Where to find the real sources:
+#   - Each state with a packaging EPR law has an environmental agency program
+#     page. Search the agency's own site for "extended producer responsibility"
+#     or "packaging EPR". Watch the "updates", "rulemaking" and "deadlines" parts.
+#   - Rulemaking: agencies list proposed rules and comment periods on a
+#     rulemaking or "public notices" page. Many also post a notice in the
+#     state register or administrative bulletin.
+#   - Bills: each state legislature has a bill status page; several offer RSS
+#     or email tracking. Search the legislature site for the bill number.
+#   - The state-approved producer responsibility organization (PRO) publishes
+#     official program documents such as approved plans and fee schedules. Use
+#     only its public pages, never member-only material.
+#   - Federal: the Federal Register has a free JSON API (see "Developer Tools"
+#     on federalregister.gov). Use it for federal notices on packaging claims
+#     or recycling labels.
+#
+# Never present this brief as legal advice: describe what the rules say and
+# link to them. Do not tell a brand whether it owes fees.
+
+digest:
+  name: "Packaging EPR Update — US states"
+  scope: >-
+    Changes to US state packaging EPR programs that affect small consumer
+    brands: who is covered, registration and reporting deadlines, fees,
+    exemptions, proposed rules and comment periods, new laws and bills.
+  audience: "Operations and packaging leads at consumer brands with $1M–50M revenue"
+
+settings:
+  user_agent: "YourDigestName/1.0 (+mailto:you@yourdomain.com)"   # put your real contact email here
+  delay_seconds: 5
+  # Keywords highlight matching changes on pages and PDFs, and filter feed and data records.
+  # Plurals match automatically; a * at the end matches any ending (exempt* = exempt, exemption...).
+  keywords: [packaging, producer, "extended producer responsibility", EPR, registration,
+             reporting, fee, deadline, exempt*, "small producer", rulemaking, "comment period"]
+
+sources:
+  # --- State A: agency program page (HTML). Watch only the updates section.
+  - name: "State A environmental agency: packaging EPR program updates"
+    url: https://example.gov/state-a/environment/packaging-epr
+    type: html
+    selector: "#updates, .news-list"     # open the page, right-click the updates box, Inspect, copy its id or class
+    ignore_patterns: ["^Last (updated|modified)", "^Page updated"]
+    follow_new_links: true               # fetch new PDFs linked from the page and save their text
+    tags: [state-a, program]
+    terms_checked:                       # e.g. 2026-10-01
+
+  # --- State A: rulemaking page (HTML) for proposed rules and comment periods.
+  - name: "State A environmental agency: EPR rulemaking"
+    url: https://example.gov/state-a/environment/rulemaking/packaging
+    type: html
+    follow_new_links: true
+    tags: [state-a, rulemaking]
+    terms_checked:
+
+  # --- State A: the agency's notice bulletin, if it offers an RSS feed (RSS).
+  - name: "State A environmental agency: public notices feed"
+    url: https://example.gov/state-a/environment/notices/feed.xml
+    type: rss
+    follow_new_links: true
+    tags: [state-a, notice]
+    terms_checked:
+
+  # --- State B: program page that publishes deadlines as a PDF fact sheet (PDF).
+  - name: "State B agency: EPR producer deadlines (PDF)"
+    url: https://example.gov/state-b/recycling/epr-producer-deadlines.pdf
+    type: pdf
+    tags: [state-b, deadlines]
+    terms_checked:
+
+  # --- State B: legislature bill status page for a pending EPR bill (HTML).
+  - name: "State B legislature: packaging EPR bill status"
+    url: https://example.gov/state-b/legislature/bills/HB-0000
+    type: html
+    selector: "#bill-history"
+    tags: [state-b, legislation]
+    terms_checked:
+
+  # --- Producer responsibility organization: public notices (HTML).
+  - name: "Approved PRO: public program notices"
+    url: https://example.org/pro/program-notices
+    type: html
+    tags: [pro, program]
+    notes: "Official program documents only. Link to them, do not attach them."
+    terms_checked:
+
+  # --- Federal Register API (JSON). Real endpoint: see federalregister.gov developer docs.
+  #     Ask it for recent documents that mention packaging, newest first.
+  - name: "Federal Register: documents mentioning packaging"
+    url: https://example.gov/api/v1/documents.json?conditions[term]=packaging&order=newest&per_page=50
+    type: json
+    items_path: results
+    id_field: document_number
+    fields: [document_number, publication_date, type, title, agencies, html_url]
+    link_field: html_url
+    keywords: []          # the search term already filters this feed, so keep every record
+    tags: [federal]
+    terms_checked:

@@ -1,0 +1,95 @@
+# Offer: weekly list of new commercial premises from city open-data permits
+#
+# What it watches: building permits, certificates of occupancy and planning
+# applications for NEW commercial buildings and tenant fit-outs in one metro,
+# from the city's and county's open-data portals. Buyers are commercial
+# cleaners, sign makers, alarm and IT firms and insurance brokers who want to
+# pitch before a business opens.
+#
+# How to use this file:
+#   1. Copy it to digests/<your-digest>/sources.yaml
+#   2. Replace every https://example.gov/... address with the real dataset address.
+#      The watcher skips placeholder addresses, so nothing is fetched until you do.
+#   3. Read each portal's terms and data licence (some ask for a credit line:
+#      put it in issue.attribution in your items file) and its robots.txt, then
+#      put the date you checked in terms_checked.
+#   4. Add each domain under Allowed domains in the environment's Network access settings.
+#   5. Run: python scripts/watch_sources.py digests/<your-digest>
+#
+# Where to find the real sources:
+#   - Search the city's or county's open-data portal for "building permits",
+#     "certificates of occupancy" or "business licenses".
+#   - Socrata portals (often data.<city>.gov or data.<city>.org): open the
+#     dataset and choose "API" or "Access data via API" to get an address like
+#     /resource/abcd-1234.json. Add $where to keep only commercial permits, and
+#     $order and $limit to get the newest ones first.
+#   - ArcGIS Hub portals: the dataset's "I want to use this" / API section gives
+#     a FeatureServer query address; use f=json, items_path: features and field
+#     names like attributes.PERMIT_NUMBER.
+#   - CKAN portals: use the datastore_search API; items_path: result.records.
+#
+# Private individuals: never include homeowners or residential permits.
+# Keep only business fields with 'fields', and drop residential records with
+# 'skip_records_where'. Business license data can include sole traders who are
+# private individuals: leave out personal names and home addresses.
+
+digest:
+  name: "New Commercial Premises — Example Metro"
+  scope: >-
+    New commercial buildings, tenant fit-outs and changes of use to
+    commercial occupancy in the example metro, with permit value, address,
+    business name (when public), contractor and stage.
+  audience: "Commercial cleaners, sign makers, alarm, IT cabling and fire-protection firms, insurance brokers"
+
+settings:
+  user_agent: "YourDigestName/1.0 (+mailto:you@yourdomain.com)"   # put your real contact email here
+  delay_seconds: 5
+  keywords: []          # these API queries already select commercial permits, so keep every record
+
+sources:
+  # --- City building permits (Socrata API, JSON): commercial permits issued in the last 21 days.
+  #     {{today-21}} becomes the date 21 days ago, so the window moves each week.
+  - name: "City of Example open data: commercial building permits"
+    url: >-
+      https://example.gov/resource/abcd-1234.json?$where=issue_date%20%3E%20'{{today-21}}'%20AND%20permit_class%3D'Commercial'%20AND%20estimated_cost%20%3E%2050000&$order=issue_date%20DESC&$limit=500
+    type: json
+    id_field: permit_number
+    # Business fields only. Never keep owner or applicant names, phone numbers or emails.
+    fields: [permit_number, issue_date, permit_type, work_description, address,
+             estimated_cost, business_name, contractor_company]
+    skip_records_where:
+      occupancy_group: [R-3, "R-3 Residential", "One-family", "Two-family"]
+    tags: [city, permits]
+    terms_checked:                       # e.g. 2026-10-01
+
+  # --- City certificates of occupancy (Socrata API, JSON): buildings about to open.
+  - name: "City of Example open data: certificates of occupancy"
+    url: https://example.gov/resource/efgh-5678.json?$where=issued_date%20%3E%20'{{today-21}}'&$order=issued_date%20DESC&$limit=200
+    type: json
+    id_field: co_number
+    fields: [co_number, issued_date, address, occupancy_type, business_name, square_feet]
+    skip_records_where:
+      occupancy_type: [Residential, R-3]
+    tags: [city, certificate-of-occupancy]
+    terms_checked:
+
+  # --- County permits (ArcGIS FeatureServer query, JSON).
+  - name: "Example County: commercial permits (ArcGIS)"
+    url: https://example.gov/arcgis/rest/services/Permits/FeatureServer/0/query?where=PERMIT_CLASS%3D'COMMERCIAL'&outFields=*&orderByFields=ISSUED_DATE%20DESC&resultRecordCount=200&f=json
+    type: json
+    items_path: features
+    id_field: attributes.PERMIT_NUMBER
+    fields: [attributes.PERMIT_NUMBER, attributes.ISSUED_DATE, attributes.WORK_CLASS,
+             attributes.DESCRIPTION, attributes.SITE_ADDRESS, attributes.VALUATION]
+    tags: [county, permits]
+    terms_checked:
+
+  # --- Planning: new commercial site plans under review (HTML page from the planning department).
+  - name: "City of Example planning: site plans under review"
+    url: https://example.gov/city/planning/site-plans-under-review
+    type: html
+    selector: "table"
+    follow_new_links: true
+    keywords: [commercial, retail, restaurant, office, "medical office", warehouse, "tenant improvement"]
+    tags: [city, planning]
+    terms_checked:

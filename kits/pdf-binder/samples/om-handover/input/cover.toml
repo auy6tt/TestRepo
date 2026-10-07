@@ -1,0 +1,19 @@
+# Cover for the sample O&M handover binder. Copy templates/binder-cover-handover.toml for real jobs.
+type = "handover"
+title = "Operation & Maintenance Manual"
+subtitle = "Division 23 - Heating, Ventilating and Air Conditioning"
+organization = "Sample Document Services"
+footer_text = "Harborview Family Clinic (fictional) - Division 23 HVAC O&M Manual"
+accent_color = "#1F3A5F"
+watermark = "SAMPLE"
+
+[details]
+"Project" = "Harborview Family Clinic - Tenant Fit-Out (fictional project)"
+"Project number" = "2026-014"
+"Owner" = "Harborview Health Partners (fictional)"
+"General contractor" = "Quellmoor Builders (fictional)"
+"Mechanical subcontractor" = "Northgate Mechanical Services (fictional)"
+"Substantial completion" = "September 18, 2026"
+"Volume" = "1 of 1"
+"Prepared by" = "Sample Document Services"
+"Date" = "today"

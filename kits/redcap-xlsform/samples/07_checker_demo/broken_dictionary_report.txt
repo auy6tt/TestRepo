@@ -1,0 +1,125 @@
+REDCap data dictionary check
+============================
+
+File:     samples/07_checker_demo/broken_dictionary.csv
+Checked:  2026-10-07
+Fields:   29 in 2 form(s): intake 26, followup 3
+Events:   2 (baseline_arm_1, month_3_arm_1) from broken_event_mapping.csv
+
+RESULT: FAILED - 24 error(s), 5 warning(s), 2 note(s)
+
+Summary
+-------
+Field types:      text 13, radio 5, calc 4, yesno 3, dropdown 1, radiobutton 1, checkbox 1, notes 1
+Identifiers:      none flagged
+Required fields:  0
+Branching logic:  5 field(s)
+Calculated:       bmi, score_a, score_b, weight_change
+Matrix groups:    mood (2 rows)
+Section headers:  2
+Action tags:      @NONEOFTHEABOVE x1
+
+Errors - must fix before uploading
+----------------------------------
+* Row 3, col I (Text Validation Min) [visit_date]
+    Min value '01-01-2020' is not a date written YYYY-MM-DD (or 'today').
+    Fix: REDCap stores date limits as YYYY-MM-DD in the data dictionary, whatever the display format. e.g. 31-12-2026 becomes 2026-12-31.
+* Row 4, col A (Variable / Field Name) [Age Years]
+    Variable name 'Age Years' has capital letters and contains characters other than letters, numbers and underscores.
+    Fix: Use lowercase letters, numbers and underscores, starting with a letter, e.g. 'age_years'. Then update any logic that uses it.
+* Row 4, col I (Text Validation Min) [Age Years]
+    Min (120) is greater than max (18).
+    Fix: Swap or correct the limits.
+* Row 5, col A (Variable / Field Name) [sex]
+    Variable name 'sex' is used 2 times (rows 5, 6).
+    Fix: Every variable name must be unique in the project.
+* Row 5, col F (Choices, Calculations, OR Slider Labels) [sex]
+    Choices: choice "2 Male" has no comma between the code and the label.
+    Fix: Write each choice as "code, label" and separate choices with " | ", e.g. "1, Yes | 0, No".
+* Row 5, col M (Required Field?) [sex]
+    'Required Field?' must be 'y' or empty; it is 'yes'.
+    Fix: Write y, or leave the cell empty for no.
+* Row 7, col A (Variable / Field Name) [2nd_contact_person_relationship_type]
+    Variable name '2nd_contact_person_relationship_type' does not start with a letter.
+    Fix: Use lowercase letters, numbers and underscores, starting with a letter, e.g. 'v_2nd_contact_person_relationship_type'. Then update any logic that uses it.
+* Row 8, col D (Field Type) [smoke_status]
+    Unknown field type 'radiobutton'.
+    Fix: Did you mean 'radio'? Allowed: text, notes, dropdown, radio, checkbox, yesno, truefalse, calc, slider, descriptive, file, sql
+* Row 9, col L (Branching Logic) [cigs_day]
+    Branching logic refers to [smoker], which does not exist.
+    Fix: Check the spelling, or add the missing field.
+* Row 10, col L (Branching Logic) [pregnant]
+    Branching logic cannot be read: curly quote ‘ at character 9 (usually pasted from Word). Retype it as a straight quote ' or ".
+    Fix: Field names go in [square brackets], text values in 'quotes', and conditions are joined with and / or. Example: [sex] = '1' and [age] >= 18
+* Row 11, col F (Choices, Calculations, OR Slider Labels) [conditions]
+    Choice code '1' is used 2 times.
+    Fix: Each code must be unique.
+* Row 12, col L (Branching Logic) [asthma_inhaler]
+    [conditions] is a checkbox; logic must name the option.
+    Fix: Write [conditions(1)] = '1' for 'option 1 is ticked'.
+* Row 13, col L (Branching Logic) [pregnancy_weeks]
+    [sex(2)]: the (code) form is only for checkbox fields, and 'sex' is a radio field.
+    Fix: Write [sex] = '2' instead.
+* Row 14, col L (Branching Logic) [menopause]
+    Branching logic cannot be read: '&&' at character 13: REDCap uses the words 'and' / 'or'.
+    Fix: Field names go in [square brackets], text values in 'quotes', and conditions are joined with and / or. Example: [sex] = '1' and [age] >= 18
+* Row 17, col F (Choices, Calculations, OR Slider Labels) [bmi]
+    Calculation cannot be read: function round( starting at character 1 is not closed with ')' (found 'the end' instead).
+    Fix: Example: round([weight_kg] / (([height_cm] / 100) ^ 2), 1)
+* Row 19, col F (Choices, Calculations, OR Slider Labels) [score_b]
+    Calculated fields depend on each other in a circle: score_a -> score_b -> score_a.
+    Fix: Break the loop so each calculation uses earlier values.
+* Row 22, col H (Text Validation Type) [pain_level]
+    Validation 'integer' is set on a radio field; validation only works on text fields.
+    Fix: Clear column H, or change the field type to text.
+* Row 23, col A (Variable / Field Name) [redcap_status]
+    Names starting with 'redcap_' are reserved by REDCap.
+    Fix: Rename the field.
+* Row 24, col F (Choices, Calculations, OR Slider Labels) [q1]
+    Fields in matrix group 'mood' must have identical choices; these differ from the first row: q2.
+    Fix: Copy the same choices to every row.
+* Row 26, col R (Field Annotation) [allergy]
+    @NONEOFTHEABOVE only works on checkbox fields.
+    Fix: Remove the tag.
+* Row 27, col E (Field Label) [comments]
+    The field label (the question text) is empty.
+    Fix: Add the question text.
+* Row 29, col B (Form Name) [late_field]
+    Form 'intake' appears again after another form. All fields of a form must be in one block of rows.
+    Fix: Move this row up next to the other rows of the form.
+* Row 30, col B (Form Name) [weight_change]
+    Form 'followup' appears again after another form. All fields of a form must be in one block of rows.
+    Fix: Move this row up next to the other rows of the form.
+* Row 30, col F (Choices, Calculations, OR Slider Labels) [weight_change]
+    [baseline_arm_9] is not an event in the event mapping file.
+    Fix: Did you mean [baseline_arm_1]? Unique event names look like visit_1_arm_1.
+
+Warnings - fix, or confirm with the client that they are intended
+-----------------------------------------------------------------
+* Row 7, col A (Variable / Field Name) [2nd_contact_person_relationship_type]
+    Variable name is 36 characters long. REDCap recommends 26 or fewer; Stata and SAS cut names at 32 characters.
+    Fix: Shorten it.
+* Row 20, col K (Identifier?) [phone_number]
+    'phone_number' looks like it collects identifying information but is not flagged as an identifier.
+    Fix: If it does, put y in 'Identifier?' so de-identified exports leave it out. Confirm with the client.
+* Row 21, col H (Text Validation Type) [visit_time]
+    'date_dym' is not a standard REDCap validation type.
+    Fix: Did you mean 'date_ymd'? If it is a custom type, check the client's REDCap server has it enabled.
+* Row 25, col C (Section Header) [q2]
+    A section header in the middle of matrix 'mood' splits the matrix in two.
+    Fix: Put the matrix header only on the first field of the group.
+* Row 30, col F (Choices, Calculations, OR Slider Labels) [weight_change]
+    [weight] is on form 'intake', which is never in the same event as 'followup'.
+    Fix: Add the event name in front, e.g. [baseline_arm_1][weight].
+
+Notes - good to know
+--------------------
+* Whole file
+    6 free-text field(s) (2nd_contact_person_relationship_type, height, phone_number, redcap_status, comments, late_field) could end up holding names or other identifiers.
+    Tip: Keep the reminder in the label or field note: 'no names or contact details'.
+* Whole file
+    No field is flagged as an identifier.
+    Tip: Confirm with the client that the form collects no names, dates of birth, contact details or record numbers.
+
+Rows are spreadsheet rows (the header is row 1), so you can find them in Excel.
+This check cannot replace testing: import into a test project and try every path.

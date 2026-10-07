@@ -14,6 +14,7 @@ this computer and checks that:
     page that robots.txt blocks
   - unchanged pages are not downloaded again (HTTP 304) and a repeat run
     reports no changes
+  - API keys written as ${NAME} are sent to the site but never saved
   - private individuals' records and unlisted fields never reach the snapshots
   - --dry-run, --only and broken settings behave
   - the build refuses unchecked items and makes valid HTML, text, PDF, XLSX
@@ -117,7 +118,11 @@ def watcher_tests(tmp: Path) -> None:
         check("every request sent our user agent", all(r["user_agent"].startswith("WeeklyDigestWatcher/") for r in server.log))
         snaps = (digest / "data" / "snapshots").rglob("*")
         text = " ".join(p.read_text(errors="ignore") for p in snaps if p.is_file())
-        check("private individuals' records are never stored", "individual" not in text and "Resident" not in text)
+        records = json.loads((digest / "data" / "snapshots" / "halden-county-open-data-zoning-applications-json"
+                              / "records.json").read_text())
+        check("private individuals' records are never stored",
+              "Resident (sample)" not in text and "V-2026-109" not in records
+              and not any("applicant_type: individual" in r["text"] for r in records.values()))
         check("fields not listed (phone numbers) are never stored", "555-01" not in text)
 
         print("Watcher: week 41 (changes)")
@@ -184,6 +189,46 @@ def watcher_tests(tmp: Path) -> None:
     code, rep = watch_run("down")
     check("site down: every source is an error and exit code is 1",
           code == 1 and rep["summary"]["errors"] == rep["summary"]["sources"], f"{code} {rep.get('summary')}")
+
+
+def feature_tests(tmp: Path) -> None:
+    print("Watcher: API keys and keyword filters")
+    site = tmp / "feature-site"
+    api = site / "api.example" / "v1"
+    api.mkdir(parents=True)
+    (api / "items.json").write_text('{"results": [{"id": "A1", "title": "Battery storage bid"}]}')
+    digest = tmp / "feature-digest"
+    digest.mkdir()
+    (digest / "sources.yaml").write_text(
+        "settings:\n  user_agent: 'WeeklyDigestWatcher/1.0 (+mailto:test@example.org)'\n"
+        "  keywords: [battery]\nsources:\n  - name: Keyed API\n"
+        "    url: https://api.example/v1/items.json?api_key=${SELFTEST_KEY}\n"
+        "    type: json\n    items_path: results\n    id_field: id\n    terms_checked: 2026-10-07\n")
+    server = run_demo.DemoServer(site)
+    watch = [str(KIT / "scripts" / "watch_sources.py"), str(digest / "sources.yaml"),
+             "--map-url", server.map_url, "--delay", "0"]
+    try:
+        import os
+        env = {**os.environ, "SELFTEST_KEY": "not-a-real-key-42"}
+        missing = {k: v for k, v in os.environ.items() if k != "SELFTEST_KEY"}
+        proc = subprocess.run([sys.executable] + watch + ["--out", str(tmp / "k0.json")],
+                              capture_output=True, text=True, env=missing)
+        check("a missing ${KEY} is reported clearly", "SELFTEST_KEY is not set" in proc.stdout, proc.stdout[-300:])
+        subprocess.run([sys.executable] + watch + ["--out", str(tmp / "k1.json")], capture_output=True, env=env)
+        (api / "items.json").write_text('{"results": [{"id": "A1", "title": "Battery storage bid"}, '
+                                        '{"id": "A2", "title": "Paving bid"}]}')
+        later = (api / "items.json").stat().st_mtime + 60  # a newer "last modified" date, like a real update
+        os.utime(api / "items.json", (later, later))
+        subprocess.run([sys.executable] + watch + ["--out", str(tmp / "k2.json")], capture_output=True, env=env)
+        check("the key is sent to the site", any("not-a-real-key-42" in r["path"] for r in server.log))
+        written = " ".join(p.read_text(errors="ignore") for p in list(tmp.glob("k*.*")) +
+                           list((digest / "data").rglob("*")) if p.is_file())
+        check("the key never appears in reports or snapshots", "not-a-real-key-42" not in written)
+        report = json.loads((tmp / "k2.json").read_text())
+        check("changes without keywords are listed apart from 'changed'",
+              report["summary"]["changed"] == 0 and report["summary"]["no_keyword_match"] == 1, str(report["summary"]))
+    finally:
+        server.stop()
 
 
 def build_tests(tmp: Path) -> None:
@@ -255,6 +300,7 @@ def main() -> int:
     try:
         unit_tests()
         watcher_tests(tmp)
+        feature_tests(tmp)
         build_tests(tmp)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)

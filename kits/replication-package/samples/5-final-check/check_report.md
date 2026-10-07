@@ -24,6 +24,7 @@ Checked 2026-10-07 with check_package.py 1.0. This is an automated first pass: e
 ## Findings
 
 No findings. Still read the README and run the package before you sign off.
+
 ## What this check does not do
 
 - It does not run the code. Use run_and_compare.py for that.

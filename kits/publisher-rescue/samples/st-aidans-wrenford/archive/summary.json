@@ -1,0 +1,25 @@
+{
+  "title": "St Aidan's Church, Wrenford: Publisher archive (fictional sample)",
+  "source_name": "originals",
+  "generated": "07 October 2026, 10:30",
+  "counts": {
+    "files": 10,
+    "converted": 9,
+    "check": 0,
+    "failed": 1,
+    "skipped": 0,
+    "duplicates": 0,
+    "pages": 9
+  },
+  "pdfa": true,
+  "libreoffice": "LibreOffice 24.2.7.2 420(Build:2)",
+  "interrupted": false,
+  "failed_files": [
+    {
+      "file": "Old PC backup/Parish magazine March 2007.pub",
+      "note": "LibreOffice could not open it",
+      "problem": "LibreOffice could not open this file. It may be damaged, from an unsupported version, or not the file type its name suggests."
+    }
+  ],
+  "check_files": []
+}

@@ -1,0 +1,11 @@
+record_id,redcap_event_name,redcap_repeat_instrument,redcap_repeat_instance,form,field,value,issue,detail
+1,visit_1_arm_1,,,follow_up_visit,fu_sbp,"fu_sbp=131, fu_dbp=172",custom_rule,Diastolic is not lower than systolic (follow-up)
+1,visit_1_arm_1,,,follow_up_visit,fu_dbp,172,out_of_range,Above the maximum (150).
+2,screening_arm_1,,,screening,scr_sbp,"scr_sbp=146, scr_dbp=148",custom_rule,Diastolic is not lower than systolic (screening)
+3,screening_arm_1,,,screening,conditions,"2, 3, 5, 6",none_of_the_above_conflict,Ticked together: Diabetes; Heart disease; Kidney disease; None of these.
+6,visit_2_arm_1,health_event,1,health_event,he_nights,266,hidden_has_value,Branching logic hides this question ([he_type] = '1') but it has a value.
+7,visit_3_arm_1,health_event,1,health_event,he_heart,7,invalid_code,"Allowed codes: 1, 0, 98."
+12,visit_1_arm_1,,,follow_up_visit,fu_dbp,70.5,not_a_number,Should be a whole number.
+14,visit_3_arm_1,,,follow_up_visit,fu_missed_other,,missing_required,"Required question is blank (shown because fu_missed_reason is ""Other"" (5))."
+19,visit_1_arm_1,health_event,1,health_event,he_date,2026-02-30,bad_date,Should be a real date written YYYY-MM-DD.
+24,visit_2_arm_1,,,follow_up_visit,fu_days,93,calc_mismatch,"Formula gives 88 (datediff([screening_arm_1][scr_date], [fu_date], ""d"")). Re-save the form or run REDCap's Data Quality rule H to update it."

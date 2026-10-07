@@ -454,8 +454,10 @@ def _column_widths(header: list[str], rows: list[list[str]], total_mm: float) ->
         body = [re.sub(r"[*`]", "", re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", r[c] if c < len(r) else ""))
                 for r in rows] or [""]
         head = re.sub(r"[*`]", "", header[c])
-        longest_word = max((len(w) for t in body + [head] for w in tokens(t)), default=3)
-        lo = min(max(mm(longest_word), 12), 46)
+        longest_word = max((len(w) for t in body for w in tokens(t)), default=3)
+        head_word = max((len(w) for w in tokens(head)), default=3)
+        # Body words get room up to a cap (very long words may wrap); header words are bold, so wider.
+        lo = max(min(max(mm(longest_word), 12), 36), 2.15 * head_word + 3.2)
         avg = sum(len(t) for t in body) / len(body)
         want = max(lo, min(mm(0.5 * avg + 0.5 * min(max(len(t) for t in body), 70)), 95))
         if not any(t.strip() for t in body):
@@ -530,6 +532,8 @@ def md_to_docx(md_text: str, out_path: str | Path, footer: str | None = None) ->
         rpr.rFonts.set(qn("w:ascii"), FONT)
         rpr.rFonts.set(qn("w:hAnsi"), FONT)
         rpr.rFonts.set(qn("w:eastAsia"), FONT)
+        for theme_attr in ("w:asciiTheme", "w:hAnsiTheme", "w:eastAsiaTheme", "w:cstheme"):
+            rpr.rFonts.attrib.pop(qn(theme_attr), None)  # theme fonts would override Arial
         st.paragraph_format.space_before = Pt(12 if name != "Title" else 0)
         st.paragraph_format.space_after = Pt(6)
     for name in ("List Bullet", "List Bullet 2", "List Bullet 3"):

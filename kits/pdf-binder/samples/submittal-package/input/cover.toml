@@ -1,0 +1,18 @@
+# Cover for the sample submittal. Copy templates/binder-cover-submittal.toml for real jobs.
+type = "submittal"
+title = "Submittal 23 74 00-001"
+subtitle = "Packaged rooftop unit RTU-1 - product data"
+organization = "Sample Document Services"
+footer_text = "Harborview Family Clinic (fictional) - Submittal 23 74 00-001 Rev 0"
+accent_color = "#1F3A5F"
+watermark = "SAMPLE"
+
+[details]
+"Project" = "Harborview Family Clinic - Tenant Fit-Out (fictional project)"
+"Project number" = "2026-014"
+"Submittal number" = "23 74 00-001, Revision 0"
+"Specification section" = "23 74 00 - Packaged Outdoor HVAC Equipment"
+"Subcontractor" = "Northgate Mechanical Services (fictional)"
+"Submitted to" = "Quellmoor Builders (fictional general contractor)"
+"Architect / engineer" = "Ashgrove Partners Architects (fictional)"
+"Date" = "today"

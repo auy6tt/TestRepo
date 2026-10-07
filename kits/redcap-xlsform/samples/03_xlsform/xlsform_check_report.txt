@@ -1,0 +1,37 @@
+XLSForm check
+=============
+
+File:     samples/03_xlsform/lakeside_health_check.xlsx
+Checked:  2026-10-07
+Tools:    pyxform 4.5.0; ODK Validate run
+Convert:  OK - the form converts to an XForm (saved to samples/03_xlsform/lakeside_health_check.xml)
+
+RESULT: PASSED - 0 error(s), 0 warning(s), 0 note(s)
+
+Summary
+-------
+Questions:        52 (plus 7 notes, 3 calculations)
+Groups / repeats: 11 / 1
+Question types:   select_one 26, integer 10, note 7, text 7, date 4, calculate 3, decimal 3, start 1, end 1, today 1, select_multiple 1, range 1
+Required:         33
+Relevant (skip):  22
+Constraints:      22
+Choice lists:     12
+Languages:        English (en)
+Form id/version:  lakeside_health_check / 2026100701
+
+Errors - must fix
+-----------------
+  None.
+
+Warnings - fix, or confirm they are intended
+--------------------------------------------
+  None.
+
+Notes - good to know
+--------------------
+  None.
+
+Rows are spreadsheet rows (the header is row 1).
+Passing these checks is not the same as testing: preview the form in KoboToolbox or ODK
+and try every path before collecting data.

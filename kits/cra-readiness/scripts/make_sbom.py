@@ -736,7 +736,7 @@ def write_tables(bom: dict, rows: list[dict], sbom_path: Path, out_dir: Path, ba
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("inputs", nargs="+", help="project folders and/or CycloneDX JSON files")
+    ap.add_argument("inputs", nargs="*", help="project folders and/or CycloneDX JSON files")
     ap.add_argument("--out", required=True, help="output folder")
     ap.add_argument("--product", help="product name (default: from --client or the single project)")
     ap.add_argument("--product-version", help="release version of the product")
@@ -753,6 +753,8 @@ def main() -> None:
                          "dependencies; requirements only reads the file")
     ap.add_argument("--node-tool", choices=["auto", "cyclonedx-npm", "cdxgen"], default="auto")
     args = ap.parse_args()
+    if not args.inputs and not args.extra_components:
+        ap.error("give at least one project folder, SBOM file or --extra-components CSV")
 
     client = K.load_json(args.client) if args.client else {}
     first_product = (client.get("products") or [{}])[0]

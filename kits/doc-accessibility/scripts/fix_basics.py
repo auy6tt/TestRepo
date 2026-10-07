@@ -318,7 +318,8 @@ def main(argv: list[str] | None = None) -> int:
             print(f"    title: '{row['title_before'] or '(none)'}' -> '{row['title_after']}'  [{row['title_source']}]")
         if row["ocr"]:
             print(f"    OCR: {row['ocr']}")
-        print(f"    still to do: {row['still_to_do']}")
+        if row["still_to_do"]:
+            print(f"    still to do: {row['still_to_do']}")
     if out and not args.dry_run:
         with open(out / "fix-log.csv", "w", newline="", encoding="utf-8") as handle:
             writer = csv.DictWriter(handle, fieldnames=list(rows[0].keys()))

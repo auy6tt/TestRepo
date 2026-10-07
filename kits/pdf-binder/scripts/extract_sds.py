@@ -1085,8 +1085,8 @@ def write_inventory(workbook, f, rows, args, today, client: str):
     else:
         # The cached result of a date formula must be Excel's date serial number.
         settings.write_formula(4, 1, "=TODAY()", f["input_date"], (today - dt.date(1899, 12, 30)).days)
-    settings.write(4, 2, "=TODAY() keeps ages current each time the file is opened. Type a date to freeze them.",
-                   f["note"])
+    settings.write_string(4, 2, "The formula =TODAY() keeps ages current each time the file is opened. Type a date "
+                                "to freeze them.", f["note"])
     settings.write(6, 0, "Client / site", f["label"])
     settings.write(6, 1, client or "", f["wrap"])
     settings.write(7, 0, "Created", f["label"])
@@ -1176,6 +1176,8 @@ def write_inventory(workbook, f, rows, args, today, client: str):
             pic = r.pictos
             if pic.value:
                 put("Pictograms (from text)", "; ".join(f"{code} {PICTOGRAMS[code]}" for code in pic.value))
+            elif pic.how == "none stated":
+                put("Pictograms (from text)", "None (stated on the sheet)")
             else:
                 put("Pictograms (from text)", "Not named in text - check the sheet", f["muted"])
             put("SDS version", r.version.value or "", f["center"])
@@ -1442,7 +1444,7 @@ def main(argv=None) -> int:
     rows = build_rows(results, matches, bool(site_rows))
     out.parent.mkdir(parents=True, exist_ok=True)
     try:
-        workbook = xlsxwriter.Workbook(str(out))
+        workbook = xlsxwriter.Workbook(str(out), kitlib.XLSX_OPTIONS)
         f = kitlib.xlsx_formats(workbook)
         for name in ("Inventory", "Binder Index", "Summary", "Settings"):
             workbook.add_worksheet(name)

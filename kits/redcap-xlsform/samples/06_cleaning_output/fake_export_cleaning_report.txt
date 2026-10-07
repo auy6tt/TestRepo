@@ -1,0 +1,72 @@
+REDCap export cleaning report
+=============================
+
+Export:      fake_export.csv (99 rows, 24 records, 68 columns)
+Dictionary:  lakeside_data_dictionary.csv
+Events:      screening_arm_1, visit_1_arm_1, visit_2_arm_1, visit_3_arm_1
+Rules:       cleaning_rules.csv (5 rule(s))
+Date limits: 'today' means 2026-10-07
+
+RESULT: 10 issue(s) to review
+
+Issues by type
+--------------
+  custom_rule                    2   Flagged by a study-specific rule
+  out_of_range                   1   Outside the min/max limits in the dictionary
+  none_of_the_above_conflict     1   'None of these' ticked together with other options
+  hidden_has_value               1   Has a value although branching logic hides the question
+  invalid_code                   1   Value is not one of the question's codes
+  not_a_number                   1   Not a valid number for this question
+  missing_required               1   Required question left blank although it was shown
+  bad_date                       1   Not a valid date or time in the export format
+  calc_mismatch                  1   Stored calculated value differs from its formula
+
+Records per event
+-----------------
+  screening_arm_1           24 record(s), 24 row(s)
+  visit_1_arm_1             18 record(s), 29 row(s)
+  visit_2_arm_1             18 record(s), 25 row(s)
+  visit_3_arm_1             18 record(s), 21 row(s)
+
+Form status (rows checked)
+--------------------------
+  screening at screening_arm_1: 24 Complete
+  contact_details at screening_arm_1: 18 Complete, 6 Incomplete; 6 with no data yet
+  follow_up_visit at visit_1_arm_1: 18 Complete
+  health_event at visit_1_arm_1: 11 Complete
+  follow_up_visit at visit_2_arm_1: 18 Complete
+  health_event at visit_2_arm_1: 7 Complete
+  follow_up_visit at visit_3_arm_1: 18 Complete
+  health_event at visit_3_arm_1: 3 Complete
+
+Issues
+------
+* Record 1, visit_1_arm_1: fu_sbp=131, fu_dbp=172
+    custom_rule: Diastolic is not lower than systolic (follow-up)
+* Record 1, visit_1_arm_1: fu_dbp = '172'
+    out_of_range: Above the maximum (150).
+* Record 2, screening_arm_1: scr_sbp=146, scr_dbp=148
+    custom_rule: Diastolic is not lower than systolic (screening)
+* Record 3, screening_arm_1: conditions = '2, 3, 5, 6'
+    none_of_the_above_conflict: Ticked together: Diabetes; Heart disease; Kidney disease; None of these.
+* Record 6, visit_2_arm_1, health_event #1: he_nights = '266'
+    hidden_has_value: Branching logic hides this question ([he_type] = '1') but it has a value.
+* Record 7, visit_3_arm_1, health_event #1: he_heart = '7'
+    invalid_code: Allowed codes: 1, 0, 98.
+* Record 12, visit_1_arm_1: fu_dbp = '70.5'
+    not_a_number: Should be a whole number.
+* Record 14, visit_3_arm_1: fu_missed_other
+    missing_required: Required question is blank (shown because fu_missed_reason is "Other" (5)).
+* Record 19, visit_1_arm_1, health_event #1: he_date = '2026-02-30'
+    bad_date: Should be a real date written YYYY-MM-DD.
+* Record 24, visit_2_arm_1: fu_days = '93'
+    calc_mismatch: Formula gives 88 (datediff([screening_arm_1][scr_date], [fu_date], "d")). Re-save the form or run REDCap's Data Quality rule H to update it.
+
+Files written
+-------------
+  samples/06_cleaning_output/fake_export_labelled.csv
+  samples/06_cleaning_output/fake_export_issues.csv
+  samples/06_cleaning_output/fake_export_cleaning_report.txt
+
+Each issue is a question for the study team, not an automatic correction. Fix values in
+REDCap itself (with a reason in the audit trail), then export and run this again.

@@ -173,7 +173,7 @@ class Geometry:
         self.T = 54.0
         self.right = self.W - self.R
         self.width = self.W - self.L - self.R
-        self.bottom = 74.0       # body text stays above this line; the footer sits below
+        self.bottom = 68.0       # body text stays above this line; the footer sits below
 
 
 # ---------------------------------------------------------------------------
@@ -376,10 +376,14 @@ def load_docs(args, s: Settings) -> tuple[list[Doc], list[str], list[str]]:
         raise KitError(f"PDF folder not found: {folder}")
     available = list_pdfs(folder)
     docs, problems, warnings = [], [], []
-    used = set()
+    used, left_out = set(), 0
     where = f"{Path(args.index).name}" + (f", sheet '{info['sheet']}'" if info.get("sheet") else "")
     for row in rows:
         if row["include"].strip().lower() in ("no", "n", "false", "0", "exclude", "skip", "x"):
+            left_out += 1
+            excluded = find_file(folder, row["file"], available) if row["file"].strip() else None
+            if excluded is not None:
+                used.add(excluded.relative_to(folder).as_posix())
             continue
         title = row["title"].strip() or Path(row["file"]).stem
         if not title:
@@ -432,6 +436,8 @@ def load_docs(args, s: Settings) -> tuple[list[Doc], list[str], list[str]]:
     if unused:
         listing = ", ".join(unused[:8]) + (f" and {len(unused) - 8} more" if len(unused) > 8 else "")
         warnings.append(f"{len(unused)} PDF(s) in the folder are not in the index: {listing}")
+    if left_out:
+        warnings.append(f"{left_out} row(s) marked include = no were left out on purpose.")
     if not docs and not problems:
         problems.append(f"{where} lists no documents.")
     return docs, problems, warnings
@@ -495,7 +501,7 @@ class TocItem:
     note_lines: list = field(default_factory=list)
 
 
-SEC_SIZE, SEC_LEAD, SEC_GAP = 11.0, 15.0, 11.0
+SEC_SIZE, SEC_LEAD, SEC_GAP = 11.0, 15.0, 8.0
 DOC_SIZE, DOC_LEAD = 9.8, 12.4
 NOTE_SIZE, NOTE_LEAD = 7.8, 9.8
 NUM_COL = 40.0
@@ -533,12 +539,12 @@ def build_toc_items(sections, s: Settings, g: Geometry) -> list[TocItem]:
 def item_height(item: TocItem) -> float:
     if item.kind == "section":
         return len(item.title_lines) * SEC_LEAD + 5
-    return len(item.title_lines) * DOC_LEAD + len(item.note_lines) * NOTE_LEAD + 4
+    return len(item.title_lines) * DOC_LEAD + len(item.note_lines) * NOTE_LEAD + 2.5
 
 
 def layout_toc(items: list[TocItem], g: Geometry):
     """Split the contents into pages. Returns a list of pages: [(item, top_y), ...]."""
-    first_top = g.H - g.T - 86
+    first_top = g.H - g.T - 80
     next_top = g.H - g.T - 44
     pages, y = [[]], first_top
     for index, item in enumerate(items):
@@ -639,47 +645,75 @@ def cover_stats(s: Settings, sections, total):
 
 def draw_cover(c, s: Settings, g: Geometry, sections, total, warnings):
     W, H, L, right = g.W, g.H, g.L, g.right
-    band = 212.0
+    label_w = 152.0
+    rows = [(str(k), str(v)) for k, v in s.details]
+
+    # Plan the page from the bottom up: notice box, then the stamp boxes
+    # (submittals) or the "at a glance" figures, then whatever room is left
+    # goes to the details. If they don't fit, make the header band shorter,
+    # then the details smaller, then drop the figures, and only then rows.
+    notice_lines = wrap(s.notice, FONT, 8.2, g.width - 28) if s.notice else []
+    notice_h = (len(notice_lines) * 11 + 22) if notice_lines else 0
+    notice_y = 50.0
+    block_top = notice_y + notice_h + (14 if notice_h else 0)
+    box_h = 92.0
+    block_h = box_h + 22 if s.kind == "submittal" else 58.0
+    title_lines = wrap(s.title, BOLD, 28, g.width, max_lines=3)
+    subtitle_lines = wrap(s.subtitle, FONT, 14, g.width, max_lines=2) if s.subtitle else []
+
+    def details_height(size, lead):
+        height = 0.0
+        for _, value in rows:
+            n = len(wrap(value, FONT, size, g.width - label_w, max_lines=3)) if value.strip() else 1
+            height += n * lead + 12
+        return height
+
+    def room(band, stats_shown):
+        top = H - band - 66 - len(title_lines) * 33 - (len(subtitle_lines) * 18 + 1 if subtitle_lines else 0) - 34
+        bottom = block_top + (block_h + 18 if (s.kind == "submittal" or stats_shown) else 12)
+        return top - bottom
+
+    plan = None
+    for band, size, lead in ((212.0, 11.0, 14.0), (150.0, 11.0, 14.0), (150.0, 9.5, 12.0)):
+        if details_height(size, lead) <= room(band, True):
+            plan = (band, size, lead, True)
+            break
+    if plan is None and s.kind != "submittal" and details_height(9.5, 12.0) <= room(150.0, False):
+        plan = (150.0, 9.5, 12.0, False)
+    if plan is None:
+        plan = (150.0, 9.5, 12.0, s.kind == "submittal")
+        while rows and details_height(9.5, 12.0) > room(150.0, plan[3]):
+            dropped = rows.pop()
+            warnings.append(f"Cover: not enough room for the detail '{dropped[0]}'. Shorten the details.")
+    band, size, lead, show_stats = plan
+
     c.setFillColorRGB(*s.accent)
     c.rect(0, H - band, W, band, stroke=0, fill=1)
     c.setFillColorRGB(*mix(s.accent, (1, 1, 1), 0.35))
     c.rect(0, H - band - 5, W, 5, stroke=0, fill=1)
     c.setFillColorRGB(1, 1, 1)
     if s.organization:
-        spaced(c, L, H - 62, fit_text(s.organization.upper(), BOLD, 11, g.width - 150), BOLD, 11, 1.4)
+        spaced(c, L, H - 58, fit_text(s.organization.upper(), BOLD, 11, g.width - 150), BOLD, 11, 1.4)
     c.setFillColorRGB(*mix(s.accent, (1, 1, 1), 0.78))
-    spaced(c, L, H - band + 30, s.doc_label or TYPE_LABELS[s.kind], FONT, 10, 2.0)
+    spaced(c, L, H - band + 28, s.doc_label or TYPE_LABELS[s.kind], FONT, 10, 2.0)
     if s.logo:
         try:
-            c.drawImage(ImageReader(str(s.logo)), right - 140, H - 112, width=140, height=64,
+            c.drawImage(ImageReader(str(s.logo)), right - 140, H - 104, width=140, height=60,
                         preserveAspectRatio=True, anchor="ne", mask="auto")
         except Exception as exc:
             warnings.append(f"Logo '{s.logo}' could not be drawn ({exc}).")
 
-    # Bottom blocks first, so the details know how much room they have.
-    notice_lines = wrap(s.notice, FONT, 8.2, g.width - 28) if s.notice else []
-    notice_h = (len(notice_lines) * 11 + 22) if notice_lines else 0
-    notice_y = 54.0
-    block_top = notice_y + notice_h + (14 if notice_h else 0)
-
-    if s.kind == "submittal":
-        box_h = 104.0
-        block_h = box_h + 22
-    else:
-        block_h = 58.0
-
-    # Title and subtitle
     y = H - band - 66
     c.setFillColorRGB(*DARK)
     c.setFont(BOLD, 28)
-    for line in wrap(s.title, BOLD, 28, g.width, max_lines=3):
+    for line in title_lines:
         c.drawString(L, y, line)
         y -= 33
-    if s.subtitle:
+    if subtitle_lines:
         c.setFont(FONT, 14)
         c.setFillColorRGB(*GREY)
         y -= 1
-        for line in wrap(s.subtitle, FONT, 14, g.width, max_lines=2):
+        for line in subtitle_lines:
             c.drawString(L, y, line)
             y -= 18
     y -= 6
@@ -687,28 +721,6 @@ def draw_cover(c, s: Settings, g: Geometry, sections, total, warnings):
     c.rect(L, y, 56, 3, stroke=0, fill=1)
     y -= 28
 
-    # Details table (label / value). Shrink, then drop the stats, if space runs out.
-    label_w = 152.0
-    rows = [(str(k), str(v)) for k, v in s.details]
-
-    def measure(size, lead):
-        height = 0.0
-        for _, value in rows:
-            n = len(wrap(value, FONT, size, g.width - label_w, max_lines=3)) if value.strip() else 1
-            height += n * lead + 12
-        return height
-
-    size, lead = 11.0, 14.0
-    show_stats = True
-    room = y - (block_top + block_h + 18)
-    if measure(size, lead) > room:
-        size, lead = 9.5, 12.0
-    if measure(size, lead) > room and s.kind != "submittal":
-        show_stats = False
-        room = y - (block_top + 12)
-    while rows and measure(size, lead) > room:
-        dropped = rows.pop()
-        warnings.append(f"Cover: not enough room for the detail '{dropped[0]}'. Shorten the details.")
     for label, value in rows:
         c.setFont(BOLD, 7.4)
         c.setFillColorRGB(*GREY)
@@ -731,7 +743,6 @@ def draw_cover(c, s: Settings, g: Geometry, sections, total, warnings):
             c.setLineWidth(0.5)
             c.line(L, y + 8, right, y + 8)
 
-    # Middle block: review stamps (submittal) or "at a glance" figures.
     if s.kind == "submittal":
         top = block_top + block_h
         c.setFont(BOLD, 7.4)
@@ -919,14 +930,25 @@ def draw_placeholder(c, s: Settings, g: Geometry, section: Section, doc: Doc, to
 # ---------------------------------------------------------------------------
 # Page-number stamp for source pages (optional)
 # ---------------------------------------------------------------------------
-def stamp_page(page, text: str):
-    """Write a small page number in the bottom-right margin of the visible page."""
+def stamp_page(page, text: str, position: str = "bottom-right"):
+    """Write a small page number in the margin of the page, the right way up
+    for the reader even on rotated pages. A thin white outline keeps it
+    readable on dark or busy backgrounds without covering the page."""
     box = page.cropbox
     x0, y0 = float(box.left), float(box.bottom)
     w, h = float(box.width), float(box.height)
     rotation = (page.rotation or 0) % 360
-    visible_w = h if rotation in (90, 270) else w
-    u, v = visible_w - 24, 16            # position on the page as the reader sees it
+    visible_w, visible_h = (h, w) if rotation in (90, 270) else (w, h)
+    text = pdf_safe(text)
+    width = stringWidth(text, FONT, 7.5)
+    vertical = visible_h - 18 if position.startswith("top") else 13.0
+    if position.endswith("left"):
+        u = 24.0 + width
+    elif position.endswith("center"):
+        u = (visible_w + width) / 2
+    else:
+        u = visible_w - 24
+    v = vertical                          # (u, v): right end of the text as the reader sees the page
     if rotation == 90:
         x, y = x0 + w - v, y0 + u
     elif rotation == 180:
@@ -943,9 +965,21 @@ def stamp_page(page, text: str):
         c.saveState()
         c.translate(x, y)
         c.rotate(rotation)
-        c.setFont(FONT, 7.5)
-        c.setFillColorRGB(0.25, 0.25, 0.25)
-        c.drawRightString(0, 0, pdf_safe(text))
+        c.saveState()                         # the outline's render mode must not leak into the fill
+        outline = c.beginText(-width, 0)
+        outline.setTextRenderMode(1)          # stroke only: a white halo
+        outline.setFont(FONT, 7.5)
+        c.setStrokeColorRGB(1, 1, 1)
+        c.setLineWidth(1.8)
+        c.setLineJoin(1)
+        outline.textOut(text)
+        c.drawText(outline)
+        c.restoreState()
+        fill = c.beginText(-width, 0)
+        fill.setFont(FONT, 7.5)
+        fill.setFillColorRGB(0.2, 0.2, 0.2)
+        fill.textOut(text)
+        c.drawText(fill)
         c.restoreState()
 
     overlay = render_page(size, draw)
@@ -1007,7 +1041,7 @@ def count_outline(items) -> int:
 # Index spreadsheet
 # ---------------------------------------------------------------------------
 def write_index_xlsx(path: Path, s: Settings, sections, toc_pages, total, out_pdf: Path, args, warnings):
-    workbook = xlsxwriter.Workbook(str(path))
+    workbook = xlsxwriter.Workbook(str(path), kitlib.XLSX_OPTIONS)
     f = kitlib.xlsx_formats(workbook, s.accent_hex)
     sheet = workbook.add_worksheet("Index")
     headers = ["Type", "Section No.", "Section", "Doc No.", "Title", "Notes", "Status", "Source file",
@@ -1228,7 +1262,7 @@ def build(args) -> int:
                     continue
                 for number in range(doc.start, doc.end + 1):
                     label = f"{s.stamp_prefix}  Page {number} of {total}".strip()
-                    stamp_page(writer.pages[number - 1], label)
+                    stamp_page(writer.pages[number - 1], label, args.stamp_position)
 
     # Bookmarks
     writer.add_outline_item("Cover", 0)
@@ -1316,6 +1350,9 @@ def main(argv=None) -> int:
     parser.add_argument("--page-numbers", action="store_true",
                         help="stamp 'Page X of Y' in the bottom margin of every document page")
     parser.add_argument("--stamp-prefix", help="text before the stamped page number, e.g. 'Project 2041 O&M'")
+    parser.add_argument("--stamp-position", default="bottom-right",
+                        choices=["bottom-right", "bottom-center", "bottom-left", "top-right"],
+                        help="where the stamped page number goes (default bottom-right)")
     parser.add_argument("--no-dividers", action="store_true", help="leave out section divider pages")
     parser.add_argument("--no-toc", action="store_true", help="leave out the contents pages")
     parser.add_argument("--tabs", choices=["numbers", "letters", "none"], default="numbers",

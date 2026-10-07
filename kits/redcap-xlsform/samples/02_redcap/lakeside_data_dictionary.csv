@@ -15,7 +15,7 @@ smoke_status,screening,,radio,"Do you smoke tobacco (cigarettes, cigars, pipe, w
 cig_per_day,screening,,text,"On a day when you smoke, how many cigarettes (or similar) do you usually smoke?",,,integer,1,80,,[smoke_status] = '1' or [smoke_status] = '2',y,,8,,,
 active_days,screening,,text,"In a usual week, on how many days are you active for at least 30 minutes (for example brisk walking, cycling, sport or heavy housework)?",,0 to 7 days,integer,0,7,,,y,,9,,,
 fruit_veg,screening,,text,"On a usual day, how many portions of fruit and vegetables do you eat? One portion is about a handful.",,,integer,0,20,,,,,10,,,
-energy,screening,,slider,"Over the past week, how much energy have you had?",No energy at all | Some energy | Full of energy,Move the slider to your answer (0 to 100).,number,,,,,,,11,,,
+energy,screening,,slider,"Over the past week, how much energy have you had?",No energy at all |  | Full of energy,Move the slider to your answer (0 to 100).,number,,,,,,,11,,,
 sleep_trouble,screening,,radio,"Over the past month, how often have you had trouble sleeping?","0, Never | 1, Rarely | 2, Sometimes | 3, Often | 4, Every night or almost every night",,,,,,,,,12,,,
 sym_headache,screening,"In the past 2 weeks, how often have you had the following?",radio,Headaches,"0, Not at all | 1, Some days | 2, Most days",,,,,,,,,13a,scr_symptoms,,
 sym_dizzy,screening,,radio,Dizziness or feeling faint,"0, Not at all | 1, Some days | 2, Most days",,,,,,,,,13b,scr_symptoms,,

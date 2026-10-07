@@ -37,18 +37,31 @@ def booklet_order(page_count: int) -> list[tuple[int | None, int | None]]:
     return sides
 
 
+# Landscape sheet sizes in points. If two pages side by side are within 1% of
+# one of these, the sheet is made exactly that size so it prints at 100%.
+SHEETS = {"A4": (841.89, 595.28), "Letter": (792.0, 612.0)}
+
+
+def sheet_size(width: float, height: float) -> tuple[float, float]:
+    for sheet_w, sheet_h in SHEETS.values():
+        if abs(2 * width - sheet_w) / sheet_w < 0.01 and abs(height - sheet_h) / sheet_h < 0.01:
+            return sheet_w, sheet_h
+    return 2 * width, height
+
+
 def make_booklet(source: Path, target: Path) -> int:
     with fitz.open(source) as doc:
         if doc.page_count == 0:
             raise ValueError("The PDF has no pages.")
-        width, height = doc[0].rect.width, doc[0].rect.height
+        sheet_w, sheet_h = sheet_size(doc[0].rect.width, doc[0].rect.height)
+        half = sheet_w / 2
         out = fitz.open()
         for left, right in booklet_order(doc.page_count):
-            side = out.new_page(width=2 * width, height=height)
-            if left is not None:
-                side.show_pdf_page(fitz.Rect(0, 0, width, height), doc, left)
+            side = out.new_page(width=sheet_w, height=sheet_h)
+            if left is not None:  # pages keep their shape and are centred in each half
+                side.show_pdf_page(fitz.Rect(0, 0, half, sheet_h), doc, left)
             if right is not None:
-                side.show_pdf_page(fitz.Rect(width, 0, 2 * width, height), doc, right)
+                side.show_pdf_page(fitz.Rect(half, 0, sheet_w, sheet_h), doc, right)
         out.set_metadata({"title": f"{source.stem} (print-ready booklet)",
                           "creator": "Publisher Rescue kit"})
         out.save(target, garbage=3, deflate=True)

@@ -276,6 +276,11 @@ def resolve_today(value: str, today: dt.date | None = None) -> str:
 # --------------------------------------------------------------------------
 # XLSX writing helpers (XlsxWriter)
 # --------------------------------------------------------------------------
+# Text that starts with "=" or looks like a web address stays plain text.
+# Formulas are only written on purpose with write_formula(). This also stops
+# text pulled out of a PDF from turning into a live formula.
+XLSX_OPTIONS = {"strings_to_formulas": False, "strings_to_urls": False}
+
 def xlsx_formats(workbook, accent: str = DEFAULT_ACCENT) -> dict:
     """Common cell formats so every spreadsheet in the kit looks the same."""
     base = {"font_name": "Arial", "font_size": 10, "valign": "top"}

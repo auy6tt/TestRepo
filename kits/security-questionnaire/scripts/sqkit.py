@@ -494,7 +494,9 @@ def assign_ids(rows: list[dict]) -> None:
 SYNONYM_GROUPS = {
     "mfa": ["multi factor authentication", "multifactor authentication", "multi factor", "multifactor",
             "two factor authentication", "two factor", "2 factor", "2fa", "two step verification",
-            "2 step verification", "two step", "second factor", "mfa"],
+            "2 step verification", "two step", "second factor", "hardware security keys", "hardware security key",
+            "hardware tokens", "hardware token", "security keys", "security key", "authenticator apps",
+            "authenticator app", "one time passwords", "one time password", "totp", "mfa"],
     "sso": ["single sign on", "single signon", "sso"],
     "pentest": ["penetration testing", "penetration tests", "penetration test", "pen testing", "pen tests",
                 "pen test", "pentests", "pentesting", "pentest"],
@@ -509,10 +511,12 @@ SYNONYM_GROUPS = {
     "accessreview": ["user access reviews", "user access review", "access reviews", "access review",
                      "access recertification", "recertification", "recertified", "entitlement review"],
     "offboard": ["off boarding", "offboarding", "leavers", "leaver", "terminated employees",
-                 "termination of employment", "departing employees", "employee departures"],
+                 "termination of employment", "departing employees", "employee departures", "last working day",
+                 "last day", "final day", "leaves the company", "leave the company", "leaves your company",
+                 "leave your company", "leaves the organization", "leave the organization"],
     "backgroundcheck": ["background screening checks", "background screening", "background checks", "background check",
                         "pre employment screening", "criminal record checks", "criminal background",
-                        "background verification", "screening checks"],
+                        "background verification", "screening checks", "screening", "screened", "screen"],
     "securitytraining": ["security awareness training", "security and privacy awareness training", "security awareness",
                          "awareness training", "security training", "phishing training", "phishing simulation"],
     "nda": ["non disclosure agreements", "non disclosure agreement", "nondisclosure agreement",
@@ -548,9 +552,13 @@ SYNONYM_GROUPS = {
     "multitenant": ["multi tenant", "multitenant", "multi tenancy", "multitenancy"],
     "cyberinsurance": ["cyber liability insurance", "cyber insurance", "cyber liability", "cybersecurity insurance"],
     "vulnscan": ["vulnerability scanning", "vulnerability scans", "vulnerability scan", "vulnerability scanner"],
-    "statuspage": ["status page", "status site"],
+    "statuspage": ["status pages", "status page", "status site", "status updates"],
     "rto": ["recovery time objectives", "recovery time objective", "rto"],
-    "rpo": ["recovery point objectives", "recovery point objective", "rpo"],
+    "rpo": ["recovery point objectives", "recovery point objective", "maximum tolerable data loss",
+            "acceptable data loss", "data loss", "rpo"],
+    "dlp": ["data loss prevention", "dlp"],
+    "inventory": ["asset inventories", "asset inventory", "asset registers", "asset register", "inventories",
+                  "inventory"],
     "disasterrecovery": ["disaster recovery", "dr"],
     "businesscontinuity": ["business continuity", "bcp"],
     "incidentresponse": ["incident response", "incident management", "irp"],
@@ -572,11 +580,42 @@ SYNONYM_GROUPS = {
     "auditlog": ["audit logs", "audit log", "audit trails", "audit trail", "security logs", "event logs",
                  "activity logs", "activity log"],
     "patch": ["patch management", "patching", "patches", "patched", "security updates"],
+    # In a buyer's questionnaire "our" means the buyer and "your" means the vendor.
+    "customeruser": ["our employees", "our employee", "our users", "our user", "our staff", "our people",
+                     "our personnel", "our team members", "customer users", "customers users", "end users"],
+    "staff": ["your employees", "your staff", "your personnel", "your people", "employees", "employee", "staff",
+              "personnel", "workforce", "team members"],
+    "outage": ["becomes unavailable", "became unavailable", "becoming unavailable", "is unavailable", "unavailable",
+               "goes down", "went down", "outages", "outage", "downtime", "fails", "failed", "failure"],
+    "timeframe": ["timeframes", "timeframe", "time frames", "time frame", "timelines", "timeline", "how quickly",
+                  "how soon", "how fast", "within what time"],
+    "vendor": ["third party providers", "service providers", "suppliers", "supplier", "vendors", "vendor",
+               "subcontractors", "subcontractor"],
+    "always": ["24 hours a day", "around the clock", "round the clock", "24x7", "24 x 7", "24 7"],
+    "laptop": ["laptops", "laptop", "notebooks", "workstations", "workstation", "desktops", "desktop computers",
+               "computers", "computer", "company devices", "company device"],
+    "screenlock": ["screen locks", "screen lock", "screen locking", "lock screen", "auto lock", "automatic lock"],
+    "newhire": ["new hires", "new hire", "new employees", "new employee", "new staff", "new joiners", "joiners",
+                "new starters", "new personnel"],
+    "contractend": ["end of the contract", "end of contract", "contract ends", "contract end", "contract termination",
+                    "termination of the contract", "terminate the contract", "termination", "cancellation", "cancels",
+                    "cancel", "when we leave", "if we leave"],
     "notify": ["notifications", "notification", "notifies", "notified", "notifying", "notify"],
     "retain": ["retention period", "retention", "retained", "retaining", "retains", "retain", "kept for", "kept"],
     "login": ["sign in", "signin", "sign on", "log in", "logon", "log on", "logins", "login"],
     "idp": ["identity providers", "identity provider", "idp"],
+    "backup": ["backed up", "back up", "backing up", "back ups", "backups", "backup", "snapshots", "snapshot"],
+    "admin": ["administrators", "administrator", "administrative", "administration", "admins", "admin"],
+    "separate": ["segregation", "segregated", "segregate", "separation", "separated", "separate", "isolation",
+                 "isolated", "isolate"],
+    "delete": ["deletion", "deleted", "deletes", "delete", "erasure", "erased", "erase", "purged", "purge",
+               "destroyed", "destruction", "destroy", "disposal", "dispose"],
 }
+
+# Word endings the stemmer leaves different ("response" -> respons, "respond" -> respond).
+STEM_ALIASES = {"respons": "respond", "retent": "retain", "recoveri": "recov", "revoc": "revok", "analyz": "analys",
+                "analysi": "analys", "licenc": "licens", "centr": "center", "storag": "store", "notif": "notifi",
+                "subscript": "subscrib"}
 
 STOPWORDS = set("""
 a about above after again against all also am an and any are aren as at be because been before being below
@@ -589,6 +628,7 @@ without would yes you your yours e g eg ie i.e n a
 company companies organisation organization organisations organizations business firm team
 describe explain provide detail details list indicate confirm specify state include includes including
 currently applicable relevant appropriate ensure ensures exist exists existing place
+use used uses using ever anywhere
 """.split())
 
 # Subjects such as "the vendor" or "your company" say who is answering, not
@@ -619,8 +659,11 @@ def _ascii_lower(text: str) -> str:
     return text.lower()
 
 
-def normalise(text: str) -> str:
-    """Lower-case, simplify punctuation and replace synonyms with one token."""
+def normalise(text: str, keep_phrase_words: bool = True) -> str:
+    """Lower-case, simplify punctuation and replace synonyms with a group token.
+
+    keep_phrase_words: a multi-word phrase such as "incident response" becomes
+    "incidentresponse incident response" (True) or just "incidentresponse" (False)."""
     t = _ascii_lower(text)
     t = t.replace("&", " and ")
     # Cloud region names such as us-east-1 become one token ("us" is a stop word).
@@ -628,25 +671,33 @@ def normalise(text: str) -> str:
                r"southwest)-(\d)\b", r"\1\2\3", t)
     t = re.sub(r"(\w)'s\b", r"\1", t)          # vendor's -> vendor
     t = re.sub(r"\b(\w{3,})fications?\b", r"\1fy", t)  # classification -> classify (stems then agree)
+    t = re.sub(r"\b(\w{3,})is(e|ed|es|ing|ation|ations)\b", r"\1iz\2", t)  # British -ise -> -ize
     t = re.sub(r"(\w)s'(?=\s|$)", r"\1s", t)    # customers' -> customers
     t = re.sub(r"[^a-z0-9@]+", " ", t)
     t = re.sub(r"\s+", " ", t).strip()
     t = _SUBJECT_RE.sub(" ", t)
-    t = _SYN_RE.sub(lambda m: _SYN_LOOKUP[m.group(1)], t)
+
+    def swap(m):
+        phrase = m.group(1)
+        token = _SYN_LOOKUP[phrase]
+        return token + (" " + phrase if keep_phrase_words and " " in phrase else "")
+
+    t = _SYN_RE.sub(swap, t)
     return re.sub(r"\s+", " ", t).strip()
 
 
-def tokens(text: str, extra_stopwords: set[str] | None = None) -> list[str]:
+def tokens(text: str, extra_stopwords: set[str] | None = None, keep_phrase_words: bool = True) -> list[str]:
     """Normalised, stop-word-free, stemmed tokens."""
     out = []
     stop = STOPWORDS | (extra_stopwords or set())
-    for word in normalise(text).split():
+    for word in normalise(text, keep_phrase_words).split():
         if word in _CANON:
             out.append(word)
         elif word in stop or len(word) < 2:
             continue
         else:
-            out.append(_STEMMER.stemWord(word))
+            stem = _STEMMER.stemWord(word)
+            out.append(STEM_ALIASES.get(stem, stem))
     return out
 
 
@@ -671,16 +722,20 @@ def has_negation(text: str) -> bool:
 # TF-IDF similarity
 # --------------------------------------------------------------------------
 
+CONCEPT_BOOST = 1.5  # known security terms (the SYNONYM_GROUPS tokens, e.g. "mfa") count 1.5 times
+
+
 class TfidfIndex:
     """Plain TF-IDF with cosine similarity.
 
-    weight(term) = (1 + log(count in text)) * idf(term)
+    weight(term) = (1 + log(count in text)) * idf(term), times CONCEPT_BOOST for known security terms
     idf(term)    = log((1 + N) / (1 + texts containing term)) + 1
     Vectors are scaled to length 1, so the dot product is the cosine.
     """
 
-    def __init__(self, corpus: list[list[str]]):
+    def __init__(self, corpus: list[list[str]], concept_boost: float = 1.0):
         self.n = len(corpus)
+        self.boost = concept_boost
         df: Counter = Counter()
         for feats in corpus:
             df.update(set(feats))
@@ -689,7 +744,10 @@ class TfidfIndex:
 
     def vector(self, feats: list[str]) -> dict[str, float]:
         counts = Counter(feats)
-        vec = {t: (1 + math.log(c)) * self.idf.get(t, self.unseen_idf) for t, c in counts.items()}
+        vec = {}
+        for t, c in counts.items():
+            w = (1 + math.log(c)) * self.idf.get(t, self.unseen_idf)
+            vec[t] = w * self.boost if t in _CANON else w
         norm = math.sqrt(sum(w * w for w in vec.values())) or 1.0
         return {t: w / norm for t, w in vec.items()}
 

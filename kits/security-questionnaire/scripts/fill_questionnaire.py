@@ -55,7 +55,7 @@ ROLE_NAMES = {"question": "question", "answer": "answer", "short": "Yes/No answe
               "source": "evidence/source", "id": "question ID", "domain": "domain"}
 
 DEFAULTS = {
-    "ok_score": 0.55, "min_score": 0.35, "margin": 0.05, "fuzzy_weight": 0.30, "stale_days": 365,
+    "ok_score": 0.50, "min_score": 0.25, "margin": 0.05, "fuzzy_weight": 0.30, "stale_days": 365,
     "placeholder": sqkit.NEEDS_INPUT, "source_mode": "auto", "include_drafts": False, "overwrite": False,
 }
 
@@ -381,8 +381,19 @@ def collect_items(layout: Layout, args) -> list[Item]:
     return items
 
 
+ENTRY_WEIGHT = 0.3  # share of the keyword score taken from all of an entry's phrasings together
+
+
 class Matcher:
-    """TF-IDF cosine (keywords) blended with rapidfuzz token-sort ratio (spelling/word order)."""
+    """Score = (1 - w) x keyword score + w x fuzzy score, where w is --fuzzy-weight (0.3).
+
+    keyword score: TF-IDF cosine similarity of the normalised words and word pairs
+                   (0.7 x best single phrasing + 0.3 x all phrasings of the entry together;
+                   known security terms such as "mfa" count 1.5 times).
+    fuzzy score:   rapidfuzz token-sort ratio against the closest phrasing (catches spelling
+                   and word-order differences).
+    Both are between 0 and 1, so the score is too.
+    """
 
     def __init__(self, entries: list[dict], fuzzy_weight: float, extra_texts=(), extra_stopwords=()):
         self.stop = set(extra_stopwords)
@@ -396,8 +407,12 @@ class Matcher:
                     self.phrasings.append((i, text, toks))
         corpus = [sqkit.features(t) for _i, _x, t in self.phrasings]
         corpus += [sqkit.features(sqkit.tokens(x, self.stop)) for x in extra_texts]
-        self.index = sqkit.TfidfIndex(corpus)
+        self.index = sqkit.TfidfIndex(corpus, concept_boost=sqkit.CONCEPT_BOOST)
         self.vectors = [self.index.vector(sqkit.features(t)) for _i, _x, t in self.phrasings]
+        together: dict[int, list[str]] = {}
+        for i, _x, toks in self.phrasings:
+            together.setdefault(i, []).extend(toks)
+        self.entry_vectors = {i: self.index.vector(sqkit.features(t)) for i, t in together.items()}
 
     def rank(self, question: str, top: int = 2) -> list[Match]:
         q_toks = sqkit.tokens(question, self.stop)
@@ -405,14 +420,21 @@ class Matcher:
             return []
         qv = self.index.vector(sqkit.features(q_toks))
         q_str = " ".join(q_toks)
-        best: dict[int, Match] = {}
-        for (i, text, toks), vec in zip(self.phrasings, self.vectors):
-            tf = self.index.cosine(qv, vec)
-            fz = fuzz.token_sort_ratio(q_str, " ".join(toks)) / 100 if self.w else 0.0
-            score = (1 - self.w) * tf + self.w * fz
-            if i not in best or score > best[i].score:
-                best[i] = Match(score, tf, fz, self.entries[i], text, toks)
-        ranked = sorted(best.values(), key=lambda m: -m.score)[:top]
+        best_cos: dict[int, tuple[float, int]] = {}
+        best_fuzzy: dict[int, float] = {}
+        for n, ((i, _text, toks), vec) in enumerate(zip(self.phrasings, self.vectors)):
+            c = self.index.cosine(qv, vec)
+            if i not in best_cos or c > best_cos[i][0]:
+                best_cos[i] = (c, n)
+            if self.w:
+                best_fuzzy[i] = max(best_fuzzy.get(i, 0.0), fuzz.token_sort_ratio(q_str, " ".join(toks)) / 100)
+        matches = []
+        for i, (c, n) in best_cos.items():
+            keyword = (1 - ENTRY_WEIGHT) * c + ENTRY_WEIGHT * self.index.cosine(qv, self.entry_vectors[i])
+            fz = best_fuzzy.get(i, 0.0)
+            _i, text, toks = self.phrasings[n]
+            matches.append(Match((1 - self.w) * keyword + self.w * fz, keyword, fz, self.entries[i], text, toks))
+        ranked = sorted(matches, key=lambda m: -m.score)[:top]
         for m in ranked:
             shared = set(q_toks) & set(m.tokens)
             m.shared = sorted(shared, key=lambda t: -self.index.idf.get(t, 0))[:6]

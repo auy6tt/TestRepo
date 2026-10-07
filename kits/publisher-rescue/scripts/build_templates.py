@@ -902,6 +902,7 @@ def build_certificate(content: dict, brand: dict, paper: str, path: Path, base_d
     props.author = ""
     props.last_modified_by = ""
     props.keywords = "template, Publisher Rescue"
+    props.comments = ""
     props.revision = 1
     path.parent.mkdir(parents=True, exist_ok=True)
     prs.save(path)

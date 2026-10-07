@@ -60,7 +60,8 @@ def _title(ws, title: str, subtitle: str) -> None:
     ws.row_dimensions[1].height = 20
 
 
-def _table(ws, columns: list[tuple[str, float]], rows: list[list], date_format: str) -> None:
+def _table(ws, columns: list[tuple[str, float]], rows: list[list], date_format: str,
+           center: tuple[int, ...] = ()) -> None:
     for index, (label, width) in enumerate(columns, start=1):
         cell = ws.cell(row=HEADER_ROW, column=index, value=label)
         cell.font = HEADER_FONT
@@ -73,7 +74,8 @@ def _table(ws, columns: list[tuple[str, float]], rows: list[list], date_format: 
         for index, value in enumerate(values, start=1):
             cell = ws.cell(row=row_number, column=index, value=value)
             cell.font = BODY_FONT
-            cell.alignment = Alignment(wrap_text=True, vertical="top")
+            cell.alignment = Alignment(wrap_text=True, vertical="top",
+                                       horizontal="center" if index in center else None)
             cell.border = Border(bottom=THIN)
             if offset % 2 == 0:
                 cell.fill = PatternFill("solid", fgColor=ZEBRA)
@@ -96,6 +98,10 @@ def _table(ws, columns: list[tuple[str, float]], rows: list[list], date_format: 
     ws.page_margins.top = ws.page_margins.bottom = 0.6
     ws.oddFooter.left.text = "&8&A"
     ws.oddFooter.right.text = "&8Page &P of &N"
+
+
+def _first_upper(text: str) -> str:
+    return text[:1].upper() + text[1:]
 
 
 def _due_value(value):
@@ -141,14 +147,14 @@ def build_workbook(m: dict) -> Workbook:
         rows.append([
             motion_label(number, motion), item.get("number", ""), motion["text"],
             motion.get("moved_by") or "", motion.get("seconded_by") or "",
-            METHOD_LABELS.get(vote.get("method"), vote.get("method") or ""),
+            _first_upper(METHOD_LABELS.get(vote.get("method"), vote.get("method") or "")),
             vote.get("in_favor"), vote.get("opposed"), vote.get("abstained"),
             result_label(motion.get("result")), " ".join(details), motion.get("source", ""),
         ])
     columns = [("Motion", 11), ("Item", 7), ("Motion text", 50), ("Moved by", 18), ("Seconded by", 20),
                ("Vote method", 14), (f"In {word(locale, 'favor', 'favour')}", 9), ("Opposed", 9),
                ("Abstained", 10), ("Result", 12), ("Details", 42), ("Recording time", 11)]
-    _table(ws, columns, rows, date_format)
+    _table(ws, columns, rows, date_format, center=(2, 7, 8, 9))
     for offset, (_, _, motion) in enumerate(iter_motions(m), start=1):
         cell = ws.cell(row=HEADER_ROW + offset, column=10)
         fill, color = RESULT_FILLS.get(motion.get("result"), OTHER_RESULT)
@@ -156,8 +162,6 @@ def build_workbook(m: dict) -> Workbook:
             fill, color = UNCLEAR_FILL, INK
         cell.fill = PatternFill("solid", fgColor=fill)
         cell.font = Font(name="Calibri", size=10, bold=True, color=color)
-        for column in (7, 8, 9):
-            ws.cell(row=HEADER_ROW + offset, column=column).alignment = Alignment(horizontal="center", vertical="top")
     if not rows:
         ws.cell(row=HEADER_ROW + 1, column=1, value="No motions were made.").font = BODY_FONT
 
@@ -168,7 +172,7 @@ def build_workbook(m: dict) -> Workbook:
     rows = [[index, action["task"], action["owner"], _due_value(action["due"]), action.get("item", ""), "Open",
              action.get("source", "")] for index, action in enumerate(actions, start=1)]
     _table(ws, [("#", 5), ("Action", 60), ("Owner", 22), ("Due", 15), ("Item", 7), ("Status", 12),
-                ("Recording time", 11)], rows, date_format)
+                ("Recording time", 11)], rows, date_format, center=(1, 5))
     if rows:
         status = DataValidation(type="list", formula1='"Open,In progress,Done"', allow_blank=True)
         ws.add_data_validation(status)
@@ -183,7 +187,7 @@ def build_workbook(m: dict) -> Workbook:
     rows = [[index, q["question"], q.get("where", ""), q.get("source", ""), ""]
             for index, q in enumerate(questions, start=1)]
     _table(ws, [("#", 5), ("Question", 70), ("Where in the minutes", 26), ("Recording time", 11),
-                ("Answer", 40)], rows, date_format)
+                ("Answer", 40)], rows, date_format, center=(1,))
     if not rows:
         ws.cell(row=HEADER_ROW + 1, column=2, value="No open questions.").font = BODY_FONT
 

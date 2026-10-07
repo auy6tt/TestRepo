@@ -1,0 +1,122 @@
+# Offer: local-government meeting watch for one industry
+#
+# What it watches: agendas, packets, legal notices, rezonings, moratoria,
+# zoning text changes, votes and hearing dates across 10–40 councils,
+# planning commissions and zoning boards, for one industry (the example is
+# battery storage developers; also works for solar, self-storage, car washes,
+# data centers or warehouses).
+#
+# How to use this file:
+#   1. Copy it to digests/<your-digest>/sources.yaml
+#   2. Replace every https://example.gov/... address with the real official page.
+#      The watcher skips placeholder addresses, so nothing is fetched until you do.
+#   3. For each real source, read the site's terms of use and its robots.txt,
+#      then put the date you checked in terms_checked.
+#   4. Add each domain under Allowed domains in the environment's Network access settings.
+#   5. Run: python scripts/watch_sources.py digests/<your-digest>
+#
+# Where to find the real sources:
+#   - Start with the county, township and city websites in your area. Look for
+#     "Agendas & Minutes", "Agenda Center", "Meetings", "Public Notices" or
+#     "Legal Notices", and the planning or zoning department page.
+#   - Many councils use an agenda system. Legistar has a public web API
+#     (webapi.legistar.com/v1/<client>/events); many "Agenda Center" pages offer
+#     an RSS link; some systems only work with JavaScript, so look for their RSS,
+#     API or PDF links instead and check them by hand if there are none.
+#   - Planning commissions often post one "current agenda" or packet PDF that is
+#     replaced each month. Watch that PDF directly (type: pdf). The watcher puts
+#     page numbers in front of each changed line so you can cite them.
+#   - State level: siting boards and utility commissions keep public dockets;
+#     many offer RSS or email alerts for a case.
+#   - Keep residents' names out: public comment lists and hearing minutes often
+#     name private individuals. Never copy those names into the brief.
+
+digest:
+  name: "Battery Storage Zoning Watch — Example State"
+  scope: >-
+    Local government actions that affect battery energy storage (BESS)
+    projects: moratoria, zoning text amendments, rezonings, conditional use
+    and variance cases, hearings, votes and fire-safety ordinances.
+  audience: "Battery storage developers, land agents and their consultants"
+
+settings:
+  user_agent: "YourDigestName/1.0 (+mailto:you@yourdomain.com)"   # put your real contact email here
+  delay_seconds: 5
+  keywords: [battery, batteries, "energy storage", BESS, moratorium, moratoria, rezon*,
+             "text amendment", "conditional use", "special use", variance, setback]
+
+sources:
+  # --- County commission: agendas page (HTML). Fetch each new agenda PDF and save its text.
+  - name: "Example County Commissioners: agendas"
+    url: https://example.gov/county/commissioners/agendas
+    type: html
+    ignore_patterns: ["^Page last updated", "^Last modified"]
+    follow_new_links: {pattern: "agenda.*\\.pdf", max: 3}
+    tags: [example-county, county, agenda]
+    terms_checked:                       # e.g. 2026-10-01
+
+  # --- City council on Legistar: upcoming meetings from its public web API (JSON).
+  #     {{today}} is replaced with today's date, so only meetings from today on are listed.
+  - name: "City of Example council: meetings (Legistar API)"
+    url: https://example.gov/legistar/v1/exampleclient/events?$filter=EventDate+ge+datetime'{{today}}'
+    type: json
+    id_field: EventId
+    fields: [EventId, EventBodyName, EventDate, EventTime, EventLocation, EventAgendaFile, EventInSiteURL]
+    link_field: EventInSiteURL
+    keywords: []          # keep every meeting; read the agendas for relevant items
+    tags: [city, council, agenda]
+    terms_checked:
+
+  # --- Regional planning commission: the "current agenda" PDF that is replaced each month.
+  - name: "Example Regional Planning Commission: current agenda (PDF)"
+    url: https://example.gov/rpc/agendas/current-agenda.pdf
+    type: pdf
+    tags: [regional, planning-commission, agenda]
+    terms_checked:
+
+  # --- Township: legal notices as an RSS feed (hearing notices for zoning changes).
+  - name: "Example Township: legal notices (RSS)"
+    url: https://example.gov/township/notices/feed.xml
+    type: rss
+    follow_new_links: true
+    tags: [township, legal-notice]
+    terms_checked:
+
+  # --- County board of zoning appeals: decisions page (HTML). Watch only the decisions table.
+  - name: "Example County Board of Zoning Appeals: decisions"
+    url: https://example.gov/county/bza/decisions
+    type: html
+    selector: "#decisions"
+    tags: [example-county, zoning-appeals]
+    terms_checked:
+
+  # --- City: pending ordinances (HTML), e.g. moratoria and fire-safety rules.
+  - name: "City of Example: pending legislation"
+    url: https://example.gov/city/council/legislation
+    type: html
+    selector: "#pending-legislation"
+    follow_new_links: true
+    tags: [city, ordinance]
+    terms_checked:
+
+  # --- County open data: zoning applications (JSON). Skip private individuals' applications.
+  - name: "Example County open data: zoning applications"
+    url: https://example.gov/county/api/zoning-applications.json
+    type: json
+    items_path: records
+    id_field: case_number
+    fields: [case_number, filed_date, application_type, township, proposed_use,
+             project_name, applicant_name, applicant_type, site_location, acreage, status, documents_url]
+    link_field: documents_url
+    skip_records_where:
+      applicant_type: [individual, resident, homeowner]
+    tags: [example-county, open-data]
+    terms_checked:
+
+  # --- State siting board or utility commission: docket page for battery cases (HTML).
+  - name: "State siting board: storage dockets"
+    url: https://example.gov/state/siting-board/dockets?type=storage
+    type: html
+    selector: "table.dockets"
+    tags: [state, docket]
+    terms_checked:

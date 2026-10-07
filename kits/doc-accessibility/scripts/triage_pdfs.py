@@ -137,7 +137,9 @@ def yes_no(value: bool) -> str:
 
 def short_error(exc: Exception) -> str:
     text = str(exc).strip().splitlines()[0] if str(exc).strip() else exc.__class__.__name__
-    return text[:120]
+    # Drop a leading file path ("/path/file.pdf: unable to find trailer").
+    text = re.sub(r"^.*[\\/][^:]*:\s*", "", text) or text
+    return text[:160]
 
 
 def sha256_of(path: Path) -> str:
@@ -470,7 +472,10 @@ def analyze_pdf(path: Path, rec: dict, sample_pages: int) -> None:
         rec["bookmarks"] = yes_no(isinstance(outlines, pikepdf.Dictionary) and outlines.get("/First") is not None)
         if pdf.is_encrypted:
             try:
-                rec["a11y_blocked"] = not pdf.allow.accessibility
+                # Bit 10 of /P is "extract text for accessibility". Newer files may have
+                # it cleared even though modern readers ignore it, so report it either way.
+                p_value = int(pdf.trailer.Encrypt.get("/P", -1))
+                rec["a11y_blocked"] = not (p_value & 512) or not pdf.allow.accessibility
             except Exception:
                 pass
 
@@ -496,6 +501,8 @@ def analyze_pdf(path: Path, rec: dict, sample_pages: int) -> None:
             except Exception:
                 area = 612.0 * 792.0
             stats = content_stats(page, _resources_of(page.obj))
+            if reader is None and (stats["visible_text"] or stats["invisible_text"]):
+                chars = MIN_TEXT_CHARS  # text extraction failed; fall back to "the page draws text"
             kinds.append(classify_page(chars, min(stats["image_area"] / area, 1.0), stats))
 
     counts = Counter(kinds)
@@ -767,7 +774,12 @@ def suggest_action(rec: dict, archive_before: int, short_pages: int) -> None:
         return done("Archive", f"Dated {year}. If it is kept only for reference and not changed, the client's ADA "
                     "coordinator or lawyer may decide it can go in an archive section. Otherwise fix or delete it.", "Low")
     if is_service:
-        what = f"{rec['form_fields']} fillable fields" if rec.get("form_fields") else f"'{service_match.group(0)}' in its name or link"
+        if rec.get("form_fields"):
+            what = plural(rec["form_fields"], "fillable field")
+        elif rec.get("xfa"):
+            what = "an XFA form"
+        else:
+            what = f"'{service_match.group(0)}' in its name or link"
         return done("Fix", f"People use it to apply for or use a service ({what}). Fix it first, "
                     "or replace it with an accessible web form.", "High")
     if rec["ext"] not in MODERN_OFFICE and rec["type"] != "PDF":

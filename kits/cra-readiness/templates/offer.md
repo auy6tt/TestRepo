@@ -95,4 +95,4 @@ Your pack is current as of [date]. New vulnerabilities are published every day a
 
 ## Words to avoid
 
-Never write "CRA compliant", "certified", "guaranteed compliance" or "legal advice", and never offer to sign the EU declaration of conformity. Say "CRA readiness", "preparation" and "gap checklist" instead.
+Never promise "CRA compliance", a "certified" product or a "guarantee", never present your work as legal advice, and never offer to sign the EU declaration of conformity. Say "CRA readiness", "preparation" and "gap checklist" instead.

@@ -1,0 +1,38 @@
+REDCap data dictionary check
+============================
+
+File:     samples/02_redcap/lakeside_data_dictionary.csv
+Checked:  2026-10-07
+Fields:   61 in 4 form(s): screening 32, contact_details 4, follow_up_visit 19, health_event 6
+Events:   4 (screening_arm_1, visit_1_arm_1, visit_2_arm_1, visit_3_arm_1) from instrument_event_mapping.csv
+Repeating: health_event in visit_1_arm_1, health_event in visit_2_arm_1, health_event in visit_3_arm_1
+
+RESULT: PASSED - 0 error(s), 0 warning(s), 1 note(s)
+
+Summary
+-------
+Field types:      text 21, radio 15, yesno 7, descriptive 5, calc 5, dropdown 3, notes 3, checkbox 1, slider 1
+Identifiers:      dob, contact_phone
+Required fields:  31
+Branching logic:  25 field(s)
+Calculated:       age, bmi, bp_high, fu_days, fu_bp_change
+Matrix groups:    scr_symptoms (5 rows), fu_symptoms (5 rows)
+Section headers:  10
+Action tags:      @CHARLIMIT x3, @NONEOFTHEABOVE x1
+
+Errors - must fix before uploading
+----------------------------------
+  None.
+
+Warnings - fix, or confirm with the client that they are intended
+-----------------------------------------------------------------
+  None.
+
+Notes - good to know
+--------------------
+* Whole file
+    5 free-text field(s) (scr_notes, fu_missed_other, fu_notes, he_type_other, he_desc) could end up holding names or other identifiers.
+    Tip: Keep the reminder in the label or field note: 'no names or contact details'.
+
+Rows are spreadsheet rows (the header is row 1), so you can find them in Excel.
+This check cannot replace testing: import into a test project and try every path.

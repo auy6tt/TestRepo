@@ -517,6 +517,8 @@ def main(argv=None) -> int:
     parser.add_argument("--drop-identifiers", action="store_true",
                         help="leave fields flagged as identifiers out of the labelled file")
     parser.add_argument("--fail-on-issues", action="store_true", help="exit with code 1 if any issue is found")
+    parser.add_argument("--answer-key", help="answer key from make_fake_export.py: check every deliberate "
+                                             "mistake was found (testing only)")
     args = parser.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(errors="replace")  # never crash on unusual characters
@@ -567,7 +569,36 @@ def main(argv=None) -> int:
     for line in lines[:lines.index("Issues")]:
         print(line)
     print(f"Full list: {issues_path.as_posix()}  |  Report: {report_path.as_posix()}")
+    if args.answer_key:
+        missed = compare_answer_key(args.answer_key, issues, cleaner.id_field)
+        if missed is None:
+            return 2
+        if missed:
+            return 1
     return 1 if (args.fail_on_issues and issues) else 0
+
+
+def compare_answer_key(path, issues, id_field):
+    """Check that every deliberate mistake in a fake export's answer key was reported."""
+    try:
+        with open(path, newline="", encoding="utf-8-sig") as fh:
+            key_rows = list(csv.DictReader(fh))
+    except OSError as exc:
+        print(f"ERROR: cannot read the answer key: {exc}")
+        return None
+    found = set()
+    for i in issues:
+        fields = [i["field"].split("___")[0]]
+        if i["issue"] == "custom_rule":  # a rule covers every field it looked at
+            fields += re.findall(r"(\w+)=", i["value"])
+        for field in fields:
+            found.add((i[id_field], i["redcap_event_name"], i["redcap_repeat_instance"], field))
+    missed = [k for k in key_rows if (k[id_field], k["redcap_event_name"], k["redcap_repeat_instance"],
+                                      k["field"]) not in found]
+    print(f"Answer key: {len(key_rows) - len(missed)} of {len(key_rows)} deliberate mistakes found.")
+    for k in missed:
+        print(f"  MISSED: record {k[id_field]} {k['redcap_event_name']} {k['field']} ({k['mistake']})")
+    return missed
 
 
 if __name__ == "__main__":

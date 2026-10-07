@@ -80,15 +80,17 @@ SCAN_PATTERNS = [
                           r"(?:one|two|three|four|five|six|seven|eight|nine|ten),? (?:to )?"
                           r"(?:nothing|zero|none|one|two|three|four|five))\b")),
     ("TASK", re.compile(r"(?i)\b(i'?ll (?:send|get|call|follow up|reach out|email|put|sign|check|draft|"
-                        r"schedule|contact|ask|look|have|let|make sure|take care)|will (?:send|get|follow up|"
-                        r"reach out|email)|by (?:monday|tuesday|wednesday|thursday|friday|saturday|sunday|"
-                        r"tomorrow|next week|the end of)|action item|can (?:you|somebody|someone) "
-                        r"(?:get|send|look|check))\b")),
+                        r"schedule|contact|ask|look|have|let|make sure|take care|add|update|prepare|write|"
+                        r"order|keep|review|notify|forward|circulate|post|price|find|arrange)|will (?:send|get|"
+                        r"follow up|reach out|email)|by (?:monday|tuesday|wednesday|thursday|friday|saturday|"
+                        r"sunday|tomorrow|next week|the end of)|action item|keep us posted|"
+                        r"(?:can|could|would|will) (?:you|somebody|someone) (?:please )?(?:get|send|look|check|"
+                        r"find|call|follow|put|pull|price|ask|add|walk))\b")),
     ("CLOSED", re.compile(r"(?i)\b(executive session|closed session|in camera|attorney[- ]client)\b")),
     ("TIME", re.compile(r"(?i)\b(call(?:ing|ed)? (?:this|the) [\w\s]{0,80}?to order|adjourn(?:ed)?|"
                         r"it'?s \d{1,2}:\d{2}|it is \d{1,2}:\d{2})")),
-    ("PEOPLE", re.compile(r"(?i)\b(just joined|i'?m here|has left|had to leave|dropping off|quorum|"
-                          r"recuse|abstain(?:ing)? on)\b")),
+    ("PEOPLE", re.compile(r"(?i)\b(joined|joining|i'?m (?:finally |just )?here|just got here|has left|"
+                          r"had to leave|dropping off|quorum|recuse|abstain(?:ing)? on)\b")),
     ("RECORDING", re.compile(r"(?i)\b(recording|being recorded|we record)\b")),
 ]
 

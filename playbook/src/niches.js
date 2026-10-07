@@ -473,7 +473,7 @@ NICHES.push(
  where:"Clinical research coordinator associations (ACRP, SoCRA), LinkedIn clinical-research groups, community-hospital research offices, the KoboToolbox and ODK forums.",
  first:"Build two demos from your own made-up questionnaires (a screening form and a three-visit follow-up), publish them, and send 20 personalized offers of one free conversion.",
  risk:"Work only on the form's structure, never on participant data. Don't change ethics-approved wording, and licensed scales need the client's license."},
-{id:"replication-packages", group:"research", rank:702, s:[4,4,4,3], related:["data-sharing"],
+{id:"replication-packages", group:"research", rank:702, kit:"replication-package", s:[4,4,4,3], related:["data-sharing"],
  name:"Journal replication packages for researchers",
  short:"Make a paper's code run from one script and pass the journal's check",
  who:"Economists and social scientists whose accepted papers must pass a journal's code check, research centers, and labs losing their SPSS or Stata licenses.",

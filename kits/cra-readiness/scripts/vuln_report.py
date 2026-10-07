@@ -252,7 +252,7 @@ def osv_details(rec: dict | None, ecosystem: str, name: str, installed: str) -> 
 
 def clean_summary(text: str, limit: int = 180) -> str:
     text = re.sub(r"#+\s*\w+\s*", " ", text or "")
-    text = re.sub(r"[`*_]", "", text)
+    text = re.sub(r"[`*]", "", text)  # keep underscores: they are part of names like set_key
     text = re.sub(r"\s+", " ", text).strip()
     first = re.split(r"(?<=[.!?])\s", text, maxsplit=1)[0]
     if len(first) > limit:
@@ -788,6 +788,9 @@ def write_markdown(ctx: dict) -> str:
             md.append(f"{n}. **{act['action']}**{flag} Fixes {len(act['findings'])} finding(s), highest severity "
                       f"{act['severity']}, in {', '.join(act['components'])} ({ids}).")
         md.append("")
+    elif ctx["checked"] == 0:
+        md += ["## What to do first", "", "None of the components could be checked automatically. Check the "
+               "components listed under 'Components that need a manual check'.", ""]
     else:
         md += ["## What to do first", "", "No known vulnerabilities were found in the components that could be "
                "checked automatically. Keep checking every month and before every release.", ""]
@@ -812,8 +815,10 @@ def write_markdown(ctx: dict) -> str:
            "that any vulnerability in your product is being exploited, follow your reporting runbook straight "
            "away and involve your lawyer.", ""]
 
-    md += ["## All findings", "", "| Severity | ID | Component | Fixed in | Part | What it is |",
-           "|---|---|---|---|---|---|"]
+    action_no = {id(f): n for n, act in enumerate(actions, start=1) for f in act["findings"]}
+    md += ["## All findings", "", "The Action column points to the numbered list in 'What to do first'.", "",
+           "| Severity | ID | Component | Fixed in | Action | Part | What it is |",
+           "|---|---|---|---|---|---|---|"]
     for f in sorted(f_all, key=lambda x: (K.severity_rank(x["severity"]), x["name"].lower(), x["id"])):
         idtext = f"[{f['id']}]({f['link']})"
         if f.get("kev"):
@@ -821,9 +826,10 @@ def write_markdown(ctx: dict) -> str:
         if f.get("status") == "New":
             idtext += " (new)"
         md.append(f"| {f['severity']} | {idtext} | {K.md_escape(f['name'])} {K.md_escape(f['installed'])} | "
-                  f"{K.md_escape(f['fixed'] or 'no fix yet')} | {K.md_escape(f['part'])} | {K.md_escape(f['summary'])} |")
+                  f"{K.md_escape(f['fixed'] or 'no fix yet')} | {action_no.get(id(f), '')} | "
+                  f"{K.md_escape(f['part'])} | {K.md_escape(f['summary'])} |")
     if not f_all:
-        md.append("| - | - | - | - | - | No known vulnerabilities found |")
+        md.append("| - | - | - | - | - | - | No known vulnerabilities found |")
     md.append("")
     if ctx.get("comparison") and ctx["comparison"]["fixed"]:
         md += [f"## No longer found since {ctx['comparison']['date']}", "",

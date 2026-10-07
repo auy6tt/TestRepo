@@ -1,0 +1,99 @@
+Wording check
+=============
+
+Source:   lakeside_questionnaire_v1.2.docx
+Checked:  lakeside_data_dictionary.csv (REDCap), lakeside_health_check.xlsx (XLSForm)
+
+RESULT: 103 of 127 distinct texts match the source word for word; 2 differ only in capitals or punctuation; 22 are not in the source.
+
+Differs only in capitals or punctuation (check these)
+-----------------------------------------------------
+* "Assigned by REDCap"
+    used by: record_id (field note)
+    source:  "Participant ID: (assigned by REDCap)"
+* "Main reason the visit did not take place"
+    used by: fu_missed_reason (label)
+    source:  "F3. If no: main reason the visit did not take place"
+
+Not found in the source (added or changed: give a reason, and get approval for anything
+participants see)
+--------------------------------------------------------------------------------------
+* "0 = No energy at all, 100 = Full of energy"
+    used by: energy (hint)
+    closest source text (91% similar): "No energy at all Full of energy"
+    difference: {+0 =+} No energy at [-all-] {+all, 100 =+} Full of energy
+* "Change in systolic blood pressure since screening (mmHg)"
+    used by: fu_bp_change (label)
+    closest source text (71% similar): "a) Systolic blood pressure (mmHg):"
+    difference: [-a) Systolic-] {+Change in systolic+} blood pressure [-(mmHg):-] {+since screening (mmHg)+}
+* "Calculated from height and weight"
+    used by: bmi (field note)
+    closest source text (68% similar): "14. Height and weight"
+    difference: [-14. Height-] {+Calculated from height+} and weight
+* "High blood pressure reading (1 = yes, 0 = no)"
+    used by: bp_high (label)
+    closest source text (67% similar): "High blood pressure"
+    difference: High blood pressure {+reading (1 = yes, 0 = no)+}
+* "Age at screening (years)"
+    used by: age (label)
+    closest source text (62% similar): "Part 1: Screening questionnaire"
+    difference: [-Part 1: Screening questionnaire-] {+Age at screening (years)+}
+* "0 to 7 days"
+    used by: active_days (field note), active_days (hint)
+    closest source text (60% similar): "Some days"
+    difference: [-Some-] {+0 to 7+} days
+* "Calculated from the screening date"
+    used by: fu_days (field note)
+    nothing similar in the source (probably text added by the form builder)
+* "Calculated from date of birth and date of screening"
+    used by: age (field note)
+    nothing similar in the source (probably text added by the form builder)
+* "Visit details"
+    used by: fu_date (section header)
+    nothing similar in the source (probably text added by the form builder)
+* "Days since screening"
+    used by: fu_days (label)
+    nothing similar in the source (probably text added by the form builder)
+* "Screening visit"
+    used by: screening (label)
+    nothing similar in the source (probably text added by the form builder)
+* "Follow-up visit 2 (3 months)"
+    used by: visit list (choice visit_2)
+    nothing similar in the source (probably text added by the form builder)
+* "Follow-up visit 3 (6 months)"
+    used by: visit list (choice visit_3)
+    nothing similar in the source (probably text added by the form builder)
+* "A negative number means lower than at screening"
+    used by: fu_bp_change (field note)
+    nothing similar in the source (probably text added by the form builder)
+* "Which visit is this?"
+    used by: visit (label)
+    nothing similar in the source (probably text added by the form builder)
+* "Follow-up visit 1 (2 weeks)"
+    used by: visit list (choice visit_1)
+    nothing similar in the source (probably text added by the form builder)
+* "Move the slider to your answer (0 to 100)."
+    used by: energy (field note)
+    nothing similar in the source (probably text added by the form builder)
+* "Lakeside Community Health Check (fictional sample form). Staff complete this form with the participant. Choose the visit first."
+    used by: intro (label)
+    nothing similar in the source (probably text added by the form builder)
+* "Medicines and symptoms"
+    used by: fu_bp_med (section header), fu_medicines (label)
+    nothing similar in the source (probably text added by the form builder)
+* "Body mass index (BMI, kg/m2)"
+    used by: bmi (label), bmi_show (label)
+    nothing similar in the source (probably text added by the form builder)
+* "Format LH-0000, for example LH-0042"
+    used by: participant_id (hint)
+    nothing similar in the source (probably text added by the form builder)
+* "1 if systolic is 140 or more, or diastolic is 90 or more"
+    used by: bp_high (field note)
+    nothing similar in the source (probably text added by the form builder)
+
+Exact matches
+-------------
+  "Participant ID"; "Date of screening"; "Staff section: visit details and consent"; "Has the participant signed the study consent form?"; "STOP. Do not continue: people can only take part after signi..."; "What is your date of birth?"; "Section A: About you"; "STOP. This person is under 18 and cannot take part. Do not c..."; "What is your sex?"; "Female"; "Male"; "Prefer not to say"; "What is the highest level of education you have completed?"; "No formal schooling"; "Primary school"; "Secondary school"; "Trade or vocational qualification"; "University degree"; "How many people live in your household, including you?"; "Has a doctor or nurse ever told you that you have any of the..."; "Section B: Your health"; "High blood pressure"; "Diabetes"; "Heart disease"; "Asthma or COPD"; "Kidney disease"; "None of these"; "Are you currently taking medicine for high blood pressure?"; "Do you smoke tobacco (cigarettes, cigars, pipe, water-pipe o..."; "Yes, every day"; "Yes, some days"; "No, but I used to"; "No, never"; "On a day when you smoke, how many cigarettes (or similar) do..."; "In a usual week, on how many days are you active for at leas..."; "On a usual day, how many portions of fruit and vegetables do..."; "Over the past week, how much energy have you had?"; "No energy at all"; "Full of energy"; "Over the past month, how often have you had trouble sleeping..."; "Never"; "Rarely"; "Sometimes"; "Often"; "Every night or almost every night"; "Headaches"; "In the past 2 weeks, how often have you had the following?"; "Not at all"; "Some days"; "Most days"; "Dizziness or feeling faint"; "Chest pain or tightness"; "Shortness of breath"; "Swollen ankles or feet"; "Height (cm)"; "Section C: Measurements (staff to complete)"; "Measure without shoes. Enter one decimal place, e.g. 165.0"; "Weight (kg)"; "Light clothing, no shoes. Enter one decimal place, e.g. 72.4"; "Systolic blood pressure (mmHg)"; "Seated, after 5 minutes' rest"; "Diastolic blood pressure (mmHg)"; "Section D: Result and follow-up (staff to complete)"; "This reading is 140/90 mmHg or higher. Give the participant ..."; "Has the participant agreed to the 3 follow-up visits?"; "Staff notes (do not write names, addresses or phone numbers ..."; "Complete this form only if the participant agreed to the fol..."; "Phone number for follow-up reminders"; "Include the area code"; "Best time to call"; "Morning"; "Afternoon"; "Evening"; "Any time"; "May we send text message reminders before each visit?"; "Date of visit (or date of last contact attempt)"; "Did the visit take place?"; "Could not contact participant"; "Participant declined"; "Participant unwell"; "Participant moved away"; "Other"; "Other reason, please describe"; "Measurements"; "On how many of the last 7 days did you take your blood press..."; "Since the last visit, have you stayed overnight in hospital,..."; "Complete one Health event form for each event."; "Date the event started"; "Type of event"; "Overnight hospital stay"; "Emergency department visit (no overnight stay)"; "New health condition diagnosed"; "Other, please describe"; "Number of nights in hospital"; "Was the event related to the heart or blood pressure?"; "Yes"; "No"; "Not sure"; "Brief description (no names or other identifying details)"; "Contact details"; "Follow-up visit"; "Health event"; "Screening"
+
+Normal additions: labels of calculated fields, staff instructions, and adapted instructions
+such as 'move the slider' for 'mark the line'. Record them in the delivery note.

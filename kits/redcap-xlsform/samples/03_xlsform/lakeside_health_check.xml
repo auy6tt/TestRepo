@@ -1,0 +1,1252 @@
+<?xml version="1.0"?>
+<h:html xmlns="http://www.w3.org/2002/xforms" xmlns:h="http://www.w3.org/1999/xhtml" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:jr="http://openrosa.org/javarosa" xmlns:orx="http://openrosa.org/xforms" xmlns:odk="http://www.opendatakit.org/xforms">
+  <h:head>
+    <h:title>Lakeside Community Health Check (fictional sample)</h:title>
+    <model odk:xforms-version="1.0.0">
+      <itext>
+        <translation lang="English (en)" default="true()">
+          <text id="visit-0">
+            <value>Screening</value>
+          </text>
+          <text id="visit-1">
+            <value>Follow-up visit 1 (2 weeks)</value>
+          </text>
+          <text id="visit-2">
+            <value>Follow-up visit 2 (3 months)</value>
+          </text>
+          <text id="visit-3">
+            <value>Follow-up visit 3 (6 months)</value>
+          </text>
+          <text id="yesno-0">
+            <value>Yes</value>
+          </text>
+          <text id="yesno-1">
+            <value>No</value>
+          </text>
+          <text id="sex-0">
+            <value>Female</value>
+          </text>
+          <text id="sex-1">
+            <value>Male</value>
+          </text>
+          <text id="sex-2">
+            <value>Prefer not to say</value>
+          </text>
+          <text id="education-0">
+            <value>No formal schooling</value>
+          </text>
+          <text id="education-1">
+            <value>Primary school</value>
+          </text>
+          <text id="education-2">
+            <value>Secondary school</value>
+          </text>
+          <text id="education-3">
+            <value>Trade or vocational qualification</value>
+          </text>
+          <text id="education-4">
+            <value>University degree</value>
+          </text>
+          <text id="education-5">
+            <value>Prefer not to say</value>
+          </text>
+          <text id="conditions-0">
+            <value>High blood pressure</value>
+          </text>
+          <text id="conditions-1">
+            <value>Diabetes</value>
+          </text>
+          <text id="conditions-2">
+            <value>Heart disease</value>
+          </text>
+          <text id="conditions-3">
+            <value>Asthma or COPD</value>
+          </text>
+          <text id="conditions-4">
+            <value>Kidney disease</value>
+          </text>
+          <text id="conditions-5">
+            <value>None of these</value>
+          </text>
+          <text id="smoke-0">
+            <value>Yes, every day</value>
+          </text>
+          <text id="smoke-1">
+            <value>Yes, some days</value>
+          </text>
+          <text id="smoke-2">
+            <value>No, but I used to</value>
+          </text>
+          <text id="smoke-3">
+            <value>No, never</value>
+          </text>
+          <text id="often-0">
+            <value>Never</value>
+          </text>
+          <text id="often-1">
+            <value>Rarely</value>
+          </text>
+          <text id="often-2">
+            <value>Sometimes</value>
+          </text>
+          <text id="often-3">
+            <value>Often</value>
+          </text>
+          <text id="often-4">
+            <value>Every night or almost every night</value>
+          </text>
+          <text id="freq3-0">
+            <value>Not at all</value>
+          </text>
+          <text id="freq3-1">
+            <value>Some days</value>
+          </text>
+          <text id="freq3-2">
+            <value>Most days</value>
+          </text>
+          <text id="contact_time-0">
+            <value>Morning</value>
+          </text>
+          <text id="contact_time-1">
+            <value>Afternoon</value>
+          </text>
+          <text id="contact_time-2">
+            <value>Evening</value>
+          </text>
+          <text id="contact_time-3">
+            <value>Any time</value>
+          </text>
+          <text id="missed-0">
+            <value>Could not contact participant</value>
+          </text>
+          <text id="missed-1">
+            <value>Participant declined</value>
+          </text>
+          <text id="missed-2">
+            <value>Participant unwell</value>
+          </text>
+          <text id="missed-3">
+            <value>Participant moved away</value>
+          </text>
+          <text id="missed-4">
+            <value>Other</value>
+          </text>
+          <text id="he_type-0">
+            <value>Overnight hospital stay</value>
+          </text>
+          <text id="he_type-1">
+            <value>Emergency department visit (no overnight stay)</value>
+          </text>
+          <text id="he_type-2">
+            <value>New health condition diagnosed</value>
+          </text>
+          <text id="he_type-3">
+            <value>Other</value>
+          </text>
+          <text id="yes_no_unsure-0">
+            <value>Yes</value>
+          </text>
+          <text id="yes_no_unsure-1">
+            <value>No</value>
+          </text>
+          <text id="yes_no_unsure-2">
+            <value>Not sure</value>
+          </text>
+          <text id="/data/intro:label">
+            <value>**Lakeside Community Health Check** (fictional sample form). Staff complete this form with the participant. Choose the visit first.</value>
+          </text>
+          <text id="/data/participant_id:jr:constraintMsg">
+            <value>Use the format LH-0000: LH, a dash, then 4 digits.</value>
+          </text>
+          <text id="/data/participant_id:label">
+            <value>Participant ID</value>
+          </text>
+          <text id="/data/participant_id:hint">
+            <value>Format LH-0000, for example LH-0042</value>
+          </text>
+          <text id="/data/visit:label">
+            <value>Which visit is this?</value>
+          </text>
+          <text id="/data/screening:label">
+            <value>Screening visit</value>
+          </text>
+          <text id="/data/screening/scr_date:jr:constraintMsg">
+            <value>The date cannot be before 2026 or in the future.</value>
+          </text>
+          <text id="/data/screening/scr_date:label">
+            <value>Date of screening</value>
+          </text>
+          <text id="/data/screening/consent:label">
+            <value>Has the participant signed the study consent form?</value>
+          </text>
+          <text id="/data/screening/consent_stop:label">
+            <value>**STOP.** Do not continue: people can only take part after signing the consent form.</value>
+          </text>
+          <text id="/data/screening/section_a:label">
+            <value>Section A: About you</value>
+          </text>
+          <text id="/data/screening/section_a/dob:jr:constraintMsg">
+            <value>The date cannot be before 1900 or in the future.</value>
+          </text>
+          <text id="/data/screening/section_a/dob:label">
+            <value>1. What is your date of birth?</value>
+          </text>
+          <text id="/data/screening/section_a/age_stop:label">
+            <value>**STOP.** This person is under 18 and cannot take part. Do not continue.</value>
+          </text>
+          <text id="/data/screening/section_a/sex:label">
+            <value>2. What is your sex?</value>
+          </text>
+          <text id="/data/screening/section_a/education:label">
+            <value>3. What is the highest level of education you have completed?</value>
+          </text>
+          <text id="/data/screening/section_a/household:jr:constraintMsg">
+            <value>Enter a number from 1 to 20.</value>
+          </text>
+          <text id="/data/screening/section_a/household:label">
+            <value>4. How many people live in your household, including you?</value>
+          </text>
+          <text id="/data/screening/section_b:label">
+            <value>Section B: Your health</value>
+          </text>
+          <text id="/data/screening/section_b/conditions:jr:constraintMsg">
+            <value>'None of these' cannot be ticked together with a condition.</value>
+          </text>
+          <text id="/data/screening/section_b/conditions:label">
+            <value>5. Has a doctor or nurse ever told you that you have any of these conditions? Tick all that apply.</value>
+          </text>
+          <text id="/data/screening/section_b/bp_med:label">
+            <value>6. Are you currently taking medicine for high blood pressure?</value>
+          </text>
+          <text id="/data/screening/section_b/smoke_status:label">
+            <value>7. Do you smoke tobacco (cigarettes, cigars, pipe, water-pipe or similar)?</value>
+          </text>
+          <text id="/data/screening/section_b/cig_per_day:jr:constraintMsg">
+            <value>Enter a number from 1 to 80.</value>
+          </text>
+          <text id="/data/screening/section_b/cig_per_day:label">
+            <value>8. On a day when you smoke, how many cigarettes (or similar) do you usually smoke?</value>
+          </text>
+          <text id="/data/screening/section_b/active_days:jr:constraintMsg">
+            <value>Enter a number from 0 to 7.</value>
+          </text>
+          <text id="/data/screening/section_b/active_days:label">
+            <value>9. In a usual week, on how many days are you active for at least 30 minutes (for example brisk walking, cycling, sport or heavy housework)?</value>
+          </text>
+          <text id="/data/screening/section_b/active_days:hint">
+            <value>0 to 7 days</value>
+          </text>
+          <text id="/data/screening/section_b/fruit_veg:jr:constraintMsg">
+            <value>Enter a number from 0 to 20.</value>
+          </text>
+          <text id="/data/screening/section_b/fruit_veg:label">
+            <value>10. On a usual day, how many portions of fruit and vegetables do you eat? One portion is about a handful.</value>
+          </text>
+          <text id="/data/screening/section_b/energy:label">
+            <value>11. Over the past week, how much energy have you had?</value>
+          </text>
+          <text id="/data/screening/section_b/energy:hint">
+            <value>0 = No energy at all, 100 = Full of energy</value>
+          </text>
+          <text id="/data/screening/section_b/sleep_trouble:label">
+            <value>12. Over the past month, how often have you had trouble sleeping?</value>
+          </text>
+          <text id="/data/screening/section_b/scr_symptoms/generated_table_list_label_29:label">
+            <value>13. In the past 2 weeks, how often have you had the following?</value>
+          </text>
+          <text id="/data/screening/section_b/scr_symptoms/sym_headache:label">
+            <value>Headaches</value>
+          </text>
+          <text id="/data/screening/section_b/scr_symptoms/sym_dizzy:label">
+            <value>Dizziness or feeling faint</value>
+          </text>
+          <text id="/data/screening/section_b/scr_symptoms/sym_chest:label">
+            <value>Chest pain or tightness</value>
+          </text>
+          <text id="/data/screening/section_b/scr_symptoms/sym_breath:label">
+            <value>Shortness of breath</value>
+          </text>
+          <text id="/data/screening/section_b/scr_symptoms/sym_ankles:label">
+            <value>Swollen ankles or feet</value>
+          </text>
+          <text id="/data/screening/section_c:label">
+            <value>Section C: Measurements (staff to complete)</value>
+          </text>
+          <text id="/data/screening/section_c/height_cm:jr:constraintMsg">
+            <value>Enter a height from 100 to 230 cm.</value>
+          </text>
+          <text id="/data/screening/section_c/height_cm:label">
+            <value>14a. Height (cm)</value>
+          </text>
+          <text id="/data/screening/section_c/height_cm:hint">
+            <value>Measure without shoes. Enter one decimal place, e.g. 165.0</value>
+          </text>
+          <text id="/data/screening/section_c/weight_kg:jr:constraintMsg">
+            <value>Enter a weight from 30 to 250 kg.</value>
+          </text>
+          <text id="/data/screening/section_c/weight_kg:label">
+            <value>14b. Weight (kg)</value>
+          </text>
+          <text id="/data/screening/section_c/weight_kg:hint">
+            <value>Light clothing, no shoes. Enter one decimal place, e.g. 72.4</value>
+          </text>
+          <text id="/data/screening/section_c/bmi_show:label">
+            <value> Body mass index (BMI, kg/m2): <output value=" /data/screening/section_c/bmi "/> </value>
+          </text>
+          <text id="/data/screening/section_c/scr_sbp:jr:constraintMsg">
+            <value>Enter a value from 70 to 250.</value>
+          </text>
+          <text id="/data/screening/section_c/scr_sbp:label">
+            <value>15a. Systolic blood pressure (mmHg)</value>
+          </text>
+          <text id="/data/screening/section_c/scr_sbp:hint">
+            <value>Seated, after 5 minutes' rest</value>
+          </text>
+          <text id="/data/screening/section_c/scr_dbp:jr:constraintMsg">
+            <value>Enter a value from 40 to 150, lower than the systolic value.</value>
+          </text>
+          <text id="/data/screening/section_c/scr_dbp:label">
+            <value>15b. Diastolic blood pressure (mmHg)</value>
+          </text>
+          <text id="/data/screening/section_d:label">
+            <value>Section D: Result and follow-up (staff to complete)</value>
+          </text>
+          <text id="/data/screening/section_d/bp_high_msg:label">
+            <value>This reading is 140/90 mmHg or higher. Give the participant the advice leaflet and invite them to the 3 follow-up visits.</value>
+          </text>
+          <text id="/data/screening/section_d/fu_agree:label">
+            <value>Has the participant agreed to the 3 follow-up visits?</value>
+          </text>
+          <text id="/data/screening/section_d/contact_details:label">
+            <value>Contact details</value>
+          </text>
+          <text id="/data/screening/section_d/contact_details/contact_intro:label">
+            <value>Complete this form only if the participant agreed to the follow-up visits. These details identify the participant: record them only here.</value>
+          </text>
+          <text id="/data/screening/section_d/contact_details/contact_phone:label">
+            <value>Phone number for follow-up reminders</value>
+          </text>
+          <text id="/data/screening/section_d/contact_details/contact_phone:hint">
+            <value>Include the area code</value>
+          </text>
+          <text id="/data/screening/section_d/contact_details/contact_time:label">
+            <value>Best time to call</value>
+          </text>
+          <text id="/data/screening/section_d/contact_details/contact_sms:label">
+            <value>May we send text message reminders before each visit?</value>
+          </text>
+          <text id="/data/screening/section_d/scr_notes:jr:constraintMsg">
+            <value>Keep notes under 500 characters.</value>
+          </text>
+          <text id="/data/screening/section_d/scr_notes:label">
+            <value>Staff notes (do not write names, addresses or phone numbers here)</value>
+          </text>
+          <text id="/data/follow_up:label">
+            <value>Follow-up visit</value>
+          </text>
+          <text id="/data/follow_up/fu_date:jr:constraintMsg">
+            <value>The date cannot be before 2026 or in the future.</value>
+          </text>
+          <text id="/data/follow_up/fu_date:label">
+            <value>F1. Date of visit (or date of last contact attempt)</value>
+          </text>
+          <text id="/data/follow_up/fu_attended:label">
+            <value>F2. Did the visit take place?</value>
+          </text>
+          <text id="/data/follow_up/fu_missed_reason:label">
+            <value>F3. Main reason the visit did not take place</value>
+          </text>
+          <text id="/data/follow_up/fu_missed_other:label">
+            <value>F3a. Other reason, please describe</value>
+          </text>
+          <text id="/data/follow_up/fu_measurements:label">
+            <value>Measurements</value>
+          </text>
+          <text id="/data/follow_up/fu_measurements/fu_sbp:jr:constraintMsg">
+            <value>Enter a value from 70 to 250.</value>
+          </text>
+          <text id="/data/follow_up/fu_measurements/fu_sbp:label">
+            <value>F4a. Systolic blood pressure (mmHg)</value>
+          </text>
+          <text id="/data/follow_up/fu_measurements/fu_sbp:hint">
+            <value>Seated, after 5 minutes' rest</value>
+          </text>
+          <text id="/data/follow_up/fu_measurements/fu_dbp:jr:constraintMsg">
+            <value>Enter a value from 40 to 150, lower than the systolic value.</value>
+          </text>
+          <text id="/data/follow_up/fu_measurements/fu_dbp:label">
+            <value>F4b. Diastolic blood pressure (mmHg)</value>
+          </text>
+          <text id="/data/follow_up/fu_measurements/fu_weight:jr:constraintMsg">
+            <value>Enter a weight from 30 to 250 kg.</value>
+          </text>
+          <text id="/data/follow_up/fu_measurements/fu_weight:label">
+            <value>F5. Weight (kg)</value>
+          </text>
+          <text id="/data/follow_up/fu_measurements/fu_weight:hint">
+            <value>Light clothing, no shoes. Enter one decimal place, e.g. 72.4</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines:label">
+            <value>Medicines and symptoms</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_bp_med:label">
+            <value>F6. Are you currently taking medicine for high blood pressure?</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_med_days:jr:constraintMsg">
+            <value>Enter a number from 0 to 7.</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_med_days:label">
+            <value>F7. On how many of the last 7 days did you take your blood pressure medicine?</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_symptoms/generated_table_list_label_71:label">
+            <value>F8. In the past 2 weeks, how often have you had the following?</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_symptoms/fu_headache:label">
+            <value>Headaches</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_symptoms/fu_dizzy:label">
+            <value>Dizziness or feeling faint</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_symptoms/fu_chest:label">
+            <value>Chest pain or tightness</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_symptoms/fu_breath:label">
+            <value>Shortness of breath</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_symptoms/fu_ankles:label">
+            <value>Swollen ankles or feet</value>
+          </text>
+          <text id="/data/follow_up/fu_medicines/fu_health_event:label">
+            <value>F9. Since the last visit, have you stayed overnight in hospital, visited an emergency department, or been told you have a new health condition?</value>
+          </text>
+          <text id="/data/follow_up/health_event:label">
+            <value>Health event</value>
+          </text>
+          <text id="/data/follow_up/health_event/fu_he_msg:label">
+            <value>Complete one Health event form for each event.</value>
+          </text>
+          <text id="/data/follow_up/health_event/he_date:jr:constraintMsg">
+            <value>The date cannot be before 2026 or in the future.</value>
+          </text>
+          <text id="/data/follow_up/health_event/he_date:label">
+            <value>H1. Date the event started</value>
+          </text>
+          <text id="/data/follow_up/health_event/he_type:label">
+            <value>H2. Type of event</value>
+          </text>
+          <text id="/data/follow_up/health_event/he_type_other:label">
+            <value>H2a. Other, please describe</value>
+          </text>
+          <text id="/data/follow_up/health_event/he_nights:jr:constraintMsg">
+            <value>Enter a number from 1 to 365.</value>
+          </text>
+          <text id="/data/follow_up/health_event/he_nights:label">
+            <value>H3. Number of nights in hospital</value>
+          </text>
+          <text id="/data/follow_up/health_event/he_heart:label">
+            <value>H4. Was the event related to the heart or blood pressure?</value>
+          </text>
+          <text id="/data/follow_up/health_event/he_desc:jr:constraintMsg">
+            <value>Keep the description under 500 characters.</value>
+          </text>
+          <text id="/data/follow_up/health_event/he_desc:label">
+            <value>H5. Brief description (no names or other identifying details)</value>
+          </text>
+          <text id="/data/follow_up/fu_notes:jr:constraintMsg">
+            <value>Keep notes under 500 characters.</value>
+          </text>
+          <text id="/data/follow_up/fu_notes:label">
+            <value>Staff notes (do not write names, addresses or phone numbers here)</value>
+          </text>
+        </translation>
+      </itext>
+      <instance>
+        <data id="lakeside_health_check" version="2026100701">
+          <start/>
+          <end/>
+          <today/>
+          <intro/>
+          <participant_id/>
+          <visit/>
+          <screening>
+            <scr_date/>
+            <consent/>
+            <consent_stop/>
+            <section_a>
+              <dob/>
+              <age/>
+              <age_stop/>
+              <sex/>
+              <education/>
+              <household/>
+            </section_a>
+            <section_b>
+              <conditions/>
+              <bp_med/>
+              <smoke_status/>
+              <cig_per_day/>
+              <active_days/>
+              <fruit_veg/>
+              <energy/>
+              <sleep_trouble/>
+              <scr_symptoms>
+                <generated_table_list_label_29/>
+                <reserved_name_for_field_list_labels_30/>
+                <sym_headache/>
+                <sym_dizzy/>
+                <sym_chest/>
+                <sym_breath/>
+                <sym_ankles/>
+              </scr_symptoms>
+            </section_b>
+            <section_c>
+              <height_cm/>
+              <weight_kg/>
+              <bmi/>
+              <bmi_show/>
+              <scr_sbp/>
+              <scr_dbp/>
+            </section_c>
+            <section_d>
+              <bp_high/>
+              <bp_high_msg/>
+              <fu_agree/>
+              <contact_details>
+                <contact_intro/>
+                <contact_phone/>
+                <contact_time/>
+                <contact_sms/>
+              </contact_details>
+              <scr_notes/>
+            </section_d>
+          </screening>
+          <follow_up>
+            <fu_date/>
+            <fu_attended/>
+            <fu_missed_reason/>
+            <fu_missed_other/>
+            <fu_measurements>
+              <fu_sbp/>
+              <fu_dbp/>
+              <fu_weight/>
+            </fu_measurements>
+            <fu_medicines>
+              <fu_bp_med/>
+              <fu_med_days/>
+              <fu_symptoms>
+                <generated_table_list_label_71/>
+                <reserved_name_for_field_list_labels_72/>
+                <fu_headache/>
+                <fu_dizzy/>
+                <fu_chest/>
+                <fu_breath/>
+                <fu_ankles/>
+              </fu_symptoms>
+              <fu_health_event/>
+            </fu_medicines>
+            <health_event jr:template="">
+              <fu_he_msg/>
+              <he_date/>
+              <he_type/>
+              <he_type_other/>
+              <he_nights/>
+              <he_heart/>
+              <he_desc/>
+            </health_event>
+            <health_event>
+              <fu_he_msg/>
+              <he_date/>
+              <he_type/>
+              <he_type_other/>
+              <he_nights/>
+              <he_heart/>
+              <he_desc/>
+            </health_event>
+            <fu_notes/>
+          </follow_up>
+          <meta>
+            <instanceID/>
+            <instanceName/>
+          </meta>
+        </data>
+      </instance>
+      <instance id="visit">
+        <root>
+          <item>
+            <itextId>visit-0</itextId>
+            <name>screening</name>
+          </item>
+          <item>
+            <itextId>visit-1</itextId>
+            <name>visit_1</name>
+          </item>
+          <item>
+            <itextId>visit-2</itextId>
+            <name>visit_2</name>
+          </item>
+          <item>
+            <itextId>visit-3</itextId>
+            <name>visit_3</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="yesno">
+        <root>
+          <item>
+            <itextId>yesno-0</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>yesno-1</itextId>
+            <name>0</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="sex">
+        <root>
+          <item>
+            <itextId>sex-0</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>sex-1</itextId>
+            <name>2</name>
+          </item>
+          <item>
+            <itextId>sex-2</itextId>
+            <name>99</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="education">
+        <root>
+          <item>
+            <itextId>education-0</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>education-1</itextId>
+            <name>2</name>
+          </item>
+          <item>
+            <itextId>education-2</itextId>
+            <name>3</name>
+          </item>
+          <item>
+            <itextId>education-3</itextId>
+            <name>4</name>
+          </item>
+          <item>
+            <itextId>education-4</itextId>
+            <name>5</name>
+          </item>
+          <item>
+            <itextId>education-5</itextId>
+            <name>99</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="conditions">
+        <root>
+          <item>
+            <itextId>conditions-0</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>conditions-1</itextId>
+            <name>2</name>
+          </item>
+          <item>
+            <itextId>conditions-2</itextId>
+            <name>3</name>
+          </item>
+          <item>
+            <itextId>conditions-3</itextId>
+            <name>4</name>
+          </item>
+          <item>
+            <itextId>conditions-4</itextId>
+            <name>5</name>
+          </item>
+          <item>
+            <itextId>conditions-5</itextId>
+            <name>6</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="smoke">
+        <root>
+          <item>
+            <itextId>smoke-0</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>smoke-1</itextId>
+            <name>2</name>
+          </item>
+          <item>
+            <itextId>smoke-2</itextId>
+            <name>3</name>
+          </item>
+          <item>
+            <itextId>smoke-3</itextId>
+            <name>4</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="often">
+        <root>
+          <item>
+            <itextId>often-0</itextId>
+            <name>0</name>
+          </item>
+          <item>
+            <itextId>often-1</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>often-2</itextId>
+            <name>2</name>
+          </item>
+          <item>
+            <itextId>often-3</itextId>
+            <name>3</name>
+          </item>
+          <item>
+            <itextId>often-4</itextId>
+            <name>4</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="freq3">
+        <root>
+          <item>
+            <itextId>freq3-0</itextId>
+            <name>0</name>
+          </item>
+          <item>
+            <itextId>freq3-1</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>freq3-2</itextId>
+            <name>2</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="contact_time">
+        <root>
+          <item>
+            <itextId>contact_time-0</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>contact_time-1</itextId>
+            <name>2</name>
+          </item>
+          <item>
+            <itextId>contact_time-2</itextId>
+            <name>3</name>
+          </item>
+          <item>
+            <itextId>contact_time-3</itextId>
+            <name>4</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="missed">
+        <root>
+          <item>
+            <itextId>missed-0</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>missed-1</itextId>
+            <name>2</name>
+          </item>
+          <item>
+            <itextId>missed-2</itextId>
+            <name>3</name>
+          </item>
+          <item>
+            <itextId>missed-3</itextId>
+            <name>4</name>
+          </item>
+          <item>
+            <itextId>missed-4</itextId>
+            <name>5</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="he_type">
+        <root>
+          <item>
+            <itextId>he_type-0</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>he_type-1</itextId>
+            <name>2</name>
+          </item>
+          <item>
+            <itextId>he_type-2</itextId>
+            <name>3</name>
+          </item>
+          <item>
+            <itextId>he_type-3</itextId>
+            <name>4</name>
+          </item>
+        </root>
+      </instance>
+      <instance id="yes_no_unsure">
+        <root>
+          <item>
+            <itextId>yes_no_unsure-0</itextId>
+            <name>1</name>
+          </item>
+          <item>
+            <itextId>yes_no_unsure-1</itextId>
+            <name>0</name>
+          </item>
+          <item>
+            <itextId>yes_no_unsure-2</itextId>
+            <name>98</name>
+          </item>
+        </root>
+      </instance>
+      <bind nodeset="/data/start" jr:preload="timestamp" type="dateTime" jr:preloadParams="start"/>
+      <bind nodeset="/data/end" jr:preload="timestamp" type="dateTime" jr:preloadParams="end"/>
+      <bind nodeset="/data/today" jr:preload="date" type="date" jr:preloadParams="today"/>
+      <bind nodeset="/data/intro" readonly="true()" type="string"/>
+      <bind nodeset="/data/participant_id" type="string" required="true()" constraint="regex(., '^LH-[0-9]{4}$')" jr:constraintMsg="jr:itext('/data/participant_id:jr:constraintMsg')"/>
+      <bind nodeset="/data/visit" type="string" required="true()"/>
+      <bind nodeset="/data/screening" relevant=" /data/visit  = 'screening'"/>
+      <bind nodeset="/data/screening/scr_date" type="date" required="true()" constraint=". &gt;= date('2026-01-01') and . &lt;= today()" jr:constraintMsg="jr:itext('/data/screening/scr_date:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/consent" type="string" required="true()"/>
+      <bind nodeset="/data/screening/consent_stop" readonly="true()" type="string" relevant=" /data/screening/consent  = '0'"/>
+      <bind nodeset="/data/screening/section_a" relevant=" /data/screening/consent  = '1'"/>
+      <bind nodeset="/data/screening/section_a/dob" type="date" required="true()" constraint=". &gt;= date('1900-01-01') and . &lt;= today()" jr:constraintMsg="jr:itext('/data/screening/section_a/dob:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_a/age" type="string" calculate="if( /data/screening/section_a/dob  != '' and  /data/screening/scr_date  != '', int((decimal-date-time( /data/screening/scr_date ) - decimal-date-time( /data/screening/section_a/dob )) div 365.2425), '')"/>
+      <bind nodeset="/data/screening/section_a/age_stop" readonly="true()" type="string" relevant=" /data/screening/section_a/age  != '' and  /data/screening/section_a/age  &lt; 18"/>
+      <bind nodeset="/data/screening/section_a/sex" type="string" required="true()"/>
+      <bind nodeset="/data/screening/section_a/education" type="string" required="true()"/>
+      <bind nodeset="/data/screening/section_a/household" type="int" constraint=". &gt;= 1 and . &lt;= 20" jr:constraintMsg="jr:itext('/data/screening/section_a/household:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_b" relevant=" /data/screening/consent  = '1'"/>
+      <bind nodeset="/data/screening/section_b/conditions" type="string" required="true()" constraint="not(selected(., '6') and count-selected(.) &gt; 1)" jr:constraintMsg="jr:itext('/data/screening/section_b/conditions:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_b/bp_med" type="string" required="true()" relevant="selected( /data/screening/section_b/conditions , '1')"/>
+      <bind nodeset="/data/screening/section_b/smoke_status" type="string" required="true()"/>
+      <bind nodeset="/data/screening/section_b/cig_per_day" type="int" required="true()" relevant=" /data/screening/section_b/smoke_status  = '1' or  /data/screening/section_b/smoke_status  = '2'" constraint=". &gt;= 1 and . &lt;= 80" jr:constraintMsg="jr:itext('/data/screening/section_b/cig_per_day:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_b/active_days" type="int" required="true()" constraint=". &gt;= 0 and . &lt;= 7" jr:constraintMsg="jr:itext('/data/screening/section_b/active_days:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_b/fruit_veg" type="int" constraint=". &gt;= 0 and . &lt;= 20" jr:constraintMsg="jr:itext('/data/screening/section_b/fruit_veg:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_b/energy" type="int"/>
+      <bind nodeset="/data/screening/section_b/sleep_trouble" type="string"/>
+      <bind nodeset="/data/screening/section_b/scr_symptoms/generated_table_list_label_29" readonly="true()" type="string"/>
+      <bind nodeset="/data/screening/section_b/scr_symptoms/reserved_name_for_field_list_labels_30" type="string"/>
+      <bind nodeset="/data/screening/section_b/scr_symptoms/sym_headache" type="string"/>
+      <bind nodeset="/data/screening/section_b/scr_symptoms/sym_dizzy" type="string"/>
+      <bind nodeset="/data/screening/section_b/scr_symptoms/sym_chest" type="string"/>
+      <bind nodeset="/data/screening/section_b/scr_symptoms/sym_breath" type="string"/>
+      <bind nodeset="/data/screening/section_b/scr_symptoms/sym_ankles" type="string"/>
+      <bind nodeset="/data/screening/section_c" relevant=" /data/screening/consent  = '1'"/>
+      <bind nodeset="/data/screening/section_c/height_cm" type="decimal" required="true()" constraint=". &gt;= 100 and . &lt;= 230" jr:constraintMsg="jr:itext('/data/screening/section_c/height_cm:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_c/weight_kg" type="decimal" required="true()" constraint=". &gt;= 30 and . &lt;= 250" jr:constraintMsg="jr:itext('/data/screening/section_c/weight_kg:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_c/bmi" type="string" calculate="if( /data/screening/section_c/height_cm  != '' and  /data/screening/section_c/weight_kg  != '', round( /data/screening/section_c/weight_kg  div (( /data/screening/section_c/height_cm  div 100) * ( /data/screening/section_c/height_cm  div 100)), 1), '')"/>
+      <bind nodeset="/data/screening/section_c/bmi_show" readonly="true()" type="string" relevant=" /data/screening/section_c/bmi  != ''"/>
+      <bind nodeset="/data/screening/section_c/scr_sbp" type="int" required="true()" constraint=". &gt;= 70 and . &lt;= 250" jr:constraintMsg="jr:itext('/data/screening/section_c/scr_sbp:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_c/scr_dbp" type="int" required="true()" constraint=". &gt;= 40 and . &lt;= 150 and . &lt;  /data/screening/section_c/scr_sbp " jr:constraintMsg="jr:itext('/data/screening/section_c/scr_dbp:jr:constraintMsg')"/>
+      <bind nodeset="/data/screening/section_d" relevant=" /data/screening/consent  = '1'"/>
+      <bind nodeset="/data/screening/section_d/bp_high" type="string" calculate="if( /data/screening/section_c/scr_sbp  = '' or  /data/screening/section_c/scr_dbp  = '', '', if( /data/screening/section_c/scr_sbp  &gt;= 140 or  /data/screening/section_c/scr_dbp  &gt;= 90, 1, 0))"/>
+      <bind nodeset="/data/screening/section_d/bp_high_msg" readonly="true()" type="string" relevant=" /data/screening/section_d/bp_high  = 1"/>
+      <bind nodeset="/data/screening/section_d/fu_agree" type="string" required="true()" relevant=" /data/screening/section_d/bp_high  = 1"/>
+      <bind nodeset="/data/screening/section_d/contact_details" relevant=" /data/screening/section_d/fu_agree  = '1'"/>
+      <bind nodeset="/data/screening/section_d/contact_details/contact_intro" readonly="true()" type="string"/>
+      <bind nodeset="/data/screening/section_d/contact_details/contact_phone" type="string" required="true()"/>
+      <bind nodeset="/data/screening/section_d/contact_details/contact_time" type="string"/>
+      <bind nodeset="/data/screening/section_d/contact_details/contact_sms" type="string" required="true()"/>
+      <bind nodeset="/data/screening/section_d/scr_notes" type="string" constraint="string-length(.) &lt;= 500" jr:constraintMsg="jr:itext('/data/screening/section_d/scr_notes:jr:constraintMsg')"/>
+      <bind nodeset="/data/follow_up" relevant=" /data/visit  != '' and  /data/visit  != 'screening'"/>
+      <bind nodeset="/data/follow_up/fu_date" type="date" required="true()" constraint=". &gt;= date('2026-01-01') and . &lt;= today()" jr:constraintMsg="jr:itext('/data/follow_up/fu_date:jr:constraintMsg')"/>
+      <bind nodeset="/data/follow_up/fu_attended" type="string" required="true()"/>
+      <bind nodeset="/data/follow_up/fu_missed_reason" type="string" required="true()" relevant=" /data/follow_up/fu_attended  = '0'"/>
+      <bind nodeset="/data/follow_up/fu_missed_other" type="string" required="true()" relevant=" /data/follow_up/fu_missed_reason  = '5'"/>
+      <bind nodeset="/data/follow_up/fu_measurements" relevant=" /data/follow_up/fu_attended  = '1'"/>
+      <bind nodeset="/data/follow_up/fu_measurements/fu_sbp" type="int" required="true()" constraint=". &gt;= 70 and . &lt;= 250" jr:constraintMsg="jr:itext('/data/follow_up/fu_measurements/fu_sbp:jr:constraintMsg')"/>
+      <bind nodeset="/data/follow_up/fu_measurements/fu_dbp" type="int" required="true()" constraint=". &gt;= 40 and . &lt;= 150 and . &lt;  /data/follow_up/fu_measurements/fu_sbp " jr:constraintMsg="jr:itext('/data/follow_up/fu_measurements/fu_dbp:jr:constraintMsg')"/>
+      <bind nodeset="/data/follow_up/fu_measurements/fu_weight" type="decimal" constraint=". &gt;= 30 and . &lt;= 250" jr:constraintMsg="jr:itext('/data/follow_up/fu_measurements/fu_weight:jr:constraintMsg')"/>
+      <bind nodeset="/data/follow_up/fu_medicines" relevant=" /data/follow_up/fu_attended  = '1'"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_bp_med" type="string" required="true()"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_med_days" type="int" required="true()" relevant=" /data/follow_up/fu_medicines/fu_bp_med  = '1'" constraint=". &gt;= 0 and . &lt;= 7" jr:constraintMsg="jr:itext('/data/follow_up/fu_medicines/fu_med_days:jr:constraintMsg')"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_symptoms/generated_table_list_label_71" readonly="true()" type="string"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_symptoms/reserved_name_for_field_list_labels_72" type="string"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_symptoms/fu_headache" type="string"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_symptoms/fu_dizzy" type="string"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_symptoms/fu_chest" type="string"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_symptoms/fu_breath" type="string"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_symptoms/fu_ankles" type="string"/>
+      <bind nodeset="/data/follow_up/fu_medicines/fu_health_event" type="string" required="true()"/>
+      <bind nodeset="/data/follow_up/health_event" relevant=" /data/follow_up/fu_medicines/fu_health_event  = '1'"/>
+      <bind nodeset="/data/follow_up/health_event/fu_he_msg" readonly="true()" type="string"/>
+      <bind nodeset="/data/follow_up/health_event/he_date" type="date" required="true()" constraint=". &gt;= date('2026-01-01') and . &lt;= today()" jr:constraintMsg="jr:itext('/data/follow_up/health_event/he_date:jr:constraintMsg')"/>
+      <bind nodeset="/data/follow_up/health_event/he_type" type="string" required="true()"/>
+      <bind nodeset="/data/follow_up/health_event/he_type_other" type="string" required="true()" relevant=" ../he_type  = '4'"/>
+      <bind nodeset="/data/follow_up/health_event/he_nights" type="int" required="true()" relevant=" ../he_type  = '1'" constraint=". &gt;= 1 and . &lt;= 365" jr:constraintMsg="jr:itext('/data/follow_up/health_event/he_nights:jr:constraintMsg')"/>
+      <bind nodeset="/data/follow_up/health_event/he_heart" type="string" required="true()"/>
+      <bind nodeset="/data/follow_up/health_event/he_desc" type="string" constraint="string-length(.) &lt;= 500" jr:constraintMsg="jr:itext('/data/follow_up/health_event/he_desc:jr:constraintMsg')"/>
+      <bind nodeset="/data/follow_up/fu_notes" type="string" constraint="string-length(.) &lt;= 500" jr:constraintMsg="jr:itext('/data/follow_up/fu_notes:jr:constraintMsg')"/>
+      <bind nodeset="/data/meta/instanceID" type="string" readonly="true()" jr:preload="uid"/>
+      <bind nodeset="/data/meta/instanceName" type="string" calculate="concat( /data/participant_id , ' ',  /data/visit )"/>
+    </model>
+  </h:head>
+  <h:body>
+    <input ref="/data/intro">
+      <label ref="jr:itext('/data/intro:label')"/>
+    </input>
+    <input ref="/data/participant_id">
+      <label ref="jr:itext('/data/participant_id:label')"/>
+      <hint ref="jr:itext('/data/participant_id:hint')"/>
+    </input>
+    <select1 ref="/data/visit">
+      <label ref="jr:itext('/data/visit:label')"/>
+      <itemset nodeset="instance('visit')/root/item">
+        <value ref="name"/>
+        <label ref="jr:itext(itextId)"/>
+      </itemset>
+    </select1>
+    <group ref="/data/screening">
+      <label ref="jr:itext('/data/screening:label')"/>
+      <input ref="/data/screening/scr_date">
+        <label ref="jr:itext('/data/screening/scr_date:label')"/>
+      </input>
+      <select1 ref="/data/screening/consent">
+        <label ref="jr:itext('/data/screening/consent:label')"/>
+        <itemset nodeset="instance('yesno')/root/item">
+          <value ref="name"/>
+          <label ref="jr:itext(itextId)"/>
+        </itemset>
+      </select1>
+      <input ref="/data/screening/consent_stop">
+        <label ref="jr:itext('/data/screening/consent_stop:label')"/>
+      </input>
+      <group ref="/data/screening/section_a">
+        <label ref="jr:itext('/data/screening/section_a:label')"/>
+        <input ref="/data/screening/section_a/dob">
+          <label ref="jr:itext('/data/screening/section_a/dob:label')"/>
+        </input>
+        <input ref="/data/screening/section_a/age_stop">
+          <label ref="jr:itext('/data/screening/section_a/age_stop:label')"/>
+        </input>
+        <select1 ref="/data/screening/section_a/sex">
+          <label ref="jr:itext('/data/screening/section_a/sex:label')"/>
+          <itemset nodeset="instance('sex')/root/item">
+            <value ref="name"/>
+            <label ref="jr:itext(itextId)"/>
+          </itemset>
+        </select1>
+        <select1 ref="/data/screening/section_a/education" appearance="minimal">
+          <label ref="jr:itext('/data/screening/section_a/education:label')"/>
+          <itemset nodeset="instance('education')/root/item">
+            <value ref="name"/>
+            <label ref="jr:itext(itextId)"/>
+          </itemset>
+        </select1>
+        <input ref="/data/screening/section_a/household">
+          <label ref="jr:itext('/data/screening/section_a/household:label')"/>
+        </input>
+      </group>
+      <group ref="/data/screening/section_b">
+        <label ref="jr:itext('/data/screening/section_b:label')"/>
+        <select ref="/data/screening/section_b/conditions">
+          <label ref="jr:itext('/data/screening/section_b/conditions:label')"/>
+          <itemset nodeset="instance('conditions')/root/item">
+            <value ref="name"/>
+            <label ref="jr:itext(itextId)"/>
+          </itemset>
+        </select>
+        <select1 ref="/data/screening/section_b/bp_med">
+          <label ref="jr:itext('/data/screening/section_b/bp_med:label')"/>
+          <itemset nodeset="instance('yesno')/root/item">
+            <value ref="name"/>
+            <label ref="jr:itext(itextId)"/>
+          </itemset>
+        </select1>
+        <select1 ref="/data/screening/section_b/smoke_status">
+          <label ref="jr:itext('/data/screening/section_b/smoke_status:label')"/>
+          <itemset nodeset="instance('smoke')/root/item">
+            <value ref="name"/>
+            <label ref="jr:itext(itextId)"/>
+          </itemset>
+        </select1>
+        <input ref="/data/screening/section_b/cig_per_day">
+          <label ref="jr:itext('/data/screening/section_b/cig_per_day:label')"/>
+        </input>
+        <input ref="/data/screening/section_b/active_days">
+          <label ref="jr:itext('/data/screening/section_b/active_days:label')"/>
+          <hint ref="jr:itext('/data/screening/section_b/active_days:hint')"/>
+        </input>
+        <input ref="/data/screening/section_b/fruit_veg">
+          <label ref="jr:itext('/data/screening/section_b/fruit_veg:label')"/>
+        </input>
+        <range ref="/data/screening/section_b/energy" start="0" end="100" step="1">
+          <label ref="jr:itext('/data/screening/section_b/energy:label')"/>
+          <hint ref="jr:itext('/data/screening/section_b/energy:hint')"/>
+        </range>
+        <select1 ref="/data/screening/section_b/sleep_trouble">
+          <label ref="jr:itext('/data/screening/section_b/sleep_trouble:label')"/>
+          <itemset nodeset="instance('often')/root/item">
+            <value ref="name"/>
+            <label ref="jr:itext(itextId)"/>
+          </itemset>
+        </select1>
+        <group appearance="field-list" ref="/data/screening/section_b/scr_symptoms">
+          <input ref="/data/screening/section_b/scr_symptoms/generated_table_list_label_29">
+            <label ref="jr:itext('/data/screening/section_b/scr_symptoms/generated_table_list_label_29:label')"/>
+          </input>
+          <select1 ref="/data/screening/section_b/scr_symptoms/reserved_name_for_field_list_labels_30" appearance="label">
+            <label> </label>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/screening/section_b/scr_symptoms/sym_headache" appearance="list-nolabel">
+            <label ref="jr:itext('/data/screening/section_b/scr_symptoms/sym_headache:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/screening/section_b/scr_symptoms/sym_dizzy" appearance="list-nolabel">
+            <label ref="jr:itext('/data/screening/section_b/scr_symptoms/sym_dizzy:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/screening/section_b/scr_symptoms/sym_chest" appearance="list-nolabel">
+            <label ref="jr:itext('/data/screening/section_b/scr_symptoms/sym_chest:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/screening/section_b/scr_symptoms/sym_breath" appearance="list-nolabel">
+            <label ref="jr:itext('/data/screening/section_b/scr_symptoms/sym_breath:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/screening/section_b/scr_symptoms/sym_ankles" appearance="list-nolabel">
+            <label ref="jr:itext('/data/screening/section_b/scr_symptoms/sym_ankles:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+        </group>
+      </group>
+      <group ref="/data/screening/section_c">
+        <label ref="jr:itext('/data/screening/section_c:label')"/>
+        <input ref="/data/screening/section_c/height_cm">
+          <label ref="jr:itext('/data/screening/section_c/height_cm:label')"/>
+          <hint ref="jr:itext('/data/screening/section_c/height_cm:hint')"/>
+        </input>
+        <input ref="/data/screening/section_c/weight_kg">
+          <label ref="jr:itext('/data/screening/section_c/weight_kg:label')"/>
+          <hint ref="jr:itext('/data/screening/section_c/weight_kg:hint')"/>
+        </input>
+        <input ref="/data/screening/section_c/bmi_show">
+          <label ref="jr:itext('/data/screening/section_c/bmi_show:label')"/>
+        </input>
+        <input ref="/data/screening/section_c/scr_sbp">
+          <label ref="jr:itext('/data/screening/section_c/scr_sbp:label')"/>
+          <hint ref="jr:itext('/data/screening/section_c/scr_sbp:hint')"/>
+        </input>
+        <input ref="/data/screening/section_c/scr_dbp">
+          <label ref="jr:itext('/data/screening/section_c/scr_dbp:label')"/>
+        </input>
+      </group>
+      <group ref="/data/screening/section_d">
+        <label ref="jr:itext('/data/screening/section_d:label')"/>
+        <input ref="/data/screening/section_d/bp_high_msg">
+          <label ref="jr:itext('/data/screening/section_d/bp_high_msg:label')"/>
+        </input>
+        <select1 ref="/data/screening/section_d/fu_agree">
+          <label ref="jr:itext('/data/screening/section_d/fu_agree:label')"/>
+          <itemset nodeset="instance('yesno')/root/item">
+            <value ref="name"/>
+            <label ref="jr:itext(itextId)"/>
+          </itemset>
+        </select1>
+        <group ref="/data/screening/section_d/contact_details">
+          <label ref="jr:itext('/data/screening/section_d/contact_details:label')"/>
+          <input ref="/data/screening/section_d/contact_details/contact_intro">
+            <label ref="jr:itext('/data/screening/section_d/contact_details/contact_intro:label')"/>
+          </input>
+          <input ref="/data/screening/section_d/contact_details/contact_phone" appearance="numbers">
+            <label ref="jr:itext('/data/screening/section_d/contact_details/contact_phone:label')"/>
+            <hint ref="jr:itext('/data/screening/section_d/contact_details/contact_phone:hint')"/>
+          </input>
+          <select1 ref="/data/screening/section_d/contact_details/contact_time">
+            <label ref="jr:itext('/data/screening/section_d/contact_details/contact_time:label')"/>
+            <itemset nodeset="instance('contact_time')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/screening/section_d/contact_details/contact_sms">
+            <label ref="jr:itext('/data/screening/section_d/contact_details/contact_sms:label')"/>
+            <itemset nodeset="instance('yesno')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+        </group>
+        <input ref="/data/screening/section_d/scr_notes" appearance="multiline">
+          <label ref="jr:itext('/data/screening/section_d/scr_notes:label')"/>
+        </input>
+      </group>
+    </group>
+    <group ref="/data/follow_up">
+      <label ref="jr:itext('/data/follow_up:label')"/>
+      <input ref="/data/follow_up/fu_date">
+        <label ref="jr:itext('/data/follow_up/fu_date:label')"/>
+      </input>
+      <select1 ref="/data/follow_up/fu_attended">
+        <label ref="jr:itext('/data/follow_up/fu_attended:label')"/>
+        <itemset nodeset="instance('yesno')/root/item">
+          <value ref="name"/>
+          <label ref="jr:itext(itextId)"/>
+        </itemset>
+      </select1>
+      <select1 ref="/data/follow_up/fu_missed_reason">
+        <label ref="jr:itext('/data/follow_up/fu_missed_reason:label')"/>
+        <itemset nodeset="instance('missed')/root/item">
+          <value ref="name"/>
+          <label ref="jr:itext(itextId)"/>
+        </itemset>
+      </select1>
+      <input ref="/data/follow_up/fu_missed_other">
+        <label ref="jr:itext('/data/follow_up/fu_missed_other:label')"/>
+      </input>
+      <group ref="/data/follow_up/fu_measurements">
+        <label ref="jr:itext('/data/follow_up/fu_measurements:label')"/>
+        <input ref="/data/follow_up/fu_measurements/fu_sbp">
+          <label ref="jr:itext('/data/follow_up/fu_measurements/fu_sbp:label')"/>
+          <hint ref="jr:itext('/data/follow_up/fu_measurements/fu_sbp:hint')"/>
+        </input>
+        <input ref="/data/follow_up/fu_measurements/fu_dbp">
+          <label ref="jr:itext('/data/follow_up/fu_measurements/fu_dbp:label')"/>
+        </input>
+        <input ref="/data/follow_up/fu_measurements/fu_weight">
+          <label ref="jr:itext('/data/follow_up/fu_measurements/fu_weight:label')"/>
+          <hint ref="jr:itext('/data/follow_up/fu_measurements/fu_weight:hint')"/>
+        </input>
+      </group>
+      <group ref="/data/follow_up/fu_medicines">
+        <label ref="jr:itext('/data/follow_up/fu_medicines:label')"/>
+        <select1 ref="/data/follow_up/fu_medicines/fu_bp_med">
+          <label ref="jr:itext('/data/follow_up/fu_medicines/fu_bp_med:label')"/>
+          <itemset nodeset="instance('yesno')/root/item">
+            <value ref="name"/>
+            <label ref="jr:itext(itextId)"/>
+          </itemset>
+        </select1>
+        <input ref="/data/follow_up/fu_medicines/fu_med_days">
+          <label ref="jr:itext('/data/follow_up/fu_medicines/fu_med_days:label')"/>
+        </input>
+        <group appearance="field-list" ref="/data/follow_up/fu_medicines/fu_symptoms">
+          <input ref="/data/follow_up/fu_medicines/fu_symptoms/generated_table_list_label_71">
+            <label ref="jr:itext('/data/follow_up/fu_medicines/fu_symptoms/generated_table_list_label_71:label')"/>
+          </input>
+          <select1 ref="/data/follow_up/fu_medicines/fu_symptoms/reserved_name_for_field_list_labels_72" appearance="label">
+            <label> </label>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/follow_up/fu_medicines/fu_symptoms/fu_headache" appearance="list-nolabel">
+            <label ref="jr:itext('/data/follow_up/fu_medicines/fu_symptoms/fu_headache:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/follow_up/fu_medicines/fu_symptoms/fu_dizzy" appearance="list-nolabel">
+            <label ref="jr:itext('/data/follow_up/fu_medicines/fu_symptoms/fu_dizzy:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/follow_up/fu_medicines/fu_symptoms/fu_chest" appearance="list-nolabel">
+            <label ref="jr:itext('/data/follow_up/fu_medicines/fu_symptoms/fu_chest:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/follow_up/fu_medicines/fu_symptoms/fu_breath" appearance="list-nolabel">
+            <label ref="jr:itext('/data/follow_up/fu_medicines/fu_symptoms/fu_breath:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <select1 ref="/data/follow_up/fu_medicines/fu_symptoms/fu_ankles" appearance="list-nolabel">
+            <label ref="jr:itext('/data/follow_up/fu_medicines/fu_symptoms/fu_ankles:label')"/>
+            <itemset nodeset="instance('freq3')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+        </group>
+        <select1 ref="/data/follow_up/fu_medicines/fu_health_event">
+          <label ref="jr:itext('/data/follow_up/fu_medicines/fu_health_event:label')"/>
+          <itemset nodeset="instance('yesno')/root/item">
+            <value ref="name"/>
+            <label ref="jr:itext(itextId)"/>
+          </itemset>
+        </select1>
+      </group>
+      <group ref="/data/follow_up/health_event">
+        <label ref="jr:itext('/data/follow_up/health_event:label')"/>
+        <repeat nodeset="/data/follow_up/health_event">
+          <input ref="/data/follow_up/health_event/fu_he_msg">
+            <label ref="jr:itext('/data/follow_up/health_event/fu_he_msg:label')"/>
+          </input>
+          <input ref="/data/follow_up/health_event/he_date">
+            <label ref="jr:itext('/data/follow_up/health_event/he_date:label')"/>
+          </input>
+          <select1 ref="/data/follow_up/health_event/he_type">
+            <label ref="jr:itext('/data/follow_up/health_event/he_type:label')"/>
+            <itemset nodeset="instance('he_type')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <input ref="/data/follow_up/health_event/he_type_other">
+            <label ref="jr:itext('/data/follow_up/health_event/he_type_other:label')"/>
+          </input>
+          <input ref="/data/follow_up/health_event/he_nights">
+            <label ref="jr:itext('/data/follow_up/health_event/he_nights:label')"/>
+          </input>
+          <select1 ref="/data/follow_up/health_event/he_heart">
+            <label ref="jr:itext('/data/follow_up/health_event/he_heart:label')"/>
+            <itemset nodeset="instance('yes_no_unsure')/root/item">
+              <value ref="name"/>
+              <label ref="jr:itext(itextId)"/>
+            </itemset>
+          </select1>
+          <input ref="/data/follow_up/health_event/he_desc" appearance="multiline">
+            <label ref="jr:itext('/data/follow_up/health_event/he_desc:label')"/>
+          </input>
+        </repeat>
+      </group>
+      <input ref="/data/follow_up/fu_notes" appearance="multiline">
+        <label ref="jr:itext('/data/follow_up/fu_notes:label')"/>
+      </input>
+    </group>
+  </h:body>
+</h:html>

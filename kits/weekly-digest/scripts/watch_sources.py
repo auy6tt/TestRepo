@@ -80,8 +80,8 @@ DEFAULT_SETTINGS = {
 SOURCE_FIELDS = {
     "name", "id", "url", "type", "selector", "exclude_selector", "tags",
     "keywords", "ignore_patterns", "follow_new_links", "items_path",
-    "id_field", "fields", "link_field", "skip_records_where", "notes",
-    "terms_checked", "enabled",
+    "id_field", "fields", "link_field", "skip_records_where", "report_removed",
+    "notes", "terms_checked", "enabled",
 }
 
 ACCEPT = {
@@ -355,6 +355,40 @@ def http_status_problem(status: int) -> tuple[str, str]:
     return f"Unexpected answer from the site (HTTP {status})", ""
 
 
+_ENV_REF = re.compile(r"\$\{([A-Za-z_][A-Za-z0-9_]*)\}")
+_DATE_REF = re.compile(r"\{\{\s*today\s*(?:([+-])\s*(\d+))?\s*(?::([^}]+))?\}\}")
+
+
+def expand_dates(url: str) -> str:
+    """{{today}}, {{today-30}} or {{today-30:%m/%d/%Y}} become dates, for APIs that need a date window."""
+    def replace(match):
+        sign, days, fmt = match.groups()
+        day = dt.date.today()
+        if days:
+            day += dt.timedelta(days=int(days) * (-1 if sign == "-" else 1))
+        return day.strftime(fmt.strip() if fmt else "%Y-%m-%d")
+    return _DATE_REF.sub(replace, url)
+
+
+def expand_env(url: str) -> tuple[str, dict]:
+    """Fill in dates, and replace ${NAME} with the environment variable NAME so
+    API keys stay out of sources.yaml. Returns the address and the secrets used."""
+    url = expand_dates(url)
+    found: dict[str, str] = {}
+
+    def replace(match):
+        name = match.group(1)
+        value = os.environ.get(name)
+        if not value:
+            raise FetchError(f"The environment variable {name} is not set",
+                             f"Set {name} before running (in a cloud environment: its environment "
+                             "variables or API credentials). Never write keys into sources.yaml.")
+        found[value] = "${" + name + "}"
+        return value
+
+    return _ENV_REF.sub(replace, url), found
+
+
 class Fetcher:
     def __init__(self, settings: dict, url_map: list[tuple[str, str]]):
         self.user_agent = str(settings["user_agent"])
@@ -368,7 +402,13 @@ class Fetcher:
         self._last_request: dict[str, float] = {}
         self._host_delay: dict[str, float] = {}
         self._robots: dict[str, object] = {}
+        self._secrets: dict[str, str] = {}
         self.request_count = 0
+
+    def redact(self, url: str) -> str:
+        for value, placeholder in self._secrets.items():
+            url = url.replace(value, placeholder)
+        return url
 
     # URL mapping lets the demo and tests serve fictional sites from this computer.
     def map_url(self, url: str) -> str:
@@ -397,9 +437,11 @@ class Fetcher:
 
     def _request(self, url: str, accept: str, headers: dict | None = None) -> Response:
         host = (urlsplit(url).hostname or "").lower()
+        real_url, secrets = expand_env(url)
+        self._secrets.update(secrets)
         self._pause(host)
         try:
-            with self.session.get(self.map_url(url), headers={"Accept": accept, **(headers or {})},
+            with self.session.get(self.map_url(real_url), headers={"Accept": accept, **(headers or {})},
                                   timeout=self.timeout, stream=True,
                                   allow_redirects=True) as resp:
                 self.request_count += 1
@@ -412,7 +454,7 @@ class Fetcher:
                             "Raise max_megabytes in settings if you really need this file.")
                     chunks.append(chunk)
                 result = Response(resp.status_code, dict(resp.headers), b"".join(chunks),
-                                  self.unmap_url(resp.url))
+                                  self.redact(self.unmap_url(resp.url)))
         except requests.exceptions.RequestException as exc:
             raise FetchError(*describe_network_error(exc, host)) from None
         deny = {k.lower(): v for k, v in result.headers.items()}.get("x-deny-reason")
@@ -838,7 +880,7 @@ def diff_lines(old: list[str], new: list[str], max_diff: int,
     return result
 
 
-def compare_records(old: dict, new: dict, keywords: list[str]) -> dict:
+def compare_records(old: dict, new: dict, keywords: list[str], report_removed: bool = False) -> dict:
     new_ids = [rid for rid in new if rid not in old]
     removed_ids = [rid for rid in old if rid not in new]
     changed_ids = [rid for rid in new if rid in old and new[rid]["text"] != old[rid]["text"]]
@@ -869,11 +911,14 @@ def compare_records(old: dict, new: dict, keywords: list[str]) -> dict:
             continue
         out["changed_records"].append({"id": rid, "before": old[rid]["text"],
                                        "after": new[rid]["text"], "url": new[rid].get("url")})
-    for rid in removed_ids:
-        if wanted(old[rid]["text"]) is None:
-            out["other_records_not_matching_keywords"] += 1
-            continue
-        out["removed_records"].append({"id": rid, "text": old[rid]["text"]})
+    if report_removed:
+        for rid in removed_ids:
+            if wanted(old[rid]["text"]) is None:
+                out["other_records_not_matching_keywords"] += 1
+                continue
+            out["removed_records"].append({"id": rid, "text": old[rid]["text"]})
+    elif removed_ids:
+        out["records_dropped_out"] = len(removed_ids)  # feeds and API windows drop old records
     for key in ("new_records", "changed_records", "removed_records"):
         out[key] = out[key][:MAX_LIST_ITEMS]
     return out
@@ -950,6 +995,9 @@ def summary_text(entry: dict) -> str:
     other = entry.get("other_records_not_matching_keywords")
     if other:
         parts.append(f"{other} other record change{'s' if other != 1 else ''} without your keywords")
+    dropped = entry.get("records_dropped_out")
+    if dropped and not parts:
+        parts.append(f"{plural(dropped, 'older record')} dropped out of the feed")
     return ", ".join(parts) or "content changed"
 
 
@@ -1070,7 +1118,17 @@ def check_source(source: dict, fetcher: Fetcher, store: Store, settings: dict,
     prev_urls = {l["url"] for l in previous["links"]}
     new_urls = {l["url"] for l in ext.links}
     if ext.records is not None and previous.get("records") is not None:
-        entry.update(compare_records(previous["records"], ext.records, keywords))
+        entry.update(compare_records(previous["records"], ext.records, keywords,
+                                     bool(source.get("report_removed"))))
+        if not (entry["new_records"] or entry["changed_records"] or entry["removed_records"]):
+            # Nothing that matches the keywords: save the snapshot, but there is nothing to draft.
+            store.save(sid, ext, meta, previous)
+            quiet = {**base, "status": "no_match",
+                     "other_records_not_matching_keywords": entry["other_records_not_matching_keywords"]}
+            if entry.get("records_dropped_out"):
+                quiet["records_dropped_out"] = entry["records_dropped_out"]
+            quiet["summary"] = summary_text(dict(quiet))
+            return quiet
         candidates = [{"text": r.get("title") or r["id"], "url": r["url"]}
                       for r in entry["new_records"] if r.get("url")]
         hit_texts = [r["text"] for r in entry["new_records"]] + \
@@ -1185,6 +1243,7 @@ def load_config(path: Path) -> tuple[dict | None, list[str], list[str]]:
             "fields": [str(f) for f in (src.get("fields") or [])],
             "link_field": src.get("link_field"),
             "skip_records_where": skip_rules,
+            "report_removed": bool(src.get("report_removed")),
             "notes": src.get("notes"),
             "terms_checked": str(src["terms_checked"]) if src.get("terms_checked") else None,
             "enabled": src.get("enabled", True) is not False,
@@ -1212,7 +1271,7 @@ def load_config(path: Path) -> tuple[dict | None, list[str], list[str]]:
 def build_report(config: dict, results: list[dict], started: dt.datetime, finished: dt.datetime,
                  sources_path: Path, digest_dir: Path, warnings: list[str], dry_run: bool) -> dict:
     groups = {key: [r for r in results if r["status"] == key]
-              for key in ("changed", "first_run", "unchanged", "skipped", "error")}
+              for key in ("changed", "no_match", "first_run", "unchanged", "skipped", "error")}
     digest = config.get("digest") or {}
     report = {
         "tool": f"weekly-digest watch_sources.py {VERSION}",
@@ -1227,6 +1286,7 @@ def build_report(config: dict, results: list[dict], started: dt.datetime, finish
         "summary": {
             "sources": len(results),
             "changed": len(groups["changed"]),
+            "no_keyword_match": len(groups["no_match"]),
             "first_run": len(groups["first_run"]),
             "unchanged": len(groups["unchanged"]),
             "skipped": len(groups["skipped"]),
@@ -1234,6 +1294,8 @@ def build_report(config: dict, results: list[dict], started: dt.datetime, finish
         },
         "next_step": REVIEW_REMINDER,
         "changed": groups["changed"],
+        "changed_without_keyword_match": [
+            {k: r.get(k) for k in ("id", "name", "url", "summary")} for r in groups["no_match"]],
         "errors": [{k: r.get(k) for k in ("id", "name", "url", "error", "hint")} for r in groups["error"]],
         "skipped": [{k: r.get(k) for k in ("id", "name", "url", "reason")} for r in groups["skipped"]],
         "first_run": [{k: v for k, v in r.items() if k != "status"} for r in groups["first_run"]],
@@ -1245,7 +1307,8 @@ def build_report(config: dict, results: list[dict], started: dt.datetime, finish
 
 
 def counts_text(s: dict) -> str:
-    return (f"{s['changed']} changed, {s['unchanged']} unchanged, {s['first_run']} first check, "
+    quiet = f" ({s['no_keyword_match']} more with no keyword match)" if s.get("no_keyword_match") else ""
+    return (f"{s['changed']} changed{quiet}, {s['unchanged']} unchanged, {s['first_run']} first check, "
             f"{s['skipped']} skipped, {plural(s['errors'], 'error')}")
 
 
@@ -1313,6 +1376,10 @@ def report_markdown(report: dict) -> str:
         if entry.get("warnings"):
             out += ["**Notes**", ""] + [f"- {w}" for w in entry["warnings"]] + [""]
 
+    if report.get("changed_without_keyword_match"):
+        out += [f"## Changed, but nothing matched your keywords ({len(report['changed_without_keyword_match'])})", ""]
+        out += [f"- {e['name']}: {e['summary']}" for e in report["changed_without_keyword_match"]]
+        out.append("")
     if report["errors"]:
         out += [f"## Errors ({len(report['errors'])}): check these by hand", ""]
         for e in report["errors"]:

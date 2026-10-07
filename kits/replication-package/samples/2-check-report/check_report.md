@@ -70,7 +70,7 @@ Checked 2026-10-07 with check_package.py 1.0. This is an automated first pass: e
 | F31 | Paths | code/clean_data.py (line 2) | Absolute path in a comment: `D:\projects\tutoring\raw`. | Harmless when running, but it reveals where files lived on the author's computer. Delete or update the comment. |
 | F32 | Dependencies | (Stata code) | No version statement in the do-files. | Add version NN (the Stata version the author used) near the top of the master do-file. |
 | F33 | Housekeeping | (package) | No LICENSE file. | Ask the author which licence to use for code and data (for example MIT for code, CC BY 4.0 for data they own) and add a LICENSE file. |
-| F34 | Housekeeping | .DS_Store | 1 stray system or temporary file(s) or folder(s). | Delete them from the deposit (they are created by Mac, Windows, Python, R or Office). |
+| F34 | Housekeeping | output/Thumbs.db | 1 stray system or temporary file(s) or folder(s). | Delete them from the deposit (they are created by Mac, Windows, Python, R or Office). |
 
 ## What this check does not do
 

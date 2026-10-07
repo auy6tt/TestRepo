@@ -26,7 +26,7 @@ John Roe), the paper, the school district and the data. Show it to prospects as 
 - An appendix table (Table A1) with no program that creates it.
 - An old Stata do-file that reads a data file not in the package, uses community commands with no
   version list, draws bootstrap samples without a seed and writes paths with backslashes.
-- No log, no licence, and a stray `.DS_Store` file.
+- No log, no licence, and a stray `Thumbs.db` file (a Windows thumbnail cache) in `output/`.
 
 ## What the authors were asked, and their answers (fictional)
 

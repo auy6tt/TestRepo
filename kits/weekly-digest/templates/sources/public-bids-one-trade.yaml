@@ -1,0 +1,117 @@
+# Offer: public-bid digest for one trade, with past winning prices
+#
+# What it watches: open bids from city, county, school district, state and
+# transit purchasing offices for ONE trade in ONE metro area or state, plus
+# the posted bid results ("bid tabulations") that show who bid and at what price.
+# The example trade here is roofing. Change the keywords for your trade.
+#
+# How to use this file:
+#   1. Copy it to digests/<your-digest>/sources.yaml
+#   2. Replace every https://example.gov/... address with the real official page.
+#      The watcher skips placeholder addresses, so nothing is fetched until you do.
+#   3. For each real source, read the site's terms of use and its robots.txt,
+#      then put the date you checked in terms_checked.
+#   4. Add each domain under Allowed domains in the environment's Network access settings.
+#   5. Run: python scripts/watch_sources.py digests/<your-digest>
+#
+# Where to find the real sources:
+#   - Search each agency's site for "bids", "bid opportunities", "solicitations"
+#     or "purchasing". Start with the 8–15 agencies that buy the most of your trade.
+#   - Results: the same purchasing pages usually post "bid tabulations",
+#     "bid results" or "award notices" as PDFs. Council or board agendas also
+#     show contract awards with the price.
+#   - Some agencies use an e-procurement portal. Many portals need a login and
+#     forbid redistribution. Never log in with the watcher and never copy their
+#     listings: watch the agency's public page and link to the notice.
+#   - Open data: many cities publish "contracts", "purchase orders" or "vendor
+#     payments" as open data with an API (see the new-commercial-premises
+#     template for how API addresses work).
+#   - Federal: SAM.gov has a free "Get Opportunities" API that needs an API key
+#     (see open.gsa.gov). Never write a key in this file. Write ${SAM_API_KEY} in
+#     the address and set SAM_API_KEY as an environment variable (see README.md).
+#
+# Double-check every deadline: a wrong bid date is the costliest mistake here.
+
+digest:
+  name: "Roofing Bid Digest — Example Metro"
+  scope: >-
+    Open public bids for roofing work (replacement, repair, coatings, gutters)
+    from agencies in the example metro, plus posted results with winning prices.
+  audience: "Small roofing contractors who bid on public work"
+
+settings:
+  user_agent: "YourDigestName/1.0 (+mailto:you@yourdomain.com)"   # put your real contact email here
+  delay_seconds: 5
+  keywords: [roof*, reroof*, "roof replacement", gutter, membrane, TPO, EPDM, shingle,
+             "bid tabulation", "bid result", award*]
+
+sources:
+  # --- City purchasing: open bids list (HTML). Fetch new solicitation PDFs.
+  - name: "City of Example: open bids"
+    url: https://example.gov/city/purchasing/open-bids
+    type: html
+    selector: "table.bids, #bid-list"
+    follow_new_links: {pattern: "\\.pdf($|\\?)", max: 5}
+    tags: [city, open-bid]
+    terms_checked:                       # e.g. 2026-10-01
+
+  # --- City purchasing: bid results page. New tabulation PDFs give past winning prices.
+  - name: "City of Example: bid results and tabulations"
+    url: https://example.gov/city/purchasing/bid-results
+    type: html
+    follow_new_links: {pattern: "(tab|result|award).*\\.pdf", max: 5}
+    tags: [city, results]
+    terms_checked:
+
+  # --- County purchasing: an RSS feed of new solicitations, if the county offers one.
+  - name: "Example County: solicitations feed"
+    url: https://example.gov/county/purchasing/solicitations.rss
+    type: rss
+    follow_new_links: true
+    tags: [county, open-bid]
+    terms_checked:
+
+  # --- School district: facilities bids page (HTML).
+  - name: "Example School District: facilities bids"
+    url: https://example.gov/schools/business-office/bids
+    type: html
+    follow_new_links: true
+    tags: [school-district, open-bid]
+    terms_checked:
+
+  # --- Transit or airport authority: procurement page (HTML).
+  - name: "Example Transit Authority: procurement opportunities"
+    url: https://example.gov/transit/procurement
+    type: html
+    tags: [transit, open-bid]
+    terms_checked:
+
+  # --- City council agendas: contract awards approved, with amounts (PDF of the current agenda).
+  - name: "City of Example council: current agenda (contract awards)"
+    url: https://example.gov/city/council/agenda-current.pdf
+    type: pdf
+    tags: [city, award]
+    terms_checked:
+
+  # --- Open data: city contracts dataset (JSON API). Keep business fields only.
+  - name: "City of Example open data: contracts"
+    url: https://example.gov/resource/contracts.json?$order=start_date%20DESC&$limit=200
+    type: json
+    id_field: contract_number
+    fields: [contract_number, start_date, vendor_business_name, description, amount, department]
+    tags: [city, open-data, award]
+    terms_checked:
+
+  # --- Federal (optional): SAM.gov opportunities API. The key comes from an environment variable.
+  #     {{today-14:%m/%d/%Y}} becomes the date 14 days ago, so the window moves each week.
+  #     238160 is the NAICS code for roofing contractors; XX is your state's two-letter code.
+  - name: "SAM.gov: roofing opportunities in the state"
+    url: https://example.gov/sam/opportunities/v2/search?api_key=${SAM_API_KEY}&ncode=238160&state=XX&postedFrom={{today-14:%m/%d/%Y}}&postedTo={{today:%m/%d/%Y}}&limit=100
+    type: json
+    items_path: opportunitiesData
+    id_field: noticeId
+    fields: [noticeId, title, postedDate, responseDeadLine, type, fullParentPathName, uiLink]
+    link_field: uiLink
+    keywords: []          # the search already filters by trade code and state
+    tags: [federal, open-bid]
+    terms_checked:

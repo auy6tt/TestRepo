@@ -296,7 +296,8 @@ class Crawler:
                 self.notes.append(f"Could not read {base}/robots.txt ({exc.__class__.__name__}).")
             self.robots[base] = rules
             if getattr(rules, "crawl_delay", None) and rules.crawl_delay > self.args.delay:
-                self.notes.append(f"{base} asks for {rules.crawl_delay:g} seconds between requests; the crawler waits that long.")
+                unit = "second" if rules.crawl_delay == 1 else "seconds"
+                self.notes.append(f"{base} asks for {rules.crawl_delay:g} {unit} between requests; the crawler waits that long.")
         return self.robots[base]
 
     def wait_turn(self, base: str) -> None:
@@ -445,6 +446,11 @@ class Crawler:
             response = self.request(url)
         except requests.RequestException as exc:
             self.add_page(url, depth, note=f"Error: {exc.__class__.__name__}")
+            if depth == 0:
+                self.notes.append(
+                    f"Could not reach the start page ({exc.__class__.__name__}). In a Claude Code cloud session this "
+                    "usually means the environment's network policy blocks the site: allow the client's domains under "
+                    "Network access in the environment settings (see the kit README), then run the crawl again.")
             return
         final = normalize(response.url)
         ctype = self.content_type(response)

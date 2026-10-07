@@ -67,6 +67,8 @@ NOT_NAMES = {
     "then", "first", "last", "today", "tonight", "here", "there", "aye", "nay", "transcript",
     "speakers", "source", "length", "times", "recording", "meeting", "q", "a", "p.s", "ps",
 }
+CONTRACTIONS = {"it's", "that's", "there's", "here's", "what's", "let's", "i'm", "we're", "you're", "they're",
+                "he's", "she's", "we'll", "i'll", "don't", "can't", "won't", "isn't", "i've", "we've"}
 NAME_CONNECTORS = {"de", "da", "del", "della", "di", "du", "van", "von", "der", "den", "la", "le",
                    "bin", "binti", "al", "el", "y", "and", "&", "of", "st."}
 SUSPICIOUS_LABEL_RE = re.compile(
@@ -93,7 +95,7 @@ class TranscriptInfo:
     format: str
     captions: int = 0
     fillers_removed: int = 0
-    skipped_preamble: int = 0
+    skipped_preamble: str = ""
     speaker_seconds: dict = field(default_factory=dict)
 
 
@@ -173,6 +175,8 @@ def looks_like_speaker(name: str | None) -> bool:
     if not 1 <= len(tokens) <= 6:
         return False
     if not (tokens[0][0].isupper() or re.match(r"^i[A-Z]", tokens[0])):
+        return False
+    if tokens[0].lower().replace("\u2019", "'") in CONTRACTIONS:
         return False
     for token in tokens:
         if token.lower() in NAME_CONNECTORS or re.fullmatch(r"[-–&/|]", token):
@@ -372,7 +376,7 @@ def parse_text_transcript(text: str, info: TranscriptInfo) -> list[Cue]:
     # Drop title lines before the first speaker label (Teams and Otter add a few).
     labelled = [i for i, cue in enumerate(cues) if cue.speaker]
     if len(labelled) >= 3 and labelled[0] > 0:
-        info.skipped_preamble = labelled[0]
+        info.skipped_preamble = " ".join(cue.text for cue in cues[:labelled[0]])
         cues = cues[labelled[0]:]
     # A turn ends where the next one starts.
     for cue, nxt in zip(cues, cues[1:]):
@@ -550,7 +554,8 @@ def report(turns: list[Turn], info: TranscriptInfo, output: str) -> str:
     lines = [f"Read {info.captions} captions or lines from {info.source} ({info.format}).",
              f"Wrote {len(turns)} speaker turns to {output}."]
     if info.skipped_preamble:
-        lines.append(f"Skipped {info.skipped_preamble} title line(s) before the first speaker label.")
+        shown = info.skipped_preamble if len(info.skipped_preamble) <= 80 else info.skipped_preamble[:77] + "..."
+        lines.append(f"Skipped the title text before the first speaker label: {shown!r}")
     lines.append("Speakers:")
     for name, count, seconds in speaker_stats(turns, info):
         talk = f"   {format_offset(seconds)} talk time" if seconds else ""

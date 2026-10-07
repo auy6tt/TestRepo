@@ -22,7 +22,7 @@ WHAT I CHANGED (no estimates, data values or results were changed)
 5. Pinned exact package versions in requirements.txt, and added numpy and scipy, which the code imports but the old file did not list.
 6. Replaced data/raw/tutoring_pilot.csv with the de-identified version you approved (names, parent emails, phone numbers, home addresses and birth dates removed). The analysis never used those columns, and the comparison shows the results are unchanged.
 7. Wrote README.md in the data editors' format, with the data availability statement, the data citation and the table and figure map. Added LICENSE.txt with the licences you chose (MIT for the code, CC0 for the data).
-8. Left out old/robustness_check.do, which you confirmed is an unused 2022 check that is not in the paper (it also read a data file that is not in the package), and a stray .DS_Store file.
+8. Left out old/robustness_check.do, which you confirmed is an unused 2022 check that is not in the paper (it also read a data file that is not in the package), and a stray Thumbs.db file.
 
 DIFFERENCES AND QUESTIONS FOR YOU (you decide)
 1. No differences: every number in Tables 1, 2 and A1, and the Figure 1 image, match your originals.

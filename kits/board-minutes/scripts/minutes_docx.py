@@ -511,6 +511,9 @@ def build_house_template(locale: str = "en-US", appendices: bool = True):
     section.header_distance = section.footer_distance = Inches(0.4)
     define_house_styles(doc, locale)
     width = text_width_twips(doc)
+    zoom = doc.settings.element.find(qn("w:zoom"))
+    if zoom is not None and zoom.get(qn("w:percent")) is None:
+        zoom.set(qn("w:percent"), "100")  # python-docx's default omits this required attribute
 
     # Header on pages 2+, footer on every page.
     section.different_first_page_header_footer = True
@@ -1046,16 +1049,17 @@ def _replace_scalars(paragraph: Paragraph, values: dict, problems: list[str]) ->
         position += len(run.text)
     for match in reversed(list(PLACEHOLDER_RE.finditer(full))):
         name = match.group(1)
-        if name not in values:
-            if name.upper() == name and name in BLOCK_NAMES:
-                problems.append(f"{match.group(0)} must be alone in its own paragraph (line).")
-            else:
-                problems.append(f"Unknown placeholder {match.group(0)}.")
+        if name in BLOCK_NAMES:
+            problems.append(f"{match.group(0)} must be alone in its own paragraph (line).")
+            continue
+        key = name if name in values else name.lower()  # {{ORGANIZATION}} works like {{organization}}
+        if key not in values:
+            problems.append(f"Unknown placeholder {match.group(0)}.")
             continue
         start, end = match.span()
         first = next(i for i, (a, b) in enumerate(bounds) if a <= start < b)
         last = next(i for i, (a, b) in enumerate(bounds) if a < end <= b)
-        value = smart_quotes(values[name])
+        value = smart_quotes(values[key])
         offset = bounds[first][0]
         if first == last:
             text = runs[first].text
@@ -1116,6 +1120,8 @@ def fill_document(doc, m: dict, house: bool) -> None:
         if match and match.group(1).isupper():
             name, arg = match.group(1), (match.group(2) or "").strip()
             if name not in BLOCK_NAMES:
+                if name.lower() in SCALAR_NAMES and not arg:
+                    continue  # a short placeholder typed in capitals; filled below
                 problems.append(f"Unknown block placeholder {match.group(0)}. "
                                 f"Blocks: {', '.join('{{' + b + '}}' for b in BLOCK_NAMES)}.")
                 continue
@@ -1125,9 +1131,9 @@ def fill_document(doc, m: dict, house: bool) -> None:
             anchors.append((paragraph, name, arg))
     for root, parent in _story_roots(doc)[1:]:
         for paragraph in _paragraphs(root, parent):
-            match = PLACEHOLDER_RE.search(paragraph.text)
-            if match and match.group(1).isupper():
-                problems.append(f"{match.group(0)} is in a header or footer; blocks only work in the main text.")
+            for match in PLACEHOLDER_RE.finditer(paragraph.text):
+                if match.group(1) in BLOCK_NAMES:
+                    problems.append(f"{match.group(0)} is in a header or footer; blocks only work in the main text.")
     if problems:
         raise TemplateError("\n".join(problems))
 
@@ -1175,11 +1181,11 @@ def render_docx(m: dict, out_path: str | Path, template_path: str | Path | None 
     out_path = Path(out_path)
     if template_path:
         template_path = Path(template_path)
-        if not template_path.exists():
-            raise TemplateError(f"Template not found: {template_path}")
         if template_path.suffix.lower() != ".docx":
             raise TemplateError("The template must be a .docx file. Open it in Word or LibreOffice and "
                                 "save it as a Word document (.docx) first.")
+        if not template_path.exists():
+            raise TemplateError(f"Template not found: {template_path}")
         try:
             doc = Document(str(template_path))
         except Exception as exc:  # python-docx raises several error types for damaged files

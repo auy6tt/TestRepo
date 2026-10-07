@@ -260,7 +260,7 @@ Fills the automated columns of `templates/remediation-log-template.xlsx` (before
 
 | Folder | What it shows |
 |---|---|
-| `samples/town-site/` | The fictional town website: 9 pages, robots.txt, sitemap, and 14 documents with typical problems (untagged PDFs, a duplicate, an old file, a fillable form, an image-only scan, a link without a file extension, a broken link, a file blocked by robots.txt, an off-site file) plus one properly tagged PDF made from Word |
+| `samples/town-site/` | The fictional town website: 9 public pages (one reachable only through the sitemap), a staff-only section blocked by robots.txt, and 14 documents: untagged PDFs, an exact duplicate, a 2019 file, a fillable form, an image-only scan, a file served from a link with no file extension, a tagged PDF with problems, one properly tagged PDF made from Word, and Word, Excel and PowerPoint files. Pages also link to a missing file, a staff-only file and an off-site file. |
 | `samples/source-files/` | The Word files behind the tagged PDFs, including the rebuilt council agenda |
 | `samples/crawl/` | Crawl output: documents, links, pages and the crawl summary |
 | `samples/downloads/` | The documents the crawler downloaded |
@@ -270,7 +270,7 @@ Fills the automated columns of `templates/remediation-log-template.xlsx` (before
 | `samples/fixes/basic-fixes/` | Copies with titles, language and OCR added by `fix_basics.py`, and `fix-log.csv` |
 | `samples/fixes/remediation-log-sample.xlsx` | The log with the automated columns filled; the human-check columns are honestly marked "To do" |
 
-To run it all again: `$PY kits/doc-accessibility/scripts/run_sample_demo.py --rebuild` (about a minute).
+To run it all again: `$PY kits/doc-accessibility/scripts/run_sample_demo.py --rebuild` (under a minute).
 
 ## Using it with Claude Code
 

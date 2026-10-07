@@ -1,0 +1,102 @@
+# Offer: international aid tenders for one specialty (and one language)
+#
+# What it watches: procurement notices and calls for proposals from
+# development banks, UN agencies and the EU for ONE specialty. The example
+# specialty is monitoring and evaluation (M&E); change the keywords for
+# GIS, training, translation, WASH engineering or your own field.
+#
+# How to use this file:
+#   1. Copy it to digests/<your-digest>/sources.yaml
+#   2. Replace every https://example.org/... address with the real official page.
+#      The watcher skips placeholder addresses, so nothing is fetched until you do.
+#   3. For each real source, read its terms of use and robots.txt, then put the
+#      date you checked in terms_checked. Several of these portals have their own
+#      reuse terms: summarise in your own words and link to the notice.
+#   4. Add each domain under Allowed domains in the environment's Network access settings.
+#   5. Run: python scripts/watch_sources.py digests/<your-digest>
+#
+# Where to find the real sources:
+#   - World Bank: procurement notices for its projects are public, and the
+#     Bank offers a public search API (look for "API" on its projects and
+#     procurement pages). Use the notices feed, not third-party copies.
+#   - United Nations: the UN Global Marketplace (UNGM) lists notices from many
+#     UN agencies. UNGM sells its own alert service, so never resell or repost
+#     its listings: link to each notice. UNDP, UNICEF and others also publish
+#     notices on their own procurement pages.
+#   - European Union: TED (Tenders Electronic Daily) has an official API and
+#     search feeds; EU grant calls are on the EU Funding & Tenders portal.
+#   - Regional development banks (Asian, African, Inter-American and others)
+#     each publish procurement and consulting notices on their sites.
+#   - Pick sources in your subscribers' language. Add keywords in that language
+#     too (for example "évaluation" and "suivi-évaluation" for French).
+#
+# Watch the closing dates and time zones: notices often give the deadline in
+# the issuing office's local time.
+
+digest:
+  name: "Evaluation Tenders Weekly — Africa, English and French"
+  scope: >-
+    Open tenders, expressions of interest and calls for proposals for
+    monitoring, evaluation, baseline and impact studies funded by development
+    banks, UN agencies and the EU in Africa.
+  audience: "Small evaluation consultancies and independent evaluators"
+
+settings:
+  user_agent: "YourDigestName/1.0 (+mailto:you@yourdomain.com)"   # put your real contact email here
+  delay_seconds: 6
+  keywords: [evaluation, "monitoring and evaluation", "M&E", "baseline", "endline", "midline",
+             "impact assessment", "third-party monitoring", "évaluation", "suivi-évaluation",
+             "étude de base"]
+
+sources:
+  # --- World Bank procurement notices (JSON API). Real endpoint: see the Bank's API docs.
+  - name: "World Bank: procurement notices (consulting services)"
+    url: https://example.org/worldbank/api/procnotices?format=json&rows=100&procurement_group=CS
+    type: json
+    items_path: procnotices
+    id_field: id
+    fields: [id, notice_type, noticedate, submission_deadline_date, project_ctry_name,
+             project_name, bid_description, procurement_method_name, url]
+    link_field: url
+    tags: [world-bank, consulting]
+    terms_checked:                       # e.g. 2026-10-01
+
+  # --- UN Global Marketplace: public notices list (HTML). Link to notices; never repost them.
+  - name: "UN Global Marketplace: public notices (evaluation)"
+    url: https://example.org/ungm/public/notice?keyword=evaluation
+    type: html
+    selector: "#tblNotices, .notice-list"
+    tags: [un, ungm]
+    notes: "UNGM sells its own alert service: link to each notice, do not copy listings."
+    terms_checked:
+
+  # --- UNDP procurement notices (HTML).
+  - name: "UNDP: procurement notices"
+    url: https://example.org/undp/procurement-notices
+    type: html
+    selector: "table, .notice-list"
+    follow_new_links: {pattern: "notice|tender|rfp", max: 5}
+    tags: [un, undp]
+    terms_checked:
+
+  # --- EU: TED search feed (RSS) for evaluation services in your region.
+  - name: "EU TED: evaluation services notices (RSS)"
+    url: https://example.org/ted/search/rss?query=evaluation-services-africa
+    type: rss
+    tags: [eu, ted]
+    terms_checked:
+
+  # --- Regional development bank: consulting notices (RSS, if offered).
+  - name: "Regional development bank: consulting notices"
+    url: https://example.org/regional-bank/procurement/consulting.rss
+    type: rss
+    tags: [regional-bank]
+    terms_checked:
+
+  # --- National development agency: tenders page in French (HTML).
+  - name: "National development agency: appels d'offres"
+    url: https://example.org/agence/appels-offres
+    type: html
+    selector: "main"
+    tags: [bilateral, french]
+    terms_checked:

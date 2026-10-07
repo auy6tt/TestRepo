@@ -13,7 +13,7 @@ I get packages ready for the code check: one master script that runs everything,
 
 I never change estimates: any difference goes to you, and you decide. Restricted data stay with you; I can work from the code alone. I use AI-assisted coding tools and check every change myself.
 
-- README and structure check: $[300-600], ready in [3] working days
+- README and structure check: $[300–600], ready in [3] working days
 - Full clean-up with reproduction report: from $[800], fixed price after a free look at the package
 
 A sample report from a fictional package I cleaned up: [link]

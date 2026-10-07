@@ -1,0 +1,88 @@
+XLSForm check
+=============
+
+File:     samples/07_checker_demo/broken_xlsform.xlsx
+Checked:  2026-10-07
+Tools:    pyxform 4.5.0; ODK Validate run
+Convert:  FAILED - the form does not convert yet
+
+RESULT: FAILED - 13 error(s), 2 warning(s), 3 note(s)
+
+Summary
+-------
+Questions:        10 (plus 0 notes, 1 calculations)
+Groups / repeats: 1 / 0
+Question types:   text 3, integer 3, select_one 3, calculate 1, select_multiple 1
+Required:         3
+Relevant (skip):  4
+Constraints:      1
+Choice lists:     3
+Languages:        one (no language columns)
+Form id/version:  broken_example / (not set)
+
+Errors - must fix
+-----------------
+* survey row 4
+    'smokes' uses the choice list 'yesnoo', which is not on the choices sheet.
+    Fix: Did you mean 'yesno'? Add the list to the choices sheet.
+* survey row 5
+    The relevant of 'cigs' uses REDCap-style [field] references.
+    Fix: Write ${field} instead, e.g. ${age} > 17; for a ticked checkbox use selected(${field}, '2').
+* survey row 6
+    The relevant of 'pregnant' has curly quotes (usually pasted from Word): ${sex} = ‘2’
+    Fix: Retype the quotes as straight ' quotes. Curly quotes pass the converter but never match.
+* survey row 6
+    The relevant of 'pregnant' refers to ${sex}, which is not a question name.
+    Fix: Check the spelling.
+* survey row 7
+    The relevant of 'alcohol' uses '<>' (REDCap style). XLSForm uses '!='.
+    Fix: ${age} >= 18 AND ${age} != 99
+* survey row 7
+    The relevant of 'alcohol' uses AND/OR in capitals. XLSForm needs lowercase.
+    Fix: Write and / or in lowercase.
+* survey row 9
+    Name 'village name' is not allowed.
+    Fix: Names start with a letter or underscore and use only letters, numbers, _ - and .; no spaces.
+* survey row 10
+    Calculate row 'age_months' has no formula in the calculation column.
+* survey row 11
+    The group 'contact' is never closed.
+    Fix: Add an end_group row.
+* survey row 11
+    The relevant of 'contact' refers to ${consnt}, which is not a question name.
+    Fix: Did you mean ${contact}?
+* choices row 4
+    Choice '1' appears twice in list 'yesno' (also row 2).
+    Fix: Each choice name must be unique within its list.
+* choices row 5
+    Choice 'sore throat' has a space but list 'symptoms' is used by a select_multiple question.
+    Fix: Remove the spaces, e.g. use underscores.
+* pyxform
+    pyxform stopped with this error:
+      [row : 4] On the 'choices' sheet, the 'name' value is invalid. Choice names must be unique for each choice list. If this is intentional, use the setting 'allow_choice_duplicates'. Learn more: https://xlsform.org/#choice-names.
+    In plain English: A choice list has the same name (code) twice.
+    Fix: Give every choice in a list its own name.
+
+Warnings - fix, or confirm they are intended
+--------------------------------------------
+* survey row 5
+    Required is 'maybe'. Use yes, or an expression.
+    Fix: Anything else is read as an expression and may silently mean 'not required'.
+* survey row 8
+    Name 'age' is also used on survey row 3.
+    Fix: Give each question its own name; ${...} references become ambiguous otherwise.
+
+Notes - good to know
+--------------------
+* survey row 3
+    'age' has a constraint but no constraint_message.
+    Tip: Add a message that tells the person what to enter, e.g. 'Enter a number from 0 to 7.'
+* choices row 6
+    Choice list 'spare' is not used by any question.
+    Tip: Delete it if it is not needed.
+* settings sheet
+    No version set (e.g. a date like 2026100701; change it for every update).
+
+Rows are spreadsheet rows (the header is row 1).
+Passing these checks is not the same as testing: preview the form in KoboToolbox or ODK
+and try every path before collecting data.
