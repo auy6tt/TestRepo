@@ -168,13 +168,14 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 *Component lists, vulnerability policy and a reporting plan.* **€500–2,000 per product, plus €100–300 a month to keep it current (est.)** · demand 4/5 · few competitors 3/5 · Claude fit 4/5 · beginner 2/5
 
 - **Who pays:** Micro and small companies anywhere that sell connected hardware, firmware or downloadable software in the EU.
-- **What they need:** A software bill of materials (a list of every component) per release, a vulnerability-handling and disclosure policy, a security.txt contact file, a 24-hour/72-hour/14-day reporting plan, a support-period statement, and a gap list.
+- **What they need:** A software bill of materials (a list of every component) per release, a vulnerability-handling and disclosure policy, a security.txt contact file, a reporting plan (early warning within 24 hours, notification within 72 hours, and a final report 14 days after a fix is available for exploited vulnerabilities, or one month after notification for severe incidents), a support-period statement, and a gap list.
 - **Proof of demand:** Since 11 September 2026 makers must report actively exploited vulnerabilities to the EU cybersecurity agency on tight deadlines; full obligations follow in December 2027. Maximum fines are €15M or 2.5% of turnover, though micro and small firms can't be fined for missing the 24-hour early warning. In ENISA's survey, 57% of micro firms have nobody responsible for cybersecurity and over 70% asked for documentation templates.
 - **Why few people offer it:** The rule is new. Current providers are enterprise software vendors, consultancies and law firms that micro firms can't afford. Component-scanning tools are common, so the value is in the policies and reporting plan, which need some security knowledge.
 - **How Claude does it here:** Free tools generate the component lists and check them for known vulnerabilities in this sandbox. Claude drafts the policies, the reporting plan and the gap table, and sets up regeneration on each release. The client confirms the lists match what ships; their lawyer decides how the product is classified.
 - **Where buyers are:** Hardware sellers on Crowd Supply, Tindie and Kickstarter who ship to the EU, EU startup networks, embedded-systems meetups, LinkedIn. Speaking German, French or Italian helps.
 - **Watch out:** Not legal advice. Never claim "CRA compliant" or sign the EU declaration of conformity for a client.
 - **Test it in one day:** Check 30 small EU-selling hardware brands for a published vulnerability-reporting contact (a security.txt file is the usual way), and offer the ones without one a sample component list and report.
+- **Starter kit:** [`kits/cra-readiness/`](kits/cra-readiness/). In Claude Code, type `/cra-readiness` in this repo.
 
 <a id="vpat-acr"></a>
 #### Accessibility reports for software sold to governments and universities

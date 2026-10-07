@@ -577,6 +577,14 @@ def plan_writes(item: Item, args) -> None:
             item.writes[source_col] = src_line
     elif item.status == NEEDS and long_col and args.placeholder:
         item.writes[long_col] = args.placeholder
+    grid = layout.grid
+    for col in list(item.writes):
+        m = grid.merged(item.row, col)
+        if m and (m[0], m[1]) != (item.row, col):
+            del item.writes[col]
+            item.reasons.append(f"Cell {item.ref(col)} is inside a merged area, so it was not filled: do it by hand.")
+            if item.status == OK:
+                item.status = CHECK
 
 
 def already_answered(item: Item) -> bool:
