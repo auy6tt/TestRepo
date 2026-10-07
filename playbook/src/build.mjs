@@ -53,8 +53,8 @@ const copy = {
   __DATE__: "October 2026",
   __NSRC__: String(nSources),
   __LEDE__: "What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. <strong>Ranked for someone starting from zero:</strong> no reviews, no portfolio, no network.",
-  __META__: `<span><b>${opps.length}</b> ways to earn</span><span><b>${nPlatforms}</b> platforms compared</span><span><b>10</b> research passes</span><span>Prices in USD</span>`,
-  __PICKS_SUB__: "Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Start the first one this week and add others as reviews come in. The next section covers where to find the buyers.",
+  __META__: `<span><b>${opps.length}</b> ways to earn</span><span><b>${get("NICHES").length}</b> hidden niches</span><span><b>${nPlatforms}</b> platforms compared</span><span><b>${get("NICHES").filter(n => n.kit).length}</b> starter kits</span><span>Prices in USD</span>`,
+  __PICKS_SUB__: "Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Start the first one this week and add others as reviews come in. The next section lists less crowded niches, several with a ready-made starter kit.",
   __NICHES_SUB__: "Each one passed three tests: proof that people pay for it, evidence that few people offer it, and work Claude can do most of. Many exist because a new rule, a platform change or a dull task created demand faster than sellers appeared. Scores are out of 5. Before you build anything, run the one-day test in each entry.",
   __FC_SUB__: "Marketplaces now rank sellers by their history, and AI matchers on both Upwork and Fiverr decide who gets seen. So a newcomer wins fastest through people they know and through outreach that shows finished work first. Run Upwork and Fiverr alongside as slower channels. Ranked by how fast each works for someone with zero reviews.",
   __REALITY_SUB__: "Claude makes the work fast. It doesn't bring clients and it doesn't make strangers trust you. The data is sobering. One dataset of Claude Code businesses that owners listed on a revenue tracker found fewer than half earned anything, and the typical one made about $145–227 a month. The ranges below are targets for someone who works the plan every week, not promises.",
@@ -120,7 +120,7 @@ const L = [];
 L.push("# Claude Income Playbook", "");
 L.push("What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. Ranked for someone starting from zero: no reviews, no portfolio, no network.", "");
 if (PAGE_URL) L.push(`**Interactive version (filters, fee calculator, checklist):** ${PAGE_URL}`, "");
-L.push(`Researched October 2026 · ${opps.length} ways to earn · ${nPlatforms} platforms · ${nSources} sources. Not legal, tax or financial advice.`, "");
+L.push(`Researched October 2026 · ${opps.length} ways to earn · ${get("NICHES").length} hidden niches · ${nPlatforms} platforms · ${nSources} sources. Not legal, tax or financial advice.`, "");
 L.push("## Contents", "", "1. [Start here](#start-here)", "2. [Hidden niches: real demand, few competitors](#hidden-niches-real-demand-few-competitors)", "3. [First clients when nobody knows you](#first-clients-when-nobody-knows-you)", "4. [Reality check](#reality-check)", "5. [All opportunities](#all-opportunities)", "6. [Where to sell](#where-to-sell)", "7. [Rules](#rules)", "8. [30-day plan](#30-day-plan)", "9. [Templates](#templates)", "10. [Using this workspace](#using-this-workspace)", "11. [Sources](#sources)", "");
 L.push("## Start here", "", md(copy.__PICKS_SUB__), "");
 L.push("| # | Pick | Charge | First $ | Sell on |", "|---|---|---|---|---|");
@@ -137,7 +137,9 @@ for (const g of Object.keys(NG)) {
   L.push(`### ${NG[g]}`, "");
   list.forEach(n => {
     L.push(`<a id="${n.id}"></a>`, `#### ${n.name}`, "", `*${n.short}.* **${n.price}** · demand ${n.s[0]}/5 · few rivals ${n.s[1]}/5 · Claude fit ${n.s[2]}/5 · beginner ${n.s[3]}/5`, "");
-    L.push(`- **Who pays:** ${md(n.who)}`, `- **What they need:** ${md(n.need)}`, `- **Proof of demand:** ${md(n.demand)}`, `- **Why few people offer it:** ${md(n.why)}`, `- **How Claude does it here:** ${md(n.how)}`, `- **Where buyers are:** ${md(n.where)}`, `- **Watch out:** ${md(n.risk)}`, `- **Test it in one day:** ${md(n.first)}`, "");
+    L.push(`- **Who pays:** ${md(n.who)}`, `- **What they need:** ${md(n.need)}`, `- **Proof of demand:** ${md(n.demand)}`, `- **Why few people offer it:** ${md(n.why)}`, `- **How Claude does it here:** ${md(n.how)}`, `- **Where buyers are:** ${md(n.where)}`, `- **Watch out:** ${md(n.risk)}`, `- **Test it in one day:** ${md(n.first)}`);
+    if (n.kit) L.push(`- **Starter kit:** [\`kits/${n.kit}/\`](kits/${n.kit}/). In Claude Code, type \`/${n.kit}\` in this repo.`);
+    L.push("");
   });
 }
 L.push("", "## First clients when nobody knows you", "", md(copy.__FC_SUB__), "");

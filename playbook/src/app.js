@@ -83,7 +83,7 @@ function copyText(text, fallbackNode){
     ol.appendChild(h("li", {class:"pick"},
       h("div", {class:"rank", text:String(i + 1)}),
       h("div", null, h("span", {class:"group-tag", text:G[n.group]}), h("h3", {text:n.name}), h("p", {text:n.need}), h("p", {class:"why", text:"Why it's open: " + n.why})),
-      h("dl", null, h("dt", {text:"Charge"}), h("dd", null, h("span", {class:"money", text:n.price})), h("dt", {text:"Test it"}), h("dd", {text:n.first}))
+      h("dl", null, h("dt", {text:"Charge"}), h("dd", null, h("span", {class:"money", text:n.price})), h("dt", {text:"Test it"}), h("dd", {text:n.first}), n.kit ? h("dt", {text:"Kit"}) : null, n.kit ? h("dd", null, h("code", {text:"/" + n.kit})) : null)
     ));
   });
   var state = store("cip-niches") || {group:"all", sort:"overall"};
@@ -100,7 +100,7 @@ function copyText(text, fallbackNode){
   function row(n){
     return h("details", {class:"niche", id:"niche-" + n.id},
       h("summary", null,
-        h("div", {class:"nm"}, h("span", {class:"group-tag", text:G[n.group]}), h("div", {text:n.name}), h("small", {text:n.short})),
+        h("div", {class:"nm"}, h("span", {class:"group-tag", text:G[n.group]}), n.kit ? h("span", {class:"kit-tag", text:"Starter kit"}) : null, h("div", {text:n.name}), h("small", {text:n.short})),
         h("div", {class:"pr"}, h("span", {class:"money", text:n.price})),
         scores(n),
         h("span", {class:"caret", "aria-hidden":"true"})
@@ -114,7 +114,8 @@ function copyText(text, fallbackNode){
         h("div", null, h("h4", {text:"Where buyers are"}), h("p", {text:n.where})),
         h("div", null, h("h4", {text:"Watch out"}), h("p", {text:n.risk})),
         h("div", null, h("h4", {text:"Typical price"}), h("p", {text:n.priceNote || n.price})),
-        h("div", {class:"wide"}, h("h4", {text:"Test it in one day"}), h("p", {class:"firststep", text:n.first}))
+        h("div", {class:"wide"}, h("h4", {text:"Test it in one day"}), h("p", {class:"firststep", text:n.first})),
+        n.kit ? h("div", {class:"wide"}, h("h4", {text:"Starter kit in your repo"}), h("p", null, "Scripts, templates and a sample deliverable in ", h("code", {text:"kits/" + n.kit + "/"}), ". Open Claude Code in this repo and type ", h("code", {text:"/" + n.kit}), " to run the whole process.")) : null
       )
     );
   }

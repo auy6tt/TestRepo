@@ -2,7 +2,7 @@
 
 What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. Ranked for someone starting from zero: no reviews, no portfolio, no network.
 
-Researched October 2026 · 36 ways to earn · 27 platforms · 210 sources. Not legal, tax or financial advice.
+Researched October 2026 · 36 ways to earn · 46 hidden niches · 27 platforms · 272 sources. Not legal, tax or financial advice.
 
 ## Contents
 
@@ -20,7 +20,7 @@ Researched October 2026 · 36 ways to earn · 27 platforms · 210 sources. Not l
 
 ## Start here
 
-Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Start the first one this week and add others as reviews come in. The next section covers where to find the buyers.
+Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Start the first one this week and add others as reviews come in. The next section lists less crowded niches, several with a ready-made starter kit.
 
 | # | Pick | Charge | First $ | Sell on |
 |---|---|---|---|---|
@@ -1507,7 +1507,7 @@ Each template is also a separate file in [`templates/`](templates/).
 
 ## Sources
 
-210 sources across 10 research passes, October 2026. This environment's network policy blocked most sites, so the research agents read most pages through search-result summaries; Anthropic's terms and policies were read directly. Prices and fees change, so check before you rely on them.
+272 sources across 10 research passes, October 2026. This environment's network policy blocked most sites, so the research agents read most pages through search-result summaries; Anthropic's terms and policies were read directly. Prices and fees change, so check before you rely on them.
 
 ### Demand and market data
 
@@ -1690,6 +1690,80 @@ Each template is also a separate file in [`templates/`](templates/).
 - <https://www.ic3.gov/PSA/2025/PSA250123>
 - <https://unit42.paloaltonetworks.com/two-campaigns-by-north-korea-bad-actors-target-job-hunters/>
 - <https://www.irs.gov/forms-pubs/about-form-w-8-ben>
+
+### Hidden niches: rules and deadlines
+
+- <https://www.reedsmith.com/articles/doj-extends-digital-accessibility-compliance-dates-under-title-ii-of-the-ada/>
+- <https://www.deque.com/blog/section-504-digital-accessibility-deadlines-what-every-hhs-funded-provider-must-know/>
+- <https://venngage.com/blog/pdf-accessibility-cost/>
+- <https://mc.merill.net/message/MC1227454>
+- <https://o365reports.com/deprecation-of-smtp-authentication-client-submission-in-exchange-online/>
+- <https://it.uw.edu/microsoft-publisher-retires-october-2026/>
+- <https://learn.microsoft.com/en-us/answers/questions/5855781/how-can-i-continue-to-use-microsoft-publisher-afte>
+- <https://erp-recycling.org/uk/news-and-events/2026/07/packaging-epr-data-mistakes-costing-producers-thousands/>
+- <https://www.enisa.europa.eu/publications/sme-cra-survey-report>
+- <https://www.mass.gov/doc/accessibility-conformance-report-review-checklist/download>
+- <https://tallysolutions.com/mena/uae-vat/uae-e-invoicing-timeline-2026-2027-complete-phase-by-phase-implementation-guide/>
+- <https://pcisecuritystandards.org/faq/articles/Frequently_Asked_Question/how-does-an-e-commerce-merchant-meet-the-saq-a-eligibility-criteria-for-scripts>
+- <https://www.ehstoday.com/osha-enforcement/news/55343917/osha-extends-compliance-date-for-hazard-communication-standard-rulemaking>
+- <https://www.cpsc.gov/Newsroom/News-Releases/2026/CPSC-Implements-Mandatory-eFiling-for-Certificates-of-Compliance-Targeting-Dangerous-Foreign-Imports>
+- <https://www.coolset.com/academy/the-eu-deforestation-regulation-eudr-what-businesses-need-to-know-and-do>
+- <https://epoch.blue/article/missing-polygons>
+
+### Hidden niches: specialist software and data subscriptions
+
+- <https://help4access.com/microsoft-access-end-of-life/>
+- <https://www.drupal.org/about/drupal-7/d7eol/migration-resource-center/d7-extended-security-support>
+- <https://drupalify.com/blog/drupal-7-migration-cost-uk>
+- <https://www.cadcrowd.com/hire/autolisp>
+- <https://www.autodesk.com/blogs/autocad/autocad-lt-2024-autolisp/>
+- <https://www.ortussolutions.com/blog/the-cfml-talent-crunch-in-2025-why-modernization-cant-wait>
+- <https://www.pagination.com/indesign-automation/>
+- <https://www.cadcrowd.com/hire/revit-dynamo>
+- <https://www.orderful.com/blog/best-edi-providers-small-businesses-2026>
+- <https://beancount.io/blog/2026/09/27/packaging-epr-laws-small-business-producer-pro-guide>
+- <https://repurpose.global/case-studies/tillamook>
+- <https://civiciq.com/blog/civic-iq-bidnet-direct-pricing>
+- <https://www.electricchoice.com/datacenters/moratoriums/>
+- <https://www.devex.com/membership/individuals>
+- <https://sacra.com/c/shovels/>
+
+### Hidden niches: new AI needs and back office
+
+- <https://platform.claude.com/docs/en/about-claude/model-deprecations>
+- <https://platform.claude.com/docs/en/about-claude/pricing>
+- <https://myaskai.com/blog/how-to-improve-intercom-fin-resolution-rate>
+- <https://www.langchain.com/state-of-agent-engineering>
+- <https://claude.com/blog/skills>
+- <https://claude.com/blog/cowork-plugins-across-enterprise>
+- <https://www.gartner.com/en/newsroom/press-releases/2025-02-26-lack-of-ai-ready-data-puts-ai-projects-at-risk>
+- <https://www.bakerbotts.com/thought-leadership/publications/2026/september/eu-ai-act-article-50-transparency-obligations-go-live>
+- <https://www.axios.com/2026/05/05/openai-self-serve-ad-platform>
+- <https://ahrefs.com/blog/ai-brand-visibility-correlations>
+- <https://www.searchenginejournal.com/llms-txt-shows-no-clear-effect-on-ai-citations-based-on-300k-domains/561542/>
+- <https://hoaresources.caionline.org/author/minutes-solutions>
+- <https://www.indiehackers.com/post/why-is-filling-out-a-sig-security-questionnaire-still-a-15-hour-job-in-2026-5824d125ab>
+- <https://www.nsca.org/industy-insights/outsourcing-submittals-oampm-manuals-and-close-out-documentation/>
+- <https://designingbuildings.co.uk/wiki/Outsourcing_operation_and_maintenance_manuals>
+- <https://www.beaconproducts.co.uk/gift-aid>
+- <https://parishresources.org.uk/giftaid/claiming/>
+- <https://www.tacto.ai/en/procurement-glossary/ecovadis-rating>
+- <https://www.food.gov.uk/news-alerts/news/updated-industry-guidance-issued-for-food-allergen-information-in-the-out-of-home-sector>
+
+### Hidden niches: research, nonprofits and authors
+
+- <https://healthinstitute.illinois.edu/research-support/redcap/consultation-support/project-build-services>
+- <https://ctsi.lundquist.org/wp-content/uploads/2025/01/REDCap-Rate-Sheet.pdf>
+- <https://aeadataeditor.github.io/aea-de-guidance/preparing-for-data-deposit>
+- <https://www.cascad.tech/pricing/>
+- <https://www.fda.gov/news-events/press-announcements/fda-reminds-more-2200-sponsors-and-researchers-disclose-trial-results>
+- <https://datadryad.org/help/requirements/costs>
+- <https://www.mgcaa.org/community-needs-assessment-rfp/>
+- <https://www.the-efa.org/rates/>
+- <https://www.factual.work/hire-a-fact-checker>
+- <https://asindexing.org/ai-news/statement-on-ai-and-book-indexing/>
+- <https://www.thebookdesigner.com/cip-what-it-means-how-to-read-it-who-should-get-it/>
+- <https://foundryvtt.com/article/paizo-faq>
 
 ### Getting first clients as a newcomer
 
