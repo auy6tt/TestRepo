@@ -68,6 +68,16 @@ def money(value: float) -> str:
     return f"${value:,.0f}"
 
 
+def delay_text(crawl: dict) -> str:
+    """The wait the crawler left between requests, for 'leaving at least ... between requests'."""
+    seconds = crawl.get("effective_delay_seconds", crawl.get("delay_seconds"))
+    try:
+        seconds = float(seconds)
+    except (TypeError, ValueError):
+        return "[delay]"
+    return "one second" if seconds == 1 else f"{seconds:g} seconds"
+
+
 def summary_text(records: list[dict], numbers: dict, crawl: dict, site: str) -> str:
     pages_read = crawl.get("pages_crawled")
     parts = [f"We found {numbers['total_files']} documents ({numbers['total_pages']} pages) linked from "
@@ -156,7 +166,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--template", default=str(KIT / "templates" / "snapshot-report-template.docx"))
     parser.add_argument("--out", required=True, help="the .docx to write")
     parser.add_argument("--client", required=True, help="client name, as it should appear in the report")
-    parser.add_argument("--site", help="website (default: the crawl's start URL)")
+    parser.add_argument("--site", help="website address to show in the report, also where the crawl started "
+                        "(default: the crawl's start URL)")
     parser.add_argument("--prepared-by", default="[Your name]")
     parser.add_argument("--contact", default="[your email and phone]")
     parser.add_argument("--sector", choices=sorted(WHY_IT_MATTERS), default="us-public",
@@ -176,7 +187,7 @@ def main(argv: list[str] | None = None) -> int:
     values = {
         "CLIENT_NAME": args.client, "SITE_URL": site, "PREPARED_BY": args.prepared_by, "CONTACT": args.contact,
         "REPORT_DATE": dt.date.today().strftime("%d %B %Y").lstrip("0"),
-        "CRAWL_DATE": nice_date(crawl.get("date")), "START_URL": crawl.get("start_url", site),
+        "CRAWL_DATE": nice_date(crawl.get("date")), "START_URL": site, "CRAWL_DELAY": delay_text(crawl),
         "DEPTH": crawl.get("depth", "[depth]"), "PAGES_CRAWLED": crawl.get("pages_crawled", "[number of]"),
         "TOTAL_FILES": numbers["total_files"], "TOTAL_PAGES": numbers["total_pages"],
         "PDF_COUNT": numbers["by_type"].get("PDF", 0), "WORD_COUNT": numbers["by_type"].get("Word", 0),

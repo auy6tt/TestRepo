@@ -1,6 +1,8 @@
 # CRA readiness kit
 
-A starter kit for one paid service you can sell from day one: an **EU Cyber Resilience Act (CRA) readiness pack** for micro and small makers of connected hardware, firmware and downloadable software sold in the EU. It comes with scripts that do the technical work, document templates, and a finished sample for a fictional product that you can show to prospects.
+A starter kit for one paid service: an **EU Cyber Resilience Act (CRA) readiness pack** for micro and small makers of connected hardware, firmware and downloadable software sold in the EU. It comes with scripts that do the technical work, document templates, and a finished sample for a fictional product that you can show to prospects.
+
+> **Beginner level: 2 out of 5** in the playbook. The scripts do the technical work, but the policies and the reporting plan need some security knowledge. For your first jobs, work with an experienced reviewer or partner who checks the documents before you deliver them.
 
 > **Not legal advice.** This kit prepares technical documents. It never makes a product "CRA compliant" on its own. Dates and duties below come from Regulation (EU) 2024/2847 as published: **verify current dates** before you rely on them.
 
@@ -32,6 +34,14 @@ Then offer **monthly care** to keep the SBOM and vulnerability checks current.
 
 See the finished example in [samples/mossbyte-sprout-s1/](samples/mossbyte-sprout-s1/) and ready-to-send messages in [templates/offer.md](templates/offer.md).
 
+**Put your own name on the sample.** In [samples/mossbyte-sprout-s1/client.json](samples/mossbyte-sprout-s1/client.json), change `consultant_name` and `consultant_email` (under `engagement`) to your name, business and email. Then rebuild the sample from the repository root (see [Set up the tools](#set-up-the-tools) first):
+
+```sh
+CRA_PY=~/.cache/cra-readiness/venv/bin/python bash kits/cra-readiness/scripts/build_sample.sh
+```
+
+It takes a few minutes and needs the network. The vulnerability numbers may change, because the databases are updated every day.
+
 ## Who buys, and where to find them
 
 **Buyers:** founders and lead engineers of companies with 1 to 50 people that sell a connected product in the EU: a device with firmware, often with an app or cloud service, or downloadable software. They are worried about the CRA but have no security team and no budget for a big consultancy.
@@ -51,12 +61,14 @@ See the finished example in [samples/mossbyte-sprout-s1/](samples/mossbyte-sprou
 
 ## Price guide
 
-| Package | Fits | Price |
+| Package | Fits | Price (estimate) |
 |---|---|---|
 | Starter | One product, one codebase (for example a desktop app, or a device with one firmware) | €500 to €700 |
 | Standard | A device with firmware plus an app and/or cloud service (two or three codebases) | €900 to €1,400 |
 | Extended | Several variants or versions, larger codebases, plus a practice run of the runbook | €1,500 to €2,000 |
 | Monthly care | New SBOM for each release, monthly vulnerability check with a "what changed" note, security.txt renewal, checklist update | €100 to €300 per month |
+
+Prices are estimates from the October 2026 research. Check what your market pays.
 
 Quote per product, not per hour. Ask new clients for 50% up front. Your first two or three clients can be at the lower end in exchange for a testimonial.
 
@@ -74,7 +86,7 @@ Quote per product, not per hour. Ask new clients for 50% up front. Your first tw
 10. **Gap checklist workshop.** 60 to 90 minutes with the client. Fill in Status, Evidence, Owner and Target date. Mark scope, category and role questions "Needs lawyer".
 11. **Run the delivery checklist** below.
 12. **Deliver and hand over.** Send the files with the handover note and walk through it on a 30-minute call. Offer monthly care.
-13. **Monthly care.** For each new release: run `make_sbom.py` again. Every month: run `vuln_report.py` with `--previous` pointing to last month's `findings.json`, and send the "what changed" summary. Renew security.txt a month before it expires.
+13. **Monthly care.** For each new release: run `make_sbom.py` again. Every month: run `vuln_report.py` with `--previous` pointing to last month's `findings.json` (and the same `--node-project` folders as the first report, if you still have the code), and send the "what changed" summary. Renew security.txt a month before it expires.
 
 ## Delivery checklist
 
@@ -100,13 +112,15 @@ Quote per product, not per hour. Ask new clients for 50% up front. Your first tw
 
 ## Set up the tools
 
-The scripts need Python 3.10+ and Node.js 20+. Everything installs into a folder you choose, never globally:
+The scripts need Python 3.10+ and Node.js 20+. The kit's tools install into one folder, never globally:
 
 ```sh
-bash kits/cra-readiness/scripts/setup.sh                  # installs into ~/.cache/cra-readiness
-bash kits/cra-readiness/scripts/setup.sh /path/to/tools   # or into a folder of your choice
+bash kits/setup.sh cra-readiness                          # the usual route: installs into ~/.cache/cra-readiness
+bash kits/cra-readiness/scripts/setup.sh /path/to/tools   # or this kit's tools only, into a folder of your choice
 export CRA_PY=~/.cache/cra-readiness/venv/bin/python      # the Python the scripts must run with
 ```
+
+`bash kits/setup.sh cra-readiness` also installs the system tools the other kits use, and `bash kits/setup.sh --list` shows where each kit's Python is. To install only this kit's tools, run `bash kits/cra-readiness/scripts/setup.sh` (into `~/.cache/cra-readiness`) or give it a folder, as above.
 
 This installs cyclonedx-py, pip-audit, openpyxl, python-docx and Jinja2 into `<folder>/venv`, and cyclonedx-npm and cdxgen into `<folder>/npm`. The scripts find the Node tools automatically when they sit next to the virtualenv; otherwise set `CRA_NPM_TOOLS=<folder>/npm`. In a temporary cloud session, run the setup again in each new session (it takes about a minute).
 
@@ -114,16 +128,16 @@ This installs cyclonedx-py, pip-audit, openpyxl, python-docx and Jinja2 into `<f
 
 ## How to run each script
 
-All commands run from the repository root with the kit's Python (`$CRA_PY`). Add `--help` to any script for every option.
+All commands run from the repository root with the kit's Python (`$CRA_PY`). The examples keep the client's files in `kits/cra-readiness/clients/acme/`, a folder that git ignores (see step 5). Add `--help` to any script for every option.
 
 ### make_sbom.py: the SBOM
 
 ```sh
 "$CRA_PY" kits/cra-readiness/scripts/make_sbom.py \
   path/to/backend path/to/app \
-  --extra-components firmware-components.csv \
-  --client client.json --product-type device \
-  --out clients/acme/2026-10/sbom
+  --extra-components kits/cra-readiness/clients/acme/firmware-components.csv \
+  --client kits/cra-readiness/clients/acme/client.json --product-type device \
+  --out kits/cra-readiness/clients/acme/2026-10/sbom
 ```
 
 - Give it project folders (it detects Python or Node) and/or existing CycloneDX JSON files from the client's own build.
@@ -136,21 +150,25 @@ All commands run from the repository root with the kit's Python (`$CRA_PY`). Add
 ### vuln_report.py: the known-vulnerability report
 
 ```sh
-"$CRA_PY" kits/cra-readiness/scripts/vuln_report.py clients/acme/2026-10/sbom/acme-sensor-1.4.0.cdx.json \
-  --node-project path/to/app --client client.json --out clients/acme/2026-10
+"$CRA_PY" kits/cra-readiness/scripts/vuln_report.py \
+  kits/cra-readiness/clients/acme/2026-10/sbom/acme-sensor-1.4.0.cdx.json \
+  --node-project path/to/app --client kits/cra-readiness/clients/acme/client.json \
+  --out kits/cra-readiness/clients/acme/2026-10
 ```
 
 - Python packages: pip-audit. Node packages: `npm audit --json` in each `--node-project` folder; any npm packages not covered that way are checked against the same npm advisory database directly, so a stored SBOM can be re-checked without the code. Other ecosystems (Go, Rust, Java...): OSV API, only if it can be reached.
 - Adds severity, CVE numbers and fixed versions from OSV, and flags anything on CISA's known-exploited list.
 - Groups findings into a short list of actions (for example "Update express from 4.18.2 to 4.22.3"), and warns about major version jumps.
 - Output: `vulnerability-report.docx`, `.xlsx` (with a "Your assessment" column for the client) and `.md`, plus `vulnerability-data/` with `findings.json` and the raw tool output.
-- Monthly: add `--previous last-month/vulnerability-data/findings.json` to mark new findings and list fixed ones.
+- Monthly: add `--previous kits/cra-readiness/clients/acme/2026-10/vulnerability-data/findings.json` to mark new findings and list fixed ones, and write to the new month's folder (`--out kits/cra-readiness/clients/acme/2026-11`). Keep the same `--node-project` folders if you still have the code. Without them, npm packages are checked through the npm advisory service instead of `npm audit`, so the action list can be grouped or worded differently even when the findings are the same.
 
 ### fill_templates.py: policy, runbook, support statement, handover note
 
 ```sh
-"$CRA_PY" kits/cra-readiness/scripts/fill_templates.py --client client.json --out clients/acme/2026-10
-"$CRA_PY" kits/cra-readiness/scripts/fill_templates.py --client client.json --out clients/acme/2026-10 --only policy,runbook
+"$CRA_PY" kits/cra-readiness/scripts/fill_templates.py --client kits/cra-readiness/clients/acme/client.json \
+  --out kits/cra-readiness/clients/acme/2026-10
+"$CRA_PY" kits/cra-readiness/scripts/fill_templates.py --client kits/cra-readiness/clients/acme/client.json \
+  --out kits/cra-readiness/clients/acme/2026-10 --only policy,runbook
 ```
 
 - Writes each document as `.md` and `.docx`. Anything missing from `client.json` appears as `[TO FILL: name]` and is listed at the end.
@@ -159,8 +177,9 @@ All commands run from the repository root with the kit's Python (`$CRA_PY`). Add
 ### make_security_txt.py: security.txt
 
 ```sh
-"$CRA_PY" kits/cra-readiness/scripts/make_security_txt.py --client client.json --out clients/acme/2026-10/security.txt
-"$CRA_PY" kits/cra-readiness/scripts/make_security_txt.py --check clients/acme/2026-10/security.txt
+"$CRA_PY" kits/cra-readiness/scripts/make_security_txt.py --client kits/cra-readiness/clients/acme/client.json \
+  --out kits/cra-readiness/clients/acme/2026-10/security.txt
+"$CRA_PY" kits/cra-readiness/scripts/make_security_txt.py --check kits/cra-readiness/clients/acme/2026-10/security.txt
 ```
 
 - Builds the RFC 9116 fields (Contact, Expires, Encryption, Acknowledgments, Preferred-Languages, Canonical, Policy, Hiring, CSAF) from `client.json` or from options such as `--contact` and `--policy`.
@@ -170,8 +189,11 @@ All commands run from the repository root with the kit's Python (`$CRA_PY`). Add
 ### make_gap_checklist.py: the gap checklist
 
 ```sh
-"$CRA_PY" kits/cra-readiness/scripts/make_gap_checklist.py --client client.json --out clients/acme/2026-10/cra-gap-checklist.xlsx
-"$CRA_PY" kits/cra-readiness/scripts/make_gap_checklist.py --client client.json --status gap-status.csv --out ...
+"$CRA_PY" kits/cra-readiness/scripts/make_gap_checklist.py --client kits/cra-readiness/clients/acme/client.json \
+  --out kits/cra-readiness/clients/acme/2026-10/cra-gap-checklist.xlsx
+"$CRA_PY" kits/cra-readiness/scripts/make_gap_checklist.py --client kits/cra-readiness/clients/acme/client.json \
+  --status kits/cra-readiness/clients/acme/gap-status.csv \
+  --out kits/cra-readiness/clients/acme/2026-10/cra-gap-checklist.xlsx
 ```
 
 - The 54 checklist items live in [templates/gap-checklist-items.csv](templates/gap-checklist-items.csv): our own plain-English paraphrase of the essential requirements (Annex I), user information (Annex II), reporting, support period and documentation duties, each with a reference to the regulation.
@@ -180,8 +202,8 @@ All commands run from the repository root with the kit's Python (`$CRA_PY`). Add
 ### Other scripts
 
 - `setup.sh`: installs the tools (see above).
-- `build_sample.sh`: rebuilds the blank templates and the whole sample. Also a quick end-to-end test after you change anything.
-- `md2docx.py`: turns any Markdown file into a tidy Word document (`"$CRA_PY" kits/cra-readiness/scripts/md2docx.py notes.md`).
+- `build_sample.sh`: rebuilds the blank templates and the whole sample (`CRA_PY=~/.cache/cra-readiness/venv/bin/python bash kits/cra-readiness/scripts/build_sample.sh`). Also a quick end-to-end test after you change anything.
+- `md2docx.py`: turns any Markdown file into a tidy Word document next to it (`"$CRA_PY" kits/cra-readiness/scripts/md2docx.py kits/cra-readiness/clients/acme/2026-10/notes.md`).
 
 ## What's in this folder
 
@@ -192,9 +214,10 @@ kits/cra-readiness/
 ├── package.json               Node tools (installed by setup.sh into a local folder)
 ├── scripts/                   make_sbom.py, vuln_report.py, fill_templates.py, make_security_txt.py,
 │                              make_gap_checklist.py, md2docx.py, kitlib.py, setup.sh, build_sample.sh
-├── templates/                 policy, runbook, support statement, handover note and questionnaire
-│                              (.md sources + blank .docx), security.txt template, gap checklist
-│                              (.xlsx + items CSV), client.example.json, extra-components.csv, offer.md
+├── templates/                 policy, runbook, support statement and questionnaire (.md sources +
+│                              blank .docx), handover note (.md only), security.txt template, gap
+│                              checklist (.xlsx + items CSV), client.example.json, extra-components.csv,
+│                              offer.md
 └── samples/mossbyte-sprout-s1 FICTIONAL portfolio sample: source projects, client.json, and the
                                generated deliverables
 ```

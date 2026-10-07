@@ -7,7 +7,9 @@ that spills onto an extra page before the client does.
 
 Examples
   python scripts/check_render.py templates/newsletter-two-column-A4.docx
-  python scripts/check_render.py ~/jobs/stmarys/templates --out ~/jobs/stmarys/render-check
+  python scripts/check_render.py jobs/stmarys/templates --out jobs/stmarys/render-check
+  python scripts/check_render.py jobs/stmarys/templates/service-bulletin-A5-booklet.docx \
+      --out jobs/stmarys/render-check --expect-pages 4
 """
 
 from __future__ import annotations
@@ -20,31 +22,27 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from office_tools import (  # noqa: E402
     MODULE_BY_EXT,
+    SAME_SIZE_AS,
     OfficeToolsError,
     Soffice,
+    font_family,
     read_pdf,
     render_all_pages,
+    stand_in_fonts,
 )
-
-# Free fonts with exactly the same letter widths as common Microsoft fonts.
-# If you see these, the layout matches what the client will see in Office.
-SAME_SIZE_AS = {
-    "Carlito": "Calibri",
-    "Caladea": "Cambria",
-    "LiberationSans": "Arial",
-    "LiberationSerif": "Times New Roman",
-    "LiberationMono": "Courier New",
-}
-FALLBACK_FONTS = ("DejaVu", "FreeSans", "FreeSerif", "Noto")
 
 
 def describe_fonts(fonts: list[str]) -> tuple[list[str], list[str]]:
+    """Notes for every font, and the list of stand-in fonts to warn about.
+    SAME_SIZE_AS fonts (Carlito, Caladea, Liberation ...) have the same letter
+    widths as the Office font, so the layout matches what the client sees."""
     notes, warnings = [], []
+    stand_ins = set(stand_in_fonts(fonts))
     for font in fonts:
-        family = font.split("-")[0].replace(" ", "")
+        family = font_family(font)
         if family in SAME_SIZE_AS:
             notes.append(f"{font} (same size as {SAME_SIZE_AS[family]})")
-        elif family.startswith(FALLBACK_FONTS) and family not in ("OpenSymbol",):
+        elif font in stand_ins:
             warnings.append(font)
             notes.append(f"{font} (a stand-in: the font asked for is not installed here)")
         else:

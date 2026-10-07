@@ -332,7 +332,8 @@ def load_raw(path: Path, cases: list) -> list:
     if missing:
         print(f"WARNING: no saved answers for {len(missing)} test case(s), left out: {', '.join(missing)}")
     if saved:
-        print(f"WARNING: saved answers for case ids not in the test set, left out: {', '.join(sorted(saved))}")
+        print(f"WARNING: saved answers left out because their case ids are not in the test set (or come after "
+              f"--limit): {', '.join(sorted(saved))}")
     return rows
 
 
@@ -659,31 +660,80 @@ def write_raw(rows: list, path: Path):
 
 
 # --------------------------------------------------------------------------- main
+def rebuild_from_raw(args, tests_path: Path, cases: list, old_cfg: dict, new_cfg: dict) -> int:
+    """--from-raw: write a new workbook from saved answers. No runner is loaded and nothing is called."""
+    raw_path = Path(args.from_raw)
+    rows = load_raw(raw_path, cases)
+    print(f"Re-using {len(rows)} saved cases from {raw_path}. No model is called and nothing is paid.")
+    for label, cfg in (("OLD", old_cfg), ("NEW", new_cfg)):
+        print(f"  {label}: {cfg['name']} | model={cfg['model']}")
+    for file in changed_configs(rows, old_cfg, new_cfg):
+        print(f"WARNING: {file} has a different model, prompt or settings than the saved answers. The Settings "
+              f"sheet shows the file as it is now. Use the runner configs of the run you are re-building.")
+    if args.dry_run:
+        print("Dry run: nothing was written.")
+        return 0
+    if importlib.util.find_spec("openpyxl") is None:
+        print("openpyxl is not installed. Run: pip install -r requirements.txt", file=sys.stderr)
+        return 1
+    grades = load_grades(Path(args.grades)) if args.grades else {}
+    out = Path(args.out) if args.out else raw_path.parent / "comparison_rebuilt.xlsx"
+    out.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        so, sn = write_workbook(rows, old_cfg, new_cfg, out, tests_path, grades, from_raw=raw_path)
+    except PermissionError:
+        print(f"Could not write {out}. Close it in Excel and run again.", file=sys.stderr)
+        return 1
+    if grades:
+        unknown = sorted(set(grades) - {r["case"]["id"] for r in rows})
+        if unknown:
+            print(f"WARNING: grades for unknown case ids ignored: {', '.join(unknown)}")
+    print(f"Old: {so['ok']}/{so['calls']} ok | New: {sn['ok']}/{sn['calls']} ok")
+    print(f"Wrote {out}")
+    return 0
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Compare an old and a new model setup on the same test cases.")
     ap.add_argument("--tests", required=True, help="test set (JSONL)")
     ap.add_argument("--old", required=True, help="runner config for the current (old) setup")
     ap.add_argument("--new", required=True, help="runner config for the new setup")
-    ap.add_argument("--out", default="comparison.xlsx", help="Excel file to write (default comparison.xlsx)")
+    ap.add_argument("--out", help="Excel file to write (default: comparison.xlsx next to the test set, "
+                                  "or comparison_rebuilt.xlsx next to the --from-raw file)")
     ap.add_argument("--raw-out", help="JSONL with every prompt and answer (default: <out>_raw.jsonl)")
     ap.add_argument("--grades", help="CSV (id, preferred, new_ok, notes) to pre-fill the grading columns")
+    ap.add_argument("--from-raw", metavar="RAW_JSONL",
+                    help="re-build the workbook from the answers saved by an earlier run (comparison_raw.jsonl). "
+                         "Calls nothing, so it is free. Use it to add --grades")
     ap.add_argument("--limit", type=int, help="only run the first N cases")
     ap.add_argument("--delay", type=float, default=0.0, help="seconds to wait after each call")
     ap.add_argument("--retries", type=int, default=2, help="retries for a failed call (default 2)")
     ap.add_argument("--dry-run", action="store_true", help="check inputs and show the plan, call nothing")
     ap.add_argument("--yes", action="store_true", help="confirm calls to a real API")
     args = ap.parse_args(argv)
+    if args.from_raw and args.raw_out:
+        ap.error("--raw-out cannot be used with --from-raw (nothing new is saved).")
 
     tests_path = Path(args.tests)
     cases = load_test_set(tests_path)
     if args.limit:
         cases = cases[: args.limit]
     old_cfg, new_cfg = load_config(Path(args.old), "old"), load_config(Path(args.new), "new")
+    if args.from_raw:
+        return rebuild_from_raw(args, tests_path, cases, old_cfg, new_cfg)
     old_runner, new_runner = resolve_runner(old_cfg), resolve_runner(new_cfg)
     print(describe_plan(cases, old_cfg, new_cfg))
+    problems, warnings = check_setup(cases, old_cfg, new_cfg)
+    for text in warnings:
+        print(f"WARNING: {text}")
+    for text in problems:
+        print(f"PROBLEM: {text}")
     if args.dry_run:
         print("Dry run: nothing was called.")
-        return 0
+        return 2 if problems else 0
+    if problems:
+        print("\nFix the problem above, then run again. Nothing was called.")
+        return 2
     live = [c["runner"] for c in (old_cfg, new_cfg) if c["runner"] not in OFFLINE_RUNNERS]
     if live and not args.yes:
         print(f"\nThis run calls a real API ({', '.join(live)}). That uses the client's key and costs money.\n"
@@ -693,7 +743,7 @@ def main(argv=None) -> int:
         print("openpyxl is not installed. Run: pip install -r requirements.txt", file=sys.stderr)
         return 1
     grades = load_grades(Path(args.grades)) if args.grades else {}
-    out = Path(args.out)
+    out = Path(args.out) if args.out else tests_path.parent / "comparison.xlsx"
     out.parent.mkdir(parents=True, exist_ok=True)
     raw_path = Path(args.raw_out) if args.raw_out else out.with_name(out.stem + "_raw.jsonl")
 
@@ -730,8 +780,9 @@ def main(argv=None) -> int:
     try:
         so, sn = write_workbook(rows, old_cfg, new_cfg, out, tests_path, grades)
     except PermissionError:
-        print(f"Could not write {out}. Close it in Excel and run again. Every answer is saved in {raw_path}; "
-              f'to rebuild without new calls, use "runner": "recorded" with "recorded_side".', file=sys.stderr)
+        print(f"Could not write {out}. Close it in Excel. Every answer is saved in {raw_path}, so you can "
+              f"re-build the workbook without new calls: run the same command again, with --from-raw {raw_path} "
+              f"in place of --yes (and without --raw-out).", file=sys.stderr)
         return 1
     if grades:
         unknown = sorted(set(grades) - {r["case"]["id"] for r in rows})

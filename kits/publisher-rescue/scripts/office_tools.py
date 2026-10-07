@@ -303,6 +303,36 @@ class PdfInfo:
 
 _SUBSET_PREFIX = re.compile(r"^[A-Z]{6}\+")
 
+# Free fonts with exactly the same letter widths as common Microsoft and
+# PostScript fonts. If a PDF uses these, line breaks match the original.
+SAME_SIZE_AS = {
+    "Carlito": "Calibri",
+    "Caladea": "Cambria",
+    "LiberationSans": "Arial",
+    "LiberationSerif": "Times New Roman",
+    "LiberationMono": "Courier New",
+    "NimbusSans": "Helvetica",
+    "NimbusRoman": "Times",
+    "NimbusMonoPS": "Courier",
+}
+
+# Fonts LibreOffice uses when the font a file asks for is not installed. Old
+# client files almost never ask for these fonts themselves, so seeing one in a
+# PDF means a font was replaced. Some look nothing like the original: for
+# example Z003 (a script font) often stands in for Comic Sans MS.
+STAND_IN_FONTS = ("DejaVu", "FreeSans", "FreeSerif", "FreeMono", "Noto",
+                  "Z003", "C059", "P052", "URWBookman", "URWGothic", "D050000L")
+
+
+def font_family(font: str) -> str:
+    """"Z003-MediumItalic" -> "Z003", "Liberation Sans-Bold" -> "LiberationSans"."""
+    return _clean_font(font).split("-")[0].replace(" ", "")
+
+
+def stand_in_fonts(fonts: list[str]) -> list[str]:
+    """The fonts in a PDF's font list that are stand-ins for a missing font."""
+    return [font for font in fonts if font_family(font).startswith(STAND_IN_FONTS)]
+
 
 def _clean_font(name: str) -> str:
     name = _SUBSET_PREFIX.sub("", name or "").strip()

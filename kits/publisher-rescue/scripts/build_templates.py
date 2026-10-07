@@ -11,15 +11,17 @@ delivery note (Word).
 Every template uses named styles (Heading 1, Kicker, Caption, Box Text ...)
 so clients restyle a whole document by changing one style.
 
-Examples
+Examples (run from kits/publisher-rescue/; jobs/ is git-ignored)
   python scripts/build_templates.py                       # blank templates into templates/
-  python scripts/build_templates.py --paper letter --out ~/jobs/stmarys/templates \
-      --org "St Mary's School PTA" --primary 0B6E4F --accent E0A100 --logo logo.png
+  python scripts/build_templates.py --paper letter --out jobs/stmarys/templates \
+      --org "St Mary's School PTA" --primary 0B6E4F --accent E0A100 \
+      --logo jobs/stmarys/logo.png
   python scripts/build_templates.py --content scripts/sample-data/st-aidans-wrenford.json \
-      --paper a4 --out samples/st-aidans-wrenford/3-rebuilt-templates --pdf
+      --paper a4 --out jobs/try-out/templates --pdf
 
 With --content the templates are filled with the text in a JSON file (see
-scripts/sample-data/st-aidans-wrenford.json for the format).
+scripts/sample-data/st-aidans-wrenford.json for the format: sections "brand",
+"newsletter", "bulletin", "certificate" and "delivery_note").
 """
 
 from __future__ import annotations
@@ -1185,6 +1187,8 @@ SUGGESTIONS = {
                            "text if needed.",
     "No searchable text": "The page is all pictures, so search will not find words in "
                           "it. Text recognition (OCR) can be added on request.",
+    "Font replaced": "A font was replaced, so some text can look different. See "
+                     "'Fonts' below.",
 }
 
 
@@ -1227,6 +1231,25 @@ def render_pdfs(paths: list[Path]) -> None:
             print(f"  {path.name}: {status}")
 
 
+CONTENT_SECTIONS = ("brand", "newsletter", "bulletin", "certificate", "delivery_note")
+
+
+def check_content(data, path: Path) -> dict | None:
+    """The --content file must hold the sections of the sample file. A file that
+    holds only the inside of "delivery_note" is used as that section."""
+    if isinstance(data, dict) and any(key in data for key in CONTENT_SECTIONS):
+        return data
+    if isinstance(data, dict) and data and all(key in DELIVERY_TEMPLATE for key in data):
+        print(f"Note: {path} has no \"delivery_note\": {{...}} around it; using it as the "
+              "delivery note.")
+        return {"delivery_note": data}
+    print(f"{path} has none of the sections {', '.join(CONTENT_SECTIONS)}, so nothing "
+          "would be filled in. Copy the layout of "
+          "scripts/sample-data/st-aidans-wrenford.json, for example "
+          "{\"delivery_note\": {\"client\": \"...\", ...}}.", file=sys.stderr)
+    return None
+
+
 def main(argv=None) -> int:
     parser = argparse.ArgumentParser(description="Build the newsletter, service bulletin "
                                      "and certificate templates, plus the intake "
@@ -1252,6 +1275,10 @@ def main(argv=None) -> int:
     args = parser.parse_args(argv)
 
     data = json.loads(args.content.read_text(encoding="utf-8")) if args.content else {}
+    if args.content:
+        data = check_content(data, args.content)
+        if data is None:
+            return 2
     base_dir = args.content.parent if args.content else Path.cwd()
     brand = merged(DEFAULT_BRAND, data.get("brand"))
     for key, value in (("org", args.org), ("primary", args.primary), ("accent", args.accent),

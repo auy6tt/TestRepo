@@ -14,18 +14,20 @@ Kit: `${CLAUDE_PROJECT_DIR}/kits/doc-accessibility`. Its README has the offer, p
 - Exceptions (archived content and others) are decided by the client's ADA coordinator or lawyer. Call files "archive candidates", nothing stronger.
 - Deadlines: ADA Title II requires WCAG 2.1 AA; reported dates are 26 April 2027 (entities serving 50,000+) and 26 April 2028 (smaller ones). Always add "verify current dates".
 - Crawl only sites the user says the client has agreed to. Keep the default delay (1 second or more), respect robots.txt, and put the user's contact in `--user-agent`. For prospects, at most a light `--depth 1` look.
-- Keep client files out of this kit and out of public repos: use a client folder the user names (suggest `~/clients/<client-name>/`).
+- Keep client files out of this kit and out of public repos: use `C=${CLAUDE_PROJECT_DIR}/clients/<client-name>` (the repo's `.gitignore` keeps `clients/` out of git), or another git-ignored folder the user names. Never write client files into `samples/` or any folder git tracks.
 - Do not change the meaning, numbers or names in client documents. Draft alt text for complex images and ask the client to approve it.
 
 ## Setup (once per session)
 
+The kit's Python is the doc-accessibility line of `bash kits/setup.sh --list`. If it is missing, set up with `bash kits/setup.sh doc-accessibility` (system tools, Python packages and veraPDF). Run every script with `$PY`, never with bare `python` or `python3`.
+
 ```sh
 PY=${DOC_A11Y_VENV:-$HOME/.venvs/doc-accessibility}/bin/python
 K=${CLAUDE_PROJECT_DIR}/kits/doc-accessibility/scripts
-test -x "$PY" || bash "$K/setup.sh" --verapdf
+test -x "$PY" || bash "${CLAUDE_PROJECT_DIR}/kits/setup.sh" doc-accessibility
 ```
 
-If the crawler cannot reach the client's site (connection refused, 403 from the proxy), tell the user that this environment's network policy blocks the domain and that they can allow it under Network access in the environment settings (cloud environment menu in the session title bar > Edit > Allowed domains). Name the exact hosts. Do not try to work around it.
+If the crawler cannot reach the client's site (connection refused, 403 from the proxy), tell the user that this environment's network policy blocks the domain and how to allow it: at claude.ai/code, click the cloud icon showing your environment's name (above the message box), hover over the environment and click the settings icon; under Network access choose "Custom" (newer app versions may call it "Limited") and add the domains; keep the "Also include default list of common package managers" box ticked (newer versions: "Allow package managers"). Name the exact hosts. Do not try to work around it.
 
 ## Step 1: snapshot (inventory and report)
 
@@ -74,12 +76,13 @@ Read the finished report (render pages with `pdftoppm -png -r 60` and look at th
 ## Selling
 
 - Cold email: `templates/cold-email-ada-coordinator.md`. Fill in one real detail about the prospect's site; keep it under 150 words; no scare tactics.
-- Prices (from the README): snapshot $300 to $1,500 by size; fixing $5 to $25 per page by complexity; monthly upkeep for new agendas and minutes.
-- Portfolio: `samples/report/fernwick-document-snapshot.pdf` and `samples/fixes/before-after/comparison.md`. Always say the town is fictional.
+- Prices (estimates, from the README): snapshot $300 to $1,500 by size; fixing $5 to $25 per page by complexity; monthly upkeep for new agendas and minutes. Say they are estimates.
+- Portfolio: `samples/report/fernwick-document-snapshot.pdf` and `samples/fixes/before-after/comparison.md`. Always say the town is fictional. To put the user's name on the sample report: `$PY $K/run_sample_demo.py --prepared-by "<name, business>" --contact "<email>"`.
 
 ## Demo and troubleshooting
 
 - `$PY $K/run_sample_demo.py --rebuild` runs everything on the fictional site (local server, no network needed).
-- "source file could not be loaded" from LibreOffice: Writer is missing; run `setup.sh` (installs `libreoffice-writer`).
-- OCR skipped: Tesseract is missing; run `setup.sh`.
-- veraPDF not found: `bash $K/setup.sh --verapdf`, or set `VERAPDF_DIR`.
+- "source file could not be loaded" from LibreOffice: Writer is missing; run `bash kits/setup.sh doc-accessibility` (installs `libreoffice-writer`).
+- OCR skipped: Tesseract is missing; run `bash kits/setup.sh doc-accessibility`.
+- veraPDF not found: `bash kits/setup.sh doc-accessibility` (or `bash $K/setup.sh --verapdf`), or set `VERAPDF_DIR`.
+- `build_templates.py` stops if the templates exist; `--force` overwrites them and throws away the user's edits, so ask first.

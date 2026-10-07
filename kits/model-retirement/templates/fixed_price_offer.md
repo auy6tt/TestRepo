@@ -33,11 +33,13 @@ I never need your production passwords. API keys stay in your environment variab
 
 ## Price guide
 
-| Job | Price |
+| Job | Price (estimate) |
 |---|---|
 | One feature (one prompt, one model call) | $300–800 |
 | Whole app, several features, with a reusable test set | $1,500–4,000 |
 | Already broken (date has passed), same-week fix | add 50% for urgent work |
+
+These prices are estimates. Check them against your market before you quote.
 
 ## Short version for a gig listing or a post
 

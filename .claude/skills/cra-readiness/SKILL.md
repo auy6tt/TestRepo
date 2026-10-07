@@ -23,44 +23,48 @@ Target for this request: $ARGUMENTS
 
 ## Set up the tools (once per session)
 
+The usual setup route is `bash kits/setup.sh cra-readiness` (see kits/README.md and PLAYBOOK.md). It installs the tools in `~/.cache/cra-readiness`, and `bash kits/setup.sh --list` shows the kit's Python there (`~/.cache/cra-readiness/venv/bin/python`). Run this block from the repository root. It uses those tools, or installs them if they are missing:
+
 ```sh
-bash kits/cra-readiness/scripts/setup.sh "$TOOLS"     # TOOLS: a scratch folder, or omit for ~/.cache/cra-readiness
+TOOLS="${TOOLS:-$HOME/.cache/cra-readiness}"   # where kits/setup.sh cra-readiness installs; or set your own scratch folder
+test -x "$TOOLS/venv/bin/python" || bash kits/cra-readiness/scripts/setup.sh "$TOOLS"
 export CRA_PY="$TOOLS/venv/bin/python" CRA_NPM_TOOLS="$TOOLS/npm"
 ```
 
-Nothing is installed globally. If a cloud session has a scratchpad directory, use a folder inside it as `$TOOLS`. The scripts need the PyPI and npm registries. The OSV API and cisa.gov may be blocked: the scripts fall back to OSV's data files and the GitHub copy of CISA's list, and the report says what was used. If the known-exploited list cannot be reached, ask the user to download `known_exploited_vulnerabilities.json` and pass it with `--kev-file`.
+If `bash kits/setup.sh cra-readiness` already ran, leave TOOLS unset and the install is skipped. Otherwise the block installs only this kit's tools (about a minute); you may set TOOLS to a folder inside the session's scratchpad first. Nothing is installed globally. `"$CRA_PY"` in the commands below is the kit's Python. If a later command finds `$CRA_PY` empty (some shells do not keep variables between commands), run the block again in the same command; it is quick once the tools are there. Never use a bare `python` or `python3` for the scripts. The scripts need the PyPI and npm registries. The OSV API and cisa.gov may be blocked: the scripts fall back to OSV's data files and the GitHub copy of CISA's list, and the report says what was used. If the known-exploited list cannot be reached, ask the user to download `known_exploited_vulnerabilities.json` and pass it with `--kev-file`.
 
 ## Workflow for a new client
 
-Work in a client folder such as `kits/cra-readiness/clients/<client>/<YYYY-MM>/`.
+Keep every client file in the client's folder `<client>` = `kits/cra-readiness/clients/<name>/` (ignored by git), or in a private folder outside this repository. `<out>` below is `<client>/<YYYY-MM>`. Never write client files anywhere else in the repository: it is public.
 
-1. **Intake.** Send `templates/client-intake-questionnaire.docx`. Copy `templates/client.example.json` to `client.json` and fill it from the answers. Leave nothing in [brackets].
-2. **Firmware components.** Put SDKs, RTOS and C libraries (with versions) in a CSV like `templates/extra-components.csv`. One row whose name equals the part name describes the firmware itself.
+1. **Intake.** Send `templates/client-intake-questionnaire.docx`. Copy `templates/client.example.json` to `<client>/client.json` and fill it from the answers. Leave nothing in [brackets].
+2. **Firmware components.** Put SDKs, RTOS and C libraries (with versions) in `<client>/firmware-components.csv`, in the format of `templates/extra-components.csv`. One row whose name equals the part name describes the firmware itself.
 3. **SBOM.**
    ```sh
    "$CRA_PY" kits/cra-readiness/scripts/make_sbom.py <python-folder> <node-folder> [existing.cdx.json] \
-     --extra-components firmware-components.csv --client client.json --product-type device --out <out>/sbom
+     --extra-components <client>/firmware-components.csv --client <client>/client.json --product-type device --out <out>/sbom
    ```
    Read every WARNING it prints (unpinned versions, missing lockfiles, install failures) and pass them to the client as questions. Confirm "Schema check: ... is valid". Use `--product-type application` for software-only products.
 4. **Vulnerability report.**
    ```sh
    "$CRA_PY" kits/cra-readiness/scripts/vuln_report.py <out>/sbom/<product>-<version>.cdx.json \
-     --node-project <node-folder> --client client.json --out <out>
+     --node-project <node-folder> --client <client>/client.json --out <out>
    ```
    Check that the action list makes sense (versions, major-version warnings). Never invent CVE numbers, severities or fixed versions: use only what the tools report. Hand-listed components appear under "Need a manual check"; say so plainly rather than guessing.
 5. **Documents.**
    ```sh
-   "$CRA_PY" kits/cra-readiness/scripts/fill_templates.py --client client.json --out <out>
+   "$CRA_PY" kits/cra-readiness/scripts/fill_templates.py --client <client>/client.json --out <out>
    ```
    Fix every `[TO FILL: ...]` it lists by editing client.json and running it again. Then read each document and adapt it to the client.
 6. **security.txt.**
    ```sh
-   "$CRA_PY" kits/cra-readiness/scripts/make_security_txt.py --client client.json --out <out>/security.txt
+   "$CRA_PY" kits/cra-readiness/scripts/make_security_txt.py --client <client>/client.json --out <out>/security.txt
    "$CRA_PY" kits/cra-readiness/scripts/make_security_txt.py --check <out>/security.txt
    ```
 7. **Gap checklist.** Build it, then fill the yellow columns with the client in a 60 to 90 minute workshop (or pre-fill from a status CSV with columns `id,status,evidence,owner,target_date,notes`):
    ```sh
-   "$CRA_PY" kits/cra-readiness/scripts/make_gap_checklist.py --client client.json [--status gap-status.csv] --out <out>/cra-gap-checklist.xlsx
+   "$CRA_PY" kits/cra-readiness/scripts/make_gap_checklist.py --client <client>/client.json [--status <client>/gap-status.csv] \
+     --out <out>/cra-gap-checklist.xlsx
    ```
 8. **Delivery checklist** (from the kit README): SBOM confirmed or marked draft; no placeholders; every finding has an action; security.txt passes `--check`; dates verified; no compliance claims; legal questions listed; client data private.
 9. **Handover.** Send the files with `handover-note.docx` and offer monthly care.
@@ -68,17 +72,23 @@ Work in a client folder such as `kits/cra-readiness/clients/<client>/<YYYY-MM>/`
 ## Monthly care
 
 - New release: run `make_sbom.py` again with the new version.
-- Every month: run `vuln_report.py` on the latest SBOM with `--previous <last-month>/vulnerability-data/findings.json`. Send a short note: new findings, fixed findings, top actions.
+- Every month: run `vuln_report.py` on the latest SBOM with `--previous <last-month>/vulnerability-data/findings.json` and `--out <client>/<new YYYY-MM>`. Pass the same `--node-project <node-folder>` as the first report when you still have the code. Without it, npm packages are checked through the npm bulk advisory service instead of `npm audit`, so the action list can be grouped or worded differently even when the findings did not change; tell the client so if the wording moves. Send a short note: new findings, fixed findings, top actions.
+   ```sh
+   "$CRA_PY" kits/cra-readiness/scripts/vuln_report.py <client>/<YYYY-MM>/sbom/<product>-<version>.cdx.json \
+     --node-project <node-folder> --client <client>/client.json \
+     --previous <client>/<last YYYY-MM>/vulnerability-data/findings.json --out <client>/<new YYYY-MM>
+   ```
 - A month before security.txt expires: make a new one.
 - Every quarter: check the runbook contacts and the checklist owners.
 
 ## Other jobs
 
 - **Quote or outreach message:** adapt `templates/offer.md`. Mention one specific detail about the prospect's product. One message per company, no bulk mailing.
-- **Check a client's existing security.txt:** `make_security_txt.py --check <file>`.
-- **List an SBOM the client already has:** `make_sbom.py client-sbom.cdx.json --out <out>`.
-- **Any Markdown to Word:** `md2docx.py file.md`.
-- **After changing the kit:** run `scripts/build_sample.sh` (with `CRA_PY` set) to rebuild the blank templates and the sample, as an end-to-end test.
+- **Check a client's existing security.txt:** `"$CRA_PY" kits/cra-readiness/scripts/make_security_txt.py --check <file>`.
+- **List an SBOM the client already has:** `"$CRA_PY" kits/cra-readiness/scripts/make_sbom.py <client>/client-sbom.cdx.json --out <out>/sbom`.
+- **Any Markdown to Word:** `"$CRA_PY" kits/cra-readiness/scripts/md2docx.py <out>/file.md` (writes `file.docx` next to it).
+- **Put the user's name on the portfolio sample:** change `consultant_name` and `consultant_email` (under `engagement`) in `kits/cra-readiness/samples/mossbyte-sprout-s1/client.json`, then rebuild it with `CRA_PY="$CRA_PY" bash kits/cra-readiness/scripts/build_sample.sh`.
+- **After changing the kit:** run `CRA_PY="$CRA_PY" bash kits/cra-readiness/scripts/build_sample.sh` to rebuild the blank templates and the sample, as an end-to-end test (it also checks a relative `--out` folder).
 
 ## Troubleshooting
 

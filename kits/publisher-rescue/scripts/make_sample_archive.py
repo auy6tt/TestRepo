@@ -16,6 +16,7 @@ Example
 
 from __future__ import annotations
 
+import argparse
 import base64
 import io
 import os
@@ -379,8 +380,11 @@ def set_saved(path: Path, when: datetime) -> None:
 
 
 def main(argv=None) -> int:
-    out = Path((argv or sys.argv[1:] or ["samples/st-aidans-wrenford/originals"])[0])
-    out = out.expanduser().resolve()
+    parser = argparse.ArgumentParser(description="Make the fictional stand-in 'client files' "
+                                     "for the St Aidan's sample. Deletes the folder first.")
+    parser.add_argument("out", nargs="?", default="samples/st-aidans-wrenford/originals",
+                        help="folder to (re)create (default: samples/st-aidans-wrenford/originals)")
+    out = Path(parser.parse_args(argv).out).expanduser().resolve()
     if out.exists():
         shutil.rmtree(out)
     out.mkdir(parents=True)

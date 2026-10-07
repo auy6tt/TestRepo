@@ -386,7 +386,7 @@
         "templates/certificate-of-achievement-A4.pptx"
       ]
     ],
-    "fonts": "Your old files used Times New Roman and Arial, which every computer has. The rebuilt templates use Cambria for headings and Calibri for text. Both come with Microsoft Office and are also available in Google Docs, so no paid fonts were needed.",
+    "fonts": "Your old files mostly used Times New Roman and Arial. The PDFs show these in free fonts with the same letter widths, so the text fits each page as before. One file is different: the 2021 reading certificate used Comic Sans MS, which was not available when we made the archive. In that PDF, the “Well done!” heading and the dotted name line are in a stand-in script font (Z003), so they look different from your original. The index notes this in the “Problem or note” column. The rebuilt templates use Cambria for headings and Calibri for text. Both come with Microsoft Office and are also available in Google Docs, so no paid fonts were needed.",
     "delete_by": "13 October 2026",
     "support_days": "14"
   }

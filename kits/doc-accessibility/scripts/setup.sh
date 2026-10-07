@@ -23,7 +23,7 @@ for arg in "$@"; do
   case "$arg" in
     --no-apt) WANT_APT=0 ;;
     --verapdf) WANT_VERAPDF=1 ;;
-    -h|--help) sed -n '2,14p' "$0"; exit 0 ;;
+    -h|--help) sed -n '2,13p' "$0"; exit 0 ;;
     *) echo "Unknown option: $arg"; exit 1 ;;
   esac
 done

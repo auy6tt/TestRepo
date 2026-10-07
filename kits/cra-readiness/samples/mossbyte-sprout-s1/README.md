@@ -38,7 +38,7 @@ Because new vulnerabilities are published every day, running the build again lat
 
 ## Rebuild it
 
-From the repository root, after setting up the tools (see the kit [README](../../README.md#set-up-the-tools)):
+To put your own name on the sample, first change `consultant_name` and `consultant_email` (under `engagement`) in [client.json](client.json). Then, from the repository root, after setting up the tools (see the kit [README](../../README.md#set-up-the-tools)):
 
 ```sh
 CRA_PY=~/.cache/cra-readiness/venv/bin/python bash kits/cra-readiness/scripts/build_sample.sh

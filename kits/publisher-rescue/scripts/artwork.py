@@ -449,9 +449,13 @@ def picture(spec: str, base_dir: Path | None = None, brand: dict | None = None) 
 
 
 if __name__ == "__main__":  # preview every illustration: python artwork.py out_dir
-    import sys
+    import argparse
 
-    out = Path(sys.argv[1] if len(sys.argv) > 1 else "artwork-preview")
+    parser = argparse.ArgumentParser(description="Write preview PNGs of the built-in "
+                                     "pictures and placeholders.")
+    parser.add_argument("out", nargs="?", default="artwork-preview",
+                        help="folder for the PNG files (default: ./artwork-preview)")
+    out = Path(parser.parse_args().out).expanduser()
     out.mkdir(parents=True, exist_ok=True)
     for name, fn in SCENES.items():
         (out / f"{name}.png").write_bytes(fn())

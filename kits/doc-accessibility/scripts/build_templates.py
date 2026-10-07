@@ -6,13 +6,17 @@
 
 You can edit both files directly in Word or Excel. Keep the {{PLACEHOLDERS}} in
 the report if you want make_report.py to fill it. Run this script again only if
-you want to start over from the default text (it overwrites both files).
+you want to start over from the default text. It stops if the files are already
+there; add --force to overwrite both (this throws away your edits).
+
+  python build_templates.py --force
 
 The report template is itself accessible: real headings, table header rows,
 a title and a language in its properties.
 """
 from __future__ import annotations
 
+import argparse
 import datetime as dt
 import sys
 from pathlib import Path
@@ -152,7 +156,7 @@ def build_report_template(path: Path) -> None:
 
     doc.add_heading("How we checked", level=2)
     doc.add_paragraph("We read {{PAGES_CRAWLED}} web pages on {{CRAWL_DATE}}, following your site's robots.txt "
-                      "rules and leaving at least one second between requests. For each file we checked tags, "
+                      "rules and leaving at least {{CRAWL_DELAY}} between requests. For each file we checked tags, "
                       "real text versus scanned images, title, language, form fields, bookmarks and security "
                       "settings, using open-source tools.")
     doc.add_paragraph("Questions: {{PREPARED_BY}}, {{CONTACT}}")
@@ -242,7 +246,18 @@ def build_log_template(path: Path) -> None:
     book.save(path)
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Build the two Office templates in templates/ from the default text.")
+    parser.add_argument("--force", action="store_true",
+                        help="overwrite the templates if they exist (this throws away your edits)")
+    args = parser.parse_args(argv)
+    existing = [path for path in (REPORT, LOG) if path.exists()]
+    if existing and not args.force:
+        names = " and ".join(str(path.relative_to(KIT)) for path in existing)
+        verb = "exists" if len(existing) == 1 else "exist"
+        print(f"{names} already {verb}. Nothing was changed. Run again with --force to overwrite "
+              "(this throws away your edits).", file=sys.stderr)
+        return 1
     TEMPLATES.mkdir(exist_ok=True)
     build_report_template(REPORT)
     build_log_template(LOG)

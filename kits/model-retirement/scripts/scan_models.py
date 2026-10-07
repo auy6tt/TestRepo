@@ -3,7 +3,10 @@
 
 Usage:
     python scan_models.py PATH/TO/CLIENT/REPO \
-        --retirements ../data/retirements.csv --out-dir scan_output
+        --retirements ../data/retirements.csv --out-dir PATH/TO/CLIENT/WORK/scan
+
+Write the results to the client's own work folder (for example clients/acme/scan at the root
+of the kits repo, which git ignores), never to a folder that git would commit.
 
 Writes two files to --out-dir:
     model_scan.csv   every reference, one row each (open it in a spreadsheet)
@@ -1082,7 +1085,9 @@ def main(argv=None) -> int:
         description="Find AI model references in a codebase and check them against a retirement list.")
     ap.add_argument("repo", help="folder to scan (the client's code)")
     ap.add_argument("--retirements", help="retirement list CSV (default: ../data/retirements.csv next to this script)")
-    ap.add_argument("--out-dir", default="scan_output", help="where to write model_scan.csv and model_scan.md")
+    ap.add_argument("--out-dir", required=True,
+                    help="where to write model_scan.csv and model_scan.md: the client's work folder, "
+                         "for example clients/acme/scan (required, so client code never lands here by mistake)")
     ap.add_argument("--today", help="pretend today is this date (YYYY-MM-DD); useful for repeatable reports")
     ap.add_argument("--warn-days", type=int, default=90, help="flag models retiring within this many days (default 90)")
     ap.add_argument("--exclude", action="append", default=[], metavar="GLOB",

@@ -57,7 +57,7 @@ Start with `templates/cold-email-ada-coordinator.md`. Send a handful of personal
 
 ## Price guide
 
-| What | Suggested price | Notes |
+| What | Price (estimate) | Notes |
 |---|---|---|
 | Snapshot, up to 100 documents | $300 | About one day of work including the report |
 | Snapshot, 100 to 500 documents | $500 to $900 | |
@@ -67,6 +67,8 @@ Start with `templates/cold-email-ada-coordinator.md`. Send a handful of personal
 | Fixing complex pages (big tables, charts, maps, forms, poor scans) | $15 to $25 per page | Forms are often quoted per form instead |
 | Converting a document to a web page | The same per-page rates | Often the best choice for short documents |
 | Monthly upkeep (new agendas, minutes and notices) | A fixed monthly fee for up to a set number of pages | Turns one job into steady income |
+
+These prices are estimates. Check what your market pays before you quote.
 
 Add 25 to 50 percent for rush jobs (under three working days) and set a minimum per batch (for example $150). Give a fixed quote after the snapshot, never an open-ended hourly rate.
 
@@ -90,7 +92,7 @@ The Title II rule has a few exceptions, for example for archived content and som
 6. **Don't change the meaning.** Keep wording, numbers and signatures as they are. Ask before fixing typos in legal or official documents. Keep the originals.
 7. **The client approves alt text** for complex charts, maps and diagrams. You draft it.
 8. **Don't remove security settings** from a client's file without asking. The fix script skips protected files.
-9. **Protect client files.** Keep them out of public repositories (use a private repo or folder per client), turn off model training in Claude's privacy settings, and delete client files when the job is done.
+9. **Protect client files.** Keep them out of public repositories: put them in `clients/` at the repository root (git ignores it) or in a private repo, one folder per client. Turn off model training in Claude's privacy settings, and delete client files when the job is done.
 
 ## Step by step
 
@@ -130,7 +132,7 @@ The Title II rule has a few exceptions, for example for archived content and som
 - [ ] Written OK from the client, and the list of hosts and sections to include or skip
 - [ ] Client domains allowed in Network access (cloud sessions)
 - [ ] Your contact email in `--user-agent`
-- [ ] An empty output folder for this client, outside this kit and outside any public repo
+- [ ] An empty folder for this client in `clients/` at the repository root (git ignores it), never in `samples/` or any other folder git tracks
 
 **Before you send the snapshot**
 
@@ -155,11 +157,11 @@ The Title II rule has a few exceptions, for example for archived content and som
 **One command (Linux and Claude Code cloud sessions):**
 
 ```sh
-bash kits/doc-accessibility/scripts/setup.sh --verapdf
+bash kits/setup.sh doc-accessibility
 PY=~/.venvs/doc-accessibility/bin/python
 ```
 
-It installs LibreOffice Writer, Tesseract and Ghostscript (with apt), creates a Python virtual environment at `~/.venvs/doc-accessibility` with the packages in `requirements.txt`, and downloads the veraPDF validator (with `--verapdf`; needs Java and Maven, both present in cloud sessions). Cloud sessions start from a clean machine, so run it again in each new session, or add it to your environment's setup script.
+It installs the system tools (LibreOffice Writer, Tesseract, Ghostscript and others, with apt), then runs this kit's own `scripts/setup.sh --verapdf`. That creates a Python virtual environment at `~/.venvs/doc-accessibility` with the packages in `requirements.txt` and downloads the veraPDF validator (needs Java and Maven, both present in cloud sessions). You can also run `bash kits/doc-accessibility/scripts/setup.sh --verapdf` on its own. `bash kits/setup.sh --list` shows where each kit's Python is. Cloud sessions start from a clean machine, so run it again in each new session, or add it to your environment's setup script.
 
 Good to know:
 
@@ -167,16 +169,16 @@ Good to know:
 - On a Mac: `brew install --cask libreoffice` and `brew install tesseract ghostscript`, then `python3 -m venv ~/.venvs/doc-accessibility && ~/.venvs/doc-accessibility/bin/pip install -r kits/doc-accessibility/requirements.txt`. Install veraPDF from verapdf.org and set `VERAPDF_DIR` to its folder.
 - The human check needs Windows (NVDA, PAC, Acrobat Reader). Use a Windows computer or a Windows virtual machine.
 
-**Network access for real client sites.** This cloud environment's network policy blocks most websites, so the crawler cannot reach a client's site until you allow it. To audit a real site from here, open the cloud environment menu in the session's title bar, choose Edit, and under Network access either pick a broader access level or add the client's domains under Allowed domains (leave "Allow package managers" ticked). Add every host the documents live on, such as a separate agenda or file-storage host. Steps: https://code.claude.com/docs/en/cloud-environments#network-access. The sample site in this kit runs on your own machine, so it needs no network access.
+**Network access for real client sites.** This cloud environment's network policy blocks most websites, so the crawler cannot reach a client's site until you allow it. To audit a real site from here: at claude.ai/code, click the cloud icon showing your environment's name (above the message box), hover over the environment and click the settings icon. Under Network access, choose "Custom" (newer app versions may call it "Limited") and add the client's domains to the allowed domains. Keep the "Also include default list of common package managers" box ticked (newer versions: "Allow package managers"). Add every host the documents live on, such as a separate agenda or file-storage host. Steps: https://code.claude.com/docs/en/cloud-environments#network-access. The sample site in this kit runs on your own machine, so it needs no network access.
 
 ## How to run each script
 
-Run these from the repository root. Put each client's files in their own folder outside this kit, for example `C=~/clients/town-of-example`.
+Run these from the repository root. Put each client's files in their own folder under `clients/` at the repository root, for example `C=clients/town-of-example`. The repository's `.gitignore` keeps `clients/` out of git, so client files are never pushed to this public repository.
 
 ```sh
 PY=~/.venvs/doc-accessibility/bin/python
 K=kits/doc-accessibility/scripts
-C=~/clients/town-of-example
+C=clients/town-of-example
 ```
 
 **1. Crawl the site** (`crawl_documents.py`)
@@ -250,9 +252,11 @@ Fills the automated columns of `templates/remediation-log-template.xlsx` (before
 
 - `setup.sh`: installs everything (see [Setup](#setup)).
 - `run_sample_demo.py`: runs the whole process on the fictional sample site. `--serve-only` just serves the sample site at http://127.0.0.1:8765/ so you can try the crawler by hand.
-- `build_samples.py`: rebuilds the fictional town website and its documents.
-- `build_templates.py`: rebuilds the two Office templates from the default text (overwrites your edits).
+- `build_samples.py`: rebuilds the fictional town website and its documents (it deletes and remakes `samples/town-site/` and `samples/source-files/`).
+- `build_templates.py --force`: rebuilds the two Office templates from the default text. This overwrites your edits, so without `--force` it stops and changes nothing.
 - `office_helpers.py`: shared code for making accessible Word files.
+
+All the other scripts print their options with `--help` and then stop without changing anything.
 
 ## The portfolio sample
 
@@ -271,6 +275,14 @@ Fills the automated columns of `templates/remediation-log-template.xlsx` (before
 | `samples/fixes/remediation-log-sample.xlsx` | The log with the automated columns filled; the human-check columns are honestly marked "To do" |
 
 To run it all again: `$PY kits/doc-accessibility/scripts/run_sample_demo.py --rebuild` (under a minute).
+
+**Put your own name on the sample report.** The sample report says "Your Name, Document Accessibility Services". Run the demo again with your name and contact details; it rebuilds `samples/report/fernwick-document-snapshot.docx` and `.pdf`:
+
+```sh
+$PY kits/doc-accessibility/scripts/run_sample_demo.py --prepared-by "Your Name, Your Business" --contact "you@example.com"
+```
+
+The report shows the website as `https://www.fernwick.example/`, a made-up address, although the demo crawls a copy of the site on your own machine.
 
 ## Using it with Claude Code
 

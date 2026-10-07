@@ -15,6 +15,7 @@ Example
 
 from __future__ import annotations
 
+import argparse
 import shutil
 import subprocess
 import sys
@@ -31,7 +32,10 @@ def run(script: str, *args) -> None:
     subprocess.run([sys.executable, str(SCRIPTS / script), *map(str, args)], check=True)
 
 
-def main() -> int:
+def main(argv=None) -> int:
+    argparse.ArgumentParser(description=__doc__,
+                            formatter_class=argparse.RawDescriptionHelpFormatter
+                            ).parse_args(argv)
     if SAMPLE.exists():
         shutil.rmtree(SAMPLE)
     run("make_sample_archive.py", SAMPLE / "originals")

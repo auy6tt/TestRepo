@@ -19,10 +19,12 @@ The documents show problems you meet on real public-body websites:
 Fernwick is not a real place. All names, numbers and addresses are made up.
 Phone numbers use the 555-01xx range, which is reserved for fiction.
 
+Each run deletes and rebuilds samples/town-site and samples/source-files.
 Then run run_sample_demo.py to crawl the site and produce the outputs.
 """
 from __future__ import annotations
 
+import argparse
 import datetime as dt
 import json
 import random
@@ -813,7 +815,11 @@ def build_site() -> None:
     (SITE / "routes.json").write_text(json.dumps(routes, indent=2) + "\n", encoding="utf-8")
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(
+        description="Rebuild the fictional Town of Fernwick sample site (samples/town-site) and its Word "
+                    "sources (samples/source-files). Both folders are deleted and made again.")
+    parser.parse_args(argv)
     for folder in (SITE, SOURCES):
         if folder.exists():
             shutil.rmtree(folder)

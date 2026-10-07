@@ -14,6 +14,8 @@ Run build_samples.py first if samples/town-site does not exist (or pass --rebuil
 
   python run_sample_demo.py              run everything
   python run_sample_demo.py --serve-only just serve the sample site, to try the crawler by hand
+  python run_sample_demo.py --prepared-by "Your Name, Your Business" --contact "you@example.com"
+                                         put your own name on the sample report
 """
 from __future__ import annotations
 
@@ -35,6 +37,9 @@ SAMPLES = KIT / "samples"
 SITE = SAMPLES / "town-site"
 PYTHON = sys.executable
 CLIENT = "Town of Fernwick (fictional)"
+# The address the sample report shows instead of the local test server.
+# .example is reserved for examples, so it can never be a real website.
+SAMPLE_SITE = "https://www.fernwick.example/"
 
 
 class SampleSiteHandler(SimpleHTTPRequestHandler):
@@ -117,6 +122,9 @@ def main() -> int:
     parser.add_argument("--port", type=int, default=8765)
     parser.add_argument("--serve-only", action="store_true", help="only serve the sample site until Ctrl+C")
     parser.add_argument("--rebuild", action="store_true", help="rebuild the sample site first (build_samples.py)")
+    parser.add_argument("--prepared-by", default="Your Name, Document Accessibility Services",
+                        help="your name (and business) on the sample report (default: %(default)s)")
+    parser.add_argument("--contact", help="your email and phone on the sample report")
     args = parser.parse_args()
 
     if args.rebuild or not SITE.exists():
@@ -142,9 +150,10 @@ def main() -> int:
          "--out", "samples/inventory", "--client", CLIENT])
     run("3. Fill the snapshot report",
         ["scripts/make_report.py", "--inventory", "samples/inventory/inventory.xlsx",
-         "--crawl-summary", "samples/crawl/crawl_summary.json", "--client", CLIENT,
-         "--prepared-by", "Your Name, Document Accessibility Services", "--sector", "us-public",
-         "--out", "samples/report/fernwick-document-snapshot.docx", "--pdf"])
+         "--crawl-summary", "samples/crawl/crawl_summary.json", "--client", CLIENT, "--site", SAMPLE_SITE,
+         "--prepared-by", args.prepared_by, "--sector", "us-public",
+         "--out", "samples/report/fernwick-document-snapshot.docx", "--pdf"]
+        + (["--contact", args.contact] if args.contact else []))
     run("4. Safe automatic fixes (title, language, OCR)",
         ["scripts/fix_basics.py", "samples/downloads", "--out", "samples/fixes/basic-fixes",
          "--crawl", "samples/crawl/documents.csv", "--inventory", "samples/inventory/inventory.xlsx",

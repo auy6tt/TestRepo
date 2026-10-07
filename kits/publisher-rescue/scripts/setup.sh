@@ -3,6 +3,9 @@
 #
 #   bash kits/publisher-rescue/scripts/setup.sh
 #
+# (From the repository root, "bash kits/setup.sh publisher-rescue" does the same
+# and puts the Python environment in the same place.)
+#
 # Installs:
 #   - LibreOffice Draw (holds the Microsoft Publisher import filter, libmspub),
 #     Writer and Impress (for Word and PowerPoint files)
@@ -14,6 +17,7 @@
 # Set VENV to choose where the virtual environment goes
 # (default: ~/.venvs/publisher-rescue).
 set -euo pipefail
+case "${1:-}" in -h|--help) sed -n '2,18p' "$0"; exit 0;; esac
 
 KIT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 VENV="${VENV:-$HOME/.venvs/publisher-rescue}"
@@ -47,5 +51,5 @@ fi
 "$VENV/bin/python" -c "import docx, pptx, openpyxl, pymupdf, PIL; print('Python packages: OK')"
 
 echo
-echo "Done. Before running the scripts, start the environment with:"
-echo "  source $VENV/bin/activate"
+echo "Done. Run the scripts with this Python: $VENV/bin/python"
+echo "(or start the environment first: source $VENV/bin/activate)"

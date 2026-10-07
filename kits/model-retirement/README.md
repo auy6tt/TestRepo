@@ -32,11 +32,13 @@ Everything here uses placeholder model names such as `old-model-v1`. Real model 
 
 ## Price guide
 
-| Job | Price |
+| Job | Price (estimate) |
 |---|---|
 | One feature (one prompt, one model call) | $300–800 |
 | Whole app with several features and a reusable test set | $1,500–4,000 |
 | Already broken (the date has passed), fixed the same week | Suggested: add 50% for urgent work |
+
+These prices are estimates. Check them against your market before you quote.
 
 The price goes up with the number of features, how much testing they need, missing staging environments, several providers, and short deadlines. Quote embeddings and fine-tuned models separately (see [Risks](#risks-and-how-to-handle-them)). A good follow-up offer: re-run the scan and the test set before the client's next retirement date.
 
@@ -66,7 +68,13 @@ The Claude Code skill lives in `.claude/skills/model-retirement/SKILL.md` at the
 
 ## Setup
 
-The scanner needs only Python 3.9 or newer. The comparison and report scripts need two packages. The cloud container is temporary, so do this at the start of each session:
+The scanner needs only Python 3.9 or newer. The comparison and report scripts need two packages. The cloud container is temporary, so do this at the start of each session, from the root of this repo:
+
+```sh
+bash kits/setup.sh model-retirement
+```
+
+That creates the Python environment at `/tmp/mr-venv` (and installs the system tools the kits share). To do it by hand instead:
 
 ```sh
 python3 -m venv /tmp/mr-venv
@@ -75,7 +83,7 @@ python3 -m venv /tmp/mr-venv
 
 Then run the scripts with `/tmp/mr-venv/bin/python`, or activate the environment first with `. /tmp/mr-venv/bin/activate`. The commands below assume you are in the root of this repo with the environment active.
 
-Keep each client's work (scan, test set, configs, results, report) in its own private folder, for example `~/client-work/acme`. Never put it inside this repo if the repo is public. The container is temporary, so make that folder a private Git repo and push it as you go.
+Keep each client's work (their code, scan, test set, configs, results, report) in its own folder under `clients/` at the root of this repo, for example `clients/acme`. Git ignores `clients/`, so client files never go into this repo, which may be public. Never save client files anywhere else in this repo. The container is temporary, so make the client's folder a private Git repo of its own and push it as you go.
 
 ## Step by step
 
@@ -83,17 +91,17 @@ Keep each client's work (scan, test set, configs, results, report) in its own pr
 
 1. Send `templates/scoping_questionnaire.md`. It asks which features use AI, where the code is, whether there is a staging environment, and whether the client can share 20–50 real examples.
 2. Quote a fixed price with `templates/fixed_price_offer.md`. Take 50% up front.
-3. Get read access to the code. Agree that you work on a new branch and the client releases.
+3. Get read access to the code and clone it into the client's folder, for example `clients/acme/repo`. Agree that you work on a new branch and the client releases.
 
 ### 2. Fill the retirement list
 
-Fill `data/retirements.csv` from each provider's official page before every job (details in [Fill the retirement list](#fill-the-retirement-list)). Keep a copy per client if they use different providers.
+Fill `data/retirements.csv` from each provider's official page before every job (details in [Fill the retirement list](#fill-the-retirement-list)). If a client uses different providers, keep a copy in their folder (for example `clients/acme/retirements.csv`).
 
 ### 3. Scan the code
 
 ```sh
-python3 kits/model-retirement/scripts/scan_models.py ~/client-work/acme/repo \
-    --retirements kits/model-retirement/data/retirements.csv --out-dir ~/client-work/acme/scan
+python3 kits/model-retirement/scripts/scan_models.py clients/acme/repo \
+    --retirements kits/model-retirement/data/retirements.csv --out-dir clients/acme/scan
 ```
 
 Open `model_scan.md`. Section 1 lists what is retired or retires within 90 days. Open every row in the code and confirm it is a real model call. Then:
@@ -119,17 +127,19 @@ Collect 20–50 real inputs per feature, with names, emails, phone numbers and a
 
 ### 7. Compare old and new
 
-1. Copy `templates/runner_config_template.json` to `runner_old.json` and `runner_new.json` in `~/client-work/acme/compare`. Set the model, the settings and the prompt for each side.
+1. Copy `templates/runner_config_template.json` to `runner_old.json` and `runner_new.json` in `clients/acme/compare`. Set the name, the model, the settings, the prompt and the prices for each side.
 2. Connect the runner to the client's API. Copy the `client_api_run` stub from `scripts/runners.py` into a file in the client's work folder (for example `client_runner.py`), fill in the marked block, and set `"runner": "client_runner.py:client_api_run"`. Calling the client's own function (example C in the stub) is best, because it tests their real code. Claude Code can do this with you.
-3. Check everything without calling anything: add `--dry-run`. It shows the number of calls and a rough maximum cost.
+3. Check everything without calling anything: add `--dry-run`. It shows the number of calls and a rough maximum cost. It also warns you if a config still has the template's model, prices of 0, or the same settings as the other side. Fix those before a real run.
 4. The comparison runs **in staging, with the client's own API key, while the old model still works**. Either the client runs it, or they give you a staging key with a spending limit and you set it as an environment variable (`export CLIENT_API_KEY=...`). Never paste a key into a file or a chat.
 5. Run it (calls to a real API need `--yes`):
 
 ```sh
-W=~/client-work/acme/compare
+W=clients/acme/compare
 python kits/model-retirement/scripts/compare_runs.py --tests $W/test_set.jsonl \
     --old $W/runner_old.json --new $W/runner_new.json --out $W/comparison.xlsx --yes
 ```
+
+It saves every prompt and answer in `comparison_raw.jsonl` next to `comparison.xlsx`. Keep that file: you need it in step 9.
 
 ### 8. Re-tune the prompts
 
@@ -137,13 +147,24 @@ Open `comparison.xlsx`. Read the cases where the checks failed or the answers di
 
 ### 9. Grade
 
-Someone who knows the client's business grades every case in the yellow columns of the Comparison sheet: **Preferred** (old, new or same) and **New OK?** (yes or no). The Summary sheet counts the grades. If the reviewer prefers a plain spreadsheet, have them fill a CSV with `id,preferred,new_ok,notes` and add `--grades grades.csv` when you re-build the workbook.
+Someone who knows the client's business grades every case in the yellow columns of the Comparison sheet: **Preferred** (old, new or same) and **New OK?** (yes or no). The Summary sheet counts the grades.
+
+If the reviewer prefers a plain spreadsheet, have them fill a CSV with `id,preferred,new_ok,notes`. Then build a new workbook from the saved answers with `--from-raw`. It calls no model and costs nothing:
+
+```sh
+W=clients/acme/compare
+python kits/model-retirement/scripts/compare_runs.py --tests $W/test_set.jsonl \
+    --old $W/runner_old.json --new $W/runner_new.json \
+    --from-raw $W/comparison_raw.jsonl --grades $W/grades.csv --out $W/comparison_graded.xlsx
+```
+
+Use the same test set and runner configs as the run the reviewer graded. Do not run the comparison again with `--yes` just to add the grades. That calls the paid API again, makes new answers, puts the grades next to answers the reviewer never saw, and overwrites `comparison_raw.jsonl`.
 
 ### 10. Report and hand over
 
 1. Copy `templates/client_report_template.md` to the client's folder as `report.md` and fill it in.
-2. Convert it: `python kits/model-retirement/scripts/md_to_docx.py ~/client-work/acme/report.md ~/client-work/acme/report.docx --footer "Prepared for Acme"`.
-3. Send the report, `comparison.xlsx`, `model_scan.md`, the test set and the pull request link.
+2. Convert it: `python kits/model-retirement/scripts/md_to_docx.py clients/acme/report.md clients/acme/report.docx --footer "Prepared for Acme"`.
+3. Send the report, `comparison.xlsx` (or `comparison_graded.xlsx`), `model_scan.md`, the test set and the pull request link.
 4. The client reviews, merges and releases. Agree a 7-day watch period.
 5. Invoice the second 50%. Offer a reminder and a re-run before the next retirement date in the scan.
 
@@ -180,18 +201,19 @@ Rules:
 
 ## How to run each script
 
-Run these from the kit folder (`cd kits/model-retirement`), or give full paths.
+Run these from the root of this repo. The examples use `clients/acme` as the client's folder (see [Setup](#setup)). Always write the results to the client's folder, never anywhere else in this repo.
 
 ### scan_models.py
 
 ```sh
-python3 scripts/scan_models.py PATH/TO/REPO --retirements data/retirements.csv --out-dir scan_output
+python3 kits/model-retirement/scripts/scan_models.py clients/acme/repo \
+    --retirements kits/model-retirement/data/retirements.csv --out-dir clients/acme/scan
 ```
 
 | Option | What it does |
 |---|---|
-| `--retirements FILE` | The retirement list. Default: `data/retirements.csv` |
-| `--out-dir DIR` | Where `model_scan.csv` and `model_scan.md` go. Default: `scan_output` |
+| `--retirements FILE` | The retirement list. Default: `data/retirements.csv` in the kit |
+| `--out-dir DIR` | Required. Where `model_scan.csv` and `model_scan.md` go, for example `clients/acme/scan` |
 | `--today YYYY-MM-DD` | Pretend today is this date. Use it for repeatable reports |
 | `--warn-days 90` | How many days ahead counts as "retiring soon" |
 | `--exclude 'tests/*'` | Skip matching files or folders (repeatable) |
@@ -205,14 +227,18 @@ Each reference gets a status: **RETIRED**, **RETIRING SOON** (within 90 days), *
 ### compare_runs.py
 
 ```sh
-python scripts/compare_runs.py --tests test_set.jsonl --old runner_old.json --new runner_new.json --out comparison.xlsx
+W=clients/acme/compare
+python kits/model-retirement/scripts/compare_runs.py --tests $W/test_set.jsonl \
+    --old $W/runner_old.json --new $W/runner_new.json --out $W/comparison.xlsx
 ```
 
 | Option | What it does |
 |---|---|
-| `--dry-run` | Check the files and show the plan and a rough maximum cost. Calls nothing |
+| `--out FILE` | The Excel file to write. Default: `comparison.xlsx` next to the test set |
+| `--dry-run` | Check the files and show the plan and a rough maximum cost. Calls nothing. Warns about the template's placeholder model, prices of 0, and old and new configs that are the same |
 | `--yes` | Required when a runner calls a real API |
 | `--grades FILE` | CSV with `id,preferred,new_ok,notes` to fill the grading columns |
+| `--from-raw FILE` | Build the workbook again from the answers an earlier run saved (`comparison_raw.jsonl`). Calls nothing and costs nothing. Use it with `--grades` (step 9) or when Excel had the workbook open |
 | `--limit N` | Only the first N cases (a cheap first try) |
 | `--delay S` | Wait S seconds after each call (for rate limits) |
 | `--retries N` | Retry a failed call N times (default 2) |
@@ -239,7 +265,7 @@ python scripts/compare_runs.py --tests test_set.jsonl --old runner_old.json --ne
 | Runner | Use it for |
 |---|---|
 | `mock` | Testing the whole process with fake answers. No key, no cost |
-| `recorded` | Replaying saved answers from a JSONL file (`recorded_outputs`). Use it when the old model is already retired and you only have its answers from logs, or to reuse one side of an earlier run (`recorded_side`: `old` or `new`) |
+| `recorded` | Replaying saved answers from a JSONL file (`recorded_outputs`). Use it when the old model is already retired and you only have its answers from logs, or to reuse one side of an earlier run (`recorded_side`: `old` or `new`). A saved error stays an error |
 | `client_api` | The stub in `scripts/runners.py` that shows where the client's API call goes. It reads the key from the environment variable named in `api_key_env`. Copy it into a runner file for each client (step 7) |
 | `client_runner.py:client_api_run` | Your own file and function, with the shape `(prompt, system, config, case)` returning `{"output": ...}`. The path is relative to the runner config |
 
@@ -248,7 +274,8 @@ The workbook has three sheets. **Summary**: run details, averages, changes, chec
 ### md_to_docx.py
 
 ```sh
-python scripts/md_to_docx.py report.md report.docx --footer "Prepared for Client Name"
+python kits/model-retirement/scripts/md_to_docx.py clients/acme/report.md clients/acme/report.docx \
+    --footer "Prepared for Client Name"
 ```
 
 It handles headings, paragraphs, bold, italic, code, links, bullet and numbered lists, tick boxes, tables, quotes and code blocks. Text inside `<!-- ... -->` is left out, so you can keep notes to yourself in the Markdown.
@@ -276,7 +303,7 @@ It handles headings, paragraphs, bold, italic, code, links, bullet and numbered 
 
 **API keys and accounts.** All test calls use the client's own API key and the client's bill, ideally a staging key with a spending limit. Keys stay in environment variables, never in files, configs or chats. Never run a client's system or test calls on your personal Claude subscription. Claude Code helps you read and change code; the client's AI features must call their own API account.
 
-**Client data.** Test sets often start from real customer messages. Remove personal details before they leave the client, keep client work in a private repo or folder (never this repo if it is public), and delete your copies when the job ends. Turn off model training in your Claude privacy settings before you handle client files, and sign an NDA if asked.
+**Client data.** Test sets often start from real customer messages. Remove personal details before they leave the client, keep client work only in the client's folder under `clients/` (git ignores it) and their own private repo, never anywhere else in this repo, and delete your copies when the job ends. Turn off model training in your Claude privacy settings before you handle client files, and sign an NDA if asked.
 
 **Never generate training data for other models.** Don't use Claude, or any provider's outputs, to create training or fine-tuning data for another AI model. Provider terms forbid it. The test set is for testing only. Turn down requests to build a training set from model outputs.
 
@@ -322,7 +349,7 @@ or ask in plain words, for example "help me move this client's AI feature off a 
 | `compare/` | Test set (10 cases), both runner configs, canned mock answers, the grader's CSV, and the results: `comparison.xlsx` and `comparison_raw.jsonl` |
 | `sample_report.md` and `.docx` | The finished client report |
 
-Before you show it to anyone, put your name in `samples/sample_report.md` (it says "[Your name]" twice), then rebuild the Word file:
+Before you show it to anyone, put your name in `samples/sample_report.md` (replace "[Your name]" in both places and "[your email]"), then rebuild the Word file with the environment from [Setup](#setup) active:
 
 ```sh
 cd kits/model-retirement/samples

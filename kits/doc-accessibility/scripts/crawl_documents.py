@@ -634,6 +634,11 @@ class Crawler:
             writer.writeheader()
             writer.writerows(self.pages)
 
+        # The shortest wait the crawler left between two requests to the same host:
+        # --delay, or the host's robots.txt Crawl-delay when that is longer.
+        waits = [max(self.args.delay, getattr(self.robots.get(base), "crawl_delay", None) or 0)
+                 for base in self.last_request]
+        effective_delay = min(waits) if waits else self.args.delay
         docs = list(self.documents.values())
         by_type = {}
         for doc in docs:
@@ -642,7 +647,8 @@ class Crawler:
             "start_url": self.start, "date": started.date().isoformat(),
             "started": started.isoformat(timespec="seconds"),
             "finished": dt.datetime.now().isoformat(timespec="seconds"),
-            "depth": self.args.depth, "delay_seconds": self.args.delay, "max_pages": self.args.max_pages,
+            "depth": self.args.depth, "delay_seconds": self.args.delay,
+            "effective_delay_seconds": effective_delay, "max_pages": self.args.max_pages,
             "user_agent": self.args.user_agent, "used_sitemap": bool(self.args.sitemap),
             "pages_crawled": sum(1 for p in self.pages if p["content_type"] in HTML_TYPES and str(p["status"]).startswith("2")),
             "pages_blocked_by_robots": self.counts["skipped_robots"],
@@ -661,7 +667,8 @@ class Crawler:
         (out / "crawl_summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
         lines = [f"# Crawl summary: {self.start}", "",
                  f"Crawled on {summary['date']} ({summary['started']} to {summary['finished']}), up to {self.args.depth} "
-                 f"clicks from the start page, one request every {self.args.delay:g} seconds or slower, "
+                 f"clicks from the start page, one request every {effective_delay:g} "
+                 f"{'second' if effective_delay == 1 else 'seconds'} or slower, "
                  f"following robots.txt.", "", "| Measure | Count |", "|---|---|"]
         for label, key in [("Web pages read", "pages_crawled"), ("Documents found", "documents_found"),
                            ("Links to documents", "document_links"), ("Documents downloaded", "downloaded"),

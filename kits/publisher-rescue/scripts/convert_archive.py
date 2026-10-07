@@ -12,16 +12,16 @@ For every .pub file in a folder (and all its subfolders) this script:
 The client's files are never changed. Output folders mirror the original
 folder structure.
 
-Examples
+Examples (run from kits/publisher-rescue/ with the kit's Python; jobs/ is git-ignored)
   # Count what is there before you quote (nothing is converted):
-  python scripts/convert_archive.py ~/jobs/stmarys/incoming --survey
+  python scripts/convert_archive.py jobs/stmarys/originals --survey
 
   # Convert every .pub file:
-  python scripts/convert_archive.py ~/jobs/stmarys/incoming ~/jobs/stmarys/archive \
+  python scripts/convert_archive.py jobs/stmarys/originals jobs/stmarys/archive \
       --title "St Mary's School newsletters"
 
   # Also convert Word, PowerPoint and drawing files LibreOffice can open:
-  python scripts/convert_archive.py incoming archive --ext all
+  python scripts/convert_archive.py jobs/stmarys/originals jobs/stmarys/archive --ext all
 
 Run with --help to see every option.
 """
@@ -33,6 +33,7 @@ import hashlib
 import html
 import json
 import os
+import shutil
 import sys
 from collections import Counter
 from dataclasses import dataclass, field
@@ -49,12 +50,14 @@ from office_tools import (  # noqa: E402
     OfficeToolsError,
     Soffice,
     find_soffice,
+    fitz,
     has_ole_signature,
     pdf_target,
     read_pdf,
     render_page,
     soffice_version,
     soffice_version_text,
+    stand_in_fonts,
 )
 
 EXTENSION_GROUPS = {
@@ -190,6 +193,11 @@ def make_record(path: Path, root: Path) -> FileRecord:
 # Survey (count before quoting)
 # ---------------------------------------------------------------------------
 
+def money(amount: float) -> str:
+    """$2 or $1,234 for whole dollars, $0.50 or $150.50 otherwise."""
+    return f"${amount:,.0f}" if amount == int(amount) else f"${amount:,.2f}"
+
+
 def survey(files: list[Path], root: Path) -> None:
     records = [make_record(f, root) for f in files]
     print(f"Survey of {root} (nothing was converted)\n")
@@ -226,7 +234,7 @@ def survey(files: list[Path], root: Path) -> None:
     print(f"  Dates (last modified):   {dates[0]:%Y-%m-%d} to {dates[-1]:%Y-%m-%d}")
     print(f"\n  Unique files to convert: {unique}")
     print(f"  At ${PRICE_PER_FILE_LOW:.2f}-${PRICE_PER_FILE_HIGH:.2f} a file that is about "
-          f"${unique * PRICE_PER_FILE_LOW:,.0f}-${unique * PRICE_PER_FILE_HIGH:,.0f} "
+          f"{money(unique * PRICE_PER_FILE_LOW)}-{money(unique * PRICE_PER_FILE_HIGH)} "
           "for the archive part (templates are priced separately).")
 
 
@@ -328,6 +336,12 @@ def convert_one(record: FileRecord, out_root: Path, lo: Soffice, args, used: set
                          "The text looks garbled (letters such as \u00d0, \u00f1, \u00ea instead of "
                          "real words). This happens with some older Publisher files written "
                          "in non-Western languages. Compare with the original.")
+    replaced = stand_in_fonts(info.fonts)
+    if replaced:
+        record.add_issue("Font replaced",
+                         f"Some text is shown in a stand-in font ({', '.join(replaced)}) "
+                         "because the font the file asked for was not available, so it "
+                         "can look different from the original.")
 
     try:
         render_page(pdf_path, png_path, width_px=args.preview_width)
@@ -655,7 +669,8 @@ def build_parser() -> argparse.ArgumentParser:
         description="Convert a folder of Publisher (.pub) files to searchable PDFs, "
                     "with preview pictures, index.xlsx and contact-sheet.html.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="Example: python scripts/convert_archive.py incoming archive --title \"St Mary's newsletters\"",
+        epilog="Example: python scripts/convert_archive.py jobs/stmarys/originals "
+               "jobs/stmarys/archive --title \"St Mary's newsletters\"",
     )
     parser.add_argument("input", type=Path, help="folder with the client's files (subfolders included)")
     parser.add_argument("output", type=Path, nargs="?",
@@ -679,6 +694,18 @@ def build_parser() -> argparse.ArgumentParser:
                         help="only do the first N files (for a quick trial run)")
     parser.add_argument("--soffice", help="path to LibreOffice's soffice program, if not found")
     return parser
+
+
+def missing_tools() -> list[str]:
+    """What is needed for a conversion run but not installed."""
+    missing = []
+    try:
+        import openpyxl  # noqa: F401  (writes index.xlsx at the end)
+    except ImportError:
+        missing.append("the Python package openpyxl (for index.xlsx)")
+    if fitz is None and not (shutil.which("pdftoppm") and shutil.which("pdffonts")):
+        missing.append("PyMuPDF or the Poppler tools (to read PDFs and make previews)")
+    return missing
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -705,6 +732,13 @@ def main(argv: list[str] | None = None) -> int:
     if not files:
         print(f"No {', '.join('.' + e for e in extensions)} files found in {in_root}.")
         return 0
+    missing = missing_tools()
+    if missing:
+        print(f"Missing: {', '.join(missing)}. Run this script with the kit's Python, "
+              "~/.venvs/publisher-rescue/bin/python (to set it up, run "
+              "'bash kits/setup.sh publisher-rescue' from the repository root).",
+              file=sys.stderr)
+        return 2
 
     try:
         soffice = find_soffice(args.soffice)
@@ -781,11 +815,16 @@ def main(argv: list[str] | None = None) -> int:
                                for r in records if r.status in (STATUS_FAILED, STATUS_SKIPPED)]
     summary["check_files"] = [{"file": r.rel_path, "note": r.note, "problem": r.problem}
                               for r in records if r.status == STATUS_CHECK]
+    summary["stand_in_fonts"] = [{"file": r.rel_path, "fonts": stand_in_fonts(r.fonts)}
+                                 for r in records if stand_in_fonts(r.fonts)]
     (out_root / "summary.json").write_text(json.dumps(summary, indent=2), encoding="utf-8")
 
     print(f"\nDone: {counts['converted'] + counts['check']} of {counts['files']} converted "
           f"({counts['pages']} pages); {counts['check']} to check, {counts['failed']} failed, "
           f"{counts['skipped']} skipped.")
+    if summary["stand_in_fonts"]:
+        print(f"{len(summary['stand_in_fonts'])} file(s) use a stand-in font ('Font replaced' "
+              "in index.xlsx). List them in the delivery note.")
     print(f"  Index:         {index_path}\n  Contact sheet: {sheet_path}")
     return 130 if interrupted else 0
 
