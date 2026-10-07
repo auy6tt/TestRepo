@@ -64,11 +64,11 @@ const copy = {
   __DATE__: "October 2026",
   __NSRC__: String(nSources),
   __LEDE__: "What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. <strong>Ranked for someone starting from zero:</strong> no reviews, no portfolio, no network.",
-  __META__: `<span><b>${opps.length}</b> ways to earn</span><span><b>${get("NICHES").length}</b> hidden niches</span><span><b>${nPlatforms}</b> platform entries</span><span><b>${get("NICHES").filter(n => n.kit).length}</b> starter kits</span><span>Prices in USD</span>`,
-  __PICKS_SUB__: "Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Start the first one this week and add others as reviews come in. The next section lists less crowded niches, several with a ready-made starter kit.",
-  __NICHES_SUB__: "Each one passed three tests: proof that people pay for it, evidence that few people offer it, and work Claude can do most of. Many exist because a new rule, a platform change or a dull task created demand faster than sellers appeared. Scores are out of 5. Before you build anything, run the one-day test in each entry.",
+  __META__: `<span><b>${opps.length}</b> ways to earn</span><span><b>${get("NICHES").length}</b> hidden niches</span><span><b>${nPlatforms}</b> platform entries</span><span><b>${nKits}</b> starter kits</span><span>Prices in USD unless marked</span>`,
+  __PICKS_SUB__: "Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Your first step: start pick 1 this week, because small jobs are the fastest way to a first review. Add others as reviews come in. The next section lists less crowded niches; when you are ready, choose one with a starter kit and a high Beginner score.",
+  __NICHES_SUB__: "Each one passed three tests: proof that people pay for it, evidence that few people offer it, and work Claude can do most of. Many exist because a new rule, a platform change or a dull task created demand faster than sellers appeared. Scores are out of 5, and higher is better on every scale: 5 means strong demand, very few competitors, an excellent fit for Claude, or very easy to start. Before you build anything, run the one-day test in each entry.",
   __FC_SUB__: "Marketplaces now rank sellers by their history, and AI matchers on both Upwork and Fiverr decide who gets seen. So a newcomer wins fastest through people they know and through outreach that shows finished work first. Run Upwork and Fiverr alongside as slower channels. Ranked by how fast each works for someone with zero reviews.",
-  __REALITY_SUB__: "Claude makes the work fast. It doesn't bring clients and it doesn't make strangers trust you. The data is sobering. One tracker of Claude Code businesses listed by their owners found fewer than half earned anything, and the median listing made roughly $150–230 a month (self-reported). The ranges below are targets for someone who works the plan every week, not promises.",
+  __REALITY_SUB__: "Claude makes the work fast. It doesn't bring clients and it doesn't make strangers trust you. The data is sobering. One tracker of Claude Code businesses listed by their owners (its method is unchecked) found that only about 4 in 10 earned any revenue, and it reported a median of about $145 a month ($227 for service businesses), all self-reported. The ranges below are targets for someone who works the plan every week, not promises.",
   __STAGES__: STAGES.map(s => `<div class="stage"><div class="when">${esc(s.when)}</div><div class="amt">${esc(s.amt)}</div><p>${esc(s.text)}</p></div>`).join(""),
   __PRINCIPLES__: PRINCIPLES.map(p => `<li><b>${esc(p[0])}</b>${esc(p[1])}</li>`).join(""),
   __EXPLORE_SUB__: "Every option the research turned up, with prices, where buyers are, and how Claude does the work in this workspace. Open a row for details. \"First $\" is the typical time until your first payment arrives. \"No reviews needed\" means buyers judge the work or product itself; \"With samples\" means a newcomer can win with a portfolio and a low first price.",
@@ -155,7 +155,7 @@ for (const g of Object.keys(NG)) {
   });
 }
 L.push("", "## First clients when nobody knows you", "", md(copy.__FC_SUB__), "");
-DATA.channels.forEach((c, i) => L.push(`${i + 1}. **${c.name}** (cost: ${c.cost}; first $: ${c.first}). ${c.what} ${c.why}`));
+DATA.channels.forEach((c, i) => L.push(`${i + 1}. **${c.name}.** ${c.what} ${c.why} *Cost: ${c.cost}. First payment: ${c.first}.*`));
 L.push("", "### Upwork, step by step", "");
 DATA.upworkSteps.forEach((t, i) => L.push(`${i + 1}. ${t}`));
 L.push("", "### Fiverr, step by step", "");
@@ -193,7 +193,7 @@ DATA.rulesDont.forEach(r => L.push(`- ${md(r)}`));
 L.push("", "### When a job goes wrong", "");
 DATA.whenWrong.forEach(r => L.push(`- ${md(r)}`));
 L.push("", ...copy.__RULES_CALLOUT__.match(/<p class="callout">.*?<\/p>/g).map(p => "> " + md(p).replace(/\\"/g, '"') + "\n"));
-L.push("## 30-day plan", "", "Built for zero reviews. Tick items off as you go.", "");
+L.push("## 30-day plan", "", "Built for zero reviews and about 10–15 hours a week. Tick items off as you go.", "");
 DATA.plan.forEach(w => {
   L.push(`### ${w.title} (${w.days})`, "", `*Goal: ${w.goal}*`, "");
   w.items.forEach(t => L.push(`- [ ] ${t}`));

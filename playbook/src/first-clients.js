@@ -42,7 +42,7 @@ var UPWORK_STEPS = [
  "Save a search: payment verified, fewer than 5 proposals, client has no hires, posted in the last hour. Leave out jobs that ask for a \"free test\". Turn on notifications; postings peak Monday to Thursday.",
  "Open each proposal by restating the deliverable, then link a small proof made for their post. A 60–90 second screen recording works well. Add a 3-step plan, a fixed price, a delivery date and one sharp question.",
  "Add 1–2 fixed-price offers to the Project Catalog, for example \"Clean and dedupe your spreadsheet (up to 10,000 rows), $40\".",
- "Deliver the first job early and ask for feedback. The Rising Talent badge needs a 4.8+ rating and $250 earned, and it lifts you in search."
+ "Deliver the first job early and ask for feedback. The Rising Talent badge lifts you in search. Upwork lists several requirements, including a complete, identity-verified profile, recent activity, at least $250 earned in the past 12 months and a high rating (4.8+); check its help page for the current list."
 ];
 
 var FIVERR_STEPS = [
@@ -53,7 +53,7 @@ var FIVERR_STEPS = [
  "Launch when you can reply within hours. Use Out of Office instead of leaving messages unanswered.",
  "Send real prospects (never friends or family) to your gig link. Fiverr's AI matcher (Mira) mostly picks sellers who already have orders.",
  "Never have friends or family order to create reviews, and never offer anything for a review. Fiverr permanently bans \"feedback boosting\", and the US FTC can seek up to $53,088 per fake review.",
- "Level 1 needs at least 5 orders from 3 different clients, $400 earned and a 4.4+ rating. Money clears 14 days after each order."
+ "Level 1 needs, among other things, 60 days as a seller, at least 5 orders from 3 different clients, $400 earned, a 4.4+ rating, a Success Score of 5+ and replies to at least 80% of messages. Money clears 14 days after each order."
 ];
 
 var PROOF_STEPS = [

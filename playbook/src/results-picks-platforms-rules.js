@@ -211,10 +211,24 @@ var WORKSPACE = [
  {t:"Safe client access", d:"Ask for the least access that works: collaborator or staff accounts (Shopify, WordPress), invitations to private GitHub repos, read-only exports. Never log in to a client's personal accounts (for LinkedIn work, send them the text to post), and ask them to remove your access when the job ends."},
  {t:"Secrets stay secret", d:"Never paste client passwords into chat. Use the environment's secrets settings and temporary accounts, and never commit keys to Git."},
  {t:"Clean up after each client", d:"Chats you don't delete stay in your history. Delete finished client sessions from claude.ai/code; Anthropic erases deleted chats from its systems within 30 days. Don't use thumbs ratings on client work."},
- {t:"Steer from your phone", d:"Cloud sessions keep running in the background, and Remote Control lets you follow and steer a session from your phone or another computer."}
+ {t:"Check in from your phone", d:"Cloud sessions keep running after you close the tab. Open them in the Claude app on your phone, or at claude.ai/code, to follow progress and reply. (Remote Control is a different feature: it connects your phone to a session running on your own computer.)"}
 ];
 
 var GLOSSARY = [
+ ["HOA", "Homeowners association: the group that runs a housing development or condo building. Its elected board must keep formal meeting minutes."],
+ ["NDA", "Non-disclosure agreement: a short contract in which you promise to keep a client's information confidential."],
+ ["SDS", "Safety data sheet: the standard document from a chemical's maker about its hazards and safe handling. US employers must keep one for each hazardous chemical they use."],
+ ["OSHA", "The US Occupational Safety and Health Administration, the federal agency that sets workplace safety rules."],
+ ["EPR", "Extended producer responsibility: laws that make brands pay for the packaging they sell, usually through fees and yearly reports."],
+ ["REDCap", "A web tool that universities and hospitals use to build study forms and collect research data."],
+ ["XLSForm", "A spreadsheet format for building survey forms for KoboToolbox and ODK, tools used by researchers and aid organisations."],
+ ["O&M manual", "Operation and maintenance manual: the binder of datasheets, manuals and warranties a builder hands over when a building is finished."],
+ ["CRM", "Customer relationship management software, where a business keeps its contacts, leads and sales."],
+ ["SOP", "Standard operating procedure: a written, step-by-step way of doing a recurring task."],
+ ["VBA", "Visual Basic for Applications, the macro language built into Excel and other Office programs."],
+ ["n8n", "An automation tool, like Zapier and Make, that connects apps so tasks run by themselves."],
+ ["BIM", "Building information modelling: 3D building models with data attached, made in tools such as Revit."],
+ ["ADA", "The Americans with Disabilities Act, the US law behind most website and document accessibility requirements."],
  ["API key", "A secret code that lets software use a service such as Claude and bills that usage to the key's owner."],
  ["ATS", "Applicant tracking system: software employers use to filter resumes by keywords."],
  ["Care plan or retainer", "A monthly fee for ongoing updates, monitoring and small fixes after a project."],
@@ -222,7 +236,6 @@ var GLOSSARY = [
  ["EDI", "Electronic data interchange: the file formats big retailers use for orders, shipping notices and invoices."],
  ["Escrow", "The platform holds the client's payment and releases it to you when the work is approved."],
  ["GeoJSON", "A standard file format for map shapes, such as farm plot outlines."],
- ["KYC", "\"Know your customer\": the identity checks platforms run before paying you."],
  ["MCP", "Model Context Protocol: the standard way to connect tools and data to AI assistants like Claude."],
  ["Merchant of record", "A checkout service that sells on your behalf and handles sales tax and VAT (Gumroad, Lemon Squeezy, Paddle)."],
  ["OCR", "Optical character recognition: turning scanned images into real, selectable text."],

@@ -23,7 +23,7 @@ Researched October 2026 · 36 ways to earn · 44 hidden niches · 27 platform en
 
 ## Start here
 
-Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Start the first one this week and add others as reviews come in. The next section lists less crowded niches, several with a ready-made starter kit.
+Each pick either lets the buyer see the work before paying, or is small enough that buyers will take a chance on a newcomer. Your first step: start pick 1 this week, because small jobs are the fastest way to a first review. Add others as reviews come in. The next section lists less crowded niches; when you are ready, choose one with a starter kit and a high Beginner score.
 
 | # | Pick | Charge | First $ | Sell on |
 |---|---|---|---|---|
@@ -36,7 +36,7 @@ Each pick either lets the buyer see the work before paying, or is small enough t
 
 ## Hidden niches: real demand, few competitors
 
-Each one passed three tests: proof that people pay for it, evidence that few people offer it, and work Claude can do most of. Many exist because a new rule, a platform change or a dull task created demand faster than sellers appeared. Scores are out of 5. Before you build anything, run the one-day test in each entry.
+Each one passed three tests: proof that people pay for it, evidence that few people offer it, and work Claude can do most of. Many exist because a new rule, a platform change or a dull task created demand faster than sellers appeared. Scores are out of 5, and higher is better on every scale: 5 means strong demand, very few competitors, an excellent fit for Claude, or very easy to start. Before you build anything, run the one-day test in each entry.
 
 | Niche | Type | Typical price | Demand | Few competitors | Claude fit | Beginner |
 |---|---|---|---|---|---|---|
@@ -108,14 +108,14 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 *Inventory and fix PDFs and Office files for the US ADA rules and the EU Accessibility Act.* **$5–25 per page (most vendors charge $5–8); a site inventory $300–1,500 (est.)** · demand 5/5 · few competitors 2/5 · Claude fit 4/5 · beginner 3/5
 
-- **Who pays:** US towns, counties, school and special districts, community colleges, clinics and nonprofits funded by the US health department, EU public bodies (under the Web Accessibility Directive), and accessibility vendors who need overflow help.
+- **Who pays:** US towns, counties, school and special districts, community colleges, clinics and nonprofits funded by the US health department, EU businesses covered by the European Accessibility Act, and accessibility vendors who need overflow help.
 - **What they need:** A list of every PDF, Word and PowerPoint file on their website, sorted into delete, archive, convert to a web page, or fix. Then the files that stay are fixed to WCAG 2.1 AA: headings, reading order, alt text, table headers and usable forms. Accessible templates keep new files right.
 - **Proof of demand:** The US Justice Department's ADA Title II rule requires WCAG 2.1 AA; an April 2026 interim rule moved the deadlines to 26 April 2027 for bodies serving 50,000+ people and 26 April 2028 for smaller ones. Health providers funded by the US health department got their own one-year extension under Section 504: 11 May 2027 for those with 15+ employees and 10 May 2028 for smaller ones. The standard itself did not change, and the Justice Department cited the difficulty of fixing large document sets as a reason for the delay.
 - **Why few people offer it:** Vendors are multiplying and automated tools start around $0.30 a page, so compete on careful human checking for small bodies rather than on price. Automated checkers miss many issues (estimates of what they catch range from about 30% to 57%).
 - **How Claude does it here:** A crawler lists every document on the site; a script triages each PDF (tagged or not, scanned or real text, title and language set). Claude fixes the source Word files (headings, draft alt text, table headers) and exports tagged PDFs with LibreOffice; scans get OCR. A person checks reading order and alt text with free Windows tools (PAC, NVDA) or Acrobat.
 - **Where buyers are:** State municipal leagues and school-board associations, bid portals (search "document remediation"), ADA coordinators on LinkedIn, state associations of community health centers, accessibility vendors needing white-label help.
 - **Watch out:** Never promise "ADA compliant" or certification; deliver test results and a log of what was checked. Exemptions are for the client's ADA coordinator or lawyer to decide. The deadlines have already moved once.
-- **Test it in one day:** Crawl the websites of 10 towns or school districts under 50,000 people and email each ADA coordinator a one-page snapshot (for example "312 PDFs, 240 not accessible") with one fixed file free.
+- **Test it in one day:** Pick 10 towns or school districts under 50,000 people. Take a light look at each public website (a few pages, not a full crawl), then email each ADA coordinator what you noticed and offer a free full document snapshot and one fixed file once they agree.
 - **Related:** [Accessibility reports for software sold to governments and universities](#vpat-acr), [Speed and accessibility check reports](#audits)
 - **Starter kit:** [`kits/doc-accessibility/`](kits/doc-accessibility/). Set it up with `bash kits/setup.sh doc-accessibility`, then type `/doc-accessibility` in Claude Code.
 
@@ -200,7 +200,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** UAE businesses that issue or receive business-to-business or business-to-government invoices. Sales to consumers are out of scope for now.
 - **What they need:** A clean-up of invoice and customer data (tax numbers, IDs, item codes), a map from their Tally, Zoho or Excel fields to the required format, and a comparison of providers.
-- **Proof of demand:** Ministerial decisions in 2025 set the rollout. Businesses with AED 50M+ revenue had to appoint an accredited provider by 30 October 2026 (extended from 31 July; confirm the current date) and go live on 1 January 2027. Smaller ones must appoint a provider by 31 March 2027 and go live on 1 July 2027. Missing a deadline brings penalties.
+- **Proof of demand:** Ministerial decisions in 2025 set the rollout. Businesses with AED 50M+ revenue must appoint an accredited provider by 30 October 2026 (extended from 31 July; confirm the current date) and go live on 1 January 2027. Smaller ones must appoint a provider by 31 March 2027 and go live on 1 July 2027. Missing a deadline brings penalties.
 - **Why few people offer it:** The market is led by providers, ERP resellers and large accounting firms; independent help with data readiness is rarely offered (unverified).
 - **How Claude does it here:** Claude extracts fields from sample invoices and accounting exports and builds a mapping and validation workbook, plus provider questions and staff instructions. The client's tax agent signs off and the provider handles the connection.
 - **Where buyers are:** Chamber and free-zone business events, UAE small-business groups, small accounting firms as partners.
@@ -335,7 +335,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Why few people offer it:** Only a handful of firms specialize in it; everything else is generic transcription. A "your template, next day" offer aimed at management companies looks thin (unverified).
 - **How Claude does it here:** Start from the client's Zoom, Teams or Otter transcript. Claude drafts the minutes in their template as a .docx, plus a motions-and-votes table, an action list and questions on anything unclear. You check names, motions and votes; the board approves the minutes.
 - **Where buyers are:** Community Associations Institute (CAI) chapters and directory, local HOA management companies, nonprofit and church networks, Upwork and Fiverr searches for "meeting minutes".
-- **Watch out:** Follow consent rules for recordings, leave out closed-session detail unless the bylaws allow it, keep everything confidential, and never invent content. Use anonymized or metadata-only exports, or the client's own Claude workspace, for personal data.
+- **Watch out:** Follow consent rules for recordings, leave out closed-session detail unless the bylaws allow it, keep everything confidential, and never invent content.
 - **Test it in one day:** Turn a public HOA or council meeting recording into sample minutes, then email 25 management companies offering one free set with 24-hour turnaround, and count the replies.
 - **Starter kit:** [`kits/board-minutes/`](kits/board-minutes/). Set it up with `bash kits/setup.sh board-minutes`, then type `/board-minutes` in Claude Code.
 
@@ -351,7 +351,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **How Claude does it here:** Claude reads the client's policies, SOC 2 report and past answers, builds a sourced answer library in Excel, and fills in the buyer's spreadsheet, tagging every answer with its source or "needs client input". The client's technical owner checks and signs off.
 - **Where buyers are:** Indie Hackers, r/SaaS, founders on LinkedIn posting about SOC 2 or security reviews, SOC 2 consultants who could refer clients. Search: "SIG Lite", "CAIQ", "vendor security assessment".
 - **Watch out:** These are statements the client makes to its customers, so never invent security controls. The client signs; don't pose as an auditor or certify compliance.
-- **Test it in one day:** Fill in a public questionnaire for a made-up startup as a sample, then message 30 B2B software founders offering a fixed-price first questionnaire in 72 hours.
+- **Test it in one day:** Fill in a public questionnaire for a made-up startup as a sample, then message 30 B2B software founders offering a fixed-price first questionnaire in 3 business days.
 - **Related:** [Supplier sustainability questionnaires (EcoVadis)](#ecovadis)
 - **Starter kit:** [`kits/security-questionnaire/`](kits/security-questionnaire/). Set it up with `bash kits/setup.sh security-questionnaire`, then type `/security-questionnaire` in Claude Code.
 
@@ -405,10 +405,10 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 <a id="epr-digest"></a>
 #### Packaging-law updates for small consumer brands
 
-*A monthly brief on US packaging fee laws and deadlines.* **$39–99 a month per brand, or $300–800 a month white-label (est.)** · demand 4/5 · few competitors 3/5 · Claude fit 5/5 · beginner 3/5
+*A regular brief on US packaging fee laws and deadlines.* **$39–99 a month per brand, or $300–800 a month white-label (est.)** · demand 4/5 · few competitors 3/5 · Claude fit 5/5 · beginner 3/5
 
 - **Who pays:** Food, drink, cosmetics, pet and home-goods brands with roughly $1M–50M in revenue, plus packaging distributors who could resell it to their clients.
-- **What they need:** A monthly brief on what changed in state packaging "producer responsibility" (EPR) laws: a state-by-state table of thresholds, exemptions and deadlines that the brand checks against its own figures, with official links and a deadline calendar.
+- **What they need:** A monthly or weekly brief on what changed in state packaging "producer responsibility" (EPR) laws: a state-by-state table of thresholds, exemptions and deadlines that the brand checks against its own figures, with official links and a deadline calendar.
 - **Proof of demand:** Seven US states have packaging EPR laws (California, Colorado, Maine, Maryland, Minnesota, Oregon, Washington). Oregon sent its first invoices in June 2025, Colorado's fees began in January 2026, and California's rules took effect in May 2026. One compliance blog puts typical fees at $5,000–25,000 a year, though several states exempt small producers. Brands already pay compliance firms for help.
 - **Why few people offer it:** Today's supply is free law-firm alerts written for big clients and enterprise compliance services. No low-cost recurring brief aimed at small brands turned up in the research (unverified).
 - **How Claude does it here:** A weekly job checks about 30 official pages (state agency pages, the producer organization's notices, bill trackers) for changes. Claude drafts the change notes and updates the deadline table; you check every line against its source. A scheduled Routine can run the weekly check. Real sources must be allowed in this environment's Network access settings.
@@ -572,7 +572,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Why few people offer it:** Freelancers in AI support sell bot setup, not knowledge-base work. The vendors' auto-drafted articles still need a person to check the facts.
 - **How Claude does it here:** Claude groups an export of unresolved conversations by theme, finds contradictions and rewrites articles in the brand's voice, with a spreadsheet change log. The support lead checks policy facts and tests in the bot's preview mode.
 - **Where buyers are:** Intercom and Zendesk communities, Support Driven Slack, "Head of Support" and "CX Ops" roles on LinkedIn. Search: "Fin resolution rate", "knowledge base audit".
-- **Watch out:** Wrong policy text creates liability, so the client signs off every article. Ask for exports with personal data removed. Use anonymized or metadata-only exports, or the client's own Claude workspace, for personal data.
+- **Watch out:** Wrong policy text creates liability, so the client signs off every article. Ask for exports with personal data removed.
 - **Test it in one day:** Do a free "contradictions and gaps" teardown of one public help center that has an AI chat widget, and send it to 5 support leads with a fixed price. A good sign is 1 call booked.
 - **Related:** [Cleaning up company documents before an AI rollout](#ai-ready-docs), [Website assistants that answer from the business's own info](#chatbots)
 
@@ -587,7 +587,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Why few people offer it:** Supply is mostly self-serve tools and lab data-labelling gigs. Only about 9 evaluation gigs turned up on Fiverr, while chatbot-building gigs are saturated.
 - **How Claude does it here:** Claude drafts test cases from the client's docs and transcripts, writes the scoring rules, and builds and runs the test harness (open-source tools like promptfoo) against the client's system using their key. You check the automated grader against about 30 answers graded by hand.
 - **Where buyers are:** LangChain and LlamaIndex communities, Indie Hackers, AI launches on Product Hunt, Upwork "LLM testing" jobs.
-- **Watch out:** Run misuse tests only with the owner's written permission. Sign an NDA for transcripts, and never use the test data to train models. Use anonymized or metadata-only exports, or the client's own Claude workspace, for personal data.
+- **Watch out:** Run misuse tests only with the owner's written permission. Sign an NDA, ask for transcripts with personal data removed, and never use the test data to train models.
 - **Test it in one day:** Ask 3 public website bots 20 ordinary customer questions (no attacks), and send each owner an accuracy report with an offer. A good sign is 1 request.
 - **Related:** [Rescuing AI features before their model is retired](#model-retirement), [AI API bill audits for startups](#ai-cost-audit)
 
@@ -617,7 +617,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Why few people offer it:** IT service firms sell permission fixes; the content clean-up itself is rarely sold on its own (unverified).
 - **How Claude does it here:** Claude reads exported Word, PDF and Excel files, groups duplicates, finds contradictions and drafts the current pages, producing a keep/merge/archive spreadsheet and a list of permission risks. The client's admin makes the changes.
 - **Where buyers are:** Managed IT providers (as white-label work, which suits zero reviews), Microsoft 365 and Notion consultant communities. Search: "Copilot readiness", "SharePoint cleanup".
-- **Watch out:** The documents are confidential: sign an NDA and keep model training off. Never change permissions yourself. Use anonymized or metadata-only exports, or the client's own Claude workspace, for personal data.
+- **Watch out:** The documents are confidential: sign an NDA and keep model training off. Never change permissions yourself.
 - **Test it in one day:** Email 5 local IT providers offering a content clean-up add-on, with a sample built from a public company's published policies. A good sign is 1 pilot.
 - **Related:** [Fixing help-center content so AI support bots stop failing](#support-content), [Website assistants that answer from the business's own info](#chatbots)
 
@@ -628,7 +628,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** EU-facing agencies, publishers and shops that use chatbots or publish AI content, and small businesses with no AI policy.
 - **What they need:** An inventory of AI tools, a staff AI-use policy, disclosure wording for chatbots and AI-generated content, and short staff training with an attendance log.
-- **Proof of demand:** The EU AI Act's transparency rules (Article 50) apply from 2 August 2026. Most duties fall on companies that build AI tools; businesses that use AI mainly have to label deepfakes and some published AI-written text. A softened Article 4 asks firms to support staff AI literacy. In one survey of 4,400 small and mid-size firms, 81% use AI but 69% have a policy.
+- **Proof of demand:** The EU AI Act's transparency rules (Article 50) apply from 2 August 2026. Most duties fall on companies that build AI tools; businesses that use AI mainly have to label deepfakes and some published AI-written text. A softened Article 4 asks firms to support staff AI literacy. In one survey of 4,400 small and mid-size firms, 81% use AI, yet 31% have no AI policy.
 - **Why few people offer it:** Law firms are expensive and templates are free, but hands-on help for 10–50 person firms looks thin (unverified).
 - **How Claude does it here:** Claude drafts the policy, disclosure wording, a slide deck and a quiz with an attendance log (good practice, not a legal requirement). A partner lawyer reviews it, because legal interpretation needs a qualified person. Pairs well with the core "Hands-on AI workshops" offer.
 - **Where buyers are:** Chambers of commerce, agency networks, LinkedIn. Search: "AI Act Article 50", "AI policy template".
@@ -674,11 +674,11 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 *Make a paper's code run from one script and pass the journal's check.* **$300–600 for a README and structure check; $800–2,500 for a full clean-up (est.)** · demand 4/5 · few competitors 4/5 · Claude fit 4/5 · beginner 3/5
 
-- **Who pays:** Economists and social scientists whose accepted papers must pass a journal's code check, research centers, and labs losing their SPSS or Stata licenses.
+- **Who pays:** Economists and social scientists whose accepted papers must pass a journal's code check, and research centers.
 - **What they need:** A replication package that runs from one master script, a README in the standard template, data citations, pinned software versions, logs, and a map from each table and figure to its code; or old statistics code translated with matching results.
 - **Proof of demand:** The American Economic Association's data editor reported 249 packages "accepted with changes" against 7 accepted as-is at one review stage, so nearly every package goes back for fixes. A reproducibility certificate costs €500 at one service, and universities are dropping SPSS licenses.
 - **Why few people offer it:** Existing services check packages rather than fix them, and the fixing is usually done unpaid by PhD students.
-- **How Claude does it here:** For R and Python packages Claude runs everything end to end here, pins versions, regenerates outputs and compares them with the paper. For Stata or SPSS packages Claude reads the code and writes the README and master file; the client runs it and sends logs.
+- **How Claude does it here:** For R and Python packages Claude runs everything end to end here, pins versions, regenerates outputs and compares them with the paper. For Stata packages Claude reads the code and writes the README and master file; the client runs it and sends logs. The kit's checker doesn't read SPSS syntax, so treat SPSS jobs as manual work.
 - **Where buyers are:** Authors of recent working papers (NBER, SSRN, IZA) using R or Python, economics postdoc networks, research-computing help desks.
 - **Watch out:** Never change estimates or "fix" results; report every discrepancy to the author. Restricted data stays with the client.
 - **Test it in one day:** Take a public replication package, write a template-compliant README for it, publish the before and after, and email 25 working-paper authors offering a free README check.
@@ -737,7 +737,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** Small Amazon and Shopify brands importing consumer products into the US, and non-US makers shipping children's clothing, toys, baby gear or sporting goods duties-paid.
 - **What they need:** A draft list of the safety rules that may apply to each product, for the importer and its lab to confirm. Certificates (General Certificate of Conformity or Children's Product Certificate) drafted from existing lab reports. The data entered in CPSC's Product Registry. A spreadsheet linking products to rules, certificates and retest dates, with tariff codes copied from the importer's broker or past entries.
-- **Proof of demand:** Certificate eFiling became mandatory on 8 July 2026 for about 600 tariff codes, with no low-value exemption (goods entering through foreign-trade zones follow on 8 January 2027). Shipments without it risk exams, storage fees and delays, and freight forwarders are warning their customers.
+- **Proof of demand:** Certificate eFiling became mandatory on 8 July 2026 for regulated consumer products, with no low-value exemption; CPSC lists about 600 tariff codes as a guide to which imports are likely affected (goods entering through foreign-trade zones follow on 8 January 2027). Shipments without it risk exams, storage fees and delays, and freight forwarders are warning their customers.
 - **Why few people offer it:** Visible providers are law firms, customs brokers and test labs that draft certificates as an add-on; one Fiverr seller charges $295–585 per certificate. Cheap bulk registry setup wasn't found (unverified).
 - **How Claude does it here:** Claude pulls data out of lab-report PDFs, drafts the certificates, and builds a registry-ready spreadsheet with a list of products lacking valid tests. The importer decides which rules apply, then issues and signs the certificates; the customs broker files.
 - **Where buyers are:** Amazon Seller Forums, FBA and Shopify seller groups, small freight forwarders, non-US sellers of children's products.
@@ -751,7 +751,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 - **Who pays:** EU importers of coffee, cocoa, rubber, timber, palm oil, soy and cattle (including small roasters and chocolate makers) and the cooperatives and exporters that supply them.
 - **What they need:** Valid map files (GeoJSON) for each farm plot with outlines for plots over 4 hectares, repaired shapes, duplicates removed, plots linked to shipments, a check against forest-loss maps, and supplier instructions.
-- **Proof of demand:** The EU Deforestation Regulation applies from 30 December 2026 for large and medium firms and 30 June 2027 for micro and small ones (one source limits the later date to non-timber products, so check which applies). The Commission's May 2026 review did not reopen or delay it. Collecting and checking location data is called the single biggest compliance problem, and cooperatives already pay $1,600–7,500 for field mapping.
+- **Proof of demand:** The EU Deforestation Regulation applies from 30 December 2026 for large and medium firms and 30 June 2027 for micro and small ones (one source limits the later date to non-timber products, so check which applies). The Commission published a simplification review in May 2026, so check the current dates and rules before you quote them. Collecting and checking location data is called the single biggest compliance problem, and cooperatives already pay $1,600–7,500 for field mapping.
 - **Why few people offer it:** Supply is traceability software and local field-mapping firms; remote data checking for small importers looks fragmented (unverified).
 - **How Claude does it here:** Python mapping libraries repair shapes, compute areas, flag overlaps and compare plots with the EU's 2020 forest map, producing a spreadsheet and an interactive map. You resolve problems with suppliers; the importer files the due-diligence statement.
 - **Where buyers are:** Specialty coffee roasters, craft chocolate makers, timber trade groups, exporter associations, LinkedIn. Spanish, Portuguese, French, Indonesian or Swahili is a major advantage.
@@ -763,14 +763,14 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 Marketplaces now rank sellers by their history, and AI matchers on both Upwork and Fiverr decide who gets seen. So a newcomer wins fastest through people they know and through outreach that shows finished work first. Run Upwork and Fiverr alongside as slower channels. Ranked by how fast each works for someone with zero reviews.
 
-1. **People you know, and the people they know** (cost: $0; first $: 1–3 weeks). Message 20–40 former classmates, former coworkers and owners of shops you use. Ask for introductions as well as work. Trust passes through someone they already know. A LinkedIn study of about 20 million people found that ties with roughly 10 mutual connections led to more new jobs than close friends did.
-2. **Show-first outreach to small businesses** (cost: $0; first $: 2–6 weeks). Make a quick sample for one specific business (a demo site, a one-page audit, a cleaned spreadsheet) and send it with a personal first line. The finished sample stands in for reviews: the owner sees their own result before paying. Small batches work better: lists under 50 get about 3× the replies of lists over 500.
-3. **Reddit hiring communities** (cost: $0 (some need account age or karma); first $: Days to 2 weeks). r/forhire, r/freelance_forhire, r/slavelabour and r/DoneDirtCheap. Sort by New every day and reply within the first hours with one matching sample. Posters pick whoever replies fast with relevant proof. r/forhire gets about 33 posts a day and bans pay under $15/h; a 6-hour-old post already has 20–30 replies.
-4. **Upwork, with a tight saved search** (cost: $25–45 per 50 proposals; first $: 2–8 weeks). Apply only to fresh jobs with few proposals from clients with a verified payment method. See the Upwork steps below. Escrow protects both sides, and first-time clients take more chances on newcomers. Expect about 1 reply per 10–20 proposals; only about 1 posting in 12 is marked entry level.
-5. **Communities around one tool** (cost: $0; first $: 2–6 weeks). The n8n forum's Jobs category, Webflow's hiring board, and Facebook or Slack groups for agency owners. Help people for 30 minutes a day before you pitch. Helpful public answers are proof anyone can check, and the people there already pay for the tool.
-6. **Fiverr** (cost: $0 (20% per order); first $: 2–6 weeks). Publish 2–4 related gigs and send your own prospects to them. See the Fiverr steps below. Buyers come to you, so a low entry price and strong samples can win first orders. Fiverr's AI matcher (Mira) mostly picks sellers who already have orders, so don't wait for it.
-7. **White-label work for agencies** (cost: $0; first $: 3–8 weeks). Pitch 20–40 web, marketing or automation agencies with 2–3 matching samples and offer a small paid test. The agency's brand carries the trust; they need someone who delivers without creating more management work. Agency work tends to repeat.
-8. **Smaller marketplaces** (cost: $0 to start; first $: 2–4+ weeks). PeoplePerHour (15 free proposals a month), Freelancer.com (6 free bids a month), Workana, Legiit. Use Contra to bill clients you find yourself, since it charges you 0%. Same review problem as Upwork, but less competition in some niches.
+1. **People you know, and the people they know.** Message 20–40 former classmates, former coworkers and owners of shops you use. Ask for introductions as well as work. Trust passes through someone they already know. A LinkedIn study of about 20 million people found that ties with roughly 10 mutual connections led to more new jobs than close friends did. *Cost: $0. First payment: 1–3 weeks.*
+2. **Show-first outreach to small businesses.** Make a quick sample for one specific business (a demo site, a one-page audit, a cleaned spreadsheet) and send it with a personal first line. The finished sample stands in for reviews: the owner sees their own result before paying. Small batches work better: lists under 50 get about 3× the replies of lists over 500. *Cost: $0. First payment: 2–6 weeks.*
+3. **Reddit hiring communities.** r/forhire, r/freelance_forhire, r/slavelabour and r/DoneDirtCheap. Sort by New every day and reply within the first hours with one matching sample. Posters pick whoever replies fast with relevant proof. r/forhire gets about 33 posts a day and bans pay under $15/h; a 6-hour-old post already has 20–30 replies. *Cost: $0 (some need account age or karma). First payment: Days to 2 weeks.*
+4. **Upwork, with a tight saved search.** Apply only to fresh jobs with few proposals from clients with a verified payment method. See the Upwork steps below. Escrow protects both sides, and first-time clients take more chances on newcomers. Expect about 1 reply per 10–20 proposals; only about 1 posting in 12 is marked entry level. *Cost: $25–45 per 50 proposals. First payment: 2–8 weeks.*
+5. **Communities around one tool.** The n8n forum's Jobs category, Webflow's hiring board, and Facebook or Slack groups for agency owners. Help people for 30 minutes a day before you pitch. Helpful public answers are proof anyone can check, and the people there already pay for the tool. *Cost: $0. First payment: 2–6 weeks.*
+6. **Fiverr.** Publish 2–4 related gigs and send your own prospects to them. See the Fiverr steps below. Buyers come to you, so a low entry price and strong samples can win first orders. Fiverr's AI matcher (Mira) mostly picks sellers who already have orders, so don't wait for it. *Cost: $0 (20% per order). First payment: 2–6 weeks.*
+7. **White-label work for agencies.** Pitch 20–40 web, marketing or automation agencies with 2–3 matching samples and offer a small paid test. The agency's brand carries the trust; they need someone who delivers without creating more management work. Agency work tends to repeat. *Cost: $0. First payment: 3–8 weeks.*
+8. **Smaller marketplaces.** PeoplePerHour (15 free proposals a month), Freelancer.com (6 free bids a month), Workana, Legiit. Use Contra to bill clients you find yourself, since it charges you 0%. Same review problem as Upwork, but less competition in some niches. *Cost: $0 to start. First payment: 2–4+ weeks.*
 
 ### Upwork, step by step
 
@@ -781,7 +781,7 @@ Marketplaces now rank sellers by their history, and AI matchers on both Upwork a
 5. Save a search: payment verified, fewer than 5 proposals, client has no hires, posted in the last hour. Leave out jobs that ask for a "free test". Turn on notifications; postings peak Monday to Thursday.
 6. Open each proposal by restating the deliverable, then link a small proof made for their post. A 60–90 second screen recording works well. Add a 3-step plan, a fixed price, a delivery date and one sharp question.
 7. Add 1–2 fixed-price offers to the Project Catalog, for example "Clean and dedupe your spreadsheet (up to 10,000 rows), $40".
-8. Deliver the first job early and ask for feedback. The Rising Talent badge needs a 4.8+ rating and $250 earned, and it lifts you in search.
+8. Deliver the first job early and ask for feedback. The Rising Talent badge lifts you in search. Upwork lists several requirements, including a complete, identity-verified profile, recent activity, at least $250 earned in the past 12 months and a high rating (4.8+); check its help page for the current list.
 
 ### Fiverr, step by step
 
@@ -792,7 +792,7 @@ Marketplaces now rank sellers by their history, and AI matchers on both Upwork a
 5. Launch when you can reply within hours. Use Out of Office instead of leaving messages unanswered.
 6. Send real prospects (never friends or family) to your gig link. Fiverr's AI matcher (Mira) mostly picks sellers who already have orders.
 7. Never have friends or family order to create reviews, and never offer anything for a review. Fiverr permanently bans "feedback boosting", and the US FTC can seek up to $53,088 per fake review.
-8. Level 1 needs at least 5 orders from 3 different clients, $400 earned and a 4.4+ rating. Money clears 14 days after each order.
+8. Level 1 needs, among other things, 60 days as a seller, at least 5 orders from 3 different clients, $400 earned, a 4.4+ rating, a Success Score of 5+ and replies to at least 80% of messages. Money clears 14 days after each order.
 
 ### Show-first outreach, step by step
 
@@ -805,7 +805,7 @@ Marketplaces now rank sellers by their history, and AI matchers on both Upwork a
 
 ## Reality check
 
-Claude makes the work fast. It doesn't bring clients and it doesn't make strangers trust you. The data is sobering. One tracker of Claude Code businesses listed by their owners found fewer than half earned anything, and the median listing made roughly $150–230 a month (self-reported). The ranges below are targets for someone who works the plan every week, not promises.
+Claude makes the work fast. It doesn't bring clients and it doesn't make strangers trust you. The data is sobering. One tracker of Claude Code businesses listed by their owners (its method is unchecked) found that only about 4 in 10 earned any revenue, and it reported a median of about $145 a month ($227 for service businesses), all self-reported. The ranges below are targets for someone who works the plan every week, not promises.
 
 - **First 30 days: $0–$200.** Most of the month goes into samples, profiles and outreach. One or two small paid jobs and a first review count as a good result.
 - **Months 2–3: $200–$1,000/mo.** Reviews and referrals start to stack up if you keep sending 10–20 messages or proposals every week.
@@ -1454,13 +1454,13 @@ Anthropic's consumer terms allow you to sell work made with Claude. Most of the 
 
 ## 30-day plan
 
-Built for zero reviews. Tick items off as you go.
+Built for zero reviews and about 10–15 hours a week. Tick items off as you go.
 
 ### Week 1: build proof from nothing (Days 1–7)
 
 *Goal: By day 7 you have one clear offer, 3–5 samples written up as case studies, and accounts ready.*
 
-- [ ] Day 1: pick one main offer from "Start here" and write it as one sentence, such as "I turn messy sales spreadsheets into clean, auto-updating dashboards in 48 hours."
+- [ ] Day 1: pick one main offer from "Start here" (pick 1, spreadsheet fixes, is the safest start) and write it as one sentence, such as "I turn messy sales spreadsheets into clean, auto-updating dashboards in 48 hours."
 - [ ] Turn off model training in Claude's privacy settings before you touch anyone else's files.
 - [ ] Days 2–4: ask Claude to build 3–5 samples in this repo from made-up or public data, each labeled as a self-initiated sample.
 - [ ] Day 5: write each sample up as a case study (problem, process, solution, result) with concrete numbers from the sample (rows cleaned, minutes saved), clearly labeled as a self-initiated sample, and publish them together on one page.
@@ -1532,45 +1532,58 @@ Each template is also a separate file in [`templates/`](templates/).
 - **Safe client access.** Ask for the least access that works: collaborator or staff accounts (Shopify, WordPress), invitations to private GitHub repos, read-only exports. Never log in to a client's personal accounts (for LinkedIn work, send them the text to post), and ask them to remove your access when the job ends.
 - **Secrets stay secret.** Never paste client passwords into chat. Use the environment's secrets settings and temporary accounts, and never commit keys to Git.
 - **Clean up after each client.** Chats you don't delete stay in your history. Delete finished client sessions from claude.ai/code; Anthropic erases deleted chats from its systems within 30 days. Don't use thumbs ratings on client work.
-- **Steer from your phone.** Cloud sessions keep running in the background, and Remote Control lets you follow and steer a session from your phone or another computer.
+- **Check in from your phone.** Cloud sessions keep running after you close the tab. Open them in the Claude app on your phone, or at claude.ai/code, to follow progress and reply. (Remote Control is a different feature: it connects your phone to a session running on your own computer.)
 
 ## Glossary
 
+- **ADA:** The Americans with Disabilities Act, the US law behind most website and document accessibility requirements.
 - **API key:** A secret code that lets software use a service such as Claude and bills that usage to the key's owner.
 - **ASN (856):** Advance ship notice: the EDI message a supplier sends a retailer before a shipment arrives.
 - **ATS:** Applicant tracking system: software employers use to filter resumes by keywords.
 - **Backdrop:** A free content-management system forked from Drupal 7, so old Drupal 7 sites can upgrade to it easily.
+- **BIM:** Building information modelling: 3D building models with data attached, made in tools such as Revit.
 - **CAN-SPAM, PECR, GDPR:** US, UK and EU rules on marketing messages and personal data.
 - **Care plan or retainer:** A monthly fee for ongoing updates, monitoring and small fixes after a project.
 - **Connects:** Upwork's credits for sending proposals, $0.15 each.
+- **CRM:** Customer relationship management software, where a business keeps its contacts, leads and sales.
 - **EDI:** Electronic data interchange: the file formats big retailers use for orders, shipping notices and invoices.
+- **EPR:** Extended producer responsibility: laws that make brands pay for the packaging they sell, usually through fees and yearly reports.
 - **Escrow:** The platform holds the client's payment and releases it to you when the work is approved.
 - **Fork:** A separate project started from a copy of another project's code.
 - **GeoJSON:** A standard file format for map shapes, such as farm plot outlines.
-- **KYC:** "Know your customer": the identity checks platforms run before paying you.
+- **HOA:** Homeowners association: the group that runs a housing development or condo building. Its elected board must keep formal meeting minutes.
 - **MCP:** Model Context Protocol: the standard way to connect tools and data to AI assistants like Claude.
 - **Merchant of record:** A checkout service that sells on your behalf and handles sales tax and VAT (Gumroad, Lemon Squeezy, Paddle).
 - **Microsoft Graph:** Microsoft's current interface for programs that read or send Microsoft 365 email and files.
+- **n8n:** An automation tool, like Zapier and Make, that connects apps so tasks run by themselves.
+- **NDA:** Non-disclosure agreement: a short contract in which you promise to keep a client's information confidential.
 - **NVDA and PAC:** A free screen reader (NVDA) and a free PDF accessibility checker (PAC), both for Windows.
+- **O&M manual:** Operation and maintenance manual: the binder of datasheets, manuals and warranties a builder hands over when a building is finished.
 - **OCR:** Optical character recognition: turning scanned images into real, selectable text.
+- **OSHA:** The US Occupational Safety and Health Administration, the federal agency that sets workplace safety rules.
 - **Pay-per-event:** Apify's pricing, where users pay each time your tool performs a counted action.
 - **PCI DSS and SAQ:** The card industry's security standard (PCI DSS) and the yearly self-assessment questionnaire (SAQ) small merchants fill in.
 - **PCIP:** Publisher's cataloging-in-publication: library cataloging data printed on a self-published book's copyright page.
 - **PLR:** "Private label rights" content bought for resale. Etsy bans reselling it.
 - **pyRevit and Dynamo:** Tools for writing automation scripts inside Autodesk Revit.
+- **REDCap:** A web tool that universities and hospitals use to build study forms and collect research data.
 - **Regression:** A bug where something that used to work breaks after a change.
 - **Rotate keys:** Replace passwords or API keys with new ones so any old copies stop working.
 - **Routine:** A Claude Code task that runs on a schedule in the cloud.
 - **SBOM:** Software bill of materials: a list of every component inside a piece of software.
+- **SDS:** Safety data sheet: the standard document from a chemical's maker about its hazards and safe handling. US employers must keep one for each hazardous chemical they use.
 - **security.txt:** A small text file on a website that tells people where to report security problems.
 - **SIG Lite and CAIQ:** Two common standard security questionnaires that big customers send to software vendors.
 - **Skill:** A saved set of instructions and files that teaches Claude a repeatable task. Run it by typing its name after a slash.
 - **SOC 2:** An independent audit report on a company's security controls, often requested by business customers.
+- **SOP:** Standard operating procedure: a written, step-by-step way of doing a recurring task.
 - **Staging:** A private copy of a website or app where changes are tested before going live.
+- **VBA:** Visual Basic for Applications, the macro language built into Excel and other Office programs.
 - **VPAT and ACR:** A VPAT is the standard form used to write an Accessibility Conformance Report (ACR) about a product.
 - **W-8BEN:** A US tax form non-US people give to US platforms so US tax isn't withheld unnecessarily.
 - **WCAG:** Web Content Accessibility Guidelines: the standard used to judge whether websites and documents are accessible.
 - **White-label:** Work you do that another business sells under its own name.
+- **XLSForm:** A spreadsheet format for building survey forms for KoboToolbox and ODK, tools used by researchers and aid organisations.
 
 ## Sources
 

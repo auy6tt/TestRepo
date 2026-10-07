@@ -10,10 +10,13 @@ Research and starter kits for earning money with a Claude Max plan when you're s
 
 ## Start here
 
-1. Read **Start here**, **Hidden niches**, **First clients** and **Rules** in the playbook. That takes about 30 minutes.
+1. Read **Start here**, **First clients** and **Rules** in the playbook (under an hour). Then look through **Hidden niches** for one that fits you.
 2. Turn off model training in Claude's privacy settings before you handle anyone else's files.
-3. Pick one offer. If its niche has a starter kit, read the kit's README and run `bash kits/setup.sh <kit>` (see [kits/README.md](kits/README.md)).
-4. Work through the **30-day plan** one week at a time.
+3. Start with pick 1 in **Start here** (spreadsheet fixes) this week: small jobs are the fastest way to a first review.
+4. When you're ready for a less crowded market, choose a hidden niche with a starter kit and a high Beginner score. Read the kit's README and run `bash kits/setup.sh <kit>` (see [kits/README.md](kits/README.md)).
+5. Work through the **30-day plan** one week at a time.
+
+> **This repository is public:** anyone can see it on GitHub. Never put client files, passwords or personal data in it. Client work goes in `clients/`, `work/`, `jobs/` or `reports/` (git ignores these folders) or in a private repository. You can make this repository private in its GitHub settings.
 
 ## Using this repo with Claude Code
 
@@ -26,14 +29,14 @@ You can also ask for things like:
 - "Write an Upwork proposal for this job post using `templates/upwork-proposal.md`. Keep it under 150 words."
 - "Find 15 businesses in [category] in [city] that have no website, and list them in a table. Use public info only."
 
-Cloud sessions start from a clean machine. Run `bash kits/setup.sh` (or name only the kits you need) at the start of each session, and keep each client's work in its own private repo or a folder git ignores. Commit and push as you go.
+Cloud sessions start from a clean machine. Run `bash kits/setup.sh` (or name only the kits you need) at the start of each session. Keep each client's work in a folder git ignores or in its own private repo, and commit and push your own changes to the playbook or kits as you go.
 
 ## Editing the playbook
 
 The page and the markdown are generated from the data files in `playbook/src/`. Edit those, then run:
 
 ```sh
-node playbook/src/build.mjs
+node playbook/src/build.mjs --url https://claude.ai/artifact/6XujurYFWKFDJQDofE8n9M
 ```
 
-This rewrites `PLAYBOOK.md`, `templates/` and `playbook/index.html`. Add `--url <link>` to keep the published page's link in `PLAYBOOK.md`.
+This rewrites `PLAYBOOK.md`, `templates/` and `playbook/index.html`. Keep `--url` so `PLAYBOOK.md` keeps the link to the interactive page. Then ask Claude to republish the interactive page so it shows your changes.

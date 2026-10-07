@@ -202,7 +202,7 @@ function copyText(text, fallbackNode){
       h("div", null, h("h4", {text:"Demand signal"}), h("p", {text:o.signal})),
       h("div", null, h("h4", {text:"Watch out"}), h("p", {text:o.risk})),
       h("div", null, h("h4", {text:"Skill needed from you"}), h("p", {text:o.skill})),
-      h("div", {class:"wide"}, h("h4", {text:"Example gig title"}), h("span", {class:"gigtitle", text:o.gig}))
+      h("div", {class:"wide"}, h("h4", {text:"Example gig title or idea"}), h("span", {class:"gigtitle", text:o.gig}))
     );
     return h("details", {class:"opp", id:"opp-" + o.id},
       h("summary", null,
@@ -257,6 +257,7 @@ function copyText(text, fallbackNode){
         h("td", {text:r.ai})
       ));
     });
+    box.appendChild(h("p", {class:"swipe", text:"Swipe the table sideways to see all columns."}));
     box.appendChild(h("div", {class:"table-wrap"},
       h("table", null,
         h("thead", null, h("tr", null, h("th", {text:"Platform"}), h("th", {text:"What it costs you"}), h("th", {text:"Best for"}), h("th", {text:"AI rules and notes"}))),
@@ -385,11 +386,20 @@ function copyText(text, fallbackNode){
 /* ---------- Section index highlight ---------- */
 (function(){
   var links = Array.prototype.slice.call(document.querySelectorAll(".index a"));
+  var ol = document.querySelector(".index ol");
+  // Fade the right edge while more sections are hidden off-screen, so people know the menu scrolls.
+  function edge(){ if (ol) ol.classList.toggle("more", ol.scrollLeft + ol.clientWidth < ol.scrollWidth - 4); }
+  if (ol) { ol.addEventListener("scroll", edge, {passive:true}); window.addEventListener("resize", edge); edge(); }
+  function reveal(a){
+    if (!ol) return;
+    var r = a.getBoundingClientRect(), o = ol.getBoundingClientRect();
+    if (r.left < o.left || r.right > o.right) ol.scrollLeft += (r.left - o.left) - 24;
+  }
   if (!("IntersectionObserver" in window)) return;
   var io = new IntersectionObserver(function(es){
     es.forEach(function(e){
       if (!e.isIntersecting) return;
-      links.forEach(function(a){ a.classList.toggle("on", a.getAttribute("href") === "#" + e.target.id); });
+      links.forEach(function(a){ var on = a.getAttribute("href") === "#" + e.target.id; a.classList.toggle("on", on); if (on) reveal(a); });
     });
   }, {rootMargin:"-30% 0px -65% 0px"});
   links.forEach(function(a){ var s = document.getElementById(a.getAttribute("href").slice(1)); if (s) io.observe(s); });

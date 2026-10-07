@@ -1,6 +1,6 @@
 var PLAN = [
  {title:"Week 1: build proof from nothing", days:"Days 1–7", goal:"By day 7 you have one clear offer, 3–5 samples written up as case studies, and accounts ready.", items:[
-  "Day 1: pick one main offer from \"Start here\" and write it as one sentence, such as \"I turn messy sales spreadsheets into clean, auto-updating dashboards in 48 hours.\"",
+  "Day 1: pick one main offer from \"Start here\" (pick 1, spreadsheet fixes, is the safest start) and write it as one sentence, such as \"I turn messy sales spreadsheets into clean, auto-updating dashboards in 48 hours.\"",
   "Turn off model training in Claude's privacy settings before you touch anyone else's files.",
   "Days 2–4: ask Claude to build 3–5 samples in this repo from made-up or public data, each labeled as a self-initiated sample.",
   "Day 5: write each sample up as a case study (problem, process, solution, result) with concrete numbers from the sample (rows cleaned, minutes saved), clearly labeled as a self-initiated sample, and publish them together on one page.",
