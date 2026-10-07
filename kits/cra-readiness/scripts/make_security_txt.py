@@ -6,15 +6,15 @@ https://<your-domain>/.well-known/security.txt and must be served over HTTPS as
 plain text.
 
 Create it from client.json:
-  python make_security_txt.py --client client.json --out deliverables/security.txt
+  python make_security_txt.py --client client.json --out clients/acme/2026-10/security.txt
 
 Or from options (these override client.json):
   python make_security_txt.py --contact mailto:security@example.com \\
       --policy https://example.com/security/policy --languages en,de \\
-      --canonical https://example.com/.well-known/security.txt --out security.txt
+      --canonical https://example.com/.well-known/security.txt --out clients/acme/2026-10/security.txt
 
 Check an existing file (exit code 1 when it has errors):
-  python make_security_txt.py --check security.txt
+  python make_security_txt.py --check clients/acme/2026-10/security.txt
 """
 
 from __future__ import annotations

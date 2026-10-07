@@ -6,9 +6,12 @@ Usage:
         --out comparison.xlsx
 
 Options:
+    --out FILE      Excel file to write (default: comparison.xlsx next to the test set)
     --dry-run       check the files and show the plan (calls, rough cost) without calling anything
     --yes           required when a runner calls a real API (any runner except mock and recorded)
     --grades FILE   CSV with columns id, preferred, new_ok, notes to pre-fill the grading columns
+    --from-raw FILE re-build the workbook from the answers saved by an earlier run
+                    (comparison_raw.jsonl). Calls nothing. Use it to add --grades.
     --limit N       only run the first N cases (a cheap smoke test)
     --delay S       wait S seconds after each call (helps with rate limits)
     --retries N     retry a failed call N times (default 2)
@@ -16,6 +19,7 @@ Options:
 Writes:
     comparison.xlsx         Summary, Comparison (one row per case) and Settings sheets
     comparison_raw.jsonl    every prompt and answer, so paid results are never lost
+                            (not written again with --from-raw)
 
 Test set: a JSONL file, one JSON object per line. Only "input" is required:
     {"id": "S01", "feature": "summarize", "input": "the text the feature receives",
@@ -44,6 +48,8 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import runners  # noqa: E402  (lives next to this script)
 
 OFFLINE_RUNNERS = {"mock", "recorded"}
+PLACEHOLDER_MODEL = "PUT-THE-MODEL-ID-HERE"   # the model in templates/runner_config_template.json
+PRICE_KEYS = ("price_per_1m_input_tokens", "price_per_1m_output_tokens")
 MAX_TOKEN_KEYS = ("max_tokens", "max_completion_tokens", "max_output_tokens", "maxTokens", "maxOutputTokens")
 SECRET_RE = re.compile(r"\b(?:sk|pk|rk)[-_][A-Za-z0-9_\-]{12,}|\bAKIA[0-9A-Z]{16}\b|\bAIza[0-9A-Za-z_\-]{30,}")
 
@@ -95,6 +101,12 @@ def load_config(path: Path, side: str) -> dict:
         if re.search(r"(?i)(api[_-]?key|secret|access[_-]?token|auth[_-]?token|password)$", key) and value:
             raise SystemExit(f'{path.name} contains "{key}". Never put keys in files: name an environment '
                              f'variable in "api_key_env" instead.')
+    for key in PRICE_KEYS:
+        if cfg.get(key) is not None:
+            try:
+                float(cfg[key])
+            except (TypeError, ValueError):
+                raise SystemExit(f'{path.name}: "{key}" must be a number such as 0.8, not {cfg[key]!r}.')
     cfg.setdefault("name", side)
     cfg["_config_dir"] = str(path.resolve().parent)
     cfg["_config_file"] = path.name
@@ -204,7 +216,7 @@ def run_one(runner, case: dict, cfg: dict, retries: int, delay: float) -> dict:
             elapsed = time.perf_counter() - started
             result = {"output": raw} if isinstance(raw, str) else dict(raw or {})
             result["output"] = "" if result.get("output") is None else str(result["output"])
-            if result.get("latency_s") is None:
+            if result.get("latency_s") is None and not result.get("error"):
                 result["latency_s"] = round(elapsed, 3)
         except (runners.RunnerSetupError, NotImplementedError):
             raise
@@ -258,6 +270,86 @@ def describe_plan(cases: list, old: dict, new: dict) -> str:
     return "\n".join(lines)
 
 
+def check_setup(cases: list, old: dict, new: dict):
+    """Find common setup mistakes before anything is called.
+
+    Returns (problems, warnings). A problem stops a run that calls a real API.
+    """
+    problems, warnings = [], []
+    for cfg in (old, new):
+        file, live = cfg["_config_file"], cfg["runner"] not in OFFLINE_RUNNERS
+        if any(PLACEHOLDER_MODEL in str(build_request(case, cfg)[3]) for case in cases):
+            (problems if live else warnings).append(
+                f'{file} still has the template model "{PLACEHOLDER_MODEL}". Put in the real model ID.')
+        if live:
+            prices = [cfg.get(k) for k in PRICE_KEYS]
+            if None in prices:
+                warnings.append(f"{file} has no prices, so the cost is unknown. Copy them from the provider's "
+                                f"pricing page.")
+            elif all(float(p) == 0 for p in prices):
+                warnings.append(f"{file} has prices of 0, so the cost estimate says $0. Copy the real prices "
+                                f"from the provider's pricing page.")
+
+    def settings(cfg):
+        return {k: v for k, v in cfg.items() if not k.startswith("_") and k != "name"}
+    if settings(old) == settings(new):
+        warnings.append(f"{old['_config_file']} and {new['_config_file']} have the same settings, so old and new "
+                        f"would be the same. Set the new model (and prompt) in {new['_config_file']}.")
+    elif old["name"] == new["name"]:
+        warnings.append(f'Both runner configs are called "{old["name"]}". Give each one its own "name", so the '
+                        f'workbook shows which side is which.')
+    return problems, warnings
+
+
+def load_raw(path: Path, cases: list) -> list:
+    """Re-build the result rows from the raw file of an earlier run (comparison_raw.jsonl)."""
+    if not path.exists():
+        raise SystemExit(f"Saved answers not found: {path}")
+    saved = {}
+    for n, line in enumerate(path.read_text(encoding="utf-8").splitlines(), start=1):
+        if not line.strip():
+            continue
+        try:
+            row = json.loads(line)
+        except ValueError as exc:
+            raise SystemExit(f"{path.name} line {n} is not valid JSON: {exc}")
+        if not (isinstance(row, dict) and isinstance(row.get("old"), dict) and isinstance(row.get("new"), dict)):
+            raise SystemExit(f'{path.name} line {n} has no "old" and "new" answers. Use the _raw.jsonl file '
+                             f'that compare_runs.py wrote.')
+        saved[str(row.get("id"))] = row
+    rows, missing = [], []
+    for case in cases:
+        row = saved.pop(case["id"], None)
+        if row is None:
+            missing.append(case["id"])
+            continue
+        for side in ("old", "new"):
+            row[side]["output"] = "" if row[side].get("output") is None else str(row[side]["output"])
+        rows.append({"case": case, "old": row["old"], "new": row["new"],
+                     "similarity": row.get("similarity"), "len_change": row.get("len_change")})
+    if not rows:
+        raise SystemExit(f"None of the case ids in {path.name} are in the test set. Use the test set of that run.")
+    if missing:
+        print(f"WARNING: no saved answers for {len(missing)} test case(s), left out: {', '.join(missing)}")
+    if saved:
+        print(f"WARNING: saved answers for case ids not in the test set, left out: {', '.join(sorted(saved))}")
+    return rows
+
+
+def changed_configs(rows: list, old: dict, new: dict) -> list:
+    """Runner config files whose model, prompt or settings differ from the saved answers."""
+    changed = []
+    for side, cfg in (("old", old), ("new", new)):
+        for row in rows:
+            prompt, system, params, model = build_request(row["case"], cfg)
+            saved = row[side]
+            if any(key in saved and saved[key] != value for key, value in
+                   (("model", model), ("system", system), ("prompt", prompt), ("params", params))):
+                changed.append(cfg["_config_file"])
+                break
+    return changed
+
+
 # --------------------------------------------------------------------------- numbers
 def pct_change(old, new):
     if old in (None, 0) or new is None:
@@ -287,7 +379,8 @@ def side_stats(rows: list, side: str) -> dict:
 
 
 # --------------------------------------------------------------------------- workbook
-def write_workbook(rows: list, old: dict, new: dict, out: Path, tests_path: Path, grades: dict):
+def write_workbook(rows: list, old: dict, new: dict, out: Path, tests_path: Path, grades: dict,
+                   from_raw: Path = None):
     from openpyxl import Workbook
     from openpyxl.formatting.rule import CellIsRule
     from openpyxl.styles import Alignment, Font, PatternFill
@@ -395,7 +488,8 @@ def write_workbook(rows: list, old: dict, new: dict, out: Path, tests_path: Path
     summary["A1"] = "Old vs new model comparison"
     summary["A1"].font = Font(bold=True, size=14)
     summary["A2"] = (f"Generated {dt.datetime.now().strftime('%Y-%m-%d %H:%M')} by compare_runs.py. "
-                     f"Test set: {tests_path.name} ({len(rows)} cases).")
+                     f"Test set: {tests_path.name} ({len(rows)} cases)."
+                     + (f" Answers re-used from {from_raw.name}." if from_raw else ""))
     r = 3
     if so["simulated"] or sn["simulated"]:
         summary.cell(row=r, column=1, value="SIMULATED RUN (mock runner): answers, tokens and timings are not "

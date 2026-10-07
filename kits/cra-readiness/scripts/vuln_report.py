@@ -18,9 +18,11 @@ Output: a client-facing report (.md, .docx, .xlsx), findings.json for next
 month's comparison, and the raw tool output for your records.
 
 Example
-  python vuln_report.py deliverables/sbom/sprout-s1-2.3.0.cdx.json \\
-      --node-project ../client/companion-app --client client.json --out deliverables
-  python vuln_report.py sbom.cdx.json --previous last-month/vulnerability-data/findings.json --out this-month
+  python vuln_report.py clients/acme/2026-10/sbom/sprout-s1-2.3.0.cdx.json \\
+      --node-project ../client/companion-app --client client.json --out clients/acme/2026-10
+  # next month: the same SBOM again, compared with last month's findings
+  python vuln_report.py clients/acme/2026-10/sbom/sprout-s1-2.3.0.cdx.json --node-project ../client/companion-app \\
+      --client client.json --previous clients/acme/2026-10/vulnerability-data/findings.json --out clients/acme/2026-11
 """
 
 from __future__ import annotations

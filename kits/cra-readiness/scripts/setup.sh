@@ -9,6 +9,11 @@
 # You can also set CRA_VENV and CRA_NPM_TOOLS to choose each folder yourself.
 set -euo pipefail
 
+case "${1:-}" in
+  -h|--help) sed -n '2,9p' "$0"; exit 0 ;;
+  -*) echo "Unknown option: $1 (see --help)"; exit 1 ;;
+esac
+
 KIT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TOOLS_DIR="${1:-${CRA_TOOLS_DIR:-$HOME/.cache/cra-readiness}}"
 VENV="${CRA_VENV:-$TOOLS_DIR/venv}"

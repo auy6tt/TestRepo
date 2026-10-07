@@ -7,6 +7,12 @@
 # Set CRA_TODAY=YYYY-MM-DD to pin the dates printed in the documents.
 set -euo pipefail
 
+case "${1:-}" in
+  -h|--help) sed -n '2,7p' "$0"; exit 0 ;;
+  "") ;;
+  *) echo "Unknown option: $1 (this script takes no options; see --help)"; exit 1 ;;
+esac
+
 KIT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 PY="${CRA_PY:-python3}"
 S="$KIT/samples/mossbyte-sprout-s1"
@@ -24,6 +30,18 @@ mkdir -p "$OUT"
   --extra-components "$S/source/firmware-components.csv" \
   --client "$S/client.json" --product-type device --out "$OUT/sbom"
 SBOM="$(ls "$OUT"/sbom/*.cdx.json | head -1)"
+
+echo "== Check: make_sbom.py with a relative --out folder (as in the README)"
+CHECK="$(mktemp -d)"
+STRAY="$S/source/sprout-companion/relative-out-check"
+trap 'rm -rf "$CHECK" "$STRAY"' EXIT
+(cd "$CHECK" && "$PY" "$KIT/scripts/make_sbom.py" "$S/source/sprout-companion" \
+  --product "Relative check" --product-version 1.0 --out relative-out-check/sbom > /dev/null)
+if [ ! -s "$CHECK/relative-out-check/sbom/parts/sprout-companion.cdx.json" ] || [ -e "$STRAY" ]; then
+  echo "FAILED: make_sbom.py did not put the part SBOMs under the relative --out folder."
+  exit 1
+fi
+echo "OK"
 
 echo "== Sample: vulnerability report"
 "$PY" "$KIT/scripts/vuln_report.py" "$SBOM" --node-project "$S/source/sprout-companion" \

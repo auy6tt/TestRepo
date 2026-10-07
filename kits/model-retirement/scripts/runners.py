@@ -127,6 +127,8 @@ def recorded_run(prompt, system, config, case):
                            (only id and output are required)
         recorded_side      optional: "old" or "new" to reuse one side of an earlier
                            compare_runs raw file (comparison_raw.jsonl)
+    A saved "error" is kept, so a case that failed in the earlier run shows as an error
+    again, not as an empty answer.
     """
     path = _config_path(config, "recorded_outputs")
     row = _load_jsonl_by_id(path).get(str(case.get("id")))
@@ -135,9 +137,12 @@ def recorded_run(prompt, system, config, case):
     side = config.get("recorded_side")
     if side:
         row = row.get(side) or {}
-    return {"output": row.get("output", ""), "input_tokens": row.get("input_tokens"),
-            "output_tokens": row.get("output_tokens"), "latency_s": row.get("latency_s"),
-            "model_reported": row.get("model_reported") or row.get("model")}
+    result = {"output": row.get("output") or "", "input_tokens": row.get("input_tokens"),
+              "output_tokens": row.get("output_tokens"), "latency_s": row.get("latency_s"),
+              "model_reported": row.get("model_reported") or row.get("model")}
+    if row.get("error"):
+        result["error"] = str(row["error"])
+    return result
 
 
 # --------------------------------------------------------------------------- client API (stub)

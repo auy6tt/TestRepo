@@ -7,7 +7,7 @@ small makers. It is not the legal text.
 
   python make_gap_checklist.py --out ../templates/cra-gap-checklist.xlsx      # blank checklist
   python make_gap_checklist.py --client client.json --status gap-status.csv \\
-      --out deliverables/cra-gap-checklist.xlsx                              # filled in
+      --out clients/acme/2026-10/cra-gap-checklist.xlsx                      # filled in
 
 gap-status.csv columns: id, status, evidence, owner, target_date, notes
 Status values: Not started, In progress, Done, Needs lawyer, Not applicable

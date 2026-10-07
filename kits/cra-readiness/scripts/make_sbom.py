@@ -19,9 +19,9 @@ Examples
   python make_sbom.py ../client/backend ../client/app \\
       --product "Sprout S1" --product-version 2.3.0 --product-type device \\
       --supplier "Mossbyte Labs BV" --extra-components firmware-components.csv \\
-      --out deliverables/sbom
+      --out clients/acme/2026-10/sbom
 
-  python make_sbom.py client-sbom.cdx.json --out deliverables/sbom   # list an existing SBOM
+  python make_sbom.py client-sbom.cdx.json --out clients/acme/2026-10/sbom   # list an existing SBOM
 """
 
 from __future__ import annotations
@@ -286,6 +286,8 @@ def set_python_root_dependencies(sbom: dict, direct_names: list[str]) -> None:
 
 
 def sbom_node(folder: Path, out_file: Path, include_dev: bool, node_tool: str, notes: list[str]) -> tuple[dict, str]:
+    # The Node tools run inside the project folder, so give them a full path for the output file.
+    out_file = out_file.resolve()
     has_npm_lock = (folder / "package-lock.json").exists() or (folder / "npm-shrinkwrap.json").exists()
     has_other_lock = (folder / "yarn.lock").exists() or (folder / "pnpm-lock.yaml").exists()
     use_cdxgen = node_tool == "cdxgen" or (node_tool == "auto" and has_other_lock and not has_npm_lock)
@@ -836,7 +838,7 @@ def main() -> None:
 
     client = K.load_json(args.client) if args.client else {}
     first_product = (client.get("products") or [{}])[0]
-    out_dir = Path(args.out)
+    out_dir = Path(args.out).expanduser().resolve()  # full path: some tools run in other folders
     parts_dir = out_dir / "parts"
     parts_dir.mkdir(parents=True, exist_ok=True)
     notes: list[str] = []

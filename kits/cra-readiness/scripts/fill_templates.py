@@ -3,8 +3,8 @@
 
 Writes each document as Markdown (.md) and Word (.docx).
 
-  python fill_templates.py --client client.json --out deliverables
-  python fill_templates.py --client client.json --out deliverables --only policy,runbook
+  python fill_templates.py --client client.json --out clients/acme/2026-10
+  python fill_templates.py --client client.json --out clients/acme/2026-10 --only policy,runbook
   python fill_templates.py --blank --out ../templates     # rebuild the blank .docx templates
 
 Documents: policy, runbook, support, handover (filled from client.json) and
