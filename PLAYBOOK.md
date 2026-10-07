@@ -788,12 +788,18 @@ Each template is also a separate file in [`templates/`](templates/).
 
 ## Using this workspace
 
-- **One folder or repo per job.** Ask Claude to set up a folder or repo for each client and to commit and push as it goes. This cloud container is temporary and is deleted after a period of inactivity.
+- **One folder or repo per client.** Ask Claude to set up a folder or repo for each client and to commit and push as it goes. This cloud container is temporary and is deleted after a period of inactivity.
+- **A CLAUDE.md for each client.** Put the client's rules, style, file locations and quirks in a CLAUDE.md inside their project. Claude reads it at the start of every session, so you never re-explain.
+- **Turn repeat work into a skill.** When you deliver the same thing twice, ask Claude to save the steps as a custom skill (.claude/skills/<name>/SKILL.md). The third delivery takes one command and comes out consistent.
+- **Weekly deliverables on a schedule.** Routines (claude.ai/code/routines) run a saved task in the cloud on a schedule, even with your laptop closed: a weekly digest, a monthly report. You review the output and send it to your client yourself.
 - **Real office files.** Ask for .xlsx, .docx, .pptx or .pdf. Claude has skills for each, so spreadsheets keep working formulas and documents keep real formatting.
 - **A browser for checking.** Headless Chromium and Playwright are installed. Use them for phone and desktop screenshots, form testing, and speed or accessibility audits.
 - **Private pages like this one.** Claude can publish private pages for your portfolio, price sheet or reports. Client-branded sites go on hosting in the client's name, not here.
+- **Steer from your phone.** Cloud sessions keep running in the background, and Remote Control lets you follow and steer a session from your phone or another computer.
+- **Stretch your usage limits.** Long chats and big files use up limits fastest. Start a fresh session per task, use /compact in long ones, pick a lighter model for routine work, and keep CLAUDE.md short.
 - **Network access.** This environment's network policy blocked many sites during research (Upwork, Etsy, Wikipedia, the FTC). For scraping or auditing client sites, change Network access in the environment settings.
-- **Secrets stay secret.** Don't paste client passwords into chat. Use temporary accounts and the environment's secrets settings, and never commit keys to Git.
+- **Secrets stay secret.** Don't paste client passwords into chat. Use the environment's secrets settings and temporary accounts, and never commit keys to Git.
+- **Clean up after each client.** With training turned off, chats are kept 30 days. Delete finished client sessions from claude.ai/code to remove them sooner, and don't use thumbs ratings on client work.
 
 ## Sources
 
