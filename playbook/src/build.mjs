@@ -30,6 +30,7 @@ for (const o of opps) {
 }
 for (const n of get("NICHES")) {
   for (const k of ["id","group","rank","name","short","who","need","demand","why","price","how","where","first","risk","s"]) if (n[k] === undefined) throw new Error("niche " + n.id + " missing " + k);
+  if (n.price.length > 50 && !n.priceShort) throw new Error("niche " + n.id + ": price is long, add a priceShort for the summary row");
   if (!get("NICHE_GROUPS")[n.group]) throw new Error("bad niche group " + n.group);
   if (n.s.length !== 4 || n.s.some(v => v < 1 || v > 5)) throw new Error("bad scores " + n.id);
 }
@@ -136,7 +137,7 @@ const NG = get("NICHE_GROUPS"), NN = get("NICHES").slice().sort((a, b) => a.rank
 const ntotal = n => n.s.reduce((x, y) => x + y, 0);
 L.push("", "## Hidden niches: real demand, few competitors", "", md(copy.__NICHES_SUB__), "");
 L.push("| Niche | Type | Typical price | Demand | Few competitors | Claude fit | Beginner |", "|---|---|---|---|---|---|---|");
-NN.slice().sort((a, b) => ntotal(b) - ntotal(a) || a.rank - b.rank).forEach(n => L.push(`| [${cell(n.name)}](#${n.id}) | ${NG[n.group]} | ${cell(n.price)} | ${n.s[0]} | ${n.s[1]} | ${n.s[2]} | ${n.s[3]} |`));
+NN.slice().sort((a, b) => ntotal(b) - ntotal(a) || a.rank - b.rank).forEach(n => L.push(`| [${cell(n.name)}](#${n.id}) | ${NG[n.group]} | ${cell(n.priceShort || n.price)} | ${n.s[0]} | ${n.s[1]} | ${n.s[2]} | ${n.s[3]} |`));
 L.push("");
 for (const g of Object.keys(NG)) {
   const list = NN.filter(n => n.group === g);
@@ -146,7 +147,7 @@ for (const g of Object.keys(NG)) {
     L.push(`<a id="${n.id}"></a>`, `#### ${n.name}`, "", `*${n.short}.* **${n.price}** · demand ${n.s[0]}/5 · few competitors ${n.s[1]}/5 · Claude fit ${n.s[2]}/5 · beginner ${n.s[3]}/5`, "");
     L.push(`- **Who pays:** ${md(n.who)}`, `- **What they need:** ${md(n.need)}`, `- **Proof of demand:** ${md(n.demand)}`, `- **Why few people offer it:** ${md(n.why)}`, `- **How Claude does it here:** ${md(n.how)}`, `- **Where buyers are:** ${md(n.where)}`, `- **Watch out:** ${md(n.risk)}`, `- **Test it in one day:** ${md(n.first)}`);
     if (n.related) L.push(`- **Related:** ` + n.related.map(r => { const isOpp = r.startsWith("opp:"); const id = isOpp ? r.slice(4) : r; const t = (isOpp ? opps : NN).find(x => x.id === id); return t ? `[${t.name}](#${id})` : null; }).filter(Boolean).join(", "));
-    if (n.kit) L.push(`- **Starter kit:** [\`kits/${n.kit}/\`](kits/${n.kit}/). In Claude Code, type \`/${n.kit}\` in this repo.`);
+    if (n.kit) L.push(`- **Starter kit:** [\`kits/${n.kit}/\`](kits/${n.kit}/). Set it up with \`bash kits/setup.sh ${n.kit}\`, then type \`/${n.kit}\` in Claude Code.`);
     L.push("");
   });
 }

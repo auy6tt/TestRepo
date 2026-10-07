@@ -40,50 +40,50 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 | Niche | Type | Typical price | Demand | Few competitors | Claude fit | Beginner |
 |---|---|---|---|---|---|---|
-| [Fixing help-center content so AI support bots stop failing](#support-content) | New AI needs | $1,000–3,500 for an audit plus 40–120 articles; $400–1,000 a month for upkeep (est.) | 4 | 3 | 5 | 4 |
-| [Meeting minutes for HOA, nonprofit and church boards](#board-minutes) | Back office | $75–200 per meeting, or $100–300 a month per association (est.); one firm pays its writers $56 per one-hour meeting | 4 | 2 | 5 | 5 |
-| [Rescuing Microsoft Publisher files](#publisher-rescue) | Rules and deadlines | $0.50–2 per archived file and $25–75 per rebuilt template, roughly $150–600 per organization (est.) | 4 | 3 | 4 | 5 |
+| [Fixing help-center content so AI support bots stop failing](#support-content) | New AI needs | $1,000–3,500, then $400–1,000 a month (est.) | 4 | 3 | 5 | 4 |
+| [Meeting minutes for HOA, nonprofit and church boards](#board-minutes) | Back office | $75–200 a meeting (est.) | 4 | 2 | 5 | 5 |
+| [Rescuing Microsoft Publisher files](#publisher-rescue) | Rules and deadlines | About $150–600 per organization (est.) | 4 | 3 | 4 | 5 |
 | [Getting organizations off Drupal 7](#drupal7) | Specialist software | $800–3,000 per fixed package (est.) | 4 | 3 | 5 | 3 |
-| [Packaging-law updates for small consumer brands](#epr-digest) | Data subscriptions | $39–99 a month per brand, or $300–800 a month white-label (est.) | 4 | 3 | 5 | 3 |
+| [Packaging-law updates for small consumer brands](#epr-digest) | Data subscriptions | $39–99 a month per brand (est.) | 4 | 3 | 5 | 3 |
 | [Public-bid digest for one trade, with past winning prices](#bid-digest) | Data subscriptions | $49–149 a month per contractor (est.) | 4 | 3 | 4 | 4 |
 | [Local-government meeting watch for one industry](#council-watch) | Data subscriptions | $150–500 a month per client (est.) | 4 | 3 | 5 | 3 |
-| [International aid tenders for one specialty and language](#aid-tenders) | Data subscriptions | $15–40 a month for individuals, $100–300 for firms (est.) | 3 | 3 | 5 | 4 |
-| [Rescuing AI features before their model is retired](#model-retirement) | New AI needs | $300–800 per feature; $1,500–4,000 for a whole app with a reusable test set (est.) | 4 | 3 | 5 | 3 |
-| [Test suites for small teams' AI features](#ai-evals) | New AI needs | $750–3,000 setup, plus $200–800 a month for regular runs (est.) | 4 | 3 | 5 | 3 |
-| [Custom Claude skill packs for small teams](#claude-skill-packs) | New AI needs | $250–600 per skill; $1,500–4,000 per team pack (est.) | 3 | 3 | 5 | 4 |
-| [Security questionnaires for small software companies](#security-questionnaires) | Back office | $250–1,500 per questionnaire depending on size (est.) | 5 | 3 | 5 | 2 |
-| [REDCap and XLSForm survey building for research teams](#redcap-forms) | Research and nonprofits | $200–500 per simple form set; $800–2,000 for multi-visit studies (est.) | 4 | 3 | 4 | 4 |
-| [Journal replication packages for researchers](#replication-packages) | Research and nonprofits | $300–600 for a README and structure check; $800–2,500 for a full clean-up (est.) | 4 | 4 | 4 | 3 |
-| [Spreadsheet-to-catalog automation](#catalog) | Specialist software | $300–2,500 per setup, plus a fee per new edition (est.) | 3 | 3 | 4 | 4 |
+| [International aid tenders for one specialty and language](#aid-tenders) | Data subscriptions | $15–300 a month (est.) | 3 | 3 | 5 | 4 |
+| [Rescuing AI features before their model is retired](#model-retirement) | New AI needs | $300–800 per feature (est.) | 4 | 3 | 5 | 3 |
+| [Test suites for small teams' AI features](#ai-evals) | New AI needs | $750–3,000, then $200–800 a month (est.) | 4 | 3 | 5 | 3 |
+| [Custom Claude skill packs for small teams](#claude-skill-packs) | New AI needs | $250–600 per skill (est.) | 3 | 3 | 5 | 4 |
+| [Security questionnaires for small software companies](#security-questionnaires) | Back office | $250–1,500 per questionnaire (est.) | 5 | 3 | 5 | 2 |
+| [REDCap and XLSForm survey building for research teams](#redcap-forms) | Research and nonprofits | $200–2,000 per study (est.) | 4 | 3 | 4 | 4 |
+| [Journal replication packages for researchers](#replication-packages) | Research and nonprofits | $300–2,500 per package (est.) | 4 | 4 | 4 | 3 |
+| [Spreadsheet-to-catalog automation](#catalog) | Specialist software | $300–2,500 per setup (est.) | 3 | 3 | 4 | 4 |
 | [New commercial premises list for local service firms](#premises-digest) | Data subscriptions | $79–199 a month per metro (est.) | 3 | 3 | 4 | 4 |
 | [Cleaning up company documents before an AI rollout](#ai-ready-docs) | New AI needs | $1,500–5,000 per department (est.) | 4 | 3 | 4 | 3 |
 | [Chemical safety-data binders for OSHA's 2026 update](#sds-binders) | Rules and deadlines | $300–1,500 per site (est.) | 4 | 3 | 4 | 3 |
-| [Construction submittal and handover packages](#closeout-docs) | Back office | $300–1,500 per submittal package, $500–3,000 per handover binder (est.) | 4 | 3 | 4 | 3 |
-| [Making public bodies' documents accessible](#doc-accessibility) | Rules and deadlines | $5–25 per page (most vendors charge $5–8); a site inventory $300–1,500 (est.) | 5 | 2 | 4 | 3 |
+| [Construction submittal and handover packages](#closeout-docs) | Back office | $300–3,000 per package (est.) | 4 | 3 | 4 | 3 |
+| [Making public bodies' documents accessible](#doc-accessibility) | Rules and deadlines | $5–25 per page (est.) | 5 | 2 | 4 | 3 |
 | [Preparing UK Gift Aid claims for churches and small charities](#gift-aid) | Back office | £75–300 per claim (est.) | 4 | 3 | 4 | 3 |
 | [UK packaging data reports](#uk-epr-data) | Rules and deadlines | £500–3,000 per reporting round (est.) | 4 | 3 | 4 | 3 |
 | [UAE e-invoicing data readiness](#uae-einvoicing) | Rules and deadlines | AED 2,000–8,000 (est.) | 4 | 3 | 4 | 3 |
-| [US import certificate libraries (CPSC eFiling)](#cpsc-efiling) | Cross-border selling | $300–1,000 for a 20–50 product readiness pack; $40–100 per extra product (est.) | 4 | 3 | 4 | 3 |
+| [US import certificate libraries (CPSC eFiling)](#cpsc-efiling) | Cross-border selling | $300–1,000 per readiness pack (est.) | 4 | 3 | 4 | 3 |
 | [Farm-location data for the EU deforestation rule](#eudr-data) | Cross-border selling | €300–1,500 per supplier dataset (est.) | 4 | 3 | 4 | 3 |
 | [Data-sharing packages for research datasets](#data-sharing) | Research and nonprofits | $400–1,500 per dataset (est.) | 3 | 3 | 5 | 3 |
-| [First-pass fact-checking for nonfiction books](#book-factcheck) | Things people ask for | $100–200 per chapter or $1,000–2,500 per book for a first pass (est.) | 3 | 4 | 4 | 3 |
+| [First-pass fact-checking for nonfiction books](#book-factcheck) | Things people ask for | $100–200 per chapter (est.) | 3 | 4 | 4 | 3 |
 | [Microsoft Access database rescue](#access-rescue) | Specialist software | $150–600 per fix, $1,500–8,000 per migration | 4 | 3 | 3 | 3 |
 | [ColdFusion maintenance and moves to Lucee](#coldfusion) | Specialist software | $60–125 an hour (est.) | 3 | 4 | 4 | 2 |
 | [EDI files for small brands selling to big retailers](#edi) | Specialist software | $500–3,000 per retailer connection (est.) | 4 | 3 | 4 | 2 |
-| [AI transparency and staff AI-use packs](#ai-policy-pack) | New AI needs | €500–2,000 per pack; €150–400 per training session (est.) | 3 | 3 | 4 | 3 |
-| [AI API bill audits for startups](#ai-cost-audit) | New AI needs | $1,000–3,000, or 20–30% of verified savings over 3 months (est.) | 4 | 3 | 4 | 2 |
-| [Fixing tools hit by Microsoft 365's old sign-in shutdown](#m365-email-shutdown) | Rules and deadlines | $150–400 for an inventory and runbook; $200–600 per device or plugin; $1,000–4,000 to move a custom app to Graph (est.) | 4 | 3 | 4 | 2 |
-| [EU Cyber Resilience Act packs for small device and software makers](#cra-readiness) | Rules and deadlines | €500–2,000 per product, plus €100–300 a month to keep it current (est.) | 4 | 3 | 4 | 2 |
-| [Accessibility reports for software sold to governments and universities](#vpat-acr) | Rules and deadlines | $1,500–6,000 from a freelancer, against $5,000–20,000+ from agencies (est.) | 4 | 3 | 4 | 2 |
+| [AI transparency and staff AI-use packs](#ai-policy-pack) | New AI needs | €500–2,000 per pack (est.) | 3 | 3 | 4 | 3 |
+| [AI API bill audits for startups](#ai-cost-audit) | New AI needs | $1,000–3,000 per audit (est.) | 4 | 3 | 4 | 2 |
+| [Fixing tools hit by Microsoft 365's old sign-in shutdown](#m365-email-shutdown) | Rules and deadlines | $150–600; app moves $1,000–4,000 (est.) | 4 | 3 | 4 | 2 |
+| [EU Cyber Resilience Act packs for small device and software makers](#cra-readiness) | Rules and deadlines | €500–2,000 per product (est.) | 4 | 3 | 4 | 2 |
+| [Accessibility reports for software sold to governments and universities](#vpat-acr) | Rules and deadlines | $1,500–6,000 per report (est.) | 4 | 3 | 4 | 2 |
 | [ClinicalTrials.gov results reporting for small sponsors](#ctgov-results) | Research and nonprofits | $1,500–4,000 per results record (est.) | 4 | 3 | 4 | 2 |
-| [Community needs-assessment data books](#needs-assessments) | Research and nonprofits | $1,500–5,000 for just the data chapter; $8,000–40,000 for a full assessment (est.) | 4 | 3 | 4 | 2 |
+| [Community needs-assessment data books](#needs-assessments) | Research and nonprofits | $1,500–5,000 for the data chapter (est.) | 4 | 3 | 4 | 2 |
 | [Virtual tabletop conversions for indie RPG publishers](#foundry-vtt) | Things people ask for | $300–2,500 per adventure (est.) | 3 | 3 | 4 | 3 |
 | [AutoCAD automation routines (AutoLISP)](#autolisp) | Specialist software | $50–300 per routine, $500–1,500 per project | 3 | 3 | 3 | 3 |
 | [Revit automation scripts](#revit) | Specialist software | $30–95 an hour | 4 | 3 | 3 | 2 |
 | [Supplier sustainability questionnaires (EcoVadis)](#ecovadis) | Back office | $500–2,500 per assessment (est.) | 4 | 3 | 3 | 2 |
 | [Payment-page script checks for small online stores](#pci-saq-a) | Rules and deadlines | $300–1,200 setup plus $30–100 a month (est.) | 2 | 3 | 4 | 3 |
-| [Library cataloging blocks (PCIP) for self-published books](#library-cip) | Things people ask for | $60–120 per book (est.); the long-standing market price is about $100 | 2 | 4 | 4 | 2 |
-| [Book indexing for academic and nonfiction authors](#book-indexing) | Things people ask for | $1.50–2.50 per page as a beginner (est.); professionals charge $2.50–6 | 3 | 3 | 3 | 2 |
+| [Library cataloging blocks (PCIP) for self-published books](#library-cip) | Things people ask for | $60–120 per book (est.) | 2 | 4 | 4 | 2 |
+| [Book indexing for academic and nonfiction authors](#book-indexing) | Things people ask for | $1.50–2.50 a page as a beginner (est.) | 3 | 3 | 3 | 2 |
 
 ### Rules and deadlines
 
@@ -101,7 +101,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Never write or change a safety data sheet, classify chemicals or give safety advice; a qualified person delivers staff training. Describe the deadline accurately and avoid scare tactics.
 - **Test it in one day:** Call or email 30 local shops offering a 48-hour binder refresh from photos of their shelves, and track the replies. Mention the OSHA update accurately, without scare tactics.
 - **Related:** [Construction submittal and handover packages](#closeout-docs)
-- **Starter kit:** [`kits/pdf-binder/`](kits/pdf-binder/). In Claude Code, type `/pdf-binder` in this repo.
+- **Starter kit:** [`kits/pdf-binder/`](kits/pdf-binder/). Set it up with `bash kits/setup.sh pdf-binder`, then type `/pdf-binder` in Claude Code.
 
 <a id="doc-accessibility"></a>
 #### Making public bodies' documents accessible
@@ -117,7 +117,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Never promise "ADA compliant" or certification; deliver test results and a log of what was checked. Exemptions are for the client's ADA coordinator or lawyer to decide. The deadlines have already moved once.
 - **Test it in one day:** Crawl the websites of 10 towns or school districts under 50,000 people and email each ADA coordinator a one-page snapshot (for example "312 PDFs, 240 not accessible") with one fixed file free.
 - **Related:** [Accessibility reports for software sold to governments and universities](#vpat-acr), [Speed and accessibility check reports](#audits)
-- **Starter kit:** [`kits/doc-accessibility/`](kits/doc-accessibility/). In Claude Code, type `/doc-accessibility` in this repo.
+- **Starter kit:** [`kits/doc-accessibility/`](kits/doc-accessibility/). Set it up with `bash kits/setup.sh doc-accessibility`, then type `/doc-accessibility` in Claude Code.
 
 <a id="m365-email-shutdown"></a>
 #### Fixing tools hit by Microsoft 365's old sign-in shutdown
@@ -146,7 +146,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Where buyers are:** Church-admin and church-communications groups, school offices, diocese and school-district offices (one deal can cover many sites). Search: "can't open .pub file".
 - **Watch out:** Use substitute fonts where licenses are an issue, and delete personal data after delivery. People who own the one-time-purchase Publisher 2021 can still open their files (though its support ends 13 October 2026), so some prospects won't need you. Sell "archive plus top templates", not perfect copies of everything.
 - **Test it in one day:** Offer "send one .pub file, get a PDF and an editable Word version free" in 3 church-admin groups.
-- **Starter kit:** [`kits/publisher-rescue/`](kits/publisher-rescue/). In Claude Code, type `/publisher-rescue` in this repo.
+- **Starter kit:** [`kits/publisher-rescue/`](kits/publisher-rescue/). Set it up with `bash kits/setup.sh publisher-rescue`, then type `/publisher-rescue` in Claude Code.
 
 <a id="uk-epr-data"></a>
 #### UK packaging data reports
@@ -176,7 +176,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Where buyers are:** Hardware sellers on Crowd Supply, Tindie and Kickstarter who ship to the EU, EU startup networks, embedded-systems meetups, LinkedIn. Speaking German, French or Italian helps.
 - **Watch out:** Not legal advice. Never claim "CRA compliant" or sign the EU declaration of conformity for a client.
 - **Test it in one day:** Check 30 small EU-selling hardware brands for a published vulnerability-reporting contact (a security.txt file is the usual way), and offer the ones without one a sample component list and report.
-- **Starter kit:** [`kits/cra-readiness/`](kits/cra-readiness/). In Claude Code, type `/cra-readiness` in this repo.
+- **Starter kit:** [`kits/cra-readiness/`](kits/cra-readiness/). Set it up with `bash kits/setup.sh cra-readiness`, then type `/cra-readiness` in Claude Code.
 
 <a id="vpat-acr"></a>
 #### Accessibility reports for software sold to governments and universities
@@ -337,7 +337,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Where buyers are:** Community Associations Institute (CAI) chapters and directory, local HOA management companies, nonprofit and church networks, Upwork and Fiverr searches for "meeting minutes".
 - **Watch out:** Follow consent rules for recordings, leave out closed-session detail unless the bylaws allow it, keep everything confidential, and never invent content. Use anonymized or metadata-only exports, or the client's own Claude workspace, for personal data.
 - **Test it in one day:** Turn a public HOA or council meeting recording into sample minutes, then email 25 management companies offering one free set with 24-hour turnaround, and count the replies.
-- **Starter kit:** [`kits/board-minutes/`](kits/board-minutes/). In Claude Code, type `/board-minutes` in this repo.
+- **Starter kit:** [`kits/board-minutes/`](kits/board-minutes/). Set it up with `bash kits/setup.sh board-minutes`, then type `/board-minutes` in Claude Code.
 
 <a id="security-questionnaires"></a>
 #### Security questionnaires for small software companies
@@ -368,7 +368,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** You don't certify compliance, and you never alter manufacturer documents. Keep drawings confidential.
 - **Test it in one day:** Build a sample handover binder for one trade from public manufacturer datasheets, then message 25 subcontractor project managers offering a first binder at a flat price with three-day turnaround.
 - **Related:** [Chemical safety-data binders for OSHA's 2026 update](#sds-binders)
-- **Starter kit:** [`kits/pdf-binder/`](kits/pdf-binder/). In Claude Code, type `/pdf-binder` in this repo.
+- **Starter kit:** [`kits/pdf-binder/`](kits/pdf-binder/). Set it up with `bash kits/setup.sh pdf-binder`, then type `/pdf-binder` in Claude Code.
 
 <a id="gift-aid"></a>
 #### Preparing UK Gift Aid claims for churches and small charities
@@ -415,7 +415,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** This must not become legal advice: describe the rules, never tell a client whether they owe fees. Summarise law-firm alerts in your own words rather than copying them.
 - **Test it in one day:** Write "Packaging EPR status, October 2026" for one product type (for example coffee roasters), send it to 30 founders and 5 packaging distributors with a $39 founding offer, and count the replies.
 - **Related:** [UK packaging data reports](#uk-epr-data), [Public data scraping](#scraping)
-- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). Set it up with `bash kits/setup.sh weekly-digest`, then type `/weekly-digest` in Claude Code.
 
 <a id="bid-digest"></a>
 #### Public-bid digest for one trade, with past winning prices
@@ -431,7 +431,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** A wrong deadline is costly, so double-check them. Portals that need a login usually forbid redistribution, so link to notices instead of reposting them.
 - **Test it in one day:** Pick one trade and one metro, collect the open bids and past results from 3 agencies, and email 15 firms named in those results offering 4 free weeks.
 - **Related:** [Local-government meeting watch for one industry](#council-watch), [Public data scraping](#scraping)
-- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). Set it up with `bash kits/setup.sh weekly-digest`, then type `/weekly-digest` in Claude Code.
 
 <a id="council-watch"></a>
 #### Local-government meeting watch for one industry
@@ -447,7 +447,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** A misreported vote destroys trust, so cite page numbers. Use official minutes, and remove residents' names from public comments.
 - **Test it in one day:** Pick one industry and one state (for example battery storage in Ohio), build a sample digest covering 3 counties, and send it to 15 development managers with a $150 pilot offer.
 - **Related:** [Public-bid digest for one trade, with past winning prices](#bid-digest), [Public data scraping](#scraping)
-- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). Set it up with `bash kits/setup.sh weekly-digest`, then type `/weekly-digest` in Claude Code.
 
 <a id="aid-tenders"></a>
 #### International aid tenders for one specialty and language
@@ -463,7 +463,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Don't resell paid alert services' listings, and link to tender documents instead of redistributing them. Aid budgets are shrinking.
 - **Test it in one day:** Compile two weeks of evaluation tenders for one region and language, post it on LinkedIn and two professional mailing lists, and offer a $15-a-month founding price.
 - **Related:** [Public-bid digest for one trade, with past winning prices](#bid-digest), [Public data scraping](#scraping)
-- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). Set it up with `bash kits/setup.sh weekly-digest`, then type `/weekly-digest` in Claude Code.
 
 <a id="premises-digest"></a>
 #### New commercial premises list for local service firms
@@ -479,7 +479,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Leave out residential permits, because homeowners are private individuals. Check each portal's license before reusing its data.
 - **Test it in one day:** Pull four weeks of commercial permits from one city's open-data portal, build a sample list and call 20 local cleaning and sign firms.
 - **Related:** [Public-bid digest for one trade, with past winning prices](#bid-digest), [Public data scraping](#scraping)
-- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). Set it up with `bash kits/setup.sh weekly-digest`, then type `/weekly-digest` in Claude Code.
 
 ### Things people ask for
 
@@ -558,7 +558,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** You touch production code, so use branches and staging. Never use Claude to generate training data for other models. After a shutdown date the work becomes urgent, and you can get blamed for breakage.
 - **Test it in one day:** Publish a one-page "model shutdown checklist + fixed-price fix", list it as a gig, and message 15 agencies and no-code builders. A good sign is 2 replies or 1 job within 72 hours.
 - **Related:** [Test suites for small teams' AI features](#ai-evals), [AI API bill audits for startups](#ai-cost-audit), [Fix and launch apps people built with AI tools](#vibe-rescue)
-- **Starter kit:** [`kits/model-retirement/`](kits/model-retirement/). In Claude Code, type `/model-retirement` in this repo.
+- **Starter kit:** [`kits/model-retirement/`](kits/model-retirement/). Set it up with `bash kits/setup.sh model-retirement`, then type `/model-retirement` in Claude Code.
 
 <a id="support-content"></a>
 #### Fixing help-center content so AI support bots stop failing
@@ -666,7 +666,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Work only on the form's structure, never on participant data. Don't change ethics-approved wording, and licensed scales need the client's license.
 - **Test it in one day:** Build two demos from your own made-up questionnaires (a screening form and a three-visit follow-up), publish them, and send 20 personalized offers of one free conversion.
 - **Related:** [Data-sharing packages for research datasets](#data-sharing)
-- **Starter kit:** [`kits/redcap-xlsform/`](kits/redcap-xlsform/). In Claude Code, type `/redcap-xlsform` in this repo.
+- **Starter kit:** [`kits/redcap-xlsform/`](kits/redcap-xlsform/). Set it up with `bash kits/setup.sh redcap-xlsform`, then type `/redcap-xlsform` in Claude Code.
 
 <a id="replication-packages"></a>
 #### Journal replication packages for researchers
@@ -682,7 +682,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Never change estimates or "fix" results; report every discrepancy to the author. Restricted data stays with the client.
 - **Test it in one day:** Take a public replication package, write a template-compliant README for it, publish the before and after, and email 25 working-paper authors offering a free README check.
 - **Related:** [Data-sharing packages for research datasets](#data-sharing)
-- **Starter kit:** [`kits/replication-package/`](kits/replication-package/). In Claude Code, type `/replication-package` in this repo.
+- **Starter kit:** [`kits/replication-package/`](kits/replication-package/). Set it up with `bash kits/setup.sh replication-package`, then type `/replication-package` in Claude Code.
 
 <a id="ctgov-results"></a>
 #### ClinicalTrials.gov results reporting for small sponsors

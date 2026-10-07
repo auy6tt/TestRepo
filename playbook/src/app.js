@@ -101,7 +101,7 @@ function copyText(text, fallbackNode){
     return h("details", {class:"niche", id:"niche-" + n.id},
       h("summary", null,
         h("div", {class:"nm"}, h("span", {class:"group-tag", text:G[n.group]}), n.kit ? h("span", {class:"kit-tag", text:"Starter kit"}) : null, h("div", {text:n.name}), h("small", {text:n.short})),
-        h("div", {class:"pr"}, h("span", {class:"money", text:n.price})),
+        h("div", {class:"pr"}, h("span", {class:"money", text:n.priceShort || n.price})),
         scores(n),
         h("span", {class:"caret", "aria-hidden":"true"})
       ),
@@ -123,7 +123,7 @@ function copyText(text, fallbackNode){
           a.addEventListener("click", function(e){ e.preventDefault(); (isOpp ? window.__pbOpenOpp : window.__pbOpenNiche)(id); });
           return a;
         }))) : null,
-        n.kit ? h("div", {class:"wide"}, h("h4", {text:"Starter kit in your repo"}), h("p", null, "Scripts, templates and a sample deliverable in ", h("code", {text:"kits/" + n.kit + "/"}), ". Open Claude Code in this repo and type ", h("code", {text:"/" + n.kit}), " to run the whole process.")) : null
+        n.kit ? h("div", {class:"wide"}, h("h4", {text:"Starter kit in your repo"}), h("p", null, "Scripts, templates and a sample deliverable in ", h("code", {text:"kits/" + n.kit + "/"}), ". In each new cloud session, set it up with ", h("code", {text:"bash kits/setup.sh " + n.kit}), ", then type ", h("code", {text:"/" + n.kit}), " in Claude Code to run the whole process.")) : null
       )
     );
   }
