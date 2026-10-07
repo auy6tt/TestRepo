@@ -72,7 +72,8 @@ def convert_to_pdf(docx_path: Path, out_dir: Path) -> Path | None:
             return None
     pdf = out_dir / f"{docx_path.stem}.pdf"
     if not pdf.exists():
-        print("Note: LibreOffice did not produce a PDF.", file=sys.stderr)
+        print("Note: LibreOffice did not produce a PDF. If LibreOffice Writer is missing, install it with "
+              "'sudo apt-get install -y --no-install-recommends libreoffice-writer'.", file=sys.stderr)
         return None
     return pdf
 

@@ -97,7 +97,7 @@ PY=~/.venvs/board-minutes/bin/python
 $PY kits/board-minutes/scripts/check_minutes.py --help
 ```
 
-PDF output needs LibreOffice (`soffice`), which the Claude Code cloud environment already has. Without it you still get the .docx and .xlsx.
+PDF output needs LibreOffice Writer. A fresh cloud session has only part of LibreOffice, so install Writer once per session with `sudo apt-get install -y --no-install-recommends libreoffice-writer`, or run `bash kits/setup.sh board-minutes`, which does both steps. Without Writer you still get the .docx and .xlsx.
 
 ## Step-by-step delivery process
 

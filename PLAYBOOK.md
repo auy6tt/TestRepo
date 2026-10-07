@@ -101,6 +101,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Never write or change a safety data sheet, classify chemicals or give safety advice; a qualified person delivers staff training. Describe the deadline accurately and avoid scare tactics.
 - **Test it in one day:** Call or email 30 local shops offering a 48-hour binder refresh from photos of their shelves, and track the replies. Mention the OSHA update accurately, without scare tactics.
 - **Related:** [Construction submittal and handover packages](#closeout-docs)
+- **Starter kit:** [`kits/pdf-binder/`](kits/pdf-binder/). In Claude Code, type `/pdf-binder` in this repo.
 
 <a id="doc-accessibility"></a>
 #### Making public bodies' documents accessible
@@ -367,6 +368,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** You don't certify compliance, and you never alter manufacturer documents. Keep drawings confidential.
 - **Test it in one day:** Build a sample handover binder for one trade from public manufacturer datasheets, then message 25 subcontractor project managers offering a first binder at a flat price with three-day turnaround.
 - **Related:** [Chemical safety-data binders for OSHA's 2026 update](#sds-binders)
+- **Starter kit:** [`kits/pdf-binder/`](kits/pdf-binder/). In Claude Code, type `/pdf-binder` in this repo.
 
 <a id="gift-aid"></a>
 #### Preparing UK Gift Aid claims for churches and small charities

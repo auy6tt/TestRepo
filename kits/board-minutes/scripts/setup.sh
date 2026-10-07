@@ -17,10 +17,12 @@ fi
 "$VENV/bin/python" -m pip install --quiet --upgrade pip
 "$VENV/bin/python" -m pip install --quiet -r "$KIT_DIR/requirements.txt"
 
-if command -v soffice >/dev/null 2>&1 || command -v libreoffice >/dev/null 2>&1; then
-  pdf_note="LibreOffice found: --pdf will work."
-else
+if ! command -v soffice >/dev/null 2>&1 && ! command -v libreoffice >/dev/null 2>&1; then
   pdf_note="LibreOffice not found: you'll get .docx and .xlsx but no PDF."
+elif [ -d /usr/lib/libreoffice/program ] && [ ! -e /usr/lib/libreoffice/program/libswlo.so ]; then
+  pdf_note="LibreOffice Writer is missing, so --pdf won't work. Install it with: sudo apt-get install -y --no-install-recommends libreoffice-writer"
+else
+  pdf_note="LibreOffice found: --pdf will work."
 fi
 
 echo "Ready. $pdf_note"

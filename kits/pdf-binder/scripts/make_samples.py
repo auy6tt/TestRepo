@@ -37,8 +37,7 @@ try:
     from PIL import Image, ImageDraw, ImageFont
     from pypdf import PdfReader, PdfWriter
     from reportlab.lib import colors
-    from reportlab.lib.enums import TA_LEFT
-    from reportlab.lib.pagesizes import A4, landscape, letter
+    from reportlab.lib.pagesizes import A4, letter
     from reportlab.lib.styles import ParagraphStyle
     from reportlab.lib.units import inch
     from reportlab.lib.utils import ImageReader, simpleSplit
@@ -1100,7 +1099,8 @@ def drawing(path):
     for x, y, rw, rh, name in rooms:
         c.rect(x, y, rw, rh)
         c.setFont("Helvetica", 9)
-        c.drawCentredString(x + rw / 2, y + rh - 22 if name != "CORRIDOR" else y + rh - 18, name)
+        label_y = y + 14 if name.startswith("EXAM") else (y + rh - 18 if name == "CORRIDOR" else y + rh - 22)
+        c.drawCentredString(x + rw / 2, label_y, name)
     c.setStrokeColor(colors.HexColor("#1565C0"))
     c.setLineWidth(5)
     c.line(150, 470, 860, 470)
@@ -1112,8 +1112,8 @@ def drawing(path):
         c.rect(x - 8, 322 if x in (165, 335, 505, 665) else 590, 16, 16, stroke=1, fill=0)
     c.setFont("Helvetica-Bold", 9)
     c.drawString(170, 480, "SUPPLY DUCT FROM RTU-1")
-    for i, x in enumerate((240, 410, 580)):
-        c.drawString(x, 345, f"VAV-{i + 1}")
+    for i, x in enumerate((165, 335, 505, 665)):
+        c.drawString(x + 9, 385, f"VAV-{i + 1}")
     c.setFillColor(colors.HexColor("#2E7D32"))
     for i, (x, y) in enumerate(((120, 640), (690, 640), (820, 600))):
         c.circle(x, y, 10, stroke=0, fill=1)
@@ -1335,10 +1335,19 @@ def make_sds_sample(base: Path, business: str, build: bool):
         '"Chemical list confirmed by" = ""',
         '"Date confirmed" = ""',
     ]), encoding="utf-8")
+    # Details read by eye from the scanned sheet (it has no text layer). The PDF itself is never changed.
+    with open(inputs / "manual-entries.csv", "w", encoding="utf-8", newline="") as handle:
+        writer = csv.writer(handle)
+        writer.writerow(["sds file", "field", "value", "note"])
+        for field, value in (("product", "Pemberton Glass Cleaner"),
+                             ("manufacturer", "Pemberton Household Supply (fictional)"),
+                             ("date", "2024-09-03"), ("signal word", "Warning"), ("codes", "H319")):
+            writer.writerow(["pemberton-glass-cleaner.pdf", field, value, "read from the scanned page"])
+        writer.writerow(["pemberton-glass-cleaner.pdf", "reviewed", "yes", "scanned sheet checked by eye"])
     if not build:
         return
     run([SCRIPTS / "extract_sds.py", "--sds-folder", sds, "--site-list", inputs / "site-list.xlsx",
-         "--out", outputs / "inventory.xlsx", "--group-by", "location",
+         "--manual", inputs / "manual-entries.csv", "--out", outputs / "inventory.xlsx", "--group-by", "location",
          "--client", "Riverside Auto Care (fictional client)"])
     binder = outputs / "SAMPLE_SDS-Binder_Riverside-Auto-Care.pdf"
     run([SCRIPTS / "build_binder.py", "--pdf-folder", sds, "--index", outputs / "inventory.xlsx",

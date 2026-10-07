@@ -1,0 +1,8 @@
+sds file,field,value,note
+EXAMPLE scanned-sheet.pdf,product,Product name as printed on the sheet,read from the scan by JD 2026-10-07
+EXAMPLE scanned-sheet.pdf,manufacturer,Manufacturer name as printed,
+EXAMPLE scanned-sheet.pdf,date,2024-09-03,revision date on page 1
+EXAMPLE scanned-sheet.pdf,signal word,Warning,
+EXAMPLE scanned-sheet.pdf,codes,"H319, H336",Section 2
+EXAMPLE scanned-sheet.pdf,pictograms,GHS07,
+EXAMPLE other-sheet.pdf,reviewed,yes,checked against the PDF by JD

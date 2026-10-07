@@ -305,6 +305,8 @@ class SheetResult:
     flags: set = field(default_factory=set)
     notes: list = field(default_factory=list)
     review: list = field(default_factory=list)
+    manual: dict = field(default_factory=dict)     # field -> note, for details entered by hand
+    checked: str = ""                              # set when a person marked the whole sheet as checked
 
 
 # ---------------------------------------------------------------------------
@@ -928,6 +930,80 @@ def age_years(day: dt.date, today: dt.date) -> float:
 
 
 # ---------------------------------------------------------------------------
+# Manual entries: details a person read off the sheet (the PDF is not changed)
+# ---------------------------------------------------------------------------
+MANUAL_COLUMNS = {
+    "file": ["sds file", "file", "file name", "pdf"],
+    "field": ["field", "what"],
+    "value": ["value", "correct value"],
+    "note": ["note", "notes", "checked by", "comment"],
+}
+MANUAL_FIELDS = {
+    "product": "product", "product name": "product", "manufacturer": "supplier", "supplier": "supplier",
+    "manufacturer / supplier": "supplier", "date": "date", "sds date": "date", "revision date": "date",
+    "issue date": "date", "signal": "signal", "signal word": "signal", "codes": "hcodes", "h-codes": "hcodes",
+    "hazard codes": "hcodes", "hazard statement codes": "hcodes", "pictograms": "pictos", "version": "version",
+    "reviewed": "reviewed", "checked": "reviewed",
+}
+REVIEW_PREFIXES = {"product": ("Product name",), "supplier": ("Manufacturer/supplier",), "date": ("SDS date",),
+                   "signal": ("Signal word",), "hcodes": ("H-codes", "Signal word says none"), "pictos": (),
+                   "version": ()}
+
+
+def apply_manual(results, path, args, today) -> list[str]:
+    rows, _ = kitlib.read_table(path, MANUAL_COLUMNS, required=("file", "field"))
+    by_rel = {r.rel.lower(): r for r in results}
+    by_name: dict[str, list] = {}
+    for r in results:
+        by_name.setdefault(Path(r.rel).name.lower(), []).append(r)
+    problems = []
+    for row in rows:
+        key = row["file"].strip().replace("\\", "/").lower()
+        r = by_rel.get(key) or by_rel.get(key + ".pdf")
+        if r is None:
+            names = by_name.get(Path(key).name, []) or by_name.get(Path(key).name + ".pdf", [])
+            r = names[0] if len(names) == 1 else None
+        where = f"{Path(path).name} row {row['_row']}"
+        if r is None:
+            problems.append(f"{where}: no SDS file called '{row['file']}'")
+            continue
+        name = MANUAL_FIELDS.get(row["field"].strip().lower())
+        if name is None:
+            problems.append(f"{where}: unknown field '{row['field']}' (use product, manufacturer, date, signal word, "
+                            "codes, pictograms, version or reviewed)")
+            continue
+        value, note = row["value"].strip(), row["note"].strip()
+        how = "entered by hand" + (f" ({note})" if note else "")
+        if name == "reviewed":
+            if value.lower() in ("yes", "y", "true", "1", "done", "ok", "checked"):
+                r.checked = note or "yes"
+            continue
+        if name == "date":
+            found = first_date(value, args.date_order, today)
+            if not found:
+                problems.append(f"{where}: can't read the date '{value}' (use YYYY-MM-DD)")
+                continue
+            r.date = DateFound(found[0], "high", how, label=r.date.label or "Entered by hand", raw=value,
+                               group=r.date.group or 1)
+        elif name == "hcodes":
+            codes = [] if value.lower() in ("", "none", "n/a") else (find_hcodes([value], 0, 1).value or [])
+            r.hcodes = Found(codes, "high", "entered by hand")
+        elif name == "pictos":
+            codes = sorted({f"GHS0{d}" for d in re.findall(r"GHS\s*0?([1-9])", value, re.I)} |
+                           {code for code, rx in PICTO_NAME_RES if rx.search(value)})
+            r.pictos = Found(codes, "high", "entered by hand")
+        elif name == "signal":
+            low = value.lower()
+            word = "Danger" if "danger" in low else "Warning" if "warning" in low else "None"
+            r.signal = Found(word, "high", how)
+        else:
+            setattr(r, name, Found(value, "high", how))
+        r.manual[name] = note
+        r.review = [x for x in r.review if not x.startswith(REVIEW_PREFIXES.get(name, ()) or ("\0",))]
+    return problems
+
+
+# ---------------------------------------------------------------------------
 # Site list matching
 # ---------------------------------------------------------------------------
 SITE_COLUMNS = {
@@ -1110,6 +1186,8 @@ def write_inventory(workbook, f, rows, args, today, client: str):
         review = list(r.review) if r else []
         if entry["match_note"] and r is not None and "ask the client" not in entry["match_note"]:
             review.insert(0, "Site list match: " + entry["match_note"])
+        if r is not None and r.checked:
+            review = []
         issue = ""
         if r is None:
             issue = "MISSING SDS"
@@ -1120,6 +1198,12 @@ def write_inventory(workbook, f, rows, args, today, client: str):
         notes = list(r.notes) if r else []
         if r is None:
             notes = [entry["match_note"] or "no SDS file found for this product"]
+        elif r.manual or r.checked:
+            friendly = {"product": "product name", "supplier": "manufacturer", "date": "date", "signal": "signal word",
+                        "hcodes": "codes", "pictos": "pictograms", "version": "version"}
+            done = ", ".join(friendly.get(k, k) for k in sorted(r.manual))
+            notes.insert(0, "Checked by hand" + (f" ({r.checked})" if r.checked not in ("", "yes") else "") +
+                         (f"; entered by hand: {done}" if done else ""))
         if r is not None and "old_format" in r.flags:
             review.insert(0, "old MSDS format (not the 16-section SDS); request the current SDS from the manufacturer")
         if issue == "NOT ON SITE LIST":
@@ -1134,8 +1218,11 @@ def write_inventory(workbook, f, rows, args, today, client: str):
                             "supplier": (r.supplier.value or "") if r else (site or {}).get("manufacturer", ""),
                             "location": (site or {}).get("location", ""), "date": date, "file": bool(r)})
 
-        def put(name, value, fmt=None, uncertain=False, missing=False, comment=None):
+        def put(name, value, fmt=None, uncertain=False, missing=False, comment=None, manual=None):
             col = COL[name]
+            if manual is not None:
+                fmt, comment = f["checked"], "Entered by hand" + (f": {manual}" if manual else "")
+                uncertain = missing = False
             if missing:
                 fmt = f["missing"]
             elif uncertain:
@@ -1155,14 +1242,19 @@ def write_inventory(workbook, f, rows, args, today, client: str):
         if r is not None:
             pc = r.product
             put("Product name (from SDS)", pc.value, uncertain=pc.conf != "high", missing=pc.value is None,
-                comment=None if pc.conf == "high" else f"Found as: {pc.how}. {pc.issue}".strip())
+                comment=None if pc.conf == "high" else f"Found as: {pc.how}. {pc.issue}".strip(),
+                manual=r.manual.get("product"))
             sc = r.supplier
             put("Manufacturer / supplier", sc.value, uncertain=sc.conf != "high", missing=sc.value is None,
                 comment=None if sc.conf == "high" else (f"Found as: {sc.how}. {sc.issue}" if sc.value else
-                                                        "Not found on the sheet"))
+                                                        "Not found on the sheet"), manual=r.manual.get("supplier"))
             dc = r.date
             date_uncertain = dc.value is not None and (dc.conf != "high" or any(x.startswith("SDS date") for x in review))
-            if dc.value:
+            if dc.value and "date" in r.manual:
+                ws.write_datetime(row, COL["SDS date"], dt.datetime.combine(dc.value, dt.time()), f["checked_date"])
+                ws.write_comment(row, COL["SDS date"], "Entered by hand" + (f": {r.manual['date']}" if r.manual["date"]
+                                                                            else ""))
+            elif dc.value:
                 ws.write_datetime(row, COL["SDS date"], dt.datetime.combine(dc.value, dt.time()),
                                   f["uncertain_date"] if date_uncertain else f["date"])
                 if date_uncertain:
@@ -1175,17 +1267,21 @@ def write_inventory(workbook, f, rows, args, today, client: str):
             signal_uncertain = sg.value is not None and sg.conf != "high"
             put("Signal word", sg.value if sg.value is not None else "",
                 uncertain=signal_uncertain, missing=sg.value is None and "old_format" not in r.flags,
-                comment=(f"{sg.how}. {sg.issue}".strip() if (sg.value is None or sg.conf != "high") else None))
+                comment=(f"{sg.how}. {sg.issue}".strip() if (sg.value is None or sg.conf != "high") else None),
+                manual=r.manual.get("signal"))
             hc = r.hcodes
             codes_text = ", ".join(hc.value or [])
             source = {"printed": "Printed on SDS", "matched from statement wording": "From wording (verify)",
-                      "none found": "None found"}.get(hc.how, hc.how)
-            put("Hazard statement codes", codes_text, uncertain=hc.how == "matched from statement wording" or
-                bool(hc.issue))
+                      "none found": "None found", "entered by hand": "Entered by hand"}.get(hc.how, hc.how)
+            if r.checked and hc.how == "matched from statement wording":
+                source = "From wording (checked)"
+            put("Hazard statement codes", codes_text, uncertain=(hc.how == "matched from statement wording" or
+                bool(hc.issue)) and not r.checked, manual=r.manual.get("hcodes"))
             put("Codes source", source)
             pic = r.pictos
             if pic.value:
-                put("Pictograms (from text)", "; ".join(f"{code} {PICTOGRAMS[code]}" for code in pic.value))
+                put("Pictograms (from text)", "; ".join(f"{code} {PICTOGRAMS[code]}" for code in pic.value),
+                    manual=r.manual.get("pictos"))
             elif pic.how == "none stated":
                 put("Pictograms (from text)", "None (stated on the sheet)")
             else:
@@ -1437,6 +1533,8 @@ def main(argv=None) -> int:
     parser.add_argument("--out", required=True, help="inventory spreadsheet to create (.xlsx)")
     parser.add_argument("--site-list", help="client's on-site chemical list (.xlsx or .csv)")
     parser.add_argument("--sheet", help="sheet name in the site list (default: first sheet with a product column)")
+    parser.add_argument("--manual", help="details you read off sheets yourself (.csv or .xlsx; see "
+                                         "templates/sds-manual-entries-template.csv); applied on every run")
     parser.add_argument("--max-age-years", type=float, default=3.0,
                         help="flag sheets older than this many years (default 3)")
     parser.add_argument("--update-cutoff", default=DEFAULT_CUTOFF,
@@ -1490,6 +1588,14 @@ def main(argv=None) -> int:
     for number, path in enumerate(pdfs, start=1):
         print(f"Reading {number}/{len(pdfs)}: {path.name}")
         results.append(analyse(path, folder, args, today))
+    if args.manual:
+        try:
+            problems = apply_manual(results, args.manual, args, today)
+        except KitError as exc:
+            print(f"Error: {exc}", file=sys.stderr)
+            return 1
+        for problem in problems:
+            print(f"Warning: {problem}")
 
     matches = match_site_list(site_rows, results, folder) if site_rows else []
     rows = build_rows(results, matches, bool(site_rows))
