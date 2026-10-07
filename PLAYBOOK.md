@@ -2,8 +2,6 @@
 
 What people pay for that Claude can do well, where to find buyers when nobody knows you yet, and a 30-day plan to your first paid job. Ranked for someone starting from zero: no reviews, no portfolio, no network.
 
-**Interactive version (filters, fee calculator, checklist):** https://claude.ai/artifact/6XujurYFWKFDJQDofE8n9M
-
 Researched October 2026 · 36 ways to earn · 27 platforms · 210 sources. Not legal, tax or financial advice.
 
 ## Contents
@@ -39,6 +37,113 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 
 | Niche | Type | Typical price | Demand | Few rivals | Claude fit | Beginner |
 |---|---|---|---|---|---|---|
+| [Microsoft Access database rescue](#access-rescue) | Specialist software | $150–600 per fix, $1,500–8,000 per migration | 4 | 4 | 4 | 3 |
+| [Getting organisations off Drupal 7](#drupal7) | Specialist software | $800–3,000 per fixed package (est.) | 4 | 3 | 5 | 3 |
+| [AutoCAD automation routines (AutoLISP)](#autolisp) | Specialist software | $50–300 per routine, $500–1,500 per project | 3 | 4 | 4 | 3 |
+| [ColdFusion maintenance and moves to Lucee](#coldfusion) | Specialist software | $60–125 an hour (est.) | 3 | 5 | 4 | 2 |
+| [Spreadsheet-to-catalogue automation](#catalogue) | Specialist software | $300–2,500 per setup, plus a fee per new edition (est.) | 3 | 3 | 4 | 4 |
+| [Revit automation scripts](#revit) | Specialist software | $30–95 an hour | 4 | 4 | 3 | 2 |
+| [EDI files for small brands selling to big retailers](#edi) | Specialist software | $500–3,000 per retailer connection (est.) | 4 | 3 | 4 | 2 |
+
+### Specialist software
+
+<a id="access-rescue"></a>
+#### Microsoft Access database rescue
+
+*Keep old Access databases running, or move them to the web.* **$150–600 per fix, $1,500–8,000 per migration** · demand 4/5 · few rivals 4/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Small manufacturers, clinics, distributors, charities and councils whose Access database was built by someone who has since left.
+- **What they need:** Fixes after Office updates, new reports, 64-bit VBA fixes, or moving the data into a proper database or a web app.
+- **Proof of demand:** Access 2021 support ends on 13 October 2026, a year after Access 2016 and 2019. US Access/VBA work averages about $48 an hour (ZipRecruiter, Aug 2026), and London contracts have a median of £650 a day.
+- **Why few people offer it:** Migration firms all report the same thing: the original builder has often retired, and VBA skills get harder to find every year.
+- **How Claude does it here:** Python tools (mdbtools, access-parser) read the tables here. The client exports forms and VBA as text so Claude can read every module. A web replacement can be built and fully tested in this sandbox; VBA changes have to be tested by the client on Windows.
+- **Where buyers are:** UtterAccess, Access World Forums, r/MSAccess, Microsoft Q&A, Upwork "Microsoft Access" jobs, and local IT-support firms that inherit these databases.
+- **Watch out:** These files hold personal data, so sign an NDA, work on copies and delete them afterwards. Never edit the live file.
+- **Test it in one day:** Turn Microsoft's free Northwind sample database into a small web app, publish a before-and-after page, and offer a $99 "Access health check" to 15 job posts and 10 local IT firms.
+
+<a id="drupal7"></a>
+#### Getting organisations off Drupal 7
+
+*Upgrade, archive or migrate sites on an unsupported system.* **$800–3,000 per fixed package (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 5/5 · beginner 3/5
+
+- **Who pays:** Nonprofits (often using CiviCRM), university departments, associations and councils.
+- **What they need:** A safe, affordable way off Drupal 7: upgrade to Backdrop (a Drupal 7 fork), freeze the site as static pages, or migrate to current Drupal, plus a malware check.
+- **Proof of demand:** Drupal 7 support ended on 5 January 2025, yet about 134,000 sites reportedly still run it (unverified). Organisations pay for extended security support through the Drupal Association's paid program.
+- **Why few people offer it:** Agencies price these moves at £4,000–35,000. Very little is offered at small-budget prices.
+- **How Claude does it here:** Everything can be tested here: run a copy of the client's site in Docker, run Backdrop's upgrade or Drupal's migration, and compare old and new pages with Playwright screenshots. A static archive is just a crawl of the site.
+- **Where buyers are:** The CiviCRM community, Drupal Slack, university web teams, and sites whose page source still shows the "Generator: Drupal 7" tag.
+- **Watch out:** Many of these sites are already hacked, so scan copies before moving them. Only look at what a normal visit shows, and follow cold-email laws.
+- **Test it in one day:** Move a sample Drupal 7 site to Backdrop and to a static archive here, write a one-page "3 ways off Drupal 7" PDF, and email 20 nonprofits still running it.
+
+<a id="autolisp"></a>
+#### AutoCAD automation routines (AutoLISP)
+
+*Small scripts that save drafters hours every week.* **$50–300 per routine, $500–1,500 per project** · demand 3/5 · few rivals 4/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Small drafting, building-services, survey, civil and fabrication firms, and their CAD managers.
+- **What they need:** Batch layer and block edits, auto-numbering, exporting attributes or coordinates to Excel, standard details and standards checks.
+- **Proof of demand:** Autodesk's forums carry repeated "hiring a LISP programmer" threads, and ZipRecruiter lists AutoLISP jobs at $25–49 an hour (Jun 2026). AutoCAD LT gained AutoLISP in 2024, opening up its large base of cheaper users.
+- **Why few people offer it:** Cad Crowd lists only 28 AutoLISP freelancers (Mar 2026). Forum volunteers write tiny routines for free, so sell bundles rather than one-liners.
+- **How Claude does it here:** Claude writes AutoLISP well, and the Python ezdxf library builds and checks test drawings here. AutoCAD doesn't run on Linux, so the client does the final test (a BricsCAD trial works for a first check).
+- **Where buyers are:** The Visual LISP forum on forums.autodesk.com, CADTutor, TheSwamp, AUGI, Cad Crowd, Upwork "AutoLISP" jobs, CAD managers on LinkedIn.
+- **Watch out:** Don't reuse other people's copyrighted routines, and test only on copies of drawings.
+- **Test it in one day:** Publish 3 free routines that work in AutoCAD LT, answer 3 forum requests with them, and offer 15 CAD managers one custom routine for $99.
+
+<a id="coldfusion"></a>
+#### ColdFusion maintenance and moves to Lucee
+
+*Keep 20-year-old business apps alive and secure.* **$60–125 an hour (est.)** · demand 3/5 · few rivals 5/5 · Claude fit 4/5 · beginner 2/5
+
+- **Who pays:** Insurers, government bodies, universities and membership groups running old ColdFusion apps for billing, claims or licensing.
+- **What they need:** Bug and security fixes, moving from paid Adobe ColdFusion to the free Lucee engine, upgrades and documentation.
+- **Proof of demand:** Vendors report that many organisations still run mission-critical ColdFusion apps in 2026, and companies keep advertising ColdFusion roles.
+- **Why few people offer it:** Ortus calls it a "CFML talent crunch": experienced developers are shrinking fast and many companies depend on a single developer.
+- **How Claude does it here:** CommandBox and Lucee run on Linux, so a copy of the app runs here against a copy of its database. Claude fixes SQL injection, updates old tags and writes tests; Adobe-only features are tested on the client's staging server.
+- **Where buyers are:** CFML Slack, dev.lucee.org, Adobe's ColdFusion community, ColdFusion contracts on LinkedIn, Dice and Indeed.
+- **Watch out:** Cautious buyers may ask for background checks or insurance. Say plainly that the work is AI-assisted and human-reviewed, and never test on the live system.
+- **Test it in one day:** Move a small open-source ColdFusion app to the latest Lucee, publish the write-up, and send it to 10 organisations advertising ColdFusion roles.
+
+<a id="catalogue"></a>
+#### Spreadsheet-to-catalogue automation
+
+*Print-ready product catalogues rebuilt from a spreadsheet.* **$300–2,500 per setup, plus a fee per new edition (est.)** · demand 3/5 · few rivals 3/5 · Claude fit 4/5 · beginner 4/5
+
+- **Who pays:** Wholesalers, parts distributors, furniture and fashion brands, and print shops that produce seasonal price lists.
+- **What they need:** A product spreadsheet and photos turned into a styled multi-page catalogue that can be re-run whenever prices change.
+- **Proof of demand:** Adobe forum users keep asking how to automate catalogues from Excel, and a market of paid plugins exists for it (EasyCatalog, InData and others).
+- **Why few people offer it:** InDesign's built-in Data Merge can't handle complex multi-page layouts, so the job needs scripting, which few designers do.
+- **How Claude does it here:** The Linux route is fully testable here: spreadsheet to print-ready PDF with HTML and CSS (WeasyPrint or Paged.js) or Typst. If the client must edit in InDesign, Claude writes the script and the client runs it.
+- **Where buyers are:** Adobe's InDesign community, Upwork "catalog automation" and "data merge" jobs, local print shops (as white-label work), marketing managers at distributors.
+- **Watch out:** Font and image licences, print specs (bleed, CMYK), and costly price typos once printed. Get written sign-off before anything goes to print.
+- **Test it in one day:** Build a 16-page demo catalogue from a public sample product file, then pitch a fixed-price setup to 10 print shops and 10 distributors.
+
+<a id="revit"></a>
+#### Revit automation scripts
+
+*pyRevit and Dynamo tools for architecture firms.* **$30–95 an hour** · demand 4/5 · few rivals 4/5 · Claude fit 3/5 · beginner 2/5
+
+- **Who pays:** Architecture and engineering firms, BIM managers and building-services contractors.
+- **What they need:** Batch sheet and view creation, schedules to and from Excel, model checks, and placing components from spreadsheets.
+- **Proof of demand:** ZipRecruiter lists Revit/Dynamo and Revit API jobs through 2026, and BIM-manager roles paying $130,000–160,000 mention managing custom tools.
+- **Why few people offer it:** Cad Crowd lists only 28 Revit Dynamo freelancers (May 2026), and specialists earn more because the skill is scarce.
+- **How Claude does it here:** Claude writes pyRevit Python and tests the pure logic here. Revit only runs on Windows, so the client runs each tool on a detached copy of the model, or you use a Windows PC with a Revit trial.
+- **Where buyers are:** forum.dynamobim.com, the pyRevit forum, Autodesk's Revit API forum, BIM managers on LinkedIn, Cad Crowd.
+- **Watch out:** Scripts can damage models, so only work on detached copies. Don't use student licences for paid work.
+- **Test it in one day:** Publish one free pyRevit tool (sheets to and from Excel), post it on the pyRevit and Dynamo forums, and offer 10 BIM managers a free first script in exchange for a testimonial.
+
+<a id="edi"></a>
+#### EDI files for small brands selling to big retailers
+
+*Orders, shipping notices and invoices in the retailer's format.* **$500–3,000 per retailer connection (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 2/5
+
+- **Who pays:** Small brands newly selling to Walmart, Target, Home Depot and similar chains, and small logistics firms.
+- **What they need:** Translating purchase orders (850), shipping notices (856) and invoices (810) between the retailer's EDI system and the brand's spreadsheets, Shopify or QuickBooks.
+- **Proof of demand:** Big retailers require these documents, and a missing or late shipping notice can cost $200–2,000+ per shipment in penalties. One small team was quoted about $8,000 by an established vendor, and EDI services run $100–1,000+ a month.
+- **Why few people offer it:** Searches turned up vendors and consultancies, not freelancers working at small-business prices (unverified).
+- **How Claude does it here:** Claude reads the retailer's specification PDF and writes code that generates and validates the files, tested here against the spec's samples. Sending files and retailer certification go through the client's EDI provider.
+- **Where buyers are:** Brands announcing new big-retail deals, operations managers on LinkedIn, logistics communities. Search: "Walmart 856 ASN", "EDI mapping help".
+- **Watch out:** Penalties fall on the client, so cap your liability and never guarantee compliance. Keep their pricing data confidential.
+- **Test it in one day:** Build a spreadsheet-to-shipping-notice (856) generator checked against a public retailer spec, and offer a free error check to 10 newly listed brands.
 
 
 ## First clients when nobody knows you
