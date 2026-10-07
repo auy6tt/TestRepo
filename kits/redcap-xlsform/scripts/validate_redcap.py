@@ -94,9 +94,10 @@ class Checker:
 
     # -- helpers -----------------------------------------------------------
     def add(self, level, f, message, fix="", column="", row=None, field=None):
-        self.issues.append(rd.Issue(level, row if row is not None else (f.row if f else None),
-                                    field if field is not None else (f.name if f else ""),
-                                    message, fix, column))
+        issue = rd.Issue(level, row if row is not None else (f.row if f else None),
+                         field if field is not None else (f.name if f else ""), message, fix, column)
+        if issue not in self.issues:  # the same problem is reported once, even if logic repeats it
+            self.issues.append(issue)
 
     def suggest(self, name: str) -> str:
         close = difflib.get_close_matches(name.lower(), list(self.dd.by_name), n=1, cutoff=0.75)

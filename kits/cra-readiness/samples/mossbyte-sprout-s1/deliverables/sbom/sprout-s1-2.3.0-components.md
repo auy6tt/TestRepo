@@ -3,7 +3,7 @@
 - **Product:** Sprout S1 (version 2.3.0)
 - **Manufacturer:** Mossbyte Labs BV (fictional)
 - **SBOM file:** `sprout-s1-2.3.0.cdx.json` (CycloneDX 1.6, JSON)
-- **SHA-256 of the SBOM file:** `4f5ab08eeaf59d6b6bf892c7c7d87284c258d0f53277fc0e528fac63fc85e3c2`
+- **SHA-256 of the SBOM file:** `bd8a853f91a04f9e508902a870f70683058e7fd9fa4c8ba0b6fcec0acaf0956e`
 - **Generated:** 2026-10-07 by Alex Example, Example Consulting (fictional)
 - **Components listed:** 137
 

@@ -357,7 +357,7 @@ NICHES.push(
  where:"r/sysadmin, r/Office365, Microsoft Tech Community, Spiceworks. Search the error messages people post (\"EWS stopped working\", \"535 5.7.139\"). A business's DNS mail records show whether it uses Microsoft 365.",
  first:"Publish a free self-check script with a plain-English guide, then email 20 local Microsoft 365 users offering a fixed-price 48-hour check.",
  risk:"Turning old access back on is only a stopgap, so say so in writing and pitch this as a growing risk, not a hard cutoff for every tool. Never ask for full admin passwords."},
-{id:"publisher-rescue", group:"rules", rank:502, s:[4,3,4,5],
+{id:"publisher-rescue", group:"rules", rank:502, kit:"publisher-rescue", s:[4,3,4,5],
  name:"Rescuing Microsoft Publisher files",
  short:"Convert years of .pub newsletters and rebuild the templates people reuse",
  who:"Churches and parishes, schools and parent-teacher groups, clubs, small charities and councils with years of newsletters, bulletins and certificates made in Publisher.",

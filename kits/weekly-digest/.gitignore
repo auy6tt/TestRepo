@@ -1,0 +1,5 @@
+# Local Python environment and caches. Digest data, issues and outputs ARE committed:
+# the snapshots in digests/<name>/data/ are how next week's run knows what changed.
+.venv/
+__pycache__/
+*.pyc

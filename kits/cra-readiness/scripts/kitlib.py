@@ -7,6 +7,7 @@ main scripts stay short and readable.
 
 from __future__ import annotations
 
+import atexit
 import datetime as _dt
 import json
 import os
@@ -813,5 +814,18 @@ def xlsx_inject_cached_values(path: str | Path, values: dict[str, dict[str, obje
     tmp.replace(path)
 
 
+_TEMP_DIRS: list[Path] = []
+
+
+def _remove_temp_dirs() -> None:
+    for path in _TEMP_DIRS:
+        shutil.rmtree(path, ignore_errors=True)
+
+
 def make_temp_dir(prefix: str) -> Path:
-    return Path(tempfile.mkdtemp(prefix=prefix))
+    """A temporary folder that is deleted automatically when the script ends."""
+    if not _TEMP_DIRS:
+        atexit.register(_remove_temp_dirs)
+    path = Path(tempfile.mkdtemp(prefix=prefix))
+    _TEMP_DIRS.append(path)
+    return path

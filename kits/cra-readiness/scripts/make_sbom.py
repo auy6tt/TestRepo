@@ -125,6 +125,57 @@ def unpinned_requirements(req_file: Path) -> list[str]:
 # Running the SBOM tools
 # ---------------------------------------------------------------------------
 
+def install_and_scan(tool: str, folder: Path, req_file: Path, common: list, pyproject_opt: list,
+                     no_deps: bool = False) -> None:
+    """Install the requirements into a throwaway environment (without pip itself), then list what is there."""
+    env_dir = K.make_temp_dir("cra-pyenv-")
+    try:
+        K.run([sys.executable, "-m", "venv", "--without-pip", str(env_dir)])
+        target_python = env_dir / "bin" / "python"
+        cmd = [sys.executable, "-m", "pip", "--python", str(target_python), "install",
+               "--disable-pip-version-check", "--no-input", "-q"]
+        if no_deps:
+            cmd.append("--no-deps")
+        K.run([*cmd, "-r", str(req_file)], cwd=folder)
+        K.run([tool, "environment", *common, *pyproject_opt, str(target_python)])
+    finally:
+        shutil.rmtree(env_dir, ignore_errors=True)
+
+
+def poetry_lock_requirements(folder: Path, include_dev: bool) -> list[str]:
+    """Pinned requirement lines from poetry.lock (main group unless include_dev)."""
+    try:
+        import tomllib
+    except ModuleNotFoundError:  # Python 3.10
+        import tomli as tomllib  # type: ignore
+    with open(folder / "poetry.lock", "rb") as fh:
+        data = tomllib.load(fh)
+    lines = []
+    for pkg in data.get("package", []):
+        groups = pkg.get("groups") or [pkg.get("category", "main")]
+        if not include_dev and "main" not in groups:
+            continue
+        marker = pkg.get("markers")
+        if isinstance(marker, dict):
+            marker = marker.get("main") or next(iter(marker.values()), None)
+        line = f"{pkg['name']}=={pkg['version']}"
+        lines.append(f"{line} ; {marker}" if marker else line)
+    return lines
+
+
+def poetry_direct_names(pyproject: Path) -> list[str]:
+    if not pyproject.exists():
+        return []
+    data = pyproject_data(pyproject)
+    names = []
+    for dep in data.get("project", {}).get("dependencies", []) or []:
+        match = re.match(r"^\s*([A-Za-z0-9][A-Za-z0-9._-]*)", dep)
+        if match:
+            names.append(match.group(1))
+    names += [n for n in (data.get("tool", {}).get("poetry", {}).get("dependencies", {}) or {}) if n.lower() != "python"]
+    return names
+
+
 def sbom_python(folder: Path, kind: str, out_file: Path, mode: str, include_dev: bool, notes: list[str]) -> dict:
     tool = K.find_python_tool("cyclonedx-py")
     if not tool:
@@ -132,13 +183,44 @@ def sbom_python(folder: Path, kind: str, out_file: Path, mode: str, include_dev:
                "(see README: 'Set up the tools').")
     common = ["--sv", "1.6", "--of", "JSON", "-o", str(out_file)]
     pyproject = folder / "pyproject.toml"
-    pyproject_opt = ["--pyproject", str(pyproject)] if pyproject.exists() and "project" in pyproject_data(pyproject) else []
+    project_meta = pyproject_data(pyproject).get("project", {}) if pyproject.exists() else {}
+    poetry_meta = pyproject_data(pyproject).get("tool", {}).get("poetry") if pyproject.exists() else None
+    # cyclonedx-py reads the root component from pyproject.toml, but stops with an error when a
+    # [tool.poetry] table has no name (newer Poetry projects). Then we describe the root ourselves.
+    use_pyproject = bool(project_meta) and (poetry_meta is None or "name" in poetry_meta)
+    pyproject_opt = ["--pyproject", str(pyproject)] if use_pyproject else []
     direct_names: list[str] | None = None
 
     if kind == "python-poetry":
-        K.run([tool, "poetry", *common, *([] if include_dev else ["--no-dev"]), str(folder)])
+        lock_lines = poetry_lock_requirements(folder, include_dev)
+        done = False
+        try:
+            K.run([tool, "poetry", *common, *([] if include_dev else ["--no-dev"]), str(folder)])
+            done = bool(K.load_json(out_file).get("components")) or not lock_lines
+        except (RuntimeError, ValueError):
+            pass
+        if not done:
+            # Newer Poetry projects (dependencies under [project]) are not read by cyclonedx-py's
+            # poetry mode, so install exactly what poetry.lock pins and scan that instead.
+            K.info("  cyclonedx-py could not read this Poetry project; using the versions pinned in poetry.lock")
+            req_file = K.make_temp_dir("cra-req-") / "requirements.txt"
+            req_file.write_text("\n".join(lock_lines) + "\n", encoding="utf-8")
+            direct_names = poetry_direct_names(pyproject)
+            try:
+                install_and_scan(tool, folder, req_file, common, pyproject_opt, no_deps=True)
+            except RuntimeError as exc:
+                K.warn(f"Could not install {folder.name}'s locked packages for scanning; listing them from "
+                       f"poetry.lock only.\n{exc}")
+                K.run([tool, "requirements", *common, *pyproject_opt, str(req_file)])
+                notes.append(f"{folder.name}: packages listed from poetry.lock without installing them, so "
+                             "the SBOM shows which packages are used but not which one pulls in which.")
     elif kind == "python-pipenv":
         K.run([tool, "pipenv", *common, *pyproject_opt, *(["--dev"] if include_dev else []), str(folder)])
+        if (folder / "Pipfile").exists():
+            pipfile = pyproject_data(folder / "Pipfile")
+            direct_names = list(pipfile.get("packages", {}) or {})
+            if include_dev:
+                direct_names += list(pipfile.get("dev-packages", {}) or {})
     else:
         if kind == "python-requirements":
             req_file = folder / "requirements.txt"
@@ -157,14 +239,8 @@ def sbom_python(folder: Path, kind: str, out_file: Path, mode: str, include_dev:
 
         chosen_mode = mode
         if mode == "environment":
-            env_dir = K.make_temp_dir("cra-pyenv-")
             try:
-                # Install into a throwaway environment (without pip itself), then list what is there.
-                K.run([sys.executable, "-m", "venv", "--without-pip", str(env_dir)])
-                target_python = env_dir / "bin" / "python"
-                K.run([sys.executable, "-m", "pip", "--python", str(target_python), "install",
-                       "--disable-pip-version-check", "--no-input", "-q", "-r", str(req_file)], cwd=folder)
-                K.run([tool, "environment", *common, *pyproject_opt, str(target_python)])
+                install_and_scan(tool, folder, req_file, common, pyproject_opt)
             except RuntimeError as exc:
                 K.warn(f"Could not install {folder.name}'s requirements into a test environment, so "
                        f"falling back to reading the file only.\n{exc}")
@@ -172,8 +248,6 @@ def sbom_python(folder: Path, kind: str, out_file: Path, mode: str, include_dev:
                              "packages or build errors?), so only the packages named in requirements.txt "
                              "are listed. Indirect dependencies are missing.")
                 mode = "requirements"
-            finally:
-                shutil.rmtree(env_dir, ignore_errors=True)
         if mode == "requirements":
             K.run([tool, "requirements", *common, *pyproject_opt, str(req_file)])
             if chosen_mode == "requirements":
@@ -183,8 +257,12 @@ def sbom_python(folder: Path, kind: str, out_file: Path, mode: str, include_dev:
     sbom = K.load_json(out_file)
     meta = sbom.setdefault("metadata", {})
     if not meta.get("component"):
-        # No pyproject.toml: describe the project by its folder name.
-        meta["component"] = {"type": "application", "name": folder.name, "bom-ref": "root-component"}
+        # Describe the project from pyproject.toml [project], or by its folder name.
+        root = {"type": "application", "name": project_meta.get("name") or folder.name, "bom-ref": "root-component"}
+        for key in ("version", "description"):
+            if isinstance(project_meta.get(key), str):
+                root[key] = project_meta[key]
+        meta["component"] = root
     if direct_names is not None:
         set_python_root_dependencies(sbom, direct_names)
     return sbom

@@ -1,0 +1,29 @@
+# Cover sheet for a safety data sheet (SDS) binder.
+#
+# Copy this file into the client's folder, change the text inside the quotes,
+# then build with:  build_binder.py ... --cover cover.toml
+#   - Keep every value inside "double quotes".
+#   - "today" prints today's date, e.g. October 7, 2026.
+#   - An empty value ("") prints a blank line for someone to fill in by hand.
+#   - Lines starting with # are notes and are ignored.
+
+type = "sds"                                   # sds, submittal, handover or general
+title = "Safety Data Sheet Binder"
+subtitle = "Chemical inventory and safety data sheets"
+organization = "Your Business Name"           # your business; shown at the top of the cover
+footer_text = "Client Name - Safety Data Sheet Binder"   # foot of the contents and divider pages
+accent_color = "#1F3A5F"                       # colour of the header band (hex)
+logo = ""                                      # optional PNG or JPG, path relative to this file
+watermark = ""                                 # optional, e.g. "DRAFT" until the client signs off
+
+# Optional: replace the standard notice printed at the bottom of the cover.
+# notice = "This binder collects manufacturers' safety data sheets exactly as supplied..."
+
+[details]                                      # shown on the cover in this order: "Label" = "Value"
+"Prepared for" = "Client business name"
+"Site" = "Street, City, State ZIP"
+"Binder date" = "today"
+"Revision" = "0 (first issue)"
+"Prepared by" = "Your Business Name"
+"Chemical list confirmed by" = ""
+"Date confirmed" = ""

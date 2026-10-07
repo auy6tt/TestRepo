@@ -145,6 +145,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Where buyers are:** Church-admin and church-communications groups, school offices, diocese and school-district offices (one deal can cover many sites). Search: "can't open .pub file".
 - **Watch out:** Use substitute fonts where licenses are an issue, and delete personal data after delivery. People who own the one-time-purchase Publisher 2021 can still open their files (though its support ends 13 October 2026), so some prospects won't need you. Sell "archive plus top templates", not perfect copies of everything.
 - **Test it in one day:** Offer "send one .pub file, get a PDF and an editable Word version free" in 3 church-admin groups.
+- **Starter kit:** [`kits/publisher-rescue/`](kits/publisher-rescue/). In Claude Code, type `/publisher-rescue` in this repo.
 
 <a id="uk-epr-data"></a>
 #### UK packaging data reports

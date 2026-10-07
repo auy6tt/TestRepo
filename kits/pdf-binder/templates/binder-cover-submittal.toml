@@ -1,0 +1,28 @@
+# Cover sheet for a construction submittal package.
+#
+# If the general contractor has its own cover or transmittal form, use theirs
+# (put it first in the index as a PDF) and use "general" below instead.
+# The cover leaves two boxes for the reviewers' stamps. You never stamp or
+# sign them yourself.
+#
+#   - Keep every value inside "double quotes".
+#   - "today" prints today's date. An empty value ("") prints a blank line.
+
+type = "submittal"
+title = "Submittal 23 34 23-001"                         # submittal number
+subtitle = "Exhaust fans EF-1 to EF-3 - product data"     # what is in the package
+organization = "Your Business Name"
+footer_text = "Project Name - Submittal 23 34 23-001 Rev 0"
+accent_color = "#1F3A5F"
+logo = ""
+watermark = ""
+
+[details]
+"Project" = "Project name"
+"Project number" = "0000-000"
+"Submittal number" = "23 34 23-001, Revision 0"
+"Specification section" = "23 34 23 - HVAC Power Ventilators"
+"Subcontractor" = "Subcontractor company name"
+"Submitted to" = "General contractor name"
+"Architect / engineer" = "Design firm name"
+"Date" = "today"

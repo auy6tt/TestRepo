@@ -70,6 +70,7 @@ class Codebook:
     overview_rows: list
     sections: list
     identifiers: list
+    page_per_section: bool = True   # start each section on a new page (instruments yes, small groups no)
 
 
 def humanise(name: str) -> str:
@@ -164,8 +165,11 @@ def codebook_from_redcap(dd, title, event_map=None, repeating=None, when="") -> 
                 intro.append("Events: " + ", ".join(events))
         if repeating:
             reps = sorted(e for e, frm in repeating if frm == form)
-            if reps:
-                intro.append("Repeating instrument (several instances per event) in: " + ", ".join(reps))
+            named = [e for e in reps if e]
+            if named:
+                intro.append("Repeating instrument (several instances per event) in: " + ", ".join(named))
+            elif reps:
+                intro.append("Repeating instrument (can be filled in several times per record)")
         data_fields = [f for f in fields if f.ftype != "descriptive"]
         intro.append(f"{len(data_fields)} variables")
         sections.append(Section(f"{humanise(form)} ({form})", ". ".join(intro) + ".", rows))
@@ -342,7 +346,7 @@ def codebook_from_xlsform(path, title, when="") -> Codebook:
     ]
     overview_rows = [[s.title, str(sum(1 for r in s.rows if r.kind == "field" and not r.muted))] for s in sections]
     return Codebook(title or settings.get("form_title") or Path(path).stem, Path(path).name, when, facts,
-                    reading, ["Section", "Variables"], overview_rows, sections, [])
+                    reading, ["Section", "Variables"], overview_rows, sections, [], page_per_section=False)
 
 
 # ---------------------------------------------------------------------------
@@ -380,6 +384,7 @@ tr.muted td { color:var(--muted); }
 .values div { white-space:normal; }
 footer { color:var(--muted); font-size:12.5px; margin-top:40px; }
 @media print { body { font-size:11px; } main { padding:0; } h2 { break-before:page; } table { font-size:10px; }
+  body.compact h2 { break-before:auto; }
   tr { break-inside:avoid; } .wrap { overflow:visible; } }
 """
 
@@ -391,7 +396,8 @@ def esc(text) -> str:
 def render_html(book: Codebook, target: Path) -> None:
     out = ["<!doctype html>", '<html lang="en">', "<head>", '<meta charset="utf-8">',
            '<meta name="viewport" content="width=device-width, initial-scale=1">',
-           f"<title>Codebook - {esc(book.title)}</title>", f"<style>{CSS}</style>", "</head>", "<body>", "<main>"]
+           f"<title>Codebook - {esc(book.title)}</title>", f"<style>{CSS}</style>", "</head>",
+           "<body>" if book.page_per_section else '<body class="compact">', "<main>"]
     out.append(f"<h1>Codebook: {esc(book.title)}</h1>")
     out.append(f'<p class="sub">Generated from {esc(book.source)}' + (f" on {esc(book.generated)}" if book.generated else "") + ".</p>")
     out.append('<ul class="facts">' + "".join(f"<li><b>{esc(v)}</b><span>{esc(k)}</span></li>" for k, v in book.facts) + "</ul>")
@@ -566,12 +572,14 @@ def render_docx(book: Codebook, target: Path, page: str = "a4") -> None:
     columns = [4.8, 7.4, 3.4, 6.0, usable - 4.8 - 7.4 - 3.4 - 6.0]
     heads = ["Variable", "Question / label", "Type", "Values and rules", "Shown when"]
     grey = RGBColor(0x5B, 0x66, 0x72)
-    for section_model in book.sections:
-        doc.add_page_break()
-        doc.add_heading(section_model.title, level=1)
+    for number, section_model in enumerate(book.sections):
+        if book.page_per_section or number == 0:
+            doc.add_page_break()
+        doc.add_heading(section_model.title, level=1 if book.page_per_section else 2)
         if section_model.intro:
             p = doc.add_paragraph(section_model.intro)
             p.runs[0].italic = True
+            p.paragraph_format.keep_with_next = True  # keep the heading and intro with the table
         table = doc.add_table(rows=1, cols=5)
         table.style = "Table Grid"
         for i, head in enumerate(heads):

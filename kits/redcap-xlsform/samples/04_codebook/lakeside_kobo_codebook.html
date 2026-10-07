@@ -35,10 +35,11 @@ tr.muted td { color:var(--muted); }
 .values div { white-space:normal; }
 footer { color:var(--muted); font-size:12.5px; margin-top:40px; }
 @media print { body { font-size:11px; } main { padding:0; } h2 { break-before:page; } table { font-size:10px; }
+  body.compact h2 { break-before:auto; }
   tr { break-inside:avoid; } .wrap { overflow:visible; } }
 </style>
 </head>
-<body>
+<body class="compact">
 <main>
 <h1>Codebook: Lakeside Community Health Check (fictional sample)</h1>
 <p class="sub">Generated from lakeside_health_check.xlsx on 2026-10-07.</p>
@@ -64,9 +65,9 @@ footer { color:var(--muted); font-size:12.5px; margin-top:40px; }
 </tbody></table></div>
 <h2 id="s0">Form start</h2>
 <div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
-<tr><td class="var">start<div></div></td><td>(no label)</td><td>Start time (automatic)</td><td class="values"></td><td>Always (within its group)</td></tr>
-<tr><td class="var">end<div></div></td><td>(no label)</td><td>End time (automatic)</td><td class="values"></td><td>Always (within its group)</td></tr>
-<tr><td class="var">today<div></div></td><td>(no label)</td><td>Date (automatic)</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr><td class="var">start<div></div></td><td>(recorded automatically)</td><td>Start time (automatic)</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr><td class="var">end<div></div></td><td>(recorded automatically)</td><td>End time (automatic)</td><td class="values"></td><td>Always (within its group)</td></tr>
+<tr><td class="var">today<div></div></td><td>(recorded automatically)</td><td>Date (automatic)</td><td class="values"></td><td>Always (within its group)</td></tr>
 <tr class="muted"><td class="var">intro<div></div></td><td>Lakeside Community Health Check (fictional sample form). Staff complete this form with the participant. Choose the visit first.</td><td>Note (no data)</td><td class="values"></td><td>Always (within its group)</td></tr>
 <tr><td class="var">participant_id<div><span class="flag req">Required</span></div></td><td>Participant ID<div class="note">Format LH-0000, for example LH-0042</div></td><td>Text</td><td class="values"><div>Rule: regex(., &#x27;^LH-[0-9]{4}$&#x27;)</div></td><td>Always (within its group)</td></tr>
 <tr><td class="var">visit<div><span class="flag req">Required</span></div></td><td>Which visit is this?</td><td>Choose one (visit)</td><td class="values"><div>screening = Screening</div><div>visit_1 = Follow-up visit 1 (2 weeks)</div><div>visit_2 = Follow-up visit 2 (3 months)</div><div>visit_3 = Follow-up visit 3 (6 months)</div></td><td>Always (within its group)</td></tr>
@@ -82,7 +83,7 @@ footer { color:var(--muted); font-size:12.5px; margin-top:40px; }
 <p class="intro">Shown when: consent is &quot;Yes&quot;</p>
 <div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
 <tr><td class="var">dob<div><span class="flag req">Required</span></div></td><td>1. What is your date of birth?</td><td>Date</td><td class="values"><div>Rule: . &gt;= date(&#x27;1900-01-01&#x27;) AND . &lt;= today()</div></td><td>Always (within its group)</td></tr>
-<tr><td class="var">age<div></div></td><td>(no label)</td><td>Calculated</td><td class="values"><div>Formula: if(${dob} != &#x27;&#x27; and ${scr_date} != &#x27;&#x27;, int((decimal-date-time(${scr_date}) - decimal-date-time(${dob})) div 365.2425), &#x27;&#x27;)</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">age<div></div></td><td>(calculated, not shown on screen)</td><td>Calculated</td><td class="values"><div>Formula: if(${dob} != &#x27;&#x27; and ${scr_date} != &#x27;&#x27;, int((decimal-date-time(${scr_date}) - decimal-date-time(${dob})) div 365.2425), &#x27;&#x27;)</div></td><td>Always (within its group)</td></tr>
 <tr class="muted"><td class="var">age_stop<div></div></td><td>STOP. This person is under 18 and cannot take part. Do not continue.</td><td>Note (no data)</td><td class="values"></td><td>age is not blank AND age &lt; 18<div class="raw">${age} != &#x27;&#x27; and ${age} &lt; 18</div></td></tr>
 <tr><td class="var">sex<div><span class="flag req">Required</span></div></td><td>2. What is your sex?</td><td>Choose one (sex)</td><td class="values"><div>1 = Female</div><div>2 = Male</div><div>99 = Prefer not to say</div></td><td>Always (within its group)</td></tr>
 <tr><td class="var">education<div><span class="flag req">Required</span></div></td><td>3. What is the highest level of education you have completed?<div class="note">Appearance: minimal</div></td><td>Choose one (education)</td><td class="values"><div>1 = No formal schooling</div><div>2 = Primary school</div><div>3 = Secondary school</div><div>4 = Trade or vocational qualification</div><div>5 = University degree</div><div>99 = Prefer not to say</div></td><td>Always (within its group)</td></tr>
@@ -114,7 +115,7 @@ footer { color:var(--muted); font-size:12.5px; margin-top:40px; }
 <div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
 <tr><td class="var">height_cm<div><span class="flag req">Required</span></div></td><td>14a. Height (cm)<div class="note">Measure without shoes. Enter one decimal place, e.g. 165.0</div></td><td>Decimal number</td><td class="values"><div>Rule: . &gt;= 100 AND . &lt;= 230</div></td><td>Always (within its group)</td></tr>
 <tr><td class="var">weight_kg<div><span class="flag req">Required</span></div></td><td>14b. Weight (kg)<div class="note">Light clothing, no shoes. Enter one decimal place, e.g. 72.4</div></td><td>Decimal number</td><td class="values"><div>Rule: . &gt;= 30 AND . &lt;= 250</div></td><td>Always (within its group)</td></tr>
-<tr><td class="var">bmi<div></div></td><td>(no label)</td><td>Calculated</td><td class="values"><div>Formula: if(${height_cm} != &#x27;&#x27; and ${weight_kg} != &#x27;&#x27;, round(${weight_kg} div ((${height_cm} div 100) * (${height_cm} div 100)), 1), &#x27;&#x27;)</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">bmi<div></div></td><td>(calculated, not shown on screen)</td><td>Calculated</td><td class="values"><div>Formula: if(${height_cm} != &#x27;&#x27; and ${weight_kg} != &#x27;&#x27;, round(${weight_kg} div ((${height_cm} div 100) * (${height_cm} div 100)), 1), &#x27;&#x27;)</div></td><td>Always (within its group)</td></tr>
 <tr class="muted"><td class="var">bmi_show<div></div></td><td>Body mass index (BMI, kg/m2): ${bmi}</td><td>Note (no data)</td><td class="values"></td><td>bmi is not blank<div class="raw">${bmi} != &#x27;&#x27;</div></td></tr>
 <tr><td class="var">scr_sbp<div><span class="flag req">Required</span></div></td><td>15a. Systolic blood pressure (mmHg)<div class="note">Seated, after 5 minutes&#x27; rest</div></td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 70 AND . &lt;= 250</div></td><td>Always (within its group)</td></tr>
 <tr><td class="var">scr_dbp<div><span class="flag req">Required</span></div></td><td>15b. Diastolic blood pressure (mmHg)</td><td>Whole number</td><td class="values"><div>Rule: . &gt;= 40 AND . &lt;= 150 AND . &lt; scr_sbp</div></td><td>Always (within its group)</td></tr>
@@ -122,7 +123,7 @@ footer { color:var(--muted); font-size:12.5px; margin-top:40px; }
 <h2 id="s6">Screening visit &gt; Section D: Result and follow-up (staff to complete)</h2>
 <p class="intro">Shown when: consent is &quot;Yes&quot;</p>
 <div class="wrap"><table><thead><tr><th scope="col">Variable</th><th scope="col">Question / label</th><th scope="col">Type</th><th scope="col">Values and rules</th><th scope="col">Shown when</th></tr></thead><tbody>
-<tr><td class="var">bp_high<div></div></td><td>(no label)</td><td>Calculated</td><td class="values"><div>Formula: if(${scr_sbp} = &#x27;&#x27; or ${scr_dbp} = &#x27;&#x27;, &#x27;&#x27;, if(${scr_sbp} &gt;= 140 or ${scr_dbp} &gt;= 90, 1, 0))</div></td><td>Always (within its group)</td></tr>
+<tr><td class="var">bp_high<div></div></td><td>(calculated, not shown on screen)</td><td>Calculated</td><td class="values"><div>Formula: if(${scr_sbp} = &#x27;&#x27; or ${scr_dbp} = &#x27;&#x27;, &#x27;&#x27;, if(${scr_sbp} &gt;= 140 or ${scr_dbp} &gt;= 90, 1, 0))</div></td><td>Always (within its group)</td></tr>
 <tr class="muted"><td class="var">bp_high_msg<div></div></td><td>This reading is 140/90 mmHg or higher. Give the participant the advice leaflet and invite them to the 3 follow-up visits.</td><td>Note (no data)</td><td class="values"></td><td>bp_high = 1<div class="raw">${bp_high} = 1</div></td></tr>
 <tr><td class="var">fu_agree<div><span class="flag req">Required</span></div></td><td>Has the participant agreed to the 3 follow-up visits?</td><td>Choose one (yesno)</td><td class="values"><div>1 = Yes</div><div>0 = No</div></td><td>bp_high = 1<div class="raw">${bp_high} = 1</div></td></tr>
 </tbody></table></div>

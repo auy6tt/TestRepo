@@ -31,6 +31,7 @@ the final list.
 from __future__ import annotations
 
 import argparse
+import logging
 import datetime as dt
 import difflib
 import re
@@ -51,6 +52,8 @@ except ImportError:  # optional, but recommended
     pdfplumber = None
 
 import kitlib
+
+logging.getLogger("pypdf").setLevel(logging.ERROR)   # the scripts report problems in plain words
 from kitlib import KitError
 
 RANK = {"none": 0, "low": 1, "medium": 2, "high": 3}

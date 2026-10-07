@@ -35,6 +35,7 @@ of every page; leave it off if the client wants untouched pages.
 from __future__ import annotations
 
 import argparse
+import logging
 import datetime as dt
 import difflib
 import io
@@ -56,6 +57,8 @@ except ImportError as exc:  # pragma: no cover
     sys.exit(f"Missing package '{exc.name}'. Run: pip install -r requirements.txt")
 
 import kitlib
+
+logging.getLogger("pypdf").setLevel(logging.ERROR)   # the scripts report problems in plain words
 from kitlib import KitError, pdf_safe
 
 FONT = "Helvetica"
@@ -376,7 +379,7 @@ def load_docs(args, s: Settings) -> tuple[list[Doc], list[str], list[str]]:
         raise KitError(f"PDF folder not found: {folder}")
     available = list_pdfs(folder)
     docs, problems, warnings = [], [], []
-    used, left_out = set(), 0
+    used, included, left_out = set(), set(), 0
     where = f"{Path(args.index).name}" + (f", sheet '{info['sheet']}'" if info.get("sheet") else "")
     for row in rows:
         if row["include"].strip().lower() in ("no", "n", "false", "0", "exclude", "skip", "x"):
@@ -392,12 +395,19 @@ def load_docs(args, s: Settings) -> tuple[list[Doc], list[str], list[str]]:
                   file=row["file"].strip(), order=row["order"].strip(), notes=row["notes"].strip(),
                   pages_spec=row["pages"].strip())
         label = f"Row {doc.row} ({where}) '{title}'"
+        for text in (doc.title, doc.section, doc.notes):
+            if pdf_safe(text).count("?") > text.count("?"):
+                warnings.append(f"{label}: some characters can't be drawn with the built-in font and show as '?' "
+                                "on the cover, contents and dividers (bookmarks keep them).")
+                break
         if not doc.file:
             doc.pending = True
             doc.pending_reason = "not yet received"
             docs.append(doc)
             continue
         path = find_file(folder, doc.file, available)
+        if path is not None:
+            used.add(path.relative_to(folder).as_posix())
         if path is None:
             close = difflib.get_close_matches(doc.file, list(available), n=1, cutoff=0.5)
             hint = f" Did you mean '{close[0]}'?" if close else ""
@@ -428,9 +438,9 @@ def load_docs(args, s: Settings) -> tuple[list[Doc], list[str], list[str]]:
         doc.path, doc.reader = path, reader
         doc.sha256 = kitlib.sha256_file(path)
         rel = path.relative_to(folder).as_posix()
-        if rel in used:
+        if rel in included:
             warnings.append(f"{label}: {rel} is listed more than once.")
-        used.add(rel)
+        included.add(rel)
         docs.append(doc)
     unused = [name for name in available if name not in used and Path(name).name != Path(args.out).name]
     if unused:
@@ -686,6 +696,7 @@ def draw_cover(c, s: Settings, g: Geometry, sections, total, warnings):
             dropped = rows.pop()
             warnings.append(f"Cover: not enough room for the detail '{dropped[0]}'. Shorten the details.")
     band, size, lead, show_stats = plan
+    show_stats = show_stats and sections is not None      # no figures on a cover-only proof
 
     c.setFillColorRGB(*s.accent)
     c.rect(0, H - band, W, band, stroke=0, fill=1)
@@ -1188,7 +1199,7 @@ def build(args) -> int:
 
     if args.cover_only:
         out.parent.mkdir(parents=True, exist_ok=True)
-        page = render_page(s.page_size, lambda c: draw_cover(c, s, g, [], 1, warnings))
+        page = render_page(s.page_size, lambda c: draw_cover(c, s, g, None, 1, warnings))
         writer = PdfWriter()
         writer.add_page(page)
         with open(out, "wb") as handle:

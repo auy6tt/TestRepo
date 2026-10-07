@@ -1,0 +1,12 @@
+# pdf-binder kit (Python 3.11 or newer)
+# Install:  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+# Tested with: pypdf 6.19.0, cryptography 50.0.2, reportlab 5.0.1, pdfplumber 0.11.10,
+#              openpyxl 3.1.5, XlsxWriter 3.2.9, Pillow 12.3.0
+
+pypdf>=5.0            # merge PDFs, bookmarks, links, page stamps
+cryptography>=42.0    # open AES-encrypted PDFs (many manufacturer downloads are)
+reportlab>=4.0        # draw the cover, contents, divider and placeholder pages
+pdfplumber>=0.11      # read text from safety data sheets (extract_sds.py)
+openpyxl>=3.1         # read .xlsx index and site-list files
+XlsxWriter>=3.1       # write the spreadsheets
+Pillow>=10.0          # pictures in the sample documents (installed with reportlab anyway)

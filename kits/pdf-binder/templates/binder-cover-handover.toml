@@ -1,0 +1,25 @@
+# Cover sheet for a handover / operation and maintenance (O&M) binder.
+#
+#   - Keep every value inside "double quotes".
+#   - "today" prints today's date. An empty value ("") prints a blank line.
+#   - Add or remove detail lines as the general contractor requires.
+
+type = "handover"
+title = "Operation & Maintenance Manual"
+subtitle = "Division 23 - Heating, Ventilating and Air Conditioning"
+organization = "Your Business Name"
+footer_text = "Project Name - Division 23 O&M Manual"
+accent_color = "#1F3A5F"
+logo = ""
+watermark = ""
+
+[details]
+"Project" = "Project name"
+"Project number" = "0000-000"
+"Owner" = "Building owner"
+"General contractor" = "General contractor name"
+"Subcontractor" = "Subcontractor company name"
+"Substantial completion" = "Month Day, Year"
+"Volume" = "1 of 1"
+"Prepared by" = "Your Business Name"
+"Date" = "today"

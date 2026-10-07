@@ -1,0 +1,13 @@
+# Client jobs: keep confidential files out of git.
+# Everything in work/ is ignored except its README.
+work/*
+!work/README.txt
+
+# Python and test leftovers
+__pycache__/
+.pytest_cache/
+*.pyc
+
+# Word/LibreOffice lock files
+.~lock.*#
+~$*

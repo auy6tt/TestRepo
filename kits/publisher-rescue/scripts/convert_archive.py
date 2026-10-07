@@ -367,7 +367,7 @@ def write_index(records: list[FileRecord], out_root: Path, meta: dict) -> Path:
     ws.append(headers)
     header_fill = PatternFill("solid", fgColor="1F3A5F")
     for cell in ws[1]:
-        cell.font = Font(bold=True, color="FFFFFF")
+        cell.font = Font(name="Calibri", bold=True, color="FFFFFF")
         cell.fill = header_fill
         cell.alignment = Alignment(vertical="center", wrap_text=True)
     ws.row_dimensions[1].height = 30
@@ -389,7 +389,7 @@ def write_index(records: list[FileRecord], out_root: Path, meta: dict) -> Path:
         bg, fg = fills.get(r.status, ("FFFFFF", "000000"))
         status_cell = ws.cell(excel_row, 5)
         status_cell.fill = PatternFill("solid", fgColor=bg)
-        status_cell.font = Font(bold=True, color=fg)
+        status_cell.font = Font(name="Calibri", bold=True, color=fg)
         for column, rel in ((7, r.pdf_rel), (8, r.preview_rel)):
             if rel:
                 cell = ws.cell(excel_row, column)
@@ -403,12 +403,18 @@ def write_index(records: list[FileRecord], out_root: Path, meta: dict) -> Path:
         ws.column_dimensions[get_column_letter(index)].width = width
     ws.freeze_panes = "C2"
     ws.auto_filter.ref = f"A1:{get_column_letter(len(headers))}{max(ws.max_row, 2)}"
+    # Printing: landscape, all columns on one page width, header row on every page
+    ws.page_setup.orientation = "landscape"
+    ws.page_setup.fitToWidth = 1
+    ws.page_setup.fitToHeight = 0
+    ws.sheet_properties.pageSetUpPr.fitToPage = True
+    ws.print_title_rows = "1:1"
 
     summary = wb.create_sheet("Summary")
     summary.column_dimensions["A"].width = 34
     summary.column_dimensions["B"].width = 70
     summary.append([meta["title"]])
-    summary["A1"].font = Font(bold=True, size=14)
+    summary["A1"].font = Font(name="Calibri", bold=True, size=14)
     summary.append([])
     rows = [
         ("Folder converted", meta["source_name"]),
@@ -425,7 +431,7 @@ def write_index(records: list[FileRecord], out_root: Path, meta: dict) -> Path:
     ]
     for key, value in rows:
         summary.append([key, value])
-        summary.cell(summary.max_row, 1).font = Font(bold=True)
+        summary.cell(summary.max_row, 1).font = Font(name="Calibri", bold=True)
         summary.cell(summary.max_row, 2).alignment = Alignment(horizontal="left")
     summary.append([])
     notes = [
@@ -442,7 +448,7 @@ def write_index(records: list[FileRecord], out_root: Path, meta: dict) -> Path:
         summary.append([line])
         summary.merge_cells(start_row=summary.max_row, start_column=1,
                             end_row=summary.max_row, end_column=2)
-    summary.cell(summary.max_row - len(notes) + 1, 1).font = Font(bold=True)
+    summary.cell(summary.max_row - len(notes) + 1, 1).font = Font(name="Calibri", bold=True)
     wb.properties.title = meta["title"]
     wb.properties.creator = "Publisher Rescue kit"
     path = out_root / "index.xlsx"

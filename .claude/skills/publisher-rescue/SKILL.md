@@ -36,6 +36,8 @@ JOB=jobs/<client-slug>          # lowercase, hyphens, e.g. jobs/st-marys-pta
 mkdir -p "$JOB/originals" "$JOB/archive" "$JOB/templates"
 ```
 
+All commands in this skill run from `kits/publisher-rescue/`. Shell variables and the working directory may not carry over between commands, so start each command with `cd kits/publisher-rescue && JOB=jobs/<client-slug> && ...` from the project root, or write the paths out in full.
+
 Ask the user how the files will arrive (upload, a shared cloud folder through a connected drive, a zip). Put them in `$JOB/originals/` exactly as received. Unzip archives there. If the user has an intake checklist filled in (`templates/client-intake-checklist.docx`), read it for paper size, colours, logo, fonts and deadline.
 
 ## 3. Survey and quote
@@ -116,7 +118,7 @@ python scripts/make_booklet.py "$JOB/render-check/<bulletin>.pdf" -o "$JOB/templ
 Only after the user confirms the client has everything:
 
 ```bash
-rm -rf kits/publisher-rescue/jobs/<client-slug>
+rm -rf "jobs/<client-slug>"      # from kits/publisher-rescue/
 ```
 
 Confirm the folder is gone, then draft a one-line message to the client confirming deletion and the date.

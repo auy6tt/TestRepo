@@ -557,6 +557,10 @@ def plan_writes(item: Item, args) -> None:
     src_line = f"Source: {item.source}" if item.source else ""
     if item.status in (OK, CHECK):
         text = item.answer
+        if not YES_NO_START.match(item.question):
+            # "Describe how..." does not want "Yes." first; the Yes/No column still carries it.
+            text = re.sub(r"^(Yes|No)[.,;:]\s+(?=\S)", "", text)
+            text = text[:1].upper() + text[1:]
         source_col = None
         if args.source_mode in ("auto", "column"):
             if cols.get("source"):
@@ -589,21 +593,30 @@ def already_answered(item: Item) -> bool:
 # Review sheet
 # --------------------------------------------------------------------------
 
-REVIEW_HEADERS = ["Status", "What to do", "Sheet", "Cell", "Ref", "Buyer question", "Proposed Yes/No",
-                  "Proposed answer", "Library ID", "Library question matched", "Score", "Shared keywords",
-                  "Runner-up", "Source", "Library confidence", "Last reviewed", "Use library ID",
-                  "Resolved (Y/N)", "Reviewer notes"]
-REVIEW_WIDTHS = [17, 44, 14, 9, 8, 46, 10, 60, 10, 40, 7, 24, 16, 36, 11, 12, 11, 10, 30]
+# Review sheet columns: (header, key, width). The first ten (A to J) are the essentials and
+# form the print area; then the reviewer's own columns; then matching details.
+REVIEW_COLUMNS = [
+    ("Status", "status", 16), ("Ref", "ref", 8), ("Cell", "cell", 10), ("Buyer question", "question", 40),
+    ("Proposed Yes/No", "short", 9), ("Proposed answer", "answer", 52), ("Source", "source", 30),
+    ("What to do", "reasons", 38), ("Library ID", "lib_id", 9), ("Score", "score", 7),
+    ("Use library ID", "use_id", 11), ("Resolved (Y/N)", "resolved", 10), ("Reviewer notes", "notes", 28),
+    ("Library question matched", "lib_q", 36), ("Shared keywords", "shared", 22), ("Runner-up", "runner", 14),
+    ("Library confidence", "confidence", 11), ("Last reviewed", "reviewed", 12), ("Sheet", "sheet", 14),
+]
+REVIEW_HEADERS = [c[0] for c in REVIEW_COLUMNS]
+PRINT_COLS = 10
 NO_MATCH_WORDS = ("NONE", "-", "NO", "NO MATCH")
 STATUS_FILL = {NEEDS: "F8CBAD", CHECK: "FFE699", OK: "C6EFCE", SKIPPED: "D9D9D9"}
 
 
-def review_table(items: list[Item]) -> list[list]:
+def review_table(items: list[Item]) -> list[dict]:
+    multi_sheet = len({it.sheet for it in items}) > 1
     rows = []
     for it in items:
         m, e = it.match, (it.match.entry if it.match else {})
         rows.append({
-            "status": it.status, "reasons": " ".join(it.reasons), "sheet": it.sheet, "cell": it.review_cell,
+            "status": it.status, "reasons": " ".join(it.reasons), "sheet": it.sheet,
+            "cell": f"{it.sheet}!{it.review_cell}" if multi_sheet else it.review_cell, "target": it.review_cell,
             "ref": it.qid, "question": it.question, "short": it.short_written or (it.short if it.status != NEEDS else ""),
             "answer": it.answer if it.status in (OK, CHECK) else "", "lib_id": e.get("id", "") if m else "",
             "lib_q": m.phrasing if m else "", "score": round(m.score, 2) if m else "",
@@ -620,53 +633,61 @@ def build_review_sheet(pkg: XlsxPackage, items: list[Item], meta: dict) -> None:
     ordered = sorted(items, key=lambda it: (PRIORITY[it.status], it.sheet, it.row))
     counts = {s: sum(1 for it in items if it.status == s) for s in PRIORITY}
     wrap = {"wrap": True}
-    title = {"bold": True, "size": 14}
     header = {"bold": True, "fill": "1F3864", "color": "FFFFFF", "wrap": True, "valign": "center"}
     link = {"color": "0563C1", "underline": True}
-    rows: list[list] = [
-        [(f"Review: {meta['questionnaire']} (remove this sheet before sending to the buyer)", title)],
-        [f"Library: {meta['library']} ({meta['approved']} approved answers). Generated {meta['date']}. "
-         f"Thresholds: OK at {meta['ok_score']:.2f} or more; CHECK at {meta['min_score']:.2f} or more; below that, no match."],
-        [f"{len(items)} questions: {counts[OK]} OK, {counts[CHECK]} CHECK, {counts[NEEDS]} NEEDS CLIENT INPUT"
-         + (f", {counts[SKIPPED]} skipped (already answered)" if counts[SKIPPED] else "") + "."],
-        [f"Score: how close the buyer's question is to the library question, from 0 to 1 "
-         f"({100 - meta['fuzzy_pct']}% TF-IDF keyword match + {meta['fuzzy_pct']}% fuzzy text match). "
-         "Shared keywords show why it matched; Runner-up is the next best library entry."],
-        ["How to finish: fix every NEEDS CLIENT INPUT and CHECK row in the questionnaire, then type Y in Resolved. "
-         "Wrong match? Type the right library ID (or NONE) in 'Use library ID' and rerun with --use-review. "
-         "The client's technical owner must read and approve every answer. Then delete this sheet, or run "
-         "fill_questionnaire.py --finalize, before sending."],
-        [],
-        [(h, header) for h in REVIEW_HEADERS],
+    notes = [
+        (f"Review: {meta['questionnaire']} (remove this sheet before sending to the buyer)", {"bold": True, "size": 14}),
+        (f"{len(items)} questions: {counts[OK]} OK, {counts[CHECK]} CHECK, {counts[NEEDS]} NEEDS CLIENT INPUT"
+         + (f", {counts[SKIPPED]} skipped (already answered)" if counts[SKIPPED] else "")
+         + f". Library: {meta['library']} ({meta['approved']} approved answers). Generated {meta['date']}.",
+         {"bold": True, "wrap": True}),
+        ("How to finish: fix every NEEDS CLIENT INPUT and CHECK row in the questionnaire (click the Cell link to jump "
+         "there), then type Y in Resolved. Wrong match? Type the right library ID (or NONE) in 'Use library ID' and "
+         "rerun with --use-review. The client's technical owner must read and approve every answer. Delete this sheet, "
+         "or run fill_questionnaire.py --finalize, before sending.", wrap),
+        (f"Score: how close the buyer's question is to the library question, from 0 to 1 "
+         f"({100 - meta['fuzzy_pct']}% TF-IDF keyword match + {meta['fuzzy_pct']}% fuzzy text match). OK at "
+         f"{meta['ok_score']:.2f} or more; CHECK at {meta['min_score']:.2f} or more; lower means no match. Shared "
+         "keywords show why it matched; Runner-up is the next best library entry.", wrap),
     ]
-    first_data = len(rows) + 1
+    print_width = sum(c[2] for c in REVIEW_COLUMNS[:PRINT_COLS])
+    rows: list[list] = [[note] for note in notes] + [[]]
+    heights = {1: 21}
+    for i, (text, _style) in enumerate(notes[1:], start=2):
+        heights[i] = 15 * max(1, -(-len(text) // int(print_width * 1.05))) + 3
+    rows.append([(h, header) for h in REVIEW_HEADERS])
+    header_row = len(rows)
+    first_data = header_row + 1
     links = []
+    styles = {"status": None, "question": wrap, "answer": wrap, "source": wrap, "reasons": wrap, "score": {"numfmt": 2},
+              "cell": link, "notes": wrap, "lib_q": wrap, "shared": wrap}
     for i, r in enumerate(review_table(ordered)):
-        n = first_data + i
-        rows.append([
-            (r["status"], {"bold": True, "fill": STATUS_FILL[r["status"]], "wrap": True}), (r["reasons"], wrap),
-            (r["sheet"], wrap), (r["cell"], link), r["ref"], (r["question"], wrap), r["short"], (r["answer"], wrap),
-            r["lib_id"], (r["lib_q"], wrap), r["score"], (r["shared"], wrap), r["runner"], (r["source"], wrap),
-            r["confidence"], r["reviewed"], r["use_id"], r["resolved"], (r["notes"] or None, wrap),
-        ])
-        links.append((f"D{n}", f"{quote_sheet(r['sheet'])}!{r['cell']}", f"{r['sheet']}!{r['cell']}"))
+        cells = []
+        for _h, key, _w in REVIEW_COLUMNS:
+            value = r[key]
+            if key == "status":
+                cells.append((value, {"bold": True, "fill": STATUS_FILL[value], "wrap": True}))
+            else:
+                cells.append((value if value != "" else None, styles.get(key) or {"valign": "top"}))
+        rows.append(cells)
+        links.append((f"C{first_data + i}", f"{quote_sheet(r['sheet'])}!{r['target']}", f"{r['sheet']}!{r['target']}"))
     last = max(len(rows), first_data)
-    header_row = first_data - 1
-    end_col = col_letter(len(REVIEW_HEADERS))
-    pkg.add_sheet(REVIEW_SHEET, rows, widths=REVIEW_WIDTHS, freeze_rows=header_row,
-                  autofilter=f"A{header_row}:{end_col}{last}", links=links,
-                  lists=[(f"R{first_data}:R{max(last, first_data)}", ["Y", "N"])], tab_color="C00000")
+    resolved_col = col_letter(REVIEW_HEADERS.index("Resolved (Y/N)") + 1)
+    pkg.add_sheet(REVIEW_SHEET, rows, widths=[c[2] for c in REVIEW_COLUMNS], freeze_rows=header_row, freeze_cols=2,
+                  autofilter=f"A{header_row}:{col_letter(len(REVIEW_COLUMNS))}{last}", links=links,
+                  lists=[(f"{resolved_col}{first_data}:{resolved_col}{last}", ["Y", "N"])],
+                  merges=[f"A{n}:{col_letter(PRINT_COLS)}{n}" for n in range(1, len(notes) + 1)],
+                  row_heights=heights, print_area=f"A1:{col_letter(PRINT_COLS)}{last}",
+                  print_title_rows=f"{header_row}:{header_row}", tab_color="C00000")
 
 
 def write_review_csv(path: Path, items: list[Item]) -> None:
     ordered = sorted(items, key=lambda it: (PRIORITY[it.status], it.row))
-    keys = ["status", "reasons", "sheet", "cell", "ref", "question", "short", "answer", "lib_id", "lib_q", "score",
-            "shared", "runner", "source", "confidence", "reviewed", "use_id", "resolved", "notes"]
     with open(path, "w", newline="", encoding="utf-8-sig") as fh:
         w = csv.writer(fh)
         w.writerow(REVIEW_HEADERS)
         for r in review_table(ordered):
-            w.writerow([r[k] for k in keys])
+            w.writerow([r[key] for _h, key, _w in REVIEW_COLUMNS])
 
 
 # --------------------------------------------------------------------------
@@ -700,7 +721,7 @@ def read_review_choices(path: Path) -> dict[tuple[str, str], dict]:
             rows.append(dict(zip(names, values)))
     choices = {}
     for r in rows:
-        key = (sqkit.clean(r.get("Sheet")), sqkit.clean(r.get("Cell")).upper())
+        key = (sqkit.clean(r.get("Sheet")), sqkit.clean(r.get("Cell")).rsplit("!", 1)[-1].upper())
         if key[1]:
             choices[key] = {"use_id": sqkit.clean(r.get("Use library ID")),
                             "resolved": sqkit.clean(r.get("Resolved (Y/N)")),
@@ -971,7 +992,7 @@ def cmd_finalize(args) -> int:
                     status = sqkit.clean(row[cols["Status"]])
                     done = sqkit.clean(row[cols["Resolved (Y/N)"]]).upper() in ("Y", "YES")
                     if status in (NEEDS, CHECK) and not done:
-                        unresolved.append(f"{sqkit.clean(row[cols['Sheet']])}!{sqkit.clean(row[cols['Cell']])} "
+                        unresolved.append(f"{sqkit.clean(row[cols['Sheet']])}!{sqkit.clean(row[cols['Cell']]).rsplit('!', 1)[-1]} "
                                           f"[{status}] {sqkit.clean(row[cols['Buyer question']])[:70]}")
     else:
         print("Finalize works on .xlsx, .xlsm and .csv files.", file=sys.stderr)

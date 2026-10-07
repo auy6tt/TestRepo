@@ -713,7 +713,7 @@
       "type": "application",
       "version": "2.3.0"
     },
-    "timestamp": "2026-10-07T10:35:06.924155+00:00",
+    "timestamp": "2026-10-07T10:40:40.854499+00:00",
     "tools": {
       "components": [
         {
@@ -817,7 +817,7 @@
       ]
     }
   },
-  "serialNumber": "urn:uuid:aeb9f8a3-37f2-4601-90f8-f331fbb498f4",
+  "serialNumber": "urn:uuid:aab84565-d369-469e-b7ba-b6ebe84b4d5c",
   "version": 1,
   "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
   "bomFormat": "CycloneDX",

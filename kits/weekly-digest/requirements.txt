@@ -1,0 +1,21 @@
+# Python packages for the weekly-digest kit (Python 3.10 or newer).
+# Install from the kits/weekly-digest folder:
+#   python3 -m venv .venv
+#   .venv/bin/pip install -r requirements.txt        (Windows: .venv\Scripts\pip install -r requirements.txt)
+
+requests>=2.31,<3          # polite downloads
+beautifulsoup4>=4.12,<5    # web pages to text
+pypdf>=4.2,<7              # PDF text
+feedparser>=6.0,<7         # RSS and Atom feeds
+PyYAML>=6.0,<7             # sources.yaml and items files
+jsonschema>=4.20,<5        # checks the items file
+Jinja2>=3.1,<4             # email and PDF layout
+openpyxl>=3.1,<4           # .xlsx tracker
+
+# Prints the PDF with headless Chromium. 1.56 matches the browser already installed
+# in Claude Code cloud sessions. On your own computer, run once:
+#   python -m playwright install chromium
+playwright==1.56.0
+
+# Time zone data (Windows needs it; Linux and macOS already have it).
+tzdata; sys_platform == "win32"

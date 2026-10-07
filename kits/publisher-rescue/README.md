@@ -44,7 +44,7 @@ Sell **"your archive plus your top templates"**, not "a perfect copy of every fi
 
 | Part | What the client gets | Why they care |
 | --- | --- | --- |
-| PDF archive | One searchable PDF per `.pub` file (PDF/A, the archive standard), in the same folders as before. A preview picture of each. `index.xlsx` listing every file with its date, page count and status. `contact-sheet.html`: thumbnails they can browse, search and print. | They can find and read every old newsletter, forever, without Publisher. |
+| PDF archive | One searchable PDF per `.pub` file (PDF/A, the archive standard), in the same folders as before. A preview picture of each. `index.xlsx` listing every file with its date, page count and status. `contact-sheet.html`: thumbnails they can browse, search and print. | They can find and read every old newsletter for years to come, without Publisher. |
 | Rebuilt templates | Their most-used layouts as Word (`.docx`) or PowerPoint (`.pptx`) files, built with named styles so anyone can edit them. | Next week's bulletin still gets made. |
 | Delivery note | What they received, files that need attention, how to use the templates, and confirmation that their files will be deleted. | Clear hand-over, fewer support emails. |
 

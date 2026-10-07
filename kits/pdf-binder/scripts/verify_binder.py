@@ -20,6 +20,7 @@ Exit code 0 means every check passed.
 from __future__ import annotations
 
 import argparse
+import logging
 import re
 import sys
 from pathlib import Path
@@ -31,6 +32,8 @@ except ImportError as exc:  # pragma: no cover
     sys.exit(f"Missing package '{exc.name}'. Run: pip install -r requirements.txt")
 
 import kitlib
+
+logging.getLogger("pypdf").setLevel(logging.ERROR)   # the scripts report problems in plain words
 
 STAMP_RE = re.compile(r"page\d+of\d+")
 LEADER_LINE_RE = re.compile(r"(?:\.\s*){2,}\s*(\d+)\s*$")

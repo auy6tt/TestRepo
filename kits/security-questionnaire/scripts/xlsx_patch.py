@@ -334,7 +334,7 @@ class XlsxPackage:
         return None
 
     def style_index(self, spec: dict) -> int | None:
-        """Add a cell style (bold, color, fill, size, underline, wrap) and return its index."""
+        """Add a cell style (bold, color, fill, size, underline, wrap, valign, numfmt) and return its index."""
         key = tuple(sorted(spec.items()))
         if key in self._style_cache:
             return self._style_cache[key]
@@ -371,10 +371,13 @@ class XlsxPackage:
                     etree.SubElement(pattern, M + "bgColor", indexed="64")
                     fills.set("count", str(len(fills)))
                     fill_id = len(fills) - 1
-                xf = etree.SubElement(xfs, M + "xf", numFmtId="0", fontId=str(len(fonts) - 1),
+                numfmt = int(spec.get("numfmt", 0))  # a built-in format id, e.g. 2 = "0.00"
+                xf = etree.SubElement(xfs, M + "xf", numFmtId=str(numfmt), fontId=str(len(fonts) - 1),
                                       fillId=str(fill_id), borderId="0")
                 if root.find(M + "cellStyleXfs") is not None:
                     xf.set("xfId", "0")
+                if numfmt:
+                    xf.set("applyNumberFormat", "1")
                 xf.set("applyFont", "1")
                 if fill_id:
                     xf.set("applyFill", "1")
@@ -418,18 +421,23 @@ class XlsxPackage:
             el.set("hidden", "1")
         el.text = text
 
-    def add_sheet(self, name: str, rows: list[list], *, widths=(), freeze_rows: int = 0, autofilter: str | None = None,
-                  links=(), lists=(), tab_color: str | None = None) -> None:
+    def add_sheet(self, name: str, rows: list[list], *, widths=(), freeze_rows: int = 0, freeze_cols: int = 0,
+                  autofilter: str | None = None, links=(), lists=(), merges=(), row_heights=None,
+                  print_area: str | None = None, print_title_rows: str | None = None,
+                  tab_color: str | None = None) -> None:
         """Append a new worksheet at the end of the workbook.
 
         rows: list of rows; each cell is None, a str/int/float, or (value, style_dict).
         links: (cell_ref, location, display) internal hyperlinks.
         lists: (sqref, [allowed values]) drop-down lists.
+        merges: ranges to merge, e.g. "A1:J1". row_heights: {row number: height in points}.
+        print_area: e.g. "A1:J40". print_title_rows: rows repeated on each printed page, e.g. "7:7".
         """
         if not name or len(name) > 31 or _BAD_SHEET_CHARS.search(name) or name.startswith("'") or name.endswith("'"):
             raise XlsxError(f"invalid sheet name: {name!r}")
         if any(s["name"].lower() == name.lower() for s in self.sheets()):
             raise XlsxError(f"the workbook already has a sheet named '{name}'")
+        row_heights = row_heights or {}
 
         ws = etree.Element(M + "worksheet", nsmap={None: NS_MAIN, "r": NS_REL})
         pr = etree.SubElement(ws, M + "sheetPr")
@@ -439,11 +447,23 @@ class XlsxPackage:
         n_cols = max([len(r) for r in rows] + [1])
         etree.SubElement(ws, M + "dimension", ref=f"A1:{col_letter(n_cols)}{max(len(rows), 1)}")
         view = etree.SubElement(etree.SubElement(ws, M + "sheetViews"), M + "sheetView", workbookViewId="0")
-        if freeze_rows:
-            top = f"A{freeze_rows + 1}"
-            etree.SubElement(view, M + "pane", ySplit=str(freeze_rows), topLeftCell=top, activePane="bottomLeft",
-                             state="frozen")
-            etree.SubElement(view, M + "selection", pane="bottomLeft", activeCell=top, sqref=top)
+        if freeze_rows or freeze_cols:
+            top_left = f"{col_letter(freeze_cols + 1)}{freeze_rows + 1}"
+            pane = etree.SubElement(view, M + "pane")
+            if freeze_cols:
+                pane.set("xSplit", str(freeze_cols))
+            if freeze_rows:
+                pane.set("ySplit", str(freeze_rows))
+            active = "bottomRight" if freeze_rows and freeze_cols else ("bottomLeft" if freeze_rows else "topRight")
+            pane.set("topLeftCell", top_left)
+            pane.set("activePane", active)
+            pane.set("state", "frozen")
+            if freeze_rows and freeze_cols:
+                etree.SubElement(view, M + "selection", pane="topRight", activeCell=f"{col_letter(freeze_cols + 1)}1",
+                                 sqref=f"{col_letter(freeze_cols + 1)}1")
+                etree.SubElement(view, M + "selection", pane="bottomLeft", activeCell=f"A{freeze_rows + 1}",
+                                 sqref=f"A{freeze_rows + 1}")
+            etree.SubElement(view, M + "selection", pane=active, activeCell=top_left, sqref=top_left)
         etree.SubElement(ws, M + "sheetFormatPr", defaultRowHeight="15")
         if widths:
             cols = etree.SubElement(ws, M + "cols")
@@ -452,6 +472,9 @@ class XlsxPackage:
         data = etree.SubElement(ws, M + "sheetData")
         for r, row in enumerate(rows, start=1):
             row_el = etree.Element(M + "row", r=str(r))
+            if r in row_heights:
+                row_el.set("ht", str(row_heights[r]))
+                row_el.set("customHeight", "1")
             for c, cell in enumerate(row, start=1):
                 value, style = cell if isinstance(cell, tuple) else (cell, None)
                 if (value is None or value == "") and not style:
@@ -467,10 +490,14 @@ class XlsxPackage:
                     etree.SubElement(c_el, M + "v").text = repr(value) if isinstance(value, float) else str(value)
                 else:
                     _set_text(c_el, str(value))
-            if len(row_el):
+            if len(row_el) or r in row_heights:
                 data.append(row_el)
         if autofilter:
             etree.SubElement(ws, M + "autoFilter", ref=autofilter)
+        if merges:
+            mc = etree.SubElement(ws, M + "mergeCells", count=str(len(merges)))
+            for ref in merges:
+                etree.SubElement(mc, M + "mergeCell", ref=ref)
         if lists:
             dvs = etree.SubElement(ws, M + "dataValidations", count=str(len(lists)))
             for sqref, values in lists:
@@ -501,9 +528,15 @@ class XlsxPackage:
         ids = [int(s.get("sheetId")) for s in sheets_el if (s.get("sheetId") or "").isdigit()]
         new = etree.SubElement(sheets_el, M + "sheet", name=name, sheetId=str(max(ids + [0]) + 1))
         new.set(R_ID, rid)
+        index = len([s for s in sheets_el if s.tag == M + "sheet"]) - 1
         if autofilter:
-            index = len([s for s in sheets_el if s.tag == M + "sheet"]) - 1
             self._add_defined_name("_xlnm._FilterDatabase", f"{quote_sheet(name)}!{absolute_range(autofilter)}", index)
+        if print_area:
+            self._add_defined_name("_xlnm.Print_Area", f"{quote_sheet(name)}!{absolute_range(print_area)}", index,
+                                   hidden=False)
+        if print_title_rows:
+            first, last = print_title_rows.split(":")
+            self._add_defined_name("_xlnm.Print_Titles", f"{quote_sheet(name)}!${first}:${last}", index, hidden=False)
         self._touch(self.workbook_part)
 
         ct = self._tree("[Content_Types].xml")
