@@ -149,7 +149,7 @@ var PLATFORM_GROUPS = [
  ]},
  {label:"Paid on results", rows:[
   {name:"Devpost", url:"https://devpost.com", fee:"Free to enter", best:"Online hackathons with cash and credit prizes.", ai:"Usually must use the sponsor's tools; check each ruleset."},
-  {name:"lablab.ai", url:"https://lablab.ai/ai-hackathons", fee:"Free to enter", best:"Frequent AI hackathons with $6k–12k pools.", ai:"Must use the sponsor's tech; payouts up to 90 days."},
+  {name:"lablab.ai", url:"https://lablab.ai/ai-hackathons", fee:"Free to enter", best:"Frequent AI hackathons with $6,000–12,000 prize pools.", ai:"Must use the sponsor's tech; payouts up to 90 days."},
   {name:"Expensify/App", url:"https://github.com/Expensify/App", fee:"Upwork fee applies", best:"$250 fixed bounties for accepted fixes.", ai:"Allowed if you understand and test the code; 50% penalty per regression."},
   {name:"Algora / Opire", url:"https://algora.io/bounties", fee:"You keep 100%", best:"Cash on GitHub issues; very crowded.", ai:"Set per repo; many ban AI pull requests."},
   {name:"Kaggle", url:"https://www.kaggle.com", fee:"Free", best:"Medals for your profile.", ai:"Code competitions run offline."}
@@ -158,7 +158,7 @@ var PLATFORM_GROUPS = [
   {name:"Payoneer", url:"https://www.payoneer.com", fee:"Varies", best:"Marketplace payouts; Etsy pays sellers in some countries through it.", ai:"Check that it supports your country and bank."},
   {name:"Wise", url:"https://wise.com", fee:"Low conversion fees", best:"Holding and converting foreign currency.", ai:"Check that it supports your country and bank."},
   {name:"PayPal", url:"https://www.paypal.com/webapps/mpp/country-worldwide", fee:"About 3–5% + fixed fee", best:"Direct clients; Apify payouts from $20; UserTesting and Gumroad payouts.", ai:"Some countries can send but not receive."},
-  {name:"Stripe", url:"https://stripe.com/global", fee:"About 2.9% + $0.30 (US)", best:"Card payments; Algora, Opire and Notion Marketplace payouts.", ai:"In some countries (for example the UAE and India) individuals need a business licence, which blocks these payouts."}
+  {name:"Stripe", url:"https://stripe.com/global", fee:"About 2.9% + $0.30 (US)", best:"Card payments; Algora, Opire and Notion Marketplace payouts.", ai:"In some countries (for example the UAE and India) individuals need a business license, which blocks these payouts."}
  ]}
 ];
 

@@ -1367,7 +1367,7 @@ What each platform costs you and its rules on AI. Fees change, so check the plat
 | Platform | What it costs you | Best for | AI rules and notes |
 |---|---|---|---|
 | [Devpost](https://devpost.com) | Free to enter | Online hackathons with cash and credit prizes. | Usually must use the sponsor's tools; check each ruleset. |
-| [lablab.ai](https://lablab.ai/ai-hackathons) | Free to enter | Frequent AI hackathons with $6k–12k pools. | Must use the sponsor's tech; payouts up to 90 days. |
+| [lablab.ai](https://lablab.ai/ai-hackathons) | Free to enter | Frequent AI hackathons with $6,000–12,000 prize pools. | Must use the sponsor's tech; payouts up to 90 days. |
 | [Expensify/App](https://github.com/Expensify/App) | Upwork fee applies | $250 fixed bounties for accepted fixes. | Allowed if you understand and test the code; 50% penalty per regression. |
 | [Algora / Opire](https://algora.io/bounties) | You keep 100% | Cash on GitHub issues; very crowded. | Set per repo; many ban AI pull requests. |
 | [Kaggle](https://www.kaggle.com) | Free | Medals for your profile. | Code competitions run offline. |
@@ -1379,7 +1379,7 @@ What each platform costs you and its rules on AI. Fees change, so check the plat
 | [Payoneer](https://www.payoneer.com) | Varies | Marketplace payouts; Etsy pays sellers in some countries through it. | Check that it supports your country and bank. |
 | [Wise](https://wise.com) | Low conversion fees | Holding and converting foreign currency. | Check that it supports your country and bank. |
 | [PayPal](https://www.paypal.com/webapps/mpp/country-worldwide) | About 3–5% + fixed fee | Direct clients; Apify payouts from $20; UserTesting and Gumroad payouts. | Some countries can send but not receive. |
-| [Stripe](https://stripe.com/global) | About 2.9% + $0.30 (US) | Card payments; Algora, Opire and Notion Marketplace payouts. | In some countries (for example the UAE and India) individuals need a business licence, which blocks these payouts. |
+| [Stripe](https://stripe.com/global) | About 2.9% + $0.30 (US) | Card payments; Algora, Opire and Notion Marketplace payouts. | In some countries (for example the UAE and India) individuals need a business license, which blocks these payouts. |
 
 ### Fee presets used by the interactive page's calculator
 
