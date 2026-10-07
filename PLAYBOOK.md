@@ -412,6 +412,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** This must not become legal advice: describe the rules, never tell a client whether they owe fees. Summarise law-firm alerts in your own words rather than copying them.
 - **Test it in one day:** Write "Packaging EPR status, October 2026" for one product type (for example coffee roasters), send it to 30 founders and 5 packaging distributors with a $39 founding offer, and count the replies.
 - **Related:** [UK packaging data reports](#uk-epr-data), [Public data scraping](#scraping)
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
 
 <a id="bid-digest"></a>
 #### Public-bid digest for one trade, with past winning prices
@@ -427,6 +428,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** A wrong deadline is costly, so double-check them. Portals that need a login usually forbid redistribution, so link to notices instead of reposting them.
 - **Test it in one day:** Pick one trade and one metro, collect the open bids and past results from 3 agencies, and email 15 firms named in those results offering 4 free weeks.
 - **Related:** [Local-government meeting watch for one industry](#council-watch), [Public data scraping](#scraping)
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
 
 <a id="council-watch"></a>
 #### Local-government meeting watch for one industry
@@ -442,6 +444,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** A misreported vote destroys trust, so cite page numbers. Use official minutes, and remove residents' names from public comments.
 - **Test it in one day:** Pick one industry and one state (for example battery storage in Ohio), build a sample digest covering 3 counties, and send it to 15 development managers with a $150 pilot offer.
 - **Related:** [Public-bid digest for one trade, with past winning prices](#bid-digest), [Public data scraping](#scraping)
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
 
 <a id="aid-tenders"></a>
 #### International aid tenders for one specialty and language
@@ -457,6 +460,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Don't resell paid alert services' listings, and link to tender documents instead of redistributing them. Aid budgets are shrinking.
 - **Test it in one day:** Compile two weeks of evaluation tenders for one region and language, post it on LinkedIn and two professional mailing lists, and offer a $15-a-month founding price.
 - **Related:** [Public-bid digest for one trade, with past winning prices](#bid-digest), [Public data scraping](#scraping)
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
 
 <a id="premises-digest"></a>
 #### New commercial premises list for local service firms
@@ -472,6 +476,7 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Leave out residential permits, because homeowners are private individuals. Check each portal's license before reusing its data.
 - **Test it in one day:** Pull four weeks of commercial permits from one city's open-data portal, build a sample list and call 20 local cleaning and sign firms.
 - **Related:** [Public-bid digest for one trade, with past winning prices](#bid-digest), [Public data scraping](#scraping)
+- **Starter kit:** [`kits/weekly-digest/`](kits/weekly-digest/). In Claude Code, type `/weekly-digest` in this repo.
 
 ### Things people ask for
 

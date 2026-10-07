@@ -7,7 +7,7 @@ X-WR-CALNAME:Battery Storage Zoning Watch: Week 41
 X-WR-TIMEZONE:America/New_York
 BEGIN:VEVENT
 UID:battery-storage-zoning-watch-w41-01-667926115d@fieldline.example
-DTSTAMP:20261007T102627Z
+DTSTAMP:20261007T104235Z
 DTSTART:20261013T133000Z
 DTEND:20261013T143000Z
 SUMMARY:Commissioners' session (public comment at the start): Tarrow County
@@ -39,7 +39,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:battery-storage-zoning-watch-w41-02-3068315ceb@fieldline.example
-DTSTAMP:20261007T102627Z
+DTSTAMP:20261007T104235Z
 DTSTART:20261016T200000Z
 DTEND:20261016T210000Z
 SUMMARY:Written comments due to the Zoning Inspector: Wrenfield Township ba
@@ -65,8 +65,38 @@ TRIGGER:-P1D
 END:VALARM
 END:VEVENT
 BEGIN:VEVENT
+UID:battery-storage-zoning-watch-w41-05-d954f97d99@fieldline.example
+DTSTAMP:20261007T104235Z
+DTSTART:20261019T230000Z
+DTEND:20261020T000000Z
+SUMMARY:City council second reading: Marlowe Falls battery fire-safety ordi
+ nance (No. 2026-41)
+DESCRIPTION:The Safety Committee amended Ordinance 2026-41 on October 5. As
+  amended\, it applies to battery energy storage systems larger than 600 kW
+ h (up from 50 kWh)\, other than systems serving a single one- or two-famil
+ y home. It requires compliance with NFPA 855\, an emergency response plan 
+ approved by the fire chief before a certificate of occupancy is issued\, a
+  site walkthrough with the fire department once a year (down from twice a 
+ year) and a 24-hour emergency contact posted at each entrance.\n\nSource: 
+ City of Marlowe Falls\, Ordinance 2026-41 as amended (PDF)\, sections 1 to
+  5\; committee amendments on page 2\nhttps://www.marlowefalls.example/coun
+ cil/legislation/ord-2026-41-amended.pdf\n\nFrom Battery Storage Zoning Wat
+ ch\, Week 41 (Fieldline Briefs). Check the official source before you rely
+  on this date. Not legal advice.
+URL:https://www.marlowefalls.example/council/legislation/ord-2026-41-amende
+ d.pdf
+CATEGORIES:Ordinances
+TRANSP:TRANSPARENT
+LOCATION:Council Chambers\, Marlowe Falls City Hall\, 12 Main Street
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Reminder: City council second reading
+TRIGGER:-P1D
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
 UID:battery-storage-zoning-watch-w41-02-884565474a@fieldline.example
-DTSTAMP:20261007T102627Z
+DTSTAMP:20261007T104235Z
 DTSTART:20261021T230000Z
 DTEND:20261022T000000Z
 SUMMARY:Township zoning commission public hearing: Wrenfield Township batte
@@ -94,7 +124,7 @@ END:VALARM
 END:VEVENT
 BEGIN:VEVENT
 UID:battery-storage-zoning-watch-w41-03-b8278799c9@fieldline.example
-DTSTAMP:20261007T102627Z
+DTSTAMP:20261007T104235Z
 DTSTART:20261022T220000Z
 DTEND:20261022T230000Z
 SUMMARY:Planning commission hearing and recommendation: Kessler Road batter
@@ -115,36 +145,6 @@ LOCATION:RPC Meeting Room\, 210 Pike Street\, Tarrow City
 BEGIN:VALARM
 ACTION:DISPLAY
 DESCRIPTION:Reminder: Planning commission hearing and recommendation
-TRIGGER:-P1D
-END:VALARM
-END:VEVENT
-BEGIN:VEVENT
-UID:battery-storage-zoning-watch-w41-05-d954f97d99@fieldline.example
-DTSTAMP:20261007T102627Z
-DTSTART:20261019T230000Z
-DTEND:20261020T000000Z
-SUMMARY:City council second reading: Marlowe Falls battery fire-safety ordi
- nance (No. 2026-41)
-DESCRIPTION:The Safety Committee amended Ordinance 2026-41 on October 5. As
-  amended\, it applies to battery energy storage systems larger than 600 kW
- h (up from 50 kWh)\, other than systems serving a single one- or two-famil
- y home. It requires compliance with NFPA 855\, an emergency response plan 
- approved by the fire chief before a certificate of occupancy is issued\, a
-  site walkthrough with the fire department once a year (down from twice a 
- year) and a 24-hour emergency contact posted at each entrance.\n\nSource: 
- City of Marlowe Falls\, Ordinance 2026-41 as amended (PDF)\, sections 1 to
-  5\; committee amendments on page 2\nhttps://www.marlowefalls.example/coun
- cil/legislation/ord-2026-41-amended.pdf\n\nFrom Battery Storage Zoning Wat
- ch\, Week 41 (Fieldline Briefs). Check the official source before you rely
-  on this date. Not legal advice.
-URL:https://www.marlowefalls.example/council/legislation/ord-2026-41-amende
- d.pdf
-CATEGORIES:Ordinances
-TRANSP:TRANSPARENT
-LOCATION:Council Chambers\, Marlowe Falls City Hall\, 12 Main Street
-BEGIN:VALARM
-ACTION:DISPLAY
-DESCRIPTION:Reminder: City council second reading
 TRIGGER:-P1D
 END:VALARM
 END:VEVENT

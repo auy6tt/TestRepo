@@ -1,6 +1,6 @@
 # Changes found: Battery Storage Zoning Watch — Ohio
 
-Checked 2026-10-07 10:13:34 UTC (week 2026-W41). 8 sources: 5 changed, 1 unchanged, 0 first check, 1 skipped, 1 error.
+Checked 2026-10-07 10:42:29 UTC (week 2026-W41). 8 sources: 5 changed, 1 unchanged, 0 first check, 1 skipped, 1 error.
 
 > **Next step:** Draft items from the changed sources with status needs_review. A person must check every item against its source before anything is sent.
 

@@ -12,7 +12,7 @@ You still check every item, and you send the issue yourself. The Routine never s
    - At claude.ai/code, click the cloud icon above the message box, hover over your environment and click the settings icon.
    - Set **Network access** to **Custom** (called **Limited** in newer versions of the app).
    - Under **Allowed domains**, list every domain your sources use, one per line. `*.example.gov` covers all its subdomains.
-   - Keep **Also include default list of common package managers** ticked, so the kit's Python packages can still install.
+   - Keep the package managers box ticked (**Also include default list of common package managers**, or **Allow package managers** in newer versions), so the kit's Python packages can still install.
    - Save. A Routine uses the environment you pick for it, so make sure it is this one.
 4. **Test by hand.** In a session, run the watcher twice (the first run only saves snapshots). Any source that is still blocked shows "Blocked by the network policy (host)" in `changes.md`.
 5. **Commit and push** the digest folder, including `data/`. The snapshots in `data/` are how next week's run knows what changed. Every cloud session starts from a fresh copy of your repository, so anything you do not push is lost.

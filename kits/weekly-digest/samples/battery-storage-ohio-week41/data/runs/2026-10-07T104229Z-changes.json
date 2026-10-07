@@ -5,12 +5,13 @@
   "sources_file": "sources.yaml",
   "paths_relative_to": "the folder that holds the sources file",
   "week": "2026-W41",
-  "run_started": "2026-10-07T10:13:34Z",
-  "run_finished": "2026-10-07T10:13:39Z",
+  "run_started": "2026-10-07T10:42:29Z",
+  "run_finished": "2026-10-07T10:42:33Z",
   "dry_run": false,
   "summary": {
     "sources": 8,
     "changed": 5,
+    "no_keyword_match": 0,
     "first_run": 0,
     "unchanged": 1,
     "skipped": 1,
@@ -29,8 +30,8 @@
         "county",
         "agenda"
       ],
-      "checked_at": "2026-10-07T10:13:34Z",
-      "previous_check": "2026-10-07T10:13:31Z",
+      "checked_at": "2026-10-07T10:42:29Z",
+      "previous_check": "2026-10-07T10:42:25Z",
       "added": [
         "Notice: The Board will consider Resolution 2026-118, a proposed moratorium on battery energy storage facility zoning applications, at its October 13, 2026 regular session.",
         "October 13, 2026 | Regular session | October 6, 2026 | Agenda (PDF) | –"
@@ -120,8 +121,8 @@
         "planning-commission",
         "agenda"
       ],
-      "checked_at": "2026-10-07T10:13:37Z",
-      "previous_check": "2026-10-07T10:13:33Z",
+      "checked_at": "2026-10-07T10:42:32Z",
+      "previous_check": "2026-10-07T10:42:27Z",
       "added": [
         "[p. 1] Thursday, October 22, 2026, 6:00 p.m.",
         "[p. 1] Posted October 5, 2026",
@@ -236,8 +237,8 @@
         "township",
         "legal-notice"
       ],
-      "checked_at": "2026-10-07T10:13:37Z",
-      "previous_check": "2026-10-07T10:13:33Z",
+      "checked_at": "2026-10-07T10:42:32Z",
+      "previous_check": "2026-10-07T10:42:28Z",
       "new_records": [
         {
           "id": "https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf",
@@ -305,8 +306,8 @@
         "county",
         "open-data"
       ],
-      "checked_at": "2026-10-07T10:13:38Z",
-      "previous_check": "2026-10-07T10:13:33Z",
+      "checked_at": "2026-10-07T10:42:32Z",
+      "previous_check": "2026-10-07T10:42:28Z",
       "new_records": [
         {
           "id": "CU-2026-031",
@@ -339,8 +340,8 @@
         "city",
         "ordinance"
       ],
-      "checked_at": "2026-10-07T10:13:38Z",
-      "previous_check": "2026-10-07T10:13:33Z",
+      "checked_at": "2026-10-07T10:42:33Z",
+      "previous_check": "2026-10-07T10:42:28Z",
       "added": [
         "Ordinance 2026-41 | Establishing fire safety and emergency response requirements for battery energy storage systems | First reading September 21, 2026. Amended in the Safety Committee October 5, 2026. Second reading October 19, 2026. | Ordinance 2026-41 as introduced (PDF); Ordinance 2026-41 as amended (PDF)",
         "Ordinance 2026-43 | Establishing a no-parking zone on the west side of Mill Street | First reading October 5, 2026. Second reading October 19, 2026. | Ordinance 2026-43 (PDF)"
@@ -419,6 +420,7 @@
       "snapshot": "data/snapshots/city-of-marlowe-falls-pending-legislation/current.txt"
     }
   ],
+  "changed_without_keyword_match": [],
   "errors": [
     {
       "id": "halden-county-zoning-commission-hearings-page",
@@ -443,7 +445,7 @@
       "name": "Tarrow County Board of Zoning Appeals: decisions",
       "url": "https://www.tarrowcounty.example/bza/decisions/",
       "last_changed": null,
-      "first_checked": "2026-10-07T10:13:32Z"
+      "first_checked": "2026-10-07T10:42:26Z"
     }
   ],
   "warnings": []

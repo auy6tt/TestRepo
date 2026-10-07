@@ -1,6 +1,6 @@
 Source: https://www.wrenfieldtwp.example/notices/ZTA-2026-03-hearing-notice.pdf
 Link text: Notice of public hearing: Zoning Text Amendment ZTA-2026-03 (battery energy storage systems)
-Fetched: 2026-10-07T10:13:38Z
+Fetched: 2026-10-07T10:42:32Z
 Type: pdf, 1 pages
 
 [Page 1]

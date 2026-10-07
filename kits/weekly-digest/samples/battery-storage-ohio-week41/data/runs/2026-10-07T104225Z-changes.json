@@ -5,12 +5,13 @@
   "sources_file": "sources.yaml",
   "paths_relative_to": "the folder that holds the sources file",
   "week": "2026-W41",
-  "run_started": "2026-10-07T10:13:31Z",
-  "run_finished": "2026-10-07T10:13:34Z",
+  "run_started": "2026-10-07T10:42:25Z",
+  "run_finished": "2026-10-07T10:42:28Z",
   "dry_run": false,
   "summary": {
     "sources": 8,
     "changed": 0,
+    "no_keyword_match": 0,
     "first_run": 7,
     "unchanged": 0,
     "skipped": 1,
@@ -18,6 +19,7 @@
   },
   "next_step": "Draft items from the changed sources with status needs_review. A person must check every item against its source before anything is sent.",
   "changed": [],
+  "changed_without_keyword_match": [],
   "errors": [],
   "skipped": [
     {
