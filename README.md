@@ -4,7 +4,7 @@ Research and starter kits for earning money with a Claude Max plan when you're s
 
 - **[Interactive playbook](https://claude.ai/artifact/6XujurYFWKFDJQDofE8n9M)**: the published page with filters, a fee calculator and a 30-day checklist. It's private to your Claude account unless you share it.
 - **[PLAYBOOK.md](PLAYBOOK.md)**: the full research. Best bets for beginners, 44 hidden niches with real demand and few competitors, where to find first clients with zero reviews, 36 ways to earn with prices and demand evidence, platforms and fees, rules, a 30-day plan and sources.
-- **[kits/](kits/)**: 10 starter kits that cover 14 of the hidden niches. Each has the offer, prices, the step-by-step process, scripts, templates, a fictional portfolio sample and a Claude Code skill.
+- **[kits/](kits/)**: 10 starter kits that cover 15 of the hidden niches. Each has the offer, prices, the step-by-step process, scripts, templates, a fictional portfolio sample and a Claude Code skill.
 - **[templates/](templates/)**: copy-ready messages, proposals, a gig description, an intake form, an invoice and a one-page agreement.
 - **[playbook/index.html](playbook/index.html)**: the same page as a file you can open in any browser.
 

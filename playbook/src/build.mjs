@@ -51,6 +51,9 @@ const DATA = {
   niches: get("NICHES"), nicheGroups: get("NICHE_GROUPS"), glossary: get("GLOSSARY").slice().sort((a, b) => a[0].toLowerCase().localeCompare(b[0].toLowerCase())), whenWrong: get("WHEN_WRONG"),
   channels: get("CHANNELS"), upworkSteps: get("UPWORK_STEPS"), fiverrSteps: get("FIVERR_STEPS"), proofSteps: get("PROOF_STEPS")
 };
+// Kit counts in the workspace text come from the niche data, so they can't go stale.
+const kitNiches = DATA.niches.filter(n => n.kit), nKits = new Set(kitNiches.map(n => n.kit)).size;
+DATA.workspace = DATA.workspace.map(w => ({ ...w, d: w.d.replace("{KITS}", nKits).replace("{KIT_NICHES}", kitNiches.length) }));
 const STAGES = get("STAGES"), PRINCIPLES = get("PRINCIPLES");
 const nSources = DATA.sources.reduce((n, g) => n + g.items.length, 0);
 const nPlatforms = DATA.platformGroups.reduce((n, g) => n + g.rows.length, 0);
@@ -85,7 +88,7 @@ const left = body.match(/__[A-Z_]+__/g);
 if (left) throw new Error("unfilled placeholders: " + left.join(","));
 
 const head = `<title>Claude Income Playbook</title>
-<meta name="description" content="Ways to earn with Claude when you're starting from zero: services, products, platforms, rules and a 30-day plan.">
+<meta name="description" content="Ways to earn with Claude when you're starting from zero: services, products, hidden niches with starter kits, platforms, rules and a 30-day plan.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&family=Public+Sans:ital,wght@0,400..700;1,400..700&display=swap">
