@@ -38,10 +38,12 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 | Niche | Type | Typical price | Demand | Few rivals | Claude fit | Beginner |
 |---|---|---|---|---|---|---|
 | [Meeting minutes for HOA, nonprofit and church boards](#board-minutes) | Back office | $75–200 per meeting, or $100–300 a month per association (est.); one firm pays its writers $56 per one-hour meeting | 4 | 3 | 5 | 5 |
+| [Rescuing Microsoft Publisher files](#publisher-rescue) | Rules and deadlines | $0.50–2 per archived file and $25–75 per rebuilt template, roughly $150–600 per organisation (est.) | 4 | 4 | 4 | 5 |
 | [Rescuing AI features before their model is retired](#model-retirement) | New AI needs | $300–800 per feature; $1,500–4,000 for a whole app with a reusable test set (est.) | 4 | 4 | 5 | 3 |
 | [Fixing help-centre content so AI support bots stop failing](#support-content) | New AI needs | $1,000–3,500 for an audit plus 40–120 articles; $400–1,000 a month for upkeep (est.) | 4 | 3 | 5 | 4 |
 | [Security questionnaires for small software companies](#security-questionnaires) | Back office | $250–1,500 per questionnaire depending on size (est.) | 5 | 3 | 5 | 3 |
-| [Microsoft Access database rescue](#access-rescue) | Specialist software | $150–600 per fix, $1,500–8,000 per migration | 4 | 4 | 4 | 3 |
+| [UK packaging data reports](#uk-epr-data) | Rules and deadlines | £500–3,000 per reporting round (est.) | 4 | 3 | 5 | 4 |
+| [REDCap and XLSForm survey building for research teams](#redcap-forms) | Research and nonprofits | $200–500 per simple form set; $800–2,000 for multi-visit studies (est.) | 4 | 3 | 5 | 4 |
 | [Getting organisations off Drupal 7](#drupal7) | Specialist software | $800–3,000 per fixed package (est.) | 4 | 3 | 5 | 3 |
 | [Packaging-law updates for small consumer brands](#epr-digest) | Data subscriptions | $39–99 a month per brand, or $300–800 a month white-label (est.) | 4 | 3 | 5 | 3 |
 | [Public-bid digest for one trade, with past winning prices](#bid-digest) | Data subscriptions | $49–149 a month per contractor (est.) | 4 | 3 | 4 | 4 |
@@ -50,21 +52,37 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 | [Test suites for small teams' AI features](#ai-evals) | New AI needs | $750–3,000 setup, plus $200–800 a month for regular runs (est.) | 4 | 3 | 5 | 3 |
 | [Custom Claude skill packs for small teams](#claude-skill-packs) | New AI needs | $250–600 per skill; $1,500–4,000 per team pack (est.) | 3 | 3 | 5 | 4 |
 | [Chemical safety-data binders for OSHA's 2026 update](#sds-binders) | Rules and deadlines | $300–1,500 per site (est.) | 4 | 3 | 4 | 4 |
-| [Construction submittal and handover packages](#closeout-docs) | Back office | $300–1,500 per submittal package, $500–3,000 per handover binder (est.) | 4 | 4 | 4 | 3 |
+| [Making public bodies' documents accessible](#doc-accessibility) | Rules and deadlines | $5–25 per page (most vendors charge $5–8); a site inventory $300–1,500 (est.) | 5 | 3 | 4 | 3 |
 | [Preparing UK Gift Aid claims for churches and small charities](#gift-aid) | Back office | £75–300 per claim (est.) | 4 | 3 | 4 | 4 |
+| [Fixing tools broken by Microsoft's email shutdowns](#m365-email-shutdown) | Rules and deadlines | $150–400 for an inventory and runbook; $200–600 per device or plugin; $1,000–4,000 to move a custom app to Graph (est.) | 4 | 3 | 5 | 3 |
+| [EU Cyber Resilience Act packs for small device and software makers](#cra-readiness) | Rules and deadlines | €500–2,000 per product, plus €100–300 a month to keep it current (est.) | 4 | 4 | 4 | 3 |
+| [US import certificate libraries (CPSC eFiling)](#cpsc-efiling) | Cross-border selling | $300–1,000 for a 20–50 product readiness pack; $40–100 per extra product (est.) | 4 | 3 | 4 | 4 |
+| [Journal replication packages for researchers](#replication-packages) | Research and nonprofits | $300–600 for a README and structure check; $800–2,500 for a full clean-up (est.) | 4 | 4 | 4 | 3 |
+| [Microsoft Access database rescue](#access-rescue) | Specialist software | $150–600 per fix, $1,500–8,000 per migration | 4 | 3 | 4 | 3 |
 | [AutoCAD automation routines (AutoLISP)](#autolisp) | Specialist software | $50–300 per routine, $500–1,500 per project | 3 | 4 | 4 | 3 |
 | [ColdFusion maintenance and moves to Lucee](#coldfusion) | Specialist software | $60–125 an hour (est.) | 3 | 5 | 4 | 2 |
 | [Spreadsheet-to-catalogue automation](#catalogue) | Specialist software | $300–2,500 per setup, plus a fee per new edition (est.) | 3 | 3 | 4 | 4 |
 | [New commercial premises list for local service firms](#premises-digest) | Data subscriptions | $79–199 a month per metro (est.) | 3 | 3 | 4 | 4 |
 | [Cleaning up company documents before an AI rollout](#ai-ready-docs) | New AI needs | $1,500–5,000 per department (est.) | 4 | 3 | 4 | 3 |
-| [Making public bodies' documents accessible](#doc-accessibility) | Rules and deadlines | $2–15 per page; most vendors charge $4–8 | 5 | 3 | 3 | 3 |
+| [Construction submittal and handover packages](#closeout-docs) | Back office | $300–1,500 per submittal package, $500–3,000 per handover binder (est.) | 4 | 3 | 4 | 3 |
+| [UAE e-invoicing data readiness](#uae-einvoicing) | Rules and deadlines | AED 2,000–8,000 (est.) | 4 | 3 | 4 | 3 |
+| [Farm-location data for the EU deforestation rule](#eudr-data) | Cross-border selling | €300–1,500 per supplier dataset (est.) | 4 | 3 | 4 | 3 |
+| [Data-sharing packages for research datasets](#data-sharing) | Research and nonprofits | $400–1,500 per dataset (est.) | 3 | 3 | 5 | 3 |
+| [First-pass fact-checking for nonfiction books](#book-factcheck) | Things people ask for | $100–200 per chapter or $1,000–2,500 per book for a first pass (est.) | 3 | 4 | 4 | 3 |
+| [Library cataloguing blocks for self-published books](#library-cip) | Things people ask for | $60–120 per book (est.); the long-standing market price is about $100 | 2 | 5 | 4 | 3 |
 | [Revit automation scripts](#revit) | Specialist software | $30–95 an hour | 4 | 4 | 3 | 2 |
 | [EDI files for small brands selling to big retailers](#edi) | Specialist software | $500–3,000 per retailer connection (est.) | 4 | 3 | 4 | 2 |
 | [AI transparency and staff AI-use packs](#ai-policy-pack) | New AI needs | €500–2,000 per pack; €150–400 per training session (est.) | 3 | 3 | 4 | 3 |
 | [AI API bill audits for startups](#ai-cost-audit) | New AI needs | $1,000–3,000, or 20–30% of verified savings over 3 months (est.) | 4 | 3 | 4 | 2 |
 | [Allergen charts for UK food businesses](#allergen-charts) | Back office | £100–400 per menu, plus £20–50 per update (est.) | 3 | 3 | 4 | 3 |
+| [Accessibility reports for software sold to governments and universities](#vpat-acr) | Rules and deadlines | $1,500–6,000 from a freelancer, against $5,000–20,000+ from agencies (est.) | 4 | 3 | 4 | 2 |
+| [Payment-page script checks for small online stores](#pci-saq-a) | Rules and deadlines | $300–1,200 setup plus $30–100 a month (est.) | 3 | 3 | 4 | 3 |
+| [ClinicalTrials.gov results reporting for small sponsors](#ctgov-results) | Research and nonprofits | $1,500–4,000 per results record (est.) | 4 | 3 | 4 | 2 |
+| [Community needs-assessment data books](#needs-assessments) | Research and nonprofits | $1,500–5,000 for just the data chapter; $8,000–40,000 for a full assessment (est.) | 4 | 3 | 4 | 2 |
+| [Virtual tabletop conversions for indie RPG publishers](#foundry-vtt) | Things people ask for | $300–2,500 per adventure (est.) | 3 | 3 | 4 | 3 |
 | [ChatGPT Ads setup for small US businesses](#chatgpt-ads) | New AI needs | $300–700 setup plus $300–1,000 a month (est.) | 4 | 3 | 3 | 2 |
 | [Supplier sustainability questionnaires (EcoVadis)](#ecovadis) | Back office | $500–2,500 per assessment (est.) | 4 | 3 | 3 | 2 |
+| [Book indexing for academic and nonfiction authors](#book-indexing) | Things people ask for | $1.50–2.50 per page as a beginner (est.); professionals charge $2.50–6 | 3 | 4 | 3 | 2 |
 
 ### Rules and deadlines
 
@@ -85,28 +103,126 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 <a id="doc-accessibility"></a>
 #### Making public bodies' documents accessible
 
-*Fix PDFs and Word files for the US ADA Title II rule and the EU Accessibility Act.* **$2–15 per page; most vendors charge $4–8** · demand 5/5 · few rivals 3/5 · Claude fit 3/5 · beginner 3/5
+*Inventory and fix PDFs and Office files for the US ADA rules and the EU Accessibility Act.* **$5–25 per page (most vendors charge $5–8); a site inventory $300–1,500 (est.)** · demand 5/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
 
-- **Who pays:** US cities, counties, school districts and colleges, health providers funded by the US health department, EU companies under the European Accessibility Act, and accessibility vendors needing overflow help.
-- **What they need:** PDFs and Office files made to meet WCAG 2.1 AA and PDF/UA (tags, reading order, alt text, table headers), or converted into accessible web pages.
-- **Proof of demand:** The US Justice Department's ADA Title II rule requires WCAG 2.1 AA; an April 2026 interim rule moved the deadlines to 26 April 2027 for bodies serving 50,000+ people and 26 April 2028 for smaller ones. Large institutions have backlogs of thousands of documents.
-- **Why few people offer it:** Many vendors exist, so competition is moderate, but skilled manual checking is the bottleneck: automated checkers catch only 20–30% of issues.
-- **How Claude does it here:** A script extracts each document's structure; Claude rebuilds it with proper headings, table headers and draft alt text, exports a tagged PDF and checks it with the open-source veraPDF validator. Final checks need Acrobat Pro or the free PAC checker (Windows) and a screen reader.
-- **Where buyers are:** Small municipalities and special districts, state procurement portals, accessibility vendors needing white-label help, accessibility coordinators on LinkedIn. Search: "PDF remediation", "Title II documents".
-- **Watch out:** Never promise "ADA compliant" certification, and have a person check every file. The client approves alt text for complex charts. The deadlines have moved once already.
-- **Test it in one day:** Fix one public council-agenda PDF, show the checker results before and after, and email 20 small public bodies and 10 accessibility vendors offering per-page capacity.
+- **Who pays:** US towns, counties, school and special districts, community colleges, clinics and nonprofits funded by the US health department, EU businesses under the European Accessibility Act, and accessibility vendors who need overflow help.
+- **What they need:** A list of every PDF, Word and PowerPoint file on their website sorted into delete, archive, convert to a web page, or fix; then the files that stay fixed to WCAG 2.1 AA (headings, reading order, alt text, table headers, usable forms), plus accessible templates for new files.
+- **Proof of demand:** The US Justice Department's ADA Title II rule requires WCAG 2.1 AA; an April 2026 interim rule moved the deadlines to 26 April 2027 for bodies serving 50,000+ people and 26 April 2028 for smaller ones. Health providers funded by the US health department face separate Section 504 deadlines (May 2026 for 15+ staff, May 2027 for smaller ones). The Justice Department itself cited the difficulty of fixing large document sets as a reason for the delay.
+- **Why few people offer it:** Vendors are multiplying and automated tools start around $0.30 a page, so compete on careful human checking for small bodies rather than on price. Automated checkers catch only 20–30% of issues.
+- **How Claude does it here:** A crawler lists every document on the site; a script triages each PDF (tagged or not, scanned or real text, title and language set). Claude fixes the source Word files (headings, draft alt text, table headers) and exports tagged PDFs with LibreOffice; scans get OCR. A person checks reading order and alt text with free Windows tools (PAC, NVDA) or Acrobat.
+- **Where buyers are:** State municipal leagues and school-board associations, bid portals (search "document remediation"), ADA coordinators on LinkedIn, state associations of community health centres, accessibility vendors needing white-label help.
+- **Watch out:** Never promise "ADA compliant" or certification; deliver test results and a log of what was checked. Exemptions are for the client's ADA coordinator or lawyer to decide. The deadlines have already moved once.
+- **Test it in one day:** Crawl the websites of 10 towns or school districts under 50,000 people and email each ADA coordinator a one-page snapshot (for example "312 PDFs, 240 not accessible") with one fixed file free.
+
+<a id="m365-email-shutdown"></a>
+#### Fixing tools broken by Microsoft's email shutdowns
+
+*Copiers, scripts and apps that stop sending or reading Microsoft 365 email.* **$150–400 for an inventory and runbook; $200–600 per device or plugin; $1,000–4,000 to move a custom app to Graph (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 5/5 · beginner 3/5
+
+- **Who pays:** Small firms, schools, nonprofits and small software vendors whose tools connect to Microsoft 365 email the old way: scan-to-email copiers, accounting and ERP systems, CRMs, help desks, WordPress mail plugins, Python or PHP scripts.
+- **What they need:** A list of everything that depends on the old connections, a fix for each (move code to Microsoft Graph, switch sending to modern sign-in or another mail service), and a runbook.
+- **Proof of demand:** Microsoft began disabling Exchange Web Services (EWS) in Exchange Online on 1 October 2026 and turns it off for good on 1 April 2027. Password-only SMTP sending is switched off by default at the end of December 2026. Software partners are already warning their users.
+- **Why few people offer it:** The work needs both Microsoft 365 admin knowledge and coding against Microsoft Graph. IT firms look after contract clients, but many 5–50 person organisations have no IT firm (unverified).
+- **How Claude does it here:** Claude writes read-only PowerShell checks for the client's admin to run and turns the output into a fix list. It rewrites old mailbox code to use Graph with tests and minimal permissions, and writes setup steps for each device. Everything is tested in the client's own Microsoft 365 account.
+- **Where buyers are:** r/sysadmin, r/Office365, Microsoft Tech Community, Spiceworks. Search the error messages people post ("EWS stopped working", "535 5.7.139"). A business's DNS mail records show whether it uses Microsoft 365.
+- **Watch out:** Turning old access back on is only a stopgap, so say so in writing. Never ask for full admin passwords.
+- **Test it in one day:** Publish a free self-check script with a plain-English guide, then email 20 local Microsoft 365 users offering a fixed-price 48-hour check.
+
+<a id="publisher-rescue"></a>
+#### Rescuing Microsoft Publisher files
+
+*Convert years of .pub newsletters and rebuild the templates people reuse.* **$0.50–2 per archived file and $25–75 per rebuilt template, roughly $150–600 per organisation (est.)** · demand 4/5 · few rivals 4/5 · Claude fit 4/5 · beginner 5/5
+
+- **Who pays:** Churches and parishes, schools and parent-teacher groups, clubs, small charities and councils with years of newsletters, bulletins and certificates made in Publisher.
+- **What they need:** Old files turned into searchable PDFs with a file list, and the 5–20 layouts they reuse rebuilt as editable Word or PowerPoint templates.
+- **Proof of demand:** From 1 October 2026 Microsoft 365 subscribers can no longer open or edit .pub files, and people are already asking how to keep using their files (one Microsoft Q&A thread is titled "How can I continue to use Microsoft Publisher after 10/1/26?"). Churches, dioceses, school districts and universities have published conversion guides.
+- **Why few people offer it:** Two separate searches found no services rebuilding editable templates, only converter tools and how-to articles. Microsoft's own bulk route needs PowerShell scripting, and press coverage says no third-party app is fully compatible.
+- **How Claude does it here:** LibreOffice, which is installed here, can open .pub files (fidelity varies) and batch-converts them to PDFs with preview images and an index. Claude rebuilds the reused layouts as styled Word or PowerPoint templates. You compare previews with the originals and walk the client through the templates.
+- **Where buyers are:** Church-admin and church-communications groups, school offices, diocese and school-district offices (one deal can cover many sites). Search: "can't open .pub file".
+- **Watch out:** Use substitute fonts where licences are an issue, and delete personal data after delivery. Sell "archive plus top templates", not perfect copies of everything.
+- **Test it in one day:** Offer "send one .pub file, get a PDF and an editable Word version free" in 3 church-admin groups.
+
+<a id="uk-epr-data"></a>
+#### UK packaging data reports
+
+*Packaging weights by material and nation, ready to upload.* **£500–3,000 per reporting round (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 5/5 · beginner 4/5
+
+- **Who pays:** UK brand owners, importers and online sellers with £1M+ turnover handling 25+ tonnes of packaging a year.
+- **What they need:** Packaging weights for each product by material, packaging type and UK nation, a clean upload file, recyclability details and written assumptions.
+- **Proof of demand:** Over 80% of producers audited in 2025 had to resubmit their packaging data. Large producers' first-half 2026 data was due on 1 October 2026, and data split by UK nation is reported for the first time in early 2027.
+- **Why few people offer it:** Compliance schemes and software take the data, but the company still has to assemble it product by product, and few people sell that spreadsheet work to £1–10M firms (unverified).
+- **How Claude does it here:** Claude reads product lists and supplier specification PDFs, calculates tonnage, writes the upload file and runs a check script for codes, totals and big swings. You spot-check weights with the client, who submits.
+- **Where buyers are:** Operations and compliance staff at UK food, drink, cosmetics and online brands on LinkedIn, UK Amazon and Shopify seller groups.
+- **Watch out:** The company is legally responsible for the numbers, so never invent weights. You are not a compliance scheme.
+- **Test it in one day:** Build a demo upload file from a made-up 50-product catalogue and offer free 30-minute data checks.
+
+<a id="cra-readiness"></a>
+#### EU Cyber Resilience Act packs for small device and software makers
+
+*Component lists, vulnerability policy and a reporting plan.* **€500–2,000 per product, plus €100–300 a month to keep it current (est.)** · demand 4/5 · few rivals 4/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Micro and small companies anywhere that sell connected hardware, firmware or downloadable software in the EU.
+- **What they need:** A software bill of materials (a list of every component) per release, a vulnerability-handling and disclosure policy, a security.txt contact file, a 24-hour/72-hour/14-day reporting plan, a support-period statement, and a gap list.
+- **Proof of demand:** Since 11 September 2026 makers must report actively exploited vulnerabilities to the EU cybersecurity agency on tight deadlines; full obligations follow in December 2027, with fines up to €15M or 2.5% of turnover. In ENISA's survey, 57% of micro firms have nobody responsible for cybersecurity and over 70% asked for documentation templates.
+- **Why few people offer it:** The rule is new. Current providers are enterprise software vendors and law firms that micro firms can't afford, and no fixed-price hands-on packs turned up (unverified).
+- **How Claude does it here:** Free tools generate the component lists and check them for known vulnerabilities in this sandbox. Claude drafts the policies, the reporting plan and the gap table, and sets up regeneration on each release. The client confirms the lists match what ships; their lawyer decides how the product is classified.
+- **Where buyers are:** Hardware sellers on Crowd Supply, Tindie and Kickstarter who ship to the EU, EU startup networks, embedded-systems meetups, LinkedIn. Speaking German, French or Italian helps.
+- **Watch out:** Not legal advice. Never claim "CRA compliant" or sign the EU declaration of conformity for a client.
+- **Test it in one day:** Check 30 small EU-selling hardware brands for a security.txt file, and email the ones without one with a sample component list and report.
+
+<a id="vpat-acr"></a>
+#### Accessibility reports for software sold to governments and universities
+
+*Honest VPAT/ACR reports based on real testing.* **$1,500–6,000 from a freelancer, against $5,000–20,000+ from agencies (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 2/5
+
+- **Who pays:** Small education, government and health software vendors whose public-sector buyers now ask for an Accessibility Conformance Report (ACR), usually on the standard VPAT form.
+- **What they need:** An honest report based on real testing, plus a plan for fixing the gaps.
+- **Proof of demand:** The ADA Title II rule covers content provided through contractors, so public buyers now check vendors; states and universities publish checklists for reviewing these reports.
+- **Why few people offer it:** Agencies dominate; a search surfaced only one Upwork service and one Fiverr gig.
+- **How Claude does it here:** Automated checks (axe-core through Playwright) plus scripted keyboard and colour-contrast checks, then Claude drafts each line of the report. You test by hand with a screen reader and keyboard and check every claim.
+- **Where buyers are:** Vendors on government purchasing contracts and on universities' approved-software lists.
+- **Watch out:** An honest report needs careful manual testing; a beginner who overstates accessibility exposes the vendor legally. Start with the automated snapshot and partner with an experienced tester. Never call the report a certification.
+- **Test it in one day:** Email 15 such vendors that have no report, or an outdated one, with a free automated snapshot of their product.
+
+<a id="uae-einvoicing"></a>
+#### UAE e-invoicing data readiness
+
+*Clean invoice data and map it to the new format before go-live.* **AED 2,000–8,000 (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** UAE businesses, especially those under AED 50M revenue, which must appoint an accredited e-invoicing provider in 2027.
+- **What they need:** A clean-up of invoice and customer data (tax numbers, IDs, item codes), a map from their Tally, Zoho or Excel fields to the required format, and a comparison of providers.
+- **Proof of demand:** Ministerial decisions in 2025 set the rollout: larger businesses face late-2026 and January 2027 deadlines; smaller ones must appoint a provider by 31 March 2027 and go live on 1 July 2027, with penalties for missing them.
+- **Why few people offer it:** The market is led by providers, ERP resellers and large accounting firms; independent help with data readiness is rarely offered (unverified).
+- **How Claude does it here:** Claude extracts fields from sample invoices and accounting exports and builds a mapping and validation workbook, plus provider questions and staff instructions. The client's tax agent signs off and the provider handles the connection.
+- **Where buyers are:** Chamber and free-zone business events, UAE small-business groups, small accounting firms as partners.
+- **Watch out:** This is not tax advice, and you are not an accredited provider.
+- **Test it in one day:** Offer a free 20-invoice readiness check to 30 businesses.
+
+<a id="pci-saq-a"></a>
+#### Payment-page script checks for small online stores
+
+*Script inventory and alerts so stores can complete their card-security questionnaire.* **$300–1,200 setup plus $30–100 a month (est.)** · demand 3/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Self-hosted online stores (WooCommerce, Magento) that embed their card processor's payment form.
+- **What they need:** Since PCI DSS 4.0, these merchants must confirm in their yearly questionnaire (SAQ A) that their site isn't open to script attacks: in practice a list of every script on the payment page, security headers and alerts when scripts change.
+- **Proof of demand:** The rule took effect on 31 March 2025, the card industry body published an FAQ on it, and paid monitoring products exist for exactly this.
+- **Why few people offer it:** The tools and certified assessors are priced for mid-sized companies (unverified).
+- **How Claude does it here:** A Playwright script lists every script on the checkout page; Claude drafts the security headers and a scheduled check that alerts on changes. The client's developer installs the headers and the merchant signs the questionnaire.
+- **Where buyers are:** WooCommerce and Magento communities and small web agencies.
+- **Watch out:** Never sign the questionnaire for the merchant, never pose as a certified assessor, and do no intrusive testing without written permission.
+- **Test it in one day:** Look at the public checkout pages of 20 stores (look only, no testing) and send each a short findings note.
 
 ### Specialist software
 
 <a id="access-rescue"></a>
 #### Microsoft Access database rescue
 
-*Keep old Access databases running, or move them to the web.* **$150–600 per fix, $1,500–8,000 per migration** · demand 4/5 · few rivals 4/5 · Claude fit 4/5 · beginner 3/5
+*Keep old Access databases running, or move them to the web.* **$150–600 per fix, $1,500–8,000 per migration** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
 
 - **Who pays:** Small manufacturers, clinics, distributors, charities and councils whose Access database was built by someone who has since left.
 - **What they need:** Fixes after Office updates, new reports, 64-bit VBA fixes, or moving the data into a proper database or a web app.
 - **Proof of demand:** Access 2021 support ends on 13 October 2026, a year after Access 2016 and 2019. US Access/VBA work averages about $48 an hour (ZipRecruiter, Aug 2026), and London contracts have a median of £650 a day.
-- **Why few people offer it:** Migration firms all report the same thing: the original builder has often retired, and VBA skills get harder to find every year.
+- **Why few people offer it:** Migration firms report that the original builders have often retired and VBA skills get scarcer every year. Full migrations are a crowded market (migration platforms and firms compete), so lead with fixes and health checks for small databases.
 - **How Claude does it here:** Python tools (mdbtools, access-parser) read the tables here. The client exports forms and VBA as text so Claude can read every module. A web replacement can be built and fully tested in this sandbox; VBA changes have to be tested by the client on Windows.
 - **Where buyers are:** UtterAccess, Access World Forums, r/MSAccess, Microsoft Q&A, Upwork "Microsoft Access" jobs, and local IT-support firms that inherit these databases.
 - **Watch out:** These files hold personal data, so sign an NDA, work on copies and delete them afterwards. Never edit the live file.
@@ -229,12 +345,12 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 <a id="closeout-docs"></a>
 #### Construction submittal and handover packages
 
-*Product approval packages and operation & maintenance binders for subcontractors.* **$300–1,500 per submittal package, $500–3,000 per handover binder (est.)** · demand 4/5 · few rivals 4/5 · Claude fit 4/5 · beginner 3/5
+*Product approval packages and operation & maintenance binders for subcontractors.* **$300–1,500 per submittal package, $500–3,000 per handover binder (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
 
 - **Who pays:** Specialist subcontractors (electrical, mechanical, fire, audio-visual, finishes) and small general contractors.
 - **What they need:** Submittal packages for each section of the project specification (cover sheet, marked-up datasheets, compliance checklist, log) and, at the end of the job, handover binders with operation and maintenance manuals, warranties and spare-parts lists in the required format.
 - **Proof of demand:** Public agencies tender exactly this work, UK trade press calls the handover process "broken", and outside firms charge about £50,000 to produce the manuals for a £100m project.
-- **Why few people offer it:** The US audio-visual contractors' association says experts aren't aware of many members successfully outsourcing this work, because explaining each project is costly. So the gap is real; a tight intake process is the fix.
+- **Why few people offer it:** Specialist contractors say outsourcing this is rare because explaining each project is costly, but offshore services (around $18 an hour) and submittal software exist. Win on a tight intake checklist and speed.
 - **How Claude does it here:** Claude turns the specification PDF into a checklist of requirements, compares it with product datasheets and flags mismatches. A script merges, bookmarks, numbers and indexes the PDFs, and the submittal log lives in a spreadsheet. The project manager confirms compliance.
 - **Where buyers are:** Subcontractor project managers on LinkedIn, trade associations (NSCA in the US, FIS in the UK), project coordinators. Search: "submittal coordinator", "closeout documents", "O&M manuals".
 - **Watch out:** You don't certify compliance, and you never alter manufacturer documents. Keep drawings confidential.
@@ -354,6 +470,64 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Watch out:** Leave out residential permits, because homeowners are private individuals. Check each portal's licence before reusing its data.
 - **Test it in one day:** Pull four weeks of commercial permits from one city's open-data portal, build a sample list and call 20 local cleaning and sign firms.
 
+### Things people ask for
+
+<a id="book-factcheck"></a>
+#### First-pass fact-checking for nonfiction books
+
+*A claims log and suggested fixes before a book goes to print.* **$100–200 per chapter or $1,000–2,500 per book for a first pass (est.)** · demand 3/5 · few rivals 4/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Authors of memoir, narrative nonfiction, history, health and business books, and small presses.
+- **What they need:** Names, dates, figures, quotes and claims checked before publication, with sources, at a price individual authors can afford. Often paired with a permissions log for quoted lyrics, poems and images.
+- **Proof of demand:** Authors, not publishers, are usually responsible for accuracy. Professional book fact-checks cost about $10,000–12,000, and the Editorial Freelancers Association lists fact-checking at $55–73 an hour.
+- **Why few people offer it:** It's a small specialist trade and only expensive options turned up; no cheaper first-pass tier surfaced.
+- **How Claude does it here:** Claude pulls every checkable claim into a spreadsheet log, searches for sources, records a verdict (supported, contradicted, unverifiable, needs the author's source) and drafts fixes as Word comments. You open every source yourself, because AI can misread or invent links, and re-check a sample of the "supported" verdicts.
+- **Where buyers are:** Authors with deals announced on Publishers Marketplace, the Authors Guild and ALLi communities, r/selfpublish, Upwork "fact checker book" posts.
+- **Watch out:** Sell it as a first-pass check, not a legal review; defamation questions go to a lawyer. Disclose AI use and keep manuscripts confidential.
+- **Test it in one day:** Fact-check one public-domain chapter, publish the claims log as a private page, and pitch a $99 one-chapter check to 20 authors with books due next year.
+
+<a id="book-indexing"></a>
+#### Book indexing for academic and nonfiction authors
+
+*Back-of-book indexes, including indexes built inside Word.* **$1.50–2.50 per page as a beginner (est.); professionals charge $2.50–6** · demand 3/5 · few rivals 4/5 · Claude fit 3/5 · beginner 2/5
+
+- **Who pays:** Academic authors (who often pay for their own index), small presses and self-published nonfiction authors.
+- **What they need:** A publisher-ready index in the house style, often delivered within a week of final proofs, sometimes built directly in Microsoft Word.
+- **Proof of demand:** Upwork posts ask for publisher-ready indexes on one-week deadlines, and several 2026 price guides target self-publishers. Typical rates are $2.50–6 per page, or $700–1,500 for a trade book.
+- **Why few people offer it:** Indexing is a trained specialty with few freelancers: only a couple of Fiverr indexing gigs turned up.
+- **How Claude does it here:** Scripts pull the text of each printed page from the proofs; Claude proposes headings, subheadings and cross-references; Python checks every page reference and builds ranges, then outputs Word or RTF. You must read the book and edit heavily.
+- **Where buyers are:** Upwork "book indexer" posts, academic authors posting that their book is in production, ALLi and IngramSpark communities.
+- **Watch out:** The American Society for Indexing says AI tools alone don't produce viable indexes, so this only works with real human editing. Disclose "AI-assisted, human-edited", and re-check every reference if pages are renumbered.
+- **Test it in one day:** Index one chapter of a public-domain book that already has a professional index, compare the two honestly, and apply to 3 indexing jobs.
+
+<a id="library-cip"></a>
+#### Library cataloguing blocks for self-published books
+
+*Library-ready cataloguing data for the copyright page.* **$60–120 per book (est.); the long-standing market price is about $100** · demand 2/5 · few rivals 5/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Self-publishers and very small presses selling to libraries and schools (children's books, local history, regional nonfiction), and book designers who could resell it.
+- **What they need:** A library-ready cataloguing block (author headings, subject headings, call numbers, summary) for the copyright page, and optionally a catalogue record file.
+- **Proof of demand:** The Library of Congress cataloguing-in-publication programme excludes self-publishers, and indie publishing guides tell authors they need this data. Demand is modest.
+- **Why few people offer it:** Searches named only three providers.
+- **How Claude does it here:** Claude drafts the block and can produce a catalogue record (MARC) file. You check every subject heading against the Library of Congress's free authority site and compare call numbers with similar titles.
+- **Where buyers are:** r/selfpublish, ALLi, the Independent Book Publishers Association, IngramSpark users, book designers.
+- **Watch out:** Never call it "Library of Congress CIP". Library of Congress control numbers are free to authors, so don't resell them. Orders are small, so bundle with indexing or fact-checking.
+- **Test it in one day:** Write blocks for 3 published indie books, get a librarian to critique them, and offer a $49 launch price to 10 book designers.
+
+<a id="foundry-vtt"></a>
+#### Virtual tabletop conversions for indie RPG publishers
+
+*Turn a PDF adventure into a working Foundry VTT module.* **$300–2,500 per adventure (est.)** · demand 3/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Small tabletop RPG publishers and crowdfunding creators who promise a virtual tabletop edition.
+- **What they need:** A PDF adventure turned into a working Foundry module with journals, monsters, items, roll tables and scenes.
+- **Proof of demand:** Creators fund conversion costs through crowdfunding stretch goals, big publishers use partner studios for conversions, and people pay for converter tools.
+- **Why few people offer it:** The work needs both game-system knowledge and module packaging, and no commission marketplace or rate card turned up (unverified).
+- **How Claude does it here:** With Foundry's official command-line tool from npm, Claude writes the module's data files and packs a release. You test it in a local Foundry install (a one-off licence) and add walls and lighting to maps.
+- **Where buyers are:** Kickstarter and BackerKit campaigns with virtual tabletop stretch goals, DriveThruRPG and itch.io creators, Foundry's Discord, r/FoundryVTT.
+- **Watch out:** Only convert content the client owns or licenses. Foundry and game-system updates break modules, so sell maintenance too.
+- **Test it in one day:** Build a demo module from a Creative Commons adventure and message 10 live campaigns.
+
 ### New AI needs
 
 <a id="model-retirement"></a>
@@ -467,6 +641,108 @@ Each one passed three tests: proof that people pay for it, evidence that few peo
 - **Where buyers are:** Shopify merchant communities, local business groups. Search: "ChatGPT ads", "OpenAI Ads Manager".
 - **Watch out:** You handle client money and results are hard to attribute. US-only for now, and you compete with experienced ad specialists.
 - **Test it in one day:** Run a $50–100 campaign for your own page, publish a 7-day write-up of the results, and pitch 10 businesses. A good sign is 1 quote request.
+
+### Research and nonprofits
+
+<a id="redcap-forms"></a>
+#### REDCap and XLSForm survey building for research teams
+
+*Turn paper questionnaires into validated study forms.* **$200–500 per simple form set; $800–2,000 for multi-visit studies (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 5/5 · beginner 4/5
+
+- **Who pays:** Clinical and public-health study teams at hospitals, smaller universities and nonprofits without an in-house REDCap build team, and NGOs collecting data with KoboToolbox or ODK.
+- **What they need:** A Word or paper questionnaire turned into a file REDCap can import (a data dictionary) with validation, skip logic, calculated fields and repeat visits, or an XLSForm for Kobo/ODK, plus a test checklist, codebook and data-cleaning script.
+- **Proof of demand:** Universities already bill researchers for exactly this: $60–150 an hour at Illinois, New Mexico, Nebraska, Medical College of Wisconsin and Mount Sinai. REDCap jobs list at $21–90 an hour.
+- **Why few people offer it:** Most supply sits in internal university teams serving their own researchers, and no Upwork REDCap freelancer pages turned up (a weak signal).
+- **How Claude does it here:** Claude reads the form, writes the import file and checks it with a script (unique names, valid skip logic, consistent codes, identifiers flagged). XLSForms are validated with the open-source pyxform tool. The client imports into a test project and tries every path.
+- **Where buyers are:** Clinical research coordinator associations (ACRP, SoCRA), LinkedIn clinical-research groups, community-hospital research offices, the KoboToolbox and ODK forums.
+- **Watch out:** Work only on the form's structure, never on participant data. Don't change ethics-approved wording, and licensed scales need the client's licence.
+- **Test it in one day:** Build two demos from your own made-up questionnaires (a screening form and a three-visit follow-up), publish them, and send 20 personalised offers of one free conversion.
+
+<a id="replication-packages"></a>
+#### Journal replication packages for researchers
+
+*Make a paper's code run from one script and pass the journal's check.* **$300–600 for a README and structure check; $800–2,500 for a full clean-up (est.)** · demand 4/5 · few rivals 4/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** Economists and social scientists whose accepted papers must pass a journal's code check, research centres, and labs losing their SPSS or Stata licences.
+- **What they need:** A replication package that runs from one master script, a README in the standard template, data citations, pinned software versions, logs, and a map from each table and figure to its code; or old statistics code translated with matching results.
+- **Proof of demand:** The American Economic Association's data editor reported 249 packages "accepted with changes" against 7 accepted as-is at one review stage, so nearly every package goes back for fixes. A reproducibility certificate costs €500 at one service, and universities are dropping SPSS licences.
+- **Why few people offer it:** Existing services check packages rather than fix them, and the fixing is usually done unpaid by PhD students.
+- **How Claude does it here:** For R and Python packages Claude runs everything end to end here, pins versions, regenerates outputs and compares them with the paper. For Stata or SPSS packages Claude reads the code and writes the README and master file; the client runs it and sends logs.
+- **Where buyers are:** Authors of recent working papers (NBER, SSRN, IZA) using R or Python, economics postdoc networks, research-computing help desks.
+- **Watch out:** Never change estimates or "fix" results; report every discrepancy to the author. Restricted data stays with the client.
+- **Test it in one day:** Take a public replication package, rerun and clean it, write a template-compliant README, publish the before and after, and email 25 working-paper authors offering a free README check.
+
+<a id="ctgov-results"></a>
+#### ClinicalTrials.gov results reporting for small sponsors
+
+*Build and enter overdue trial results sections.* **$1,500–4,000 per results record (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 2/5
+
+- **Who pays:** Researchers running their own trials at community hospitals, small medical-device and biotech firms, foundations, and universities without a central registry office.
+- **What they need:** The results sections of a ClinicalTrials.gov record (participant flow, baseline data, outcomes and statistics, adverse events) built from the final data, checked for consistency and entered, then replies to reviewer comments.
+- **Proof of demand:** In April 2026 the FDA sent reminder letters to more than 2,200 sponsors and researchers; its analysis found 29.6% of trials that very likely must report had posted no results. Fines can reach $15,107 a day.
+- **Why few people offer it:** Large academic medical centres help their own teams for free, which leaves small outside sponsors with no help; commercial vendors mostly serve drug companies (unverified).
+- **How Claude does it here:** Claude builds the results tables from summary-level data, cross-checks counts between sections and drafts outcome descriptions and replies to reviewers. The lead researcher or statistician signs off before release.
+- **Where buyers are:** Public trackers list sponsors with overdue trials (open them in your own browser), regulatory-affairs groups on LinkedIn, clinical research associations.
+- **Watch out:** Summary-level data only, and never fill in or invent values. This is a public regulatory record that the sponsor certifies.
+- **Test it in one day:** Pick 20 small sponsors with one to three overdue trials, build a mock results section from one trial's published paper, and send short personalised offers.
+
+<a id="data-sharing"></a>
+#### Data-sharing packages for research datasets
+
+*Codebooks, READMEs and repository uploads for funded labs.* **$400–1,500 per dataset (est.)** · demand 3/5 · few rivals 3/5 · Claude fit 5/5 · beginner 3/5
+
+- **Who pays:** NIH-funded labs (which can budget for data-sharing costs), researchers facing journal data checks, and NGOs sharing evaluation data with funders.
+- **What they need:** A codebook, a README (files, data origin, licence), conversion to open formats, the description fields a repository asks for (Dryad, Zenodo, ICPSR), and a pre-release check for anything that could identify participants.
+- **Proof of demand:** NIH lets grants pay for curation, formatting and documentation; professional curation services charge thousands, and repository fees for authors without institutional cover run from $150 to over $12,000.
+- **Why few people offer it:** University libraries mostly advise rather than do the work, and professional curation is priced for funded projects (unverified).
+- **How Claude does it here:** Claude profiles the files, writes the codebook and README, converts SPSS/Stata files to CSV keeping labels, and flags dates, ZIP codes and free text for human review. For sensitive data Claude sees only the structure or made-up rows, and the client runs the scripts locally.
+- **Where buyers are:** Small NIH awards ending soon (public grant databases), university research-office newsletters, library data teams as referral partners.
+- **Watch out:** No identifiable human-subjects data on a personal Claude account, and never change values. The de-identification decision stays with the researcher and ethics board. Don't write grant data-sharing plans: NIH won't accept applications substantially written by AI.
+- **Test it in one day:** Turn a messy public dataset into a repository-ready upload, publish it as a demo, and email 20 lead researchers.
+
+<a id="needs-assessments"></a>
+#### Community needs-assessment data books
+
+*Census-based data chapters for anti-poverty agencies and health districts.* **$1,500–5,000 for just the data chapter; $8,000–40,000 for a full assessment (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 2/5
+
+- **Who pays:** Community Action Agencies (which must assess community needs every 3 years), Head Start programmes, local health districts and city human-services departments.
+- **What they need:** Profiles built from Census and other public data, analysis of a community survey, charts, and draft data chapters in the required structure.
+- **Proof of demand:** Agencies keep tendering this work: 2026 requests for proposals came from Georgia, Michigan and California health districts, among others.
+- **Why few people offer it:** The work goes to a few specialist consultancies or overstretched in-house staff (unverified).
+- **How Claude does it here:** Claude pulls data through the Census API (allow it in the network settings), makes charts, spreadsheets and Word chapters, and analyses survey exports. You run focus groups, check local facts and present to the board.
+- **Where buyers are:** State Community Action associations, national Community Action bodies, tender sites (search "community needs assessment RFP").
+- **Watch out:** Never invent quotes or survey numbers, and protect respondents' data. Federal funding for these agencies is uncertain, and tenders usually need insurance and references.
+- **Test it in one day:** Make a 10-page sample data book for one county and send it to 15 agencies whose last assessment is 2–3 years old.
+
+### Cross-border selling
+
+<a id="cpsc-efiling"></a>
+#### US import certificate libraries (CPSC eFiling)
+
+*Certificates and registry data for small brands importing consumer products.* **$300–1,000 for a 20–50 product readiness pack; $40–100 per extra product (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 4/5
+
+- **Who pays:** Small Amazon and Shopify brands importing consumer products into the US, and non-US makers shipping children's clothing, toys, baby gear or sporting goods duties-paid.
+- **What they need:** For each product: which certificate applies (General Certificate of Conformity or Children's Product Certificate), the certificate drafted from existing lab reports, the data entered in CPSC's Product Registry, and a spreadsheet linking products to tariff codes, rules, certificates and retest dates.
+- **Proof of demand:** Certificate eFiling became mandatory on 8 July 2026 for about 600 tariff codes, with no low-value exemption. Shipments without it risk exams, storage fees and delays, and freight forwarders are warning their customers.
+- **Why few people offer it:** Visible providers are law firms, customs brokers and test labs that draft certificates as an add-on; one Fiverr seller charges $295–585 per certificate. Cheap bulk registry setup wasn't found (unverified).
+- **How Claude does it here:** Claude pulls data out of lab-report PDFs, maps products to the rules, drafts the certificates and builds a registry-ready spreadsheet with a list of products lacking valid tests. The importer issues and signs; the broker files.
+- **Where buyers are:** Amazon Seller Forums, FBA and Shopify seller groups, small freight forwarders, non-US sellers of children's products.
+- **Watch out:** A false certificate breaks US product-safety law. Children's products need tests from a CPSC-accepted lab, so never invent results.
+- **Test it in one day:** Make a sample certificate and registry sheet for an invented toy, post a fixed-price "certificate from your lab report in 48 hours" offer, and message 20 sellers and 5 forwarders.
+
+<a id="eudr-data"></a>
+#### Farm-location data for the EU deforestation rule
+
+*Clean GPS points and plot outlines for coffee, cocoa, timber and other supply chains.* **€300–1,500 per supplier dataset (est.)** · demand 4/5 · few rivals 3/5 · Claude fit 4/5 · beginner 3/5
+
+- **Who pays:** EU importers of coffee, cocoa, rubber, timber, palm oil, soy and cattle (including small roasters and chocolate makers) and the cooperatives and exporters that supply them.
+- **What they need:** Valid map files (GeoJSON) for each farm plot with outlines for plots over 4 hectares, repaired shapes, duplicates removed, plots linked to shipments, a check against forest-loss maps, and supplier instructions.
+- **Proof of demand:** The EU Deforestation Regulation applies from 30 December 2026 for large and medium firms and 30 June 2027 for micro and small ones. Collecting and checking location data is called the single biggest compliance problem, and cooperatives already pay $1,600–7,500 for field mapping.
+- **Why few people offer it:** Supply is traceability software and local field-mapping firms; remote data checking for small importers looks fragmented (unverified).
+- **How Claude does it here:** Python mapping libraries repair shapes, compute areas, flag overlaps and compare plots with the EU's 2020 forest map, producing a spreadsheet and an interactive map. You resolve problems with suppliers; the importer files the due-diligence statement.
+- **Where buyers are:** Specialty coffee roasters, craft chocolate makers, timber trade groups, exporter associations, LinkedIn. Spanish, Portuguese, French, Indonesian or Swahili is a major advantage.
+- **Watch out:** Farmers' data is personal data. Never certify anything as "deforestation-free", and watch for further changes to the rule.
+- **Test it in one day:** Build a checker on a made-up 200-plot dataset, publish the demo report, and offer 10 roasters a free check of one supplier's file.
 
 
 ## First clients when nobody knows you
