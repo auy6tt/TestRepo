@@ -3,6 +3,10 @@ jobs/
 render-check/
 *.zip
 
+# Test output next to the kit's blank templates, and artwork previews
+/templates/*-print-booklet.pdf
+artwork-preview/
+
 # Python and LibreOffice leftovers
 __pycache__/
 *.pyc

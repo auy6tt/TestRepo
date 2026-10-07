@@ -9,6 +9,10 @@ Church, Wrenford, taken through a whole job.
                      filled in, each with a PDF, plus a print-ready booklet
     delivery-note.docx and delivery-note.pdf
 
+It deletes samples/st-aidans-wrenford/ first, then builds it again (about
+30 seconds). To show your own name, change "from" and "from_email" in the
+"delivery_note" section of scripts/sample-data/st-aidans-wrenford.json.
+
 Example
   python scripts/build_samples.py
 """

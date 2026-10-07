@@ -21,13 +21,16 @@ Client or folder given: `$ARGUMENTS` (if empty, ask the user for the client's na
 
 ## 1. Check the tools
 
+The kit's Python is `~/.venvs/publisher-rescue/bin/python` (`bash kits/setup.sh --list` shows it). Run every script below with that full path. A bare `python` or `python3` is the system Python, which has none of the kit's packages, and activating the environment does not carry over between commands.
+
 ```bash
 cd kits/publisher-rescue
+~/.venvs/publisher-rescue/bin/python -c "import docx, pptx, openpyxl, pymupdf, PIL; print('Python packages: OK')"
 soffice --version
 ls /usr/lib/libreoffice/program/libwpftdrawlo.so   # LibreOffice Draw: holds the Publisher filter
 ```
 
-If LibreOffice or Draw is missing, or Python packages fail to import, run `bash scripts/setup.sh`, then `source ~/.venvs/publisher-rescue/bin/activate` (use that environment's `python` for every command below).
+If any of these fails, run `bash kits/setup.sh publisher-rescue` from the project root. This is the usual setup route: it installs LibreOffice Draw, the fonts and the kit's Python. Then check again. (`bash kits/publisher-rescue/scripts/setup.sh` installs the same things for this kit only.)
 
 ## 2. Set up the job folder
 
@@ -43,7 +46,7 @@ Ask the user how the files will arrive (upload, a shared cloud folder through a 
 ## 3. Survey and quote
 
 ```bash
-python scripts/convert_archive.py "$JOB/originals" --survey
+~/.venvs/publisher-rescue/bin/python scripts/convert_archive.py "$JOB/originals" --survey
 ```
 
 Report: number of `.pub` files, duplicates, empty files, files that do not look like Publisher files, date range, and the price range printed. Add templates at \$25 to \$75 each (README "Price guide"). Draft a short quote message for the user to send. Do not start converting a large archive until the user says the quote is accepted, unless they asked you to go ahead.
@@ -51,7 +54,7 @@ Report: number of `.pub` files, duplicates, empty files, files that do not look 
 ## 4. Convert
 
 ```bash
-python scripts/convert_archive.py "$JOB/originals" "$JOB/archive" --title "<Client>: Publisher archive"
+~/.venvs/publisher-rescue/bin/python scripts/convert_archive.py "$JOB/originals" "$JOB/archive" --title "<Client>: Publisher archive"
 ```
 
 - Add `--ext all` only if the client also wants Word, PowerPoint or drawing files archived (priced separately).
@@ -63,7 +66,16 @@ python scripts/convert_archive.py "$JOB/originals" "$JOB/archive" --title "<Clie
 1. Read `$JOB/archive/summary.json` for counts, `failed_files` and `check_files`.
 2. For each failed `.pub` file, run `pub2raw "<file>" | head -20`. "ERROR: Unsupported file format" or a crash means libmspub cannot read it: the client needs another copy or a PDF saved from Publisher.
 3. Look at preview pictures (read the PNGs in `$JOB/archive/previews/`): every file marked "please check", and a sample of about one in ten of the rest. Look for missing pictures, text running off the page, odd fonts, blank pages.
-4. Read the "Fonts in PDF" column of `index.xlsx` (openpyxl). DejaVu or other fallback fonts mean the original font was missing: list them for the delivery note.
+4. Read the "Fonts in PDF" and "Problem or note" columns of `index.xlsx`:
+
+   ```bash
+   ~/.venvs/publisher-rescue/bin/python -c "
+   from openpyxl import load_workbook
+   for row in load_workbook('$JOB/archive/index.xlsx')['Index'].iter_rows(min_row=2, values_only=True):
+       print(row[1], '|', row[10], '|', row[11])"
+   ```
+
+   Any font in "Fonts in PDF" that is not the original font and not a same-width substitute is a stand-in. Same-width substitutes: Carlito (Calibri), Caladea (Cambria), Liberation Sans, Serif and Mono (Arial, Times New Roman, Courier New), Nimbus Sans, Roman and Mono PS (Helvetica, Times, Courier). Stand-ins include DejaVu, Noto, FreeSans, FreeSerif and the URW fonts Z003, C059, P052, URW Bookman and URW Gothic. Some look nothing like the original: Comic Sans MS, for example, comes out in Z003, a script font. The converter writes "Font replaced" in "Problem or note" for the stand-ins it knows, and `summary.json` lists them under `stand_in_fonts`. List every stand-in in `delivery_note.fonts`: which file, which font, and how it looks now.
 5. Tell the user what you found in plain words, with file names, and what you suggest.
 
 ## 6. Rebuild the templates
@@ -73,7 +85,7 @@ python scripts/convert_archive.py "$JOB/originals" "$JOB/archive" --title "<Clie
 3. Start from the kit's templates in the client's branding:
 
    ```bash
-   python scripts/build_templates.py --paper a4 --out "$JOB/templates" \
+   ~/.venvs/publisher-rescue/bin/python scripts/build_templates.py --paper a4 --out "$JOB/templates" \
        --org "<Client name>" --primary <hex> --accent <hex> --logo "$JOB/logo.png" \
        --only newsletter,bulletin,certificate
    ```
@@ -86,22 +98,28 @@ python scripts/convert_archive.py "$JOB/originals" "$JOB/archive" --title "<Clie
 ## 7. Check every template
 
 ```bash
-python scripts/check_render.py "$JOB/templates" --out "$JOB/render-check"
+~/.venvs/publisher-rescue/bin/python scripts/check_render.py "$JOB/templates" --out "$JOB/render-check"
 ```
 
-Read the page pictures it saves. Fix anything that spills onto an extra page, overlaps or looks cramped, then check again. A service bulletin must have exactly 4 pages (`--expect-pages 4`). For bulletins, make the print-ready booklet from the PDF:
+Read the page pictures it saves. Fix anything that spills onto an extra page, overlaps or looks cramped, then check again. A "CHECK: some text used a stand-in font" line means a font is missing here: use a font the client has, or note it for the delivery note. A service bulletin must have exactly 4 pages. Check it on its own, because `--expect-pages` applies to every file you give it:
 
 ```bash
-python scripts/make_booklet.py "$JOB/render-check/<bulletin>.pdf" -o "$JOB/templates/<bulletin>-print-booklet.pdf"
+~/.venvs/publisher-rescue/bin/python scripts/check_render.py "$JOB/templates/<bulletin>.docx" --out "$JOB/render-check" --expect-pages 4
+```
+
+Then make the print-ready booklet from its PDF:
+
+```bash
+~/.venvs/publisher-rescue/bin/python scripts/make_booklet.py "$JOB/render-check/<bulletin>.pdf" -o "$JOB/templates/<bulletin>-print-booklet.pdf"
 ```
 
 ## 8. Delivery note and package
 
-1. Create `$JOB/job.json` with a `delivery_note` section shaped like the one in `scripts/sample-data/st-aidans-wrenford.json`: client, contact, the user's name and email, date, reference, the templates delivered, font substitutions, `delete_by` date and support days. Ask the user for anything you do not know; never invent their details.
+1. Create `$JOB/job.json` with a `delivery_note` section shaped like the one in `scripts/sample-data/st-aidans-wrenford.json`, wrapped as `{"delivery_note": {...}}`: client, contact, the user's name and email, date, reference, the templates delivered, font substitutions, `delete_by` date and support days. Ask the user for anything you do not know; never invent their details.
 2. Build it:
 
    ```bash
-   python scripts/build_templates.py --only delivery --paper a4 --content "$JOB/job.json" \
+   ~/.venvs/publisher-rescue/bin/python scripts/build_templates.py --only delivery --paper a4 --content "$JOB/job.json" \
        --summary "$JOB/archive/summary.json" --out "$JOB" --pdf
    ```
 
@@ -122,6 +140,11 @@ rm -rf "jobs/<client-slug>"      # from kits/publisher-rescue/
 ```
 
 Confirm the folder is gone, then draft a one-line message to the client confirming deletion and the date.
+
+## Other tasks
+
+- **Put the user's name on the portfolio sample:** change `"from"` and `"from_email"` in the `"delivery_note"` section of `scripts/sample-data/st-aidans-wrenford.json`, then run `~/.venvs/publisher-rescue/bin/python scripts/build_samples.py` from `kits/publisher-rescue/`. It deletes and rebuilds `samples/st-aidans-wrenford/` (about 30 seconds).
+- Every script prints its options with `--help` and does nothing else.
 
 ## What to report back to the user at each stage
 

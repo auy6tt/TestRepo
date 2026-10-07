@@ -68,7 +68,7 @@ A short pitch you can adapt:
 
 ## Price guide
 
-| Item | Price |
+| Item | Price (estimate) |
 | --- | --- |
 | Archived file (PDF + preview + index row) | $0.50 to $2 per file |
 | Rebuilt template | $25 to $75 per template |
@@ -76,11 +76,13 @@ A short pitch you can adapt:
 
 Example packages:
 
-| Package | Includes | Price |
+| Package | Includes | Price (estimate) |
 | --- | --- | --- |
 | Small | up to 100 files and 3 templates | $150 to $250 |
 | Standard | up to 300 files and 6 templates | $300 to $450 |
-| Large | up to 600 files and 10 templates | $550 to $650 |
+| Large | up to 600 files and 10 templates | $550 to $600 |
+
+All prices are estimates from the October 2026 research. Check what your market pays.
 
 - Count first, then quote: `convert_archive.py --survey` counts files, exact duplicates and dates (see below).
 - Don't charge for exact duplicates. Clients notice and appreciate it.
@@ -138,24 +140,30 @@ To make a client's own versions, see [build_templates.py](#build_templatespy-tem
 
 `samples/st-aidans-wrenford/` is a complete job for **St Aidan's Church, Wrenford, a fictional parish**. All names are invented, the phone numbers are UK numbers reserved for drama, and the web addresses use example.org.
 
-- `originals/` stands in for the client's archive. Real `.pub` files cannot be created without Publisher, so the stand-ins are Word, LibreOffice Draw and Impress files styled like old Publisher files. LibreOffice converts them exactly the way it converts `.pub` files. One file, `Old PC backup/Parish magazine March 2007.pub`, is deliberately damaged to show how a failure is reported.
+- `originals/` stands in for the client's archive. Real `.pub` files cannot be created without Publisher, so the stand-ins are Word, LibreOffice Draw and Impress files styled like old Publisher files. They go through the same steps as `.pub` files (PDF/A, previews, index), but LibreOffice opens them with its Word, Draw or Impress import, not the Publisher filter. So the sample shows the whole process, not how well a real `.pub` file converts. One file, `Old PC backup/Parish magazine March 2007.pub`, is deliberately damaged to show how a failure is reported.
 - `archive/` is the output of `convert_archive.py`. Open `contact-sheet.html` in a browser and `index.xlsx` in Excel.
 - `templates/` holds the rebuilt newsletter (2 pages), the Mothering Sunday bulletin (with a print-ready booklet PDF) and three certificates, all filled in.
-- `delivery-note.pdf` is what the client receives with it.
+- `delivery-note.pdf` is what the client receives with it. It also shows how a replaced font is reported: the certificate used Comic Sans MS, which is not installed here.
 
-To show your own name on the sample, change `"from"` and `"from_email"` in `scripts/sample-data/st-aidans-wrenford.json` and run `python scripts/build_samples.py`.
+**Put your own name on the sample.** In `scripts/sample-data/st-aidans-wrenford.json`, change `"from"` (your name or business name) and `"from_email"` in the `"delivery_note"` section. Then rebuild the sample from `kits/publisher-rescue/` (about 30 seconds):
+
+```bash
+~/.venvs/publisher-rescue/bin/python scripts/build_samples.py
+```
 
 ## Set up (once per sandbox)
 
-Cloud sandboxes start fresh, so run this at the start of each session:
+Cloud sandboxes start fresh, so run this from the repository root at the start of each session:
 
 ```bash
-bash kits/publisher-rescue/scripts/setup.sh
+bash kits/setup.sh publisher-rescue
 source ~/.venvs/publisher-rescue/bin/activate
 cd kits/publisher-rescue
 ```
 
-`setup.sh` installs:
+`bash kits/setup.sh publisher-rescue` installs the system tools for all the kits, and this kit's Python in `~/.venvs/publisher-rescue` (`bash kits/setup.sh --list` shows it). The `source` line makes `python` mean that Python in your terminal. If you do not use it, run the scripts with `~/.venvs/publisher-rescue/bin/python` instead of `python`. Without it, the scripts stop with "No module named ...".
+
+To set up only this kit, run `bash kits/publisher-rescue/scripts/setup.sh`. It installs:
 
 - **LibreOffice Draw, Writer and Impress.** Draw contains the Publisher import filter (it uses a library called libmspub). In this sandbox, LibreOffice came without these parts and could not open any document until they were installed.
 - **libmspub-tools** (`pub2raw`), for checking `.pub` files that will not open.
@@ -181,7 +189,7 @@ Each job lives in its own folder, `jobs/<client>/`, inside this kit. `jobs/` is 
        --title "St Mary's School: Publisher archive"
    ```
    About 1 to 3 seconds per file. If it stops, run the same command again: finished files are kept.
-5. **Check the results.** Open `archive/contact-sheet.html` and choose "Need attention". Read the "Problem or note" column in `index.xlsx`. Compare a handful of previews with the originals (ask the client for screenshots or PDFs from Publisher if they still have it). Write down fonts that were replaced.
+5. **Check the results.** Open `archive/contact-sheet.html` and choose "Need attention". Read the "Problem or note" column in `index.xlsx`. Compare a handful of previews with the originals (ask the client for screenshots or PDFs from Publisher if they still have it). Write down fonts that were replaced: the "Problem or note" column says "Font replaced" when a PDF uses a stand-in font (see [check_render.py](#check_renderpy-check-edited-templates)).
 6. **Let the client choose templates.** Send them the contact sheet. They tick "Rebuild as template" on the layouts they reuse and press "Copy my ticks" to email you the list.
 7. **Rebuild the templates.** Start from the kit's templates in the client's colours and logo:
    ```bash
@@ -194,8 +202,8 @@ Each job lives in its own folder, `jobs/<client>/`, inside this kit. `jobs/` is 
    ```bash
    python scripts/check_render.py jobs/stmarys/templates --out jobs/stmarys/render-check
    ```
-   Look at every page picture. Fix text that spills onto an extra page. For a bulletin, make the print-ready booklet with `make_booklet.py`.
-9. **Write the delivery note.** Either fill in `templates/delivery-note.docx` by hand, or copy the `delivery_note` part of `scripts/sample-data/st-aidans-wrenford.json` into `jobs/stmarys/job.json`, edit it, and run:
+   Look at every page picture. Fix text that spills onto an extra page. A bulletin must have exactly 4 pages: check it alone with `--expect-pages 4` (see [check_render.py](#check_renderpy-check-edited-templates)). Then make its print-ready booklet with `make_booklet.py`.
+9. **Write the delivery note.** Either fill in `templates/delivery-note.docx` by hand, or make `jobs/stmarys/job.json` from the sample. Copy the whole `"delivery_note": {...}` section of `scripts/sample-data/st-aidans-wrenford.json`, with curly brackets `{ }` around it, so the file looks like `{"delivery_note": {"client": "...", ...}}`. Edit it, and run:
    ```bash
    python scripts/build_templates.py --only delivery --paper a4 \
        --content jobs/stmarys/job.json --summary jobs/stmarys/archive/summary.json \
@@ -243,7 +251,7 @@ Copy this into your notes for each job.
 
 ## How to run each script
 
-Activate the environment first (`source ~/.venvs/publisher-rescue/bin/activate`) and run commands from `kits/publisher-rescue/`. Every script has `--help`.
+Activate the environment first (`source ~/.venvs/publisher-rescue/bin/activate`), or write `~/.venvs/publisher-rescue/bin/python` instead of `python`. Run commands from `kits/publisher-rescue/`. Every script below prints its options with `--help` and then stops.
 
 ### `setup.sh`: one-time setup
 
@@ -251,6 +259,8 @@ Activate the environment first (`source ~/.venvs/publisher-rescue/bin/activate`)
 bash scripts/setup.sh                                # default environment: ~/.venvs/publisher-rescue
 VENV=/somewhere/else bash scripts/setup.sh           # choose another location
 ```
+
+From the repository root, `bash kits/setup.sh publisher-rescue` does the same job (see [Set up](#set-up-once-per-sandbox)).
 
 ### `convert_archive.py`: the batch converter
 
@@ -300,10 +310,11 @@ Status values: **Converted**, **Converted - please check** (for example no searc
 
 ```bash
 python scripts/build_templates.py                            # blank templates into templates/ (A4 and Letter)
-python scripts/build_templates.py --paper letter --out DIR \
-    --org "Riverside Rotary Club" --primary 123B6D --accent D4A017 --logo logo.png
+python scripts/build_templates.py --paper letter --out jobs/riverside-rotary/templates \
+    --org "Riverside Rotary Club" --primary 123B6D --accent D4A017 \
+    --logo jobs/riverside-rotary/logo.png
 python scripts/build_templates.py --content scripts/sample-data/st-aidans-wrenford.json \
-    --paper a4 --out DIR --pdf                               # filled with real text
+    --paper a4 --out jobs/try-out/templates --pdf            # filled with real text
 ```
 
 | Option | What it does |
@@ -311,7 +322,7 @@ python scripts/build_templates.py --content scripts/sample-data/st-aidans-wrenfo
 | `--paper a4\|letter\|both` | Paper size (default both). Bulletins use A5 or half Letter pages. |
 | `--out DIR` | Where to save (default: the kit's `templates/` folder). |
 | `--org`, `--primary`, `--accent`, `--heading-font`, `--body-font`, `--logo` | Client branding. Colours are hex codes such as `1F3A5F`. |
-| `--content FILE.json` | Fill the templates with real text. Use `scripts/sample-data/st-aidans-wrenford.json` as the pattern; pictures can be file paths. |
+| `--content FILE.json` | Fill the templates with real text. Use `scripts/sample-data/st-aidans-wrenford.json` as the pattern, with the same sections (`brand`, `newsletter`, `bulletin`, `certificate`, `delivery_note`); pictures can be file paths. |
 | `--summary summary.json` | Fill the delivery note's numbers and problem list from a conversion. |
 | `--only newsletter,bulletin,certificate,intake,delivery` | Build only some of them. |
 | `--pdf` | Also save a PDF of each file (to check the layout or to send). |
@@ -320,16 +331,27 @@ python scripts/build_templates.py --content scripts/sample-data/st-aidans-wrenfo
 
 ```bash
 python scripts/check_render.py templates/newsletter-two-column-A4.docx
-python scripts/check_render.py jobs/stmarys/templates --out jobs/stmarys/render-check --expect-pages 4
+python scripts/check_render.py jobs/stmarys/templates --out jobs/stmarys/render-check
+python scripts/check_render.py jobs/stmarys/templates/service-bulletin-A5-booklet.docx \
+    --out jobs/stmarys/render-check --expect-pages 4          # a bulletin must have 4 pages
 ```
 
-Converts each Word, PowerPoint or LibreOffice file to PDF, saves every page as a PNG, and lists fonts. Carlito and Caladea mean Calibri and Cambria (same letter widths). A "stand-in" font such as DejaVu means a font was missing here, so line breaks may differ on the client's computer.
+Converts each Word, PowerPoint or LibreOffice file to PDF, saves every page as a PNG, and lists fonts. Use `--expect-pages` only with files that must have that many pages: a newsletter or certificate has fewer pages than a bulletin.
+
+Reading the fonts:
+
+- **Same letter widths, so line breaks match:** Carlito (for Calibri), Caladea (for Cambria), Liberation Sans, Serif and Mono (for Arial, Times New Roman and Courier New), Nimbus Sans, Roman and Mono PS (for Helvetica, Times and Courier).
+- **Stand-in fonts:** DejaVu, Noto, FreeSans, FreeSerif and FreeMono, and the URW fonts Z003, C059, P052, URW Bookman, URW Gothic and D050000L. They mean the font the file asked for was missing here, so line breaks and letter shapes may differ. Some look nothing like the original: Comic Sans MS, for example, comes out in Z003, a script font. `check_render.py` marks them with CHECK, and `convert_archive.py` writes "Font replaced" in the index.
+- Any other font that is not the one the file asked for is also a stand-in. List every stand-in in the delivery note.
 
 ### `make_booklet.py`: print-ready folded booklet
 
 ```bash
-python scripts/make_booklet.py templates/service-bulletin-A5-booklet.pdf
+python scripts/make_booklet.py jobs/stmarys/render-check/service-bulletin-A5-booklet.pdf \
+    -o jobs/stmarys/templates/service-bulletin-A5-booklet-print-booklet.pdf
 ```
+
+Without `-o`, the booklet is saved next to the PDF you give it.
 
 Puts two half-size pages on each side of an A4 or Letter sheet in booklet order (4 pages: front 4|1, back 2|3). Print double-sided, flip on the short edge, at actual size, then fold.
 
@@ -346,6 +368,8 @@ Deletes and rebuilds `samples/st-aidans-wrenford/` (about 30 seconds): makes the
 ```bash
 python scripts/artwork.py /tmp/artwork-preview
 ```
+
+Saves a PNG of every built-in picture and placeholder in that folder.
 
 ## Using the Claude Code skill
 
@@ -399,7 +423,8 @@ Tested on 7 October 2026 in an Ubuntu 24.04 cloud sandbox with LibreOffice 24.2.
 | Every file fails with "LibreOffice could not open this file" | LibreOffice Draw is missing. Run `scripts/setup.sh`. |
 | LibreOffice not found | Install it with `setup.sh`, or pass `--soffice /path/to/soffice`. |
 | One file keeps timing out | Try `--timeout 600`. If it still fails, ask the client for a PDF from Publisher. |
-| Text looks different from the original | Fonts were replaced. Check the "Fonts in PDF" column, install fonts if the client has the right to use them, and note substitutions in the delivery note. |
+| Text looks different from the original | Fonts were replaced. Check the "Fonts in PDF" and "Problem or note" columns ("Font replaced"), install fonts if the client has the right to use them, and note substitutions in the delivery note. |
+| "No module named docx" (or openpyxl, pptx) | The script ran with the wrong Python. Use `~/.venvs/publisher-rescue/bin/python`, or run `bash kits/setup.sh publisher-rescue` first. |
 | "Text may be garbled" | Older non-English files. Compare with a printout; retype the important pages if needed. |
 | A rebuilt template spills onto an extra page | Shorten text or reduce a picture, then run `check_render.py` again. |
 | The run stopped halfway | Run the same command again. Finished PDFs are kept. |
